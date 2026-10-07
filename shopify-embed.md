@@ -1,42 +1,50 @@
 # Embedding Terpene Lab in Shopify
 
-## Option A: iframe from hosted URL (recommended)
+The tool is hosted on GitHub Pages: `https://alexborsody.github.io/terpene-lab/`
+No build step, no server. Pushing to the repo redeploys it automatically.
 
-1. Deploy this repo to a static host (Vercel: `vercel --prod`). Note the URL, e.g. `https://terpene-lab.vercel.app`.
-2. In Shopify admin: Online Store > Themes > Customize > add a **Custom liquid** section on the page you want (e.g. a new "Terpene Lab" page).
-3. Paste:
+## Option A: JS widget (recommended, one paste)
+
+In Shopify admin: Online Store > Themes > Customize, add a **Custom liquid**
+section on the page you want (e.g. a new "Terpene Lab" page), and paste:
+
+```html
+<div id="terpene-lab"></div>
+<script src="https://alexborsody.github.io/terpene-lab/embed.js"
+        data-target="terpene-lab" data-height="900"></script>
+```
+
+Options on the script tag:
+
+- `data-target`: id of the div to mount into (default `terpene-lab`).
+- `data-height`: iframe height in px (default `900`).
+- `data-border`: set to `0` to remove the border.
+
+## Option B: plain iframe
+
+Same Custom liquid section, no script:
 
 ```html
 <div style="max-width:1100px;margin:0 auto;">
-  <iframe src="https://terpene-lab.vercel.app"
+  <iframe src="https://alexborsody.github.io/terpene-lab/"
           style="width:100%;height:900px;border:1px solid #26334f;border-radius:12px;"
           loading="lazy" title="Terpene Lab"></iframe>
 </div>
 ```
 
-4. Adjust `height` to taste. The app is responsive; on mobile it stacks.
+## Option C: theme assets (no iframe, same domain)
 
-Pros: update the tool by pushing to the repo and redeploying, no theme edits needed.
-Cons: iframe sandboxing; the tool cannot read the Shopify cart directly (fine for a content tool).
+1. Upload `styles.css`, `app.js`, `data.js`, `embed.js` content under
+   Online Store > Themes > Edit code > Assets.
+2. Create a `page.terpene-lab.json` template with a Custom liquid section
+   that inlines the body markup from `index.html` and references the assets.
 
-## Option B: theme assets (no iframe)
-
-1. In Shopify admin: Content > Files, upload `index.html` content as a page template alternative, or simpler:
-2. Upload `styles.css`, `app.js`, `data.js` under Online Store > Themes > ... > Edit code > Assets.
-3. Create a new template `page.terpene-lab.json` with a Custom liquid section that inlines the HTML structure from `index.html` and references the assets:
-
-```html
-{{ 'terpene-lab-styles.css' | asset_url | stylesheet_tag }}
-<div id="terpene-lab-root"><!-- paste body markup from index.html here --></div>
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
-{{ 'terpene-lab-data.js' | asset_url | script_tag }}
-{{ 'terpene-lab-app.js' | asset_url | script_tag }}
-```
-
-Pros: same domain, full styling control.
-Cons: manual re-upload on every data update.
+More manual than A/B, but same-domain. Only worth it if the store blocks
+third-party iframes.
 
 ## Notes
 
-- The ECharts CDN must be reachable; if the store blocks third-party scripts, self-host `echarts.min.js` as an asset.
-- Keep `data.js` as the single source of truth. When research adds oils, terpenes, or studies, only that file changes.
+- ECharts loads from jsDelivr CDN. If the store blocks third-party scripts,
+  self-host `echarts.min.js` and change the script tag in `index.html`.
+- The app is responsive and touch-friendly; on mobile the views stack.
+- Content updates: edit `data.js`, push, done. No theme edits needed for A/B.
