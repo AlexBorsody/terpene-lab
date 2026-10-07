@@ -601,10 +601,16 @@ function renderStudies() {
 
 /* ---------- init ---------- */
 (function init() {
-  document.getElementById("stat-oils").textContent = D.oils.length;
-  document.getElementById("stat-compounds").textContent = D.compounds.length;
-  document.getElementById("stat-studies").textContent = D.studies.length;
-  document.getElementById("stat-clinical").textContent = D.studies.filter(s => s.evidenceLevel === "clinical").length;
+  // Overview stats existed in an earlier layout. Keep init compatible with
+  // both versions so missing optional UI never prevents the main tab rendering.
+  const statOils = document.getElementById("stat-oils");
+  const statCompounds = document.getElementById("stat-compounds");
+  const statStudies = document.getElementById("stat-studies");
+  const statClinical = document.getElementById("stat-clinical");
+  if (statOils) statOils.textContent = D.oils.length;
+  if (statCompounds) statCompounds.textContent = D.compounds.length;
+  if (statStudies) statStudies.textContent = D.studies.length;
+  if (statClinical) statClinical.textContent = D.studies.filter(s => s.evidenceLevel === "clinical").length;
   const classes = [...new Set(D.compounds.map(c => c.chemicalClass))].sort();
   document.getElementById("compound-class-filter").innerHTML =
     `<option value="">All classes</option>` + classes.map(c => `<option>${esc(c)}</option>`).join("");
@@ -617,8 +623,12 @@ function renderStudies() {
   const types = [...new Set(D.studies.map(s => s.studyType))].sort();
   document.getElementById("study-type-filter").innerHTML =
     `<option value="">All study types</option>` + types.map(t => `<option value="${t}">${esc(prettyStudyType(t))}</option>`).join("");
-  renderPathway();
   renderOils("");
   renderCompounds();
   renderStudies();
+
+  // Explicitly initialize whichever tab the HTML marks active. This prevents
+  // the first view from depending on a user switching tabs.
+  const active = document.querySelector(".tab.active");
+  if (active) switchTab(active.dataset.tab);
 })();
