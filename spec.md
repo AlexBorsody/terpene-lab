@@ -1,163 +1,640 @@
-# Terpene Lab — Spec
+# Terpene Lab - Product & Visualization Spec
 
 ## 1. Vision
 
-The ultimate essential oil data visualization. A user selects essential oils,
-drills down into each terpene, and browses published studies on the oils and
-terpenes. Studies are organized by use category so the tool answers "what is
-this researched for" at a glance. Embeddable in Shopify.
+Build the definitive interactive evidence map for essential oils and their constituent compounds.
 
-Status: v1 scaffold is live in this repo (oil explorer, terpene drill-down,
-oil-terpene network graph, studies browser). This spec drives v2: the full
-data model and category system.
+The experience should let a user move naturally through four questions:
 
-## 2. Data model
+1. **What is in this oil?**
+2. **Which oils contain this terpene or compound?**
+3. **What has this oil or compound actually been studied for?**
+4. **How strong and relevant is that evidence?**
 
-All data lives in `data.js` as the `TERPENE_DATA` object. Research output must
-match this schema exactly.
+The product is not a marketing-claim generator. It is an explorable research interface that connects:
 
-### 2.1 Oils
+**Essential oils -> chemical constituents -> published studies -> evidence categories -> practical research domains**
+
+It must work as a standalone data visualization and as an embeddable Sunny's Shield science experience in Shopify.
+
+The visual language is **plant science / laboratory instrument**, not wellness-blog infographic.
+
+---
+
+## 2. Research pipeline
+
+The data is built in four passes. Do not design the final visualization around incomplete sample data.
+
+### Phase 1 - Essential oil catalog
+
+First gather the essential oils.
+
+Initial Sunny's Shield oils are the priority, but the architecture must support a much larger catalog.
+
+Each oil record contains:
+
+- common name
+- Latin/binomial name
+- plant family
+- plant part
+- extraction method
+- geographic/source notes when relevant
+- aroma descriptors
+- short neutral description
+- safety notes
+- constituent profile
+- references for composition data
+
+Example:
 
 ```js
 {
-  id: "lemon",                 // slug, unique
-  name: "Lemon",
-  latinName: "Citrus limon",
-  plantPart: "Peel",
-  aroma: "Bright, clean citrus",
-  color: "#f2c230",            // chart accent
-  description: "1-2 sentences.",
-  uses: ["Surface freshening"],// plain-language uses
-  safety: "One sentence.",
-  terpenes: [
-    { terpeneId: "limonene", percent: 68 }  // typical published range
+  id: "lavender",
+  name: "Lavender",
+  latinName: "Lavandula angustifolia",
+  family: "Lamiaceae",
+  plantPart: "Flowering tops",
+  extraction: "Steam distillation",
+  aroma: ["floral", "herbaceous", "soft"],
+  description: "1-2 neutral sentences.",
+  safety: "Evidence-based safety note.",
+  constituents: [
+    {
+      compoundId: "linalool",
+      range: { min: 20, max: 45 },
+      basis: "typical published GC-MS range",
+      sourceIds: ["source-id"]
+    }
   ]
 }
 ```
 
-Phase 1 goal: catalog ALL essential oils in common use, not just the v1 sample
-of 8. Each oil gets the full field set above.
+Composition should use **ranges**, not false single-number precision, unless a specific batch GC-MS report is being represented.
 
-### 2.2 Terpenes
+### Phase 2 - Compound / terpene catalog
+
+Break each oil into its important chemical constituents.
+
+The system should not artificially restrict itself to strict terpenes. Essential oils contain important terpenoids, phenylpropanoids and other volatile compounds such as eugenol and cinnamaldehyde. The UI can use the friendly umbrella term "terpenes & compounds" while retaining chemically correct classes in the data.
 
 ```js
 {
-  id: "limonene",
-  name: "Limonene",
-  class: "Monoterpene",        // Monoterpene | Sesquiterpene | Monoterpenoid | Phenylpropanoid | ...
-  formula: "C10H16",
-  aroma: "Citrus",
-  description: "1-2 sentences."
+  id: "eugenol",
+  name: "Eugenol",
+  chemicalClass: "Phenylpropanoid",
+  formula: "C10H12O2",
+  aroma: ["clove", "warm", "spicy"],
+  description: "Neutral chemical description.",
+  sourceIds: ["source-id"]
 }
 ```
 
-Phase 2 goal: break every oil down by its terpene profile. Percentages are
-typical published composition ranges. Every `terpeneId` referenced by an oil
-must exist in this list.
+Required relationships:
 
-### 2.3 Studies
+- oil -> constituent
+- constituent -> oils containing it
+- constituent -> studies
+- oil -> studies
+
+### Phase 3 - Study collection
+
+Collect published studies for either:
+
+- an essential oil / botanical preparation
+- an isolated constituent
+- combinations when scientifically relevant
+
+Study schema:
 
 ```js
 {
-  id: "komori-1995-citrus",
-  title: "Full paper title.",
-  authors: "Komori T, et al.",
-  journal: "Neuroimmunomodulation",
-  year: 1995,
-  url: "https://pubmed.ncbi.nlm.nih.gov/8719697/",
-  finding: "One sentence, only what the paper reports.",
-  oilIds: ["lemon"],
-  terpeneIds: ["limonene"],
+  id: "stable-study-id",
+  title: "Full title",
+  authors: "Author list",
+  journal: "Journal",
+  year: 2025,
+  doi: "optional DOI",
+  pubmedId: "optional PMID",
+  url: "canonical publication URL",
+  studyType: "randomized-controlled-trial",
+  model: "human",
+  sampleSize: 120,
+  oilIds: ["lavender"],
+  compoundIds: ["linalool"],
   categories: [
-    { type: "medical-health", subcategory: "mental-health" },
-    { type: "cleaning" }
-  ]
+    { type: "health", subcategory: "mental-health", topic: "anxiety" }
+  ],
+  finding: "One-sentence faithful summary of the paper.",
+  limitations: "Short limitations note where useful.",
+  evidenceLevel: "clinical"
 }
 ```
 
-Phase 3 goal: collect all studies for the oils and terpenes. Rules:
+Rules:
 
-- Only studies with a real publication link (PubMed, DOI, journal page).
-- `finding` states what the paper found. No medical claims beyond the paper.
-- A study may link to multiple oils and multiple terpenes.
-- A study may carry multiple category tags (see 2.4).
+- Every study needs a real source URL.
+- Prefer PubMed, DOI or the journal/publisher.
+- Never infer a finished-product claim from an ingredient study.
+- Distinguish human, animal, in-vitro and review evidence.
+- Do not collapse "antimicrobial in vitro" into "treats infection."
+- Record negative or null studies, not only positive studies.
+- Deduplicate reviews and duplicate database records.
 
-### 2.4 Use categories (controlled vocabulary)
+### Phase 4 - Evidence categorization
 
-Every study gets one or more category tags. Types are fixed; subcategories
-are a starter list and may grow during research.
+Studies are tagged into a controlled taxonomy. Categories describe **research domains**, not Sunny's Shield claims.
 
-**medical-health** (subcategories):
+#### Health / medical
+
+Subcategories:
+
+- mental health
+  - anxiety
+  - stress
+  - mood
+  - sleep
+- neurological / cognitive
+  - attention
+  - memory
+  - alertness
 - respiratory
-- skin (dermatological)
-- pain-inflammation
-- mental-health (anxiety, stress, sleep)
-- digestive
-- immune
+- dermatology / skin
+- pain / inflammation
+- oral / dental
+- digestive / gastrointestinal
+- immune / inflammatory response
 - cardiovascular
-- cognitive (focus, memory, alertness)
-- oral-dental
-- hormonal
+- metabolic
+- wound research
+- other clinical research
 
-**cleaning** (no subcategories for now; add surface, laundry, air, dish if
-the research supports it):
-- General surface and home cleaning research.
+#### Cleaning / environmental
 
-**antimicrobial** (fighting microbes, subcategories):
+- surface cleaning
+- soil / residue removal
+- deodorization / odor
+- air / environmental applications
+- laundry / textiles
+- biofilm-related surface research
+
+#### Microbial
+
+Organism-level tagging is important.
+
 - bacteria
+  - gram-positive
+  - gram-negative
+  - species / strain where available
 - fungi
+  - yeast
+  - mold
+  - dermatophytes
 - viruses
+- biofilms
 
-**pest-repellent** (subcategories):
-- insects
-- rodents
-- (extend as research dictates)
+#### Pest / repellent
 
-Category tag format in data: `{ type: "<type>", subcategory: "<sub>" }`.
-The `subcategory` key is omitted when a type has no subcategories.
+- mosquitoes
+- ticks
+- fleas
+- flies
+- mites
+- ants
+- moths
+- other insects
+- rodents / vertebrate pests where actual evidence exists
 
-## 3. Build phases
+#### Additional evidence domains
 
-1. **Oil catalog.** Gather all essential oils with full field sets (2.1).
-   Research in progress via ChatGPT.
-2. **Terpene breakdown.** Terpene profile per oil with percentages (2.2).
-3. **Study collection.** Published studies linked to oils and terpenes (2.3).
-4. **Study categorization.** Tag every study with use categories (2.4).
-5. **Visualization design.** Alex defines the views. Data hooks the views
-   will need: filter studies by category/subcategory, show category coverage
-   per oil (which use categories each oil has research in), oil-by-category
-   matrix, category landing views.
-6. **Build and embed.** Implement the views, deploy static, Shopify iframe
-   embed (see shopify-embed.md).
+Add only when supported by meaningful literature:
 
-## 4. Visualization
+- antioxidant
+- food preservation
+- agricultural / plant protection
+- sensory / aroma / perception
 
-Views to be defined by Alex. Current v1 views (oil grid, composition bars,
-terpene drill-down, network graph, study list) stay as the foundation.
-Planned data-driven additions once categories land:
+---
 
-- Category filter chips on the Studies tab.
-- Per-oil "researched for" category badges.
-- Oil x use-category coverage matrix (heatmap).
-- Category landing views (e.g. open "pest-repellent" to see oils, terpenes,
-  and studies behind it).
+## 3. Evidence quality model
 
-## 5. Shopify embed
+This is essential. A PubMed link alone does not make two studies equally strong.
 
-Static hosting (Vercel) plus iframe in a Shopify Custom liquid section.
-Full instructions in shopify-embed.md. `data.js` stays the single source of
-truth so content updates never touch theme code.
+Each study receives:
 
-## 6. Open questions
+### Study type
 
-- How many oils make the v2 catalog cutoff (all known vs. top 50 by use)?
-- Do we need study quality tiers (RCT vs. in-vitro vs. review)?
-- Should categories also apply to oils directly, or only via their studies?
-  (Current decision: only via studies, so every claim is backed by a paper.)
+- systematic review / meta-analysis
+- randomized controlled trial
+- controlled human study
+- observational human study
+- animal study
+- in-vitro study
+- chemical / mechanistic study
+- review / narrative review
 
-## 7. Copy and design rules
+### Evidence context
 
-- No emojis in UI copy.
-- No em dashes in UI copy. Use hyphens or colons.
-- Laboratory instrument look: dark navy, amber accents, cream text,
-  monospace for data.
+- human
+- animal
+- in vitro
+- environmental / surface
+- agricultural
+- mechanistic
+
+### Evidence level
+
+Use a simple UI tier, derived from study metadata rather than manually used as a marketing score:
+
+- **Clinical** - human intervention or clinical evidence
+- **Preclinical** - animal or mechanistic biological evidence
+- **Laboratory** - in-vitro, organism, surface or chemical testing
+- **Review** - synthesis of prior literature
+
+The interface must always expose the underlying study type. Never show a generic "science-backed" score with no explanation.
+
+---
+
+## 4. Core visualization model
+
+The central insight: this dataset is a **network**, not a spreadsheet.
+
+There are four node types:
+
+**OILS -> COMPOUNDS -> EVIDENCE DOMAINS -> STUDIES**
+
+The best experience should provide multiple coordinated views of the same graph rather than one giant visualization.
+
+---
+
+## 5. Primary user experience
+
+### View A - Evidence Atlas (default landing view)
+
+This is the hero visualization.
+
+Layout:
+
+- Essential oils appear as the first layer.
+- Selecting an oil reveals its major compounds.
+- Compounds connect to research-domain nodes such as Health, Microbial, Cleaning and Pest.
+- Domain nodes display the number of linked studies.
+- Selecting a domain opens the relevant studies in a detail panel.
+
+Think **interactive evidence map**, not a decorative node cloud.
+
+Interaction:
+
+1. User taps Lavender.
+2. Major compounds animate/highlight: Linalool, Linalyl acetate, etc.
+3. Research domains supported by linked papers illuminate.
+4. User taps "Mental health."
+5. The graph filters to the relevant compounds and studies.
+6. Study drawer shows human vs laboratory evidence and citations.
+
+Desktop can use a horizontal network. Mobile should become a stepped drill-down rather than squeezing the entire network onto the screen.
+
+### View B - Oil Explorer
+
+A browsable oil catalog.
+
+Each oil card shows:
+
+- botanical name
+- aroma
+- plant part
+- extraction
+- top 3-5 constituents
+- small composition visualization
+- number of studies
+- research-domain coverage
+
+Opening an oil produces a full profile.
+
+#### Oil profile
+
+1. **Composition fingerprint**
+   - horizontal bars or radial fingerprint for major constituents
+   - ranges rather than false exact percentages
+2. **Research coverage**
+   - compact domain matrix
+3. **Evidence by domain**
+   - clinical / preclinical / laboratory counts
+4. **Studies**
+   - filterable bibliography
+
+### View C - Compound Explorer
+
+Invert the relationship.
+
+A user selects **Limonene**, **Linalool**, **Eugenol**, etc. and sees:
+
+- chemical class
+- molecular formula
+- aroma
+- oils containing it
+- typical abundance in each oil
+- research domains
+- studies directly investigating the compound
+
+The key visualization is a ranked "found in" bar chart plus an evidence-domain map.
+
+### View D - Evidence Matrix
+
+This is the serious comparison tool.
+
+Rows: oils or compounds.
+
+Columns: research domains / subdomains.
+
+Cell encoding:
+
+- **color intensity = number of relevant studies**
+- small marker / segmented edge = evidence context (clinical, preclinical, laboratory, review)
+
+Clicking a cell opens the exact papers behind it.
+
+Example:
+
+| | Mental health | Skin | Bacteria | Fungi | Odor | Mosquito |
+|---|---|---|---|---|---|---|
+| Lavender | strong | medium | medium | medium | low | low |
+| Clove | low | low | strong | strong | medium | medium |
+| Lemon | low | low | medium | medium | medium | low |
+
+Do not literally label cells "strong" based only on study count. The visual encoding uses count and study type; the user can inspect the papers.
+
+This view is ideal for researchers and for website screenshots.
+
+### View E - Research Domain Explorer
+
+Start from a question instead of an ingredient.
+
+Landing tiles:
+
+- Health
+- Cleaning
+- Microbial
+- Pest / Repellent
+
+Selecting **Microbial -> Fungi** shows:
+
+- oils with relevant evidence
+- compounds with relevant evidence
+- organisms studied
+- evidence type distribution
+- study list
+
+Selecting **Health -> Mental health -> Anxiety** produces the same structure.
+
+This is likely the most intuitive consumer view.
+
+### View F - Study Library
+
+A research browser, not just a long list.
+
+Filters:
+
+- oil
+- compound
+- domain
+- subcategory
+- organism / topic
+- human / animal / in-vitro
+- study type
+- year
+- positive / null / mixed finding when captured
+
+Study cards show:
+
+- title
+- year / journal
+- evidence badge
+- ingredient / compound tags
+- one-sentence finding
+- limitations
+- source link
+
+---
+
+## 6. Coordinated interactions
+
+All views share state.
+
+If a user selects **Clove** in Oil Explorer and switches to Evidence Matrix, Clove remains selected.
+
+Global filter state:
+
+- selected oils
+- selected compounds
+- evidence domain
+- subcategory/topic
+- evidence context
+- year range
+
+Every visualization should answer "why am I seeing this?" and provide a path to the underlying papers.
+
+---
+
+## 7. Visual design
+
+### Art direction
+
+**Plant science put to work.**
+
+Blend:
+
+- modern laboratory instrument
+- botanical field guide
+- scientific journal figure
+- Sunny's Shield visual system
+
+Avoid:
+
+- wellness-blog cards
+- cartoon molecule icons
+- rainbow network graphs
+- excessive glassmorphism
+- fake medical UI
+- decorative charts with no quantitative meaning
+
+### Palette
+
+Base:
+
+- cream / warm laboratory paper
+- deep forest / navy
+- cobalt accent
+- amber / botanical accent
+
+Use category colors sparingly and consistently.
+
+### Typography
+
+- editorial serif for botanical/oil names and major headings
+- clean sans-serif for interface
+- monospace for formulas, percentages, PMIDs and quantitative values
+
+---
+
+## 8. Mobile behavior
+
+Mobile is a first-class requirement because the experience will be reached from Instagram and Shopify.
+
+Do not shrink desktop charts.
+
+On mobile:
+
+- Evidence Atlas becomes sequential drill-down cards.
+- Matrix gets horizontal scrolling with frozen row labels.
+- Study filters become a compact filter drawer.
+- Detail panels become bottom sheets / stacked sections.
+- Composition charts remain touch-friendly.
+- Every chart element is tappable, not hover-dependent.
+
+---
+
+## 9. Data architecture
+
+Current `data.js` can remain the initial source of truth, but the schema should be normalized enough to avoid duplicating studies across oils.
+
+Recommended top-level structure:
+
+```js
+const TERPENE_DATA = {
+  oils: [],
+  compounds: [],
+  studies: [],
+  categories: [],
+  sources: []
+}
+```
+
+Relationships are IDs.
+
+A separate `sources` collection stores composition and taxonomy references that are not themselves studies.
+
+Do not store category claims directly on oils. Oil category coverage is **derived from linked studies**. This preserves provenance.
+
+---
+
+## 10. Research provenance
+
+Every displayed fact should be traceable.
+
+Composition values need sources just as efficacy studies do.
+
+Source types:
+
+- GC-MS composition paper
+- pharmacopoeia / monograph
+- systematic review
+- clinical paper
+- laboratory paper
+- authoritative botanical database
+
+The UI should distinguish:
+
+**Composition source** from **effect/evidence study**.
+
+---
+
+## 11. Sunny's Shield integration
+
+The visualization is broader than the product.
+
+Sunny's Shield should appear as a subtle curated layer, not as the scientific conclusion.
+
+Optional toggle:
+
+**"Show Sunny's Shield ingredients"**
+
+When enabled:
+
+- ingredients used in the current formula highlight
+- all other oils remain available
+- the evidence continues to describe ingredient research, not finished-product efficacy
+
+This keeps the tool credible and makes it genuinely useful beyond marketing.
+
+Future option: once finished-product lab testing exists, Sunny's Shield becomes its own node with its own direct studies/tests, visually distinguished from ingredient evidence.
+
+---
+
+## 12. MVP vs later
+
+### MVP
+
+Build these first:
+
+1. Oil Explorer
+2. Compound drill-down
+3. Evidence Domain Explorer
+4. Study Library with evidence-type filters
+5. Oil x domain Evidence Matrix
+
+These deliver most of the value without requiring an exotic visualization engine.
+
+### V2
+
+6. Full Evidence Atlas network
+7. organism-level microbial explorer
+8. comparison mode (oil vs oil / compound vs compound)
+9. evidence timeline
+10. Sunny's Shield formula overlay
+11. export/shareable research cards
+
+### V3
+
+- finished-product lab evidence
+- batch-specific GC-MS overlays
+- citation export
+- research update pipeline
+- richer quantitative meta-analysis where the underlying literature supports it
+
+---
+
+## 13. Definition of done for research phases
+
+### Oil complete when
+
+- taxonomy verified
+- plant part verified
+- extraction documented
+- aroma documented
+- major composition captured with source(s)
+- safety note sourced
+
+### Compound complete when
+
+- identity and class verified
+- formula verified
+- oil relationships established
+- aroma documented where meaningful
+
+### Study complete when
+
+- canonical citation exists
+- linked oils/compounds are correct
+- study type is classified
+- evidence context is classified
+- category/topic tags assigned
+- finding is faithful to paper
+- limitations captured where useful
+
+---
+
+## 14. Key product principle
+
+The visualization must never ask the user to trust Sunny's Shield's interpretation.
+
+It should let them move from:
+
+**plant -> molecule -> research area -> paper**
+
+and inspect the evidence themselves.
+
+That is the differentiator.
+
+The product should feel less like "here are our claims" and more like:
+
+**"Here is the chemistry. Here is the research. Explore it."**
