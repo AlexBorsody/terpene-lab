@@ -27,6 +27,10 @@ function esc(s) {
     .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
+function formatFormula(formula) {
+  return esc(formula).replace(/(\d+)/g, "<sub>$1</sub>");
+}
+
 function subLabel(type, sub) {
   const d = domainByType[type];
   if (!d) return sub;
@@ -376,7 +380,7 @@ function renderCompounds() {
     const s = studiesForCompound(c.id).length;
     return `<div class="card" data-c="${c.id}">
       <h3>${esc(c.name)}</h3>
-      <p style="margin:8px 0"><span class="formula-chip">${esc(c.formula)}</span></p>
+      <p style="margin:8px 0"><span class="formula-chip">${formatFormula(c.formula)}</span></p>
       <p class="sub">${esc(c.chemicalClass)}</p>
       <p class="sub">${n} oil${n === 1 ? "" : "s"} &middot; ${s} stud${s === 1 ? "y" : "ies"}</p>
     </div>`;
@@ -394,7 +398,7 @@ function showCompound(id) {
   document.getElementById("compound-list-view").classList.add("hidden");
   document.getElementById("compound-detail").classList.remove("hidden");
   document.getElementById("compound-name").textContent = c.name;
-  document.getElementById("compound-formula").textContent = c.formula;
+  document.getElementById("compound-formula").innerHTML = formatFormula(c.formula);
   document.getElementById("compound-class").textContent = c.chemicalClass;
   document.getElementById("compound-desc").textContent = c.description;
   document.getElementById("compound-aroma").textContent = c.aroma.join(", ");
