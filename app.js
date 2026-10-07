@@ -380,7 +380,10 @@ function renderCompounds() {
     const s = studiesForCompound(c.id).length;
     return `<div class="card" data-c="${c.id}">
       <h3>${esc(c.name)}</h3>
-      <p style="margin:8px 0"><span class="formula-chip">${formatFormula(c.formula)}</span></p>
+      <div class="compound-chemline">
+        <span class="molecule-glyph molecule-glyph-large" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <span class="formula-chip">${formatFormula(c.formula)}</span>
+      </div>
       <p class="sub">${esc(c.chemicalClass)}</p>
       <p class="sub">${n} oil${n === 1 ? "" : "s"} &middot; ${s} stud${s === 1 ? "y" : "ies"}</p>
     </div>`;
