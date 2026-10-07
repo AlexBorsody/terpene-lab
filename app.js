@@ -83,6 +83,7 @@ function switchTab(tab) {
   document.querySelectorAll(".tab-panel").forEach(p =>
     p.classList.toggle("active", p.id === "tab-" + tab));
   disposeCharts();
+  if (tab === "pathway") renderPathway();
   if (tab === "network") renderNetwork();
   if (tab === "matrix") renderMatrix();
   if (tab === "domains") renderDomainTiles();
@@ -192,6 +193,80 @@ function rangeBarChart(el, rows, barColor, onClick) {
     if (r && r.id) onClick(r.id);
   });
   return chart;
+}
+
+
+/* ================= PLANT -> COMPOUNDS -> USES ================= */
+let pathwayOil = null;
+
+function renderPathway(selectedId) {
+  const plantWrap = document.getElementById("pathway-plants");
+  if (!plantWrap) return;
+  const selected = selectedId || pathwayOil || (D.oils[0] && D.oils[0].id);
+  pathwayOil = selected;
+  plantWrap.innerHTML = D.oils.map(o =>
+    `<button class="path-node plant-node${o.id === selected ? " selected" : ""}" data-path-oil="${o.id}">
+      <span class="swatch sm" style="background:${o.color}"></span>
+      <span><strong>${esc(o.name)}</strong><small>${esc(o.latinName)}</small></span>
+    </button>`).join("");
+  plantWrap.querySelectorAll("[data-path-oil]").forEach(b =>
+    b.addEventListener("click", () => renderPathway(b.dataset.pathOil)));
+  renderPathwayForOil(selected);
+}
+
+function renderPathwayForOil(oilId) {
+  const oil = oilById[oilId];
+  if (!oil) return;
+  const compoundWrap = document.getElementById("pathway-compounds");
+  compoundWrap.innerHTML = oil.constituents.map(k => {
+    const comp = compoundById[k.compoundId];
+    if (!comp) return "";
+    return `<button class="path-node compound-node" data-path-compound="${comp.id}">
+      <span><strong>${esc(comp.name)}</strong><small>${esc(comp.chemicalClass)} · ${k.range.min}-${k.range.max}%</small></span>
+    </button>`;
+  }).join("");
+  compoundWrap.querySelectorAll("[data-path-compound]").forEach(b =>
+    b.addEventListener("click", () => showCompound(b.dataset.pathCompound)));
+
+  const linked = studiesForOil(oilId);
+  const groups = [];
+  D.categories.forEach(domain => {
+    domain.subcategories.forEach(sub => {
+      const ss = linked.filter(s => s.categories.some(c => c.type === domain.type && c.subcategory === sub.id));
+      if (ss.length) groups.push({ domain, sub, studies: ss });
+    });
+  });
+  groups.sort((x,y) => y.studies.length - x.studies.length);
+
+  const useWrap = document.getElementById("pathway-uses");
+  useWrap.innerHTML = groups.length ? groups.map((g,i) => {
+    const lvl = strongestLevel(g.studies);
+    return `<button class="path-node use-node" data-path-use="${i}">
+      <span><strong>${esc(g.sub.label)}</strong><small>${esc(g.domain.label)} · ${g.studies.length} paper${g.studies.length === 1 ? "" : "s"}</small></span>
+      ${lvl ? `<span class="lvl lvl-${lvl} sm">${LEVEL_LETTER[lvl]}</span>` : ""}
+    </button>`;
+  }).join("") : `<p class="pathway-empty">No linked research yet</p>`;
+
+  useWrap.querySelectorAll("[data-path-use]").forEach(b =>
+    b.addEventListener("click", () => showPathwayEvidence(oil, groups[Number(b.dataset.pathUse)])));
+  const evidence = document.getElementById("pathway-evidence");
+  evidence.classList.add("hidden");
+  evidence.innerHTML = "";
+}
+
+function showPathwayEvidence(oil, group) {
+  if (!group) return;
+  const evidence = document.getElementById("pathway-evidence");
+  evidence.classList.remove("hidden");
+  evidence.innerHTML = `<div class="pathway-evidence-head">
+      <div><p class="eyebrow">${esc(group.domain.label)}</p><h3>${esc(oil.name)} → ${esc(group.sub.label)}</h3></div>
+      <button type="button" class="back" id="pathway-close">Close</button>
+    </div>
+    <p class="pathway-proof-note">These papers describe research on the ingredient or its compounds. They are not evidence that a finished Sunny's Shield product produces the same effect.</p>
+    ${group.studies.map(studyCard).join("")}`;
+  bindStudyLinks(evidence);
+  document.getElementById("pathway-close").addEventListener("click", () => evidence.classList.add("hidden"));
+  evidence.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 /* ================= OIL EXPLORER ================= */
@@ -526,6 +601,7 @@ function renderStudies() {
   const types = [...new Set(D.studies.map(s => s.studyType))].sort();
   document.getElementById("study-type-filter").innerHTML =
     `<option value="">All study types</option>` + types.map(t => `<option value="${t}">${esc(prettyStudyType(t))}</option>`).join("");
+  renderPathway();
   renderOils("");
   renderCompounds();
   renderStudies();
