@@ -1,0 +1,306 @@
+/* Terpene Lab - laboratory instrument aesthetic.
+   Dark navy, amber/gold accents, cream text. No emojis. */
+
+:root {
+  --bg: #0b1220;
+  --bg2: #0e1626;
+  --surface: #131d31;
+  --surface2: #182642;
+  --border: #26334f;
+  --text: #f2ead8;
+  --muted: #9aa7bd;
+  --amber: #e8a020;
+  --amber-dim: #b57a14;
+  --teal: #5fc6b5;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+.lab-header {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.lab-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brand { display: flex; align-items: center; gap: 12px; }
+
+.brand-mark {
+  width: 44px; height: 44px;
+  border: 2px solid var(--amber);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--amber);
+  font-size: 18px;
+}
+
+.brand h1 {
+  font-size: 20px;
+  letter-spacing: 3px;
+  font-weight: 800;
+}
+
+.tagline {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.tabs { display: flex; gap: 6px; }
+
+.tab {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.tab:hover { color: var(--text); border-color: var(--amber-dim); }
+
+.tab.active {
+  background: var(--amber);
+  border-color: var(--amber);
+  color: #0b1220;
+  font-weight: 700;
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.toolbar input[type="search"], .toolbar select {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 9px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.toolbar input[type="search"] { min-width: 220px; }
+
+.count { color: var(--muted); font-size: 13px; font-family: var(--mono); }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.card:hover { border-color: var(--amber); transform: translateY(-2px); }
+
+.card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+
+.swatch {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.25);
+  flex-shrink: 0;
+}
+
+.card h3 { font-size: 16px; }
+.card .latin { font-style: italic; color: var(--muted); font-size: 13px; }
+.card .sub { font-size: 12px; color: var(--muted); font-family: var(--mono); margin-top: 6px; }
+.card .top-terpene { font-size: 13px; margin-top: 8px; color: var(--text); }
+.card .top-terpene b { color: var(--amber); }
+
+.formula-chip {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: var(--teal);
+}
+
+.detail {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  margin-top: 6px;
+}
+
+.hidden { display: none; }
+
+.back {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 18px;
+  font-size: 14px;
+}
+
+.back:hover { color: var(--text); border-color: var(--amber-dim); }
+
+.detail-head { display: flex; gap: 16px; align-items: center; margin-bottom: 14px; }
+
+.detail-swatch {
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.25);
+  flex-shrink: 0;
+}
+
+.detail h2 { font-size: 28px; letter-spacing: 0.5px; }
+.detail h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--amber);
+  margin: 24px 0 10px;
+}
+
+.latin { color: var(--muted); font-style: italic; }
+.formula { font-family: var(--mono); font-style: normal; color: var(--teal); }
+
+.desc { margin: 10px 0; max-width: 70ch; }
+
+.meta-row {
+  display: flex;
+  gap: 32px;
+  margin: 14px 0;
+  flex-wrap: wrap;
+}
+
+.meta-row > div { display: flex; flex-direction: column; gap: 2px; }
+
+.meta-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+}
+
+.chart { width: 100%; height: 320px; }
+.chart-tall { height: 560px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+
+.hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+.chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+
+.chip {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 7px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.chip:hover { border-color: var(--amber); }
+.chip b { color: var(--amber); font-family: var(--mono); font-weight: 600; }
+
+.uses { list-style: none; display: flex; gap: 8px; flex-wrap: wrap; }
+
+.uses li {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.safety {
+  border-left: 3px solid var(--amber);
+  padding-left: 12px;
+  color: var(--muted);
+  max-width: 70ch;
+}
+
+.panel-intro { color: var(--muted); margin-bottom: 14px; }
+
+.study {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+}
+
+.study h4 { font-size: 16px; margin-bottom: 4px; }
+.study .cite { font-size: 13px; color: var(--muted); font-family: var(--mono); margin-bottom: 8px; }
+.study .finding { font-size: 14px; }
+.study .finding-label {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--teal); display: block; margin-bottom: 2px;
+}
+.study .tags { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+.study .tags a, .study .ext {
+  font-size: 12px; color: var(--amber);
+  text-decoration: none; border: 1px solid var(--border);
+  padding: 3px 10px; border-radius: 4px; cursor: pointer;
+  background: transparent;
+}
+.study .tags a:hover, .study .ext:hover { border-color: var(--amber); }
+.study .taglink { color: var(--muted); }
+
+.empty { color: var(--muted); padding: 30px 0; text-align: center; }
+
+.lab-footer {
+  border-top: 1px solid var(--border);
+  padding: 18px 20px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (max-width: 640px) {
+  .lab-header-inner { flex-direction: column; align-items: flex-start; }
+  .detail { padding: 18px; }
+  .chart { height: 280px; }
+}
