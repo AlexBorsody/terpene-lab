@@ -119,8 +119,8 @@ document.querySelectorAll("[data-backto]").forEach(btn => {
 
 /* ---------- study cards ---------- */
 function evidenceBadge(s) {
-  return `<span class="lvl lvl-${s.evidenceLevel}">${LEVEL_LETTER[s.evidenceLevel]}</span>
-    <span class="lvl-text">${LEVEL_LABEL[s.evidenceLevel]} &middot; ${esc(prettyStudyType(s.studyType))} &middot; ${esc(s.context)}</span>`;
+  return `<span class="evidence-word evidence-${s.evidenceLevel}">${LEVEL_LABEL[s.evidenceLevel]}</span>
+    <span class="lvl-text">${esc(prettyStudyType(s.studyType))} &middot; ${esc(s.context)}</span>`;
 }
 function prettyStudyType(t) {
   return t.split("-").join(" ");
@@ -264,7 +264,7 @@ function renderPathwayForOil(oilId) {
     const lvl = strongestLevel(g.studies);
     return `<button class="path-node use-node" data-path-use="${i}">
       <span><strong>${esc(g.sub.label)}</strong><small>${esc(g.domain.label)} · ${g.studies.length} paper${g.studies.length === 1 ? "" : "s"}</small></span>
-      ${lvl ? `<span class="lvl lvl-${lvl} sm">${LEVEL_LETTER[lvl]}</span>` : ""}
+      ${lvl ? `<span class="evidence-word evidence-${lvl}">${LEVEL_LABEL[lvl]}</span>` : ""}
     </button>`;
   }).join("") : `<p class="pathway-empty">No linked research yet</p>`;
 
