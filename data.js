@@ -39,7 +39,7 @@
    ========================================================================== */
 
 const TERPENE_DATA = {
-  "version": "0.5.0-research",
+  "version": "0.5.1-research",
   "categories": [
     {
       "type": "health",
@@ -2349,6 +2349,96 @@ const TERPENE_DATA = {
       "title": "Effect of inhalation aromatherapy with lavender essential oil on stress and vital signs in patients undergoing coronary artery bypass surgery: A single-blinded randomized clinical trial",
       "url": "https://pubmed.ncbi.nlm.nih.gov/26051567/",
       "year": 2015
+    },
+    {
+      "id": "halder-2011-clove-memory",
+      "title": "Clove oil reverses learning and memory deficits in scopolamine-treated mice",
+      "authors": "Halder S, Mehta AK, Kar R, Mustafa M, Mediratta PK, Sharma KK",
+      "journal": "Planta Medica",
+      "year": 2011,
+      "doi": "10.1055/s-0030-1250605",
+      "pubmedId": "21157682",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21157682/",
+      "studyType": "animal-study",
+      "context": "animal",
+      "evidenceLevel": "preclinical",
+      "sampleSize": null,
+      "oilIds": [
+        "clove"
+      ],
+      "compoundIds": [
+        "eugenol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "memory"
+        }
+      ],
+      "finding": "In scopolamine-treated mice, repeated clove-oil pretreatment significantly reversed measures of acquisition and retention memory impairment in elevated-plus-maze and passive-avoidance tasks.",
+      "limitations": "Mouse model using injected clove oil and pharmacologically induced memory impairment; does not establish cognitive benefit in humans or from normal aromatic use."
+    },
+    {
+      "id": "halder-2012-clove-acute-cognition",
+      "title": "Acute effect of essential oil of Eugenia caryophyllata on cognition and pain in mice",
+      "authors": "Halder S, Mehta AK, Mediratta PK, Sharma KK",
+      "journal": "Naunyn-Schmiedeberg's Archives of Pharmacology",
+      "year": 2012,
+      "doi": "10.1007/s00210-012-0742-2",
+      "pubmedId": "22453493",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22453493/",
+      "studyType": "animal-study",
+      "context": "animal",
+      "evidenceLevel": "preclinical",
+      "sampleSize": null,
+      "oilIds": [
+        "clove"
+      ],
+      "compoundIds": [
+        "eugenol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "memory"
+        },
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "Acute clove-oil administration significantly improved scopolamine-induced retention-memory deficits in mice at tested doses; the study also evaluated analgesic effects.",
+      "limitations": "Mouse model with intraperitoneal administration and scopolamine-induced impairment; not evidence of human cognitive enhancement."
+    },
+    {
+      "id": "eugenol-2021-memory-neurogenesis",
+      "title": "Effects of Eugenol on Memory Performance, Neurogenesis, and Dendritic Complexity of Neurons in Mice Analyzed by Behavioral Tests and Golgi Staining of Brain Tissue",
+      "authors": "Irie Y, et al.",
+      "journal": "International Journal of Molecular Sciences",
+      "year": 2021,
+      "pubmedId": "34434006",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34434006/",
+      "studyType": "animal-study",
+      "context": "animal",
+      "evidenceLevel": "preclinical",
+      "sampleSize": 21,
+      "oilIds": [
+        "clove"
+      ],
+      "compoundIds": [
+        "eugenol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "memory"
+        }
+      ],
+      "finding": "Oral eugenol increased spatial and recognition-memory measures in mice and was associated with increased neurogenesis and dendritic complexity in hippocampal regions, although Morris-water-maze escape latency was not significantly changed.",
+      "limitations": "Small mouse study of isolated eugenol; findings do not establish cognitive benefit in humans or from clove-oil aroma."
     }
   ],
   "sources": [
