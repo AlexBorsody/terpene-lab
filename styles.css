@@ -529,3 +529,30 @@ main {
 .molecule-glyph i:nth-child(5) { left: 26px; top: 22px; }
 
 .brand-shield { width: 36px; height: 40px; display: block; color: var(--amber); }
+
+
+/* ---- chemistry notation + visible matrix scrolling ---- */
+.formula-chip sub,
+.formula sub {
+  font-size: .68em;
+  line-height: 0;
+  vertical-align: sub;
+}
+.matrix-wrap {
+  overflow-x: scroll;
+  scrollbar-width: auto;
+  scrollbar-color: var(--teal) var(--surface2);
+  padding-bottom: 10px;
+}
+.matrix-wrap::-webkit-scrollbar { height: 14px; }
+.matrix-wrap::-webkit-scrollbar-track {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.matrix-wrap::-webkit-scrollbar-thumb {
+  background: var(--teal);
+  border: 3px solid var(--surface2);
+  border-radius: 8px;
+}
+.matrix-wrap::-webkit-scrollbar-thumb:hover { background: var(--amber); }
