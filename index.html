@@ -62,6 +62,19 @@
     <div id="oil-list-view">
       <div class="toolbar">
         <input id="oil-search" type="search" placeholder="Search oils...">
+        <select id="oil-sort" aria-label="Sort plants">
+          <option value="az">A to Z</option>
+          <option value="studies">Most studied</option>
+          <option value="domains">Most use areas</option>
+          <option value="compound">Top compound A to Z</option>
+        </select>
+        <select id="oil-domain-filter" aria-label="Filter by researched use">
+          <option value="">All uses</option>
+          <option value="health">Health</option>
+          <option value="cleaning">Cleaning</option>
+          <option value="microbial">Microbial</option>
+          <option value="pest">Pest / Repellent</option>
+        </select>
         <span id="oil-count" class="count"></span>
       </div>
       <div id="oil-grid" class="card-grid"></div>
