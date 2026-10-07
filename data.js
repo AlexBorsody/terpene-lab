@@ -39,7 +39,7 @@
    ========================================================================== */
 
 const TERPENE_DATA = {
-  "version": "0.3.0-sample",
+  "version": "0.4.0-merged",
   "categories": [
     {
       "type": "health",
@@ -651,34 +651,52 @@ const TERPENE_DATA = {
       "name": "Oregano",
       "latinName": "Origanum vulgare",
       "family": "Lamiaceae",
-      "plantPart": "Leaves",
+      "plantPart": "Aerial parts",
       "extraction": "Steam distillation",
       "aroma": [
-        "spicy",
-        "warm",
-        "pungent"
+        "herbal",
+        "sharp",
+        "phenolic"
       ],
-      "color": "#6b8f4e",
-      "description": "Steam-distilled from leaves. Dominated by carvacrol, with strong in-vitro antibacterial activity documented across reviews.",
+      "color": "#71834c",
+      "description": "A strongly aromatic oil whose chemotype can be dominated by carvacrol or thymol, with p-cymene and gamma-terpinene commonly present.",
       "uses": [
-        "Surface cleaning blends",
-        "Research reference"
+        "Research on microbial and biofilm activity",
+        "Aromatic blends"
       ],
-      "safety": "Very potent skin irritant; heavy dilution required. Avoid in pregnancy.",
+      "safety": "Potent and potentially irritating; chemotype and dilution matter.",
       "constituents": [
         {
           "compoundId": "carvacrol",
           "range": {
-            "min": 60,
-            "max": 78
-          }
+            "min": 20,
+            "max": 80
+          },
+          "basis": "Chemotype-dependent published range"
         },
         {
           "compoundId": "thymol",
           "range": {
-            "min": 5,
+            "min": 1,
+            "max": 25
+          },
+          "basis": "Chemotype-dependent published range"
+        },
+        {
+          "compoundId": "p-cymene",
+          "range": {
+            "min": 3,
+            "max": 20
+          },
+          "basis": "Chemotype-dependent published range"
+        },
+        {
+          "compoundId": "gamma-terpinene",
+          "range": {
+            "min": 2,
             "max": 15
-          }
+          },
+          "basis": "Chemotype-dependent published range"
         }
       ]
     },
@@ -753,6 +771,82 @@ const TERPENE_DATA = {
             "min": 4,
             "max": 10
           }
+        }
+      ]
+    },
+    {
+      "id": "cinnamon",
+      "name": "Cinnamon Bark",
+      "latinName": "Cinnamomum verum",
+      "family": "Lauraceae",
+      "plantPart": "Bark",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "warm",
+        "woody",
+        "spicy"
+      ],
+      "color": "#a95f45",
+      "description": "Bark essential oil is typically dominated by cinnamaldehyde. Composition varies by Cinnamomum species, origin, and extraction.",
+      "uses": [
+        "Aromatic blends",
+        "Research on microbial and biofilm activity"
+      ],
+      "safety": "Highly potent and irritating at inappropriate concentrations; requires careful dilution.",
+      "constituents": [
+        {
+          "compoundId": "cinnamaldehyde",
+          "range": {
+            "min": 55,
+            "max": 80
+          },
+          "basis": "Representative published bark-oil range; species and source dependent"
+        },
+        {
+          "compoundId": "eugenol",
+          "range": {
+            "min": 2,
+            "max": 10
+          },
+          "basis": "Representative bark-oil range; species and source dependent"
+        }
+      ]
+    },
+    {
+      "id": "myrrh",
+      "name": "Myrrh",
+      "latinName": "Commiphora myrrha",
+      "family": "Burseraceae",
+      "plantPart": "Oleo-gum-resin",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "resinous",
+        "earthy",
+        "warm"
+      ],
+      "color": "#9b6545",
+      "description": "Resin-derived aromatic material rich in furanosesquiterpenes; chemical profile varies substantially by Commiphora species and extraction.",
+      "uses": [
+        "Resinous aromatic blends",
+        "Research on fungal activity"
+      ],
+      "safety": "Composition and safety depend on species and preparation; use appropriately diluted and avoid unsupported therapeutic use.",
+      "constituents": [
+        {
+          "compoundId": "furanoeudesma-1-3-diene",
+          "range": {
+            "min": 15,
+            "max": 45
+          },
+          "basis": "Representative literature range; highly source dependent"
+        },
+        {
+          "compoundId": "curzerene",
+          "range": {
+            "min": 5,
+            "max": 25
+          },
+          "basis": "Representative literature range; highly source dependent"
         }
       ]
     }
@@ -997,6 +1091,40 @@ const TERPENE_DATA = {
         "fresh"
       ],
       "description": "Refined from lemon eucalyptus citronellal. The botanical repellent compound with the strongest human trial evidence."
+    },
+    {
+      "id": "p-cymene",
+      "name": "p-Cymene",
+      "chemicalClass": "Monoterpene",
+      "formula": "C10H14",
+      "aroma": [
+        "citrus",
+        "herbal",
+        "woody"
+      ],
+      "description": "A common aromatic monoterpene in oregano and thyme oils and a biosynthetic relative of carvacrol and thymol."
+    },
+    {
+      "id": "furanoeudesma-1-3-diene",
+      "name": "Furanoeudesma-1,3-diene",
+      "chemicalClass": "Furanosesquiterpene",
+      "formula": "C15H20O",
+      "aroma": [
+        "resinous",
+        "myrrh"
+      ],
+      "description": "A characteristic furanosesquiterpene reported in Commiphora myrrh preparations."
+    },
+    {
+      "id": "curzerene",
+      "name": "Curzerene",
+      "chemicalClass": "Furanosesquiterpene",
+      "formula": "C15H20O",
+      "aroma": [
+        "resinous",
+        "warm"
+      ],
+      "description": "A furanosesquiterpene reported in myrrh and other aromatic botanicals."
     }
   ],
   "studies": [
@@ -1505,6 +1633,279 @@ const TERPENE_DATA = {
       ],
       "finding": "Aqueous thyme essential oil solutions (2.5% and 5%) applied by nebulization and direct contact reduced mesophilic and psychrophilic bacteria and environmental fungi in both air and on indoor surfaces.",
       "limitations": "Indoor trial settings; long-term efficacy and cost-effectiveness not assessed."
+    },
+    {
+      "id": "shen-2026-lavender-sleep-meta",
+      "title": "The Sleep-Enhancing Effect of Lavender Essential Oil in Adults: A Systematic Review and Meta-Analysis",
+      "authors": "Shen H, Zhang LJ, Zhu WY",
+      "journal": "Holistic Nursing Practice",
+      "year": 2026,
+      "doi": "10.1097/HNP.0000000000000734",
+      "pubmedId": "40600743",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40600743/",
+      "studyType": "systematic-review",
+      "context": "human",
+      "evidenceLevel": "review",
+      "sampleSize": 628,
+      "oilIds": [
+        "lavender"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "sleep"
+        }
+      ],
+      "finding": "Meta-analysis of 11 randomized controlled trials reported a statistically significant improvement in adult sleep quality associated with lavender essential-oil interventions.",
+      "limitations": "The authors noted limitations in the quantity and quality of included studies; interventions and routes varied."
+    },
+    {
+      "id": "ribeiro-2024-eugenol-antibiofilm-review",
+      "title": "Eugenol as a promising antibiofilm and anti-quorum sensing agent: A systematic review",
+      "authors": "Ribeiro TAN, et al.",
+      "journal": "Microbial Pathogenesis",
+      "year": 2024,
+      "doi": "10.1016/j.micpath.2024.106937",
+      "pubmedId": "39293727",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39293727/",
+      "studyType": "systematic-review",
+      "context": "in-vitro",
+      "evidenceLevel": "review",
+      "oilIds": [
+        "clove"
+      ],
+      "compoundIds": [
+        "eugenol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "finding": "Systematic review of 14 eligible studies reported antibacterial, antibiofilm, anti-virulence and anti-quorum-sensing activity for eugenol across multiple bacterial strains.",
+      "limitations": "Predominantly laboratory evidence; does not establish clinical or finished-product efficacy."
+    },
+    {
+      "id": "pinto-2009-clove-antifungal",
+      "title": "Antifungal activity of the clove essential oil from Syzygium aromaticum on Candida, Aspergillus and dermatophyte species",
+      "authors": "Pinto E, Vale-Silva L, Cavaleiro C, Salgueiro L",
+      "journal": "Journal of Medical Microbiology",
+      "year": 2009,
+      "doi": "10.1099/jmm.0.010538-0",
+      "pubmedId": "19589904",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19589904/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "oilIds": [
+        "clove"
+      ],
+      "compoundIds": [
+        "eugenol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "yeast"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "mold"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "dermatophytes"
+        }
+      ],
+      "finding": "Clove essential oil and eugenol inhibited tested Candida, Aspergillus and dermatophyte strains; experiments implicated fungal membrane damage and reduced ergosterol.",
+      "limitations": "In-vitro study; results do not establish treatment efficacy in humans."
+    },
+    {
+      "id": "firmino-2018-cinnamon-biofilm",
+      "title": "Antibacterial and Antibiofilm Activities of Cinnamomum Sp. Essential Oil and Cinnamaldehyde: Antimicrobial Activities",
+      "authors": "Firmino DF, et al.",
+      "journal": "The Scientific World Journal",
+      "year": 2018,
+      "doi": "10.1155/2018/7405736",
+      "pubmedId": "29977171",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29977171/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "oilIds": [
+        "cinnamon"
+      ],
+      "compoundIds": [
+        "cinnamaldehyde"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "finding": "C. zeylanicum and C. cassia bark oils and cinnamaldehyde exhibited antibacterial and antibiofilm activity against tested bacterial biofilms.",
+      "limitations": "In-vitro concentrations and biofilm models do not establish efficacy of a consumer spray."
+    },
+    {
+      "id": "kacaniova-2024-lemon",
+      "title": "Citrus limon Essential Oil: Chemical Composition and Selected Biological Properties Focusing on Antimicrobial, Antibiofilm, Insecticidal Activity and Preservative Effect",
+      "authors": "Kacaniova M, et al.",
+      "journal": "Plants",
+      "year": 2024,
+      "doi": "10.3390/plants13040524",
+      "pubmedId": "38498554",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38498554/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "oilIds": [
+        "lemon"
+      ],
+      "compoundIds": [
+        "limonene",
+        "beta-pinene",
+        "gamma-terpinene"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        },
+        {
+          "type": "pest",
+          "subcategory": "flies"
+        }
+      ],
+      "finding": "Lemon essential oil was characterized as 60.7% limonene, 12.6% beta-pinene and 10.3% gamma-terpinene and showed antimicrobial, antibiofilm and insecticidal activity in the reported laboratory and food-model assays.",
+      "limitations": "Laboratory and food-model evidence; composition is batch-specific and not a universal lemon-oil percentage."
+    },
+    {
+      "id": "obistioiu-2023-boswellia",
+      "title": "Boswellia Essential Oil: Natural Antioxidant as an Effective Antimicrobial and Anti-Inflammatory Agent",
+      "authors": "Obistioiu D, et al.",
+      "journal": "Antioxidants",
+      "year": 2023,
+      "doi": "10.3390/antiox12101807",
+      "pubmedId": "37891886",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37891886/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "oilIds": [
+        "frankincense"
+      ],
+      "compoundIds": [
+        "alpha-pinene",
+        "limonene"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi"
+        },
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "A commercial mixed-Boswellia essential oil dominated by alpha-pinene and limonene showed antimicrobial, antioxidant and anti-inflammatory activity in laboratory assays.",
+      "limitations": "Commercial mixture of several Boswellia species; laboratory evidence only."
+    },
+    {
+      "id": "mahboubi-2016-myrrh-dermatophyte",
+      "title": "The anti-dermatophyte activity of Commiphora molmol",
+      "authors": "Mahboubi M, Mohammad Taghizadeh Kashani L",
+      "journal": "Pharmaceutical Biology",
+      "year": 2016,
+      "doi": "10.3109/13880209.2015.1072831",
+      "pubmedId": "26427766",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/26427766/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "oilIds": [
+        "myrrh"
+      ],
+      "compoundIds": [
+        "furanoeudesma-1-3-diene",
+        "curzerene"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "dermatophytes"
+        },
+        {
+          "type": "health",
+          "subcategory": "skin"
+        }
+      ],
+      "finding": "Myrrh essential oil and extract were evaluated against Trichophyton and Microsporum dermatophytes and showed antifungal activity in vitro.",
+      "limitations": "In-vitro evidence; preparation and species identity matter and results do not establish clinical treatment efficacy."
+    },
+    {
+      "id": "guo-2024-oregano-listeria",
+      "title": "Inhibitory effect and mechanism of oregano essential oil on Listeria monocytogenes cells, toxins and biofilms",
+      "authors": "Guo P, et al.",
+      "journal": "Microbial Pathogenesis",
+      "year": 2024,
+      "doi": "10.1016/j.micpath.2024.106801",
+      "pubmedId": "39025378",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39025378/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "oilIds": [
+        "oregano"
+      ],
+      "compoundIds": [
+        "carvacrol",
+        "thymol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        },
+        {
+          "type": "cleaning",
+          "subcategory": "surface"
+        }
+      ],
+      "finding": "Oregano essential oil inhibited L. monocytogenes in laboratory assays and reduced biofilm coverage on glass slides; mechanistic experiments implicated multiple cellular effects.",
+      "limitations": "Laboratory and food-model evidence; does not establish efficacy at consumer-product concentrations."
     }
   ],
   "sources": [
