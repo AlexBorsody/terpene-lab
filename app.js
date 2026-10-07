@@ -238,7 +238,8 @@ function renderPathwayForOil(oilId) {
     const comp = compoundById[k.compoundId];
     if (!comp) return "";
     return `<button class="path-node compound-node" data-path-compound="${comp.id}">
-      <span><strong>${esc(comp.name)}</strong><small>${esc(comp.chemicalClass)} · ${k.range.min}-${k.range.max}%</small></span>
+      <span class="molecule-glyph" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+      <span class="compound-copy"><strong>${esc(comp.name)}</strong><small>${esc(comp.formula)} · ${esc(comp.chemicalClass)} · ${k.range.min}-${k.range.max}%</small></span>
     </button>`;
   }).join("");
   compoundWrap.querySelectorAll("[data-path-compound]").forEach(b =>
