@@ -39,7 +39,7 @@
    ========================================================================== */
 
 const TERPENE_DATA = {
-  "version": "0.7.0-research",
+  "version": "0.7.1-research",
   "categories": [
     {
       "type": "health",
@@ -4969,6 +4969,186 @@ const TERPENE_DATA = {
       ],
       "finding": "NULL RESULT: Lavender essential oil inhalation produced no statistically significant difference in anxiety scores versus a distilled-water placebo in patients after coronary artery bypass graft surgery, although anxiety decreased in both groups.",
       "limitations": "60 patients; 2-day intervention in acute post-surgical setting; results may not generalize."
+    },
+    {
+      "id": "moss-2008-peppermint-cognition",
+      "title": "Modulation of cognitive performance and mood by aromas of peppermint and ylang-ylang",
+      "authors": "Moss M, Hewitt S, Moss L, Wesnes K",
+      "journal": "International Journal of Neuroscience",
+      "year": 2008,
+      "doi": "10.1080/00207450601042094",
+      "pubmedId": "18041606",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18041606/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 144,
+      "oilIds": [
+        "peppermint"
+      ],
+      "compoundIds": [
+        "menthol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "memory"
+        },
+        {
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "alertness"
+        },
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "mood"
+        }
+      ],
+      "finding": "In 144 healthy volunteers, peppermint aroma enhanced memory measures and increased subjective alertness compared with ylang-ylang and no-aroma conditions.",
+      "limitations": "Acute laboratory aroma exposure in healthy volunteers; does not establish treatment effects or effects of a finished product."
+    },
+    {
+      "id": "alkanat-2023-frankincense-myrrh-backpain",
+      "title": "The effects of massage with frankincense and myrrh oil in chronic low back pain: A three-arm randomised controlled trial",
+      "authors": "Özdemir Alkanat H, Özdemir Ü, Kulaklı F",
+      "journal": "Explore",
+      "year": 2023,
+      "doi": "10.1016/j.explore.2023.04.004",
+      "pubmedId": "37121835",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37121835/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 91,
+      "oilIds": [
+        "frankincense",
+        "myrrh"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "Twice-weekly massage using frankincense and myrrh essential oils produced greater reductions in pain and disability scores than jojoba-oil massage or no massage in adults with chronic low back pain.",
+      "limitations": "Combination intervention; cannot separate effects of frankincense from myrrh, and massage is a co-intervention."
+    },
+    {
+      "id": "ozdemir-2024-frankincense-myrrh-comfort",
+      "title": "The effect of back massage with frankincense and myrrh oil before the cardiac electrophysiological procedure on back pain intensity and comfort: A single-blind randomized controlled trial",
+      "authors": "Özdemir Ü, Taşcı S, Döner A, Özdemir Alkanat H, İnanç MT",
+      "journal": "Explore",
+      "year": 2024,
+      "doi": "10.1016/j.explore.2023.09.007",
+      "pubmedId": "37783585",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37783585/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 90,
+      "oilIds": [
+        "frankincense",
+        "myrrh"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "Frankincense-and-myrrh aromatherapy massage increased several comfort measures versus comparator groups, but post-procedure pain scores did not significantly differ between groups.",
+      "limitations": "Mixed result; combination oils plus massage prevents attribution to either oil alone. Authors called for more rigorous pain research."
+    },
+    {
+      "id": "reis-2023-frankincense-fatigue",
+      "title": "Cancer-Related Fatigue: A Pilot Study Evaluating the Effect of Frankincense Essential Oil in Patients With Cancer Receiving Chemotherapy",
+      "authors": "Reis D, et al.",
+      "journal": "Cancer Nursing",
+      "year": 2023,
+      "doi": "10.1097/NCC.0000000000001080",
+      "pubmedId": "35245227",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35245227/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 70,
+      "oilIds": [
+        "frankincense"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "fatigue"
+        }
+      ],
+      "finding": "Frankincense oil applied to the feet around chemotherapy did not significantly reduce cancer-related fatigue compared with carrier-oil control.",
+      "limitations": "Pilot trial; negative result. Topical-foot application and oncology population limit generalization."
+    },
+    {
+      "id": "nialeila-2020-myrrh-frankincense-wound",
+      "title": "Episiotomy wound healing by Commiphora myrrha and Boswellia carteri in primiparous women: A randomized controlled trial",
+      "authors": "Nialeila F, et al.",
+      "journal": "Journal of Ethnopharmacology",
+      "year": 2021,
+      "doi": "10.1016/j.jep.2020.113396",
+      "pubmedId": "32971163",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32971163/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 90,
+      "oilIds": [
+        "myrrh",
+        "frankincense"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "wound"
+        }
+      ],
+      "finding": "A randomized trial evaluated myrrh- and frankincense-based sitz baths for episiotomy wound healing in 90 primiparous women and reported improved healing outcomes versus control.",
+      "limitations": "Herbal sitz-bath preparations are not equivalent to essential-oil sprays; each botanical was used as a specific clinical preparation."
+    },
+    {
+      "id": "aydinli-2026-lavender-frankincense-biopsy",
+      "title": "Aromatherapy effects on pain and anxiety during transrectal ultrasound-guided prostate biopsy: A randomized controlled trial",
+      "authors": "Aydınlı B, et al.",
+      "journal": "Journal article",
+      "year": 2026,
+      "pubmedId": "42302879",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42302879/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 120,
+      "oilIds": [
+        "lavender",
+        "frankincense"
+      ],
+      "compoundIds": [
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "anxiety"
+        },
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "In 120 men undergoing prostate biopsy, lavender and frankincense aromatherapy delivered by nebulizer were compared with placebo for procedural anxiety and pain.",
+      "limitations": "Procedure-specific clinical setting; separate oil groups should be interpreted from the full paper before making comparative claims."
     }
   ],
   "sources": [
