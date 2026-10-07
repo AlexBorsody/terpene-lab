@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terpene Lab - Essential Oil Data Explorer</title>
+<title>Terpene Lab - Essential Oil Evidence Explorer</title>
 <link rel="stylesheet" href="styles.css">
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
 </head>
@@ -14,12 +14,14 @@
       <div class="brand-mark">TL</div>
       <div>
         <h1>TERPENE LAB</h1>
-        <p class="tagline">Essential oil data explorer</p>
+        <p class="tagline">Plant to molecule to paper</p>
       </div>
     </div>
     <nav class="tabs">
       <button class="tab active" data-tab="oils">Oils</button>
-      <button class="tab" data-tab="terpenes">Terpenes</button>
+      <button class="tab" data-tab="compounds">Compounds</button>
+      <button class="tab" data-tab="matrix">Matrix</button>
+      <button class="tab" data-tab="domains">Domains</button>
       <button class="tab" data-tab="network">Network</button>
       <button class="tab" data-tab="studies">Studies</button>
     </nav>
@@ -27,15 +29,17 @@
 </header>
 
 <main id="app">
-  <!-- OILS -->
+  <!-- OIL EXPLORER -->
   <section id="tab-oils" class="tab-panel active">
-    <div class="toolbar">
-      <input id="oil-search" type="search" placeholder="Search oils...">
-      <span id="oil-count" class="count"></span>
+    <div id="oil-list-view">
+      <div class="toolbar">
+        <input id="oil-search" type="search" placeholder="Search oils...">
+        <span id="oil-count" class="count"></span>
+      </div>
+      <div id="oil-grid" class="card-grid"></div>
     </div>
-    <div id="oil-grid" class="card-grid"></div>
     <div id="oil-detail" class="detail hidden">
-      <button class="back" data-back="oils">&larr; All oils</button>
+      <button class="back" data-backto="oil-list-view">&larr; All oils</button>
       <div class="detail-head">
         <div class="detail-swatch" id="oil-swatch"></div>
         <div>
@@ -45,13 +49,18 @@
       </div>
       <p id="oil-desc" class="desc"></p>
       <div class="meta-row">
+        <div><span class="meta-label">Family</span><span id="oil-family"></span></div>
         <div><span class="meta-label">Plant part</span><span id="oil-part"></span></div>
+        <div><span class="meta-label">Extraction</span><span id="oil-extraction"></span></div>
         <div><span class="meta-label">Aroma</span><span id="oil-aroma"></span></div>
       </div>
-      <h3>Terpene composition</h3>
+      <h3>Composition fingerprint</h3>
       <div id="oil-chart" class="chart"></div>
-      <p class="hint">Click a terpene bar or chip to drill down.</p>
-      <div id="oil-terpene-chips" class="chips"></div>
+      <p class="hint">Ranges are typical published values. Click a bar or chip to drill into a compound.</p>
+      <div id="oil-compound-chips" class="chips"></div>
+      <h3>Research coverage</h3>
+      <div id="oil-domains" class="chips"></div>
+      <div id="oil-evidence" class="evidence-summary"></div>
       <h3>Common uses</h3>
       <ul id="oil-uses" class="uses"></ul>
       <h3>Safety</h3>
@@ -61,43 +70,89 @@
     </div>
   </section>
 
-  <!-- TERPENES -->
-  <section id="tab-terpenes" class="tab-panel">
-    <div class="toolbar">
-      <input id="terpene-search" type="search" placeholder="Search terpenes...">
-      <select id="terpene-class-filter">
-        <option value="">All classes</option>
-      </select>
-      <span id="terpene-count" class="count"></span>
+  <!-- COMPOUND EXPLORER -->
+  <section id="tab-compounds" class="tab-panel">
+    <div id="compound-list-view">
+      <div class="toolbar">
+        <input id="compound-search" type="search" placeholder="Search compounds...">
+        <select id="compound-class-filter"><option value="">All classes</option></select>
+        <span id="compound-count" class="count"></span>
+      </div>
+      <div id="compound-grid" class="card-grid"></div>
     </div>
-    <div id="terpene-grid" class="card-grid"></div>
-    <div id="terpene-detail" class="detail hidden">
-      <button class="back" data-back="terpenes">&larr; All terpenes</button>
-      <h2 id="terpene-name"></h2>
-      <p class="latin"><span id="terpene-formula" class="formula"></span> &middot; <span id="terpene-class"></span></p>
-      <p id="terpene-desc" class="desc"></p>
+    <div id="compound-detail" class="detail hidden">
+      <button class="back" data-backto="compound-list-view">&larr; All compounds</button>
+      <h2 id="compound-name"></h2>
+      <p class="latin"><span id="compound-formula" class="formula"></span> &middot; <span id="compound-class"></span></p>
+      <p id="compound-desc" class="desc"></p>
       <div class="meta-row">
-        <div><span class="meta-label">Aroma</span><span id="terpene-aroma"></span></div>
+        <div><span class="meta-label">Aroma</span><span id="compound-aroma"></span></div>
       </div>
       <h3>Found in these oils</h3>
-      <div id="terpene-oils-chart" class="chart"></div>
+      <div id="compound-oils-chart" class="chart"></div>
+      <p class="hint">Click a bar to open the oil.</p>
       <h3>Studies</h3>
-      <div id="terpene-studies"></div>
+      <div id="compound-studies"></div>
+    </div>
+  </section>
+
+  <!-- EVIDENCE MATRIX -->
+  <section id="tab-matrix" class="tab-panel">
+    <p class="panel-intro">Oils against research domains. Color intensity is the number of linked studies. The letter marks the strongest evidence level present: C clinical, P preclinical, L laboratory, R review. Click a cell to see the papers.</p>
+    <div class="matrix-wrap">
+      <table id="matrix-table" class="matrix"></table>
+    </div>
+    <div class="matrix-legend">
+      <span><b class="lvl lvl-clinical">C</b> clinical</span>
+      <span><b class="lvl lvl-preclinical">P</b> preclinical</span>
+      <span><b class="lvl lvl-laboratory">L</b> laboratory</span>
+      <span><b class="lvl lvl-review">R</b> review</span>
+    </div>
+  </section>
+
+  <!-- DOMAIN EXPLORER -->
+  <section id="tab-domains" class="tab-panel">
+    <div id="domain-tiles" class="domain-tiles"></div>
+    <div id="domain-detail" class="hidden">
+      <button class="back" data-backto="domain-tiles">&larr; All domains</button>
+      <h2 id="domain-name"></h2>
+      <div id="domain-subs" class="chips" style="margin-bottom:18px"></div>
+      <div class="domain-cols">
+        <div>
+          <h3>Oils with evidence</h3>
+          <div id="domain-oils"></div>
+        </div>
+        <div>
+          <h3>Compounds with evidence</h3>
+          <div id="domain-compounds"></div>
+        </div>
+      </div>
+      <h3>Studies</h3>
+      <div id="domain-studies"></div>
     </div>
   </section>
 
   <!-- NETWORK -->
   <section id="tab-network" class="tab-panel">
-    <p class="panel-intro">Every oil connected to its terpenes. Drag nodes, scroll to zoom, click a node to open it.</p>
+    <p class="panel-intro">Every oil connected to its compounds. Drag nodes, scroll to zoom, click a node to open it.</p>
     <div id="network-chart" class="chart chart-tall"></div>
   </section>
 
-  <!-- STUDIES -->
+  <!-- STUDY LIBRARY -->
   <section id="tab-studies" class="tab-panel">
     <div class="toolbar">
       <input id="study-search" type="search" placeholder="Search studies...">
       <select id="study-oil-filter"><option value="">All oils</option></select>
-      <select id="study-terpene-filter"><option value="">All terpenes</option></select>
+      <select id="study-compound-filter"><option value="">All compounds</option></select>
+      <select id="study-domain-filter"><option value="">All domains</option></select>
+      <select id="study-level-filter">
+        <option value="">All evidence levels</option>
+        <option value="clinical">Clinical</option>
+        <option value="preclinical">Preclinical</option>
+        <option value="laboratory">Laboratory</option>
+        <option value="review">Review</option>
+      </select>
+      <select id="study-type-filter"><option value="">All study types</option></select>
       <span id="study-count" class="count"></span>
     </div>
     <div id="study-list"></div>
@@ -105,7 +160,7 @@
 </main>
 
 <footer class="lab-footer">
-  <p>Terpene Lab &middot; sample dataset v0.1 &middot; findings summarize published papers; not medical advice.</p>
+  <p>Terpene Lab &middot; sample dataset v0.2 &middot; plant to molecule to paper: inspect the evidence yourself. Not medical advice.</p>
 </footer>
 
 <script src="data.js"></script>
