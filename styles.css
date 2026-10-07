@@ -673,3 +673,38 @@ main {
   .plant-language { margin-top: 36px; padding: 28px 20px; }
   .plant-language::after { display: none; }
 }
+
+/* ---- visual matrix key ---- */
+.matrix-key {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 2px 0 14px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.matrix-key-title {
+  color: var(--text);
+  font: 700 10px var(--mono);
+  letter-spacing: 1.2px;
+  margin-right: 3px;
+}
+.matrix-key-swatch {
+  width: 28px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+}
+.matrix-key-swatch.k1 { background: rgba(114,184,154,.16); }
+.matrix-key-swatch.k2 { background: rgba(114,184,154,.34); }
+.matrix-key-swatch.k3 { background: rgba(114,184,154,.58); }
+.matrix-key-swatch.k4 { background: rgba(114,184,154,.88); }
+.matrix-key-action {
+  margin-left: auto;
+  color: var(--teal);
+  font-family: var(--mono);
+}
+@media (max-width: 600px) {
+  .matrix-key-action { width: 100%; margin: 3px 0 0; }
+}
