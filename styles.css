@@ -1044,3 +1044,47 @@ main {
 }
 
 .study-count { color: var(--text); font-weight: 800; }
+
+/* ---- oil detail: evidence first ---- */
+#oil-detail .detail-head { margin-bottom: 8px; }
+#oil-detail .detail-swatch { width: 54px; height: 54px; }
+#oil-detail .detail-head h2 { font-size: clamp(28px,5vw,42px); }
+.oil-quickfacts {
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px 14px;
+  align-items:center;
+  margin:4px 0 16px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.45;
+}
+.oil-quickfacts .desc {
+  flex-basis:100%;
+  margin:0;
+  color:var(--text);
+  font-size:13px;
+  line-height:1.5;
+}
+.hidden-meta { display:none; }
+.oil-study-priority > h3 { margin-top:8px; font-size:18px; }
+.oil-study-priority .evidence-summary { margin-bottom:14px; }
+.oil-more {
+  margin-top:20px;
+  border-top:1px solid var(--border);
+  padding-top:12px;
+}
+.oil-more summary {
+  cursor:pointer;
+  color:var(--teal);
+  font:700 11px var(--mono);
+  letter-spacing:.7px;
+  text-transform:uppercase;
+  padding:8px 0;
+}
+@media(max-width:600px){
+  #oil-detail { padding-top:14px; }
+  #oil-detail .back { margin-bottom:14px; }
+  #oil-detail .detail-swatch { width:46px; height:46px; }
+  .oil-quickfacts { margin-bottom:12px; }
+}
