@@ -139,6 +139,21 @@
 
   <!-- EVIDENCE MATRIX -->
   <section id="tab-matrix" class="tab-panel">
+    <div class="toolbar matrix-toolbar">
+      <input id="matrix-search" type="search" placeholder="Search plants...">
+      <select id="matrix-sort" aria-label="Sort matrix plants">
+        <option value="az">A to Z</option>
+        <option value="studies">Most studied</option>
+      </select>
+      <select id="matrix-domain-filter" aria-label="Show research area">
+        <option value="">All research areas</option>
+        <option value="health">Health</option>
+        <option value="cleaning">Cleaning</option>
+        <option value="microbial">Microbial</option>
+        <option value="pest">Pest / Repellent</option>
+      </select>
+      <span id="matrix-count" class="count"></span>
+    </div>
     <div class="matrix-scroll-cue" aria-hidden="true">
       <span>←</span><b>SWIPE TO SEE MORE RESEARCH</b><span>→</span>
     </div>
