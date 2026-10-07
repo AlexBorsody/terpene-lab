@@ -1,0 +1,802 @@
+{
+  "batch": "2026-10-07-b10",
+  "note": "Research batch 10 (more under-covered oils) for ChatGPT to plug into data.js. Every PMID verified against the NCBI E-utilities API (titles and years match). Each study tagged with plant (oilIds), terpenes (compoundIds), uses (categories). Merge rule: skip any study whose pubmedId already exists in data.js.",
+  "studies": [
+    {
+      "id": "alencar-2026-patchouli-candida",
+      "title": "Antifungal and anti-biofilm activity of patchouli essential oil (Pogostemon cablin) against oral isolates of Candida albicans.",
+      "authors": "Alencar AA, Souza LDG, Silva LA, Lima LO, et al.",
+      "journal": "Brazilian Journal of Biology",
+      "year": 2026,
+      "doi": "10.1590/1519-6984.293258",
+      "pubmedId": "41670123",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41670123/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "patchouli"
+      ],
+      "compoundIds": [
+        "patchouli-alcohol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "yeast"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        },
+        {
+          "type": "health",
+          "subcategory": "oral-dental"
+        }
+      ],
+      "finding": "Patchouli oil (patchouli alcohol 15.11%) inhibited 11 oral Candida albicans isolates with MIC and MFC values of 2 to 128 ug/mL, apparently by complexing ergosterol in the fungal membrane, and reduced filament length and biofilm formation in the most filamentous strain.",
+      "limitations": "In-vitro only; clinical oral-candidiasis efficacy not tested."
+    },
+    {
+      "id": "singh-2025-patchouli-nanoemulsion",
+      "title": "Assessment of Anticancer and Antibacterial Activities of Patchouli Essential Oil Nanoemulsion.",
+      "authors": "Singh IR, Pulikkal AK, Hnamte M, Bualchhuak LT, et al.",
+      "journal": "Journal of Physical Chemistry B",
+      "year": 2025,
+      "doi": "10.1021/acs.jpcb.5c01654",
+      "pubmedId": "40432471",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40432471/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "patchouli"
+      ],
+      "compoundIds": [
+        "patchouli-alcohol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
+        },
+        {
+          "type": "health",
+          "subcategory": "immune"
+        }
+      ],
+      "finding": "An optimized 14 nm patchouli-oil nanoemulsion showed anticancer activity against A549 lung cancer cells (IC50 0.71 uL/mL versus 1.13 uL/mL for plain oil) and antibacterial activity against Vibrio cholerae, Bacillus cereus, E. coli, S. aureus and Salmonella typhimurium with MICs of 3.12 to 6.25 ug/mL.",
+      "limitations": "In-vitro only; nanoemulsion delivery system, not the oil as commonly used."
+    },
+    {
+      "id": "santos-2019-patchouli-larvicide",
+      "title": "Evaluation of the Larvicidal Potential of the Essential Oil Pogostemon cablin (Blanco) Benth in the Control of Aedes aegypti.",
+      "authors": "Santos LL, Brandao LB, Martins RL, Rabelo EM, et al.",
+      "journal": "Pharmaceuticals",
+      "year": 2019,
+      "doi": "10.3390/ph12020053",
+      "pubmedId": "30965561",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30965561/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "patchouli"
+      ],
+      "compoundIds": [
+        "patchouli-alcohol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "mosquitoes",
+          "topic": "larvicide"
+        }
+      ],
+      "finding": "MIXED RESULT: patchouli oil (patchouli alcohol 33.25%) showed significant larvicidal activity against Aedes aegypti (LC50 28.43 ug/mL) and antimicrobial activity at 62.5 ug/mL, but had no antioxidant activity and showed high toxicity to brine shrimp (LC50 24.25 ug/mL).",
+      "limitations": "Laboratory assays only; no non-target safety testing."
+    },
+    {
+      "id": "algaffar-2024-sandalwood-mycetoma",
+      "title": "Sandalwood Oils of Different Origins Are Active In Vitro against Madurella mycetomatis, the Major Fungal Pathogen Responsible for Eumycetoma.",
+      "authors": "Abd Algaffar SO, Seegers S, Satyal P, Setzer WN, et al.",
+      "journal": "Molecules",
+      "year": 2024,
+      "doi": "10.3390/molecules29081846",
+      "pubmedId": "38675665",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38675665/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "sandalwood"
+      ],
+      "compoundIds": [
+        "alpha-santalol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "mold"
+        }
+      ],
+      "finding": "Santalum album oil was the most potent of 18 oils tested against Madurella mycetomatis (MIC 0.0039% v/v), with activity traced to the sesquiterpene-alcohol fraction; (Z)-alpha-santalol was about twice as potent as (Z)-beta-santalol but less active than the whole oil.",
+      "limitations": "In-vitro only; no correlation found between activity and species of origin or GC-MS component profile."
+    },
+    {
+      "id": "meghani-2024-sandalwood-sanitizer",
+      "title": "Fabrication, assessment, and potential anti-bacterial activity of sandalwood oil nanoemulsion and its hand rub sanitizer.",
+      "authors": "Meghani N, Mansuri A, Chaudhari R, Kumar A, et al.",
+      "journal": "Environmental Science and Pollution Research",
+      "year": 2024,
+      "doi": "10.1007/s11356-023-26945-y",
+      "pubmedId": "37074605",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37074605/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "sandalwood"
+      ],
+      "compoundIds": [
+        "alpha-santalol"
+      ],
+      "categories": [
+        {
+          "type": "cleaning",
+          "subcategory": "surfaces"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria"
+        }
+      ],
+      "finding": "A sandalwood-oil nanoemulsion formulated into a hand rub sanitizer produced zones of inhibition of 19 to 25 mm against all tested microorganisms and showed membrane disruption in morphological analysis.",
+      "limitations": "In-vitro agar assays only; no comparison to alcohol-based sanitizers on real hands."
+    },
+    {
+      "id": "balazs-2022-helichrysum-respiratory",
+      "title": "Immortelle (Helichrysum italicum (Roth) G. Don) Essential Oil Showed Antibacterial and Biofilm Inhibitory Activity against Respiratory Tract Pathogens.",
+      "authors": "Balazs VL, Filep R, Repas F, Kerekes E, et al.",
+      "journal": "Molecules",
+      "year": 2022,
+      "doi": "10.3390/molecules27175518",
+      "pubmedId": "36080283",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36080283/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "helichrysum"
+      ],
+      "compoundIds": [
+        "alpha-pinene",
+        "limonene"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        },
+        {
+          "type": "health",
+          "subcategory": "respiratory"
+        }
+      ],
+      "finding": "Immortelle oil showed antibacterial and biofilm-inhibitory activity against respiratory pathogens including Haemophilus influenzae, H. parainfluenzae and Streptococcus pneumoniae, with H. parainfluenzae the most sensitive and Pseudomonas aeruginosa the most resistant.",
+      "limitations": "In-vitro and membrane-damage assays only; no airway or clinical data."
+    },
+    {
+      "id": "hussain-2008-basil-seasonal",
+      "title": "Chemical composition, antioxidant and antimicrobial activities of basil (Ocimum basilicum) essential oils depends on seasonal variations.",
+      "authors": "Hussain AI, Anwar F, Sherazi STH, Przybylski R, et al.",
+      "journal": "Food Chemistry",
+      "year": 2008,
+      "doi": "10.1016/j.foodchem.2007.12.010",
+      "pubmedId": "26065762",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/26065762/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "basil"
+      ],
+      "compoundIds": [
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi"
+        }
+      ],
+      "finding": "Linalool-rich basil oil (56.7-60.6% linalool) inhibited all tested bacteria and fungi, but both composition and antimicrobial and antioxidant potency varied significantly across the four growing seasons.",
+      "limitations": "Disc-diffusion screening only; single linalool chemotype; seasonal effect not tested on other chemotypes."
+    },
+    {
+      "id": "thongmee-2025-vetiver-topical",
+      "title": "Comparative evaluation of the antimicrobial, antioxidant, and cytotoxic properties of essential oils from vetiver, lemongrass, and clove buds with implications for topical application.",
+      "authors": "Thongmee A, Wanakhachornkrai O, Chongsa W, Sukplang P, et al.",
+      "journal": "PLOS ONE",
+      "year": 2025,
+      "doi": "10.1371/journal.pone.0335018",
+      "pubmedId": "41124157",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41124157/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "vetiver"
+      ],
+      "compoundIds": [
+        "khusimol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "health",
+          "subcategory": "skin"
+        }
+      ],
+      "finding": "Vetiver leaf oil showed antimicrobial activity against skin pathogens including MRSA and Pseudomonas aeruginosa, though less potent than clove bud oil, while its HaCaT cytotoxicity IC50 of 312.55 ug/mL sat well above its antimicrobial concentrations, indicating a broad topical safety margin.",
+      "limitations": "In-vitro only; leaf oil tested rather than the more common root oil."
+    },
+    {
+      "id": "pepeljnjak-2005-juniper",
+      "title": "Antimicrobial activity of juniper berry essential oil (Juniperus communis L., Cupressaceae).",
+      "authors": "Pepeljnjak S, Kosalec I, Kalodera Z, Blazevi N, et al.",
+      "journal": "Acta Pharmaceutica",
+      "year": 2005,
+      "doi": "",
+      "pubmedId": "16375831",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16375831/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "juniper-berry"
+      ],
+      "compoundIds": [
+        "alpha-pinene",
+        "beta-pinene",
+        "limonene"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "yeast"
+        }
+      ],
+      "finding": "MIXED RESULT: juniper berry oil (alpha-pinene 29.17%, beta-pinene 17.84%) had only weak antibacterial activity, requiring 8 to 70% v/v for MICs, but showed strong fungicidal activity against Candida spp. (MIC 0.78-2%) and dermatophytes (0.39-2%).",
+      "limitations": "High antibacterial MICs limit practical relevance; single-origin oil."
+    },
+    {
+      "id": "baatour-2016-marjoram",
+      "title": "Chemical content, antibacterial and antioxidant properties of essential oil extract from Tunisian Origanum majorana L. cultivated under saline condition.",
+      "authors": "Baatour O, Aouadi M, Abbassi MS, Ayachi Mouhiba BN, et al.",
+      "journal": "Pakistan Journal of Pharmaceutical Sciences",
+      "year": 2016,
+      "doi": "",
+      "pubmedId": "28375110",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28375110/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "marjoram"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol",
+        "linalyl-acetate"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
+        }
+      ],
+      "finding": "Marjoram oil inhibited the growth of most tested foodborne bacteria, with Gram-negative strains more sensitive than Gram-positives, and outperformed synthetic antibiotics against E. coli, L. innocua and S. enteritidis; Enterococcus faecalis was the least susceptible.",
+      "limitations": "In-vitro agar assays only; single Tunisian growing region."
+    },
+    {
+      "id": "ettakifi-2023-blue-tansy",
+      "title": "Chemical Characterization and Antifungal Activity of Blue Tansy (Tanacetum annuum) Essential Oil and Crude Extracts against Fusarium oxysporum f. sp. albedinis, an Agent Causing Bayoud Disease of Date Palm.",
+      "authors": "Ettakifi H, Abbassi K, Maouni S, Erbiai EH, et al.",
+      "journal": "Antibiotics",
+      "year": 2023,
+      "doi": "10.3390/antibiotics12091451",
+      "pubmedId": "37760747",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37760747/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "blue-tansy"
+      ],
+      "compoundIds": [
+        "camphor",
+        "alpha-pinene",
+        "limonene"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "mold"
+        }
+      ],
+      "finding": "Blue tansy oil, dominated by camphor with alpha-pinene and limonene, showed antifungal activity against Fusarium oxysporum f. sp. albedinis, the agent of Bayoud disease of date palm.",
+      "limitations": "Plant-pathogen in-vitro model; no human-pathogen fungal data."
+    },
+    {
+      "id": "choi-2014-neroli-menopause",
+      "title": "Effects of Inhalation of Essential Oil of Citrus aurantium L. var. amara on Menopausal Symptoms, Stress, and Estrogen in Postmenopausal Women: A Randomized Controlled Trial.",
+      "authors": "Choi SY, Kang P, Lee HS, Seol GH, et al.",
+      "journal": "Evidence-Based Complementary and Alternative Medicine",
+      "year": 2014,
+      "doi": "10.1155/2014/796518",
+      "pubmedId": "25024731",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/25024731/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 63,
+      "oilIds": [
+        "neroli"
+      ],
+      "compoundIds": [
+        "limonene",
+        "linalool",
+        "linalyl-acetate"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health"
+        },
+        {
+          "type": "health",
+          "subcategory": "cardiovascular"
+        }
+      ],
+      "finding": "In 63 postmenopausal women, inhaling neroli oil for 5 minutes twice daily over 5 days improved the physical domain of the menopause quality-of-life score and sexual desire versus almond-oil control, and reduced systolic and diastolic blood pressure.",
+      "limitations": "Small sample, 5-day intervention; no long-term follow-up."
+    }
+  ],
+  "newOils": [
+    {
+      "id": "patchouli",
+      "name": "Patchouli",
+      "latinName": "Pogostemon cablin",
+      "family": "Lamiaceae",
+      "plantPart": "Leaves",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "earthy",
+        "woody",
+        "musky"
+      ],
+      "color": "#8a7a5c",
+      "description": "Steam-distilled from leaves. Patchouli alcohol rich; antifungal against oral Candida and larvicidal against Aedes aegypti.",
+      "uses": [
+        "Grounding blends",
+        "Outdoor blends",
+        "Research reference"
+      ],
+      "safety": "Generally well tolerated; strong scent \u2014 dilute well.",
+      "constituents": [
+        {
+          "compoundId": "patchouli-alcohol",
+          "range": {
+            "min": 25,
+            "max": 40
+          }
+        },
+        {
+          "compoundId": "beta-caryophyllene",
+          "range": {
+            "min": 3,
+            "max": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "sandalwood",
+      "name": "Sandalwood",
+      "latinName": "Santalum album",
+      "family": "Santalaceae",
+      "plantPart": "Heartwood",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "woody",
+        "creamy",
+        "warm"
+      ],
+      "color": "#c9a06a",
+      "description": "Steam-distilled from heartwood. Alpha-santalol rich; most potent of 18 oils against the eumycetoma fungus Madurella mycetomatis.",
+      "uses": [
+        "Skin blends",
+        "Calming blends",
+        "Research reference"
+      ],
+      "safety": "Generally well tolerated; use sustainably sourced oil.",
+      "constituents": [
+        {
+          "compoundId": "alpha-santalol",
+          "range": {
+            "min": 45,
+            "max": 55
+          }
+        },
+        {
+          "compoundId": "beta-caryophyllene",
+          "range": {
+            "min": 1,
+            "max": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "helichrysum",
+      "name": "Helichrysum",
+      "latinName": "Helichrysum italicum",
+      "family": "Asteraceae",
+      "plantPart": "Flowers",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "herbaceous",
+        "honey",
+        "warm"
+      ],
+      "color": "#d9b44a",
+      "description": "Steam-distilled from flowers. Antibacterial and biofilm-inhibitory against respiratory tract pathogens.",
+      "uses": [
+        "Skin blends",
+        "Respiratory blends",
+        "Research reference"
+      ],
+      "safety": "Generally well tolerated; patch test for sensitive skin.",
+      "constituents": [
+        {
+          "compoundId": "alpha-pinene",
+          "range": {
+            "min": 12,
+            "max": 22
+          }
+        },
+        {
+          "compoundId": "limonene",
+          "range": {
+            "min": 5,
+            "max": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "basil",
+      "name": "Basil",
+      "latinName": "Ocimum basilicum",
+      "family": "Lamiaceae",
+      "plantPart": "Leaves",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "sweet",
+        "herbaceous",
+        "anise"
+      ],
+      "color": "#7fa86a",
+      "description": "Steam-distilled from leaves (linalool chemotype). Broad antimicrobial activity that varies with growing season.",
+      "uses": [
+        "Kitchen blends",
+        "Research reference"
+      ],
+      "safety": "Avoid in pregnancy; dilute well.",
+      "constituents": [
+        {
+          "compoundId": "linalool",
+          "range": {
+            "min": 45,
+            "max": 65
+          }
+        },
+        {
+          "compoundId": "eugenol",
+          "range": {
+            "min": 4,
+            "max": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "vetiver",
+      "name": "Vetiver",
+      "latinName": "Chrysopogon zizanioides",
+      "family": "Poaceae",
+      "plantPart": "Roots",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "earthy",
+        "woody",
+        "smoky"
+      ],
+      "color": "#6e5c48",
+      "description": "Steam-distilled from roots. Antimicrobial against skin pathogens including MRSA with a broad topical safety margin.",
+      "uses": [
+        "Grounding blends",
+        "Skin blends",
+        "Research reference"
+      ],
+      "safety": "Very thick oil; dilute well; generally well tolerated.",
+      "constituents": [
+        {
+          "compoundId": "khusimol",
+          "range": {
+            "min": 10,
+            "max": 20
+          }
+        },
+        {
+          "compoundId": "beta-caryophyllene",
+          "range": {
+            "min": 2,
+            "max": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "juniper-berry",
+      "name": "Juniper Berry",
+      "latinName": "Juniperus communis",
+      "family": "Cupressaceae",
+      "plantPart": "Berries",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "pine",
+        "fresh",
+        "balsamic"
+      ],
+      "color": "#5c7a6e",
+      "description": "Steam-distilled from berries. Strong fungicidal activity against Candida and dermatophytes; weak antibacterial.",
+      "uses": [
+        "Outdoor blends",
+        "Research reference"
+      ],
+      "safety": "Avoid in pregnancy and kidney disease; dilute well.",
+      "constituents": [
+        {
+          "compoundId": "alpha-pinene",
+          "range": {
+            "min": 25,
+            "max": 40
+          }
+        },
+        {
+          "compoundId": "beta-pinene",
+          "range": {
+            "min": 12,
+            "max": 22
+          }
+        },
+        {
+          "compoundId": "limonene",
+          "range": {
+            "min": 5,
+            "max": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "marjoram",
+      "name": "Marjoram",
+      "latinName": "Origanum majorana",
+      "family": "Lamiaceae",
+      "plantPart": "Flowering tops",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "herbaceous",
+        "warm",
+        "sweet"
+      ],
+      "color": "#9aa86e",
+      "description": "Steam-distilled from flowering tops. Terpinen-4-ol rich; inhibited foodborne bacteria, outperforming synthetic antibiotics against E. coli in one screen.",
+      "uses": [
+        "Evening blends",
+        "Kitchen blends",
+        "Research reference"
+      ],
+      "safety": "Generally well tolerated; dilute well.",
+      "constituents": [
+        {
+          "compoundId": "terpinen-4-ol",
+          "range": {
+            "min": 20,
+            "max": 35
+          }
+        },
+        {
+          "compoundId": "linalyl-acetate",
+          "range": {
+            "min": 5,
+            "max": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "blue-tansy",
+      "name": "Blue Tansy",
+      "latinName": "Tanacetum annuum",
+      "family": "Asteraceae",
+      "plantPart": "Flowers",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "sweet",
+        "herbaceous",
+        "camphor"
+      ],
+      "color": "#3a6ea8",
+      "description": "Steam-distilled from flowers; the blue color comes from chamazulene. Antifungal against Fusarium plant pathogens.",
+      "uses": [
+        "Skin blends",
+        "Research reference"
+      ],
+      "safety": "Can stain skin blue at high concentrations; dilute well.",
+      "constituents": [
+        {
+          "compoundId": "camphor",
+          "range": {
+            "min": 12,
+            "max": 22
+          }
+        },
+        {
+          "compoundId": "alpha-pinene",
+          "range": {
+            "min": 5,
+            "max": 12
+          }
+        },
+        {
+          "compoundId": "limonene",
+          "range": {
+            "min": 3,
+            "max": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "neroli",
+      "name": "Neroli",
+      "latinName": "Citrus aurantium var. amara",
+      "family": "Rutaceae",
+      "plantPart": "Flowers",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "floral",
+        "citrus",
+        "sweet"
+      ],
+      "color": "#f0d48a",
+      "description": "Steam-distilled from bitter-orange flowers. Improved menopause quality-of-life scores and lowered blood pressure in a 63-woman RCT.",
+      "uses": [
+        "Evening blends",
+        "Floral blends",
+        "Research reference"
+      ],
+      "safety": "Generally well tolerated; patch test for sensitive skin.",
+      "constituents": [
+        {
+          "compoundId": "linalool",
+          "range": {
+            "min": 28,
+            "max": 40
+          }
+        },
+        {
+          "compoundId": "limonene",
+          "range": {
+            "min": 10,
+            "max": 20
+          }
+        },
+        {
+          "compoundId": "linalyl-acetate",
+          "range": {
+            "min": 5,
+            "max": 12
+          }
+        }
+      ]
+    }
+  ],
+  "newCompounds": [
+    {
+      "id": "patchouli-alcohol",
+      "name": "Patchouli alcohol",
+      "chemicalClass": "Sesquiterpenoid",
+      "formula": "C15H26O",
+      "aroma": [
+        "earthy",
+        "woody"
+      ],
+      "description": "Sesquiterpene alcohol that dominates patchouli oil; disrupts fungal membranes via ergosterol complexation."
+    },
+    {
+      "id": "alpha-santalol",
+      "name": "alpha-Santalol",
+      "chemicalClass": "Sesquiterpenoid",
+      "formula": "C15H24O",
+      "aroma": [
+        "woody",
+        "creamy"
+      ],
+      "description": "Primary sesquiterpene alcohol of sandalwood oil; antifungal against eumycetoma pathogens."
+    },
+    {
+      "id": "khusimol",
+      "name": "Khusimol",
+      "chemicalClass": "Sesquiterpenoid",
+      "formula": "C15H24O",
+      "aroma": [
+        "earthy",
+        "woody"
+      ],
+      "description": "Sesquiterpene alcohol prominent in vetiver oil; marker compound for root-oil authenticity."
+    }
+  ]
+}
