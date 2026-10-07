@@ -510,6 +510,10 @@ function renderStudies() {
 
 /* ---------- init ---------- */
 (function init() {
+  document.getElementById("stat-oils").textContent = D.oils.length;
+  document.getElementById("stat-compounds").textContent = D.compounds.length;
+  document.getElementById("stat-studies").textContent = D.studies.length;
+  document.getElementById("stat-clinical").textContent = D.studies.filter(s => s.evidenceLevel === "clinical").length;
   const classes = [...new Set(D.compounds.map(c => c.chemicalClass))].sort();
   document.getElementById("compound-class-filter").innerHTML =
     `<option value="">All classes</option>` + classes.map(c => `<option>${esc(c)}</option>`).join("");
