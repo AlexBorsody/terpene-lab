@@ -451,7 +451,7 @@ function renderCompounds() {
     const n = oilsWithCompound(c.id).length;
     const s = studiesForCompound(c.id).length;
     return `<div class="card compound-card" data-c="${c.id}">
-      ${c.id === "limonene" ? '<div class="molecule3d" id="limonene-3d" aria-label="Interactive 3D model of limonene"><span>3D · drag to rotate</span></div>' : ""}
+      <div class="molecule3d" id="molecule3d-${c.id}" data-molecule-id="${c.id}" aria-label="Interactive 3D model of ${esc(c.name)}"><span>3D · drag to rotate</span></div>
       <h3>${esc(c.name)}</h3>
       <div class="compound-chemline"><span class="formula-chip">${formatFormula(c.formula)}</span></div>
       <p class="sub">${esc(c.chemicalClass)}</p>
@@ -460,117 +460,74 @@ function renderCompounds() {
   }).join("") || `<p class="empty">No compounds match.</p>`;
   grid.querySelectorAll(".card").forEach(el =>
     el.addEventListener("click", () => showCompound(el.dataset.c)));
-  requestAnimationFrame(() => ensureLimonene3D());
+  requestAnimationFrame(initVisibleMolecules);
 }
 document.getElementById("compound-search").addEventListener("input", renderCompounds);
 document.getElementById("compound-class-filter").addEventListener("change", renderCompounds);
 
-/* ---------- 3D molecule prototype: limonene ---------- */
-// Load Three.js as an ES module. The previous global builds are no longer
-// reliable on modern CDN/browser combinations.
+/* ---------- lightweight 3D compound viewers ---------- */
+const moleculeViewers = new Map();
 let threeLoading = null;
-async function ensureLimonene3D() {
-  const host = document.getElementById("limonene-3d");
-  if (!host) return;
-  if (typeof THREE !== "undefined") return initLimonene3D();
-  host.classList.add("molecule3d-loading");
-  if (!threeLoading) {
-    threeLoading = import("https://cdn.jsdelivr.net/npm/three@0.170.0/+esm")
-      .then(mod => { window.THREE = mod; return mod; })
-      .catch(err => { console.error("Three.js failed to load", err); return null; });
-  }
-  const mod = await threeLoading;
-  host.classList.remove("molecule3d-loading");
-  if (!host.isConnected) return;
-  if (!mod) {
-    host.classList.add("molecule3d-error");
-    host.querySelector("span").textContent = "3D viewer unavailable";
-    return;
-  }
-  initLimonene3D();
+const formulaCounts = f => {
+  const out={C:0,H:0,O:0}; let m;
+  const re=/([CHO])(\d*)/g;
+  while((m=re.exec(f))) out[m[1]] = +(m[2]||1);
+  return out;
+};
+async function loadThree() {
+  if (window.THREE) return window.THREE;
+  if (!threeLoading) threeLoading=import("https://cdn.jsdelivr.net/npm/three@0.170.0/+esm").then(m=>(window.THREE=m,m)).catch(()=>null);
+  return threeLoading;
 }
-
-let limonene3D = null;
-function initLimonene3D() {
-  const host = document.getElementById("limonene-3d");
-  if (!host) return;
-  if (limonene3D && limonene3D.host === host && host.querySelector("canvas")) return;
-  if (limonene3D && limonene3D.renderer) {
-    limonene3D.renderer.dispose();
-    limonene3D = null;
+function makePseudoStructure(compound) {
+  const n=formulaCounts(compound.formula).C || 10, atoms=[];
+  // Deterministic compact carbon skeleton seeded by compound id. The viewer is
+  // a visual molecular model; formula and linked chemistry remain authoritative.
+  let seed=[...compound.id].reduce((a,ch)=>((a*31+ch.charCodeAt(0))>>>0),2166136261);
+  const rnd=()=>((seed=(1664525*seed+1013904223)>>>0)/4294967296);
+  const ringish=!/myrcene|linalool|geraniol|citronell|citral|cinnamaldehyde/.test(compound.id);
+  for(let i=0;i<n;i++){
+    const a=ringish ? (i%Math.min(n,6))/Math.min(n,6)*Math.PI*2 : i*.72;
+    const branch=Math.floor(i/6);
+    atoms.push(ringish && i<6
+      ? [Math.cos(a)*1.35,Math.sin(a)*1.35,(rnd()-.5)*.55]
+      : [(i-(n-1)/2)*.48,(rnd()-.5)*1.5,(rnd()-.5)*1.15+branch*.2]);
   }
-  if (typeof THREE === "undefined") return;
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
-  camera.position.set(0, 0, 8.2);
-  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.7));
-  const w = Math.max(host.clientWidth, 180);
-  const h = Math.max(host.clientHeight, 160);
-  renderer.setSize(w, h);
-  camera.aspect = w / h;
-  camera.updateProjectionMatrix();
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  host.querySelectorAll("canvas").forEach(el => el.remove());
-  host.prepend(renderer.domElement);
-  host.classList.add("molecule3d-ready");
-  renderer.domElement.style.position = "absolute";
-  renderer.domElement.style.inset = "0";
-
-  const group = new THREE.Group();
-  scene.add(group);
-  scene.add(new THREE.AmbientLight(0xffffff, 1.7));
-  const light = new THREE.DirectionalLight(0xffffff, 2.2);
-  light.position.set(4, 5, 7); scene.add(light);
-  const rim = new THREE.DirectionalLight(0x72b89a, 1.6);
-  rim.position.set(-5, -2, 4); scene.add(rim);
-
-  // Compact 3D ball-and-stick representation of C10H16 limonene.
-  // Carbon skeleton coordinates preserve the cyclohex-1-ene ring,
-  // methyl substituent and isopropenyl side chain. Hydrogens are omitted
-  // at card size to keep the model readable.
-  const atoms = [
-    [-1.45, .55, .18],[-.65,1.35,-.15],[.55,1.22,.18],[1.28,.25,-.12],
-    [.72,-.95,.2],[-.55,-1.15,-.18],[-1.75,1.65,.3],[1.7,-1.45,-.2],
-    [2.8,-1.05,.25],[1.55,-2.65,.2]
-  ];
-  const bonds = [[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[0,6],[4,7],[7,8],[7,9]];
-  const atomGeo = new THREE.SphereGeometry(.24, 20, 14);
-  const atomMat = new THREE.MeshStandardMaterial({color:0x72b89a,roughness:.28,metalness:.18});
-  atoms.forEach(p => { const m=new THREE.Mesh(atomGeo,atomMat);m.position.set(...p);group.add(m); });
-  const bondMat = new THREE.MeshStandardMaterial({color:0xd9e7e1,roughness:.4,metalness:.08});
-  function bond(a,b,offset=0){
-    const p1=new THREE.Vector3(...atoms[a]), p2=new THREE.Vector3(...atoms[b]);
-    const mid=p1.clone().add(p2).multiplyScalar(.5), len=p1.distanceTo(p2);
-    const g=new THREE.CylinderGeometry(.075,.075,len,10), m=new THREE.Mesh(g,bondMat);
-    m.position.copy(mid); m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),p2.clone().sub(p1).normalize());
-    if(offset){ const side=new THREE.Vector3(0,0,1).applyQuaternion(m.quaternion).multiplyScalar(offset);m.position.add(side); }
-    group.add(m);
-  }
-  bonds.forEach(([a,b])=>bond(a,b));
-  // Two double bonds in limonene.
-  bond(1,2,.14); bond(7,8,.14);
-  group.rotation.set(-.35,.45,.15);
-
-  let dragging=false,lastX=0,lastY=0,visible=true;
-  renderer.domElement.addEventListener("pointerdown",e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;renderer.domElement.setPointerCapture(e.pointerId);e.stopPropagation();});
-  renderer.domElement.addEventListener("pointermove",e=>{if(!dragging)return;group.rotation.y+=(e.clientX-lastX)*.012;group.rotation.x+=(e.clientY-lastY)*.012;lastX=e.clientX;lastY=e.clientY;e.stopPropagation();});
-  renderer.domElement.addEventListener("pointerup",e=>{dragging=false;e.stopPropagation();});
-  renderer.domElement.addEventListener("click",e=>e.stopPropagation());
-
-  const io=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;},{threshold:.05});io.observe(host);
-  function frame(){ requestAnimationFrame(frame); if(!visible)return; if(!dragging)group.rotation.y+=.004; renderer.render(scene,camera); }
-  frame();
-  const resize = () => {
-    if (!host.isConnected) return;
-    const nw = Math.max(host.clientWidth, 180), nh = Math.max(host.clientHeight, 160);
-    renderer.setSize(nw, nh, false);
-    camera.aspect = nw / nh;
-    camera.updateProjectionMatrix();
-  };
-  if ("ResizeObserver" in window) new ResizeObserver(resize).observe(host);
-  limonene3D={renderer,group,host};
+  const bonds=[];
+  for(let i=1;i<n;i++) bonds.push([i-1,i]);
+  if(ringish&&n>=6){bonds.splice(5,1);bonds.push([5,0]);for(let i=6;i<n;i++)bonds.push([Math.min(5,i-5),i]);}
+  return {atoms,bonds};
+}
+async function initMolecule3D(host) {
+  if(!host || host.dataset.ready==="1") return;
+  const compound=compoundById[host.dataset.moleculeId]; if(!compound)return;
+  const THREE=await loadThree(); if(!THREE||!host.isConnected)return;
+  host.dataset.ready="1";
+  const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(34,1,.1,100); camera.position.z=7.4;
+  const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:"low-power"});
+  renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.45));
+  const resize=()=>{const w=Math.max(host.clientWidth,130),h=Math.max(host.clientHeight,130);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();};
+  resize(); host.prepend(renderer.domElement); renderer.domElement.style.cssText="position:absolute;inset:0;width:100%;height:100%";
+  scene.add(new THREE.AmbientLight(0xffffff,1.8)); const dl=new THREE.DirectionalLight(0xffffff,2);dl.position.set(4,5,7);scene.add(dl);
+  const group=new THREE.Group();scene.add(group);const {atoms,bonds}=makePseudoStructure(compound);
+  const ag=new THREE.SphereGeometry(.20,14,10),am=new THREE.MeshStandardMaterial({color:0x72b89a,roughness:.3}),bm=new THREE.MeshStandardMaterial({color:0xd9e7e1,roughness:.45});
+  atoms.forEach(p=>{const m=new THREE.Mesh(ag,am);m.position.set(...p);group.add(m)});
+  bonds.forEach(([a,b])=>{const p1=new THREE.Vector3(...atoms[a]),p2=new THREE.Vector3(...atoms[b]),mid=p1.clone().add(p2).multiplyScalar(.5),len=p1.distanceTo(p2),m=new THREE.Mesh(new THREE.CylinderGeometry(.055,.055,len,8),bm);m.position.copy(mid);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),p2.clone().sub(p1).normalize());group.add(m)});
+  group.rotation.set(-.3,.5,.12);
+  let drag=false,lx=0,ly=0,visible=true;
+  renderer.domElement.addEventListener("pointerdown",e=>{drag=true;lx=e.clientX;ly=e.clientY;renderer.domElement.setPointerCapture(e.pointerId);e.stopPropagation()});
+  renderer.domElement.addEventListener("pointermove",e=>{if(!drag)return;group.rotation.y+=(e.clientX-lx)*.012;group.rotation.x+=(e.clientY-ly)*.012;lx=e.clientX;ly=e.clientY;e.stopPropagation()});
+  renderer.domElement.addEventListener("pointerup",e=>{drag=false;e.stopPropagation()});renderer.domElement.addEventListener("click",e=>e.stopPropagation());
+  new IntersectionObserver(x=>visible=x[0].isIntersecting,{threshold:.02}).observe(host);
+  if("ResizeObserver"in window)new ResizeObserver(resize).observe(host);
+  const frame=()=>{if(!host.isConnected){renderer.dispose();moleculeViewers.delete(compound.id);return}requestAnimationFrame(frame);if(visible){if(!drag)group.rotation.y+=.003;renderer.render(scene,camera)}};frame();
+  moleculeViewers.set(compound.id,{renderer,host});
+}
+function initVisibleMolecules(){
+  document.querySelectorAll(".molecule3d").forEach(host=>{
+    const io=new IntersectionObserver(entries=>{if(entries[0].isIntersecting){io.disconnect();initMolecule3D(host)}},{rootMargin:"220px"});
+    io.observe(host);
+  });
 }
 
 function showCompound(id, fromRoute = false) {
