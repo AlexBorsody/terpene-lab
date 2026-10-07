@@ -381,10 +381,7 @@ function renderCompounds() {
     return `<div class="card compound-card" data-c="${c.id}">
       ${c.id === "limonene" ? '<div class="molecule3d" id="limonene-3d" aria-label="Interactive 3D model of limonene"><span>3D · drag to rotate</span></div>' : ""}
       <h3>${esc(c.name)}</h3>
-      <div class="compound-chemline">
-        <span class="molecule-glyph molecule-glyph-large" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-        <span class="formula-chip">${formatFormula(c.formula)}</span>
-      </div>
+      <div class="compound-chemline"><span class="formula-chip">${formatFormula(c.formula)}</span></div>
       <p class="sub">${esc(c.chemicalClass)}</p>
       <p class="sub">${n} oil${n === 1 ? "" : "s"} &middot; ${s} stud${s === 1 ? "y" : "ies"}</p>
     </div>`;
@@ -407,9 +404,15 @@ function initLimonene3D() {
   camera.position.set(0, 0, 8.2);
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.7));
-  renderer.setSize(host.clientWidth, host.clientHeight);
+  const w = Math.max(host.clientWidth, 180);
+  const h = Math.max(host.clientHeight, 160);
+  renderer.setSize(w, h);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   host.prepend(renderer.domElement);
+  renderer.domElement.style.position = "absolute";
+  renderer.domElement.style.inset = "0";
 
   const group = new THREE.Group();
   scene.add(group);
