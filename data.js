@@ -39,7 +39,7 @@
    ========================================================================== */
 
 const TERPENE_DATA = {
-  "version": "0.6.0-research",
+  "version": "0.7.0-research",
   "categories": [
     {
       "type": "health",
@@ -893,6 +893,442 @@ const TERPENE_DATA = {
         "Study blends",
         "Morning diffusion"
       ]
+    },
+    {
+      "id": "pine",
+      "name": "Scots Pine",
+      "latinName": "Pinus sylvestris",
+      "family": "Pinaceae",
+      "plantPart": "Needles and twigs",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "pine",
+        "resinous",
+        "fresh"
+      ],
+      "color": "#4e7d5b",
+      "description": "Steam-distilled from needles and twigs. Rich in alpha- and beta-pinene; studied for bactericidal and biofilm-dispersal activity.",
+      "uses": [
+        "Surface cleaning blends",
+        "Forest diffusion",
+        "Research reference"
+      ],
+      "safety": "For external use; can irritate sensitive skin undiluted.",
+      "constituents": [
+        {
+          "compoundId": "alpha-pinene",
+          "range": {
+            "min": 35,
+            "max": 50
+          }
+        },
+        {
+          "compoundId": "beta-pinene",
+          "range": {
+            "min": 12,
+            "max": 22
+          }
+        },
+        {
+          "compoundId": "limonene",
+          "range": {
+            "min": 4,
+            "max": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "palmarosa",
+      "name": "Palmarosa",
+      "latinName": "Cymbopogon martinii",
+      "family": "Poaceae",
+      "plantPart": "Grass",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "rosy",
+        "floral",
+        "sweet"
+      ],
+      "color": "#b98a9e",
+      "description": "Steam-distilled from tropical grass. Very high in geraniol; top performer against cat fleas and scabies mites in comparative screens.",
+      "uses": [
+        "Outdoor blends",
+        "Skin blends",
+        "Research reference"
+      ],
+      "safety": "Generally well tolerated; patch test for sensitive skin.",
+      "constituents": [
+        {
+          "compoundId": "geraniol",
+          "range": {
+            "min": 70,
+            "max": 85
+          }
+        },
+        {
+          "compoundId": "linalool",
+          "range": {
+            "min": 1,
+            "max": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "copaiba",
+      "name": "Copaiba",
+      "latinName": "Copaifera reticulata",
+      "family": "Fabaceae",
+      "plantPart": "Resin (oleoresin)",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "woody",
+        "balsamic",
+        "mild"
+      ],
+      "color": "#a08b6d",
+      "description": "Steam-distilled oleoresin. Exceptionally rich in beta-caryophyllene; strongest residual efficacy against cat fleas in comparative testing.",
+      "uses": [
+        "Outdoor blends",
+        "Research reference"
+      ],
+      "safety": "Generally well tolerated; patch test for sensitive skin.",
+      "constituents": [
+        {
+          "compoundId": "beta-caryophyllene",
+          "range": {
+            "min": 40,
+            "max": 60
+          }
+        },
+        {
+          "compoundId": "alpha-humulene",
+          "range": {
+            "min": 5,
+            "max": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "grapefruit",
+      "name": "Grapefruit",
+      "latinName": "Citrus paradisi",
+      "family": "Rutaceae",
+      "plantPart": "Peel",
+      "extraction": "Cold-pressed",
+      "aroma": [
+        "citrus",
+        "fresh",
+        "bitter"
+      ],
+      "color": "#f0d060",
+      "description": "Cold-pressed from peel. Limonene-dominant like other citrus; botanical source of nootkatone, the 14-day tick repellent.",
+      "uses": [
+        "Uplifting blends",
+        "Cleaning blends",
+        "Research reference"
+      ],
+      "safety": "Phototoxic risk; avoid sun exposure after topical use.",
+      "constituents": [
+        {
+          "compoundId": "limonene",
+          "range": {
+            "min": 90,
+            "max": 96
+          }
+        },
+        {
+          "compoundId": "myrcene",
+          "range": {
+            "min": 1,
+            "max": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "clary-sage",
+      "name": "Clary Sage",
+      "latinName": "Salvia sclarea",
+      "family": "Lamiaceae",
+      "plantPart": "Flowering tops",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "herbaceous",
+        "floral",
+        "musky"
+      ],
+      "color": "#8a9ec9",
+      "description": "Steam-distilled from flowering tops. Linalyl acetate dominant; tested against cat flea life stages.",
+      "uses": [
+        "Evening blends",
+        "Research reference"
+      ],
+      "safety": "Avoid with alcohol; generally well tolerated otherwise.",
+      "constituents": [
+        {
+          "compoundId": "linalyl-acetate",
+          "range": {
+            "min": 60,
+            "max": 75
+          }
+        },
+        {
+          "compoundId": "linalool",
+          "range": {
+            "min": 10,
+            "max": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "geranium",
+      "name": "Geranium",
+      "latinName": "Pelargonium graveolens",
+      "family": "Geraniaceae",
+      "plantPart": "Leaves",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "rosy",
+        "floral",
+        "green"
+      ],
+      "color": "#c9758f",
+      "description": "Steam-distilled from leaves. Citronellol and geraniol rich; third most effective oil against scabies mites in a ten-oil screen.",
+      "uses": [
+        "Skin blends",
+        "Floral blends",
+        "Research reference"
+      ],
+      "safety": "Generally well tolerated; patch test for sensitive skin.",
+      "constituents": [
+        {
+          "compoundId": "citronellol",
+          "range": {
+            "min": 25,
+            "max": 40
+          }
+        },
+        {
+          "compoundId": "geraniol",
+          "range": {
+            "min": 10,
+            "max": 20
+          }
+        },
+        {
+          "compoundId": "linalool",
+          "range": {
+            "min": 5,
+            "max": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "vitex",
+      "name": "Vitex",
+      "latinName": "Vitex negundo",
+      "family": "Lamiaceae",
+      "plantPart": "Leaves",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "herbaceous",
+        "camphor"
+      ],
+      "color": "#7d9b6a",
+      "description": "Steam-distilled from leaves. Larvicidal against Aedes aegypti and Culex mosquitoes at 50 to 125 ppm.",
+      "uses": [
+        "Outdoor blends",
+        "Research reference"
+      ],
+      "safety": "For external use; limited safety data — dilute well.",
+      "constituents": [
+        {
+          "compoundId": "eucalyptol",
+          "range": {
+            "min": 15,
+            "max": 30
+          }
+        },
+        {
+          "compoundId": "beta-caryophyllene",
+          "range": {
+            "min": 8,
+            "max": 15
+          }
+        },
+        {
+          "compoundId": "alpha-pinene",
+          "range": {
+            "min": 5,
+            "max": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "bergamot",
+      "name": "Bergamot",
+      "latinName": "Citrus bergamia",
+      "family": "Rutaceae",
+      "plantPart": "Peel",
+      "extraction": "Cold-pressed",
+      "aroma": [
+        "citrus",
+        "floral",
+        "sweet"
+      ],
+      "color": "#d4b855",
+      "description": "Cold-pressed from peel. Limonene and linalyl acetate rich; reduced exam anxiety in a 57-student RCT.",
+      "uses": [
+        "Anxiety blends",
+        "Uplifting blends",
+        "Research reference"
+      ],
+      "safety": "Phototoxic risk; avoid sun exposure after topical use.",
+      "constituents": [
+        {
+          "compoundId": "limonene",
+          "range": {
+            "min": 35,
+            "max": 50
+          }
+        },
+        {
+          "compoundId": "linalyl-acetate",
+          "range": {
+            "min": 22,
+            "max": 36
+          }
+        },
+        {
+          "compoundId": "linalool",
+          "range": {
+            "min": 6,
+            "max": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "ylang-ylang",
+      "name": "Ylang-Ylang",
+      "latinName": "Cananga odorata",
+      "family": "Annonaceae",
+      "plantPart": "Flowers",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "floral",
+        "sweet",
+        "exotic"
+      ],
+      "color": "#dfa0c8",
+      "description": "Steam-distilled from flowers. Lowered blood pressure and self-rated tension in human trials.",
+      "uses": [
+        "Evening blends",
+        "Floral blends",
+        "Research reference"
+      ],
+      "safety": "Strong scent; dilute well; can cause headaches in sensitive users.",
+      "constituents": [
+        {
+          "compoundId": "linalool",
+          "range": {
+            "min": 8,
+            "max": 18
+          }
+        },
+        {
+          "compoundId": "beta-caryophyllene",
+          "range": {
+            "min": 5,
+            "max": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "niaouli",
+      "name": "Niaouli",
+      "latinName": "Melaleuca quinquenervia",
+      "family": "Myrtaceae",
+      "plantPart": "Leaves",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "camphor",
+        "fresh",
+        "medicinal"
+      ],
+      "color": "#6fa87c",
+      "description": "Steam-distilled from leaves. Cineole-rich tea tree relative; selective cytotoxicity against lung cancer cells in vitro.",
+      "uses": [
+        "Respiratory blends",
+        "Research reference"
+      ],
+      "safety": "For external use; dilute well.",
+      "constituents": [
+        {
+          "compoundId": "eucalyptol",
+          "range": {
+            "min": 25,
+            "max": 45
+          }
+        },
+        {
+          "compoundId": "alpha-pinene",
+          "range": {
+            "min": 15,
+            "max": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "ravintsara",
+      "name": "Ravintsara",
+      "latinName": "Cinnamomum camphora",
+      "family": "Lauraceae",
+      "plantPart": "Leaves",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "camphor",
+        "fresh",
+        "eucalyptus"
+      ],
+      "color": "#a3c48d",
+      "description": "Steam-distilled from leaves (cineole chemotype, not camphor chemotype). Anti-MRSA activity in vitro.",
+      "uses": [
+        "Respiratory blends",
+        "Research reference"
+      ],
+      "safety": "For external use; use the cineole chemotype, not camphor chemotype.",
+      "constituents": [
+        {
+          "compoundId": "eucalyptol",
+          "range": {
+            "min": 45,
+            "max": 60
+          }
+        },
+        {
+          "compoundId": "alpha-pinene",
+          "range": {
+            "min": 4,
+            "max": 10
+          }
+        },
+        {
+          "compoundId": "linalool",
+          "range": {
+            "min": 2,
+            "max": 8
+          }
+        }
+      ]
     }
   ],
   "compounds": [
@@ -1180,6 +1616,28 @@ const TERPENE_DATA = {
       "formula": "C10H16O",
       "id": "camphor",
       "name": "Camphor"
+    },
+    {
+      "id": "nootkatone",
+      "name": "Nootkatone",
+      "chemicalClass": "Sesquiterpenoid",
+      "formula": "C15H22O",
+      "aroma": [
+        "grapefruit",
+        "woody"
+      ],
+      "description": "Grapefruit-derived sesquiterpenoid; repelled 100% of Ixodes scapularis nymphs through 14 days in field trials."
+    },
+    {
+      "id": "citronellol",
+      "name": "Citronellol",
+      "chemicalClass": "Monoterpenoid",
+      "formula": "C10H20O",
+      "aroma": [
+        "rosy",
+        "citronella"
+      ],
+      "description": "Rosy alcohol prominent in geranium and citronella; softer counterpart to citronellal."
     }
   ],
   "studies": [
@@ -3080,6 +3538,1437 @@ const TERPENE_DATA = {
       ],
       "finding": "A systematic review located four randomized trials and judged tea-tree-oil evidence for acne and fungal infections promising but not compelling at that time.",
       "limitations": "Older review with only four trials; later studies should be considered separately."
+    },
+    {
+      "id": "moridpour-2024-cinnamon",
+      "title": "The effect of cinnamon supplementation on glycemic control in patients with type 2 diabetes mellitus: An updated systematic review and dose-response meta-analysis of randomized controlled trials",
+      "authors": "Moridpour AH, Kavyani Z, Khosravi S, et al.",
+      "journal": "Phytotherapy Research",
+      "year": 2024,
+      "doi": "10.1002/ptr.8026",
+      "pubmedId": "37818728",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37818728/",
+      "studyType": "systematic-review",
+      "context": "human",
+      "evidenceLevel": "review",
+      "sampleSize": null,
+      "oilIds": [
+        "cinnamon"
+      ],
+      "compoundIds": [
+        "cinnamaldehyde"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "metabolic"
+        }
+      ],
+      "finding": "Across 24 RCTs, cinnamon supplementation significantly reduced fasting blood sugar, HOMA-IR, and HbA1c versus control, with no significant change in serum insulin.",
+      "limitations": "High heterogeneity across trials; cinnamon preparations and doses varied."
+    },
+    {
+      "id": "moss-oliver-2012-cineole",
+      "title": "Plasma 1,8-cineole correlates with cognitive performance following exposure to rosemary essential oil aroma",
+      "authors": "Moss M, Oliver L",
+      "journal": "Therapeutic Advances in Psychopharmacology",
+      "year": 2012,
+      "doi": "10.1177/2045125312436573",
+      "pubmedId": "23983963",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/23983963/",
+      "studyType": "observational-human-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 20,
+      "oilIds": [
+        "rosemary"
+      ],
+      "compoundIds": [
+        "eucalyptol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "attention"
+        }
+      ],
+      "finding": "Higher blood 1,8-cineole levels after rosemary aroma exposure correlated with better speed and accuracy on cognitive tasks, with no speed-accuracy trade-off.",
+      "limitations": "Correlational design, n=20, single exposure session."
+    },
+    {
+      "id": "pengelly-2012-rosemary",
+      "title": "Short-term study on the effects of rosemary on cognitive function in an elderly population",
+      "authors": "Pengelly A, Snow J, Mills SY, et al.",
+      "journal": "Journal of Medicinal Food",
+      "year": 2012,
+      "doi": "10.1089/jmf.2011.0005",
+      "pubmedId": "21877951",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21877951/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 28,
+      "oilIds": [
+        "rosemary"
+      ],
+      "compoundIds": [
+        "eucalyptol",
+        "camphor"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "alertness"
+        },
+        {
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "memory"
+        }
+      ],
+      "finding": "MIXED DOSE RESPONSE: 750 mg dried rosemary leaf improved speed of memory in older adults, while 6000 mg significantly impaired cognitive performance and alertness.",
+      "limitations": "Dried leaf powder, not essential oil; acute single-dose effects only."
+    },
+    {
+      "id": "han-2006-dysmenorrhea",
+      "title": "Effect of aromatherapy on symptoms of dysmenorrhea in college students: a randomized placebo-controlled clinical trial",
+      "authors": "Han SH, Hur MH, Buckle J, et al.",
+      "journal": "Journal of Alternative and Complementary Medicine",
+      "year": 2006,
+      "doi": "10.1089/acm.2006.12.535",
+      "pubmedId": "16884344",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16884344/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": null,
+      "oilIds": [
+        "lavender"
+      ],
+      "compoundIds": [
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "Topical aromatherapy with a lavender, clary sage, and rose blend significantly reduced menstrual cramp severity versus placebo.",
+      "limitations": "Three-oil blend tested; individual oil effects not isolated; clary sage and rose not in dataset."
+    },
+    {
+      "id": "akula-2021-lemongrass",
+      "title": "Anti-Plaque and Anti-Gingivitis Efficacy of 0.25% Lemongrass Oil and 0.2% Chlorhexidine Mouthwash in Children",
+      "authors": "Akula S, Nagarathna J, Srinath K",
+      "journal": "Frontiers in Dentistry",
+      "year": 2021,
+      "doi": "10.18502/fid.v18i32.7237",
+      "pubmedId": "35965722",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35965722/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 60,
+      "oilIds": [
+        "lemongrass"
+      ],
+      "compoundIds": [
+        "citral"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "oral-dental"
+        }
+      ],
+      "finding": "0.25% lemongrass oil mouthwash reduced plaque and gingival indices in children comparably to 0.2% chlorhexidine over 21 days.",
+      "limitations": "n=60 children; 21-day follow-up; no adult data."
+    },
+    {
+      "id": "smith-2011-labor",
+      "title": "Aromatherapy for pain management in labour",
+      "authors": "Smith CA, Collins CT, Crowther CA",
+      "journal": "Cochrane Database of Systematic Reviews",
+      "year": 2011,
+      "doi": "10.1002/14651858.CD009215",
+      "pubmedId": "21735438",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21735438/",
+      "studyType": "systematic-review",
+      "context": "human",
+      "evidenceLevel": "review",
+      "sampleSize": 535,
+      "oilIds": [
+        "lavender",
+        "frankincense",
+        "lemongrass"
+      ],
+      "compoundIds": [
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "NULL RESULT: across 2 trials (535 women), aromatherapy showed no difference versus control for labor pain intensity, assisted vaginal birth, or caesarean section.",
+      "limitations": "Only 2 trials; authors concluded evidence is insufficient for practice recommendations."
+    },
+    {
+      "id": "anderson-2004-ponv",
+      "title": "Aromatherapy with peppermint, isopropyl alcohol, or placebo is equally effective in relieving postoperative nausea",
+      "authors": "Anderson LA, Gross JB",
+      "journal": "Journal of PeriAnesthesia Nursing",
+      "year": 2004,
+      "doi": "10.1016/j.jopan.2003.11.001",
+      "pubmedId": "14770380",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/14770380/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 33,
+      "oilIds": [
+        "peppermint"
+      ],
+      "compoundIds": [
+        "menthol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "digestive"
+        }
+      ],
+      "finding": "NULL RESULT for peppermint: nausea scores fell equally with peppermint, isopropyl alcohol, and saline placebo; authors attributed relief to controlled breathing rather than aroma.",
+      "limitations": "n=33; saline placebo equally effective, suggesting non-specific effects."
+    },
+    {
+      "id": "satchell-2002-tinea",
+      "title": "Treatment of interdigital tinea pedis with 25% and 50% tea tree oil solution: a randomized, placebo-controlled, blinded study",
+      "authors": "Satchell AC, Saurajen A, Bell C, et al.",
+      "journal": "Australasian Journal of Dermatology",
+      "year": 2002,
+      "doi": "10.1046/j.1440-0960.2002.00590.x",
+      "pubmedId": "12121393",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12121393/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 158,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "skin"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "dermatophytes"
+        }
+      ],
+      "finding": "In 158 patients, tea tree oil solution improved clinical symptoms of interdigital tinea pedis versus placebo in a blinded RCT.",
+      "limitations": "Symptom improvement exceeded mycological cure rates."
+    },
+    {
+      "id": "mohammed-aggad-2025",
+      "title": "Evaluation of Antibacterial Activity in Some Algerian Essential Oils and Selection of Thymus vulgaris as a Potential Biofilm and Quorum Sensing Inhibitor Against Pseudomonas aeruginosa",
+      "authors": "Mohammed Aggad FZ, Ilias F, Elghali F, et al.",
+      "journal": "Chemistry and Biodiversity",
+      "year": 2025,
+      "doi": "10.1002/cbdv.202402691",
+      "pubmedId": "39777967",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39777967/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "thyme"
+      ],
+      "compoundIds": [
+        "thymol",
+        "carvacrol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "finding": "Thyme oil rich in thymol inhibited biofilm formation and quorum-sensing virulence factors in a hospital Pseudomonas aeruginosa strain, with docking data suggesting thymol and carvacrol bind its quorum-sensing receptors.",
+      "limitations": "In-vitro only; single hospital strain."
+    },
+    {
+      "id": "anees-2026",
+      "title": "Antibacterial and anti-biofilm activities of thyme oil, oregano oil, and their combination against Klebsiella pneumoniae and Acinetobacter baumannii polymicrobial biofilms",
+      "authors": "Anees TMM, Suchithra KV, Shetty AV, et al.",
+      "journal": "Antonie van Leeuwenhoek",
+      "year": 2026,
+      "doi": "10.1007/s10482-026-02284-z",
+      "pubmedId": "41854771",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41854771/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "thyme",
+        "oregano"
+      ],
+      "compoundIds": [
+        "thymol",
+        "carvacrol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "finding": "Thyme and oregano oils acted synergistically to disrupt dual-species Klebsiella pneumoniae and Acinetobacter baumannii biofilms by over 90%, downregulating biofilm-associated genes.",
+      "limitations": "In-vitro; no human data."
+    },
+    {
+      "id": "jurado-2023",
+      "title": "Essential oils of Pinus sylvestris, Citrus limon and Origanum vulgare exhibit high bactericidal and anti-biofilm activities against Neisseria gonorrhoeae and Streptococcus suis",
+      "authors": "Jurado P, Uruen C, Martinez S, et al.",
+      "journal": "Biomedicine and Pharmacotherapy",
+      "year": 2023,
+      "doi": "10.1016/j.biopha.2023.115703",
+      "pubmedId": "37857249",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37857249/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "pine",
+        "lemon",
+        "oregano"
+      ],
+      "compoundIds": [
+        "alpha-pinene",
+        "beta-pinene",
+        "limonene",
+        "carvacrol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "finding": "Scots pine and lemon oils showed strong bactericidal and biofilm-dispersal activity against multidrug-resistant Neisseria gonorrhoeae, attributed to alpha/beta-pinene and limonene acting on the bacterial outer membrane.",
+      "limitations": "In-vitro; clinical relevance untested."
+    },
+    {
+      "id": "tuan-2025",
+      "title": "Innovative antifungal strategies: enhanced biofilm inhibition of Candida albicans by a modified tea tree oil formulation",
+      "authors": "Tuan DA, Uyen PVN, Khuon NV, et al.",
+      "journal": "Frontiers in Microbiology",
+      "year": 2024,
+      "doi": "10.3389/fmicb.2024.1518598",
+      "pubmedId": "39881994",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39881994/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "yeast"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "finding": "Tea tree oil inhibited Candida albicans biofilm formation but could not eradicate more than 50 percent of mature biofilm at the concentrations tested.",
+      "limitations": "In-vitro; mature-biofilm eradication not achieved."
+    },
+    {
+      "id": "francisconi-2020",
+      "title": "Antibiofilm efficacy of tea tree oil and of its main component terpinen-4-ol against Candida albicans",
+      "authors": "Francisconi RS, Huacho PMM, Tonon CC, et al.",
+      "journal": "Brazilian Oral Research",
+      "year": 2020,
+      "doi": "10.1590/1807-3107bor-2020.vol34.0050",
+      "pubmedId": "32578760",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32578760/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "yeast"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "finding": "Tea tree oil and terpinen-4-ol interfered with Candida albicans biofilm formation in a 60-second rinse simulation, supporting potential use in oral candidiasis.",
+      "limitations": "In-vitro; brief-exposure model only."
+    },
+    {
+      "id": "garozzo-2009",
+      "title": "In vitro antiviral activity of Melaleuca alternifolia essential oil",
+      "authors": "Garozzo A, Timpanaro R, Bisignano B, et al.",
+      "journal": "Letters in Applied Microbiology",
+      "year": 2009,
+      "doi": "10.1111/j.1472-765X.2009.02740.x",
+      "pubmedId": "19843207",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19843207/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "viruses"
+        }
+      ],
+      "finding": "Tea tree oil and terpinen-4-ol inhibited influenza A H1N1 replication below cytotoxic doses, with no virucidal activity and no effect on the other viruses tested.",
+      "limitations": "In-vitro; influenza only among the viruses screened."
+    },
+    {
+      "id": "najar-2022",
+      "title": "Screening of the essential oil effects on human H1N1 influenza virus infection: an in vitro study in MDCK cells",
+      "authors": "Najar B, Nardi V, Stincarelli MA, et al.",
+      "journal": "Natural Product Research",
+      "year": 2022,
+      "doi": "10.1080/14786419.2021.1944137",
+      "pubmedId": "34176386",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34176386/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "eucalyptus",
+        "rosemary"
+      ],
+      "compoundIds": [
+        "eucalyptol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "viruses"
+        }
+      ],
+      "finding": "Among 19 oils screened, eucalyptus and rosemary oils showed anti-H1N1 activity with low cytotoxicity, with eucalyptol correlating positively with cell viability.",
+      "limitations": "In-vitro screening; no human data."
+    },
+    {
+      "id": "pellegrini-2023",
+      "title": "Virucidal Activity of Lemon Essential Oil against Feline Calicivirus Used as Surrogate for Norovirus",
+      "authors": "Pellegrini F, Camero M, Catella C, et al.",
+      "journal": "Antibiotics",
+      "year": 2023,
+      "doi": "10.3390/antibiotics12020322",
+      "pubmedId": "36830233",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36830233/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "lemon"
+      ],
+      "compoundIds": [
+        "limonene",
+        "citral"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "viruses"
+        }
+      ],
+      "finding": "Lemon essential oil significantly reduced feline calicivirus infectivity, a cultivable surrogate for human norovirus, suggesting surface-sanitizing potential.",
+      "limitations": "Surrogate virus in-vitro; not tested against human norovirus."
+    },
+    {
+      "id": "gilling-2014",
+      "title": "Antiviral efficacy and mechanisms of action of oregano essential oil and its primary component carvacrol against murine norovirus",
+      "authors": "Gilling DH, Kitajima M, Torrey JR, et al.",
+      "journal": "Journal of Applied Microbiology",
+      "year": 2014,
+      "doi": "10.1111/jam.12453",
+      "pubmedId": "24779581",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24779581/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "oregano"
+      ],
+      "compoundIds": [
+        "carvacrol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "viruses"
+        }
+      ],
+      "finding": "Carvacrol inactivated murine norovirus within one hour by disrupting the viral capsid, outperforming oregano oil and suggesting use as a surface sanitizer.",
+      "limitations": "Surrogate virus in-vitro; high concentrations required."
+    },
+    {
+      "id": "guynot-2003",
+      "title": "Antifungal activity of volatile compounds generated by essential oils against fungi commonly causing deterioration of bakery products",
+      "authors": "Guynot ME, Ramos AJ, Seto L, et al.",
+      "journal": "Journal of Applied Microbiology",
+      "year": 2003,
+      "doi": "10.1046/j.1365-2672.2003.01927.x",
+      "pubmedId": "12694455",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12694455/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "cinnamon",
+        "clove",
+        "thyme",
+        "lemongrass"
+      ],
+      "compoundIds": [
+        "cinnamaldehyde",
+        "eugenol",
+        "thymol",
+        "citral"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "mold"
+        }
+      ],
+      "finding": "Vapours of cinnamon, clove, lemongrass, and thyme oils completely inhibited bakery-spoilage molds including Aspergillus and Penicillium species.",
+      "limitations": "Vapour-phase lab model; efficacy dropped in real food matrices."
+    },
+    {
+      "id": "farouk-2022",
+      "title": "Highly Durable Antibacterial Properties of Cellulosic Fabric via beta-Cyclodextrin/Essential Oils Inclusion Complex",
+      "authors": "Farouk A, Sharaf S, Refaie R, et al.",
+      "journal": "Polymers",
+      "year": 2022,
+      "doi": "10.3390/polym14224899",
+      "pubmedId": "36433025",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36433025/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "lavender",
+        "lemon",
+        "rosemary"
+      ],
+      "compoundIds": [
+        "linalool",
+        "limonene",
+        "eucalyptol"
+      ],
+      "categories": [
+        {
+          "type": "cleaning",
+          "subcategory": "laundry"
+        }
+      ],
+      "finding": "Cotton fabric treated with cyclodextrin-encapsulated lavender, lemon, and rosemary oils retained antibacterial activity through multiple wash cycles.",
+      "limitations": "Textile-finishing lab study; no worn-garment testing."
+    },
+    {
+      "id": "semeniuc-2017",
+      "title": "Antibacterial activity and interactions of plant essential oil combinations against Gram-positive and Gram-negative bacteria",
+      "authors": "Semeniuc CA, Pop CR, Rotar AM, et al.",
+      "journal": "Food and Drug Analysis",
+      "year": 2017,
+      "doi": "10.1016/j.jfda.2016.06.002",
+      "pubmedId": "28911683",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28911683/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "thyme"
+      ],
+      "compoundIds": [
+        "thymol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        }
+      ],
+      "finding": "NULL/MIXED RESULT: parsley and lovage oils showed no inhibition against any tested bacteria, and most thyme-oil combinations were antagonistic rather than synergistic.",
+      "limitations": "Food-bacteria panel only; disc-diffusion screening."
+    },
+    {
+      "id": "chaves-campos-2026",
+      "title": "In vitro insecticidal and repellent activity of Cymbopogon essential oils and geraniol against cat flea.",
+      "authors": "de Oliveira Chaves JK, Campos DR, Santos Soares EFM, et al.",
+      "journal": "Vet Parasitol",
+      "year": 2026,
+      "doi": "10.1016/j.vetpar.2026.110886",
+      "pubmedId": "42579967",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42579967/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "citronella",
+        "lemongrass",
+        "palmarosa"
+      ],
+      "compoundIds": [
+        "geraniol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "fleas"
+        }
+      ],
+      "finding": "Geraniol showed the lowest LC50 values against cat flea eggs, pupae, adults, and whole life-cycle inhibition, while Cymbopogon martinii (palmarosa) oil was most potent against larvae and kept repellency at 90% or higher for 48 hours.",
+      "limitations": "In vitro filter-paper assays only; no animal or field data."
+    },
+    {
+      "id": "lima-campos-2024",
+      "title": "Insecticidal and Repellent Activity of Essential Oils from Copaifera reticulata, Citrus paradisi, Lavandula hybrida and Salvia sclarea Against Immature and Adult Stages of Ctenocephalides felis felis.",
+      "authors": "Lima EAS, Campos DR, Soares EFMS, et al.",
+      "journal": "Acta Parasitol",
+      "year": 2024,
+      "doi": "10.1007/s11686-024-00874-3",
+      "pubmedId": "39147955",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39147955/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "copaiba",
+        "grapefruit",
+        "lavender",
+        "clary-sage"
+      ],
+      "compoundIds": [
+        "beta-caryophyllene",
+        "linalool",
+        "linalyl-acetate",
+        "limonene"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "fleas"
+        }
+      ],
+      "finding": "All four oils showed insecticidal and repellent activity against cat flea life stages in vitro, with beta-caryophyllene-rich copaiba oil showing the strongest residual efficacy.",
+      "limitations": "In vitro only; Lavandula hybrida (lavandin) mapped to lavender; no host-animal testing."
+    },
+    {
+      "id": "walton-2004-scabies",
+      "title": "Acaricidal activity of Melaleuca alternifolia (tea tree) oil: in vitro sensitivity of sarcoptes scabiei var hominis to terpinen-4-ol.",
+      "authors": "Walton SF, McKinnon M, Pizzutto S, et al.",
+      "journal": "Arch Dermatol",
+      "year": 2004,
+      "doi": "10.1001/archderm.140.5.563",
+      "pubmedId": "15148100",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/15148100/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "mites"
+        }
+      ],
+      "finding": "Five percent tea tree oil and its component terpinen-4-ol were highly effective at reducing scabies mite survival times in vitro, comparable to 5% permethrin and ivermectin.",
+      "limitations": "In vitro continuous-exposure assay; mites from a single crusted-scabies patient."
+    },
+    {
+      "id": "fang-2016-scabies",
+      "title": "In vitro activity of ten essential oils against Sarcoptes scabiei.",
+      "authors": "Fang F, Candy K, Melloul E, et al.",
+      "journal": "Parasit Vectors",
+      "year": 2016,
+      "doi": "10.1186/s13071-016-1889-3",
+      "pubmedId": "27876081",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27876081/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "clove",
+        "palmarosa",
+        "geranium",
+        "tea-tree",
+        "lavender",
+        "eucalyptus"
+      ],
+      "compoundIds": [
+        "eugenol",
+        "geraniol",
+        "linalool",
+        "terpinen-4-ol",
+        "eucalyptol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "mites"
+        }
+      ],
+      "finding": "In contact assays 1% clove oil killed all scabies mites within 20 minutes and palmarosa within 50 minutes; efficacy order was clove, palmarosa, geranium, tea tree, then lavender.",
+      "limitations": "Mites from experimentally infected pigs; in vitro only."
+    },
+    {
+      "id": "cai-2025-dustmite",
+      "title": "Biotoxicity of essential oil of Eucalyptus citriodora Hook (Myrtaceae) to dust mites.",
+      "authors": "Cai H, Xie P, Zhang X, et al.",
+      "journal": "Front Plant Sci",
+      "year": 2025,
+      "doi": "10.3389/fpls.2025.1708798",
+      "pubmedId": "41424559",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41424559/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "lemon-eucalyptus"
+      ],
+      "compoundIds": [
+        "citronellal"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "mites"
+        }
+      ],
+      "finding": "Eucalyptus citriodora oil showed strong contact-fumigant toxicity to both house dust mite species, with citronellal the most toxic constituent and 100% vapor-phase mortality.",
+      "limitations": "Laboratory bioassays at high applied doses; no bedroom-scale testing."
+    },
+    {
+      "id": "george-2026-fireant",
+      "title": "Repellent effect of oregano essential oil and carvacrol analogs against imported fire ants.",
+      "authors": "George G, Shah FM, Ali A, et al.",
+      "journal": "Pest Manag Sci",
+      "year": 2026,
+      "doi": "10.1002/ps.70297",
+      "pubmedId": "41099098",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41099098/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "oregano"
+      ],
+      "compoundIds": [
+        "carvacrol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "ants"
+        }
+      ],
+      "finding": "Oregano oil strongly repelled red and hybrid imported fire ants, with carvacrol (minimum repellent dose 0.98 ug/g) identified as the primary active constituent.",
+      "limitations": "Laboratory repellency assays; no field colony-level data."
+    },
+    {
+      "id": "holloway-2024-argentineant",
+      "title": "Common Home Remedies Do Not Deter Argentine Ants, Linepithema humile (Hymenoptera: Formicidae), from a Preferred Harborage.",
+      "authors": "Holloway JB, Suiter DR, Davis JW, et al.",
+      "journal": "Insects",
+      "year": 2024,
+      "doi": "10.3390/insects15100768",
+      "pubmedId": "39452344",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39452344/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "peppermint",
+        "rosemary"
+      ],
+      "compoundIds": [
+        "menthol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "ants"
+        }
+      ],
+      "finding": "MIXED RESULT: tansy, cucumber, and soybean-extract home remedies failed to deter Argentine ants even at 4 to 10 times the recommended dose, while 1% peppermint oil was the most deterrent treatment and fresh rosemary and spearmint leaves also deterred harboring.",
+      "limitations": "Laboratory harborage assay; short 2 to 4 hour observation window."
+    },
+    {
+      "id": "trongtokit-2005-mosquito",
+      "title": "Comparative repellency of 38 essential oils against mosquito bites.",
+      "authors": "Trongtokit Y, Rongsriyam Y, Komalamisra N, et al.",
+      "journal": "Phytother Res",
+      "year": 2005,
+      "doi": "10.1002/ptr.1637",
+      "pubmedId": "16041723",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16041723/",
+      "studyType": "controlled-human-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": null,
+      "oilIds": [
+        "citronella",
+        "clove"
+      ],
+      "compoundIds": [
+        "eugenol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "mosquitoes"
+        }
+      ],
+      "finding": "Of 38 oils screened on human forearms, only undiluted citronella, patchouli, clove, and makaen oils gave 2 hours of complete repellency against Aedes aegypti, with clove lasting longest (2 to 4 hours) across three mosquito species; no oil at 10 to 50% lasted 2 hours.",
+      "limitations": "Small volunteer panel; laboratory forearm assay, not field conditions."
+    },
+    {
+      "id": "chandrasekaran-2019-vitex",
+      "title": "Larvicidal activity of essential oil from Vitex negundo and Vitex trifolia on dengue vector mosquito Aedes aegypti.",
+      "authors": "Chandrasekaran T, Thyagarajan A, Santhakumari PG, et al.",
+      "journal": "Rev Soc Bras Med Trop",
+      "year": 2019,
+      "doi": "10.1590/0037-8682-0459-2018",
+      "pubmedId": "31365621",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31365621/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "vitex"
+      ],
+      "compoundIds": [
+        "eucalyptol",
+        "beta-caryophyllene"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "mosquitoes",
+          "topic": "larvicide"
+        }
+      ],
+      "finding": "Vitex trifolia and Vitex negundo oils killed Aedes aegypti and Culex quinquefasciatus larvae at 50 to 125 ppm, with LC50 values around 51 to 58 ppm for Ae. aegypti.",
+      "limitations": "Laboratory larval assays; no field or non-target testing."
+    },
+    {
+      "id": "mitra-2020-epa25b",
+      "title": "Efficacy of Active Ingredients From the EPA 25(B) List in Reducing Attraction of Aedes aegypti (Diptera: Culicidae) to Humans.",
+      "authors": "Mitra S, Rodriguez SD, Vulcan J, et al.",
+      "journal": "J Med Entomol",
+      "year": 2020,
+      "doi": "10.1093/jme/tjz178",
+      "pubmedId": "31612914",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31612914/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "rosemary"
+      ],
+      "compoundIds": [
+        "eucalyptol",
+        "camphor"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "mosquitoes"
+        }
+      ],
+      "finding": "NULL RESULT: rosemary oil showed no significant repellency against Aedes aegypti in the study's attraction assay, unlike peppermint oil which strongly reduced attraction at the first time point.",
+      "limitations": "Single laboratory assay design; short observation window."
+    },
+    {
+      "id": "schulze-2011-ticks",
+      "title": "Experimental use of two standard tick collection methods to evaluate the relative effectiveness of several plant-derived and synthetic repellents against Ixodes scapularis and Amblyomma americanum (Acari: Ixodidae).",
+      "authors": "Schulze TL, Jordan RA, Dolan MC",
+      "journal": "J Econ Entomol",
+      "year": 2011,
+      "doi": "10.1603/ec10421",
+      "pubmedId": "22299371",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22299371/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "grapefruit",
+        "oregano"
+      ],
+      "compoundIds": [
+        "nootkatone",
+        "carvacrol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "ticks"
+        }
+      ],
+      "finding": "In field-plot tick drags, nootkatone and a permethrin standard each repelled 100% of Ixodes scapularis nymphs through 14 days, slightly outperforming carvacrol (90.7%) and a plant-oil product (97.7%).",
+      "limitations": "Field-plot evaluation, not a controlled lab assay; nootkatone tested as an isolated compound rather than as grapefruit oil."
+    },
+    {
+      "id": "gaudet-2024-tickseeking",
+      "title": "Lemongrass essential oil and DEET inhibit attractant detection in infected and non-infected Ixodes scapularis ticks.",
+      "authors": "Gaudet K, Anholeto LA, Hillier NK, et al.",
+      "journal": "Curr Res Insect Sci",
+      "year": 2024,
+      "doi": "10.1016/j.cris.2024.100096",
+      "pubmedId": "39386116",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39386116/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "lemongrass"
+      ],
+      "compoundIds": [
+        "citral",
+        "geraniol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "ticks"
+        }
+      ],
+      "finding": "Exposure to lemongrass oil, citral, or geraniol significantly impaired adult female Ixodes scapularis ticks' ability to detect and respond to host attractant, regardless of pathogen infection status.",
+      "limitations": "Electrophysiology and Y-tube lab assays; behavioral disruption rather than bite prevention was measured."
+    },
+    {
+      "id": "nascimento-2025-sweet-orange-labor",
+      "title": "Effectiveness of aromatherapy with sweet orange oil (Citrus sinensis L.) in relieving pain and anxiety during labor.",
+      "authors": "Nascimento JC, et al.",
+      "journal": "Explore (NY)",
+      "year": 2025,
+      "doi": "10.1016/j.explore.2024.103081",
+      "pubmedId": "39577393",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39577393/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 84,
+      "oilIds": [
+        "sweet-orange"
+      ],
+      "compoundIds": [
+        "limonene"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health"
+        },
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "Sweet orange inhalation significantly reduced labor pain intensity over time (p=0.0411) and anxiety (p<0.0001) versus a distilled-water placebo, while also lowering maternal blood pressure, heart rate, respiratory rate and fetal heart rate.",
+      "limitations": "Single-blind, single-center Brazilian trial; labor setting limits generalizability."
+    },
+    {
+      "id": "wakui-2026-bergamot-exam-anxiety",
+      "title": "Evaluation of the Anxiety-Reducing Effects of Aroma Stones with Bergamot Essential Oil before Examinations: A Randomized Controlled Trial.",
+      "authors": "Wakui N, et al.",
+      "journal": "J Integr Complement Med",
+      "year": 2026,
+      "doi": "10.1177/27683605261488658",
+      "pubmedId": "42755326",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42755326/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 57,
+      "oilIds": [
+        "bergamot"
+      ],
+      "compoundIds": [
+        "limonene",
+        "linalyl-acetate",
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health"
+        }
+      ],
+      "finding": "Bergamot aroma stones used for 3 days before examinations significantly lowered state anxiety scores versus water-stone controls on all three days (Cohen's d > 0.8) with no reported adverse events.",
+      "limitations": "Open-label, single-center design; 57 students; short 3-day intervention."
+    },
+    {
+      "id": "hongratanaworakit-2006-ylang-ylang-transdermal",
+      "title": "Relaxing effect of ylang ylang oil on humans after transdermal absorption.",
+      "authors": "Hongratanaworakit T, et al.",
+      "journal": "Phytother Res",
+      "year": 2006,
+      "doi": "10.1002/ptr.1950",
+      "pubmedId": "16807875",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16807875/",
+      "studyType": "controlled-human-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 40,
+      "oilIds": [
+        "ylang-ylang"
+      ],
+      "compoundIds": [
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health"
+        },
+        {
+          "type": "health",
+          "subcategory": "cardiovascular"
+        }
+      ],
+      "finding": "Transdermal ylang ylang oil significantly decreased blood pressure and increased skin temperature in 40 healthy volunteers, who also rated themselves calmer and more relaxed than the control group.",
+      "limitations": "Short-term transdermal exposure; no dose-response tested."
+    },
+    {
+      "id": "napavichayanun-2024-lavender-ylang-ylang-blood-pressure",
+      "title": "Effect of Lavandula angustifolia and Cananga odorata on decrease of blood pressure in high blood pressure volunteers: A randomized controlled trial.",
+      "authors": "Napavichayanun S, et al.",
+      "journal": "Explore (NY)",
+      "year": 2024,
+      "doi": "10.1016/j.explore.2023.11.013",
+      "pubmedId": "38087747",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38087747/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 34,
+      "oilIds": [
+        "lavender",
+        "ylang-ylang"
+      ],
+      "compoundIds": [
+        "linalool",
+        "linalyl-acetate"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "cardiovascular"
+        },
+        {
+          "type": "health",
+          "subcategory": "mental-health"
+        }
+      ],
+      "finding": "Sticker pads containing lavender and ylang ylang oils worn for 14 days significantly reduced systolic blood pressure and pulse rate versus placebo in volunteers with high blood pressure, with no adverse reactions.",
+      "limitations": "34 high-BP volunteers in efficacy phase; longer-term effects unknown."
+    },
+    {
+      "id": "sienkiewicz-2014-geranium-wound-bacteria",
+      "title": "The antibacterial activity of geranium oil against Gram-negative bacteria isolated from difficult-to-heal wounds.",
+      "authors": "Sienkiewicz M, et al.",
+      "journal": "Burns",
+      "year": 2014,
+      "doi": "10.1016/j.burns.2013.11.002",
+      "pubmedId": "24290961",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24290961/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "geranium"
+      ],
+      "compoundIds": [
+        "geraniol",
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "health",
+          "subcategory": "wound"
+        }
+      ],
+      "finding": "Geranium oil inhibited the growth of Gram-negative clinical strains isolated from difficult-to-heal wounds, suggesting it may be a useful component of therapy against resistant wound pathogens.",
+      "limitations": "In vitro study only; clinical wound efficacy and safety not tested."
+    },
+    {
+      "id": "androutsopoulou-2021-rose-geranium-preservative",
+      "title": "Evaluation of Essential Oils and Extracts of Rose Geranium and Rose Petals as Natural Preservatives in Terms of Toxicity, Antimicrobial, and Antiviral Activity.",
+      "authors": "Androutsopoulou C, et al.",
+      "journal": "Pathogens",
+      "year": 2021,
+      "doi": "10.3390/pathogens10040494",
+      "pubmedId": "33921899",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33921899/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "geranium"
+      ],
+      "compoundIds": [
+        "geraniol",
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "mold"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "viruses"
+        }
+      ],
+      "finding": "MIXED RESULT: 5% rose geranium essential oil showed no antibacterial activity (though 100% oil was strongly effective against E. coli), while it and the rose geranium extracts showed antifungal activity against Aspergillus niger and dose-dependent antiviral activity, with no toxicity at tested dilutions.",
+      "limitations": "In vitro study only; antibacterial efficacy highly concentration-dependent."
+    },
+    {
+      "id": "amrita-2023-palmarosa-bioactivities",
+      "title": "Underutilized Plant Cymbopogan martinii Derived Essential Oil Is Excellent Source of Bioactives with Diverse Biological Activities.",
+      "authors": "Amrita, et al.",
+      "journal": "Russ Agric Sci",
+      "year": 2023,
+      "doi": "10.3103/S1068367423010044",
+      "pubmedId": "37124716",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37124716/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "palmarosa"
+      ],
+      "compoundIds": [
+        "geraniol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "mold"
+        },
+        {
+          "type": "health",
+          "subcategory": "metabolic"
+        },
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "Palmarosa essential oil, with geraniol as its major component, showed antibacterial, antifungal, anti-inflammatory and alpha-amylase-inhibitory (antidiabetic) activity in vitro along with strong antioxidant capacity.",
+      "limitations": "In vitro and biochemical assays only; no animal or human data."
+    },
+    {
+      "id": "fikry-2025-niaouli-lung-cancer",
+      "title": "Chemical Composition and Anti-Lung Cancer Activities of Melaleuca quinquenervia Leaf Essential Oil: Integrating Gas Chromatography-Mass Spectrometry (GC/MS) Profiling, Network Pharmacology, and Molecular Docking.",
+      "authors": "Fikry E, et al.",
+      "journal": "Pharmaceuticals (Basel)",
+      "year": 2025,
+      "doi": "10.3390/ph18060771",
+      "pubmedId": "40573169",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40573169/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "niaouli"
+      ],
+      "compoundIds": [
+        "eucalyptol",
+        "alpha-pinene"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "immune"
+        }
+      ],
+      "finding": "Niaouli leaf essential oil (1,8-cineole 31.57%, alpha-pinene isomers 21.26%) showed selective cytotoxicity against A549 lung cancer cells (IC50 18.09 ug/mL), inhibited cell migration, and induced apoptosis and G0-G1 cell-cycle arrest.",
+      "limitations": "In vitro cytotoxicity only; anticancer activity has no dedicated category in the taxonomy so tagged as immune; no animal or pharmacokinetic validation yet."
+    },
+    {
+      "id": "chen-2020-ravintsara-mrsa",
+      "title": "Metabolomics analysis to evaluate the antibacterial activity of the essential oil from the leaves of Cinnamomum camphora (Linn.) Presl.",
+      "authors": "Chen J, et al.",
+      "journal": "J Ethnopharmacol",
+      "year": 2020,
+      "doi": "10.1016/j.jep.2020.112652",
+      "pubmedId": "32035880",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32035880/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "ravintsara"
+      ],
+      "compoundIds": [
+        "linalool",
+        "eucalyptol",
+        "camphor"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        }
+      ],
+      "finding": "Cinnamomum camphora leaf essential oil showed anti-MRSA activity (MIC 0.8 mg/mL, MBC 1.6 mg/mL), damaging bacterial cell membranes and disrupting amino acid metabolism according to GC-MS metabolomics.",
+      "limitations": "In vitro study only; chemotype-dependent composition may vary."
+    },
+    {
+      "id": "frank-2009-frankincense-bladder-cancer",
+      "title": "Frankincense oil derived from Boswellia carteri induces tumor cell specific cytotoxicity.",
+      "authors": "Frank MB, et al.",
+      "journal": "BMC Complement Altern Med",
+      "year": 2009,
+      "doi": "10.1186/1472-6882-9-6",
+      "pubmedId": "19296830",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19296830/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "frankincense"
+      ],
+      "compoundIds": [
+        "alpha-pinene",
+        "limonene"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "immune"
+        }
+      ],
+      "finding": "Frankincense oil suppressed viability of J82 bladder transitional carcinoma cells but not normal urothelial cells, activating genes for cell-cycle arrest, growth suppression and apoptosis.",
+      "limitations": "In vitro study only; intravesical delivery and human safety not tested; tagged as immune (no oncology category in taxonomy)."
+    },
+    {
+      "id": "hovijitra-2016-cinnamon-candida",
+      "title": "Effect of essential oils prepared from Thai culinary herbs on sessile Candida albicans cultures.",
+      "authors": "Hovijitra RS, et al.",
+      "journal": "J Oral Sci",
+      "year": 2016,
+      "doi": "10.2334/josnusd.15-0736",
+      "pubmedId": "27665976",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27665976/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "cinnamon"
+      ],
+      "compoundIds": [
+        "cinnamaldehyde"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "yeast"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "finding": "Cinnamon bark essential oil was potently fungicidal against both planktonic and sessile (biofilm) Candida albicans, though sessile MICs were 8 to 16 times higher than planktonic MICs.",
+      "limitations": "In vitro study only; much higher concentrations needed against biofilms than planktonic cells."
+    },
+    {
+      "id": "khalil-2020-myrrh-mdr-bacteria",
+      "title": "Bactericidal activity of Myrrh extracts and two dosage forms against standard bacterial strains and multidrug-resistant clinical isolates with GC/MS profiling.",
+      "authors": "Khalil N, et al.",
+      "journal": "AMB Express",
+      "year": 2020,
+      "doi": "10.1186/s13568-020-0958-3",
+      "pubmedId": "31993779",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31993779/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "myrrh"
+      ],
+      "compoundIds": [
+        "furanoeudesma-1-3-diene",
+        "curzerene"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "health",
+          "subcategory": "oral-dental"
+        }
+      ],
+      "finding": "Myrrh essential oil achieved greater than 99.999% killing of Staphylococcus aureus and Pseudomonas aeruginosa within 2 hours, showed bactericidal activity against multidrug-resistant clinical isolates, and a 5% myrrh mouthwash killed about 99.999% of S. aureus in saliva within 30 minutes.",
+      "limitations": "In vitro study only; cytotoxicity data limited to cell lines."
+    },
+    {
+      "id": "seifi-2014-lavender-anxiety-null",
+      "title": "The effect of lavender essential oil on anxiety level in patients undergoing coronary artery bypass graft surgery: A double-blinded randomized clinical trial.",
+      "authors": "Seifi Z, et al.",
+      "journal": "Iran J Nurs Midwifery Res",
+      "year": 2014,
+      "doi": "",
+      "pubmedId": "25558253",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/25558253/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 60,
+      "oilIds": [
+        "lavender"
+      ],
+      "compoundIds": [
+        "linalool",
+        "linalyl-acetate"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health"
+        }
+      ],
+      "finding": "NULL RESULT: Lavender essential oil inhalation produced no statistically significant difference in anxiety scores versus a distilled-water placebo in patients after coronary artery bypass graft surgery, although anxiety decreased in both groups.",
+      "limitations": "60 patients; 2-day intervention in acute post-surgical setting; results may not generalize."
     }
   ],
   "sources": [
