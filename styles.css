@@ -844,3 +844,65 @@ main {
  .language-flow{grid-template-columns:1fr;gap:7px}.flow-arrow{transform:rotate(90deg);height:20px}
  .language-step{min-height:0}.language-connections span,.language-connections b{padding:9px 5px;font-size:9px}
 }
+
+/* ---- photographic Beyond Aroma ---- */
+.plant-language {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  overflow: visible !important;
+}
+.plant-language::after { display:none !important; }
+.language-photo-hero {
+  position:relative;
+  min-height:330px;
+  border-radius:16px;
+  overflow:hidden;
+  margin-bottom:14px;
+  background:#0b1722;
+}
+.language-photo-hero img {
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  filter:saturate(.78) contrast(1.04) brightness(.72);
+}
+.language-photo-hero::after {
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(90deg,rgba(4,13,22,.84) 0%,rgba(4,13,22,.45) 48%,rgba(4,13,22,.08) 100%);
+}
+.language-photo-overlay {
+  position:absolute; z-index:2; left:clamp(22px,5vw,54px); bottom:clamp(25px,5vw,50px); max-width:560px;
+}
+.language-photo-overlay span { color:#b7e0ce; font:700 10px var(--mono); letter-spacing:2.4px; }
+.language-photo-overlay h2 { margin:8px 0 8px; font-size:clamp(34px,6vw,62px); line-height:.98; max-width:10ch; color:#fff8e8; }
+.language-photo-overlay p { margin:0; color:#e2e9e5 !important; font-size:clamp(15px,2vw,20px) !important; }
+.language-photo-grid {
+  display:grid; grid-template-columns:1fr 1.1fr 1fr; gap:14px; align-items:stretch;
+}
+.language-photo-grid figure {
+  margin:0; border-radius:13px; overflow:hidden; background:var(--surface); border:1px solid var(--border);
+}
+.language-photo-grid figure img { width:100%; height:190px; object-fit:cover; display:block; filter:saturate(.85); }
+.language-photo-grid figcaption { padding:14px 15px 16px; color:var(--muted); font-size:12px; line-height:1.5; }
+.language-photo-grid figcaption strong { color:var(--text); }
+.language-big-thought {
+  position:relative; display:flex; flex-direction:column; justify-content:center;
+  min-height:250px; padding:28px; border-radius:13px;
+  background:#d9e8d7; color:#10231d;
+}
+.language-big-thought .quote-mark { position:absolute; top:10px; left:18px; font:80px/1 Georgia,serif; opacity:.18; }
+.language-big-thought p { position:relative; margin:0 0 14px; font:600 clamp(19px,2.7vw,28px)/1.25 Georgia,serif; }
+.language-big-thought strong { font-size:12px; line-height:1.5; letter-spacing:.2px; }
+.language-whisper {
+  display:flex; align-items:center; justify-content:center; gap:12px;
+  margin:20px 0 10px; color:var(--teal); font:700 9px var(--mono); letter-spacing:2px;
+}
+.language-whisper i { width:34px; height:1px; background:rgba(114,184,154,.35); }
+.plant-language .plant-language-note { text-align:center; max-width:none; margin:14px auto 0; font-size:9px; }
+@media(max-width:700px){
+ .language-photo-hero{min-height:300px}
+ .language-photo-overlay h2{font-size:40px}
+ .language-photo-grid{grid-template-columns:1fr 1fr}
+ .language-big-thought{grid-column:1/-1;grid-row:1;min-height:190px;padding:25px}
+ .language-photo-grid figure img{height:145px}
+ .language-whisper{gap:7px;letter-spacing:1px}.language-whisper i{width:14px}
+}
