@@ -1,0 +1,411 @@
+{
+  "batch": "2026-10-07-b8",
+  "note": "Research batch 8 (human clinical trials depth) for ChatGPT to plug into data.js. Every PMID verified against the NCBI E-utilities API (titles and years match). Each study tagged with plant (oilIds), terpenes (compoundIds), uses (categories). Merge rule: skip any study whose pubmedId already exists in data.js.",
+  "studies": [
+    {
+      "id": "cappello-2007-peppermint-ibs",
+      "title": "Peppermint oil (Mintoil) in the treatment of irritable bowel syndrome: a prospective double blind placebo-controlled randomized trial.",
+      "authors": "Cappello G, Spezzaferro M, Grossi L, Manzoli L, et al.",
+      "journal": "Dig Liver Dis",
+      "year": 2007,
+      "doi": "10.1016/j.dld.2007.02.006",
+      "pubmedId": "17420159",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17420159/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 57,
+      "oilIds": [
+        "peppermint"
+      ],
+      "compoundIds": [
+        "menthol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "digestive",
+          "topic": "ibs"
+        }
+      ],
+      "finding": "Four weeks of enteric-coated peppermint oil significantly reduced IBS symptom scores versus placebo, with 75% versus 38% of patients achieving greater than 50% symptom reduction.",
+      "limitations": "n=57; patients with small intestinal bacterial overgrowth, lactose intolerance, or celiac disease were excluded, limiting generalizability."
+    },
+    {
+      "id": "enshaieh-2007-teatree-acne",
+      "title": "The efficacy of 5% topical tea tree oil gel in mild to moderate acne vulgaris: a randomized, double-blind placebo-controlled study.",
+      "authors": "Enshaieh S, Jooya A, Siadat AH, Iraji F",
+      "journal": "Indian J Dermatol Venereol Leprol",
+      "year": 2007,
+      "doi": "10.4103/0378-6323.30646",
+      "pubmedId": "17314442",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17314442/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": null,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "skin",
+          "topic": "acne"
+        }
+      ],
+      "finding": "Topical 5% tea tree oil gel was 3.55 times more effective than placebo on total lesion count and 5.75 times more effective on the acne severity index, with similar tolerability.",
+      "limitations": "Short trial duration; no head-to-head comparison against standard acne therapies such as benzoyl peroxide."
+    },
+    {
+      "id": "panahi-2015-rosemary-alopecia",
+      "title": "Rosemary oil vs minoxidil 2% for the treatment of androgenetic alopecia: a randomized comparative trial.",
+      "authors": "Panahi Y, Taghizadeh M, Marzony ET, Sahebkar A",
+      "journal": "Skinmed",
+      "year": 2015,
+      "doi": "",
+      "pubmedId": "25842469",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/25842469/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 100,
+      "oilIds": [
+        "rosemary"
+      ],
+      "compoundIds": [
+        "eucalyptol",
+        "camphor"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "skin",
+          "topic": "hair-loss"
+        }
+      ],
+      "finding": "After 6 months, both rosemary oil and minoxidil 2% significantly increased hair count with no significant difference between groups, while scalp itching was more frequent with minoxidil.",
+      "limitations": "No placebo arm; 6-month duration only, so long-term efficacy and safety are unknown."
+    },
+    {
+      "id": "woelk-2010-silexan-gad",
+      "title": "A multi-center, double-blind, randomised study of the Lavender oil preparation Silexan in comparison to Lorazepam for generalized anxiety disorder.",
+      "authors": "Woelk H, Schlafke S",
+      "journal": "Phytomedicine",
+      "year": 2010,
+      "doi": "10.1016/j.phymed.2009.10.006",
+      "pubmedId": "19962288",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19962288/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": null,
+      "oilIds": [
+        "lavender"
+      ],
+      "compoundIds": [
+        "linalool",
+        "linalyl-acetate"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "anxiety"
+        }
+      ],
+      "finding": "Oral lavender oil capsules (Silexan) reduced Hamilton Anxiety scores comparably to lorazepam over 6 weeks (45% versus 46% reduction) without sedation or abuse potential.",
+      "limitations": "No placebo arm; 6-week treatment period only."
+    },
+    {
+      "id": "kehrl-2004-cineole-rhinosinusitis",
+      "title": "Therapy for acute nonpurulent rhinosinusitis with cineole: results of a double-blind, randomized, placebo-controlled trial.",
+      "authors": "Kehrl W, Sonnemann U, Dethlefsen U",
+      "journal": "Laryngoscope",
+      "year": 2004,
+      "doi": "10.1097/00005537-200404000-00027",
+      "pubmedId": "15064633",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/15064633/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": null,
+      "oilIds": [
+        "eucalyptus"
+      ],
+      "compoundIds": [
+        "eucalyptol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "respiratory",
+          "topic": "cold"
+        }
+      ],
+      "finding": "Oral cineole significantly reduced acute rhinosinusitis symptom scores versus placebo after both 4 and 7 days of treatment.",
+      "limitations": "Tested isolated cineole capsules, not eucalyptus oil; acute nonpurulent cases only."
+    },
+    {
+      "id": "dryden-2004-teatree-mrsa",
+      "title": "A randomized, controlled trial of tea tree topical preparations versus a standard topical regimen for the clearance of MRSA colonization.",
+      "authors": "Dryden MS, Dailly S, Crouch M",
+      "journal": "J Hosp Infect",
+      "year": 2004,
+      "doi": "10.1016/j.jhin.2004.01.008",
+      "pubmedId": "15066738",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/15066738/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": null,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
+        },
+        {
+          "type": "health",
+          "subcategory": "skin"
+        }
+      ],
+      "finding": "MIXED RESULT: mupirocin cleared nasal MRSA carriage significantly better than tea tree cream (78% versus 47%), but tea tree preparations outperformed chlorhexidine and silver sulfadiazine at clearing skin sites and lesions.",
+      "limitations": "Hospital patients only; 5-day regimen; tea tree was inferior to the standard for nasal decolonization."
+    },
+    {
+      "id": "vakilian-2011-lavender-episiotomy",
+      "title": "Healing advantages of lavender essential oil during episiotomy recovery: a clinical trial.",
+      "authors": "Vakilian K, Atarha M, Bekhradi R, Chaman R",
+      "journal": "Complement Ther Clin Pract",
+      "year": 2011,
+      "doi": "10.1016/j.ctcp.2010.05.006",
+      "pubmedId": "21168115",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21168115/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 120,
+      "oilIds": [
+        "lavender"
+      ],
+      "compoundIds": [
+        "linalool",
+        "linalyl-acetate"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "wound"
+        }
+      ],
+      "finding": "Lavender oil sitz baths significantly reduced wound redness compared with povidone-iodine during episiotomy recovery, with no difference in pain scores or complications.",
+      "limitations": "Single-center trial; short follow-up period."
+    },
+    {
+      "id": "darsareh-2012-menopause-massage",
+      "title": "Effect of aromatherapy massage on menopausal symptoms: a randomized placebo-controlled clinical trial.",
+      "authors": "Darsareh F, Taavoni S, Joolaee S, Haghani H",
+      "journal": "Menopause",
+      "year": 2012,
+      "doi": "10.1097/gme.0b013e318248ea16",
+      "pubmedId": "22549173",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22549173/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": null,
+      "oilIds": [
+        "lavender"
+      ],
+      "compoundIds": [
+        "linalool",
+        "linalyl-acetate"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "menopause"
+        }
+      ],
+      "finding": "Aromatherapy massage significantly lowered Menopause Rating Scale scores versus both placebo massage and no treatment, while massage alone also beat no treatment.",
+      "limitations": "A multi-oil blend was tested, so individual oil effects were not isolated; single-center study."
+    },
+    {
+      "id": "sasannejad-2012-lavender-migraine",
+      "title": "Lavender essential oil in the treatment of migraine headache: a placebo-controlled clinical trial.",
+      "authors": "Sasannejad P, Saeedi M, Shoeibi A, Gorji A, et al.",
+      "journal": "Eur Neurol",
+      "year": 2012,
+      "doi": "10.1159/000335249",
+      "pubmedId": "22517298",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22517298/",
+      "studyType": "controlled-human-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": null,
+      "oilIds": [
+        "lavender"
+      ],
+      "compoundIds": [
+        "linalool",
+        "linalyl-acetate"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation",
+          "topic": "migraine"
+        }
+      ],
+      "finding": "Inhaled lavender oil reduced migraine severity significantly more than placebo (3.6 versus 1.6 VAS points), with 92 of 129 attacks responding entirely or partially.",
+      "limitations": "Acute attacks only; no comparison against standard migraine medications."
+    },
+    {
+      "id": "conrad-2012-rose-postpartum",
+      "title": "The effects of clinical aromatherapy for anxiety and depression in the high risk postpartum woman - a pilot study.",
+      "authors": "Conrad P, Adams C",
+      "journal": "Complement Ther Clin Pract",
+      "year": 2012,
+      "doi": "10.1016/j.ctcp.2012.05.002",
+      "pubmedId": "22789792",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22789792/",
+      "studyType": "controlled-human-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": null,
+      "oilIds": [
+        "rose"
+      ],
+      "compoundIds": [
+        "citronellol",
+        "geraniol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "anxiety"
+        },
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "depression"
+        }
+      ],
+      "finding": "Clinical aromatherapy with rose oil produced significantly greater improvements than control on both anxiety (GAD-7) and depression (EPDS) scales in high-risk postpartum women, with no adverse effects.",
+      "limitations": "Small pilot study; not blinded; larger trials recommended."
+    },
+    {
+      "id": "sanchez-vidana-2017-depression-review",
+      "title": "The Effectiveness of Aromatherapy for Depressive Symptoms: A Systematic Review.",
+      "authors": "Sanchez-Vidana DI, Ngai SP, He W, Chow JK, et al.",
+      "journal": "Evid Based Complement Alternat Med",
+      "year": 2017,
+      "doi": "10.1155/2017/5869315",
+      "pubmedId": "28133489",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28133489/",
+      "studyType": "systematic-review",
+      "context": "human",
+      "evidenceLevel": "review",
+      "sampleSize": null,
+      "oilIds": [
+        "lavender"
+      ],
+      "compoundIds": [
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "depression"
+        }
+      ],
+      "finding": "The systematic review concluded aromatherapy shows potential as a therapeutic option for depressive symptoms, with aromatherapy massage more beneficial than inhalation alone.",
+      "limitations": "Included studies varied in methodological quality; substantial heterogeneity across trials."
+    },
+    {
+      "id": "anderson-2000-eczema-null",
+      "title": "Evaluation of massage with essential oils on childhood atopic eczema.",
+      "authors": "Anderson C, Lis-Balchin M, Kirk-Smith M",
+      "journal": "Phytother Res",
+      "year": 2000,
+      "doi": "10.1002/1099-1573(200009)14:6<452::aid-ptr952>3.0.co;2-4",
+      "pubmedId": "10960901",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/10960901/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 8,
+      "oilIds": [
+        "frankincense",
+        "myrrh",
+        "thyme"
+      ],
+      "compoundIds": [
+        "alpha-pinene",
+        "curzerene",
+        "thymol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "skin",
+          "topic": "eczema"
+        }
+      ],
+      "finding": "NULL RESULT: aromatherapy massage showed no significant advantage over massage alone for childhood atopic eczema, and the authors raised possible allergic contact dermatitis from the essential oils themselves.",
+      "limitations": "Only 8 children studied; mothers chose varying oil blends, so no single oil can be evaluated."
+    }
+  ],
+  "newOils": [
+    {
+      "id": "rose",
+      "name": "Rose",
+      "latinName": "Rosa damascena",
+      "family": "Rosaceae",
+      "plantPart": "Petals",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "floral",
+        "sweet",
+        "rosy"
+      ],
+      "color": "#d97a98",
+      "description": "Steam-distilled from petals. Citronellol and geraniol rich; improved anxiety and depression scores in a postpartum pilot study.",
+      "uses": [
+        "Floral blends",
+        "Evening blends",
+        "Research reference"
+      ],
+      "safety": "Generally well tolerated; very expensive \u2014 expect adulteration in cheap oils.",
+      "constituents": [
+        {
+          "compoundId": "citronellol",
+          "range": {
+            "min": 25,
+            "max": 40
+          }
+        },
+        {
+          "compoundId": "geraniol",
+          "range": {
+            "min": 12,
+            "max": 22
+          }
+        }
+      ]
+    }
+  ],
+  "newCompounds": []
+}
