@@ -970,3 +970,37 @@ main {
   border-right: 1px solid var(--border);
 }
 .matrix th:last-child, .matrix td:last-child { border-right: 0; }
+
+/* ---- rebalance Beyond Aroma typography and spacing ---- */
+.language-photo-hero { margin-bottom: 10px !important; }
+.language-photo-overlay p { font-size: 16px !important; line-height: 1.45; max-width: 34ch; }
+.language-big-thought { min-height: 0 !important; padding: 22px 24px !important; }
+.language-big-thought p { font-size: clamp(20px, 2.5vw, 27px) !important; margin-bottom: 10px !important; }
+.language-big-thought strong { font-size: 14px !important; line-height: 1.45 !important; }
+.language-photo-grid { gap: 10px !important; }
+.language-photo-grid figure img { height: 125px !important; }
+.language-photo-grid figcaption { padding: 12px 13px 14px !important; font-size: 13px !important; line-height: 1.5 !important; }
+.language-human-thought {
+  margin: 12px auto 8px;
+  max-width: 68ch;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+  text-align: left;
+}
+.plant-language .plant-language-note {
+  margin-top: 8px !important;
+  font-size: 11px !important;
+  line-height: 1.5 !important;
+}
+@media(max-width:700px){
+ .language-photo-hero{margin-bottom:9px !important}
+ .language-photo-overlay p{font-size:14px !important}
+ .language-big-thought{padding:18px 19px !important}
+ .language-big-thought p{font-size:21px !important;line-height:1.3 !important}
+ .language-big-thought strong{font-size:13px !important}
+ .language-photo-grid figure img{height:110px !important}
+ .language-photo-grid figcaption{font-size:12px !important;line-height:1.45 !important;padding:11px !important}
+ .language-human-thought{font-size:14px;line-height:1.6;margin-top:13px}
+ .plant-language .plant-language-note{font-size:10px !important;text-align:left !important}
+}
