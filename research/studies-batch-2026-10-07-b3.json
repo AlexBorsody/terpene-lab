@@ -1,0 +1,303 @@
+{
+  "batch": "2026-10-07-b3",
+  "note": "Research batch 3 (health depth) for ChatGPT to plug into data.js. Every PMID verified against the NCBI E-utilities API (titles and years match). Each study tagged with plant (oilIds), terpenes (compoundIds), uses (categories). Merge rule: skip any study whose pubmedId already exists in data.js.",
+  "studies": [
+    {
+      "id": "moridpour-2024-cinnamon",
+      "title": "The effect of cinnamon supplementation on glycemic control in patients with type 2 diabetes mellitus: An updated systematic review and dose-response meta-analysis of randomized controlled trials",
+      "authors": "Moridpour AH, Kavyani Z, Khosravi S, et al.",
+      "journal": "Phytotherapy Research",
+      "year": 2024,
+      "doi": "10.1002/ptr.8026",
+      "pubmedId": "37818728",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37818728/",
+      "studyType": "systematic-review",
+      "context": "human",
+      "evidenceLevel": "review",
+      "sampleSize": null,
+      "oilIds": [
+        "cinnamon"
+      ],
+      "compoundIds": [
+        "cinnamaldehyde"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "metabolic"
+        }
+      ],
+      "finding": "Across 24 RCTs, cinnamon supplementation significantly reduced fasting blood sugar, HOMA-IR, and HbA1c versus control, with no significant change in serum insulin.",
+      "limitations": "High heterogeneity across trials; cinnamon preparations and doses varied."
+    },
+    {
+      "id": "moss-oliver-2012-cineole",
+      "title": "Plasma 1,8-cineole correlates with cognitive performance following exposure to rosemary essential oil aroma",
+      "authors": "Moss M, Oliver L",
+      "journal": "Therapeutic Advances in Psychopharmacology",
+      "year": 2012,
+      "doi": "10.1177/2045125312436573",
+      "pubmedId": "23983963",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/23983963/",
+      "studyType": "observational-human-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 20,
+      "oilIds": [
+        "rosemary"
+      ],
+      "compoundIds": [
+        "eucalyptol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "attention"
+        }
+      ],
+      "finding": "Higher blood 1,8-cineole levels after rosemary aroma exposure correlated with better speed and accuracy on cognitive tasks, with no speed-accuracy trade-off.",
+      "limitations": "Correlational design, n=20, single exposure session."
+    },
+    {
+      "id": "pengelly-2012-rosemary",
+      "title": "Short-term study on the effects of rosemary on cognitive function in an elderly population",
+      "authors": "Pengelly A, Snow J, Mills SY, et al.",
+      "journal": "Journal of Medicinal Food",
+      "year": 2012,
+      "doi": "10.1089/jmf.2011.0005",
+      "pubmedId": "21877951",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21877951/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 28,
+      "oilIds": [
+        "rosemary"
+      ],
+      "compoundIds": [
+        "eucalyptol",
+        "camphor"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "alertness"
+        },
+        {
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "memory"
+        }
+      ],
+      "finding": "MIXED DOSE RESPONSE: 750 mg dried rosemary leaf improved speed of memory in older adults, while 6000 mg significantly impaired cognitive performance and alertness.",
+      "limitations": "Dried leaf powder, not essential oil; acute single-dose effects only."
+    },
+    {
+      "id": "han-2006-dysmenorrhea",
+      "title": "Effect of aromatherapy on symptoms of dysmenorrhea in college students: a randomized placebo-controlled clinical trial",
+      "authors": "Han SH, Hur MH, Buckle J, et al.",
+      "journal": "Journal of Alternative and Complementary Medicine",
+      "year": 2006,
+      "doi": "10.1089/acm.2006.12.535",
+      "pubmedId": "16884344",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16884344/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": null,
+      "oilIds": [
+        "lavender"
+      ],
+      "compoundIds": [
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "Topical aromatherapy with a lavender, clary sage, and rose blend significantly reduced menstrual cramp severity versus placebo.",
+      "limitations": "Three-oil blend tested; individual oil effects not isolated; clary sage and rose not in dataset."
+    },
+    {
+      "id": "akula-2021-lemongrass",
+      "title": "Anti-Plaque and Anti-Gingivitis Efficacy of 0.25% Lemongrass Oil and 0.2% Chlorhexidine Mouthwash in Children",
+      "authors": "Akula S, Nagarathna J, Srinath K",
+      "journal": "Frontiers in Dentistry",
+      "year": 2021,
+      "doi": "10.18502/fid.v18i32.7237",
+      "pubmedId": "35965722",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35965722/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 60,
+      "oilIds": [
+        "lemongrass"
+      ],
+      "compoundIds": [
+        "citral"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "oral-dental"
+        }
+      ],
+      "finding": "0.25% lemongrass oil mouthwash reduced plaque and gingival indices in children comparably to 0.2% chlorhexidine over 21 days.",
+      "limitations": "n=60 children; 21-day follow-up; no adult data."
+    },
+    {
+      "id": "fischer-dethlefsen-2013-bronchitis",
+      "title": "Efficacy of cineole in patients suffering from acute bronchitis: a placebo-controlled double-blind trial",
+      "authors": "Fischer J, Dethlefsen U",
+      "journal": "Cough",
+      "year": 2013,
+      "doi": "10.1186/1745-9974-9-25",
+      "pubmedId": "24261680",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24261680/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": null,
+      "oilIds": [
+        "eucalyptus"
+      ],
+      "compoundIds": [
+        "eucalyptol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "respiratory"
+        }
+      ],
+      "finding": "Cineole reduced cough frequency and bronchitis symptom scores versus placebo in a double-blind trial.",
+      "limitations": "Tested isolated cineole capsules, not eucalyptus oil."
+    },
+    {
+      "id": "smith-2011-labor",
+      "title": "Aromatherapy for pain management in labour",
+      "authors": "Smith CA, Collins CT, Crowther CA",
+      "journal": "Cochrane Database of Systematic Reviews",
+      "year": 2011,
+      "doi": "10.1002/14651858.CD009215",
+      "pubmedId": "21735438",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21735438/",
+      "studyType": "systematic-review",
+      "context": "human",
+      "evidenceLevel": "review",
+      "sampleSize": 535,
+      "oilIds": [
+        "lavender",
+        "frankincense",
+        "lemongrass"
+      ],
+      "compoundIds": [
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "NULL RESULT: across 2 trials (535 women), aromatherapy showed no difference versus control for labor pain intensity, assisted vaginal birth, or caesarean section.",
+      "limitations": "Only 2 trials; authors concluded evidence is insufficient for practice recommendations."
+    },
+    {
+      "id": "anderson-2004-ponv",
+      "title": "Aromatherapy with peppermint, isopropyl alcohol, or placebo is equally effective in relieving postoperative nausea",
+      "authors": "Anderson LA, Gross JB",
+      "journal": "Journal of PeriAnesthesia Nursing",
+      "year": 2004,
+      "doi": "10.1016/j.jopan.2003.11.001",
+      "pubmedId": "14770380",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/14770380/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 33,
+      "oilIds": [
+        "peppermint"
+      ],
+      "compoundIds": [
+        "menthol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "digestive"
+        }
+      ],
+      "finding": "NULL RESULT for peppermint: nausea scores fell equally with peppermint, isopropyl alcohol, and saline placebo; authors attributed relief to controlled breathing rather than aroma.",
+      "limitations": "n=33; saline placebo equally effective, suggesting non-specific effects."
+    },
+    {
+      "id": "satchell-2002-tinea",
+      "title": "Treatment of interdigital tinea pedis with 25% and 50% tea tree oil solution: a randomized, placebo-controlled, blinded study",
+      "authors": "Satchell AC, Saurajen A, Bell C, et al.",
+      "journal": "Australasian Journal of Dermatology",
+      "year": 2002,
+      "doi": "10.1046/j.1440-0960.2002.00590.x",
+      "pubmedId": "12121393",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12121393/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 158,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "skin"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "dermatophytes"
+        }
+      ],
+      "finding": "In 158 patients, tea tree oil solution improved clinical symptoms of interdigital tinea pedis versus placebo in a blinded RCT.",
+      "limitations": "Symptom improvement exceeded mycological cure rates."
+    },
+    {
+      "id": "worth-2009-copd",
+      "title": "Concomitant therapy with Cineole (Eucalyptole) reduces exacerbations in COPD: a placebo-controlled double-blind trial",
+      "authors": "Worth H, Schacher C, Dethlefsen U",
+      "journal": "Respiratory Research",
+      "year": 2009,
+      "doi": "10.1186/1465-9921-10-69",
+      "pubmedId": "19624838",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19624838/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": null,
+      "oilIds": [
+        "eucalyptus"
+      ],
+      "compoundIds": [
+        "eucalyptol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "respiratory"
+        }
+      ],
+      "finding": "Cineole co-therapy reduced the frequency and severity of exacerbations versus placebo in COPD patients in a double-blind trial.",
+      "limitations": "Tested isolated cineole capsules, not eucalyptus oil; add-on to standard therapy."
+    }
+  ],
+  "newOils": [],
+  "newCompounds": []
+}
