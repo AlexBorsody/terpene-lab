@@ -564,17 +564,25 @@ function matrixCell(oilId, domainType) {
 }
 function renderMatrix() {
   const table = document.getElementById("matrix-table");
-  const domains = D.categories;
-  const maxCount = Math.max(1, ...D.oils.flatMap(o =>
-    domains.map(d => matrixCell(o.id, d.type).length)));
+  const q = (document.getElementById("matrix-search")?.value || "").trim().toLowerCase();
+  const sort = document.getElementById("matrix-sort")?.value || "az";
+  const domainFilter = document.getElementById("matrix-domain-filter")?.value || "";
+  const domains = domainFilter ? D.categories.filter(d => d.type === domainFilter) : D.categories;
+  const oils = D.oils.filter(o =>
+    !q || o.name.toLowerCase().includes(q) || o.latinName.toLowerCase().includes(q)
+  ).sort((x,y) => {
+    if (sort === "studies") return studiesForOil(y.id).length - studiesForOil(x.id).length || x.name.localeCompare(y.name);
+    return x.name.localeCompare(y.name);
+  });
+  const count = document.getElementById("matrix-count");
+  if (count) count.textContent = oils.length + " plants";
   let html = `<thead><tr><th></th>${domains.map(d => `<th>${esc(d.label)}</th>`).join("")}</tr></thead><tbody>`;
-  D.oils.forEach(o => {
+  oils.forEach(o => {
     html += `<tr><th class="rowlabel"><span class="swatch sm" style="background:${o.color}"></span>${esc(o.name)}</th>`;
     domains.forEach(d => {
       const studies = matrixCell(o.id, d.type);
       const n = studies.length;
-      html += `<td><button class="cell" data-oil="${o.id}" data-domain="${d.type}"
-        ${n ? "" : "disabled"}>
+      html += `<td><button class="cell" data-oil="${o.id}" data-domain="${d.type}" ${n ? "" : "disabled"}>
         <span class="cell-n">${n}</span>
       </button></td>`;
     });
@@ -587,6 +595,10 @@ function renderMatrix() {
       switchTab("studies");
     }));
 }
+["matrix-search","matrix-sort","matrix-domain-filter"].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener(id === "matrix-search" ? "input" : "change", renderMatrix);
+});
 
 /* ================= DOMAIN EXPLORER ================= */
 let domainState = { type: null, sub: null };
