@@ -492,3 +492,38 @@ main {
 @media (max-width: 480px) {
   .brand h1 { white-space: normal; font-size: 17px; line-height: 1.15; }
 }
+
+
+/* ---- restrained molecular motif ---- */
+.compound-node { justify-content: flex-start; }
+.compound-copy { min-width: 0; }
+.molecule-glyph {
+  position: relative;
+  width: 34px;
+  height: 28px;
+  flex: 0 0 34px;
+  opacity: .72;
+}
+.molecule-glyph::before,
+.molecule-glyph::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  background: var(--teal);
+  transform-origin: left center;
+}
+.molecule-glyph::before { width: 21px; left: 7px; top: 8px; transform: rotate(29deg); }
+.molecule-glyph::after { width: 20px; left: 8px; top: 20px; transform: rotate(-28deg); }
+.molecule-glyph i {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border: 1px solid var(--teal);
+  border-radius: 50%;
+  background: var(--surface);
+}
+.molecule-glyph i:nth-child(1) { left: 4px; top: 5px; }
+.molecule-glyph i:nth-child(2) { left: 25px; top: 10px; }
+.molecule-glyph i:nth-child(3) { left: 5px; top: 19px; }
+.molecule-glyph i:nth-child(4) { left: 16px; top: 12px; }
+.molecule-glyph i:nth-child(5) { left: 26px; top: 22px; }
