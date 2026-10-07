@@ -708,3 +708,34 @@ main {
 @media (max-width: 600px) {
   .matrix-key-action { width: 100%; margin: 3px 0 0; }
 }
+
+.matrix-scroll-cue {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 4px 0 8px;
+  padding: 8px 12px;
+  border-radius: 7px;
+  background: rgba(114,184,154,.12);
+  border: 1px solid rgba(114,184,154,.42);
+  color: var(--teal);
+  font: 700 10px var(--mono);
+  letter-spacing: 1px;
+}
+.matrix-scroll-cue span { font-size: 17px; line-height: 1; }
+.matrix-wrap {
+  overflow-x: scroll !important;
+  scrollbar-gutter: stable;
+  padding-bottom: 16px !important;
+}
+.matrix-wrap::-webkit-scrollbar { height: 16px !important; }
+.matrix-wrap::-webkit-scrollbar-track {
+  background: rgba(114,184,154,.12) !important;
+  border: 1px solid rgba(114,184,154,.35) !important;
+}
+.matrix-wrap::-webkit-scrollbar-thumb {
+  background: var(--teal) !important;
+  border: 3px solid var(--surface2) !important;
+  min-width: 70px;
+}
