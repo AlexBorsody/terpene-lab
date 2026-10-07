@@ -357,8 +357,8 @@ function showOil(id) {
   document.getElementById("oil-evidence").innerHTML =
     `<span class="evlabel">Evidence:</span> ` +
     ["clinical", "preclinical", "laboratory", "review"]
-      .map(l => `<span class="lvl lvl-${l}">${LEVEL_LETTER[l]}</span> ${ec[l]}`)
-      .join(" &nbsp; ");
+      .map(l => `<span class="evidence-word lvl-${l}">${LEVEL_LABEL[l]}</span> <b>${ec[l]}</b>`)
+      .join(" <span class=\"evidence-sep\">·</span> ");
 
   const sWrap = document.getElementById("oil-studies");
   sWrap.innerHTML = studies.length ? studies.map(studyCard).join("")
