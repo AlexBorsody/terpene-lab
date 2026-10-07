@@ -1,0 +1,436 @@
+{
+  "batch": "2026-10-07-b4",
+  "note": "Research batch 4 (microbial + cleaning depth) for ChatGPT to plug into data.js. Every PMID verified against the NCBI E-utilities API (titles and years match). Each study tagged with plant (oilIds), terpenes (compoundIds), uses (categories). Merge rule: skip any study whose pubmedId already exists in data.js.",
+  "studies": [
+    {
+      "id": "mohammed-aggad-2025",
+      "title": "Evaluation of Antibacterial Activity in Some Algerian Essential Oils and Selection of Thymus vulgaris as a Potential Biofilm and Quorum Sensing Inhibitor Against Pseudomonas aeruginosa",
+      "authors": "Mohammed Aggad FZ, Ilias F, Elghali F, et al.",
+      "journal": "Chemistry and Biodiversity",
+      "year": 2025,
+      "doi": "10.1002/cbdv.202402691",
+      "pubmedId": "39777967",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39777967/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "thyme"
+      ],
+      "compoundIds": [
+        "thymol",
+        "carvacrol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "finding": "Thyme oil rich in thymol inhibited biofilm formation and quorum-sensing virulence factors in a hospital Pseudomonas aeruginosa strain, with docking data suggesting thymol and carvacrol bind its quorum-sensing receptors.",
+      "limitations": "In-vitro only; single hospital strain."
+    },
+    {
+      "id": "anees-2026",
+      "title": "Antibacterial and anti-biofilm activities of thyme oil, oregano oil, and their combination against Klebsiella pneumoniae and Acinetobacter baumannii polymicrobial biofilms",
+      "authors": "Anees TMM, Suchithra KV, Shetty AV, et al.",
+      "journal": "Antonie van Leeuwenhoek",
+      "year": 2026,
+      "doi": "10.1007/s10482-026-02284-z",
+      "pubmedId": "41854771",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41854771/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "thyme",
+        "oregano"
+      ],
+      "compoundIds": [
+        "thymol",
+        "carvacrol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "finding": "Thyme and oregano oils acted synergistically to disrupt dual-species Klebsiella pneumoniae and Acinetobacter baumannii biofilms by over 90%, downregulating biofilm-associated genes.",
+      "limitations": "In-vitro; no human data."
+    },
+    {
+      "id": "jurado-2023",
+      "title": "Essential oils of Pinus sylvestris, Citrus limon and Origanum vulgare exhibit high bactericidal and anti-biofilm activities against Neisseria gonorrhoeae and Streptococcus suis",
+      "authors": "Jurado P, Uruen C, Martinez S, et al.",
+      "journal": "Biomedicine and Pharmacotherapy",
+      "year": 2023,
+      "doi": "10.1016/j.biopha.2023.115703",
+      "pubmedId": "37857249",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37857249/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "pine",
+        "lemon",
+        "oregano"
+      ],
+      "compoundIds": [
+        "alpha-pinene",
+        "beta-pinene",
+        "limonene",
+        "carvacrol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "finding": "Scots pine and lemon oils showed strong bactericidal and biofilm-dispersal activity against multidrug-resistant Neisseria gonorrhoeae, attributed to alpha/beta-pinene and limonene acting on the bacterial outer membrane.",
+      "limitations": "In-vitro; clinical relevance untested."
+    },
+    {
+      "id": "tuan-2025",
+      "title": "Innovative antifungal strategies: enhanced biofilm inhibition of Candida albicans by a modified tea tree oil formulation",
+      "authors": "Tuan DA, Uyen PVN, Khuon NV, et al.",
+      "journal": "Frontiers in Microbiology",
+      "year": 2024,
+      "doi": "10.3389/fmicb.2024.1518598",
+      "pubmedId": "39881994",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39881994/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "yeast"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "finding": "Tea tree oil inhibited Candida albicans biofilm formation but could not eradicate more than 50 percent of mature biofilm at the concentrations tested.",
+      "limitations": "In-vitro; mature-biofilm eradication not achieved."
+    },
+    {
+      "id": "francisconi-2020",
+      "title": "Antibiofilm efficacy of tea tree oil and of its main component terpinen-4-ol against Candida albicans",
+      "authors": "Francisconi RS, Huacho PMM, Tonon CC, et al.",
+      "journal": "Brazilian Oral Research",
+      "year": 2020,
+      "doi": "10.1590/1807-3107bor-2020.vol34.0050",
+      "pubmedId": "32578760",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32578760/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "yeast"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "finding": "Tea tree oil and terpinen-4-ol interfered with Candida albicans biofilm formation in a 60-second rinse simulation, supporting potential use in oral candidiasis.",
+      "limitations": "In-vitro; brief-exposure model only."
+    },
+    {
+      "id": "garozzo-2009",
+      "title": "In vitro antiviral activity of Melaleuca alternifolia essential oil",
+      "authors": "Garozzo A, Timpanaro R, Bisignano B, et al.",
+      "journal": "Letters in Applied Microbiology",
+      "year": 2009,
+      "doi": "10.1111/j.1472-765X.2009.02740.x",
+      "pubmedId": "19843207",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19843207/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "viruses"
+        }
+      ],
+      "finding": "Tea tree oil and terpinen-4-ol inhibited influenza A H1N1 replication below cytotoxic doses, with no virucidal activity and no effect on the other viruses tested.",
+      "limitations": "In-vitro; influenza only among the viruses screened."
+    },
+    {
+      "id": "najar-2022",
+      "title": "Screening of the essential oil effects on human H1N1 influenza virus infection: an in vitro study in MDCK cells",
+      "authors": "Najar B, Nardi V, Stincarelli MA, et al.",
+      "journal": "Natural Product Research",
+      "year": 2022,
+      "doi": "10.1080/14786419.2021.1944137",
+      "pubmedId": "34176386",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34176386/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "eucalyptus",
+        "rosemary"
+      ],
+      "compoundIds": [
+        "eucalyptol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "viruses"
+        }
+      ],
+      "finding": "Among 19 oils screened, eucalyptus and rosemary oils showed anti-H1N1 activity with low cytotoxicity, with eucalyptol correlating positively with cell viability.",
+      "limitations": "In-vitro screening; no human data."
+    },
+    {
+      "id": "pellegrini-2023",
+      "title": "Virucidal Activity of Lemon Essential Oil against Feline Calicivirus Used as Surrogate for Norovirus",
+      "authors": "Pellegrini F, Camero M, Catella C, et al.",
+      "journal": "Antibiotics",
+      "year": 2023,
+      "doi": "10.3390/antibiotics12020322",
+      "pubmedId": "36830233",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36830233/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "lemon"
+      ],
+      "compoundIds": [
+        "limonene",
+        "citral"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "viruses"
+        }
+      ],
+      "finding": "Lemon essential oil significantly reduced feline calicivirus infectivity, a cultivable surrogate for human norovirus, suggesting surface-sanitizing potential.",
+      "limitations": "Surrogate virus in-vitro; not tested against human norovirus."
+    },
+    {
+      "id": "gilling-2014",
+      "title": "Antiviral efficacy and mechanisms of action of oregano essential oil and its primary component carvacrol against murine norovirus",
+      "authors": "Gilling DH, Kitajima M, Torrey JR, et al.",
+      "journal": "Journal of Applied Microbiology",
+      "year": 2014,
+      "doi": "10.1111/jam.12453",
+      "pubmedId": "24779581",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24779581/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "oregano"
+      ],
+      "compoundIds": [
+        "carvacrol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "viruses"
+        }
+      ],
+      "finding": "Carvacrol inactivated murine norovirus within one hour by disrupting the viral capsid, outperforming oregano oil and suggesting use as a surface sanitizer.",
+      "limitations": "Surrogate virus in-vitro; high concentrations required."
+    },
+    {
+      "id": "guynot-2003",
+      "title": "Antifungal activity of volatile compounds generated by essential oils against fungi commonly causing deterioration of bakery products",
+      "authors": "Guynot ME, Ramos AJ, Seto L, et al.",
+      "journal": "Journal of Applied Microbiology",
+      "year": 2003,
+      "doi": "10.1046/j.1365-2672.2003.01927.x",
+      "pubmedId": "12694455",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12694455/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "cinnamon",
+        "clove",
+        "thyme",
+        "lemongrass"
+      ],
+      "compoundIds": [
+        "cinnamaldehyde",
+        "eugenol",
+        "thymol",
+        "citral"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "mold"
+        }
+      ],
+      "finding": "Vapours of cinnamon, clove, lemongrass, and thyme oils completely inhibited bakery-spoilage molds including Aspergillus and Penicillium species.",
+      "limitations": "Vapour-phase lab model; efficacy dropped in real food matrices."
+    },
+    {
+      "id": "farouk-2022",
+      "title": "Highly Durable Antibacterial Properties of Cellulosic Fabric via beta-Cyclodextrin/Essential Oils Inclusion Complex",
+      "authors": "Farouk A, Sharaf S, Refaie R, et al.",
+      "journal": "Polymers",
+      "year": 2022,
+      "doi": "10.3390/polym14224899",
+      "pubmedId": "36433025",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36433025/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "lavender",
+        "lemon",
+        "rosemary"
+      ],
+      "compoundIds": [
+        "linalool",
+        "limonene",
+        "eucalyptol"
+      ],
+      "categories": [
+        {
+          "type": "cleaning",
+          "subcategory": "laundry"
+        }
+      ],
+      "finding": "Cotton fabric treated with cyclodextrin-encapsulated lavender, lemon, and rosemary oils retained antibacterial activity through multiple wash cycles.",
+      "limitations": "Textile-finishing lab study; no worn-garment testing."
+    },
+    {
+      "id": "semeniuc-2017",
+      "title": "Antibacterial activity and interactions of plant essential oil combinations against Gram-positive and Gram-negative bacteria",
+      "authors": "Semeniuc CA, Pop CR, Rotar AM, et al.",
+      "journal": "Food and Drug Analysis",
+      "year": 2017,
+      "doi": "10.1016/j.jfda.2016.06.002",
+      "pubmedId": "28911683",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28911683/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "thyme"
+      ],
+      "compoundIds": [
+        "thymol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        }
+      ],
+      "finding": "NULL/MIXED RESULT: parsley and lovage oils showed no inhibition against any tested bacteria, and most thyme-oil combinations were antagonistic rather than synergistic.",
+      "limitations": "Food-bacteria panel only; disc-diffusion screening."
+    }
+  ],
+  "newOils": [
+    {
+      "id": "pine",
+      "name": "Scots Pine",
+      "latinName": "Pinus sylvestris",
+      "family": "Pinaceae",
+      "plantPart": "Needles and twigs",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "pine",
+        "resinous",
+        "fresh"
+      ],
+      "color": "#4e7d5b",
+      "description": "Steam-distilled from needles and twigs. Rich in alpha- and beta-pinene; studied for bactericidal and biofilm-dispersal activity.",
+      "uses": [
+        "Surface cleaning blends",
+        "Forest diffusion",
+        "Research reference"
+      ],
+      "safety": "For external use; can irritate sensitive skin undiluted.",
+      "constituents": [
+        {
+          "compoundId": "alpha-pinene",
+          "range": {
+            "min": 35,
+            "max": 50
+          }
+        },
+        {
+          "compoundId": "beta-pinene",
+          "range": {
+            "min": 12,
+            "max": 22
+          }
+        },
+        {
+          "compoundId": "limonene",
+          "range": {
+            "min": 4,
+            "max": 10
+          }
+        }
+      ]
+    }
+  ],
+  "newCompounds": []
+}
