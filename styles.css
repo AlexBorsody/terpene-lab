@@ -368,3 +368,66 @@ main {
 .domain-cols .chips { margin-top: 4px; }
 .chip.on { border-color: var(--amber); color: var(--amber); }
 @media (max-width: 700px) { .domain-cols { grid-template-columns: 1fr; } }
+
+
+/* ---- evidence overview ---- */
+.overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(300px, 1fr);
+  gap: 28px;
+  align-items: end;
+  padding: 8px 0 26px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+.overview-copy { max-width: 700px; }
+.overview .eyebrow {
+  color: var(--amber);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 7px;
+}
+.overview h2 {
+  font-size: clamp(25px, 4vw, 40px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+  max-width: 18ch;
+}
+.overview-copy > p:last-child {
+  color: var(--muted);
+  max-width: 68ch;
+}
+.overview-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.overview-stats > div {
+  padding: 14px 16px;
+  min-width: 0;
+}
+.overview-stats > div:nth-child(odd) { border-right: 1px solid var(--border); }
+.overview-stats > div:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+.overview-stats strong {
+  display: block;
+  font: 700 24px/1 var(--mono);
+  color: var(--text);
+  margin-bottom: 5px;
+}
+.overview-stats span {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  font-size: 10px;
+}
+@media (max-width: 760px) {
+  .overview { grid-template-columns: 1fr; gap: 16px; }
+  .overview h2 { max-width: none; }
+  .tabs { width: 100%; overflow-x: auto; padding-bottom: 3px; }
+  .tab { flex: 0 0 auto; }
+}
