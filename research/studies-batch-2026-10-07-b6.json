@@ -1,0 +1,617 @@
+{
+  "batch": "2026-10-07-b6",
+  "note": "Research batch 6 (under-covered oils) for ChatGPT to plug into data.js. Every PMID verified against the NCBI E-utilities API (titles and years match). Each study tagged with plant (oilIds), terpenes (compoundIds), uses (categories). Geranium and palmarosa records were already staged in batch 5 and are not duplicated here. Merge rule: skip any study whose pubmedId already exists in data.js.",
+  "studies": [
+    {
+      "id": "nascimento-2025-sweet-orange-labor",
+      "title": "Effectiveness of aromatherapy with sweet orange oil (Citrus sinensis L.) in relieving pain and anxiety during labor.",
+      "authors": "Nascimento JC, et al.",
+      "journal": "Explore (NY)",
+      "year": 2025,
+      "doi": "10.1016/j.explore.2024.103081",
+      "pubmedId": "39577393",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39577393/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 84,
+      "oilIds": [
+        "sweet-orange"
+      ],
+      "compoundIds": [
+        "limonene"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health"
+        },
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "Sweet orange inhalation significantly reduced labor pain intensity over time (p=0.0411) and anxiety (p<0.0001) versus a distilled-water placebo, while also lowering maternal blood pressure, heart rate, respiratory rate and fetal heart rate.",
+      "limitations": "Single-blind, single-center Brazilian trial; labor setting limits generalizability."
+    },
+    {
+      "id": "wakui-2026-bergamot-exam-anxiety",
+      "title": "Evaluation of the Anxiety-Reducing Effects of Aroma Stones with Bergamot Essential Oil before Examinations: A Randomized Controlled Trial.",
+      "authors": "Wakui N, et al.",
+      "journal": "J Integr Complement Med",
+      "year": 2026,
+      "doi": "10.1177/27683605261488658",
+      "pubmedId": "42755326",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42755326/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 57,
+      "oilIds": [
+        "bergamot"
+      ],
+      "compoundIds": [
+        "limonene",
+        "linalyl-acetate",
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health"
+        }
+      ],
+      "finding": "Bergamot aroma stones used for 3 days before examinations significantly lowered state anxiety scores versus water-stone controls on all three days (Cohen's d > 0.8) with no reported adverse events.",
+      "limitations": "Open-label, single-center design; 57 students; short 3-day intervention."
+    },
+    {
+      "id": "hongratanaworakit-2006-ylang-ylang-transdermal",
+      "title": "Relaxing effect of ylang ylang oil on humans after transdermal absorption.",
+      "authors": "Hongratanaworakit T, et al.",
+      "journal": "Phytother Res",
+      "year": 2006,
+      "doi": "10.1002/ptr.1950",
+      "pubmedId": "16807875",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16807875/",
+      "studyType": "controlled-human-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 40,
+      "oilIds": [
+        "ylang-ylang"
+      ],
+      "compoundIds": [
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health"
+        },
+        {
+          "type": "health",
+          "subcategory": "cardiovascular"
+        }
+      ],
+      "finding": "Transdermal ylang ylang oil significantly decreased blood pressure and increased skin temperature in 40 healthy volunteers, who also rated themselves calmer and more relaxed than the control group.",
+      "limitations": "Short-term transdermal exposure; no dose-response tested."
+    },
+    {
+      "id": "napavichayanun-2024-lavender-ylang-ylang-blood-pressure",
+      "title": "Effect of Lavandula angustifolia and Cananga odorata on decrease of blood pressure in high blood pressure volunteers: A randomized controlled trial.",
+      "authors": "Napavichayanun S, et al.",
+      "journal": "Explore (NY)",
+      "year": 2024,
+      "doi": "10.1016/j.explore.2023.11.013",
+      "pubmedId": "38087747",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38087747/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 34,
+      "oilIds": [
+        "lavender",
+        "ylang-ylang"
+      ],
+      "compoundIds": [
+        "linalool",
+        "linalyl-acetate"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "cardiovascular"
+        },
+        {
+          "type": "health",
+          "subcategory": "mental-health"
+        }
+      ],
+      "finding": "Sticker pads containing lavender and ylang ylang oils worn for 14 days significantly reduced systolic blood pressure and pulse rate versus placebo in volunteers with high blood pressure, with no adverse reactions.",
+      "limitations": "34 high-BP volunteers in efficacy phase; longer-term effects unknown."
+    },
+    {
+      "id": "sienkiewicz-2014-geranium-wound-bacteria",
+      "title": "The antibacterial activity of geranium oil against Gram-negative bacteria isolated from difficult-to-heal wounds.",
+      "authors": "Sienkiewicz M, et al.",
+      "journal": "Burns",
+      "year": 2014,
+      "doi": "10.1016/j.burns.2013.11.002",
+      "pubmedId": "24290961",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24290961/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "geranium"
+      ],
+      "compoundIds": [
+        "geraniol",
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "health",
+          "subcategory": "wound"
+        }
+      ],
+      "finding": "Geranium oil inhibited the growth of Gram-negative clinical strains isolated from difficult-to-heal wounds, suggesting it may be a useful component of therapy against resistant wound pathogens.",
+      "limitations": "In vitro study only; clinical wound efficacy and safety not tested."
+    },
+    {
+      "id": "androutsopoulou-2021-rose-geranium-preservative",
+      "title": "Evaluation of Essential Oils and Extracts of Rose Geranium and Rose Petals as Natural Preservatives in Terms of Toxicity, Antimicrobial, and Antiviral Activity.",
+      "authors": "Androutsopoulou C, et al.",
+      "journal": "Pathogens",
+      "year": 2021,
+      "doi": "10.3390/pathogens10040494",
+      "pubmedId": "33921899",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33921899/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "geranium"
+      ],
+      "compoundIds": [
+        "geraniol",
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "mold"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "viruses"
+        }
+      ],
+      "finding": "MIXED RESULT: 5% rose geranium essential oil showed no antibacterial activity (though 100% oil was strongly effective against E. coli), while it and the rose geranium extracts showed antifungal activity against Aspergillus niger and dose-dependent antiviral activity, with no toxicity at tested dilutions.",
+      "limitations": "In vitro study only; antibacterial efficacy highly concentration-dependent."
+    },
+    {
+      "id": "amrita-2023-palmarosa-bioactivities",
+      "title": "Underutilized Plant Cymbopogan martinii Derived Essential Oil Is Excellent Source of Bioactives with Diverse Biological Activities.",
+      "authors": "Amrita, et al.",
+      "journal": "Russ Agric Sci",
+      "year": 2023,
+      "doi": "10.3103/S1068367423010044",
+      "pubmedId": "37124716",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37124716/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "palmarosa"
+      ],
+      "compoundIds": [
+        "geraniol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "mold"
+        },
+        {
+          "type": "health",
+          "subcategory": "metabolic"
+        },
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "Palmarosa essential oil, with geraniol as its major component, showed antibacterial, antifungal, anti-inflammatory and alpha-amylase-inhibitory (antidiabetic) activity in vitro along with strong antioxidant capacity.",
+      "limitations": "In vitro and biochemical assays only; no animal or human data."
+    },
+    {
+      "id": "fikry-2025-niaouli-lung-cancer",
+      "title": "Chemical Composition and Anti-Lung Cancer Activities of Melaleuca quinquenervia Leaf Essential Oil: Integrating Gas Chromatography-Mass Spectrometry (GC/MS) Profiling, Network Pharmacology, and Molecular Docking.",
+      "authors": "Fikry E, et al.",
+      "journal": "Pharmaceuticals (Basel)",
+      "year": 2025,
+      "doi": "10.3390/ph18060771",
+      "pubmedId": "40573169",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40573169/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "niaouli"
+      ],
+      "compoundIds": [
+        "eucalyptol",
+        "alpha-pinene"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "immune"
+        }
+      ],
+      "finding": "Niaouli leaf essential oil (1,8-cineole 31.57%, alpha-pinene isomers 21.26%) showed selective cytotoxicity against A549 lung cancer cells (IC50 18.09 ug/mL), inhibited cell migration, and induced apoptosis and G0-G1 cell-cycle arrest.",
+      "limitations": "In vitro cytotoxicity only; anticancer activity has no dedicated category in the taxonomy so tagged as immune; no animal or pharmacokinetic validation yet."
+    },
+    {
+      "id": "chen-2020-ravintsara-mrsa",
+      "title": "Metabolomics analysis to evaluate the antibacterial activity of the essential oil from the leaves of Cinnamomum camphora (Linn.) Presl.",
+      "authors": "Chen J, et al.",
+      "journal": "J Ethnopharmacol",
+      "year": 2020,
+      "doi": "10.1016/j.jep.2020.112652",
+      "pubmedId": "32035880",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32035880/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "ravintsara"
+      ],
+      "compoundIds": [
+        "linalool",
+        "eucalyptol",
+        "camphor"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        }
+      ],
+      "finding": "Cinnamomum camphora leaf essential oil showed anti-MRSA activity (MIC 0.8 mg/mL, MBC 1.6 mg/mL), damaging bacterial cell membranes and disrupting amino acid metabolism according to GC-MS metabolomics.",
+      "limitations": "In vitro study only; chemotype-dependent composition may vary."
+    },
+    {
+      "id": "frank-2009-frankincense-bladder-cancer",
+      "title": "Frankincense oil derived from Boswellia carteri induces tumor cell specific cytotoxicity.",
+      "authors": "Frank MB, et al.",
+      "journal": "BMC Complement Altern Med",
+      "year": 2009,
+      "doi": "10.1186/1472-6882-9-6",
+      "pubmedId": "19296830",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19296830/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "frankincense"
+      ],
+      "compoundIds": [
+        "alpha-pinene",
+        "limonene"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "immune"
+        }
+      ],
+      "finding": "Frankincense oil suppressed viability of J82 bladder transitional carcinoma cells but not normal urothelial cells, activating genes for cell-cycle arrest, growth suppression and apoptosis.",
+      "limitations": "In vitro study only; intravesical delivery and human safety not tested; tagged as immune (no oncology category in taxonomy)."
+    },
+    {
+      "id": "hovijitra-2016-cinnamon-candida",
+      "title": "Effect of essential oils prepared from Thai culinary herbs on sessile Candida albicans cultures.",
+      "authors": "Hovijitra RS, et al.",
+      "journal": "J Oral Sci",
+      "year": 2016,
+      "doi": "10.2334/josnusd.15-0736",
+      "pubmedId": "27665976",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27665976/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "cinnamon"
+      ],
+      "compoundIds": [
+        "cinnamaldehyde"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "yeast"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "finding": "Cinnamon bark essential oil was potently fungicidal against both planktonic and sessile (biofilm) Candida albicans, though sessile MICs were 8 to 16 times higher than planktonic MICs.",
+      "limitations": "In vitro study only; much higher concentrations needed against biofilms than planktonic cells."
+    },
+    {
+      "id": "khalil-2020-myrrh-mdr-bacteria",
+      "title": "Bactericidal activity of Myrrh extracts and two dosage forms against standard bacterial strains and multidrug-resistant clinical isolates with GC/MS profiling.",
+      "authors": "Khalil N, et al.",
+      "journal": "AMB Express",
+      "year": 2020,
+      "doi": "10.1186/s13568-020-0958-3",
+      "pubmedId": "31993779",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31993779/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "myrrh"
+      ],
+      "compoundIds": [
+        "furanoeudesma-1-3-diene",
+        "curzerene"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "health",
+          "subcategory": "oral-dental"
+        }
+      ],
+      "finding": "Myrrh essential oil achieved greater than 99.999% killing of Staphylococcus aureus and Pseudomonas aeruginosa within 2 hours, showed bactericidal activity against multidrug-resistant clinical isolates, and a 5% myrrh mouthwash killed about 99.999% of S. aureus in saliva within 30 minutes.",
+      "limitations": "In vitro study only; cytotoxicity data limited to cell lines."
+    },
+    {
+      "id": "seifi-2014-lavender-anxiety-null",
+      "title": "The effect of lavender essential oil on anxiety level in patients undergoing coronary artery bypass graft surgery: A double-blinded randomized clinical trial.",
+      "authors": "Seifi Z, et al.",
+      "journal": "Iran J Nurs Midwifery Res",
+      "year": 2014,
+      "doi": "",
+      "pubmedId": "25558253",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/25558253/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 60,
+      "oilIds": [
+        "lavender"
+      ],
+      "compoundIds": [
+        "linalool",
+        "linalyl-acetate"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health"
+        }
+      ],
+      "finding": "NULL RESULT: Lavender essential oil inhalation produced no statistically significant difference in anxiety scores versus a distilled-water placebo in patients after coronary artery bypass graft surgery, although anxiety decreased in both groups.",
+      "limitations": "60 patients; 2-day intervention in acute post-surgical setting; results may not generalize."
+    }
+  ],
+  "newOils": [
+    {
+      "id": "bergamot",
+      "name": "Bergamot",
+      "latinName": "Citrus bergamia",
+      "family": "Rutaceae",
+      "plantPart": "Peel",
+      "extraction": "Cold-pressed",
+      "aroma": [
+        "citrus",
+        "floral",
+        "sweet"
+      ],
+      "color": "#d4b855",
+      "description": "Cold-pressed from peel. Limonene and linalyl acetate rich; reduced exam anxiety in a 57-student RCT.",
+      "uses": [
+        "Anxiety blends",
+        "Uplifting blends",
+        "Research reference"
+      ],
+      "safety": "Phototoxic risk; avoid sun exposure after topical use.",
+      "constituents": [
+        {
+          "compoundId": "limonene",
+          "range": {
+            "min": 35,
+            "max": 50
+          }
+        },
+        {
+          "compoundId": "linalyl-acetate",
+          "range": {
+            "min": 22,
+            "max": 36
+          }
+        },
+        {
+          "compoundId": "linalool",
+          "range": {
+            "min": 6,
+            "max": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "ylang-ylang",
+      "name": "Ylang-Ylang",
+      "latinName": "Cananga odorata",
+      "family": "Annonaceae",
+      "plantPart": "Flowers",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "floral",
+        "sweet",
+        "exotic"
+      ],
+      "color": "#dfa0c8",
+      "description": "Steam-distilled from flowers. Lowered blood pressure and self-rated tension in human trials.",
+      "uses": [
+        "Evening blends",
+        "Floral blends",
+        "Research reference"
+      ],
+      "safety": "Strong scent; dilute well; can cause headaches in sensitive users.",
+      "constituents": [
+        {
+          "compoundId": "linalool",
+          "range": {
+            "min": 8,
+            "max": 18
+          }
+        },
+        {
+          "compoundId": "beta-caryophyllene",
+          "range": {
+            "min": 5,
+            "max": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "niaouli",
+      "name": "Niaouli",
+      "latinName": "Melaleuca quinquenervia",
+      "family": "Myrtaceae",
+      "plantPart": "Leaves",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "camphor",
+        "fresh",
+        "medicinal"
+      ],
+      "color": "#6fa87c",
+      "description": "Steam-distilled from leaves. Cineole-rich tea tree relative; selective cytotoxicity against lung cancer cells in vitro.",
+      "uses": [
+        "Respiratory blends",
+        "Research reference"
+      ],
+      "safety": "For external use; dilute well.",
+      "constituents": [
+        {
+          "compoundId": "eucalyptol",
+          "range": {
+            "min": 25,
+            "max": 45
+          }
+        },
+        {
+          "compoundId": "alpha-pinene",
+          "range": {
+            "min": 15,
+            "max": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "ravintsara",
+      "name": "Ravintsara",
+      "latinName": "Cinnamomum camphora",
+      "family": "Lauraceae",
+      "plantPart": "Leaves",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "camphor",
+        "fresh",
+        "eucalyptus"
+      ],
+      "color": "#a3c48d",
+      "description": "Steam-distilled from leaves (cineole chemotype, not camphor chemotype). Anti-MRSA activity in vitro.",
+      "uses": [
+        "Respiratory blends",
+        "Research reference"
+      ],
+      "safety": "For external use; use the cineole chemotype, not camphor chemotype.",
+      "constituents": [
+        {
+          "compoundId": "eucalyptol",
+          "range": {
+            "min": 45,
+            "max": 60
+          }
+        },
+        {
+          "compoundId": "alpha-pinene",
+          "range": {
+            "min": 4,
+            "max": 10
+          }
+        },
+        {
+          "compoundId": "linalool",
+          "range": {
+            "min": 2,
+            "max": 8
+          }
+        }
+      ]
+    }
+  ],
+  "newCompounds": []
+}
