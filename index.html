@@ -18,8 +18,7 @@
       </div>
     </div>
     <nav class="tabs">
-      <button class="tab active" data-tab="pathway">Explore</button>
-      <button class="tab" data-tab="oils">Plants</button>
+      <button class="tab active" data-tab="oils">Oils</button>
       <button class="tab" data-tab="compounds">Compounds</button>
       <button class="tab" data-tab="matrix">Matrix</button>
       <button class="tab" data-tab="domains">Domains</button>
@@ -30,47 +29,8 @@
 </header>
 
 <main id="app">
-  <section class="overview" aria-label="Dataset overview">
-    <div class="overview-copy">
-      <p class="eyebrow">EVIDENCE EXPLORER</p>
-      <h2>Follow the evidence from plant to molecule to paper.</h2>
-      <p>Explore essential oils, their major compounds, and the published research connected to each one. Ingredient evidence is kept separate from finished-product claims.</p>
-    </div>
-    <div class="overview-stats">
-      <div><strong id="stat-oils">0</strong><span>oils</span></div>
-      <div><strong id="stat-compounds">0</strong><span>compounds</span></div>
-      <div><strong id="stat-studies">0</strong><span>studies</span></div>
-      <div><strong id="stat-clinical">0</strong><span>clinical</span></div>
-    </div>
-  </section>
-  <!-- PLANT -> TERPENES -> USES EXPLORER -->
-  <section id="tab-pathway" class="tab-panel active">
-    <div class="pathway-head">
-      <p class="eyebrow">THE CORE MAP</p>
-      <h2>The plant <span>→</span> the terpenes <span>→</span> the uses</h2>
-      <p>Pick a plant. Follow its major chemistry into the research areas connected to it. Open any use to inspect the papers underneath.</p>
-    </div>
-    <div class="pathway-layout">
-      <div class="pathway-col">
-        <div class="pathway-label"><b>01</b> THE PLANT</div>
-        <div id="pathway-plants" class="pathway-list"></div>
-      </div>
-      <div class="pathway-arrow" aria-hidden="true">→</div>
-      <div class="pathway-col">
-        <div class="pathway-label"><b>02</b> THE TERPENES + COMPOUNDS</div>
-        <div id="pathway-compounds" class="pathway-list"><p class="pathway-empty">Select a plant</p></div>
-      </div>
-      <div class="pathway-arrow" aria-hidden="true">→</div>
-      <div class="pathway-col">
-        <div class="pathway-label"><b>03</b> THE USES STUDIED</div>
-        <div id="pathway-uses" class="pathway-list"><p class="pathway-empty">Research areas appear here</p></div>
-      </div>
-    </div>
-    <div id="pathway-evidence" class="pathway-evidence hidden"></div>
-  </section>
-
   <!-- OIL EXPLORER -->
-  <section id="tab-oils" class="tab-panel">
+  <section id="tab-oils" class="tab-panel active">
     <div id="oil-list-view">
       <div class="toolbar">
         <input id="oil-search" type="search" placeholder="Search oils...">
@@ -200,7 +160,7 @@
 </main>
 
 <footer class="lab-footer">
-  <p>Terpene Lab &middot; plant to molecule to paper &middot; ingredient research, not finished-product efficacy. Not medical advice.</p>
+  <p>Terpene Lab &middot; sample dataset v0.3 &middot; plant to molecule to paper: inspect the evidence yourself. Not medical advice.</p>
 </footer>
 
 <script src="data.js"></script>
