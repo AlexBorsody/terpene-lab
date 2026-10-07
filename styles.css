@@ -1024,3 +1024,21 @@ main {
 @media(max-width:520px){
   .molecule3d { width: calc(47% - 4px) !important; height:171px !important; }
 }
+
+/* Keep the 3D molecule visibly contained inside its card area */
+.molecule3d {
+  right: 8px !important;
+  top: 14px !important;
+  width: calc(46% - 4px) !important;
+  height: 163px !important;
+  border: 1px solid rgba(114,184,154,.22);
+  border-radius: 8px;
+  overflow: hidden;
+}
+@media(max-width:520px){
+  .molecule3d {
+    right: 8px !important;
+    width: calc(45% - 4px) !important;
+    height: 163px !important;
+  }
+}
