@@ -527,3 +527,5 @@ main {
 .molecule-glyph i:nth-child(3) { left: 5px; top: 19px; }
 .molecule-glyph i:nth-child(4) { left: 16px; top: 12px; }
 .molecule-glyph i:nth-child(5) { left: 26px; top: 22px; }
+
+.brand-shield { width: 34px; height: 38px; display: block; color: var(--amber); }
