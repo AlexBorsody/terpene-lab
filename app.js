@@ -531,7 +531,7 @@ function renderMatrix() {
       const lvl = strongestLevel(studies);
       html += `<td><button class="cell" data-oil="${o.id}" data-domain="${d.type}"
         style="background:rgba(232,160,32,${alpha.toFixed(2)})" ${n ? "" : "disabled"}>
-        <span class="cell-n">${n}</span>${lvl ? `<span class="lvl lvl-${lvl} sm">${LEVEL_LETTER[lvl]}</span>` : ""}
+        <span class="cell-n">${n}</span>
       </button></td>`;
     });
     html += `</tr>`;
