@@ -739,3 +739,24 @@ main {
   border: 3px solid var(--surface2) !important;
   min-width: 70px;
 }
+
+/* ---- matrix sticky row-label divider ---- */
+.matrix th:first-child,
+.matrix td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  background: var(--surface);
+  border-right: 2px solid var(--teal);
+  box-shadow: 7px 0 10px -10px rgba(0,0,0,.9);
+}
+.matrix thead th:first-child {
+  z-index: 5;
+}
+.matrix .rowlabel {
+  min-width: 150px;
+  padding-right: 16px;
+}
+@media (max-width: 600px) {
+  .matrix .rowlabel { min-width: 145px; }
+}
