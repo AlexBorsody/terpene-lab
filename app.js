@@ -1,8 +1,19 @@
-/* Terpene Lab - UI logic. Reads TERPENE_DATA from data.js. */
+/* Terpene Lab - UI logic. Reads TERPENE_DATA from data.js.
+   Views: Oils, Compounds, Matrix, Domains, Network, Studies. */
 
 const D = TERPENE_DATA;
 const oilById = Object.fromEntries(D.oils.map(o => [o.id, o]));
-const terpById = Object.fromEntries(D.terpenes.map(t => [t.id, t]));
+const compoundById = Object.fromEntries(D.compounds.map(c => [c.id, c]));
+const domainByType = Object.fromEntries(D.categories.map(c => [c.type, c]));
+
+const LEVEL_ORDER = { clinical: 0, preclinical: 1, laboratory: 2, review: 3 };
+const LEVEL_LETTER = { clinical: "C", preclinical: "P", laboratory: "L", review: "R" };
+const LEVEL_LABEL = {
+  clinical: "Clinical",
+  preclinical: "Preclinical",
+  laboratory: "Laboratory",
+  review: "Review"
+};
 
 let charts = [];
 function disposeCharts() {
@@ -16,38 +27,174 @@ function esc(s) {
     .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-/* ---------- tabs ---------- */
-document.querySelectorAll(".tab").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
-    document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
-    btn.classList.add("active");
-    const tab = btn.dataset.tab;
-    document.getElementById("tab-" + tab).classList.add("active");
-    disposeCharts();
-    if (tab === "network") renderNetwork();
-  });
-});
-
-document.querySelectorAll("[data-back]").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const tab = btn.dataset.back;
-    document.getElementById("oil-detail") && document.getElementById("oil-detail").classList.add("hidden");
-    document.getElementById("terpene-detail") && document.getElementById("terpene-detail").classList.add("hidden");
-    document.getElementById("oil-grid").classList.remove("hidden");
-    document.getElementById("terpene-grid").classList.remove("hidden");
-    document.querySelector(".toolbar").style.display = "";
-    disposeCharts();
-  });
-});
-
-/* ---------- oils ---------- */
-function topTerpene(oil) {
-  if (!oil.terpenes.length) return null;
-  const t = oil.terpenes.reduce((a, b) => (b.percent > a.percent ? b : a));
-  return { terp: terpById[t.terpeneId], percent: t.percent };
+function subLabel(type, sub) {
+  const d = domainByType[type];
+  if (!d) return sub;
+  const s = d.subcategories.find(x => x.id === sub);
+  return s ? s.label : sub;
 }
 
+/* ---------- shared data helpers ---------- */
+function studiesForOil(oilId) {
+  return D.studies.filter(s => s.oilIds.includes(oilId));
+}
+function studiesForCompound(compoundId) {
+  return D.studies.filter(s => s.compoundIds.includes(compoundId));
+}
+function domainsForOil(oilId) {
+  const set = new Set();
+  studiesForOil(oilId).forEach(s => s.categories.forEach(c => set.add(c.type)));
+  return [...set];
+}
+function evidenceCounts(studies) {
+  const c = { clinical: 0, preclinical: 0, laboratory: 0, review: 0 };
+  studies.forEach(s => { if (c[s.evidenceLevel] !== undefined) c[s.evidenceLevel]++; });
+  return c;
+}
+function strongestLevel(studies) {
+  let best = null;
+  studies.forEach(s => {
+    if (best === null || LEVEL_ORDER[s.evidenceLevel] < LEVEL_ORDER[best]) best = s.evidenceLevel;
+  });
+  return best;
+}
+function oilsWithCompound(compoundId) {
+  return D.oils
+    .map(o => {
+      const hit = o.constituents.find(c => c.compoundId === compoundId);
+      return hit ? { oil: o, range: hit.range } : null;
+    })
+    .filter(Boolean)
+    .sort((a, b) => b.range.max - a.range.max);
+}
+function topConstituent(oil) {
+  if (!oil.constituents.length) return null;
+  const c = oil.constituents.reduce((a, b) => (b.range.max > a.range.max ? b : a));
+  return { compound: compoundById[c.compoundId], range: c.range };
+}
+
+/* ---------- tabs ---------- */
+document.querySelectorAll(".tab").forEach(btn => {
+  btn.addEventListener("click", () => switchTab(btn.dataset.tab));
+});
+function switchTab(tab) {
+  document.querySelectorAll(".tab").forEach(b =>
+    b.classList.toggle("active", b.dataset.tab === tab));
+  document.querySelectorAll(".tab-panel").forEach(p =>
+    p.classList.toggle("active", p.id === "tab-" + tab));
+  disposeCharts();
+  if (tab === "network") renderNetwork();
+  if (tab === "matrix") renderMatrix();
+  if (tab === "domains") renderDomainTiles();
+}
+
+document.querySelectorAll("[data-backto]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.getElementById(btn.dataset.backto).classList.remove("hidden");
+    btn.closest(".detail, #domain-detail").classList.add("hidden");
+    disposeCharts();
+  });
+});
+
+/* ---------- study cards ---------- */
+function evidenceBadge(s) {
+  return `<span class="lvl lvl-${s.evidenceLevel}">${LEVEL_LETTER[s.evidenceLevel]}</span>
+    <span class="lvl-text">${LEVEL_LABEL[s.evidenceLevel]} &middot; ${esc(prettyStudyType(s.studyType))} &middot; ${esc(s.context)}</span>`;
+}
+function prettyStudyType(t) {
+  return t.split("-").join(" ");
+}
+function categoryChips(s) {
+  return s.categories.map(c => {
+    const topic = c.topic ? " / " + esc(c.topic) : "";
+    return `<span class="catchip">${esc(domainByType[c.type] ? domainByType[c.type].label : c.type)}: ${esc(subLabel(c.type, c.subcategory))}${topic}</span>`;
+  }).join("");
+}
+function studyCard(s) {
+  const oilTags = s.oilIds.map(id => oilById[id]
+    ? `<button class="taglink" data-goto-oil="${id}">${esc(oilById[id].name)}</button>` : "").join("");
+  const compTags = s.compoundIds.map(id => compoundById[id]
+    ? `<button class="taglink" data-goto-compound="${id}">${esc(compoundById[id].name)}</button>` : "").join("");
+  return `<div class="study">
+    <div class="study-badge">${evidenceBadge(s)}</div>
+    <h4>${esc(s.title)}</h4>
+    <p class="cite">${esc(s.authors)} &middot; ${esc(s.journal)} &middot; ${s.year}${s.pubmedId ? " &middot; PMID " + esc(s.pubmedId) : ""}</p>
+    <p class="finding"><span class="finding-label">Finding</span>${esc(s.finding)}</p>
+    ${s.limitations ? `<p class="limitations"><span class="finding-label">Limitations</span>${esc(s.limitations)}</p>` : ""}
+    <div class="catchips">${categoryChips(s)}</div>
+    <div class="tags">${oilTags}${compTags}<a class="ext" href="${esc(s.url)}" target="_blank" rel="noopener">Read paper</a></div>
+  </div>`;
+}
+function bindStudyLinks(root) {
+  root.querySelectorAll("[data-goto-oil]").forEach(b =>
+    b.addEventListener("click", () => showOil(b.dataset.gotoOil)));
+  root.querySelectorAll("[data-goto-compound]").forEach(b =>
+    b.addEventListener("click", () => showCompound(b.dataset.gotoCompound)));
+}
+
+/* ---------- range bar chart ---------- */
+function rangeBarChart(el, rows, barColor, onClick) {
+  // rows: [{name, min, max, color?, id?}]
+  const chart = echarts.init(el);
+  charts.push(chart);
+  const names = rows.map(r => r.name).reverse();
+  const data = rows.map((r, i) => ({
+    value: [rows.length - 1 - i, r.min, r.max],
+    itemStyle: { color: r.color || barColor }
+  }));
+  chart.setOption({
+    backgroundColor: "transparent",
+    grid: { left: 8, right: 70, top: 8, bottom: 8, containLabel: true },
+    xAxis: {
+      type: "value", max: 100,
+      axisLabel: { color: "#9aa7bd", formatter: "{value}%" },
+      splitLine: { lineStyle: { color: "#1b2740" } }
+    },
+    yAxis: {
+      type: "category", data: names,
+      axisLabel: { color: "#f2ead8" },
+      axisLine: { show: false }, axisTick: { show: false }
+    },
+    series: [{
+      type: "custom",
+      renderItem: (params, api) => {
+        const idx = api.value(0);
+        const min = api.value(1), max = api.value(2);
+        const p1 = api.coord([min, idx]);
+        const p2 = api.coord([max, idx]);
+        const h = Math.max(api.size([0, 1])[1] * 0.45, 6);
+        return {
+          type: "rect",
+          shape: { x: p1[0], y: p1[1] - h / 2, width: Math.max(p2[0] - p1[0], 2), height: h },
+          style: api.style({ stroke: "rgba(0,0,0,0)" })
+        };
+      },
+      encode: { x: [1, 2], y: 0 },
+      data: data,
+      label: {
+        show: true, position: "right", color: "#f2ead8", fontFamily: "monospace",
+        formatter: p => {
+          const r = rows[rows.length - 1 - p.dataIndex];
+          return r.min + "-" + r.max + "%";
+        }
+      }
+    }],
+    tooltip: {
+      trigger: "item",
+      formatter: p => {
+        const r = rows[rows.length - 1 - p.dataIndex];
+        return `${esc(r.name)}: <b>${r.min}-${r.max}%</b>${onClick ? "<br>Click to drill down" : ""}`;
+      }
+    }
+  });
+  if (onClick) chart.on("click", p => {
+    const r = rows[rows.length - 1 - p.dataIndex];
+    if (r && r.id) onClick(r.id);
+  });
+  return chart;
+}
+
+/* ================= OIL EXPLORER ================= */
 function renderOils(filter) {
   const q = (filter || "").toLowerCase();
   const grid = document.getElementById("oil-grid");
@@ -55,212 +202,264 @@ function renderOils(filter) {
     o.name.toLowerCase().includes(q) || o.latinName.toLowerCase().includes(q));
   document.getElementById("oil-count").textContent = oils.length + " oils";
   grid.innerHTML = oils.map(o => {
-    const top = topTerpene(o);
+    const top = topConstituent(o);
+    const n = studiesForOil(o.id).length;
+    const domains = domainsForOil(o.id);
     return `<div class="card" data-oil="${o.id}">
       <div class="card-top">
         <div class="swatch" style="background:${o.color}"></div>
         <div><h3>${esc(o.name)}</h3><p class="latin">${esc(o.latinName)}</p></div>
       </div>
-      <p class="sub">${esc(o.plantPart)} &middot; ${esc(o.aroma)}</p>
-      ${top ? `<p class="top-terpene">Top terpene: <b>${esc(top.terp.name)}</b> ${top.percent}%</p>` : ""}
+      <p class="sub">${esc(o.plantPart)} &middot; ${esc(o.extraction)}</p>
+      ${top ? `<p class="top-terpene">Top compound: <b>${esc(top.compound.name)}</b> ${top.range.min}-${top.range.max}%</p>` : ""}
+      <p class="sub">${n} stud${n === 1 ? "y" : "ies"}${domains.length ? " &middot; " + domains.map(d => esc(domainByType[d].label)).join(", ") : ""}</p>
     </div>`;
   }).join("") || `<p class="empty">No oils match.</p>`;
   grid.querySelectorAll(".card").forEach(c =>
     c.addEventListener("click", () => showOil(c.dataset.oil)));
 }
-
 document.getElementById("oil-search").addEventListener("input", e => renderOils(e.target.value));
-
-function studyCard(s) {
-  const oilTags = s.oilIds.map(id => oilById[id] ? `<button class="taglink" data-goto-oil="${id}">${esc(oilById[id].name)}</button>` : "").join("");
-  const terpTags = s.terpeneIds.map(id => terpById[id] ? `<button class="taglink" data-goto-terp="${id}">${esc(terpById[id].name)}</button>` : "").join("");
-  return `<div class="study">
-    <h4>${esc(s.title)}</h4>
-    <p class="cite">${esc(s.authors)} &middot; ${esc(s.journal)} &middot; ${s.year}</p>
-    <p class="finding"><span class="finding-label">Finding</span>${esc(s.finding)}</p>
-    <div class="tags">${oilTags}${terpTags}<a class="ext" href="${esc(s.url)}" target="_blank" rel="noopener">Read paper</a></div>
-  </div>`;
-}
-
-function bindStudyLinks(root) {
-  root.querySelectorAll("[data-goto-oil]").forEach(b =>
-    b.addEventListener("click", () => showOil(b.dataset.gotoOil)));
-  root.querySelectorAll("[data-goto-terp]").forEach(b =>
-    b.addEventListener("click", () => showTerpene(b.dataset.gotoTerp)));
-}
-
-function studiesForOil(oilId) { return D.studies.filter(s => s.oilIds.includes(oilId)); }
-function studiesForTerpene(terpId) { return D.studies.filter(s => s.terpeneIds.includes(terpId)); }
 
 function showOil(id) {
   const o = oilById[id];
   if (!o) return;
-  document.querySelector('[data-tab="oils"]').click();
-  document.getElementById("oil-grid").classList.add("hidden");
+  switchTab("oils");
+  document.getElementById("oil-list-view").classList.add("hidden");
   document.getElementById("oil-detail").classList.remove("hidden");
   document.getElementById("oil-swatch").style.background = o.color;
   document.getElementById("oil-name").textContent = o.name;
   document.getElementById("oil-latin").textContent = o.latinName;
   document.getElementById("oil-desc").textContent = o.description;
+  document.getElementById("oil-family").textContent = o.family || "-";
   document.getElementById("oil-part").textContent = o.plantPart;
-  document.getElementById("oil-aroma").textContent = o.aroma;
+  document.getElementById("oil-extraction").textContent = o.extraction;
+  document.getElementById("oil-aroma").textContent = o.aroma.join(", ");
   document.getElementById("oil-uses").innerHTML = o.uses.map(u => `<li>${esc(u)}</li>`).join("");
   document.getElementById("oil-safety").textContent = o.safety;
 
-  const rows = o.terpenes
-    .map(t => ({ name: terpById[t.terpeneId] ? terpById[t.terpeneId].name : t.terpeneId, id: t.terpeneId, percent: t.percent }))
-    .sort((a, b) => b.percent - a.percent);
+  const rows = o.constituents
+    .map(c => ({
+      id: c.compoundId,
+      name: compoundById[c.compoundId] ? compoundById[c.compoundId].name : c.compoundId,
+      min: c.range.min, max: c.range.max
+    }))
+    .sort((a, b) => b.max - a.max);
+  rangeBarChart(document.getElementById("oil-chart"), rows, o.color, showCompound);
 
-  const chartEl = document.getElementById("oil-chart");
-  const chart = echarts.init(chartEl);
-  charts.push(chart);
-  chart.setOption({
-    backgroundColor: "transparent",
-    grid: { left: 8, right: 60, top: 8, bottom: 8, containLabel: true },
-    xAxis: { type: "value", max: 100, axisLabel: { color: "#9aa7bd", formatter: "{value}%" }, splitLine: { lineStyle: { color: "#1b2740" } } },
-    yAxis: { type: "category", data: rows.map(r => r.name).reverse(), axisLabel: { color: "#f2ead8" }, axisLine: { show: false }, axisTick: { show: false } },
-    series: [{
-      type: "bar",
-      data: rows.map(r => r.percent).reverse(),
-      itemStyle: { color: o.color, borderRadius: [0, 4, 4, 0] },
-      label: { show: true, position: "right", color: "#f2ead8", formatter: "{c}%" },
-      barWidth: "55%"
-    }],
-    tooltip: { trigger: "item", formatter: p => `${esc(p.name)}: <b>${p.value}%</b><br>Click to drill down` }
-  });
-  chart.on("click", p => {
-    const row = rows[p.dataIndex];
-    if (row) showTerpene(row.id);
-  });
-
-  const chips = document.getElementById("oil-terpene-chips");
+  const chips = document.getElementById("oil-compound-chips");
   chips.innerHTML = rows.map(r =>
-    `<button class="chip" data-terp="${r.id}">${esc(r.name)} <b>${r.percent}%</b></button>`).join("");
+    `<button class="chip" data-c="${r.id}">${esc(r.name)} <b>${r.min}-${r.max}%</b></button>`).join("");
   chips.querySelectorAll(".chip").forEach(c =>
-    c.addEventListener("click", () => showTerpene(c.dataset.terp)));
+    c.addEventListener("click", () => showCompound(c.dataset.c)));
+
+  const studies = studiesForOil(id);
+  const domains = domainsForOil(id);
+  document.getElementById("oil-domains").innerHTML = domains.length
+    ? domains.map(d => `<span class="catchip">${esc(domainByType[d].label)} <b>${studies.filter(s => s.categories.some(c => c.type === d)).length}</b></span>`).join("")
+    : `<span class="catchip dim">No categorized studies yet</span>`;
+  const ec = evidenceCounts(studies);
+  document.getElementById("oil-evidence").innerHTML =
+    `<span class="evlabel">Evidence:</span> ` +
+    ["clinical", "preclinical", "laboratory", "review"]
+      .map(l => `<span class="lvl lvl-${l}">${LEVEL_LETTER[l]}</span> ${ec[l]}`)
+      .join(" &nbsp; ");
 
   const sWrap = document.getElementById("oil-studies");
-  const studies = studiesForOil(id);
-  sWrap.innerHTML = studies.length
-    ? studies.map(studyCard).join("")
+  sWrap.innerHTML = studies.length ? studies.map(studyCard).join("")
     : `<p class="empty">No studies linked yet.</p>`;
   bindStudyLinks(sWrap);
 }
 
-/* ---------- terpenes ---------- */
-function renderTerpenes() {
-  const q = document.getElementById("terpene-search").value.toLowerCase();
-  const cls = document.getElementById("terpene-class-filter").value;
-  const grid = document.getElementById("terpene-grid");
-  const list = D.terpenes.filter(t =>
-    (!cls || t.class === cls) &&
-    (t.name.toLowerCase().includes(q) || t.formula.toLowerCase().includes(q)));
-  document.getElementById("terpene-count").textContent = list.length + " terpenes";
-  grid.innerHTML = list.map(t => {
-    const n = D.oils.filter(o => o.terpenes.some(x => x.terpeneId === t.id)).length;
-    return `<div class="card" data-terp="${t.id}">
-      <h3>${esc(t.name)}</h3>
-      <p style="margin:8px 0"><span class="formula-chip">${esc(t.formula)}</span></p>
-      <p class="sub">${esc(t.class)} &middot; ${n} oil${n === 1 ? "" : "s"}</p>
+/* ================= COMPOUND EXPLORER ================= */
+function renderCompounds() {
+  const q = document.getElementById("compound-search").value.toLowerCase();
+  const cls = document.getElementById("compound-class-filter").value;
+  const grid = document.getElementById("compound-grid");
+  const list = D.compounds.filter(c =>
+    (!cls || c.chemicalClass === cls) &&
+    (c.name.toLowerCase().includes(q) || c.formula.toLowerCase().includes(q)));
+  document.getElementById("compound-count").textContent = list.length + " compounds";
+  grid.innerHTML = list.map(c => {
+    const n = oilsWithCompound(c.id).length;
+    const s = studiesForCompound(c.id).length;
+    return `<div class="card" data-c="${c.id}">
+      <h3>${esc(c.name)}</h3>
+      <p style="margin:8px 0"><span class="formula-chip">${esc(c.formula)}</span></p>
+      <p class="sub">${esc(c.chemicalClass)}</p>
+      <p class="sub">${n} oil${n === 1 ? "" : "s"} &middot; ${s} stud${s === 1 ? "y" : "ies"}</p>
     </div>`;
-  }).join("") || `<p class="empty">No terpenes match.</p>`;
-  grid.querySelectorAll(".card").forEach(c =>
-    c.addEventListener("click", () => showTerpene(c.dataset.terp)));
+  }).join("") || `<p class="empty">No compounds match.</p>`;
+  grid.querySelectorAll(".card").forEach(el =>
+    el.addEventListener("click", () => showCompound(el.dataset.c)));
 }
+document.getElementById("compound-search").addEventListener("input", renderCompounds);
+document.getElementById("compound-class-filter").addEventListener("change", renderCompounds);
 
-document.getElementById("terpene-search").addEventListener("input", renderTerpenes);
-document.getElementById("terpene-class-filter").addEventListener("change", renderTerpenes);
+function showCompound(id) {
+  const c = compoundById[id];
+  if (!c) return;
+  switchTab("compounds");
+  document.getElementById("compound-list-view").classList.add("hidden");
+  document.getElementById("compound-detail").classList.remove("hidden");
+  document.getElementById("compound-name").textContent = c.name;
+  document.getElementById("compound-formula").textContent = c.formula;
+  document.getElementById("compound-class").textContent = c.chemicalClass;
+  document.getElementById("compound-desc").textContent = c.description;
+  document.getElementById("compound-aroma").textContent = c.aroma.join(", ");
 
-function oilsWithTerpene(terpId) {
-  return D.oils
-    .map(o => {
-      const hit = o.terpenes.find(t => t.terpeneId === terpId);
-      return hit ? { oil: o, percent: hit.percent } : null;
-    })
-    .filter(Boolean)
-    .sort((a, b) => b.percent - a.percent);
-}
+  const rows = oilsWithCompound(id).map(r => ({
+    id: r.oil.id, name: r.oil.name,
+    min: r.range.min, max: r.range.max, color: r.oil.color
+  }));
+  if (rows.length) rangeBarChart(document.getElementById("compound-oils-chart"), rows, "#5fc6b5", showOil);
+  else document.getElementById("compound-oils-chart").innerHTML = `<p class="empty">No oils reference this compound yet.</p>`;
 
-function showTerpene(id) {
-  const t = terpById[id];
-  if (!t) return;
-  document.querySelector('[data-tab="terpenes"]').click();
-  document.getElementById("terpene-grid").classList.add("hidden");
-  document.getElementById("terpene-detail").classList.remove("hidden");
-  document.getElementById("terpene-name").textContent = t.name;
-  document.getElementById("terpene-formula").textContent = t.formula;
-  document.getElementById("terpene-class").textContent = t.class;
-  document.getElementById("terpene-desc").textContent = t.description;
-  document.getElementById("terpene-aroma").textContent = t.aroma;
-
-  const rows = oilsWithTerpene(id);
-  const chartEl = document.getElementById("terpene-oils-chart");
-  const chart = echarts.init(chartEl);
-  charts.push(chart);
-  chart.setOption({
-    backgroundColor: "transparent",
-    grid: { left: 8, right: 60, top: 8, bottom: 8, containLabel: true },
-    xAxis: { type: "value", max: 100, axisLabel: { color: "#9aa7bd", formatter: "{value}%" }, splitLine: { lineStyle: { color: "#1b2740" } } },
-    yAxis: { type: "category", data: rows.map(r => r.oil.name).reverse(), axisLabel: { color: "#f2ead8" }, axisLine: { show: false }, axisTick: { show: false } },
-    series: [{
-      type: "bar",
-      data: rows.map(r => ({ value: r.percent, itemStyle: { color: r.oil.color } })).reverse(),
-      label: { show: true, position: "right", color: "#f2ead8", formatter: "{c}%" },
-      barWidth: "55%",
-      itemStyle: { borderRadius: [0, 4, 4, 0] }
-    }],
-    tooltip: { trigger: "item", formatter: p => `${esc(p.name)}: <b>${p.value}%</b><br>Click to open oil` }
-  });
-  chart.on("click", p => {
-    const row = rows[p.dataIndex];
-    if (row) showOil(row.oil.id);
-  });
-
-  const sWrap = document.getElementById("terpene-studies");
-  const studies = studiesForTerpene(id);
-  sWrap.innerHTML = studies.length
-    ? studies.map(studyCard).join("")
+  const studies = studiesForCompound(id);
+  const sWrap = document.getElementById("compound-studies");
+  sWrap.innerHTML = studies.length ? studies.map(studyCard).join("")
     : `<p class="empty">No studies linked yet.</p>`;
   bindStudyLinks(sWrap);
 }
 
-/* ---------- network ---------- */
+/* ================= EVIDENCE MATRIX ================= */
+function matrixCell(oilId, domainType) {
+  return D.studies.filter(s =>
+    s.oilIds.includes(oilId) && s.categories.some(c => c.type === domainType));
+}
+function renderMatrix() {
+  const table = document.getElementById("matrix-table");
+  const domains = D.categories;
+  const maxCount = Math.max(1, ...D.oils.flatMap(o =>
+    domains.map(d => matrixCell(o.id, d.type).length)));
+  let html = `<thead><tr><th></th>${domains.map(d => `<th>${esc(d.label)}</th>`).join("")}</tr></thead><tbody>`;
+  D.oils.forEach(o => {
+    html += `<tr><th class="rowlabel"><span class="swatch sm" style="background:${o.color}"></span>${esc(o.name)}</th>`;
+    domains.forEach(d => {
+      const studies = matrixCell(o.id, d.type);
+      const n = studies.length;
+      const alpha = n ? 0.15 + 0.75 * (n / maxCount) : 0.04;
+      const lvl = strongestLevel(studies);
+      html += `<td><button class="cell" data-oil="${o.id}" data-domain="${d.type}"
+        style="background:rgba(232,160,32,${alpha.toFixed(2)})" ${n ? "" : "disabled"}>
+        <span class="cell-n">${n}</span>${lvl ? `<span class="lvl lvl-${lvl} sm">${LEVEL_LETTER[lvl]}</span>` : ""}
+      </button></td>`;
+    });
+    html += `</tr>`;
+  });
+  table.innerHTML = html + `</tbody>`;
+  table.querySelectorAll(".cell:not([disabled])").forEach(btn =>
+    btn.addEventListener("click", () => {
+      presetStudyFilters({ oil: btn.dataset.oil, domain: btn.dataset.domain });
+      switchTab("studies");
+    }));
+}
+
+/* ================= DOMAIN EXPLORER ================= */
+let domainState = { type: null, sub: null };
+function domainStudyCount(type, sub) {
+  return D.studies.filter(s => s.categories.some(c =>
+    c.type === type && (!sub || c.subcategory === sub))).length;
+}
+function renderDomainTiles() {
+  const wrap = document.getElementById("domain-tiles");
+  wrap.classList.remove("hidden");
+  document.getElementById("domain-detail").classList.add("hidden");
+  wrap.innerHTML = D.categories.map(d => {
+    const n = domainStudyCount(d.type);
+    return `<button class="domain-tile" data-domain="${d.type}">
+      <h3>${esc(d.label)}</h3>
+      <p class="domain-n">${n} stud${n === 1 ? "y" : "ies"}</p>
+      <p class="sub">${d.subcategories.map(s => esc(s.label)).slice(0, 5).join(" &middot; ")}${d.subcategories.length > 5 ? " &middot; ..." : ""}</p>
+    </button>`;
+  }).join("");
+  wrap.querySelectorAll(".domain-tile").forEach(b =>
+    b.addEventListener("click", () => showDomain(b.dataset.domain, null)));
+}
+function showDomain(type, sub) {
+  domainState = { type, sub };
+  const d = domainByType[type];
+  document.getElementById("domain-tiles").classList.add("hidden");
+  const detail = document.getElementById("domain-detail");
+  detail.classList.remove("hidden");
+  document.getElementById("domain-name").textContent =
+    d.label + (sub ? " / " + subLabel(type, sub) : "");
+
+  const subs = document.getElementById("domain-subs");
+  subs.innerHTML = `<button class="chip${!sub ? " on" : ""}" data-sub="">All</button>` +
+    d.subcategories.map(s =>
+      `<button class="chip${sub === s.id ? " on" : ""}" data-sub="${s.id}">${esc(s.label)} <b>${domainStudyCount(type, s.id)}</b></button>`).join("");
+  subs.querySelectorAll(".chip").forEach(c =>
+    c.addEventListener("click", () => showDomain(type, c.dataset.sub || null)));
+
+  const match = s => s.categories.some(c =>
+    c.type === type && (!sub || c.subcategory === sub));
+  const studies = D.studies.filter(match);
+
+  const oilCounts = {};
+  studies.forEach(s => s.oilIds.forEach(id => { oilCounts[id] = (oilCounts[id] || 0) + 1; }));
+  const oilRows = Object.entries(oilCounts)
+    .map(([id, n]) => ({ oil: oilById[id], n }))
+    .filter(r => r.oil)
+    .sort((a, b) => b.n - a.n);
+  document.getElementById("domain-oils").innerHTML = oilRows.length
+    ? oilRows.map(r => `<button class="chip" data-oil="${r.oil.id}">
+        <span class="swatch sm" style="background:${r.oil.color}"></span>${esc(r.oil.name)} <b>${r.n}</b></button>`).join("")
+    : `<p class="empty">No oils with evidence here yet.</p>`;
+  document.querySelectorAll("#domain-oils .chip").forEach(c =>
+    c.addEventListener("click", () => showOil(c.dataset.oil)));
+
+  const compCounts = {};
+  studies.forEach(s => s.compoundIds.forEach(id => { compCounts[id] = (compCounts[id] || 0) + 1; }));
+  const compRows = Object.entries(compCounts)
+    .map(([id, n]) => ({ c: compoundById[id], n }))
+    .filter(r => r.c)
+    .sort((a, b) => b.n - a.n);
+  document.getElementById("domain-compounds").innerHTML = compRows.length
+    ? compRows.map(r => `<button class="chip" data-c="${r.c.id}">${esc(r.c.name)} <b>${r.n}</b></button>`).join("")
+    : `<p class="empty">No compounds with evidence here yet.</p>`;
+  document.querySelectorAll("#domain-compounds .chip").forEach(c =>
+    c.addEventListener("click", () => showCompound(c.dataset.c)));
+
+  const sWrap = document.getElementById("domain-studies");
+  sWrap.innerHTML = studies.length ? studies.map(studyCard).join("")
+    : `<p class="empty">No studies here yet.</p>`;
+  bindStudyLinks(sWrap);
+}
+
+/* ================= NETWORK ================= */
 function renderNetwork() {
   const el = document.getElementById("network-chart");
   const chart = echarts.init(el);
   charts.push(chart);
-
-  const nodes = [];
-  const links = [];
+  const nodes = [], links = [];
   D.oils.forEach(o => nodes.push({
     id: "oil:" + o.id, name: o.name, category: 0,
     symbolSize: 26, itemStyle: { color: o.color }
   }));
-  D.terpenes.forEach(t => {
-    const n = oilsWithTerpene(t.id).length;
+  D.compounds.forEach(c => {
+    const n = oilsWithCompound(c.id).length;
     if (!n) return;
     nodes.push({
-      id: "terp:" + t.id, name: t.name, category: 1,
+      id: "compound:" + c.id, name: c.name, category: 1,
       symbolSize: 12 + n * 4, itemStyle: { color: "#5fc6b5" }
     });
   });
-  D.oils.forEach(o => o.terpenes.forEach(t => {
-    if (terpById[t.terpeneId] && nodes.some(n => n.id === "terp:" + t.terpeneId))
-      links.push({ source: "oil:" + o.id, target: "terp:" + t.terpeneId, value: t.percent });
+  D.oils.forEach(o => o.constituents.forEach(k => {
+    if (compoundById[k.compoundId] && nodes.some(n => n.id === "compound:" + k.compoundId))
+      links.push({ source: "oil:" + o.id, target: "compound:" + k.compoundId });
   }));
-
   chart.setOption({
     backgroundColor: "transparent",
-    tooltip: { formatter: p => p.dataType === "edge"
-      ? `${esc(p.data.source.replace("oil:",""))} to ${esc(p.data.target.replace("terp:",""))}: <b>${p.data.value}%</b>`
-      : esc(p.name) },
-    legend: [{ data: ["Oils", "Terpenes"], textStyle: { color: "#9aa7bd" }, bottom: 0 }],
+    tooltip: {
+      formatter: p => p.dataType === "edge"
+        ? `${esc(p.data.source.replace("oil:", ""))} contains ${esc(p.data.target.replace("compound:", ""))}`
+        : esc(p.name)
+    },
+    legend: [{ data: ["Oils", "Compounds"], textStyle: { color: "#9aa7bd" }, bottom: 0 }],
     series: [{
-      type: "graph",
-      layout: "force",
-      data: nodes,
-      links: links,
-      categories: [{ name: "Oils" }, { name: "Terpenes" }],
+      type: "graph", layout: "force",
+      data: nodes, links: links,
+      categories: [{ name: "Oils" }, { name: "Compounds" }],
       roam: true,
       label: { show: true, color: "#f2ead8", fontSize: 11 },
       force: { repulsion: 160, edgeLength: 90 },
@@ -272,39 +471,58 @@ function renderNetwork() {
     if (p.dataType !== "node") return;
     const [kind, id] = p.data.id.split(":");
     if (kind === "oil") showOil(id);
-    else showTerpene(id);
+    else showCompound(id);
   });
 }
 
-/* ---------- studies ---------- */
+/* ================= STUDY LIBRARY ================= */
+function presetStudyFilters(f) {
+  if (f.oil !== undefined) document.getElementById("study-oil-filter").value = f.oil || "";
+  if (f.domain !== undefined) document.getElementById("study-domain-filter").value = f.domain || "";
+  if (f.compound !== undefined) document.getElementById("study-compound-filter").value = f.compound || "";
+  renderStudies();
+}
 function renderStudies() {
   const q = document.getElementById("study-search").value.toLowerCase();
   const oilF = document.getElementById("study-oil-filter").value;
-  const terpF = document.getElementById("study-terpene-filter").value;
+  const compF = document.getElementById("study-compound-filter").value;
+  const domF = document.getElementById("study-domain-filter").value;
+  const lvlF = document.getElementById("study-level-filter").value;
+  const typeF = document.getElementById("study-type-filter").value;
   const list = D.studies.filter(s =>
     (!oilF || s.oilIds.includes(oilF)) &&
-    (!terpF || s.terpeneIds.includes(terpF)) &&
+    (!compF || s.compoundIds.includes(compF)) &&
+    (!domF || s.categories.some(c => c.type === domF)) &&
+    (!lvlF || s.evidenceLevel === lvlF) &&
+    (!typeF || s.studyType === typeF) &&
     (s.title.toLowerCase().includes(q) || s.finding.toLowerCase().includes(q)));
   document.getElementById("study-count").textContent = list.length + " studies";
   const wrap = document.getElementById("study-list");
   wrap.innerHTML = list.map(studyCard).join("") || `<p class="empty">No studies match.</p>`;
   bindStudyLinks(wrap);
 }
-
-document.getElementById("study-search").addEventListener("input", renderStudies);
-document.getElementById("study-oil-filter").addEventListener("change", renderStudies);
-document.getElementById("study-terpene-filter").addEventListener("change", renderStudies);
+["study-search", "study-oil-filter", "study-compound-filter",
+ "study-domain-filter", "study-level-filter", "study-type-filter"
+].forEach(id => {
+  const el = document.getElementById(id);
+  el.addEventListener(el.tagName === "SELECT" ? "change" : "input", renderStudies);
+});
 
 /* ---------- init ---------- */
 (function init() {
-  const classes = [...new Set(D.terpenes.map(t => t.class))].sort();
-  document.getElementById("terpene-class-filter").innerHTML =
+  const classes = [...new Set(D.compounds.map(c => c.chemicalClass))].sort();
+  document.getElementById("compound-class-filter").innerHTML =
     `<option value="">All classes</option>` + classes.map(c => `<option>${esc(c)}</option>`).join("");
   document.getElementById("study-oil-filter").innerHTML =
     `<option value="">All oils</option>` + D.oils.map(o => `<option value="${o.id}">${esc(o.name)}</option>`).join("");
-  document.getElementById("study-terpene-filter").innerHTML =
-    `<option value="">All terpenes</option>` + D.terpenes.map(t => `<option value="${t.id}">${esc(t.name)}</option>`).join("");
+  document.getElementById("study-compound-filter").innerHTML =
+    `<option value="">All compounds</option>` + D.compounds.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join("");
+  document.getElementById("study-domain-filter").innerHTML =
+    `<option value="">All domains</option>` + D.categories.map(d => `<option value="${d.type}">${esc(d.label)}</option>`).join("");
+  const types = [...new Set(D.studies.map(s => s.studyType))].sort();
+  document.getElementById("study-type-filter").innerHTML =
+    `<option value="">All study types</option>` + types.map(t => `<option value="${t}">${esc(prettyStudyType(t))}</option>`).join("");
   renderOils("");
-  renderTerpenes();
+  renderCompounds();
   renderStudies();
 })();
