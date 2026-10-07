@@ -436,7 +436,17 @@ document.getElementById("compound-class-filter").addEventListener("change", rend
 let limonene3D = null;
 function initLimonene3D() {
   const host = document.getElementById("limonene-3d");
-  if (!host || limonene3D || typeof THREE === "undefined") return;
+  if (!host) return;
+  if (limonene3D && limonene3D.host === host && host.querySelector("canvas")) return;
+  if (limonene3D && limonene3D.renderer) {
+    limonene3D.renderer.dispose();
+    limonene3D = null;
+  }
+  if (typeof THREE === "undefined") {
+    host.classList.add("molecule3d-error");
+    host.innerHTML = "<span>3D unavailable · tap card for compound details</span>";
+    return;
+  }
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
@@ -449,7 +459,9 @@ function initLimonene3D() {
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
   renderer.outputColorSpace = THREE.SRGBColorSpace;
+  host.querySelectorAll("canvas").forEach(el => el.remove());
   host.prepend(renderer.domElement);
+  host.classList.add("molecule3d-ready");
   renderer.domElement.style.position = "absolute";
   renderer.domElement.style.inset = "0";
 
@@ -497,6 +509,14 @@ function initLimonene3D() {
   const io=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;},{threshold:.05});io.observe(host);
   function frame(){ requestAnimationFrame(frame); if(!visible)return; if(!dragging)group.rotation.y+=.004; renderer.render(scene,camera); }
   frame();
+  const resize = () => {
+    if (!host.isConnected) return;
+    const nw = Math.max(host.clientWidth, 180), nh = Math.max(host.clientHeight, 160);
+    renderer.setSize(nw, nh, false);
+    camera.aspect = nw / nh;
+    camera.updateProjectionMatrix();
+  };
+  if ("ResizeObserver" in window) new ResizeObserver(resize).observe(host);
   limonene3D={renderer,group,host};
 }
 
