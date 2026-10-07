@@ -1042,3 +1042,5 @@ main {
     height: 163px !important;
   }
 }
+
+.study-count { color: var(--text); font-weight: 800; }
