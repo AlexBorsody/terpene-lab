@@ -527,10 +527,8 @@ function renderMatrix() {
     domains.forEach(d => {
       const studies = matrixCell(o.id, d.type);
       const n = studies.length;
-      const alpha = n ? 0.15 + 0.75 * (n / maxCount) : 0.04;
-      const lvl = strongestLevel(studies);
       html += `<td><button class="cell" data-oil="${o.id}" data-domain="${d.type}"
-        style="background:rgba(232,160,32,${alpha.toFixed(2)})" ${n ? "" : "disabled"}>
+        ${n ? "" : "disabled"}>
         <span class="cell-n">${n}</span>
       </button></td>`;
     });
