@@ -556,3 +556,24 @@ main {
   border-radius: 8px;
 }
 .matrix-wrap::-webkit-scrollbar-thumb:hover { background: var(--amber); }
+
+.compound-chemline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+}
+.molecule-glyph-large {
+  width: 42px;
+  height: 34px;
+  flex-basis: 42px;
+  transform: rotate(-7deg);
+  opacity: .82;
+}
+.molecule-glyph-large::before { width: 26px; left: 8px; top: 9px; }
+.molecule-glyph-large::after { width: 25px; left: 9px; top: 24px; }
+.molecule-glyph-large i:nth-child(1) { left: 4px; top: 5px; }
+.molecule-glyph-large i:nth-child(2) { left: 31px; top: 11px; }
+.molecule-glyph-large i:nth-child(3) { left: 5px; top: 25px; }
+.molecule-glyph-large i:nth-child(4) { left: 19px; top: 15px; }
+.molecule-glyph-large i:nth-child(5) { left: 32px; top: 28px; }
