@@ -378,7 +378,8 @@ function renderCompounds() {
   grid.innerHTML = list.map(c => {
     const n = oilsWithCompound(c.id).length;
     const s = studiesForCompound(c.id).length;
-    return `<div class="card" data-c="${c.id}">
+    return `<div class="card compound-card" data-c="${c.id}">
+      ${c.id === "limonene" ? '<div class="molecule3d" id="limonene-3d" aria-label="Interactive 3D model of limonene"><span>3D · drag to rotate</span></div>' : ""}
       <h3>${esc(c.name)}</h3>
       <div class="compound-chemline">
         <span class="molecule-glyph molecule-glyph-large" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
@@ -390,9 +391,72 @@ function renderCompounds() {
   }).join("") || `<p class="empty">No compounds match.</p>`;
   grid.querySelectorAll(".card").forEach(el =>
     el.addEventListener("click", () => showCompound(el.dataset.c)));
+  requestAnimationFrame(initLimonene3D);
 }
 document.getElementById("compound-search").addEventListener("input", renderCompounds);
 document.getElementById("compound-class-filter").addEventListener("change", renderCompounds);
+
+/* ---------- 3D molecule prototype: limonene ---------- */
+let limonene3D = null;
+function initLimonene3D() {
+  const host = document.getElementById("limonene-3d");
+  if (!host || limonene3D || typeof THREE === "undefined") return;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
+  camera.position.set(0, 0, 8.2);
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.7));
+  renderer.setSize(host.clientWidth, host.clientHeight);
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  host.prepend(renderer.domElement);
+
+  const group = new THREE.Group();
+  scene.add(group);
+  scene.add(new THREE.AmbientLight(0xffffff, 1.7));
+  const light = new THREE.DirectionalLight(0xffffff, 2.2);
+  light.position.set(4, 5, 7); scene.add(light);
+  const rim = new THREE.DirectionalLight(0x72b89a, 1.6);
+  rim.position.set(-5, -2, 4); scene.add(rim);
+
+  // Compact 3D ball-and-stick representation of C10H16 limonene.
+  // Carbon skeleton coordinates preserve the cyclohex-1-ene ring,
+  // methyl substituent and isopropenyl side chain. Hydrogens are omitted
+  // at card size to keep the model readable.
+  const atoms = [
+    [-1.45, .55, .18],[-.65,1.35,-.15],[.55,1.22,.18],[1.28,.25,-.12],
+    [.72,-.95,.2],[-.55,-1.15,-.18],[-1.75,1.65,.3],[1.7,-1.45,-.2],
+    [2.8,-1.05,.25],[1.55,-2.65,.2]
+  ];
+  const bonds = [[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[0,6],[4,7],[7,8],[7,9]];
+  const atomGeo = new THREE.SphereGeometry(.24, 20, 14);
+  const atomMat = new THREE.MeshStandardMaterial({color:0x72b89a,roughness:.28,metalness:.18});
+  atoms.forEach(p => { const m=new THREE.Mesh(atomGeo,atomMat);m.position.set(...p);group.add(m); });
+  const bondMat = new THREE.MeshStandardMaterial({color:0xd9e7e1,roughness:.4,metalness:.08});
+  function bond(a,b,offset=0){
+    const p1=new THREE.Vector3(...atoms[a]), p2=new THREE.Vector3(...atoms[b]);
+    const mid=p1.clone().add(p2).multiplyScalar(.5), len=p1.distanceTo(p2);
+    const g=new THREE.CylinderGeometry(.075,.075,len,10), m=new THREE.Mesh(g,bondMat);
+    m.position.copy(mid); m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),p2.clone().sub(p1).normalize());
+    if(offset){ const side=new THREE.Vector3(0,0,1).applyQuaternion(m.quaternion).multiplyScalar(offset);m.position.add(side); }
+    group.add(m);
+  }
+  bonds.forEach(([a,b])=>bond(a,b));
+  // Two double bonds in limonene.
+  bond(1,2,.14); bond(7,8,.14);
+  group.rotation.set(-.35,.45,.15);
+
+  let dragging=false,lastX=0,lastY=0,visible=true;
+  renderer.domElement.addEventListener("pointerdown",e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;renderer.domElement.setPointerCapture(e.pointerId);e.stopPropagation();});
+  renderer.domElement.addEventListener("pointermove",e=>{if(!dragging)return;group.rotation.y+=(e.clientX-lastX)*.012;group.rotation.x+=(e.clientY-lastY)*.012;lastX=e.clientX;lastY=e.clientY;e.stopPropagation();});
+  renderer.domElement.addEventListener("pointerup",e=>{dragging=false;e.stopPropagation();});
+  renderer.domElement.addEventListener("click",e=>e.stopPropagation());
+
+  const io=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;},{threshold:.05});io.observe(host);
+  function frame(){ requestAnimationFrame(frame); if(!visible)return; if(!dragging)group.rotation.y+=.004; renderer.render(scene,camera); }
+  frame();
+  limonene3D={renderer,group,host};
+}
 
 function showCompound(id) {
   const c = compoundById[id];
