@@ -631,4 +631,6 @@ function renderStudies() {
   // the first view from depending on a user switching tabs.
   const active = document.querySelector(".tab.active");
   if (active) switchTab(active.dataset.tab);
+  const activeTab = document.querySelector(".tab.active");
+  if (activeTab) switchTab(activeTab.dataset.tab);
 })();
