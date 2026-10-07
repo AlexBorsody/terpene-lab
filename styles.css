@@ -486,3 +486,9 @@ main {
   .pathway-label { min-height: 0; margin-top: 4px; }
   .pathway-list { max-height: 290px; overflow-y: auto; }
 }
+
+.brand-owner { color: var(--amber); }
+.brand h1 { white-space: nowrap; }
+@media (max-width: 480px) {
+  .brand h1 { white-space: normal; font-size: 17px; line-height: 1.15; }
+}
