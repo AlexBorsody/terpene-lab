@@ -609,3 +609,6 @@ main {
 @media (max-width: 520px) {
   .molecule3d { width: 47%; height: 175px; right: 3px; top: 8px; }
 }
+
+.evidence-word { display:inline-block; font:700 11px var(--mono); text-transform:uppercase; letter-spacing:.7px; padding:4px 7px; border-radius:5px; }
+.evidence-sep { color:var(--muted); padding:0 3px; }
