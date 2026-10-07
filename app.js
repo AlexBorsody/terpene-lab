@@ -363,8 +363,21 @@ function showOil(id) {
   const studies = studiesForOil(id);
   const domains = domainsForOil(id);
   document.getElementById("oil-domains").innerHTML = domains.length
-    ? domains.map(d => `<span class="catchip">${esc(domainByType[d].label)} <b>${studies.filter(s => s.categories.some(c => c.type === d)).length}</b></span>`).join("")
+    ? domains.map(d => `<button class="catchip domain-filter-chip" data-domain-filter="${d}">${esc(domainByType[d].label)} <b>${studies.filter(s => s.categories.some(c => c.type === d)).length}</b></button>`).join("")
     : `<span class="catchip dim">No categorized studies yet</span>`;
+  document.querySelectorAll("#oil-domains [data-domain-filter]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      switchTab("studies");
+      document.getElementById("study-oil-filter").value = id;
+      document.getElementById("study-domain-filter").value = btn.dataset.domainFilter;
+      document.getElementById("study-compound-filter").value = "";
+      document.getElementById("study-level-filter").value = "";
+      document.getElementById("study-type-filter").value = "";
+      document.getElementById("study-search").value = "";
+      renderStudies();
+      document.getElementById("tab-studies").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
   const ec = evidenceCounts(studies);
   document.getElementById("oil-evidence").innerHTML =
     `<span class="evlabel">Evidence:</span> ` +
