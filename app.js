@@ -363,7 +363,7 @@ function renderOils(filter) {
         <div class="swatch" style="background:${o.color}"></div>
         <div><h3>${esc(o.name)}</h3><p class="latin">${esc(o.latinName)}</p></div>
       </div>
-${top ? `<p class="top-terpene">Top compound: <b>${esc(top.compound.name)}</b> ${top.range.min}-${top.range.max}%</p>` : ""}
+${top ? `<p class="top-terpene">Top compound: <b>${esc(top.compound.name)}</b></p>` : ""}
       <p class="sub"><strong class="study-count">${n} stud${n === 1 ? "y" : "ies"}</strong>${domains.length ? " &middot; " + domains.map(d => esc(domainByType[d].label)).join(", ") : ""}</p>
     </div>`;
   }).join("") || `<p class="empty">No oils match.</p>`;
