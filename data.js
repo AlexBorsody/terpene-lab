@@ -39,7 +39,7 @@
    ========================================================================== */
 
 const TERPENE_DATA = {
-  "version": "0.5.1-research",
+  "version": "0.6.0-research",
   "categories": [
     {
       "type": "health",
@@ -2439,6 +2439,647 @@ const TERPENE_DATA = {
       ],
       "finding": "Oral eugenol increased spatial and recognition-memory measures in mice and was associated with increased neurogenesis and dendritic complexity in hippocampal regions, although Morris-water-maze escape latency was not significantly changed.",
       "limitations": "Small mouse study of isolated eugenol; findings do not establish cognitive benefit in humans or from clove-oil aroma."
+    },
+    {
+      "id": "tea-tree-dandruff-2002",
+      "title": "Treatment of dandruff with 5% tea tree oil shampoo",
+      "authors": "Satchell AC, Saurajen A, Bell C, Barnetson RSC",
+      "journal": "Journal of the American Academy of Dermatology",
+      "year": 2002,
+      "doi": "10.1067/mjd.2002.122734",
+      "pubmedId": "12451368",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12451368/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 126,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "skin"
+        }
+      ],
+      "finding": "In a randomized trial, 5% tea tree oil shampoo improved the dandruff severity score by 41% versus 11% with placebo after four weeks.",
+      "limitations": "Specific 5% shampoo formulation; results do not establish effects of other tea-tree products."
+    },
+    {
+      "id": "tea-tree-acne-2007",
+      "title": "The efficacy of 5% topical tea tree oil gel in mild to moderate acne vulgaris: a randomized, double-blind placebo-controlled study",
+      "authors": "Enshaieh S, Jooya A, Siadat AH, Iraji F",
+      "journal": "Indian Journal of Dermatology, Venereology and Leprology",
+      "year": 2007,
+      "doi": "10.4103/0378-6323.30646",
+      "pubmedId": "17314442",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17314442/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 60,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "skin"
+        }
+      ],
+      "finding": "In 60 participants, 5% tea tree oil gel produced significantly greater improvement in acne lesion counts and severity than placebo over 45 days.",
+      "limitations": "Specific topical gel and acne population; does not establish efficacy of diluted sprays or other formulations."
+    },
+    {
+      "id": "rosemary-students-2018",
+      "title": "Effects of Rosmarinus officinalis L. on memory performance, anxiety, depression, and sleep quality in university students: A randomized clinical trial",
+      "authors": "Nematolahi P, Mehrabani M, Karami-Mohajeri S, Dabaghzadeh F",
+      "journal": "Complementary Therapies in Clinical Practice",
+      "year": 2018,
+      "doi": "10.1016/j.ctcp.2017.11.004",
+      "pubmedId": "29389474",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29389474/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 68,
+      "oilIds": [
+        "rosemary"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "memory"
+        },
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "anxiety"
+        },
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "mood"
+        },
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "sleep"
+        }
+      ],
+      "finding": "Oral rosemary powder for one month was associated with improvements in prospective and retrospective memory, anxiety, depression and several sleep-quality measures versus placebo.",
+      "limitations": "Studied oral rosemary powder, not rosemary essential oil or inhalation."
+    },
+    {
+      "id": "lemon-test-anxiety-2022",
+      "title": "Effectiveness of lemon essential oil in reducing test anxiety in nursing students",
+      "authors": "Bahçecik N, et al.",
+      "journal": "Explore",
+      "year": 2022,
+      "doi": "10.1016/j.explore.2022.02.003",
+      "pubmedId": "35190270",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35190270/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 46,
+      "oilIds": [
+        "lemon"
+      ],
+      "compoundIds": [
+        "limonene"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "anxiety"
+        }
+      ],
+      "finding": "Fifteen minutes of lemon essential-oil inhalation reduced test-anxiety scores in nursing students compared with control.",
+      "limitations": "Small student sample and acute exposure; does not establish treatment of anxiety disorders."
+    },
+    {
+      "id": "commercial-eo-antibiofilm-2023",
+      "title": "Antibacterial and Antibiofilm Effects of Different Samples of Five Commercially Available Essential Oils",
+      "authors": "Muntean D, et al.",
+      "journal": "Antibiotics",
+      "year": 2023,
+      "doi": "",
+      "pubmedId": "37508287",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37508287/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "oregano",
+        "eucalyptus",
+        "rosemary",
+        "clove",
+        "peppermint"
+      ],
+      "compoundIds": [
+        "eugenol",
+        "carvacrol",
+        "thymol",
+        "eucalyptol",
+        "menthol"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "finding": "Commercial oregano, eucalyptus, rosemary, clove and peppermint oil samples showed antibacterial and antibiofilm activity against tested S. aureus, E. coli and P. aeruginosa, with substantial sample-to-sample variation.",
+      "limitations": "In-vitro study at relatively high concentrations; commercial oil composition varied substantially."
+    },
+    {
+      "id": "washing-liquids-eo-2011",
+      "title": "Lavender, tea tree and lemon oils as antimicrobials in washing liquids and soft body balms",
+      "authors": "Kunicka-Styczyńska A, Sikora M, Kalemba D",
+      "journal": "International Journal of Cosmetic Science",
+      "year": 2011,
+      "doi": "10.1111/j.1468-2494.2010.00582.x",
+      "pubmedId": "20572887",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20572887/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "lavender",
+        "tea-tree",
+        "lemon"
+      ],
+      "compoundIds": [
+        "linalool",
+        "terpinen-4-ol",
+        "limonene"
+      ],
+      "categories": [
+        {
+          "type": "cleaning",
+          "subcategory": "surface"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi"
+        }
+      ],
+      "finding": "Lavender, tea tree and lemon essential oils were evaluated as antimicrobial ingredients in washing liquid and body-balm formulations against bacteria and Candida.",
+      "limitations": "Formulation-specific laboratory testing; not finished Sunny's Shield evidence."
+    },
+    {
+      "id": "eo-pseudomonas-biofilm-2022",
+      "title": "Chemical Composition and Antibacterial Activity of Liquid and Volatile Phase of Essential Oils against Planktonic and Biofilm-Forming Cells of Pseudomonas aeruginosa",
+      "authors": "Brożyna M, et al.",
+      "journal": "Molecules",
+      "year": 2022,
+      "doi": "",
+      "pubmedId": "35807343",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35807343/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "tea-tree",
+        "rosemary",
+        "eucalyptus",
+        "lavender"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol",
+        "eucalyptol",
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "finding": "Across seven oils tested against P. aeruginosa, liquid and volatile rosemary and tea tree oils showed notable antibiofilm activity in the reported assays.",
+      "limitations": "In-vitro study; activity differed between liquid and vapor phases and cannot be extrapolated to clinical efficacy."
+    },
+    {
+      "id": "eo-staph-biofilm-2021",
+      "title": "The Antimicrobial and Antibiofilm In Vitro Activity of Liquid and Vapour Phases of Selected Essential Oils against Staphylococcus aureus",
+      "authors": "Brożyna M, et al.",
+      "journal": "Pathogens",
+      "year": 2021,
+      "doi": "10.3390/pathogens10091207",
+      "pubmedId": "34578239",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34578239/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "tea-tree",
+        "rosemary",
+        "eucalyptus",
+        "lavender"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol",
+        "eucalyptol",
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "finding": "Liquid and vapor phases of selected essential oils were tested against 16 biofilm-forming S. aureus strains, demonstrating oil- and phase-dependent antimicrobial and antibiofilm activity.",
+      "limitations": "Laboratory biofilm models only; effectiveness varied substantially by oil and assay."
+    },
+    {
+      "id": "tick-eo-2024",
+      "title": "Comparative analysis of essential oil efficacy against the Asian longhorned tick Haemaphysalis longicornis (Acari: Ixodidae)",
+      "authors": "Kim D, et al.",
+      "journal": "Journal article",
+      "year": 2024,
+      "doi": "",
+      "pubmedId": "38835262",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38835262/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "clove",
+        "eucalyptus",
+        "lavender",
+        "peppermint"
+      ],
+      "compoundIds": [
+        "eugenol",
+        "eucalyptol",
+        "linalool",
+        "menthol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "ticks"
+        }
+      ],
+      "finding": "Clove, eucalyptus, lavender and mint oils showed concentration-dependent acaricidal and repellent activity against Asian longhorned ticks; clove performed strongly in the reported assays.",
+      "limitations": "Laboratory/host-attachment model against one tick species; not a human-use repellent trial."
+    },
+    {
+      "id": "lone-star-tick-eo-2024",
+      "title": "Repellent activity of essential oils to the Lone Star tick, Amblyomma americanum",
+      "authors": "Bissinger BW, et al.",
+      "journal": "Journal article",
+      "year": 2024,
+      "doi": "",
+      "pubmedId": "38711138",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38711138/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "clove",
+        "oregano",
+        "peppermint"
+      ],
+      "compoundIds": [
+        "eugenol",
+        "carvacrol",
+        "menthol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "ticks"
+        }
+      ],
+      "finding": "In contact repellency assays against Lone Star tick nymphs, clove ranked highest among the natural oils tested, with oregano and peppermint also evaluated.",
+      "limitations": "Bioassay evidence against one tick species; does not establish duration or safety of a consumer repellent formulation."
+    },
+    {
+      "id": "mosquito-eo-repellency-1998",
+      "title": "Efficacy of plant extracts and oils as mosquito repellents",
+      "authors": "Jaenson TGT, Pålsson K, Borg-Karlson AK",
+      "journal": "Phytomedicine",
+      "year": 1998,
+      "doi": "10.1016/S0944-7113(98)80072-X",
+      "pubmedId": "23195905",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/23195905/",
+      "studyType": "controlled-human-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "clove",
+        "eucalyptus",
+        "lavender",
+        "peppermint"
+      ],
+      "compoundIds": [
+        "eugenol",
+        "eucalyptol",
+        "linalool",
+        "menthol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "mosquitoes"
+        }
+      ],
+      "finding": "Laboratory and field testing of multiple natural products found good mosquito repellency for several extracts and oils, including eucalyptus, with activity varying by product and mosquito species.",
+      "limitations": "Older comparative repellent work with heterogeneous natural products; formulation and exposure details limit direct product comparisons."
+    },
+    {
+      "id": "menthol-migraine-2010",
+      "title": "Cutaneous application of menthol 10% solution as an abortive treatment of migraine without aura: a randomised, double-blind, placebo-controlled, crossed-over study",
+      "authors": "Borhani Haghighi A, et al.",
+      "journal": "International Journal of Clinical Practice",
+      "year": 2010,
+      "doi": "",
+      "pubmedId": "20456191",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20456191/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 35,
+      "oilIds": [
+        "peppermint"
+      ],
+      "compoundIds": [
+        "menthol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "In a crossover study of 35 patients and 118 migraine attacks, topical 10% menthol solution was evaluated for pain-free and pain-relief migraine endpoints versus a low-concentration control.",
+      "limitations": "Tested isolated menthol solution rather than peppermint oil; small crossover study."
+    },
+    {
+      "id": "cineole-copd-2009",
+      "title": "Concomitant therapy with Cineole (Eucalyptole) reduces exacerbations in COPD: a placebo-controlled double-blind trial",
+      "authors": "Worth H, Schacher C, Dethlefsen U",
+      "journal": "Respiratory Research",
+      "year": 2009,
+      "doi": "",
+      "pubmedId": "19624838",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19624838/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 242,
+      "oilIds": [
+        "eucalyptus"
+      ],
+      "compoundIds": [
+        "eucalyptol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "respiratory"
+        }
+      ],
+      "finding": "In 242 patients with stable COPD, six months of oral cineole adjunct therapy reduced the combined frequency, severity and duration of exacerbations compared with placebo.",
+      "limitations": "Oral purified cineole adjunct therapy, not eucalyptus oil or inhaled use."
+    },
+    {
+      "id": "cineole-rhinosinusitis-2004",
+      "title": "Therapy for acute nonpurulent rhinosinusitis with cineole: results of a double-blind, randomized, placebo-controlled trial",
+      "authors": "Kehrl W, Sonnemann U, Dethlefsen U",
+      "journal": "Laryngoscope",
+      "year": 2004,
+      "doi": "10.1097/00005537-200404000-00027",
+      "pubmedId": "15064633",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/15064633/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 152,
+      "oilIds": [
+        "eucalyptus"
+      ],
+      "compoundIds": [
+        "eucalyptol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "respiratory"
+        }
+      ],
+      "finding": "Oral cineole produced significantly greater reductions in a rhinosinusitis symptom-sum score than placebo after four and seven days.",
+      "limitations": "Purified oral cineole, not eucalyptus essential oil or topical/inhaled use."
+    },
+    {
+      "id": "cineole-bronchitis-2013",
+      "title": "Efficacy of cineole in patients suffering from acute bronchitis: a placebo-controlled double-blind trial",
+      "authors": "Fischer J, Dethlefsen U",
+      "journal": "Cough",
+      "year": 2013,
+      "doi": "10.1186/1745-9974-9-25",
+      "pubmedId": "24261680",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24261680/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 242,
+      "oilIds": [
+        "eucalyptus"
+      ],
+      "compoundIds": [
+        "eucalyptol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "respiratory"
+        }
+      ],
+      "finding": "A multicenter placebo-controlled trial evaluated 600 mg/day oral cineole for ten days in 242 patients with acute bronchitis and reported faster improvement in bronchitis symptoms.",
+      "limitations": "Purified oral cineole; not evidence for eucalyptus-oil spray or inhalation."
+    },
+    {
+      "id": "cineole-asthma-2012",
+      "title": "Patients with asthma benefit from concomitant therapy with cineole: a placebo-controlled, double-blind trial",
+      "authors": "Worth H, Dethlefsen U",
+      "journal": "Journal of Asthma",
+      "year": 2012,
+      "doi": "10.3109/02770903.2012.717657",
+      "pubmedId": "22978309",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22978309/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 247,
+      "oilIds": [
+        "eucalyptus"
+      ],
+      "compoundIds": [
+        "eucalyptol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "respiratory"
+        }
+      ],
+      "finding": "In 247 asthma patients, six months of oral cineole adjunct therapy was evaluated for lung function, asthma symptoms and quality of life versus placebo.",
+      "limitations": "Purified oral cineole as adjunct therapy; not eucalyptus essential oil and not a replacement for asthma treatment."
+    },
+    {
+      "id": "carvacrol-asthma-2021",
+      "title": "Carvacrol improves pulmonary function tests, oxidant/antioxidant parameters and cytokine levels in asthmatic patients: A randomized, double-blind, clinical trial",
+      "authors": "Ghorani V, Alavinezhad A, Rajabi O, Boskabady MH",
+      "journal": "Phytomedicine",
+      "year": 2021,
+      "doi": "10.1016/j.phymed.2021.153539",
+      "pubmedId": "33773189",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33773189/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 33,
+      "oilIds": [
+        "oregano"
+      ],
+      "compoundIds": [
+        "carvacrol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "respiratory"
+        },
+        {
+          "type": "health",
+          "subcategory": "immune"
+        }
+      ],
+      "finding": "In 33 moderate asthma patients, oral carvacrol adjunct therapy improved respiratory symptoms, pulmonary-function measures and several inflammatory/oxidative markers versus baseline and placebo.",
+      "limitations": "Small trial of purified oral carvacrol used alongside routine asthma medication; not oregano oil."
+    },
+    {
+      "id": "carvacrol-asthma-phase2-2018",
+      "title": "Possible therapeutic effect of carvacrol on asthmatic patients: A randomized, double blind, placebo-controlled, Phase II clinical trial",
+      "authors": "Alavinezhad A, Khazdair MR, Boskabady MH",
+      "journal": "Phytotherapy Research",
+      "year": 2018,
+      "doi": "10.1002/ptr.5967",
+      "pubmedId": "29193478",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29193478/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 23,
+      "oilIds": [
+        "oregano"
+      ],
+      "compoundIds": [
+        "carvacrol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "respiratory"
+        },
+        {
+          "type": "health",
+          "subcategory": "immune"
+        }
+      ],
+      "finding": "In a small phase II trial, two months of oral carvacrol improved pulmonary-function measures and reduced several respiratory symptoms and inflammatory markers compared with placebo.",
+      "limitations": "Small study of purified oral carvacrol; not oregano essential oil."
+    },
+    {
+      "id": "carvacrol-safety-2021",
+      "title": "Safety and tolerability of carvacrol in healthy subjects: a phase I clinical study",
+      "authors": "Ghorani V, et al.",
+      "journal": "Drug and Chemical Toxicology",
+      "year": 2021,
+      "doi": "10.1080/01480545.2018.1538233",
+      "pubmedId": "30486682",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30486682/",
+      "studyType": "controlled-human-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": null,
+      "oilIds": [
+        "oregano"
+      ],
+      "compoundIds": [
+        "carvacrol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "respiratory"
+        }
+      ],
+      "finding": "One month of oral carvacrol at 1 or 2 mg/kg/day was generally tolerated in healthy subjects; measured laboratory values remained within normal ranges despite several statistically significant changes.",
+      "limitations": "Safety/tolerability study of purified oral carvacrol, not evidence of oregano-oil efficacy."
+    },
+    {
+      "id": "tea-tree-systematic-review-2000",
+      "title": "Tea tree oil: a systematic review of randomized clinical trials",
+      "authors": "Ernst E, Huntley A",
+      "journal": "Forschende Komplementärmedizin",
+      "year": 2000,
+      "doi": "",
+      "pubmedId": "10800248",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/10800248/",
+      "studyType": "systematic-review",
+      "context": "human",
+      "evidenceLevel": "review",
+      "sampleSize": null,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "skin"
+        }
+      ],
+      "finding": "A systematic review located four randomized trials and judged tea-tree-oil evidence for acne and fungal infections promising but not compelling at that time.",
+      "limitations": "Older review with only four trials; later studies should be considered separately."
     }
   ],
   "sources": [
