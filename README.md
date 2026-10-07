@@ -1,30 +1,38 @@
 # Terpene Lab
 
-Interactive essential oil and terpene data visualization explorer.
+Interactive essential oil evidence explorer. Plant to molecule to paper.
 
-- **Oils tab**: search and select essential oils, see terpene composition charts.
-- **Terpenes tab**: drill down into any terpene, see which oils contain it and at what percentage.
-- **Network tab**: force-directed graph of every oil connected to its terpenes. Click any node to open it.
-- **Studies tab**: published papers linked to oils and terpenes, with one-sentence findings and links.
+## Views
+
+- **Oils**: oil explorer with composition fingerprint (range bars), research coverage, evidence summary, studies.
+- **Compounds**: terpene and compound drill-downs (chemically correct classes, not just "terpenes"), found-in charts, studies.
+- **Matrix**: oils x research domains heatmap. Color intensity is study count; the letter marks the strongest evidence level (C clinical, P preclinical, L laboratory, R review). Click a cell to see the papers.
+- **Domains**: start from a research question (Health, Cleaning, Microbial, Pest) and drill to subcategories, then oils, compounds, and papers.
+- **Network**: force-directed oil-compound graph. Click any node to open it.
+- **Studies**: filterable research library (oil, compound, domain, evidence level, study type).
 
 ## Files
 
 | File | Purpose |
 |---|---|
 | `index.html` | App shell |
-| `styles.css` | Laboratory instrument theme (dark navy, amber, cream) |
+| `styles.css` | Laboratory instrument theme |
 | `app.js` | Rendering, charts (ECharts via CDN), interactions |
-| `data.js` | **The dataset.** Schema documented at the top of the file. |
+| `data.js` | **The dataset.** Full schema documented at the top of the file. |
+| `spec.md` | Product and visualization spec (source of truth). |
 
-## Data workflow
+## Data model
 
-`data.js` currently holds sample data (8 oils, 15 terpenes, 5 studies). Replace
-`TERPENE_DATA` with the research output. The research agent must follow the
-schema documented at the top of `data.js`:
+`data.js` holds `TERPENE_DATA`: `{ version, categories, oils, compounds, studies, sources }`.
 
-- Only include studies that link to a real publication (PubMed, DOI, journal).
-- Terpene percentages should be typical published composition ranges.
-- Keep each study "finding" to what the paper actually reports. No medical claims beyond the paper.
+- Composition uses **ranges** (`{min, max}`), not false single-number precision.
+- Compounds carry chemically correct classes (Monoterpene, Sesquiterpene, Phenylpropanoid, ...). The UI says "terpenes and compounds".
+- Every study has `studyType`, `context` (human/animal/in-vitro/...), and `evidenceLevel` (clinical/preclinical/laboratory/review).
+- Studies are tagged with use categories: `{type, subcategory, topic}` where type is health, cleaning, microbial, or pest.
+- Oil category coverage is **derived from linked studies**, never stored on oils.
+- `sources` holds composition/taxonomy references separately from efficacy studies.
+
+Research rules: real publication URLs only (PubMed/DOI/journal). Findings stay faithful to the paper. Record null studies. Never infer finished-product claims from ingredient studies.
 
 ## Run locally
 
@@ -34,20 +42,13 @@ python3 -m http.server 8000
 # open http://localhost:8000
 ```
 
-(A plain `file://` open works for layout, but charts and data load most reliably over http.)
-
 ## Deploy
 
-Any static host works. Vercel:
-
-```sh
-vercel --prod
-```
-
-No build step. Then embed in Shopify (see `shopify-embed.md`).
+Any static host works (no build step). Vercel: `vercel --prod`. Then embed in Shopify; see `shopify-embed.md`.
 
 ## Design rules
 
-- No emojis anywhere in UI copy.
+- No emojis in UI copy.
 - No em dashes in UI copy. Use hyphens or colons.
-- Laboratory look: dark navy, amber accents, cream text, mono for data.
+- Laboratory instrument look: dark navy, amber accents, cream text, monospace for data.
+- Evidence levels must always be visible next to counts. Never show a generic "science-backed" score.
