@@ -97,6 +97,32 @@ document.querySelectorAll(".tab").forEach(btn => {
     switchTab(tab);
   });
 });
+
+/* ---------- lightweight URL/history routing ---------- */
+let routingFromHistory = false;
+function routeUrl(tab, params = {}, replace = false) {
+  if (routingFromHistory) return;
+  const url = new URL(window.location.href);
+  url.searchParams.set("tab", tab);
+  ["oil","compound","domain","sub"].forEach(k => {
+    if (params[k]) url.searchParams.set(k, params[k]);
+    else url.searchParams.delete(k);
+  });
+  history[replace ? "replaceState" : "pushState"]({ tab, ...params }, "", url);
+}
+function applyRoute() {
+  const p = new URLSearchParams(location.search);
+  const tab = p.get("tab") || "oils";
+  routingFromHistory = true;
+  switchTab(tab);
+  const oil = p.get("oil"), compound = p.get("compound"), domain = p.get("domain"), sub = p.get("sub");
+  if (tab === "oils" && oil && oilById[oil]) showOil(oil, true);
+  else if (tab === "compounds" && compound && compoundById[compound]) showCompound(compound, true);
+  else if (tab === "domains" && domain && domainByType[domain]) showDomain(domain, sub || null);
+  routingFromHistory = false;
+}
+window.addEventListener("popstate", applyRoute);
+
 function switchTab(tab) {
   document.querySelectorAll(".tab").forEach(b =>
     b.classList.toggle("active", b.dataset.tab === tab));
@@ -111,9 +137,15 @@ function switchTab(tab) {
 
 document.querySelectorAll("[data-backto]").forEach(btn => {
   btn.addEventListener("click", () => {
-    document.getElementById(btn.dataset.backto).classList.remove("hidden");
+    if (history.state && (history.state.oil || history.state.compound || history.state.domain)) {
+      history.back();
+      return;
+    }
+    const target = btn.dataset.backto;
+    document.getElementById(target).classList.remove("hidden");
     btn.closest(".detail, #domain-detail").classList.add("hidden");
     disposeCharts();
+    routeUrl(target.includes("oil") ? "oils" : target.includes("compound") ? "compounds" : "domains", {}, true);
   });
 });
 
@@ -342,9 +374,10 @@ document.getElementById("oil-search").addEventListener("input", e => renderOils(
 document.getElementById("oil-sort").addEventListener("change", () => renderOils(document.getElementById("oil-search").value));
 document.getElementById("oil-domain-filter").addEventListener("change", () => renderOils(document.getElementById("oil-search").value));
 
-function showOil(id) {
+function showOil(id, fromRoute = false) {
   const o = oilById[id];
   if (!o) return;
+  if (!fromRoute) routeUrl("oils", { oil: id });
   switchTab("oils");
   document.getElementById("oil-list-view").classList.add("hidden");
   document.getElementById("oil-detail").classList.remove("hidden");
@@ -540,9 +573,10 @@ function initLimonene3D() {
   limonene3D={renderer,group,host};
 }
 
-function showCompound(id) {
+function showCompound(id, fromRoute = false) {
   const c = compoundById[id];
   if (!c) return;
+  if (!fromRoute) routeUrl("compounds", { compound: id });
   switchTab("compounds");
   document.getElementById("compound-list-view").classList.add("hidden");
   document.getElementById("compound-detail").classList.remove("hidden");
@@ -782,8 +816,14 @@ function renderStudies() {
 
   // Explicitly initialize whichever tab the HTML marks active. This prevents
   // the first view from depending on a user switching tabs.
-  const active = document.querySelector(".tab.active");
-  if (active) switchTab(active.dataset.tab);
-  const activeTab = document.querySelector(".tab.active");
-  if (activeTab) switchTab(activeTab.dataset.tab);
+  const initialParams = new URLSearchParams(location.search);
+  if (initialParams.has("tab") || initialParams.has("oil") || initialParams.has("compound") || initialParams.has("domain")) {
+    applyRoute();
+  } else {
+    const activeTab = document.querySelector(".tab.active");
+    if (activeTab) {
+      switchTab(activeTab.dataset.tab);
+      routeUrl(activeTab.dataset.tab, {}, true);
+    }
+  }
 })();
