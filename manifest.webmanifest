@@ -1,0 +1,18 @@
+{
+  "name": "Sunny's Shield Terpene Lab",
+  "short_name": "Terpene Lab",
+  "description": "Explore plants, terpenes, compounds, uses, and published research.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1220",
+  "theme_color": "#0b1220",
+  "icons": [
+    {
+      "src": "shield-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
