@@ -503,7 +503,7 @@ async function initMolecule3D(host) {
   const compound=compoundById[host.dataset.moleculeId]; if(!compound)return;
   const THREE=await loadThree(); if(!THREE||!host.isConnected)return;
   host.dataset.ready="1";
-  const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(34,1,.1,100); camera.position.z=7.4;
+  const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(34,1,.1,100); camera.position.z=8.6;
   const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:"low-power"});
   renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.45));
   const resize=()=>{const w=Math.max(host.clientWidth,130),h=Math.max(host.clientHeight,130);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();};
