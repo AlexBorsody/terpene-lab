@@ -304,3 +304,67 @@ main {
   .detail { padding: 18px; }
   .chart { height: 280px; }
 }
+
+/* ---- evidence levels ---- */
+.lvl {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 50%;
+  font-family: var(--mono); font-size: 12px; font-weight: 700;
+  color: #0b1220; flex-shrink: 0;
+}
+.lvl.sm { width: 20px; height: 20px; font-size: 10px; }
+.lvl-clinical { background: #5fc6b5; }
+.lvl-preclinical { background: #e8a020; }
+.lvl-laboratory { background: #7aa2f7; }
+.lvl-review { background: #9b7ed9; }
+.lvl-text { font-size: 12px; color: var(--muted); text-transform: capitalize; }
+.study-badge { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.evidence-summary { display: flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 14px; flex-wrap: wrap; }
+.evlabel { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); }
+
+/* ---- category chips ---- */
+.catchips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.catchip {
+  font-size: 12px; background: var(--surface2);
+  border: 1px solid var(--border); color: var(--text);
+  padding: 4px 10px; border-radius: 4px;
+}
+.catchip b { color: var(--amber); font-family: var(--mono); }
+.catchip.dim { color: var(--muted); }
+.taglink {
+  font-size: 12px; color: var(--muted); background: transparent;
+  border: 1px solid var(--border); padding: 3px 10px; border-radius: 4px; cursor: pointer;
+}
+.taglink:hover { color: var(--text); border-color: var(--amber-dim); }
+.limitations { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+/* ---- matrix ---- */
+.matrix-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+.matrix { border-collapse: collapse; width: 100%; min-width: 640px; }
+.matrix th, .matrix td { padding: 10px 12px; text-align: center; border-bottom: 1px solid var(--border); }
+.matrix thead th { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--amber); }
+.matrix .rowlabel { text-align: left; white-space: nowrap; position: sticky; left: 0; background: var(--surface); font-size: 14px; }
+.cell {
+  border: 1px solid var(--border); border-radius: 8px; cursor: pointer;
+  min-width: 76px; padding: 10px 6px; display: inline-flex; gap: 6px;
+  align-items: center; justify-content: center; color: var(--text);
+}
+.cell[disabled] { cursor: default; }
+.cell-n { font-family: var(--mono); font-weight: 700; font-size: 15px; }
+.matrix-legend { display: flex; gap: 18px; margin-top: 12px; font-size: 13px; color: var(--muted); flex-wrap: wrap; }
+.swatch.sm { width: 18px; height: 18px; border-width: 1px; display: inline-block; vertical-align: -3px; margin-right: 6px; }
+
+/* ---- domain explorer ---- */
+.domain-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.domain-tile {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 22px 18px; cursor: pointer; text-align: left; color: var(--text);
+  transition: border-color 0.15s, transform 0.15s;
+}
+.domain-tile:hover { border-color: var(--amber); transform: translateY(-2px); }
+.domain-tile h3 { font-size: 18px; margin-bottom: 4px; }
+.domain-n { font-family: var(--mono); color: var(--amber); font-size: 14px; margin-bottom: 8px; }
+.domain-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 8px; }
+.domain-cols .chips { margin-top: 4px; }
+.chip.on { border-color: var(--amber); color: var(--amber); }
+@media (max-width: 700px) { .domain-cols { grid-template-columns: 1fr; } }
