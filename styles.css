@@ -906,3 +906,42 @@ main {
  .language-photo-grid figure img{height:145px}
  .language-whisper{gap:7px;letter-spacing:1px}.language-whisper i{width:14px}
 }
+
+/* ---- rein in Beyond Aroma photography ---- */
+.plant-language {
+  max-width: 900px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.language-photo-hero {
+  min-height: 220px !important;
+  max-height: 240px;
+}
+.language-photo-overlay h2 {
+  font-size: clamp(28px, 4vw, 42px) !important;
+  max-width: 14ch !important;
+}
+.language-photo-grid {
+  grid-template-columns: 1fr 1fr 1fr !important;
+}
+.language-photo-grid figure img {
+  height: 115px !important;
+}
+.language-big-thought {
+  min-height: 175px !important;
+  padding: 20px !important;
+}
+.language-big-thought p {
+  font-size: clamp(17px, 2vw, 22px) !important;
+}
+@media(max-width:700px){
+  .plant-language { width:100%; }
+  .language-photo-hero { min-height:190px !important; max-height:190px; }
+  .language-photo-overlay { left:18px; bottom:18px; max-width:78%; }
+  .language-photo-overlay h2 { font-size:30px !important; }
+  .language-photo-overlay p { font-size:13px !important; }
+  .language-photo-grid { grid-template-columns:1fr 1fr !important; gap:8px !important; }
+  .language-big-thought { grid-column:1/-1; min-height:145px !important; padding:18px !important; }
+  .language-photo-grid figure img { height:95px !important; }
+  .language-photo-grid figcaption { padding:10px !important; font-size:10px !important; }
+}
