@@ -1,0 +1,625 @@
+{
+  "batch": "2026-10-07-b5",
+  "note": "Research batch 5 (pest depth) for ChatGPT to plug into data.js. Every PMID verified against the NCBI E-utilities API (titles and years match). Each study tagged with plant (oilIds), terpenes (compoundIds), uses (categories). Merge rule: skip any study whose pubmedId already exists in data.js.",
+  "studies": [
+    {
+      "id": "chaves-campos-2026",
+      "title": "In vitro insecticidal and repellent activity of Cymbopogon essential oils and geraniol against cat flea.",
+      "authors": "de Oliveira Chaves JK, Campos DR, Santos Soares EFM, et al.",
+      "journal": "Vet Parasitol",
+      "year": 2026,
+      "doi": "10.1016/j.vetpar.2026.110886",
+      "pubmedId": "42579967",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42579967/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "citronella",
+        "lemongrass",
+        "palmarosa"
+      ],
+      "compoundIds": [
+        "geraniol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "fleas"
+        }
+      ],
+      "finding": "Geraniol showed the lowest LC50 values against cat flea eggs, pupae, adults, and whole life-cycle inhibition, while Cymbopogon martinii (palmarosa) oil was most potent against larvae and kept repellency at 90% or higher for 48 hours.",
+      "limitations": "In vitro filter-paper assays only; no animal or field data."
+    },
+    {
+      "id": "lima-campos-2024",
+      "title": "Insecticidal and Repellent Activity of Essential Oils from Copaifera reticulata, Citrus paradisi, Lavandula hybrida and Salvia sclarea Against Immature and Adult Stages of Ctenocephalides felis felis.",
+      "authors": "Lima EAS, Campos DR, Soares EFMS, et al.",
+      "journal": "Acta Parasitol",
+      "year": 2024,
+      "doi": "10.1007/s11686-024-00874-3",
+      "pubmedId": "39147955",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39147955/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "copaiba",
+        "grapefruit",
+        "lavender",
+        "clary-sage"
+      ],
+      "compoundIds": [
+        "beta-caryophyllene",
+        "linalool",
+        "linalyl-acetate",
+        "limonene"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "fleas"
+        }
+      ],
+      "finding": "All four oils showed insecticidal and repellent activity against cat flea life stages in vitro, with beta-caryophyllene-rich copaiba oil showing the strongest residual efficacy.",
+      "limitations": "In vitro only; Lavandula hybrida (lavandin) mapped to lavender; no host-animal testing."
+    },
+    {
+      "id": "walton-2004-scabies",
+      "title": "Acaricidal activity of Melaleuca alternifolia (tea tree) oil: in vitro sensitivity of sarcoptes scabiei var hominis to terpinen-4-ol.",
+      "authors": "Walton SF, McKinnon M, Pizzutto S, et al.",
+      "journal": "Arch Dermatol",
+      "year": 2004,
+      "doi": "10.1001/archderm.140.5.563",
+      "pubmedId": "15148100",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/15148100/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "mites"
+        }
+      ],
+      "finding": "Five percent tea tree oil and its component terpinen-4-ol were highly effective at reducing scabies mite survival times in vitro, comparable to 5% permethrin and ivermectin.",
+      "limitations": "In vitro continuous-exposure assay; mites from a single crusted-scabies patient."
+    },
+    {
+      "id": "fang-2016-scabies",
+      "title": "In vitro activity of ten essential oils against Sarcoptes scabiei.",
+      "authors": "Fang F, Candy K, Melloul E, et al.",
+      "journal": "Parasit Vectors",
+      "year": 2016,
+      "doi": "10.1186/s13071-016-1889-3",
+      "pubmedId": "27876081",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27876081/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "clove",
+        "palmarosa",
+        "geranium",
+        "tea-tree",
+        "lavender",
+        "eucalyptus"
+      ],
+      "compoundIds": [
+        "eugenol",
+        "geraniol",
+        "linalool",
+        "terpinen-4-ol",
+        "eucalyptol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "mites"
+        }
+      ],
+      "finding": "In contact assays 1% clove oil killed all scabies mites within 20 minutes and palmarosa within 50 minutes; efficacy order was clove, palmarosa, geranium, tea tree, then lavender.",
+      "limitations": "Mites from experimentally infected pigs; in vitro only."
+    },
+    {
+      "id": "cai-2025-dustmite",
+      "title": "Biotoxicity of essential oil of Eucalyptus citriodora Hook (Myrtaceae) to dust mites.",
+      "authors": "Cai H, Xie P, Zhang X, et al.",
+      "journal": "Front Plant Sci",
+      "year": 2025,
+      "doi": "10.3389/fpls.2025.1708798",
+      "pubmedId": "41424559",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41424559/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "lemon-eucalyptus"
+      ],
+      "compoundIds": [
+        "citronellal"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "mites"
+        }
+      ],
+      "finding": "Eucalyptus citriodora oil showed strong contact-fumigant toxicity to both house dust mite species, with citronellal the most toxic constituent and 100% vapor-phase mortality.",
+      "limitations": "Laboratory bioassays at high applied doses; no bedroom-scale testing."
+    },
+    {
+      "id": "george-2026-fireant",
+      "title": "Repellent effect of oregano essential oil and carvacrol analogs against imported fire ants.",
+      "authors": "George G, Shah FM, Ali A, et al.",
+      "journal": "Pest Manag Sci",
+      "year": 2026,
+      "doi": "10.1002/ps.70297",
+      "pubmedId": "41099098",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41099098/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "oregano"
+      ],
+      "compoundIds": [
+        "carvacrol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "ants"
+        }
+      ],
+      "finding": "Oregano oil strongly repelled red and hybrid imported fire ants, with carvacrol (minimum repellent dose 0.98 ug/g) identified as the primary active constituent.",
+      "limitations": "Laboratory repellency assays; no field colony-level data."
+    },
+    {
+      "id": "holloway-2024-argentineant",
+      "title": "Common Home Remedies Do Not Deter Argentine Ants, Linepithema humile (Hymenoptera: Formicidae), from a Preferred Harborage.",
+      "authors": "Holloway JB, Suiter DR, Davis JW, et al.",
+      "journal": "Insects",
+      "year": 2024,
+      "doi": "10.3390/insects15100768",
+      "pubmedId": "39452344",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39452344/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "peppermint",
+        "rosemary"
+      ],
+      "compoundIds": [
+        "menthol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "ants"
+        }
+      ],
+      "finding": "MIXED RESULT: tansy, cucumber, and soybean-extract home remedies failed to deter Argentine ants even at 4 to 10 times the recommended dose, while 1% peppermint oil was the most deterrent treatment and fresh rosemary and spearmint leaves also deterred harboring.",
+      "limitations": "Laboratory harborage assay; short 2 to 4 hour observation window."
+    },
+    {
+      "id": "trongtokit-2005-mosquito",
+      "title": "Comparative repellency of 38 essential oils against mosquito bites.",
+      "authors": "Trongtokit Y, Rongsriyam Y, Komalamisra N, et al.",
+      "journal": "Phytother Res",
+      "year": 2005,
+      "doi": "10.1002/ptr.1637",
+      "pubmedId": "16041723",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16041723/",
+      "studyType": "controlled-human-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": null,
+      "oilIds": [
+        "citronella",
+        "clove"
+      ],
+      "compoundIds": [
+        "eugenol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "mosquitoes"
+        }
+      ],
+      "finding": "Of 38 oils screened on human forearms, only undiluted citronella, patchouli, clove, and makaen oils gave 2 hours of complete repellency against Aedes aegypti, with clove lasting longest (2 to 4 hours) across three mosquito species; no oil at 10 to 50% lasted 2 hours.",
+      "limitations": "Small volunteer panel; laboratory forearm assay, not field conditions."
+    },
+    {
+      "id": "chandrasekaran-2019-vitex",
+      "title": "Larvicidal activity of essential oil from Vitex negundo and Vitex trifolia on dengue vector mosquito Aedes aegypti.",
+      "authors": "Chandrasekaran T, Thyagarajan A, Santhakumari PG, et al.",
+      "journal": "Rev Soc Bras Med Trop",
+      "year": 2019,
+      "doi": "10.1590/0037-8682-0459-2018",
+      "pubmedId": "31365621",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31365621/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "vitex"
+      ],
+      "compoundIds": [
+        "eucalyptol",
+        "beta-caryophyllene"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "mosquitoes",
+          "topic": "larvicide"
+        }
+      ],
+      "finding": "Vitex trifolia and Vitex negundo oils killed Aedes aegypti and Culex quinquefasciatus larvae at 50 to 125 ppm, with LC50 values around 51 to 58 ppm for Ae. aegypti.",
+      "limitations": "Laboratory larval assays; no field or non-target testing."
+    },
+    {
+      "id": "mitra-2020-epa25b",
+      "title": "Efficacy of Active Ingredients From the EPA 25(B) List in Reducing Attraction of Aedes aegypti (Diptera: Culicidae) to Humans.",
+      "authors": "Mitra S, Rodriguez SD, Vulcan J, et al.",
+      "journal": "J Med Entomol",
+      "year": 2020,
+      "doi": "10.1093/jme/tjz178",
+      "pubmedId": "31612914",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31612914/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "rosemary"
+      ],
+      "compoundIds": [
+        "eucalyptol",
+        "camphor"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "mosquitoes"
+        }
+      ],
+      "finding": "NULL RESULT: rosemary oil showed no significant repellency against Aedes aegypti in the study's attraction assay, unlike peppermint oil which strongly reduced attraction at the first time point.",
+      "limitations": "Single laboratory assay design; short observation window."
+    },
+    {
+      "id": "schulze-2011-ticks",
+      "title": "Experimental use of two standard tick collection methods to evaluate the relative effectiveness of several plant-derived and synthetic repellents against Ixodes scapularis and Amblyomma americanum (Acari: Ixodidae).",
+      "authors": "Schulze TL, Jordan RA, Dolan MC",
+      "journal": "J Econ Entomol",
+      "year": 2011,
+      "doi": "10.1603/ec10421",
+      "pubmedId": "22299371",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22299371/",
+      "studyType": "in-vitro-study",
+      "context": "environmental",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "grapefruit",
+        "oregano"
+      ],
+      "compoundIds": [
+        "nootkatone",
+        "carvacrol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "ticks"
+        }
+      ],
+      "finding": "In field-plot tick drags, nootkatone and a permethrin standard each repelled 100% of Ixodes scapularis nymphs through 14 days, slightly outperforming carvacrol (90.7%) and a plant-oil product (97.7%).",
+      "limitations": "Field-plot evaluation, not a controlled lab assay; nootkatone tested as an isolated compound rather than as grapefruit oil."
+    },
+    {
+      "id": "gaudet-2024-tickseeking",
+      "title": "Lemongrass essential oil and DEET inhibit attractant detection in infected and non-infected Ixodes scapularis ticks.",
+      "authors": "Gaudet K, Anholeto LA, Hillier NK, et al.",
+      "journal": "Curr Res Insect Sci",
+      "year": 2024,
+      "doi": "10.1016/j.cris.2024.100096",
+      "pubmedId": "39386116",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39386116/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "lemongrass"
+      ],
+      "compoundIds": [
+        "citral",
+        "geraniol"
+      ],
+      "categories": [
+        {
+          "type": "pest",
+          "subcategory": "ticks"
+        }
+      ],
+      "finding": "Exposure to lemongrass oil, citral, or geraniol significantly impaired adult female Ixodes scapularis ticks' ability to detect and respond to host attractant, regardless of pathogen infection status.",
+      "limitations": "Electrophysiology and Y-tube lab assays; behavioral disruption rather than bite prevention was measured."
+    }
+  ],
+  "newOils": [
+    {
+      "id": "palmarosa",
+      "name": "Palmarosa",
+      "latinName": "Cymbopogon martinii",
+      "family": "Poaceae",
+      "plantPart": "Grass",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "rosy",
+        "floral",
+        "sweet"
+      ],
+      "color": "#b98a9e",
+      "description": "Steam-distilled from tropical grass. Very high in geraniol; top performer against cat fleas and scabies mites in comparative screens.",
+      "uses": [
+        "Outdoor blends",
+        "Skin blends",
+        "Research reference"
+      ],
+      "safety": "Generally well tolerated; patch test for sensitive skin.",
+      "constituents": [
+        {
+          "compoundId": "geraniol",
+          "range": {
+            "min": 70,
+            "max": 85
+          }
+        },
+        {
+          "compoundId": "linalool",
+          "range": {
+            "min": 1,
+            "max": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "copaiba",
+      "name": "Copaiba",
+      "latinName": "Copaifera reticulata",
+      "family": "Fabaceae",
+      "plantPart": "Resin (oleoresin)",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "woody",
+        "balsamic",
+        "mild"
+      ],
+      "color": "#a08b6d",
+      "description": "Steam-distilled oleoresin. Exceptionally rich in beta-caryophyllene; strongest residual efficacy against cat fleas in comparative testing.",
+      "uses": [
+        "Outdoor blends",
+        "Research reference"
+      ],
+      "safety": "Generally well tolerated; patch test for sensitive skin.",
+      "constituents": [
+        {
+          "compoundId": "beta-caryophyllene",
+          "range": {
+            "min": 40,
+            "max": 60
+          }
+        },
+        {
+          "compoundId": "alpha-humulene",
+          "range": {
+            "min": 5,
+            "max": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "grapefruit",
+      "name": "Grapefruit",
+      "latinName": "Citrus paradisi",
+      "family": "Rutaceae",
+      "plantPart": "Peel",
+      "extraction": "Cold-pressed",
+      "aroma": [
+        "citrus",
+        "fresh",
+        "bitter"
+      ],
+      "color": "#f0d060",
+      "description": "Cold-pressed from peel. Limonene-dominant like other citrus; botanical source of nootkatone, the 14-day tick repellent.",
+      "uses": [
+        "Uplifting blends",
+        "Cleaning blends",
+        "Research reference"
+      ],
+      "safety": "Phototoxic risk; avoid sun exposure after topical use.",
+      "constituents": [
+        {
+          "compoundId": "limonene",
+          "range": {
+            "min": 90,
+            "max": 96
+          }
+        },
+        {
+          "compoundId": "myrcene",
+          "range": {
+            "min": 1,
+            "max": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "clary-sage",
+      "name": "Clary Sage",
+      "latinName": "Salvia sclarea",
+      "family": "Lamiaceae",
+      "plantPart": "Flowering tops",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "herbaceous",
+        "floral",
+        "musky"
+      ],
+      "color": "#8a9ec9",
+      "description": "Steam-distilled from flowering tops. Linalyl acetate dominant; tested against cat flea life stages.",
+      "uses": [
+        "Evening blends",
+        "Research reference"
+      ],
+      "safety": "Avoid with alcohol; generally well tolerated otherwise.",
+      "constituents": [
+        {
+          "compoundId": "linalyl-acetate",
+          "range": {
+            "min": 60,
+            "max": 75
+          }
+        },
+        {
+          "compoundId": "linalool",
+          "range": {
+            "min": 10,
+            "max": 20
+          }
+        }
+      ]
+    },
+    {
+      "id": "geranium",
+      "name": "Geranium",
+      "latinName": "Pelargonium graveolens",
+      "family": "Geraniaceae",
+      "plantPart": "Leaves",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "rosy",
+        "floral",
+        "green"
+      ],
+      "color": "#c9758f",
+      "description": "Steam-distilled from leaves. Citronellol and geraniol rich; third most effective oil against scabies mites in a ten-oil screen.",
+      "uses": [
+        "Skin blends",
+        "Floral blends",
+        "Research reference"
+      ],
+      "safety": "Generally well tolerated; patch test for sensitive skin.",
+      "constituents": [
+        {
+          "compoundId": "citronellol",
+          "range": {
+            "min": 25,
+            "max": 40
+          }
+        },
+        {
+          "compoundId": "geraniol",
+          "range": {
+            "min": 10,
+            "max": 20
+          }
+        },
+        {
+          "compoundId": "linalool",
+          "range": {
+            "min": 5,
+            "max": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "vitex",
+      "name": "Vitex",
+      "latinName": "Vitex negundo",
+      "family": "Lamiaceae",
+      "plantPart": "Leaves",
+      "extraction": "Steam distillation",
+      "aroma": [
+        "herbaceous",
+        "camphor"
+      ],
+      "color": "#7d9b6a",
+      "description": "Steam-distilled from leaves. Larvicidal against Aedes aegypti and Culex mosquitoes at 50 to 125 ppm.",
+      "uses": [
+        "Outdoor blends",
+        "Research reference"
+      ],
+      "safety": "For external use; limited safety data \u2014 dilute well.",
+      "constituents": [
+        {
+          "compoundId": "eucalyptol",
+          "range": {
+            "min": 15,
+            "max": 30
+          }
+        },
+        {
+          "compoundId": "beta-caryophyllene",
+          "range": {
+            "min": 8,
+            "max": 15
+          }
+        },
+        {
+          "compoundId": "alpha-pinene",
+          "range": {
+            "min": 5,
+            "max": 12
+          }
+        }
+      ]
+    }
+  ],
+  "newCompounds": [
+    {
+      "id": "nootkatone",
+      "name": "Nootkatone",
+      "chemicalClass": "Sesquiterpenoid",
+      "formula": "C15H22O",
+      "aroma": [
+        "grapefruit",
+        "woody"
+      ],
+      "description": "Grapefruit-derived sesquiterpenoid; repelled 100% of Ixodes scapularis nymphs through 14 days in field trials."
+    },
+    {
+      "id": "citronellol",
+      "name": "Citronellol",
+      "chemicalClass": "Monoterpenoid",
+      "formula": "C10H20O",
+      "aroma": [
+        "rosy",
+        "citronella"
+      ],
+      "description": "Rosy alcohol prominent in geranium and citronella; softer counterpart to citronellal."
+    }
+  ]
+}
