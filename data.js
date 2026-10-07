@@ -39,7 +39,7 @@
    ========================================================================== */
 
 const TERPENE_DATA = {
-  "version": "0.7.2-research",
+  "version": "0.7.3-research",
   "categories": [
     {
       "type": "health",
@@ -5228,6 +5228,169 @@ const TERPENE_DATA = {
       ],
       "finding": "In 120 men undergoing prostate biopsy, lavender and frankincense aromatherapy delivered by nebulizer were compared with placebo for procedural anxiety and pain.",
       "limitations": "Procedure-specific clinical setting; separate oil groups should be interpreted from the full paper before making comparative claims."
+    },
+    {
+      "id": "cannabis-terpenes-review-2020",
+      "title": "Cannabis sativa terpenes are cannabimimetic and selectively enhance cannabinoid activity",
+      "authors": "LaVigne JE, Hecksel R, Keresztes A, Streicher JM",
+      "journal": "Scientific Reports",
+      "year": 2021,
+      "doi": "10.1038/s41598-021-87740-8",
+      "pubmedId": "33888729",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33888729/",
+      "studyType": "animal-study",
+      "context": "animal",
+      "evidenceLevel": "preclinical",
+      "sampleSize": null,
+      "oilIds": [
+        "cannabis"
+      ],
+      "compoundIds": [
+        "alpha-humulene",
+        "geraniol",
+        "linalool",
+        "beta-pinene"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "Selected terpenes found in Cannabis sativa produced cannabinoid-like behavioral effects in mice and interacted with cannabinoid signaling in experimental models.",
+      "limitations": "Preclinical mouse and cellular work on selected isolated terpenes; does not establish effects of cannabis aroma, essential oil, or a finished product in humans."
+    },
+    {
+      "id": "cannabis-terpene-profiles-2022",
+      "title": "Terpene Synthases and Terpene Variation in Cannabis sativa",
+      "authors": "Booth JK, Bohlmann J",
+      "journal": "Plant Science / phytochemistry research",
+      "year": 2019,
+      "pubmedId": "30690172",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30690172/",
+      "studyType": "review",
+      "context": "plant",
+      "evidenceLevel": "review",
+      "sampleSize": null,
+      "oilIds": [
+        "cannabis"
+      ],
+      "compoundIds": [
+        "myrcene",
+        "limonene",
+        "alpha-pinene",
+        "beta-pinene",
+        "linalool",
+        "beta-caryophyllene",
+        "alpha-humulene"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "plant chemistry"
+        }
+      ],
+      "finding": "Reviews the diverse monoterpenes and sesquiterpenes produced by Cannabis sativa and the terpene synthases underlying cultivar-dependent aroma profiles.",
+      "limitations": "Plant chemistry review, not evidence of therapeutic efficacy."
+    },
+    {
+      "id": "cannabis-terpene-diversity-2016",
+      "title": "Terpenes in Cannabis sativa - From plant genome to humans",
+      "authors": "Booth JK, Page JE, Bohlmann J",
+      "journal": "Plant Science",
+      "year": 2017,
+      "doi": "10.1016/j.plantsci.2017.03.018",
+      "pubmedId": "28602488",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28602488/",
+      "studyType": "review",
+      "context": "plant",
+      "evidenceLevel": "review",
+      "sampleSize": null,
+      "oilIds": [
+        "cannabis"
+      ],
+      "compoundIds": [
+        "myrcene",
+        "limonene",
+        "alpha-pinene",
+        "beta-pinene",
+        "linalool",
+        "beta-caryophyllene",
+        "alpha-humulene"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "plant chemistry"
+        }
+      ],
+      "finding": "Reviews Cannabis sativa terpene biosynthesis, genetic diversity, ecological roles, and potential relevance of volatile terpenes to human exposure.",
+      "limitations": "Narrative plant-science review; potential human relevance should not be interpreted as demonstrated clinical benefit."
+    },
+    {
+      "id": "cannabis-aroma-chemistry-2023",
+      "title": "Minor, Nonterpenoid Volatile Compounds Drive the Aroma Differences of Exotic Cannabis",
+      "authors": "Oswald IW, et al.",
+      "journal": "ACS Omega",
+      "year": 2023,
+      "doi": "10.1021/acsomega.3c04496",
+      "pubmedId": "37953763",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37953763/",
+      "studyType": "laboratory-study",
+      "context": "laboratory",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "cannabis"
+      ],
+      "compoundIds": [
+        "myrcene",
+        "limonene",
+        "beta-caryophyllene"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "aroma chemistry"
+        }
+      ],
+      "finding": "Chemical and sensory analysis showed that cannabis aroma differences cannot be explained by dominant terpenes alone; minor volatile compounds make important contributions.",
+      "limitations": "Analytical and sensory chemistry study; not an efficacy study."
+    },
+    {
+      "id": "cannabis-volatile-classification-2022",
+      "title": "The phytochemical diversity of commercial Cannabis in the United States",
+      "authors": "Smith CJ, et al.",
+      "journal": "PLoS ONE",
+      "year": 2022,
+      "pubmedId": "35446892",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35446892/",
+      "studyType": "observational-study",
+      "context": "plant",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "cannabis"
+      ],
+      "compoundIds": [
+        "myrcene",
+        "limonene",
+        "beta-caryophyllene",
+        "alpha-pinene",
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "plant chemistry"
+        }
+      ],
+      "finding": "Large-scale chemical profiling of commercial Cannabis samples demonstrated substantial phytochemical diversity and showed that conventional strain labels poorly capture underlying chemistry.",
+      "limitations": "Commercial-sample chemistry study; not clinical evidence and includes cannabinoids as well as volatile chemistry."
     }
   ],
   "sources": [
