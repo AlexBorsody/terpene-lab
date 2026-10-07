@@ -427,12 +427,36 @@ function renderCompounds() {
   }).join("") || `<p class="empty">No compounds match.</p>`;
   grid.querySelectorAll(".card").forEach(el =>
     el.addEventListener("click", () => showCompound(el.dataset.c)));
-  requestAnimationFrame(initLimonene3D);
+  requestAnimationFrame(() => ensureLimonene3D());
 }
 document.getElementById("compound-search").addEventListener("input", renderCompounds);
 document.getElementById("compound-class-filter").addEventListener("change", renderCompounds);
 
 /* ---------- 3D molecule prototype: limonene ---------- */
+// Load Three.js as an ES module. The previous global builds are no longer
+// reliable on modern CDN/browser combinations.
+let threeLoading = null;
+async function ensureLimonene3D() {
+  const host = document.getElementById("limonene-3d");
+  if (!host) return;
+  if (typeof THREE !== "undefined") return initLimonene3D();
+  host.classList.add("molecule3d-loading");
+  if (!threeLoading) {
+    threeLoading = import("https://cdn.jsdelivr.net/npm/three@0.170.0/+esm")
+      .then(mod => { window.THREE = mod; return mod; })
+      .catch(err => { console.error("Three.js failed to load", err); return null; });
+  }
+  const mod = await threeLoading;
+  host.classList.remove("molecule3d-loading");
+  if (!host.isConnected) return;
+  if (!mod) {
+    host.classList.add("molecule3d-error");
+    host.querySelector("span").textContent = "3D viewer unavailable";
+    return;
+  }
+  initLimonene3D();
+}
+
 let limonene3D = null;
 function initLimonene3D() {
   const host = document.getElementById("limonene-3d");
@@ -442,11 +466,7 @@ function initLimonene3D() {
     limonene3D.renderer.dispose();
     limonene3D = null;
   }
-  if (typeof THREE === "undefined") {
-    host.classList.add("molecule3d-error");
-    host.innerHTML = "<span>3D unavailable · tap card for compound details</span>";
-    return;
-  }
+  if (typeof THREE === "undefined") return;
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
