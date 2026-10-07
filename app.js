@@ -735,6 +735,7 @@ function renderStudies() {
   const types = [...new Set(D.studies.map(s => s.studyType))].sort();
   document.getElementById("study-type-filter").innerHTML =
     `<option value="">All study types</option>` + types.map(t => `<option value="${t}">${esc(prettyStudyType(t))}</option>`).join("");
+  document.getElementById("oil-sort").value = "az";
   renderOils("");
   renderCompounds();
   renderStudies();
