@@ -1,4 +1,4 @@
-const CACHE = "sunnys-terpene-lab-v4";
+const CACHE = "sunnys-terpene-lab-v5";
 const CORE = ["./", "./index.html", "./styles.css", "./app.js", "./data.js", "./manifest.webmanifest", "./shield-icon.svg"];
 
 self.addEventListener("install", event => {
