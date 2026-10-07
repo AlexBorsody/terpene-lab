@@ -1004,3 +1004,14 @@ main {
  .language-human-thought{font-size:14px;line-height:1.6;margin-top:13px}
  .plant-language .plant-language-note{font-size:10px !important;text-align:left !important}
 }
+
+/* Matrix numbers are plain text only */
+.matrix .cell,
+.matrix .cell[disabled],
+.matrix .cell:not([disabled]):hover {
+  background: none !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.matrix .cell-n { background: transparent !important; }
