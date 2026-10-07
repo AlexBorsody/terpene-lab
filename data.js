@@ -39,7 +39,7 @@
    ========================================================================== */
 
 const TERPENE_DATA = {
-  "version": "0.7.3-research",
+  "version": "0.7.4-composition-audit",
   "categories": [
     {
       "type": "health",
@@ -282,8 +282,9 @@ const TERPENE_DATA = {
           "compoundId": "linalool",
           "range": {
             "min": 25,
-            "max": 40
-          }
+            "max": 38
+          },
+          "basis": "ISO 11024 specification cited in GC-MS study"
         },
         {
           "compoundId": "linalyl-acetate",
@@ -969,9 +970,10 @@ const TERPENE_DATA = {
         {
           "compoundId": "linalool",
           "range": {
-            "min": 1,
-            "max": 5
-          }
+            "min": 0.8,
+            "max": 3.8
+          },
+          "basis": "Published GC-MS profiles"
         }
       ]
     },
@@ -1078,9 +1080,10 @@ const TERPENE_DATA = {
         {
           "compoundId": "linalool",
           "range": {
-            "min": 10,
-            "max": 20
-          }
+            "min": 13.46,
+            "max": 30.43
+          },
+          "basis": "EFSA batch data and published GC-MS studies"
         }
       ]
     },
@@ -1122,9 +1125,10 @@ const TERPENE_DATA = {
         {
           "compoundId": "linalool",
           "range": {
-            "min": 5,
-            "max": 10
-          }
+            "min": 2.45,
+            "max": 11.68
+          },
+          "basis": "Published GC-MS profiles across origins"
         }
       ]
     },
@@ -1208,9 +1212,10 @@ const TERPENE_DATA = {
         {
           "compoundId": "linalool",
           "range": {
-            "min": 6,
+            "min": 3,
             "max": 15
-          }
+          },
+          "basis": "ISO 3520 Calabrian-type specification"
         }
       ]
     },
@@ -1238,9 +1243,10 @@ const TERPENE_DATA = {
         {
           "compoundId": "linalool",
           "range": {
-            "min": 8,
-            "max": 18
-          }
+            "min": 2,
+            "max": 19
+          },
+          "basis": "ISO 3063 specification cited by EFSA"
         },
         {
           "compoundId": "beta-caryophyllene",
@@ -1320,13 +1326,6 @@ const TERPENE_DATA = {
             "min": 4,
             "max": 10
           }
-        },
-        {
-          "compoundId": "linalool",
-          "range": {
-            "min": 2,
-            "max": 8
-          }
         }
       ]
     },
@@ -1388,14 +1387,6 @@ const TERPENE_DATA = {
           "range": {
             "min": 1,
             "max": 8
-          },
-          "basis": "Representative cultivar-dependent volatile profile range"
-        },
-        {
-          "compoundId": "linalool",
-          "range": {
-            "min": 0.2,
-            "max": 5
           },
           "basis": "Representative cultivar-dependent volatile profile range"
         },
