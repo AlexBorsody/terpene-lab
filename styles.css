@@ -1015,3 +1015,12 @@ main {
   box-shadow: none !important;
 }
 .matrix .cell-n { background: transparent !important; }
+
+/* 3D viewers: slightly smaller, lazy-loaded on every compound */
+.molecule3d {
+  width: calc(48% - 4px) !important;
+  height: 171px !important;
+}
+@media(max-width:520px){
+  .molecule3d { width: calc(47% - 4px) !important; height:171px !important; }
+}
