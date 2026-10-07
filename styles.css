@@ -945,3 +945,28 @@ main {
   .language-photo-grid figure img { height:95px !important; }
   .language-photo-grid figcaption { padding:10px !important; font-size:10px !important; }
 }
+
+/* ---- plain evidence matrix: numbers, not cards ---- */
+.matrix .cell {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  min-width: 64px;
+  padding: 14px 10px !important;
+  box-shadow: none !important;
+}
+.matrix .cell:not([disabled]):hover {
+  background: rgba(114,184,154,.07) !important;
+}
+.matrix .cell[disabled] {
+  background: transparent !important;
+  opacity: .45;
+}
+.matrix .cell-n {
+  color: var(--text);
+  font: 600 16px var(--mono);
+}
+.matrix th, .matrix td {
+  border-right: 1px solid var(--border);
+}
+.matrix th:last-child, .matrix td:last-child { border-right: 0; }
