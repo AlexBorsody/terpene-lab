@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terpene Lab - Essential Oil Data Explorer</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+</head>
+<body>
+<header class="lab-header">
+  <div class="lab-header-inner">
+    <div class="brand">
+      <div class="brand-mark">TL</div>
+      <div>
+        <h1>TERPENE LAB</h1>
+        <p class="tagline">Essential oil data explorer</p>
+      </div>
+    </div>
+    <nav class="tabs">
+      <button class="tab active" data-tab="oils">Oils</button>
+      <button class="tab" data-tab="terpenes">Terpenes</button>
+      <button class="tab" data-tab="network">Network</button>
+      <button class="tab" data-tab="studies">Studies</button>
+    </nav>
+  </div>
+</header>
+
+<main id="app">
+  <!-- OILS -->
+  <section id="tab-oils" class="tab-panel active">
+    <div class="toolbar">
+      <input id="oil-search" type="search" placeholder="Search oils...">
+      <span id="oil-count" class="count"></span>
+    </div>
+    <div id="oil-grid" class="card-grid"></div>
+    <div id="oil-detail" class="detail hidden">
+      <button class="back" data-back="oils">&larr; All oils</button>
+      <div class="detail-head">
+        <div class="detail-swatch" id="oil-swatch"></div>
+        <div>
+          <h2 id="oil-name"></h2>
+          <p class="latin" id="oil-latin"></p>
+        </div>
+      </div>
+      <p id="oil-desc" class="desc"></p>
+      <div class="meta-row">
+        <div><span class="meta-label">Plant part</span><span id="oil-part"></span></div>
+        <div><span class="meta-label">Aroma</span><span id="oil-aroma"></span></div>
+      </div>
+      <h3>Terpene composition</h3>
+      <div id="oil-chart" class="chart"></div>
+      <p class="hint">Click a terpene bar or chip to drill down.</p>
+      <div id="oil-terpene-chips" class="chips"></div>
+      <h3>Common uses</h3>
+      <ul id="oil-uses" class="uses"></ul>
+      <h3>Safety</h3>
+      <p id="oil-safety" class="safety"></p>
+      <h3>Studies</h3>
+      <div id="oil-studies"></div>
+    </div>
+  </section>
+
+  <!-- TERPENES -->
+  <section id="tab-terpenes" class="tab-panel">
+    <div class="toolbar">
+      <input id="terpene-search" type="search" placeholder="Search terpenes...">
+      <select id="terpene-class-filter">
+        <option value="">All classes</option>
+      </select>
+      <span id="terpene-count" class="count"></span>
+    </div>
+    <div id="terpene-grid" class="card-grid"></div>
+    <div id="terpene-detail" class="detail hidden">
+      <button class="back" data-back="terpenes">&larr; All terpenes</button>
+      <h2 id="terpene-name"></h2>
+      <p class="latin"><span id="terpene-formula" class="formula"></span> &middot; <span id="terpene-class"></span></p>
+      <p id="terpene-desc" class="desc"></p>
+      <div class="meta-row">
+        <div><span class="meta-label">Aroma</span><span id="terpene-aroma"></span></div>
+      </div>
+      <h3>Found in these oils</h3>
+      <div id="terpene-oils-chart" class="chart"></div>
+      <h3>Studies</h3>
+      <div id="terpene-studies"></div>
+    </div>
+  </section>
+
+  <!-- NETWORK -->
+  <section id="tab-network" class="tab-panel">
+    <p class="panel-intro">Every oil connected to its terpenes. Drag nodes, scroll to zoom, click a node to open it.</p>
+    <div id="network-chart" class="chart chart-tall"></div>
+  </section>
+
+  <!-- STUDIES -->
+  <section id="tab-studies" class="tab-panel">
+    <div class="toolbar">
+      <input id="study-search" type="search" placeholder="Search studies...">
+      <select id="study-oil-filter"><option value="">All oils</option></select>
+      <select id="study-terpene-filter"><option value="">All terpenes</option></select>
+      <span id="study-count" class="count"></span>
+    </div>
+    <div id="study-list"></div>
+  </section>
+</main>
+
+<footer class="lab-footer">
+  <p>Terpene Lab &middot; sample dataset v0.1 &middot; findings summarize published papers; not medical advice.</p>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
