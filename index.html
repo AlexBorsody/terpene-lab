@@ -126,15 +126,16 @@
 
   <!-- EVIDENCE MATRIX -->
   <section id="tab-matrix" class="tab-panel">
-    <p class="panel-intro">Oils against research domains. Color intensity shows how many studies are linked. Tap a cell to see the papers.</p>
+    <div class="matrix-key" aria-label="Matrix key">
+      <span class="matrix-key-title">STUDIES</span>
+      <span class="matrix-key-swatch k1"></span><span>Fewer</span>
+      <span class="matrix-key-swatch k2"></span>
+      <span class="matrix-key-swatch k3"></span>
+      <span class="matrix-key-swatch k4"></span><span>More</span>
+      <span class="matrix-key-action">Tap any number → papers</span>
+    </div>
     <div class="matrix-wrap">
       <table id="matrix-table" class="matrix"></table>
-    </div>
-    <div class="matrix-legend">
-      <span><b class="lvl lvl-clinical">C</b> clinical</span>
-      <span><b class="lvl lvl-preclinical">P</b> preclinical</span>
-      <span><b class="lvl lvl-laboratory">L</b> laboratory</span>
-      <span><b class="lvl lvl-review">R</b> review</span>
     </div>
   </section>
 
