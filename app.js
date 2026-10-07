@@ -306,8 +306,21 @@ function showPathwayEvidence(oil, group) {
 function renderOils(filter) {
   const q = (filter || "").toLowerCase();
   const grid = document.getElementById("oil-grid");
+  const domainFilter = document.getElementById("oil-domain-filter")?.value || "";
+  const sort = document.getElementById("oil-sort")?.value || "az";
   const oils = D.oils.filter(o =>
-    o.name.toLowerCase().includes(q) || o.latinName.toLowerCase().includes(q));
+    (o.name.toLowerCase().includes(q) || o.latinName.toLowerCase().includes(q)) &&
+    (!domainFilter || domainsForOil(o.id).includes(domainFilter))
+  ).sort((a,b) => {
+    if (sort === "studies") return studiesForOil(b.id).length - studiesForOil(a.id).length || a.name.localeCompare(b.name);
+    if (sort === "domains") return domainsForOil(b.id).length - domainsForOil(a.id).length || a.name.localeCompare(b.name);
+    if (sort === "compound") {
+      const ac = topConstituent(a)?.compound?.name || "";
+      const bc = topConstituent(b)?.compound?.name || "";
+      return ac.localeCompare(bc) || a.name.localeCompare(b.name);
+    }
+    return a.name.localeCompare(b.name);
+  });
   document.getElementById("oil-count").textContent = oils.length + " oils";
   grid.innerHTML = oils.map(o => {
     const top = topConstituent(o);
@@ -326,6 +339,8 @@ ${top ? `<p class="top-terpene">Top compound: <b>${esc(top.compound.name)}</b> $
     c.addEventListener("click", () => showOil(c.dataset.oil)));
 }
 document.getElementById("oil-search").addEventListener("input", e => renderOils(e.target.value));
+document.getElementById("oil-sort").addEventListener("change", () => renderOils(document.getElementById("oil-search").value));
+document.getElementById("oil-domain-filter").addEventListener("change", () => renderOils(document.getElementById("oil-search").value));
 
 function showOil(id) {
   const o = oilById[id];
