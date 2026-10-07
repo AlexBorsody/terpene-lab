@@ -75,7 +75,23 @@ function topConstituent(oil) {
 
 /* ---------- tabs ---------- */
 document.querySelectorAll(".tab").forEach(btn => {
-  btn.addEventListener("click", () => switchTab(btn.dataset.tab));
+  btn.addEventListener("click", () => {
+    const tab = btn.dataset.tab;
+    // Direct tab clicks always return to the browse/list state. Detail views
+    // are opened only by selecting an item, so Oils/Compounds can never appear
+    // blank or stranded after navigating from another view.
+    if (tab === "oils") {
+      document.getElementById("oil-list-view").classList.remove("hidden");
+      document.getElementById("oil-detail").classList.add("hidden");
+      renderOils(document.getElementById("oil-search").value);
+    }
+    if (tab === "compounds") {
+      document.getElementById("compound-list-view").classList.remove("hidden");
+      document.getElementById("compound-detail").classList.add("hidden");
+      renderCompounds();
+    }
+    switchTab(tab);
+  });
 });
 function switchTab(tab) {
   document.querySelectorAll(".tab").forEach(b =>
