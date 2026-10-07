@@ -9,10 +9,10 @@ const domainByType = Object.fromEntries(D.categories.map(c => [c.type, c]));
 const LEVEL_ORDER = { clinical: 0, preclinical: 1, laboratory: 2, review: 3 };
 const LEVEL_LETTER = { clinical: "C", preclinical: "P", laboratory: "L", review: "R" };
 const LEVEL_LABEL = {
-  clinical: "Clinical",
-  preclinical: "Preclinical",
-  laboratory: "Laboratory",
-  review: "Review"
+  clinical: "Studied in people",
+  preclinical: "Early research",
+  laboratory: "Lab research",
+  review: "Research summary"
 };
 
 let charts = [];
@@ -119,8 +119,20 @@ document.querySelectorAll("[data-backto]").forEach(btn => {
 
 /* ---------- study cards ---------- */
 function evidenceBadge(s) {
-  return `<span class="evidence-word evidence-${s.evidenceLevel}">${LEVEL_LABEL[s.evidenceLevel]}</span>
-    <span class="lvl-text">${esc(prettyStudyType(s.studyType))} &middot; ${esc(s.context)}</span>`;
+  const plain = {
+    clinical: "Studied in people",
+    preclinical: "Early research",
+    laboratory: "Lab research",
+    review: "Research summary"
+  };
+  const context = {
+    human: "People",
+    animal: "Animals",
+    "in-vitro": "Lab",
+    environmental: "Real-world / environmental"
+  };
+  return `<span class="evidence-word evidence-${s.evidenceLevel}">${plain[s.evidenceLevel] || LEVEL_LABEL[s.evidenceLevel]}</span>
+    <span class="lvl-text">${esc(prettyStudyType(s.studyType))} · ${esc(context[s.context] || s.context)}</span>`;
 }
 function prettyStudyType(t) {
   return t.split("-").join(" ");
