@@ -1,0 +1,368 @@
+{
+  "batch": "2026-10-07-b7",
+  "note": "Research batch 7 (safety and toxicity) for ChatGPT to plug into data.js. Every PMID verified against the NCBI E-utilities API (titles and years match). Each study tagged with plant (oilIds), terpenes (compoundIds), uses (categories). Safety studies use {\"type\":\"health\",\"subcategory\":\"safety\"}. Merge rule: skip any study whose pubmedId already exists in data.js.",
+  "studies": [
+    {
+      "id": "henley-2007-gynecomastia",
+      "title": "Prepubertal gynecomastia linked to lavender and tea tree oils.",
+      "authors": "Henley DV, Lipson N, Korach KS, Bloch CA",
+      "journal": "N Engl J Med",
+      "year": 2007,
+      "doi": "10.1056/NEJMoa064725",
+      "pubmedId": "17267908",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17267908/",
+      "studyType": "case-series",
+      "context": "mixed",
+      "evidenceLevel": "clinical",
+      "sampleSize": 3,
+      "oilIds": [
+        "lavender",
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "linalool",
+        "linalyl-acetate",
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "safety"
+        }
+      ],
+      "finding": "SAFETY CONCERN: repeated topical use of products containing lavender and tea tree oils was linked to prepubertal gynecomastia in three boys, with in-vitro evidence of weak estrogenic and antiandrogenic activity for both oils.",
+      "limitations": "Three case reports only; no epidemiological prevalence data."
+    },
+    {
+      "id": "rutherford-2007-teatree-allergy",
+      "title": "Allergy to tea tree oil: retrospective review of 41 cases with positive patch tests over 4.5 years.",
+      "authors": "Rutherford T, Nixon R, Tam M, Tate B",
+      "journal": "Australas J Dermatol",
+      "year": 2007,
+      "doi": "10.1111/j.1440-0960.2007.00341.x",
+      "pubmedId": "17535193",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17535193/",
+      "studyType": "observational-human-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 2320,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "safety"
+        }
+      ],
+      "finding": "Of 2320 patch-tested patients, 41 (1.8%) reacted to oxidized tea tree oil, with the reaction deemed relevant to the presenting dermatitis in 41% of those cases.",
+      "limitations": "Retrospective; patch testing used oxidized oil, so the fresh-oil allergy rate may differ."
+    },
+    {
+      "id": "villar-1994-melaleuca-pets",
+      "title": "Toxicity of melaleuca oil and related essential oils applied topically on dogs and cats.",
+      "authors": "Villar D, Knight MJ, Hansen SR, Buck WB",
+      "journal": "Vet Hum Toxicol",
+      "year": 1994,
+      "doi": "",
+      "pubmedId": "8197716",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/8197716/",
+      "studyType": "case-series",
+      "context": "animal",
+      "evidenceLevel": "preclinical",
+      "sampleSize": null,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol",
+        "eucalyptol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "safety"
+        }
+      ],
+      "finding": "SAFETY CONCERN: topical melaleuca oil at inappropriately high doses caused depression, weakness, incoordination and muscle tremors in dogs and cats, though supportive care achieved full recovery within 2-3 days.",
+      "limitations": "Poison-center case series; the excessive doses were not quantified."
+    },
+    {
+      "id": "hammer-2006-teatree-toxicity-review",
+      "title": "A review of the toxicity of Melaleuca alternifolia (tea tree) oil.",
+      "authors": "Hammer KA, Carson CF, Riley TV, Nielsen JB",
+      "journal": "Food Chem Toxicol",
+      "year": 2006,
+      "doi": "10.1016/j.fct.2005.09.001",
+      "pubmedId": "16243420",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16243420/",
+      "studyType": "systematic-review",
+      "context": "mixed",
+      "evidenceLevel": "review",
+      "sampleSize": null,
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "safety"
+        }
+      ],
+      "finding": "Tea tree oil showed low acute oral and dermal toxicity in animals but caused skin irritation and allergic contact dermatitis in humans (especially when oxidized), with oral poisoning cases in children producing CNS depression and ataxia.",
+      "limitations": "Narrative review; the underlying studies vary in quality and design."
+    },
+    {
+      "id": "flaman-2001-camphor-eucalyptus-children",
+      "title": "Unintentional exposure of young children to camphor and eucalyptus oils.",
+      "authors": "Flaman Z, Pellechia-Clarke S, Bailey B, McGuigan M",
+      "journal": "Paediatr Child Health",
+      "year": 2001,
+      "doi": "10.1093/pch/6.2.80",
+      "pubmedId": "20084213",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20084213/",
+      "studyType": "observational-human-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 251,
+      "oilIds": [
+        "eucalyptus"
+      ],
+      "compoundIds": [
+        "camphor",
+        "eucalyptol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "safety"
+        }
+      ],
+      "finding": "SAFETY CONCERN: among 251 children who ingested camphorated or eucalyptus oil products, the most common symptoms were cough and vomiting, two children had seizures, and a literature review found vomiting, lethargy, coma, seizures and one death.",
+      "limitations": "Poison-center call data; exposure doses were not quantified."
+    },
+    {
+      "id": "yasui-1994-bergamot-phototoxicity",
+      "title": "Action spectrum for bergamot-oil phototoxicity measured by sunburn cell counting.",
+      "authors": "Yasui Y, Hirone T",
+      "journal": "J Dermatol",
+      "year": 1994,
+      "doi": "",
+      "pubmedId": "8051317",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/8051317/",
+      "studyType": "animal-study",
+      "context": "animal",
+      "evidenceLevel": "preclinical",
+      "sampleSize": null,
+      "oilIds": [
+        "bergamot"
+      ],
+      "compoundIds": [
+        "limonene",
+        "linalyl-acetate",
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "safety"
+        }
+      ],
+      "finding": "SAFETY CONCERN: bergamot oil plus UVA (325-365 nm) produced dose-dependent sunburn-cell phototoxicity in guinea pig skin driven by its bergapten content, while UVB plus oil caused no more damage than UVB alone.",
+      "limitations": "Guinea pig skin model; bergapten levels vary across bergamot oil batches."
+    },
+    {
+      "id": "naganuma-1985-lemon-phototoxicity",
+      "title": "A study of the phototoxicity of lemon oil.",
+      "authors": "Naganuma M, Hirose S, Nakayama Y, Nakajima K, Someya T",
+      "journal": "Arch Dermatol Res",
+      "year": 1985,
+      "doi": "10.1007/BF00412492",
+      "pubmedId": "4096528",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/4096528/",
+      "studyType": "animal-study",
+      "context": "animal",
+      "evidenceLevel": "preclinical",
+      "sampleSize": null,
+      "oilIds": [
+        "lemon"
+      ],
+      "compoundIds": [
+        "limonene"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "safety"
+        }
+      ],
+      "finding": "SAFETY CONCERN: lemon oil's phototoxicity was traced to the furocoumarins oxypeucedanin and bergapten, whose concentrations varied more than 20-fold between lemon oils from different regions.",
+      "limitations": "Guinea-pig bioassay; expressed-oil phototoxicity varies by origin and processing."
+    },
+    {
+      "id": "christensson-2012-oxidized-linalool",
+      "title": "Air-oxidized linalool: a frequent cause of fragrance contact allergy.",
+      "authors": "Brared Christensson J, Andersen KE, Bruze M, et al.",
+      "journal": "Contact Dermatitis",
+      "year": 2012,
+      "doi": "10.1111/j.1600-0536.2012.02134.x",
+      "pubmedId": "22906042",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22906042/",
+      "studyType": "controlled-human-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 2900,
+      "oilIds": [
+        "lavender"
+      ],
+      "compoundIds": [
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "safety"
+        }
+      ],
+      "finding": "SAFETY CONCERN: air-oxidized linalool at 6% caused positive patch-test reactions in 7% of 2900 dermatitis patients, while pure unoxidized linalool is a weak sensitizer, showing oxidation creates the allergens.",
+      "limitations": "Patch-test population with dermatitis; prevalence in the general population is likely lower."
+    },
+    {
+      "id": "fouyet-2022-placental-toxicity",
+      "title": "Evaluation of placental toxicity of five essential oils and their potential endocrine-disrupting effects.",
+      "authors": "Fouyet S, Olivier E, Leproux P, Dutot M, Rat P",
+      "journal": "Curr Issues Mol Biol",
+      "year": 2022,
+      "doi": "10.3390/cimb44070192",
+      "pubmedId": "35877416",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35877416/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "niaouli",
+        "sweet-orange",
+        "tea-tree",
+        "ylang-ylang"
+      ],
+      "compoundIds": [
+        "eucalyptol",
+        "limonene",
+        "linalool",
+        "terpinen-4-ol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "safety"
+        }
+      ],
+      "finding": "MIXED RESULT: niaouli, orange, tea tree and ylang-ylang oils each disrupted at least one placental hormone in human placental cells, but none activated the P2X7 cell-death receptor, so they behaved as hormonal modulators rather than true endocrine disruptors.",
+      "limitations": "Cell-line model only; in-vivo placental exposure levels are unknown."
+    },
+    {
+      "id": "lee-2020-poisonings",
+      "title": "Essential oil exposures in Australia: analysis of cases reported to the NSW Poisons Information Centre.",
+      "authors": "Lee KA, Harnett JE, Cairns R",
+      "journal": "Med J Aust",
+      "year": 2020,
+      "doi": "10.5694/mja2.50403",
+      "pubmedId": "31709543",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31709543/",
+      "studyType": "observational-human-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 4412,
+      "oilIds": [
+        "eucalyptus",
+        "tea-tree",
+        "lavender",
+        "clove",
+        "peppermint"
+      ],
+      "compoundIds": [
+        "eucalyptol",
+        "terpinen-4-ol",
+        "linalool",
+        "eugenol",
+        "menthol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "safety"
+        }
+      ],
+      "finding": "SAFETY CONCERN: among 4412 essential-oil exposure calls over four years, 63% involved children under 15, eucalyptus oil accounted for 46% of cases, and as little as 5 mL could cause life-threatening toxicity in children.",
+      "limitations": "Poison-center call data; outcomes were not followed up after the call."
+    },
+    {
+      "id": "mathew-2021-seizures",
+      "title": "Essential oil related seizures (EORS): A multi-center prospective study on essential oils and seizures in adults.",
+      "authors": "Mathew T, John SK, Kamath V, et al.",
+      "journal": "Epilepsy Res",
+      "year": 2021,
+      "doi": "10.1016/j.eplepsyres.2021.106626",
+      "pubmedId": "33813360",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33813360/",
+      "studyType": "observational-human-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 55,
+      "oilIds": [
+        "eucalyptus"
+      ],
+      "compoundIds": [
+        "eucalyptol",
+        "camphor"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "safety"
+        }
+      ],
+      "finding": "SAFETY CONCERN: across four hospitals over four years, 55 patients had essential-oil-related seizures with eucalyptus and camphor preparations implicated, including first-ever seizures in 40% of cases.",
+      "limitations": "Observational; causality was inferred from exposure history rather than controlled testing."
+    },
+    {
+      "id": "webb-1990-limonene-dogs",
+      "title": "Assessment of the subchronic oral toxicity of d-limonene in dogs.",
+      "authors": "Webb DR, et al.",
+      "journal": "Food Chem Toxicol",
+      "year": 1990,
+      "doi": "10.1016/0278-6915(90)90142-a",
+      "pubmedId": "2276695",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/2276695/",
+      "studyType": "animal-study",
+      "context": "animal",
+      "evidenceLevel": "preclinical",
+      "sampleSize": 30,
+      "oilIds": [
+        "lemon",
+        "sweet-orange",
+        "grapefruit"
+      ],
+      "compoundIds": [
+        "limonene"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "safety"
+        }
+      ],
+      "finding": "NULL RESULT for cross-species toxicity: dogs given up to 1000 mg/kg/day d-limonene for 6 months showed no hyaline-droplet nephropathy or kidney histopathology, confirming the male-rat kidney tumors are a rat-specific alpha-2u-globulin effect not relevant to humans.",
+      "limitations": "Emesis limited the maximum tolerated dose; kidney weights showed a dose-related trend without histopathological change."
+    }
+  ],
+  "newOils": [],
+  "newCompounds": []
+}
