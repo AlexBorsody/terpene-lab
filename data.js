@@ -39,7 +39,7 @@
    ========================================================================== */
 
 const TERPENE_DATA = {
-  "version": "0.7.1-research",
+  "version": "0.7.2-research",
   "categories": [
     {
       "type": "health",
@@ -1327,6 +1327,85 @@ const TERPENE_DATA = {
             "min": 2,
             "max": 8
           }
+        }
+      ]
+    },
+    {
+      "id": "cannabis",
+      "name": "Cannabis",
+      "latinName": "Cannabis sativa",
+      "family": "Cannabaceae",
+      "plantPart": "Flowers and aerial parts",
+      "extraction": "Steam distillation / volatile oil isolation",
+      "aroma": [
+        "herbal",
+        "resinous",
+        "citrus",
+        "pine"
+      ],
+      "color": "#72b89a",
+      "description": "A terpene-rich aromatic plant whose volatile profile shares many compounds with familiar botanicals across the Terpene Lab. Composition varies substantially by cultivar and growing conditions.",
+      "uses": [
+        "Aromatic research",
+        "Terpene chemistry"
+      ],
+      "safety": "Volatile-oil composition varies substantially by cultivar and preparation. Ingredient research should not be generalized to cannabinoid-rich cannabis extracts.",
+      "constituents": [
+        {
+          "compoundId": "myrcene",
+          "range": {
+            "min": 10,
+            "max": 35
+          },
+          "basis": "Representative cultivar-dependent volatile profile range"
+        },
+        {
+          "compoundId": "beta-caryophyllene",
+          "range": {
+            "min": 5,
+            "max": 25
+          },
+          "basis": "Representative cultivar-dependent volatile profile range"
+        },
+        {
+          "compoundId": "limonene",
+          "range": {
+            "min": 2,
+            "max": 15
+          },
+          "basis": "Representative cultivar-dependent volatile profile range"
+        },
+        {
+          "compoundId": "alpha-pinene",
+          "range": {
+            "min": 1,
+            "max": 10
+          },
+          "basis": "Representative cultivar-dependent volatile profile range"
+        },
+        {
+          "compoundId": "beta-pinene",
+          "range": {
+            "min": 1,
+            "max": 8
+          },
+          "basis": "Representative cultivar-dependent volatile profile range"
+        },
+        {
+          "compoundId": "linalool",
+          "range": {
+            "min": 0.2,
+            "max": 5
+          },
+          "basis": "Representative cultivar-dependent volatile profile range"
+        },
+        {
+          "compoundId": "alpha-humulene",
+          "range": {
+            "min": 1,
+            "max": 8
+          },
+          "basis": "Representative cultivar-dependent volatile profile range"
         }
       ]
     }
