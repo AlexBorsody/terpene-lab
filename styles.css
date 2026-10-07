@@ -1088,3 +1088,15 @@ main {
   #oil-detail .detail-swatch { width:46px; height:46px; }
   .oil-quickfacts { margin-bottom:12px; }
 }
+
+/* Tighter oil detail spacing under sticky navigation */
+#tab-oils:has(#oil-detail:not(.hidden)) {
+  margin-top: -10px;
+}
+#oil-detail {
+  margin-top: 0 !important;
+}
+@media(max-width:600px){
+  main { padding-top: 12px; }
+  #tab-oils:has(#oil-detail:not(.hidden)) { margin-top: -4px; }
+}
