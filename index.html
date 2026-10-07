@@ -88,26 +88,29 @@
           <p class="latin" id="oil-latin"></p>
         </div>
       </div>
-      <p id="oil-desc" class="desc"></p>
-      <div class="meta-row">
-        <div><span class="meta-label">Family</span><span id="oil-family"></span></div>
-        <div><span class="meta-label">Plant part</span><span id="oil-part"></span></div>
-        <div><span class="meta-label">Extraction</span><span id="oil-extraction"></span></div>
-        <div><span class="meta-label">Aroma</span><span id="oil-aroma"></span></div>
+      <div class="oil-quickfacts">
+        <span id="oil-desc" class="desc"></span>
+        <span><b id="oil-part"></b> · <span id="oil-extraction"></span></span>
+        <span id="oil-aroma"></span>
+        <span class="hidden-meta"><span id="oil-family"></span></span>
       </div>
-      <h3>Composition fingerprint</h3>
-      <div id="oil-chart" class="chart"></div>
-      <p class="hint">Ranges are typical published values. Click a bar or chip to drill into a compound.</p>
-      <div id="oil-compound-chips" class="chips"></div>
-      <h3>Research coverage</h3>
-      <div id="oil-domains" class="chips"></div>
-      <div id="oil-evidence" class="evidence-summary"></div>
-      <h3>Common uses</h3>
-      <ul id="oil-uses" class="uses"></ul>
-      <h3>Safety</h3>
-      <p id="oil-safety" class="safety"></p>
-      <h3>Studies</h3>
-      <div id="oil-studies"></div>
+      <div class="oil-study-priority">
+        <h3>Studies</h3>
+        <div id="oil-domains" class="chips"></div>
+        <div id="oil-evidence" class="evidence-summary"></div>
+        <div id="oil-studies"></div>
+      </div>
+      <details class="oil-more">
+        <summary>Composition, uses & safety</summary>
+        <h3>Composition fingerprint</h3>
+        <div id="oil-chart" class="chart"></div>
+        <p class="hint">Ranges are typical published values. Tap a compound to explore it.</p>
+        <div id="oil-compound-chips" class="chips"></div>
+        <h3>Common uses</h3>
+        <ul id="oil-uses" class="uses"></ul>
+        <h3>Safety</h3>
+        <p id="oil-safety" class="safety"></p>
+      </details>
     </div>
   </section>
 
