@@ -1,0 +1,322 @@
+{
+  "batch": "2026-10-07-b9",
+  "note": "Research batch 9 (isolated compound spotlight) for ChatGPT to plug into data.js. Every PMID verified against the NCBI E-utilities API (titles and years match). Each study tagged with plant (oilIds), terpenes (compoundIds), uses (categories). The Kehrl 2004 cineole rhinosinusitis study (PMID 15064633) was excluded from this batch because it was already staged in batch 8. Merge rule: skip any study whose pubmedId already exists in data.js.",
+  "studies": [
+    {
+      "id": "kenia-2008-menthol-cough",
+      "title": "Does inhaling menthol affect nasal patency or cough?",
+      "authors": "Kenia P, Houghton T, Beardsmore C",
+      "journal": "Pediatric Pulmonology",
+      "year": 2008,
+      "doi": "10.1002/ppul.20797",
+      "pubmedId": "18435479",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18435479/",
+      "studyType": "controlled-human-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 42,
+      "oilIds": [
+        "peppermint"
+      ],
+      "compoundIds": [
+        "menthol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "respiratory"
+        }
+      ],
+      "finding": "MIXED RESULT: inhaled menthol significantly increased children's perception of nasal patency but had no effect on objective spirometric airflow measures and did not reduce citric-acid-induced cough counts versus placebo.",
+      "limitations": "Healthy children aged 10-11 in a school setting; single-blind pseudo-randomized crossover design."
+    },
+    {
+      "id": "wasner-2008-menthol-allodynia",
+      "title": "The effect of menthol on cold allodynia in patients with neuropathic pain",
+      "authors": "Wasner G, Naleschinski D, Binder A, et al.",
+      "journal": "Pain Medicine",
+      "year": 2008,
+      "doi": "10.1111/j.1526-4637.2007.00290.x",
+      "pubmedId": "18366513",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18366513/",
+      "studyType": "controlled-human-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 8,
+      "oilIds": [
+        "peppermint"
+      ],
+      "compoundIds": [
+        "menthol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "MIXED RESULT: 40% topical menthol induced cold allodynia in healthy control skin but did not aggravate preexisting cold allodynia in neuropathic pain patients, and attenuated it in 6 of 8 patients.",
+      "limitations": "Only 8 patients; heterogeneous results in neuropathic areas."
+    },
+    {
+      "id": "klauke-2014-bcp-pain",
+      "title": "The cannabinoid CB(2) receptor-selective phytocannabinoid beta-caryophyllene exerts analgesic effects in mouse models of inflammatory and neuropathic pain",
+      "authors": "Klauke AL, Racz I, Pradier B, et al.",
+      "journal": "European Neuropsychopharmacology",
+      "year": 2014,
+      "doi": "10.1016/j.euroneuro.2013.10.008",
+      "pubmedId": "24210682",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24210682/",
+      "studyType": "animal-study",
+      "context": "animal",
+      "evidenceLevel": "preclinical",
+      "sampleSize": null,
+      "oilIds": [
+        "copaiba"
+      ],
+      "compoundIds": [
+        "beta-caryophyllene"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "Oral beta-caryophyllene reduced inflammatory pain in the formalin test and attenuated thermal hyperalgesia and mechanical allodynia in neuropathic pain models in a CB2-receptor-dependent manner with no tolerance after prolonged treatment.",
+      "limitations": "Mouse models only; no human data."
+    },
+    {
+      "id": "degrado-2023-eugenol-pulpotomy",
+      "title": "Efficacy of Articaine or Eugenol for Pain Relief after Emergency Coronal Pulpotomy in Teeth with Irreversible Pulpitis: A Randomized Clinical Trial",
+      "authors": "De Grado Gabriel F, Clement B, Florence F, et al.",
+      "journal": "Dentistry Journal",
+      "year": 2023,
+      "doi": "10.3390/dj11070167",
+      "pubmedId": "37504233",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37504233/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 86,
+      "oilIds": [
+        "clove"
+      ],
+      "compoundIds": [
+        "eugenol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "oral-dental"
+        }
+      ],
+      "finding": "In 86 patients with irreversible pulpitis, eugenol as a pulp dressing after emergency pulpotomy produced a significantly larger pain reduction on day 1 than articaine, with 70.5% pain-free by day 7.",
+      "limitations": "Single-center trial; eugenol tested as a dressing component rather than standalone analgesic."
+    },
+    {
+      "id": "kim-2015-alpha-pinene",
+      "title": "Alpha-Pinene Exhibits Anti-Inflammatory Activity Through the Suppression of MAPKs and the NF-kB Pathway in Mouse Peritoneal Macrophages",
+      "authors": "Kim DS, Lee HJ, Jeon YD, et al.",
+      "journal": "American Journal of Chinese Medicine",
+      "year": 2015,
+      "doi": "10.1142/S0192415X15500457",
+      "pubmedId": "26119957",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/26119957/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "pine"
+      ],
+      "compoundIds": [
+        "alpha-pinene"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "Alpha-pinene suppressed LPS-induced inflammatory mediators in mouse peritoneal macrophages by inhibiting MAPK and NF-kappaB signaling pathways.",
+      "limitations": "Cell-culture model only; no animal or human data."
+    },
+    {
+      "id": "vigushin-1998-limonene-phase1",
+      "title": "Phase I and pharmacokinetic study of D-limonene in patients with advanced cancer",
+      "authors": "Vigushin DM, Poon GK, Boddy A, et al.",
+      "journal": "Cancer Chemotherapy and Pharmacology",
+      "year": 1998,
+      "doi": "10.1007/s002800050793",
+      "pubmedId": "9654110",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/9654110/",
+      "studyType": "phase-1-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 42,
+      "oilIds": [
+        "sweet-orange"
+      ],
+      "compoundIds": [
+        "limonene"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "immune"
+        }
+      ],
+      "finding": "MIXED RESULT: oral D-limonene reached a maximum tolerated dose of 8 g/m2/day with dose-limiting nausea, vomiting and diarrhea, producing one partial response and three prolonged stable diseases in 32 advanced-cancer patients but no responses in the phase II breast cancer cohort.",
+      "limitations": "Small uncontrolled phase I/II design; high oral doses with GI toxicity."
+    },
+    {
+      "id": "martins-2017-citral-airpouch",
+      "title": "Anti-Inflammatory Activity of the Essential Oil Citral in Experimental Infection with Staphylococcus aureus in a Model Air Pouch",
+      "authors": "Martins HB, Selis ND, Souza CL, et al.",
+      "journal": "Evidence-Based Complementary and Alternative Medicine",
+      "year": 2017,
+      "doi": "10.1155/2017/2505610",
+      "pubmedId": "28316634",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28316634/",
+      "studyType": "animal-study",
+      "context": "animal",
+      "evidenceLevel": "preclinical",
+      "sampleSize": 48,
+      "oilIds": [
+        "lemongrass"
+      ],
+      "compoundIds": [
+        "citral"
+      ],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
+        },
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "Citral treatment in a mouse S. aureus air-pouch model reduced bacterial load and significantly lowered TNF-alpha levels, demonstrating combined antimicrobial and anti-inflammatory activity.",
+      "limitations": "Mouse air-pouch model only; short 4-8 hour observation window."
+    },
+    {
+      "id": "harada-2018-linalool-anxiolytic",
+      "title": "Linalool Odor-Induced Anxiolytic Effects in Mice",
+      "authors": "Harada H, Kashiwadani H, Kanmura Y, et al.",
+      "journal": "Frontiers in Behavioral Neuroscience",
+      "year": 2018,
+      "doi": "",
+      "pubmedId": "30405369",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30405369/",
+      "studyType": "animal-study",
+      "context": "animal",
+      "evidenceLevel": "preclinical",
+      "sampleSize": null,
+      "oilIds": [
+        "lavender"
+      ],
+      "compoundIds": [
+        "linalool"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health"
+        }
+      ],
+      "finding": "Inhaled linalool vapor produced anxiolytic effects in mice without motor impairment, acting through olfactory neuron input to benzodiazepine-responsive GABA-A receptors rather than direct receptor action.",
+      "limitations": "Mouse study; effects required intact olfactory neurons and may not translate to humans."
+    },
+    {
+      "id": "xu-2005-camphor-trpv1",
+      "title": "Camphor activates and strongly desensitizes the transient receptor potential vanilloid subtype 1 channel in a vanilloid-independent mechanism",
+      "authors": "Xu H, Blair NT, Clapham DE",
+      "journal": "Journal of Neuroscience",
+      "year": 2005,
+      "doi": "",
+      "pubmedId": "16192383",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16192383/",
+      "studyType": "in-vitro-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "oilIds": [
+        "rosemary"
+      ],
+      "compoundIds": [
+        "camphor"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "Camphor activated TRPV1 channels and desensitized them more rapidly and completely than capsaicin, providing a mechanistic basis for camphor's topical analgesic and counterirritant action.",
+      "limitations": "Channel-expression cell models; analgesic role inferred rather than directly tested in pain models."
+    },
+    {
+      "id": "nunes-2024-geraniol-orofacial",
+      "title": "Orofacial antinociceptive activity of codeine-associated geraniol in mice: a controlled trial",
+      "authors": "Nunes APL, Andrade HHN, Alves DDN, et al.",
+      "journal": "Brazilian Oral Research",
+      "year": 2024,
+      "doi": "10.1590/1807-3107bor-2024.vol38.0071",
+      "pubmedId": "39109768",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39109768/",
+      "studyType": "animal-study",
+      "context": "animal",
+      "evidenceLevel": "preclinical",
+      "sampleSize": 36,
+      "oilIds": [
+        "palmarosa"
+      ],
+      "compoundIds": [
+        "geraniol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "Geraniol combined with codeine reduced orofacial nociception by up to 71.9% in the formalin, glutamate, and capsaicin tests in mice, outperforming either agent alone.",
+      "limitations": "Mouse model; geraniol tested only in combination with codeine, not as a standalone treatment."
+    },
+    {
+      "id": "fachini-2012-thymol-carvacrol",
+      "title": "Effects of Thymol and Carvacrol, Constituents of Thymus vulgaris L. Essential Oil, on the Inflammatory Response",
+      "authors": "Fachini-Queiroz FC, Kummer R, Estevao-Silva CF, et al.",
+      "journal": "Evidence-Based Complementary and Alternative Medicine",
+      "year": 2012,
+      "doi": "10.1155/2012/657026",
+      "pubmedId": "22919415",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22919415/",
+      "studyType": "animal-study",
+      "context": "animal",
+      "evidenceLevel": "preclinical",
+      "sampleSize": null,
+      "oilIds": [
+        "thyme"
+      ],
+      "compoundIds": [
+        "thymol",
+        "carvacrol"
+      ],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "finding": "MIXED RESULT: purified carvacrol significantly inhibited inflammatory edema and leukocyte migration in mice, while purified thymol showed no topical anti-edema effect and instead produced an irritative response, even though thymol inhibited edema in the pleurisy model.",
+      "limitations": "Mouse models; divergent thymol effects across models complicate interpretation."
+    }
+  ],
+  "newOils": [],
+  "newCompounds": []
+}
