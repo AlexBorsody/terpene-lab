@@ -577,3 +577,35 @@ main {
 .molecule-glyph-large i:nth-child(3) { left: 5px; top: 25px; }
 .molecule-glyph-large i:nth-child(4) { left: 19px; top: 15px; }
 .molecule-glyph-large i:nth-child(5) { left: 32px; top: 28px; }
+
+/* ---- WebGL molecule prototype ---- */
+.compound-card { position: relative; min-height: 230px; overflow: hidden; }
+.molecule3d {
+  position: absolute;
+  right: 8px;
+  top: 10px;
+  width: 48%;
+  height: 185px;
+  z-index: 2;
+  touch-action: none;
+  cursor: grab;
+}
+.molecule3d:active { cursor: grabbing; }
+.molecule3d canvas { width: 100% !important; height: 100% !important; display: block; }
+.molecule3d span {
+  position: absolute;
+  right: 8px;
+  bottom: 2px;
+  z-index: 3;
+  font: 9px var(--mono);
+  letter-spacing: .8px;
+  color: var(--muted);
+  opacity: .75;
+  pointer-events: none;
+}
+.compound-card:has(.molecule3d) > h3,
+.compound-card:has(.molecule3d) > p,
+.compound-card:has(.molecule3d) > .compound-chemline { max-width: 50%; }
+@media (max-width: 520px) {
+  .molecule3d { width: 47%; height: 175px; right: 3px; top: 8px; }
+}
