@@ -46,9 +46,9 @@ body {
 .brand { display: flex; align-items: center; gap: 12px; }
 
 .brand-mark {
-  width: 44px; height: 44px;
+  width: 46px; height: 46px;
   border: 2px solid var(--amber);
-  border-radius: 8px;
+  border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-family: var(--mono);
   font-weight: 700;
@@ -528,4 +528,4 @@ main {
 .molecule-glyph i:nth-child(4) { left: 16px; top: 12px; }
 .molecule-glyph i:nth-child(5) { left: 26px; top: 22px; }
 
-.brand-shield { width: 34px; height: 38px; display: block; color: var(--amber); }
+.brand-shield { width: 36px; height: 40px; display: block; color: var(--amber); }
