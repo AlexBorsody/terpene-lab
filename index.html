@@ -11,6 +11,12 @@
 <link rel="stylesheet" href="styles.css">
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
 
+<style>
+.essential-oils-explainer { margin:0 0 20px; padding:16px 18px; border:1px solid var(--border); border-left:3px solid var(--amber); border-radius:8px; background:var(--surface); }
+.essential-oils-explainer h2 { margin:0 0 8px; color:var(--text); font-size:20px; line-height:1.3; }
+.essential-oils-explainer p { margin:0; color:var(--muted); font-size:14px; line-height:1.65; max-width:90ch; }
+@media(max-width:600px) { .essential-oils-explainer { padding:14px; } .essential-oils-explainer h2 { font-size:18px; } }
+</style>
 </head>
 <body>
 <header class="lab-header">
@@ -60,6 +66,10 @@
   <!-- OIL EXPLORER -->
   <section id="tab-oils" class="tab-panel active">
     <div id="oil-list-view">
+      <aside class="essential-oils-explainer" aria-labelledby="essential-oils-explainer-title">
+        <h2 id="essential-oils-explainer-title">Essential oils aren’t fatty oils.</h2>
+        <p>Despite the name, essential oils are different from fatty oils such as olive or coconut oil. They are concentrated mixtures of volatile aromatic plant compounds, often rich in terpenes and terpenoids, rather than oils made mainly of triglyceride fats. Some also contain other compounds, such as eugenol in clove oil. “Essential” refers to the plant’s characteristic essence or aroma.</p>
+      </aside>
       <div class="toolbar">
         <input id="oil-search" type="search" placeholder="Search oils...">
         <select id="oil-sort" aria-label="Sort plants">
