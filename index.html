@@ -14,7 +14,7 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="shield-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="shield-icon.svg">
-<link rel="stylesheet" href="styles.css?v=7">
+<link rel="stylesheet" href="styles.css?v=8">
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
 
 <style>
@@ -123,8 +123,9 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
         <summary>Composition, uses & safety</summary>
         <h3>Composition fingerprint</h3>
         <div id="oil-chart" class="chart"></div>
-        <p class="hint">Published ranges · Tap to explore</p>
+        <p class="hint">Only source-verified, sample-specific values are plotted. Literature findings are not a chemical analysis of the finished Sunny's Shield formula.</p>
         <div id="oil-compound-chips" class="chips"></div>
+        <div id="oil-beyond"></div>
         <h3>Common uses</h3>
         <ul id="oil-uses" class="uses"></ul>
         <h3>Safety</h3>
@@ -137,10 +138,12 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
   <section id="tab-compounds" class="tab-panel">
     <div id="compound-list-view">
       <div class="toolbar">
-        <input id="compound-search" type="search" placeholder="Search compounds...">
-        <select id="compound-class-filter"><option value="">All classes</option></select>
+        <input aria-label="Search compounds" id="compound-search" type="search" placeholder="Search compounds...">
+        <select id="compound-class-filter" aria-label="Primary chemical class"><option value="">All classes</option></select>
+        <select id="compound-group-filter" aria-label="Functional group or family"></select>
         <span id="compound-count" class="count"></span>
       </div>
+      <div id="compound-beyond"></div>
       <div id="compound-grid" class="card-grid"></div>
     </div>
     <div id="compound-detail" class="detail hidden">
@@ -148,12 +151,15 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
       <h2 id="compound-name"></h2>
       <p class="latin"><span id="compound-formula" class="formula"></span> &middot; <span id="compound-class"></span></p>
       <p id="compound-desc" class="desc"></p>
+      <div id="compound-chemistry"></div>
       <div class="meta-row">
         <div><span class="meta-label">Aroma</span><span id="compound-aroma"></span></div>
       </div>
       <h3>Found in these oils</h3>
       <div id="compound-oils-chart" class="chart"></div>
-      <p class="hint">Click a bar to open the oil.</p>
+      <div id="compound-oil-links" class="chips"></div>
+      <p class="hint">Each bar represents one cited oil sample, not a universal percentage. All recorded observations and their sources are listed below.</p>
+      <div id="compound-material-evidence"></div>
       <h3>Studies</h3>
       <div id="compound-studies"></div>
     </div>
@@ -208,7 +214,7 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
 
   <!-- NETWORK -->
   <section id="tab-network" class="tab-panel">
-    <p class="panel-intro">Every oil connected to its compounds. Drag nodes, scroll to zoom, click a node to open it.</p>
+    <p class="panel-intro">Explore catalog and sourced oil relationships. Dashed amber links mark nonvolatile oil fractions. Plant and solvent-extract findings stay outside this graph. Tap a node to open it.</p>
     <div id="network-chart" class="chart chart-tall"></div>
   </section>
 
@@ -227,6 +233,8 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
         <option value="review">Review</option>
       </select>
       <select id="study-type-filter"><option value="">All study types</option></select>
+      <select id="study-class-filter" aria-label="Study compound primary class"></select>
+      <select id="study-group-filter" aria-label="Study compound functional group or family"></select>
       <span id="study-count" class="count"></span>
     </div>
     <div id="study-list"></div>
@@ -270,6 +278,7 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
 </footer>
 
 <script src="data.js"></script>
+<script src="chemistry.js"></script>
 <script src="app.js"></script>
 <script>
 if ("serviceWorker" in navigator) {
