@@ -1111,3 +1111,33 @@ main {
   #tab-oils:has(#oil-detail:not(.hidden)) { margin-top: -4px; }
 }
 
+
+/* Additional chemistry: compact disclosures, independently scrollable in embeds. */
+.beyond-terpenes, .chem-evidence { border:1px solid var(--line, #26334f); border-radius:8px; margin:12px 0; padding:12px; background:#101b2e; color:#f2ead8; }
+.beyond-terpenes summary, .chem-evidence summary { cursor:pointer; line-height:1.5; }
+.beyond-terpenes > summary { color:#efbd69; font-weight:600; }
+.beyond-terpenes p, .oil-chemistry p, .chem-context { font-size:13px; line-height:1.65; max-width:90ch; }
+.chem-group-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin:16px 0; }
+.chem-group-grid h4 { color:#efbd69; margin:0 0 6px; }
+.chem-group-grid section { min-width:0; }
+.chem-evidence summary span { display:block; color:#b8c5d8; font-size:12px; }
+.chem-evidence article + article { border-top:1px solid #33425a; margin-top:16px; padding-top:12px; }
+.chem-sources { padding-left:20px; font-size:12px; line-height:1.6; }
+.chem-sources li { margin:8px 0; overflow-wrap:anywhere; }
+.chem-sources a { color:#efbd69; text-decoration:underline; }
+.chem-sources span { display:block; color:#b8c5d8; }
+.beyond-terpenes .chip, .oil-chemistry .chip, #compound-material-evidence .chip { white-space:normal; text-align:left; overflow-wrap:anywhere; min-height:36px; }
+summary:focus-visible, .chip:focus-visible, .compound-card:focus-visible { outline:2px solid #efbd69; outline-offset:3px; }
+#oil-chart:has(.empty), #compound-oils-chart:has(.empty) { height:auto; min-height:0; }
+@media (max-width:600px) { .chem-group-grid { grid-template-columns:1fr; } .beyond-terpenes, .chem-evidence { padding:10px; } }
+
+.oil-chemistry, .beyond-terpenes { min-width:0; overflow-wrap:anywhere; }
+.oil-chemistry .hint { white-space:normal; width:auto; }
+
+.oil-chemistry { border-top:1px solid #33425a; margin:12px 0; padding:8px 0; }
+.oil-chemistry > summary { color:#efbd69; cursor:pointer; }
+.oil-chemistry > summary span { display:block; font-size:12px; color:#b8c5d8; font-weight:400; text-transform:none; letter-spacing:0; }
+.oil-chemistry .chem-evidence { border:0; border-top:1px solid #26334f; border-radius:0; margin:8px 0; padding:6px 0; background:transparent; }
+.chem-source-details { margin:8px 0; }
+.chem-source-details summary { cursor:pointer; font-size:12px; color:#b8c5d8; }
+.chem-status { color:#efbd69; font-size:12px; }

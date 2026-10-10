@@ -18,6 +18,7 @@ Interactive essential oil evidence explorer. Plant to molecule to paper.
 | `index.html` | App shell |
 | `styles.css` | Laboratory instrument theme |
 | `app.js` | Rendering, charts (ECharts via CDN), interactions |
+| `chemistry.js` | Shared classification, search and quantitative-provenance guards |
 | `data.js` | **The dataset.** Full schema documented at the top of the file. |
 | `spec.md` | Product and visualization spec (source of truth). |
 
@@ -25,12 +26,15 @@ Interactive essential oil evidence explorer. Plant to molecule to paper.
 
 `data.js` holds `TERPENE_DATA`: `{ version, categories, oils, compounds, studies, sources }`.
 
-- Composition uses **ranges** (`{min, max}`), not false single-number precision.
+- Composition uses source-verified, sample-specific **ranges** (`{min, max}`) where available. Unknown or unaudited quantities say **Not quantified** and produce no numerical bars. Existing unsourced legacy ranges remain in data for audit but are not displayed.
 - Compounds carry chemically correct classes (Monoterpene, Sesquiterpene, Phenylpropanoid, ...). The UI says "terpenes and compounds".
 - Every study has `studyType`, `context` (human/animal/in-vitro/...), and `evidenceLevel` (clinical/preclinical/laboratory/review).
 - Studies are tagged with use categories: `{type, subcategory, topic}` where type is health, cleaning, microbial, or pest.
 - Oil category coverage is **derived from linked studies**, never stored on oils.
-- `sources` holds composition/taxonomy references separately from efficacy studies.
+- `sources` holds composition/taxonomy references separately from efficacy studies. Both are discoverable from oil and compound details.
+- `chemicalGroups` supplies the four Beyond Terpenes explainers. `functionalGroups` on compounds supports overlapping aldehyde, ester and thiol browsing while preserving `chemicalClass`. Flavonoids are a primary family, not a functional group.
+- `oils[].chemicalEvidence` records material-specific published evidence separately from `constituents`. Every oil displays all four groups, including explicit evidence gaps. Plant material, extracts, volatile oil and nonvolatile oil fractions are kept distinct.
+- The Studies library can combine primary class, functional group/family, oil, compound, topic/domain and evidence filters. Aroma studies have their own sensory domain; analytical results are not efficacy claims.
 
 Research rules: real publication URLs only (PubMed/DOI/journal). Findings stay faithful to the paper. Record null studies. Never infer finished-product claims from ingredient studies.
 
@@ -76,3 +80,9 @@ and `shopify-embed.md`.
 - Laboratory instrument look: dark navy, amber accents, cream text, monospace for data.
 - Evidence levels must always be visible next to counts. Never show a generic "science-backed" score.
 
+
+## Beyond Terpenes evidence and verification
+
+The per-oil collection is a curated literature review, not exhaustive coverage or a chemical analysis of Sunny's Shield. Missing evidence does not establish absence. Cold-pressed citrus may retain nonvolatile flavonoids; these findings stay outside volatile fingerprints. See `research/beyond-terpenes-source-review.md` for scientific checks and limitations.
+
+Run the data regression checks with `node tests/chemistry.cjs`. For browser checks, start the local server above, make Playwright available, then run `node tests/browser.cjs`. Set `PLAYWRIGHT_MODULE` to an installed module path, `CHROME_PATH` to a Chrome executable and `TEST_URL` to another local port as needed. The browser suite covers 320, 390, 768 and 1440 pixel widths in standalone/embed modes, combined filters, keyboard navigation, deep links and missing quantities.

@@ -751,3 +751,34 @@ This first pass intentionally includes:
 - a meaningful negative/mixed frankincense result
 
 That mix is deliberate. The evidence map should show **what kind of evidence exists**, not merely accumulate favorable citations.
+
+
+## 16. Beyond Terpenes and material-specific evidence
+
+`chemicalClass` remains the primary family. Optional `functionalGroups` contains overlapping `aldehyde`, `ester` and `thiol` tags. The browse filter also offers the `Flavonoid` family without pretending it is a functional group. Optional `aliases`, `volatility`, `sourceIds` and `showModel` annotate compounds. Do not create a duplicate citral, citronellal, cinnamaldehyde or linalyl acetate record.
+
+`chemicalGroups` contains concise, expandable descriptions, example compound IDs and source IDs. It appears adjacent to the oil fingerprint and in compound browsing.
+
+Each oil has `chemicalEvidence: []`. Records use:
+
+```js
+{
+  group: "ester",
+  status: "detected-unquantified",
+  compoundIds: ["linalyl-acetate"],
+  material: "Essential oil",
+  sample: "Exact botanical identity, part and sample scope",
+  extraction: "Preparation in the cited study",
+  method: "Analytical method in the cited study",
+  finding: "Faithful summary scoped to the material",
+  sourceIds: ["verified-source-id"]
+}
+```
+
+Supported statuses: `quantified`, `detected-unquantified`, `reported-unquantified`, `not-detected`, `not-found`, `not-reviewed`. A missing group renders an evidence gap, never absence. `reported-unquantified` includes literature reports where this dataset has not imported a numerical result; it does not imply the source never measured anything. `not-detected` requires an explicit study-specific negative finding. Status and material scope are independent.
+
+Quantitative composition additionally requires a finite `range: {min, max}` in 0–100, exact `sample`, `material`, `extraction`, `method`, nonempty `basis` (units and denominator), and valid linked `sourceIds`. Preserve GC peak-area percentage versus mass percentage. Never sum overlapping groups or combine different samples into a fingerprint. Nonvolatile and plant/extract evidence is not inserted into the volatile-oil `constituents` array. Existing ranges without this provenance are retained only for audit and suppressed in charts, pathway labels, top-compound ranking and numeric chips.
+
+Composition/taxonomy references use `sources`, with optional `type`, `evidenceLevel`, `material` and `method`. Research studies remain in `studies` with explicit study type, evidence level, topic and optional `material`. Analytical/sensory studies are categorized under `sensory`, not health/cognition. Botanical flavonoid chemistry has a `botanical` domain. Neither implies treatment efficacy.
+
+Preserve relative assets, custom domain, return link and iframe mode. New disclosures and filters must be keyboard-accessible and avoid em dashes in copy.
