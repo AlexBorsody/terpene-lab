@@ -24,6 +24,16 @@ body {
   line-height: 1.5;
 }
 
+/* The standalone lab uses the viewport, independent of Shopify page wrappers. */
+html:not(.lab-embedded) .lab-header-inner,
+html:not(.lab-embedded) main { max-width: none; }
+
+.lab-return { padding: 10px 20px; background: var(--bg2); }
+.lab-return a { color: var(--amber); font-size: 13px; text-decoration: none; }
+.lab-return a:hover { text-decoration: underline; }
+.lab-return a:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; }
+.lab-embedded .lab-return { display: none; }
+
 .lab-header {
   background: var(--bg2);
   border-bottom: 1px solid var(--border);
@@ -1100,3 +1110,4 @@ main {
   main { padding-top: 12px; }
   #tab-oils:has(#oil-detail:not(.hidden)) { margin-top: -4px; }
 }
+
