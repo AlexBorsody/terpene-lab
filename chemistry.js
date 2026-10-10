@@ -15,5 +15,20 @@ const CHEMISTRY = (() => {
     [compound.name, compound.formula, compound.chemicalClass, compound.description,
       ...(compound.aliases || []), ...tags(compound)].join(' ').toLowerCase().includes(query.trim().toLowerCase());
   const evidenceFor = (oil, group) => (oil.chemicalEvidence || []).filter(e => e.group === group);
-  return { groups, sources, hasSources, validRange, quantified, tags, matches, evidenceFor };
+  // One qualified relationship per oil/compound for browsing and graph edges.
+  // Keep every observation in chemicalEvidence; never aggregate their quantities.
+  const oilRelationships = compoundId => TERPENE_DATA.oils.map(oil => {
+    const observations = (oil.chemicalEvidence || []).filter(e =>
+      ['Essential oil', 'Essential oil: nonvolatile fraction'].includes(e.material) &&
+      ['quantified', 'reported-unquantified', 'detected-unquantified'].includes(e.status) &&
+      hasSources(e) && (e.compoundIds || []).includes(compoundId));
+    const legacy = oil.constituents.find(c => c.compoundId === compoundId);
+    const candidates = [...observations, ...(legacy ? [legacy] : [])];
+    const record = candidates.find(quantified) || candidates[0];
+    if (!record) return null;
+    const kind = record.material === 'Essential oil: nonvolatile fraction' ? 'nonvolatile-oil' :
+      hasSources(record) ? 'oil-observation' : 'catalog';
+    return { oil, record, range: record.range, kind };
+  }).filter(Boolean).sort((a, b) => a.oil.name.localeCompare(b.oil.name));
+  return { groups, sources, hasSources, validRange, quantified, tags, matches, evidenceFor, oilRelationships };
 })();

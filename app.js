@@ -63,15 +63,10 @@ function strongestLevel(studies) {
   return best;
 }
 function oilsWithCompound(compoundId) {
-  return D.oils
-    .map(o => {
-      const hit = o.constituents.find(c => c.compoundId === compoundId) ||
-        (o.chemicalEvidence || []).find(e => e.material?.startsWith("Essential oil") &&
-          !["not-found", "not-reviewed", "not-detected"].includes(e.status) && (e.compoundIds || []).includes(compoundId));
-      return hit ? { oil: o, range: hit.range, record: hit } : null;
-    })
-    .filter(Boolean)
-    .sort((a, b) => a.oil.name.localeCompare(b.oil.name));
+  return CHEMISTRY.oilRelationships(compoundId);
+}
+function quantityLabel(range) {
+  return (range.min === range.max ? range.min : range.min + "-" + range.max) + "%";
 }
 function topConstituent(oil) {
   const verified = oil.constituents.filter(CHEMISTRY.quantified);
@@ -261,7 +256,7 @@ function rangeBarChart(el, rows, barColor, onClick) {
       trigger: "item",
       formatter: p => {
         const r = rows[p.dataIndex];
-        return `${esc(r.name)}: <b>${r.min}-${r.max}%</b>${onClick ? "<br>Click to drill down" : ""}`;
+        return `${esc(r.name)}: <b>${quantityLabel(r)}</b>${r.record ? `<br>${esc(r.record.sample)}<br>${esc(r.record.material)} · ${esc(r.record.extraction)}<br>${esc(r.record.method)}<br>${esc(r.record.basis)}${sourceLinks(r.record.sourceIds)}` : ""}${onClick ? "<br>Click to drill down" : ""}`;
       }
     }
   });
@@ -568,18 +563,17 @@ function showCompound(id, fromRoute = false) {
   document.getElementById("compound-chemistry").innerHTML = `<p>${esc(c.volatility || "")} ${groupLinks(c)}</p>${sourceLinks(c.sourceIds)}`;
   bindChemistryLinks(document.getElementById("compound-chemistry"));
   const rows = oilsWithCompound(id).filter(r => r.record.material === "Essential oil" && CHEMISTRY.quantified(r.record)).map(r => ({
-    id: r.oil.id, name: r.oil.name,
-    min: r.range.min, max: r.range.max, color: r.oil.color
+    id: r.oil.id, name: r.oil.name + " (cited sample)",
+    min: r.range.min, max: r.range.max, color: r.oil.color, record: r.record
   }));
   rangeBarChart(document.getElementById("compound-oils-chart"), rows, "#5fc6b5", showOil);
   const oilLinks = document.getElementById("compound-oil-links");
-  oilLinks.innerHTML = oilsWithCompound(id).map(r => `<button class="chip" data-goto-oil="${r.oil.id}">${esc(r.oil.name)} · ${CHEMISTRY.quantified(r.record) ? `${r.range.min}-${r.range.max}%` : "Not quantified"}</button>`).join("");
+  oilLinks.innerHTML = oilsWithCompound(id).map(r => `<button class="chip" data-goto-oil="${r.oil.id}">${esc(r.oil.name)} · ${CHEMISTRY.quantified(r.record) ? `${quantityLabel(r.range)} in cited sample` : "Not quantified"}${r.kind === "nonvolatile-oil" ? " · nonvolatile fraction" : ""}</button>`).join("");
   bindStudyLinks(oilLinks);
   const material = document.getElementById("compound-material-evidence");
   material.innerHTML = D.oils.flatMap(o => (o.chemicalEvidence || []).filter(e => (e.compoundIds || []).includes(id)).map(e =>
     `<details class="chem-evidence"><summary>${esc(o.name)} · ${esc(e.material)} · ${evidenceStatus(e)}</summary>${evidenceBody(e)}<button class="chip" data-goto-oil="${o.id}">Open ${esc(o.name)}</button></details>`)).join("");
   bindChemistryLinks(material);
-  bindStudyLinks(material);
 
   const studies = studiesForCompound(id);
   const sWrap = document.getElementById("compound-studies");
@@ -709,27 +703,32 @@ function renderNetwork() {
   const chart = echarts.init(el);
   charts.push(chart);
   const nodes = [], links = [];
+  const relationships = D.compounds.flatMap(compound =>
+    oilsWithCompound(compound.id).map(relationship => ({ ...relationship, compound })));
   D.oils.forEach(o => nodes.push({
     id: "oil:" + o.id, name: o.name, category: 0,
     symbolSize: 26, itemStyle: { color: o.color }
   }));
   D.compounds.forEach(c => {
-    const n = oilsWithCompound(c.id).length;
+    const n = relationships.filter(r => r.compound.id === c.id).length;
     if (!n) return;
     nodes.push({
       id: "compound:" + c.id, name: c.name, category: 1,
       symbolSize: 12 + n * 4, itemStyle: { color: "#5fc6b5" }
     });
   });
-  D.oils.forEach(o => o.constituents.forEach(k => {
-    if (compoundById[k.compoundId] && nodes.some(n => n.id === "compound:" + k.compoundId))
-      links.push({ source: "oil:" + o.id, target: "compound:" + k.compoundId });
+  relationships.forEach(r => links.push({
+    source: "oil:" + r.oil.id, target: "compound:" + r.compound.id,
+    kind: r.kind,
+    description: `${r.oil.name} / ${r.compound.name}: ${r.kind === "nonvolatile-oil" ? "reported in a nonvolatile oil fraction" : r.kind === "catalog" ? "catalog relationship; quantity not verified" : "reported in a cited oil sample"}`,
+    sample: r.record.sample || "",
+    lineStyle: r.kind === "nonvolatile-oil" ? { type: "dashed", color: "#efbd69", width: 2 } : undefined
   }));
   chart.setOption({
     backgroundColor: "transparent",
     tooltip: {
       formatter: p => p.dataType === "edge"
-        ? `${esc(p.data.source.replace("oil:", ""))} contains ${esc(p.data.target.replace("compound:", ""))}`
+        ? `${esc(p.data.description)}${p.data.sample ? "<br>" + esc(p.data.sample) : ""}`
         : esc(p.name)
     },
     legend: [{ data: ["Oils", "Compounds"], textStyle: { color: "#9aa7bd" }, bottom: 0 }],
@@ -821,6 +820,8 @@ function renderStudies() {
   const types = [...new Set(D.studies.map(s => s.studyType))].sort();
   document.getElementById("study-type-filter").innerHTML =
     `<option value="">All study types</option>` + types.map(t => `<option value="${t}">${esc(prettyStudyType(t))}</option>`).join("");
+  const compoundSort = document.querySelector('#oil-sort option[value="compound"]');
+  compoundSort.disabled = compoundSort.hidden = !D.oils.some(topConstituent);
   document.getElementById("oil-sort").value = "az";
   renderOils("");
   renderCompounds();

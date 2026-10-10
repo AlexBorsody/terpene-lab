@@ -34,6 +34,18 @@ for(const study of d.studies) {
  for(const id of study.compoundIds) assert.ok(compounds[id],id);
  for(const cat of study.categories) assert.ok(d.categories.some(c=>c.type===cat.type),cat.type);
 }
+// Verified observations outrank unsourced legacy constituent placeholders.
+for (const [compound,oil,value] of [['citronellal','citronella',27.87],['cinnamaldehyde','cinnamon',77.42],['linalyl-acetate','clary-sage',49.1],['linalyl-acetate','bergamot',36.3]]) {
+ const relationship=r.oilRelationships(compound).find(x=>x.oil.id===oil);
+ assert.ok(r.quantified(relationship.record));assert.equal(relationship.range.min,value);
+ assert.ok(relationship.record.sample && relationship.record.method && relationship.record.basis && relationship.record.extraction);
+ assert.equal(relationship.kind,'oil-observation');
+}
+for(const compound of ['menthyl-acetate','geranyl-acetate','grapefruit-thiol','nobiletin']) assert.ok(r.oilRelationships(compound).length,compound);
+assert.equal(r.oilRelationships('prenylthiol').length,0,'Plant/extract reports do not create oil relationships');
+assert.equal(r.oilRelationships('cannflavin-a').length,0);
+assert.equal(r.oilRelationships('nobiletin').length,3);
+assert.ok(r.oilRelationships('nobiletin').every(x=>x.kind==='nonvolatile-oil' && !r.quantified(x.record)));
 const aroma=d.studies.find(s=>s.id==='cannabis-aroma-chemistry-2023');
 assert.equal(aroma.pubmedId,'37901519');assert.equal(aroma.categories[0].type,'sensory');
 assert.equal(fs.readFileSync('CNAME','utf8').trim(),'lab.sunnysshield.com');

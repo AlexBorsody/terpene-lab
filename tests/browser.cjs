@@ -5,6 +5,30 @@ const assert = require('node:assert/strict');
  const context=await browser.newContext({serviceWorkers:'block'});
  const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const base=process.env.TEST_URL || 'http://127.0.0.1:8000';
+ // Evidence links must bind once: one click, one history entry, one Back.
+ for (const route of [
+  {compound:'nobiletin',attribute:'data-goto-oil',target:'sweet-orange',destination:'oil'},
+  {compound:'citral',attribute:'data-goto-compound',target:'citronellal',destination:'compound'}
+ ]) {
+  await page.goto(`${base}/?tab=compounds&compound=${route.compound}&embed=1`);
+  const startUrl=page.url();
+  const link=page.locator(`#compound-material-evidence [${route.attribute}="${route.target}"]`).first();
+  await link.locator('xpath=ancestor::details[contains(@class,"chem-evidence")]').locator(':scope > summary').click();
+  const initialLength=await page.evaluate(()=>{
+   window.testPushCount=0;
+   const original=history.pushState.bind(history);
+   history.pushState=(...args)=>{window.testPushCount++;return original(...args);};
+   return history.length;
+  });
+  await link.click();
+  assert.equal(new URL(page.url()).searchParams.get(route.destination),route.target);
+  assert.equal(await page.evaluate(()=>window.testPushCount),1,'One evidence click must navigate once');
+  assert.equal(await page.evaluate(()=>history.length),initialLength+1,'One evidence click must add one history entry');
+  await page.goBack();
+  await page.waitForURL(startUrl);
+  assert.equal(await page.locator('#compound-name').textContent(),route.compound==='citral'?'Citral':'Nobiletin');
+  assert.equal(await page.locator('#compound-detail').isVisible(),true);
+ }
  for(const width of [320,390,768,1440]) {
   await page.setViewportSize({width,height:900});
   for(const embed of [false,true]) {
@@ -47,6 +71,20 @@ const assert = require('node:assert/strict');
  await page.goto(`${base}/?tab=compounds&compound=nobiletin`);
  assert.equal(await page.locator('#compound-oil-links button').count(),3);
  assert.equal(await page.locator('#compound-oils-chart canvas').count(),0);
+ // Source-backed quantities must survive legacy constituent placeholders in UI.
+ for (const [compound,oil,value] of [['citronellal','citronella','27.87'],['cinnamaldehyde','cinnamon','77.42'],['linalyl-acetate','clary-sage','49.1'],['linalyl-acetate','bergamot','36.3']]) {
+  await page.evaluate(id=>showCompound(id),compound);
+  assert.ok((await page.locator(`#compound-oil-links [data-goto-oil="${oil}"]`).innerText()).includes(`${value}% in cited sample`));
+ }
+ assert.equal(await page.locator('#oil-sort option[value="compound"]').evaluate(el=>el.disabled && el.hidden),true);
+ await page.getByRole('button',{name:'Network',exact:true}).click();
+ const graph=await page.evaluate(()=>echarts.getInstanceByDom(document.getElementById('network-chart')).getOption().series[0]);
+ for(const node of graph.data.filter(n=>n.id.startsWith('compound:'))) assert.ok(graph.links.some(e=>e.target===node.id),`orphan ${node.id}`);
+ for(const id of ['menthyl-acetate','geranyl-acetate','grapefruit-thiol','nobiletin']) assert.ok(graph.links.some(e=>e.target===`compound:${id}`));
+ const nonvolatile=graph.links.filter(e=>e.target==='compound:nobiletin');
+ assert.equal(nonvolatile.length,3);
+ assert.ok(nonvolatile.every(e=>e.kind==='nonvolatile-oil' && e.lineStyle.type==='dashed' && e.description.includes('nonvolatile oil fraction')));
+ assert.ok(!graph.links.some(e=>['compound:prenylthiol','compound:cannflavin-a'].includes(e.target)));
  // Missing ranges must stay safe in both directions and pathway rendering.
  await page.evaluate(()=>{oilById.lemon.constituents.push({compoundId:'prenylthiol',range:null});showOil('lemon');showCompound('prenylthiol');});
  assert.equal(await page.locator('#compound-oils-chart canvas').count(),0);

@@ -158,7 +158,7 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
       <h3>Found in these oils</h3>
       <div id="compound-oils-chart" class="chart"></div>
       <div id="compound-oil-links" class="chips"></div>
-      <p class="hint">Only verified quantitative oil records are plotted. Other plant materials and extracts are listed separately below.</p>
+      <p class="hint">Each bar represents one cited oil sample, not a universal percentage. All recorded observations and their sources are listed below.</p>
       <div id="compound-material-evidence"></div>
       <h3>Studies</h3>
       <div id="compound-studies"></div>
@@ -214,7 +214,7 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
 
   <!-- NETWORK -->
   <section id="tab-network" class="tab-panel">
-    <p class="panel-intro">Every oil connected to its compounds. Drag nodes, scroll to zoom, click a node to open it.</p>
+    <p class="panel-intro">Explore catalog and sourced oil relationships. Dashed amber links mark nonvolatile oil fractions. Plant and solvent-extract findings stay outside this graph. Tap a node to open it.</p>
     <div id="network-chart" class="chart chart-tall"></div>
   </section>
 

@@ -782,3 +782,5 @@ Quantitative composition additionally requires a finite `range: {min, max}` in 0
 Composition/taxonomy references use `sources`, with optional `type`, `evidenceLevel`, `material` and `method`. Research studies remain in `studies` with explicit study type, evidence level, topic and optional `material`. Analytical/sensory studies are categorized under `sensory`, not health/cognition. Botanical flavonoid chemistry has a `botanical` domain. Neither implies treatment efficacy.
 
 Preserve relative assets, custom domain, return link and iframe mode. New disclosures and filters must be keyboard-accessible and avoid em dashes in copy.
+
+Oil/compound browsing and Network edges share `CHEMISTRY.oilRelationships`. A valid source-backed observation takes priority over an unsourced legacy placeholder; one representative sample can be displayed, while all observations remain separately available. Percentages from different studies are never merged. Nonvolatile oil-fraction relationships use dashed amber graph edges, and plant/extract observations never create oil edges. The top-compound sort is hidden when no qualified top-compound values exist.
