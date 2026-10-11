@@ -45,15 +45,14 @@ const assert = require('node:assert/strict');
   }
  }
  await page.getByRole('button',{name:'Compounds',exact:true}).click();
- await page.locator('#compound-class-filter').selectOption('Monoterpenoid');
- await page.locator('#compound-group-filter').selectOption('aldehyde');
- assert.equal(await page.locator('#compound-grid .card').count(),2);
+ await page.locator('#compound-category-filter').selectOption('group:aldehyde');
+ assert.equal(await page.locator('#compound-grid .card').count(),3);
  await page.locator('#compound-search').fill('neral');
  assert.equal(await page.locator('#compound-grid .card').count(),1);
  await page.locator('#compound-grid .card').focus();await page.keyboard.press('Enter');
  assert.equal(await page.locator('#compound-name').textContent(),'Citral');
  await page.getByRole('button',{name:'All compounds',exact:false}).click();
- await page.locator('#compound-search').fill('');await page.locator('#compound-group-filter').selectOption('ester');
+ await page.locator('#compound-search').fill('');await page.locator('#compound-category-filter').selectOption('group:ester');
  assert.ok((await page.locator('#compound-grid').innerText()).includes('Linalyl Acetate'));
  await page.locator('[data-c="linalyl-acetate"]').click();
  assert.ok((await page.locator('#compound-chemistry').innerText()).includes('Esters'));

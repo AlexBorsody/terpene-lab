@@ -14,6 +14,28 @@ const CHEMISTRY = (() => {
     (!primary || compound.chemicalClass === primary) && (!group || tags(compound).includes(group)) &&
     [compound.name, compound.formula, compound.chemicalClass, compound.description,
       ...(compound.aliases || []), ...tags(compound)].join(' ').toLowerCase().includes(query.trim().toLowerCase());
+  const terpeneClasses = new Set(['Monoterpene', 'Monoterpenoid', 'Sesquiterpene', 'Sesquiterpenoid', 'Furanosesquiterpene']);
+  const matchesCategory = (compound, category = '') => {
+    if (!category) return true;
+    if (category === 'terpenes') return terpeneClasses.has(compound.chemicalClass);
+    if (category.startsWith('class:')) return compound.chemicalClass === category.slice(6);
+    if (category.startsWith('group:')) return tags(compound).includes(category.slice(6));
+    return false;
+  };
+  const classLabels = {
+    Monoterpene: 'Monoterpenes', Monoterpenoid: 'Monoterpenoids',
+    Sesquiterpene: 'Sesquiterpenes', Sesquiterpenoid: 'Sesquiterpenoids',
+    Furanosesquiterpene: 'Furanosesquiterpenes', Phenylpropanoid: 'Phenylpropanoids',
+    'Organosulfur compound': 'Organosulfur compounds'
+  };
+  const compoundCategories = [
+    { id: 'terpenes', label: 'Terpenes and terpenoids' },
+    ...[...new Set(TERPENE_DATA.compounds.map(c => c.chemicalClass))]
+      .filter(chemicalClass => chemicalClass !== 'Flavonoid')
+      .map(chemicalClass => ({ id: 'class:' + chemicalClass, label: classLabels[chemicalClass] || chemicalClass })),
+    ...groups.map(group => ({ id: 'group:' + group.id, label: group.label }))
+  ].filter(category => TERPENE_DATA.compounds.some(compound => matchesCategory(compound, category.id)))
+    .sort((a, b) => a.label.localeCompare(b.label));
   const evidenceFor = (oil, group) => (oil.chemicalEvidence || []).filter(e => e.group === group);
   // One qualified relationship per oil/compound for browsing and graph edges.
   // Keep every observation in chemicalEvidence; never aggregate their quantities.
@@ -30,5 +52,5 @@ const CHEMISTRY = (() => {
       hasSources(record) ? 'oil-observation' : 'catalog';
     return { oil, record, range: record.range, kind };
   }).filter(Boolean).sort((a, b) => a.oil.name.localeCompare(b.oil.name));
-  return { groups, sources, hasSources, validRange, quantified, tags, matches, evidenceFor, oilRelationships };
+  return { groups, sources, hasSources, validRange, quantified, tags, matches, matchesCategory, compoundCategories, evidenceFor, oilRelationships };
 })();
