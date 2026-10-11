@@ -1,5 +1,5 @@
-const CACHE = "sunnys-terpene-lab-v9";
-const CORE = ["./", "./index.html", "./styles.css?v=9", "./app.js", "./chemistry.js", "./data.js", "./manifest.webmanifest", "./shield-icon.svg"];
+const CACHE = "sunnys-terpene-lab-v10";
+const CORE = ["./", "./index.html", "./styles.css?v=10", "./app.js?v=10", "./chemistry.js?v=10", "./data.js?v=10", "./manifest.webmanifest", "./shield-icon.svg"];
 
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)));

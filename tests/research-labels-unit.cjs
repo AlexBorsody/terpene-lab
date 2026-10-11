@@ -154,3 +154,13 @@ for (const background of ['#efbd69', '#f7cd86', '#dfac55']) {
 console.log(`PASS: renderer/filter regression for ${counts.composition} composition, ${counts.flavonoids} flavonoid and ${counts.aroma} aroma studies; alphabetic selectors and unchanged taxonomy`);
 console.log('PASS: filled Read paper action, 44px minimum target, keyboard focus and AAA text contrast');
 console.log('PASS: visible oil/material links, hidden empty charts, plant-only/empty evidence and repeat navigation');
+
+// A changed app shell must not load stale JavaScript after deployment.
+const html = fs.readFileSync('index.html', 'utf8');
+const worker = fs.readFileSync('sw.js', 'utf8');
+const release = worker.match(/const CACHE = "sunnys-terpene-lab-v(\d+)"/)[1];
+for (const asset of ['styles.css', 'data.js', 'chemistry.js', 'app.js']) {
+  assert.ok(html.includes(`${asset}?v=${release}`), `Versioned HTML asset: ${asset}`);
+  assert.ok(worker.includes(`${asset}?v=${release}`), `Matching offline asset: ${asset}`);
+}
+console.log('PASS: versioned script/style URLs stay aligned with the offline cache');
