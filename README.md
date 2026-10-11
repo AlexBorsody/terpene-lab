@@ -34,7 +34,7 @@ Interactive essential oil evidence explorer. Plant to molecule to paper.
 - `sources` holds composition/taxonomy references separately from efficacy studies. Both are discoverable from oil and compound details.
 - `chemicalGroups` supplies the four Beyond Terpenes explainers. `functionalGroups` on compounds supports overlapping aldehyde, ester and thiol browsing while preserving `chemicalClass`. Flavonoids are a primary family, not a functional group.
 - `oils[].chemicalEvidence` records material-specific published evidence separately from `constituents`. Every oil displays all four groups, including explicit evidence gaps. Plant material, extracts, volatile oil and nonvolatile oil fractions are kept distinct.
-- The Studies library can combine primary class, functional group/family, oil, compound, topic/domain and evidence filters. Aroma studies have their own sensory domain; analytical results are not efficacy claims.
+- The Compounds tab has one category filter for chemical families and overlapping functional groups, including a terpenes-and-terpenoids umbrella. The Studies library can combine primary class, functional group/family, oil, compound, topic/domain and evidence filters. Aroma studies have their own sensory domain; analytical results are not efficacy claims.
 
 Research rules: real publication URLs only (PubMed/DOI/journal). Findings stay faithful to the paper. Record null studies. Never infer finished-product claims from ingredient studies.
 
@@ -86,3 +86,5 @@ and `shopify-embed.md`.
 The per-oil collection is a curated literature review, not exhaustive coverage or a chemical analysis of Sunny's Shield. Missing evidence does not establish absence. Cold-pressed citrus may retain nonvolatile flavonoids; these findings stay outside volatile fingerprints. See `research/beyond-terpenes-source-review.md` for scientific checks and limitations.
 
 Run the data regression checks with `node tests/chemistry.cjs`. For browser checks, start the local server above, make Playwright available, then run `node tests/browser.cjs`. Set `PLAYWRIGHT_MODULE` to an installed module path, `CHROME_PATH` to a Chrome executable and `TEST_URL` to another local port as needed. The browser suite covers 320, 390, 768 and 1440 pixel widths in standalone/embed modes, combined filters, keyboard navigation, deep links and missing quantities.
+
+Research-topic labels are a presentation layer over the original study categories. Composition analysis, flavonoid research and aroma research stay distinct across the oil cards, study filters and matrix. Run `node tests/research-labels-unit.cjs` for deterministic renderer, filter and alphabetical-selector checks. Run `node tests/research-labels.cjs` with the same browser environment variables for responsive layouts and browser interactions.

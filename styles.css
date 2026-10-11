@@ -289,7 +289,7 @@ main {
   font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
   color: var(--teal); display: block; margin-bottom: 2px;
 }
-.study .tags { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+.study .tags { margin-top: 10px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .study .tags a, .study .ext {
   font-size: 12px; color: var(--amber);
   text-decoration: none; border: 1px solid var(--border);
@@ -297,6 +297,17 @@ main {
   background: transparent;
 }
 .study .tags a:hover, .study .ext:hover { border-color: var(--amber); }
+/* The paper is the primary action; ingredient links keep their quieter style. */
+.study .tags .read-paper {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; min-width: 44px; max-width: 100%;
+  padding: 10px 16px; border: 2px solid #efbd69;
+  background: #efbd69; color: var(--bg);
+  font-size: 14px; font-weight: 700; line-height: 1.25; text-align: center;
+}
+.study .tags .read-paper:hover { background: #f7cd86; border-color: #f7cd86; color: var(--bg); }
+.study .tags .read-paper:active { background: #dfac55; border-color: #dfac55; }
+.study .tags .read-paper:focus-visible { outline: 3px solid var(--text); outline-offset: 3px; }
 .study .taglink { color: var(--muted); }
 
 .empty { color: var(--muted); padding: 30px 0; text-align: center; }

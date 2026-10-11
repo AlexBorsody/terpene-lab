@@ -14,7 +14,7 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="shield-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="shield-icon.svg">
-<link rel="stylesheet" href="styles.css?v=8">
+<link rel="stylesheet" href="styles.css?v=9">
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
 
 <style>
@@ -84,11 +84,11 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
         <select id="oil-sort" aria-label="Sort plants">
           <option value="az">A to Z</option>
           <option value="studies">Most studied</option>
-          <option value="domains">Most use areas</option>
+          <option value="domains">Most research topics</option>
           <option value="compound">Top compound A to Z</option>
         </select>
-        <select id="oil-domain-filter" aria-label="Filter by researched use">
-          <option value="">All uses</option>
+        <select id="oil-domain-filter" aria-label="Filter by research topic">
+          <option value="">All research topics</option>
           <option value="health">Health</option>
           <option value="cleaning">Cleaning</option>
           <option value="microbial">Microbial</option>
@@ -139,8 +139,7 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
     <div id="compound-list-view">
       <div class="toolbar">
         <input aria-label="Search compounds" id="compound-search" type="search" placeholder="Search compounds...">
-        <select id="compound-class-filter" aria-label="Primary chemical class"><option value="">All classes</option></select>
-        <select id="compound-group-filter" aria-label="Functional group or family"></select>
+        <select id="compound-category-filter" aria-label="Filter compounds by category"><option value="">All compounds</option></select>
         <span id="compound-count" class="count"></span>
       </div>
       <div id="compound-beyond"></div>
@@ -155,10 +154,11 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
       <div class="meta-row">
         <div><span class="meta-label">Aroma</span><span id="compound-aroma"></span></div>
       </div>
-      <h3>Found in these oils</h3>
-      <div id="compound-oils-chart" class="chart"></div>
+      <h3 id="compound-occurrence-heading">Oil evidence</h3>
       <div id="compound-oil-links" class="chips"></div>
-      <p class="hint">Each bar represents one cited oil sample, not a universal percentage. All recorded observations and their sources are listed below.</p>
+      <p id="compound-occurrence-note" class="hint hidden"></p>
+      <div id="compound-oils-chart" class="chart hidden"></div>
+      <p id="compound-chart-note" class="hint hidden">Each bar represents one cited oil sample, not a universal percentage. All recorded observations and their sources are listed below.</p>
       <div id="compound-material-evidence"></div>
       <h3>Studies</h3>
       <div id="compound-studies"></div>
@@ -173,8 +173,8 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
         <option value="az">A to Z</option>
         <option value="studies">Most studied</option>
       </select>
-      <select id="matrix-domain-filter" aria-label="Show research area">
-        <option value="">All research areas</option>
+      <select id="matrix-domain-filter" aria-label="Show research topic">
+        <option value="">All research topics</option>
         <option value="health">Health</option>
         <option value="cleaning">Cleaning</option>
         <option value="microbial">Microbial</option>
@@ -224,7 +224,7 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
       <input id="study-search" type="search" placeholder="Search studies...">
       <select id="study-oil-filter"><option value="">All oils</option></select>
       <select id="study-compound-filter"><option value="">All compounds</option></select>
-      <select id="study-domain-filter"><option value="">All domains</option></select>
+      <select id="study-domain-filter" aria-label="Filter by research topic"><option value="">All research topics</option></select>
       <select id="study-level-filter">
         <option value="">All evidence levels</option>
         <option value="clinical">Clinical</option>
