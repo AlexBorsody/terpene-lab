@@ -26,6 +26,7 @@ const { execFileSync } = require('node:child_process');
   await page.goto(base+'?tab=compounds&compound=citral');
   await page.waitForFunction(()=>navigator.serviceWorker.controller);
   await page.waitForFunction(()=>document.querySelector('#pwa-status')?.textContent.includes('saved'));
+  await page.locator('#pwa-update').waitFor({state:'hidden'});
   const metadata=await page.evaluate(async()=>{
    const m=await (await fetch('manifest.webmanifest')).json();
    return {m,scope:(await navigator.serviceWorker.ready).scope, icons:await Promise.all(m.icons.map(async i=>{const img=new Image();img.src=i.src;await img.decode();return [img.naturalWidth,img.naturalHeight];}))};

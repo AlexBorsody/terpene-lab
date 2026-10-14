@@ -30,6 +30,7 @@
   });
   window.addEventListener('appinstalled', () => { install.hidden = true; });
   navigator.serviceWorker.addEventListener('controllerchange', () => {
+    update.hidden = true;
     // A first install need not reload. Updates refresh every open standalone
     // tab to avoid continuing to browse a mixture of old and new assets.
     if (hadController && !reloading) { reloading = true; location.reload(); }
@@ -57,7 +58,7 @@
       offer();
       registration.addEventListener('updatefound', () => {
         const worker = registration.installing;
-        worker?.addEventListener('statechange', () => { if (worker.state === 'installed') offer(); });
+        worker?.addEventListener('statechange', () => { if (worker.state === 'installed' || worker.state === 'activated') offer(); });
       });
       await navigator.serviceWorker.ready;
       ready = true;

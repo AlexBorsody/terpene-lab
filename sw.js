@@ -1,12 +1,12 @@
 // Generated release and SHA-256 map: run python3 scripts/build-pwa.py after edits.
-const RELEASE = "f991f2af57744a52";
+const RELEASE = "b8ef990680ff7537";
 const ASSETS = {
-  "index.html": "d49453f4cf04f82fa35182968b6a988a664394106926b14a4614860f06717f9f",
+  "index.html": "efb8b5788ae5b008013d657af52479d5e6d4416315c3e4b55a52b0b48088ffec",
   "styles.css": "08c7926bfecb8936ad1310172da1fbf27de8bdcafff5f820c1970c73c3faa1ff",
   "app.js": "3af294fa0a31d2ccfb23350d25d42e63cf49af7c3516d13cab518958cb7b1d9d",
   "chemistry.js": "bc9a042f59ea993fd0df0dba5ac187579745ce158748dfa3686657f2c5b07507",
   "data.js": "52121e01f09f880e8e49a93cd298281d37246cb2345db224aa71a3cb7f3f0124",
-  "pwa.js": "164da9fc3d3c049b32d976c203b4b0e57411b08bcc51c54aedc17fa95945585e",
+  "pwa.js": "2f0692e8f63157d8dfb00ec2b501e898cfcf44e204870169ee1e7116ee7dbeca",
   "manifest.webmanifest": "e85307edce52944b5afd4da7ad5082893d4a4dff1fd25a8abed6469eeaee1271",
   "shield-icon.svg": "b6a4fa5ec8968f651ec6bb9441f4cb6a3c5c5b333c45628c2e43ca348d2a5562",
   "vendor/echarts-5.5.1.min.js": "e84270bd0cd5bdf60fefc26d00c2a391cb2e81f4d26a7a9ee16185a54773a3cf",
