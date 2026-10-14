@@ -21,10 +21,9 @@ Options on the script tag:
 - Valid height messages are accepted only from this iframe on either the
   existing GitHub Pages origin or `https://lab.sunnysshield.com`.
 
-## Planned standalone lab domain
+## Standalone lab domain
 
-After the coordinated DNS/GitHub Pages cutover and HTTPS verification, the
-standalone lab will be available at `https://lab.sunnysshield.com/`. Link to
+The standalone lab is available at `https://lab.sunnysshield.com/`. Link to
 that address to open the full-width lab outside the Shopify page wrapper.
 
 Existing script snippets remain compatible with GitHub Pages' redirect.
@@ -63,8 +62,8 @@ third-party iframes.
 
 ## Notes
 
-- ECharts loads from jsDelivr CDN. If the store blocks third-party scripts,
-  self-host `echarts.min.js` and change the script tag in `index.html`.
+- ECharts 5.5.1 is self-hosted in `vendor/`, including its license.
+- Embedded views do not show PWA install/update controls or register new workers.
 - The app is responsive and touch-friendly; on mobile the views stack.
-- Content updates: edit `data.js`, push, done. No theme edits needed for A/B.
+- Content updates: edit `data.js`, run `python3 scripts/build-pwa.py`, commit and push. No theme edits needed for A/B.
 

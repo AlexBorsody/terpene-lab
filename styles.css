@@ -1152,3 +1152,9 @@ summary:focus-visible, .chip:focus-visible, .compound-card:focus-visible { outli
 .chem-source-details { margin:8px 0; }
 .chem-source-details summary { cursor:pointer; font-size:12px; color:#b8c5d8; }
 .chem-status { color:#efbd69; font-size:12px; }
+
+/* Compact standalone PWA controls; never shown in Shopify embeds. */
+.pwa-controls { padding: 12px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; color: var(--muted); font-size: 12px; }
+.pwa-controls button { padding: 8px 12px; color: var(--text); background: var(--surface); border: 1px solid var(--amber); border-radius: 6px; cursor: pointer; }
+.pwa-controls button:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+.pwa-controls [hidden], .lab-embedded .pwa-controls { display: none; }
