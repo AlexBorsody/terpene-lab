@@ -56,10 +56,13 @@
       }
       const offer = () => { update.hidden = !registration.waiting; };
       offer();
-      registration.addEventListener('updatefound', () => {
+      const observeInstalling = () => {
         const worker = registration.installing;
         worker?.addEventListener('statechange', () => { if (worker.state === 'installed' || worker.state === 'activated') offer(); });
-      });
+      };
+      registration.addEventListener('updatefound', observeInstalling);
+      // register() or another tab may have already fired updatefound.
+      observeInstalling();
       await navigator.serviceWorker.ready;
       ready = true;
       render();
