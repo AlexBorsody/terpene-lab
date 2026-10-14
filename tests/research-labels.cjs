@@ -112,7 +112,7 @@ const assert = require('node:assert/strict');
   assert.ok((await page.locator('#oil-grid').innerText()).includes('Cannabis'));
   await page.goto(`${base}/?tab=matrix`);
   await page.locator('#matrix-domain-filter').selectOption('botanical:nonvolatile-chemistry');
-  assert.ok((await page.locator('#matrix-table thead').innerText()).includes('Flavonoid research'));
+  assert.ok((await page.locator('#matrix-table thead').textContent()).includes('Flavonoid research'));
   const cell = page.locator('#matrix-table [data-oil="cannabis"][data-domain="botanical:nonvolatile-chemistry"]');
   assert.equal((await cell.innerText()).trim(), '1');
   await cell.click();

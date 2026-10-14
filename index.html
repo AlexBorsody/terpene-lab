@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sunny’s Shield Terpene Lab - Plant Science Evidence Explorer</title>
 <meta name="theme-color" content="#0b1220">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Terpene Lab">
+<meta name="mobile-web-app-capable" content="yes">
 <script>
 // Keep existing Shopify embeds in their compact layout.
 if (new URLSearchParams(window.location.search).get("embed") === "1" || window.self !== window.top) {
@@ -13,9 +17,9 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
 </script>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="shield-icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="shield-icon.svg">
-<link rel="stylesheet" href="styles.css?v=10">
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" sizes="180x180">
+<link rel="stylesheet" href="styles.css?v=08c7926bfecb8936">
+<script src="vendor/echarts-5.5.1.min.js"></script>
 
 <style>
 .essential-oils-explainer { margin:0 0 12px; color:var(--muted); font-size:13px; line-height:1.5; }
@@ -273,18 +277,19 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
 
 </main>
 
+<aside class="pwa-controls" aria-label="Lab availability">
+  <span id="pwa-status" role="status" aria-live="polite"></span>
+  <button id="pwa-install" hidden>Install Terpene Lab</button>
+  <button id="pwa-update" hidden>Update available: refresh Lab</button>
+</aside>
 <footer class="lab-footer">
   <p>Sunny's Shield Terpene Lab &middot; plant to molecule to paper &middot; inspect the evidence yourself. Not medical advice.</p>
 </footer>
 
-<script src="data.js?v=10"></script>
-<script src="chemistry.js?v=10"></script>
-<script src="app.js?v=10"></script>
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js"));
-}
-</script>
+<script src="data.js?v=52121e01f09f880e"></script>
+<script src="chemistry.js?v=bc9a042f59ea993f"></script>
+<script src="app.js?v=3af294fa0a31d2cc"></script>
+<script src="pwa.js?v=164da9fc3d3c049b"></script>
 </body>
 </html>
 

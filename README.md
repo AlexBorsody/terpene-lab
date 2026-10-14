@@ -56,22 +56,51 @@ The standalone page uses the full viewport and includes a link back to
 the compact embed layout. App assets, the web manifest, and the service worker
 use relative paths so both the project URL and a custom-domain root work.
 
-### Custom-domain cutover
+### Progressive web app
 
-The planned domain is `lab.sunnysshield.com`. Keep the existing URL active
-until DNS access and the cutover are ready. Do not add a `CNAME` file early:
-GitHub Pages redirects the existing site to the configured custom domain.
+The live HTTPS domain is `https://lab.sunnysshield.com/` (two consecutive s characters).
+GitHub Pages publishes the repository root on `main`; `CNAME` preserves that domain.
 
-1. Verify domain ownership in GitHub when possible.
-2. When ready to coordinate both sides, set the repository's Pages custom
-   domain to `lab.sunnysshield.com` and create the DNS CNAME record `lab`
-   pointing to `alexborsody.github.io` (no repository path).
-3. Confirm DNS and HTTPS, then enable Enforce HTTPS when GitHub offers it.
-4. Check the app, asset URLs, deep links, and existing Shopify embeds on desktop
-   and mobile before updating storefront links to the new address.
+The manifest has relative identity, start URL and scope for both custom-domain root
+and GitHub project paths. PNG icons derive from the existing `shield-icon.svg`;
+the dedicated maskable icon keeps the entire mark inside the safe area. iOS uses
+a 180px Apple touch icon. Install with the browser's install action, the Lab's
+install button when supported, or Safari's Share > Add to Home Screen.
 
-See [GitHub's custom-domain instructions](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)
-and `shopify-embed.md`.
+After one successful online visit, the app shell, full local `data.js` research
+summaries and self-hosted ECharts 5.5.1 are available offline. External paper
+links and Wikimedia photos still require a connection. We do not cache publisher
+pages or return app HTML for failed assets. ECharts' license is in `vendor/`.
+
+The service worker precaches an entire release with SHA-256 verification and
+bypasses HTTP caches during installation. It refuses partial/mixed deployments.
+The active release stays consistent until an update is accepted or all its tabs
+close. The Lab checks for updates on return to the tab, reconnect, and hourly;
+“Update available: refresh Lab” activates the ready release and reloads open
+standalone tabs. Navigation URLs survive refresh; transient unsaved filter input
+may reset. Only caches belonging to the Lab are cleaned up. In an iframe or
+`?embed=1`, install/status/update controls and new worker registration are disabled.
+
+**After changing any shipped app, data, icon or manifest file:**
+
+```sh
+python3 scripts/build-pwa.py
+node tests/chemistry.cjs
+node tests/research-labels-unit.cjs
+# With Playwright available, plus Chrome or CHROME_PATH:
+node tests/pwa.cjs
+# Existing UI suites additionally need the local HTTP server:
+node tests/browser.cjs
+node tests/research-labels.cjs
+```
+
+Commit regenerated `index.html` and `sw.js` with the changed assets.
+The script stamps content-specific script/style URLs to avoid stale HTTP caches. CI checks the generated
+release and regression tests before merging. The PWA suite serves its own isolated
+copies at root and `/terpene-lab/`, simulates offline reopening, a corrupt partial
+rollout, waiting/accepted upgrades, and unrelated-cache preservation.
+
+See `shopify-embed.md` for storefront embedding.
 
 ## Design rules
 

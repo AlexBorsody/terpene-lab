@@ -158,9 +158,10 @@ console.log('PASS: visible oil/material links, hidden empty charts, plant-only/e
 // A changed app shell must not load stale JavaScript after deployment.
 const html = fs.readFileSync('index.html', 'utf8');
 const worker = fs.readFileSync('sw.js', 'utf8');
-const release = worker.match(/const CACHE = "sunnys-terpene-lab-v(\d+)"/)[1];
-for (const asset of ['styles.css', 'data.js', 'chemistry.js', 'app.js']) {
-  assert.ok(html.includes(`${asset}?v=${release}`), `Versioned HTML asset: ${asset}`);
-  assert.ok(worker.includes(`${asset}?v=${release}`), `Matching offline asset: ${asset}`);
+const assets = JSON.parse(worker.match(/const ASSETS = (\{[\s\S]*?\});/)[1]);
+const { createHash } = require('node:crypto');
+for (const asset of ['index.html', 'styles.css', 'data.js', 'chemistry.js', 'app.js', 'pwa.js']) {
+  assert.equal(assets[asset], createHash('sha256').update(fs.readFileSync(asset)).digest('hex'), `Offline release integrity: ${asset}`);
+  if (asset !== 'index.html') assert.ok(html.includes(`${asset}?v=${assets[asset].slice(0,16)}`), `Fresh HTTP asset URL: ${asset}`);
 }
-console.log('PASS: versioned script/style URLs stay aligned with the offline cache');
+console.log('PASS: offline release matches current HTML, styles, scripts and research');
