@@ -133,7 +133,7 @@ const assert = require('node:assert/strict');
     ['pmd', 'Oil evidence', 0]
   ]) {
     await page.goto(`${base}/?tab=compounds&compound=${compound}`);
-    assert.equal(await page.locator('#compound-occurrence-heading').innerText(), heading);
+    assert.equal(await page.locator('#compound-occurrence-heading').textContent(), heading);
     assert.equal(await page.locator('#compound-oil-links button').count(), count);
     assert.equal(await page.locator('#compound-oils-chart').isVisible(), false);
     assert.equal(await page.locator('#compound-chart-note').isVisible(), false);
