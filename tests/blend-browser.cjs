@@ -255,6 +255,7 @@ async function assertNoOverflow(page, label) {
     for(const width of [320,390,768,1440]) for(const embed of [false,true]) {
       await page.setViewportSize({width,height:1000});await page.goto(recipeUrl(five,embed));
       await assertNoOverflow(page,`${width}px embed=${embed}`);
+      assert.equal(await page.locator('.blend-result-cautions li').count(),1,'Identical missing-sensitization notes combine into one named caution');
       assert.equal(await page.locator('.lab-return').isVisible(),!embed);
       await assertNoPurchase(page);
       const summary=await page.locator('.blend-result-summary').boundingBox(),caution=await page.locator('.blend-result-cautions').boundingBox();

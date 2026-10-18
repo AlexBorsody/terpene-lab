@@ -138,9 +138,10 @@ python3 -m http.server 8000
 node tests/browser.cjs
 node tests/research-labels.cjs
 node tests/blend-browser.cjs
+node tests/blend-checkout.cjs
 ```
 
 Synthetic engine test limits are fixtures only and must never be copied into
-production data. Browser tests do not purchase anything. Regenerate and commit
+production data. Browser tests do not purchase anything. The checkout-adapter suite uses explicitly synthetic in-memory records and intercepts all test POSTs locally, with external traffic blocked. Regenerate and commit
 `index.html` and `sw.js` after changing any shipped asset, including the new
 builder CSS/JS; CI checks release integrity and regressions.

@@ -136,6 +136,18 @@
     persist();
   }
   function warningList(items) { return items.map(item=>`<li>${esc(item.message)}${item.source ? `<span class="blend-source">Source: ${sourceLink(item.source)}</span>` : ''}</li>`).join(''); }
+  function combinedWarnings(warnings) {
+    const result=[], groups=new Map();
+    for (const warning of warnings) {
+      const oil=warning.code==='sensitization_note' && warning.oilIds?.length===1 ? byId[warning.oilIds[0]] : null;
+      if (!oil?.blend.sensitizationNotes) { result.push(warning); continue; }
+      const note=oil.blend.sensitizationNotes.trim();
+      if (!groups.has(note)) { const group={...warning,oilIds:[],message:''}; groups.set(note,group); result.push(group); }
+      const group=groups.get(note);group.oilIds.push(oil.id);
+      group.message=group.oilIds.map(id=>byId[id].name).join(' + ')+': '+note;
+    }
+    return result;
+  }
   function oilProfile(entry) {
     const oil=byId[entry.id], b=oil.blend;
     const constituents=oil.constituents.map(c=>`<li><span>${esc(compounds[c.compoundId]?.name || c.compoundId)}</span><span>${CHEMISTRY.quantified(c) ? `${c.range.min}-${c.range.max}% in cited sample` : 'No verified range yet'}</span></li>`).join('');
@@ -153,7 +165,7 @@
     section.hidden=false;
     section.innerHTML=`<div class="blend-step-title"><span>03</span><h3 id="blend-results-title" tabindex="-1">${esc(recipe.name || 'Your custom blend')}</h3><span class="blend-step-note">RECIPE V1</span></div>
       <div class="blend-results-lead"><section class="blend-result-summary"><p class="blend-eyebrow">YOUR BLEND AT A GLANCE</p><h4>${recipe.oils.map(o=>esc(byId[o.id].name)).join(' + ')}</h4><ul class="blend-recipe-list">${recipe.oils.map(o=>`<li><span>${esc(byId[o.id].name)}</span><strong>${o.percent}%</strong></li>`).join('')}</ul><p>Purported qualities: ${mapped.length ? esc(mapped.join(', ')) : 'no verified mappings yet'}.</p><p class="blend-small">These proportions describe only the oil mixture. ${Number.isFinite(config.product.totalOilLoadPercent) ? 'Configured final spray oil concentration: '+esc(config.product.totalOilLoadPercent)+'% (subject to server review).' : 'Final spray concentration has not been set.'}</p></section>
-      <section class="blend-result-cautions" aria-labelledby="blend-cautions-title"><p class="blend-eyebrow">CAUTIONS COME WITH THE RESEARCH</p><h4 id="blend-cautions-title">${safety.canPurchase ? 'Review the cautions' : 'Formula review still required'}</h4><p>Ingredient research does not validate this blend or the finished spray. No medical or therapeutic benefit is claimed.</p>${recipe.petContext ? '<p class="blend-inline-warning">Pet context is on. Do not assume this blend is safe around pets.</p>' : ''}<ul>${warningList([...priorityBlockers,...safety.warnings])}</ul><p>${safety.canPurchase ? 'The configured checks pass. The checkout service must independently validate this exact recipe before purchase.' : 'Ordering remains unavailable until the formula, ingredient limits, stock and checkout validation are confirmed.'}</p></section></div>
+      <section class="blend-result-cautions" aria-labelledby="blend-cautions-title"><p class="blend-eyebrow">CAUTIONS COME WITH THE RESEARCH</p><h4 id="blend-cautions-title">${safety.canPurchase ? 'Review the cautions' : 'Formula review still required'}</h4><p>Ingredient research does not validate this blend or the finished spray. No medical or therapeutic benefit is claimed.</p>${recipe.petContext ? '<p class="blend-inline-warning">Pet context is on. Do not assume this blend is safe around pets.</p>' : ''}<ul>${warningList([...priorityBlockers,...combinedWarnings(safety.warnings)])}</ul><p>${safety.canPurchase ? 'The configured checks pass. The checkout service must independently validate this exact recipe before purchase.' : 'Ordering remains unavailable until the formula, ingredient limits, stock and checkout validation are confirmed.'}</p></section></div>
       <div class="blend-recipe-actions"><button type="button" id="blend-save" class="blend-primary">Save recipe</button><button type="button" id="blend-share" class="blend-secondary">Copy share link</button><span id="blend-action-status" role="status" aria-live="polite"></span></div>
       <div id="blend-share-fallback" hidden><label for="blend-share-url">Copy this recipe link</label><input id="blend-share-url" readonly></div>
       <p class="blend-small">Saved on this device. Anyone with your link can see the recipe and its name.</p>
