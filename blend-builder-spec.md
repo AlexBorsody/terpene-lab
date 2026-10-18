@@ -26,7 +26,7 @@ The logic and the information are as complex as possible. The delivery, shipping
 ## Terminology
 
 - The builder works with ESSENTIAL OILS, not isolated terpenes. Oils contain terpenes plus other compounds, and the data model must reflect whole-oil chemistry (major constituents listed per oil).
-- Effect language is always "purported." No medical claims anywhere. Cosmetic framing only, with a visible disclaimer on the results screen and at checkout.
+- Describe the actual studied endpoint, preparation, model and outcome, including null or unfavorable results. All research categories are available; the owner clarified that the explorer is not restricted to cosmetic uses. Ingredient evidence does not establish a finished-blend benefit, concentration or safe application. Research context and precautions remain visible in results and at checkout.
 
 ## User flow
 
