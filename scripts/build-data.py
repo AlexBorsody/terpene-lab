@@ -274,6 +274,7 @@ def validate(master):
                 require(assertion['relevance'] == 'direct', f'{aid}: researchMatch needs direct relevance')
                 require(all(assertion[field] is not None for field in ('material', 'model', 'outcome')), f'{aid}: researchMatch needs explicit material/model/outcome facets')
                 require(assertion['material'].get('kind') in ('essential-oil', 'single-oil-topical-formulation'), f'{aid}: researchMatch needs whole-oil material')
+                require(assertion['material'].get('relevance') in ('whole-oil', 'whole-oil-direct'), f'{aid}: researchMatch needs compatible material relevance')
                 require(assertion['material'].get('speciesMatch') != 'different-species', f'{aid}: researchMatch cannot cross species')
                 require(assertion.get('route') not in ('oral', 'injection'), f'{aid}: oral or injected preparations are contextual')
                 direction = assertion['outcome'].get('direction')

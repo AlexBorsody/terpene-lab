@@ -250,6 +250,44 @@ function main() {
     fixture(m => useAssertion(m).useNodeId = 'missing', false, /unknown useNodeId/);
     fixture(m => useAssertion(m).researchMatch = undefined, false, /explicit boolean/);
     fixture(m => { const a = useAssertion(m); a.researchMatch = true; a.verification.status = 'unreviewed'; }, false, /source verification/);
+    const activeAssertion = m => m.registries.evidenceAssertions.find(a => a.kind === 'study-use' && a.researchMatch);
+    for (const relevance of ['whole-oil', 'whole-oil-direct']) {
+      fixture(m => { activeAssertion(m).material.relevance = relevance; }, true);
+    }
+    const incompatibleMaterials = new Set([
+      'related-preparation', 'different-extraction', 'different-plant-part', 'unknown', '', null, undefined,
+      ...master.registries.evidenceAssertions.filter(a => a.kind === 'study-use').map(a => a.material?.relevance)
+        .filter(value => !['whole-oil', 'whole-oil-direct'].includes(value))
+    ]);
+    for (const relevance of incompatibleMaterials) {
+      fixture(m => { activeAssertion(m).material.relevance = relevance; }, false, /researchMatch needs compatible material relevance/);
+      fixture(m => {
+        const a = activeAssertion(m); a.material.relevance = relevance; a.relevance = 'contextual'; a.researchMatch = false;
+      }, true); // Uncertain or different preparations remain discoverable as contextual research.
+    }
+    const mismatchedStudyAssertions = master.registries.evidenceAssertions.filter(a => a.kind === 'study-use' && (
+      (a.oilId === 'lemon' && a.studyId === 'kiecolt-glaser-2008-olfactory') ||
+      (a.oilId === 'cinnamon' && a.studyId === 'guynot-2003')
+    ));
+    assert.equal(mismatchedStudyAssertions.length, 6, 'Cover all five lemon endpoints and the cinnamon plant-part mismatch'); checks++;
+    for (const original of mismatchedStudyAssertions) {
+      assert.equal(original.researchMatch, false);
+      assert.equal(original.relevance, 'contextual');
+      assert.ok(['different-extraction', 'different-plant-part'].includes(original.material.relevance)); checks++;
+      fixture(m => {
+        const a = m.registries.evidenceAssertions.find(a => a.id === original.id);
+        a.relevance = 'direct'; a.researchMatch = true;
+      }, false, /researchMatch needs compatible material relevance/);
+    }
+    for (const studyId of ['tea-tree-acne-2007', 'tea-tree-dandruff-2002']) {
+      const original = master.registries.evidenceAssertions.find(a => a.studyId === studyId && a.researchMatch);
+      assert.ok(original, 'Keep reviewed single-oil topical formulations eligible');
+      assert.equal(original.material.kind, 'single-oil-topical-formulation'); checks++;
+      fixture(m => {
+        const a = m.registries.evidenceAssertions.find(a => a.id === original.id);
+        a.material.relevance = 'whole-oil-direct';
+      }, true);
+    }
     fixture(m => m.registries.evidenceAssertions.find(a => a.kind === 'chemical-observation').researchMatch = true, false, /cannot be efficacy matches/);
     fixture(m => { const a = useAssertion(m); const oil = m.oils.find(o => o.id === a.oilId); findBranch(oil.uses, a.useNodeId).evidenceIds = []; }, false, /use tree and evidence registry differ/);
     fixture(m => { const oil = m.oils.find(o => o.uses.length); oil.uses.push(copy(oil.uses[0])); }, false, /duplicate/);

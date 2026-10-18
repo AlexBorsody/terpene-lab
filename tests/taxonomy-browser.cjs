@@ -27,7 +27,8 @@ addStudy('fixture-multitag', [ids[3], ids[4]], ['lemon'], ['limonene']);
 function addAssertion(oilId, studyId, useNodeId, direct) {
   const id = `assert-${oilId}-${studyId}-${useNodeId}`;
   fixture.registries.evidenceAssertions.push({ id, kind: 'study-use', oilId, studyId, useNodeId, researchMatch: direct,
-    finding: 'Scoped fixture finding', limitations: 'Fixture limitation', material: { kind: 'essential-oil', label: 'Fixture material' },
+    finding: 'Scoped fixture finding', limitations: 'Fixture limitation',
+    material: { kind: 'essential-oil', label: 'Fixture material', relevance: direct ? 'whole-oil-direct' : null },
     model: { label: 'Fixture experimental model' }, outcome: { direction: 'null', label: 'Fixture measured outcome' },
     route: 'Fixture route', species: 'Fixture species', relevance: direct ? 'direct' : 'unreviewed',
     verification: { status: direct ? 'source-checked' : 'unreviewed', sourceIds: [], urls: [], checkedAt: null, notes: 'Synthetic regression fixture' } });
