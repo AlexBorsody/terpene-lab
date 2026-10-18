@@ -60,7 +60,7 @@
   root.innerHTML = `
     <div class="blend-hero">
       <div><p class="blend-eyebrow">THE FORMULA IS YOURS</p><h2>Create a custom blend.</h2>
-        <p class="blend-intro">Start with a quality or an essential oil. Explore the chemistry, shape the aroma, and see the evidence and cautions together.</p></div>
+        <p class="blend-intro">Start with a quality or an essential oil. Explore the chemistry, shape the aroma, and see the evidence and precautions together.</p></div>
       <div class="blend-product"><span class="blend-product-size">SUNNY'S SHIELD / 8 OZ</span><strong>${esc(priceLabel)}<span> per custom blend</span></strong><p>Standard bottle, base and label.</p><span class="blend-pill">Manual review before mixing</span></div>
     </div>
     <p id="blend-link-error" class="blend-message is-error" role="alert" ${restoreError ? '' : 'hidden'}>${esc(restoreError)}</p>
