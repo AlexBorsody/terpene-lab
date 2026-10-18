@@ -25,6 +25,24 @@ assert.ok(!r.matchesCategory(compounds.cinnamaldehyde,'terpenes'));
 assert.ok(r.matchesCategory(compounds.nobiletin,'group:flavonoid'));
 assert.ok(!r.matchesCategory(compounds.nobiletin,'terpenes'));
 assert.ok(!r.matchesCategory(compounds.citral,'unknown'));
+// A new canonical chemical category requires no handwritten class or label list.
+{
+ const fixture=JSON.parse(JSON.stringify(d));
+ fixture.compounds.push({id:'fixture-chemical',name:'Fixture molecule',chemicalClass:'Fixture class',functionalGroups:[],aliases:[]});
+ fixture.chemicalTaxonomy.nodes.push(
+  {id:'fixture-family',label:'Fixture family',parentId:null,selectable:true,match:{includeDescendants:true}},
+  {id:'class:Fixture class',label:'Fixture classes',parentId:'fixture-family',selectable:true,match:{chemicalClasses:['Fixture class']}},
+  {id:'fixture-compound-list',label:'Fixture compound list',parentId:null,selectable:true,match:{compoundIds:['fixture-chemical']}}
+ );
+ const dynamic=vm.createContext({TERPENE_DATA:fixture});
+ vm.runInContext(fs.readFileSync('chemistry.js','utf8')+'\nthis.rules=CHEMISTRY;',dynamic);
+ for(const id of ['fixture-family','class:Fixture class','fixture-compound-list']) {
+  assert.ok(dynamic.rules.compoundCategories.some(node=>node.id===id));
+  assert.ok(dynamic.rules.matchesCategory(fixture.compounds.at(-1),id));
+  assert.ok(!dynamic.rules.matchesCategory(fixture.compounds[0],id));
+ }
+ assert.ok(!dynamic.rules.matchesCategory(fixture.compounds.at(-1),'terpenes'));
+}
 assert.ok(!r.quantified({range:{min:1,max:3}}));
 for (const range of [null,{}, {min:null,max:5},{min:0,max:NaN},{min:-1,max:2},{min:10,max:2},{min:1,max:101}]) assert.ok(!r.validRange(range));
 const complete = {range:{min:1,max:3},sourceIds:['oswald-2021'],material:'test fixture',sample:'fixture',extraction:'fixture',method:'fixture',basis:'fixture'};

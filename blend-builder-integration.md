@@ -8,7 +8,7 @@ or Shopify Plus feature is required.
 
 ## Current configuration
 
-`data.js` → `TERPENE_DATA.blendBuilder.product` is the product configuration:
+`master-data.json` → `blendBuilder.product` (generated as `TERPENE_DATA.blendBuilder.product`) is the product configuration:
 
 - `name: "Custom Blend"`, `price: 40`, `currency: "USD"`, `size: "8 oz"`.
 - `shopifyStoreUrl: "https://sunnysshield.com"`, the verified existing storefront.
@@ -102,9 +102,9 @@ review and resolution policy.
 
 The existing `terpene-lab:blend:v1` local-storage record holds the draft and up to
 12 saved recipes. It includes the name, starting path, visible selected
-qualities, oils, percentages and pet context. No account is created. Browser
+research topics (the version-1 field remains `qualityIds`), oils, percentages and pet context. No account is created. Browser
 storage can be cleared, blocked or device-specific; share links provide a
-portable fallback. Anyone with a share link can read its recipe and name.
+portable fallback. Legacy calm/focus/sleep/uplifting IDs migrate through canonical aliases; valid saved recipes are canonicalized before deduplication. Topics come from the same hierarchical master used by the research library, while per-oil relevance remains explicitly scoped. Anyone with a share link can read its recipe and name.
 No Shopify cart secret is stored in those links or cached by the Lab.
 
 The integrity-checked PWA caches the explorer for offline use. Shopify checkout
@@ -115,7 +115,12 @@ the app's update control to accept the new release.
 ## Verification
 
 ```sh
+python3 scripts/build-data.py
+python3 scripts/build-data.py --check
 python3 scripts/build-pwa.py
+node tests/master-data.cjs
+node tests/research.cjs
+node tests/research-audit.cjs
 node tests/blend-engine.cjs
 node tests/chemistry.cjs
 node tests/research-labels-unit.cjs
@@ -125,6 +130,7 @@ node tests/pwa.cjs
 python3 -m http.server 8000
 node tests/browser.cjs
 node tests/research-labels.cjs
+node tests/taxonomy-browser.cjs
 node tests/blend-browser.cjs
 node tests/blend-checkout.cjs
 ```

@@ -1158,3 +1158,28 @@ summary:focus-visible, .chip:focus-visible, .compound-card:focus-visible { outli
 .pwa-controls button { padding: 8px 12px; color: var(--text); background: var(--surface); border: 1px solid var(--amber); border-radius: 6px; cursor: pointer; }
 .pwa-controls button:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
 .pwa-controls [hidden], .lab-embedded .pwa-controls { display: none; }
+
+/* Shared taxonomy: disclose one level at a time without changing the lab layout. */
+.topic-navigation { margin: -4px 0 18px; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); min-width: 0; }
+.topic-breadcrumb { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 7px; margin-bottom: 10px; color: var(--muted); font-size: 13px; min-width: 0; }
+.topic-crumb { background: transparent; border: 0; padding: 5px 0; color: var(--muted); font: inherit; cursor: pointer; text-align: left; overflow-wrap: anywhere; }
+.topic-crumb:hover, .topic-crumb[aria-current] { color: var(--amber); }
+.topic-crumb:focus-visible, .catchip:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+.topic-child-label { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 13px; }
+.topic-child-select { min-height: 44px; max-width: 100%; min-width: 0; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 9px 12px; border-radius: 6px; font-size: 14px; }
+.topic-navigation select:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+.research-context { max-width: 90ch; margin: 0 0 14px; }
+.study-qualifiers { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+.study-qualifiers:empty { display: none; }
+.study-qualifiers p, .research-assessment p { margin: 4px 0; }
+.research-assessments { margin-top: 12px; border-top: 1px solid var(--border); padding-top: 8px; font-size: 13px; }
+.research-assessments summary { cursor: pointer; color: var(--muted); }
+.research-assessment { margin-top: 10px; padding: 8px 0; border-top: 1px solid var(--border); overflow-wrap: anywhere; }
+.study .catchip { font: inherit; font-size: 12px; text-align: left; max-width: 100%; white-space: normal; overflow-wrap: anywhere; cursor: pointer; }
+#domain-subs .chip { white-space: normal; text-align: left; }
+@media (max-width: 600px) { .topic-child-label { display: block; } .topic-child-select { display: block; width: 100%; margin-top: 6px; } }
+
+/* Oil-specific applicability stays visible beside the publication summary. */
+.research-scope { border-left:2px solid var(--amber); padding:9px 12px; margin:12px 0; background:rgba(210,171,93,.06); overflow-wrap:anywhere; }
+.research-scope p { font-size:14px; line-height:1.65; margin:0 0 8px; }
+.research-scope p:last-child { margin-bottom:0; }

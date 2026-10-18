@@ -35,6 +35,20 @@
 .blend-catalog h4 { margin-bottom:10px; }
 .blend-small { color:var(--muted); font-size:12px; line-height:1.6; }
 .blend-quality-buttons { display:flex; flex-wrap:wrap; gap:7px; margin:13px 0 18px; }
+.blend-topic-branch { width:100%; border:1px solid var(--border); border-radius:8px; padding:10px 12px; }
+.blend-topic-branch summary { cursor:pointer; font-size:13px; line-height:1.6; padding:5px 0; min-height:34px; }
+.blend-topic-branch summary span { color:var(--muted); font-size:11px; margin-left:7px; }
+.blend-topic-children { display:flex; flex-wrap:wrap; gap:7px; margin-top:9px; padding-left:8px; border-left:1px solid var(--border); }
+#blend-builder .blend-quality small { opacity:.75; margin-left:5px; }
+.blend-related-catalog { grid-column:1/-1; border-top:1px solid var(--border); padding-top:14px; }
+.blend-related-catalog > summary,.blend-more-research > summary { cursor:pointer; min-height:44px; padding:10px 0; line-height:1.5; color:var(--amber); font-size:13px; }
+.blend-related-catalog > .blend-small { margin-bottom:14px; }
+.blend-more-research { margin-top:12px; }
+.blend-library-link { display:inline-block; padding:12px 0; font-size:13px; }
+.blend-profile .study { padding:15px; margin-bottom:14px; min-width:0; overflow-wrap:anywhere; }
+.blend-profile .study h4 { font-size:15px; line-height:1.55; }
+.blend-profile .study .catchips { flex-wrap:wrap; }
+.blend-profile .study .tags { flex-wrap:wrap; }
 #blend-builder .blend-quality { border:1px solid #3a4b59; border-radius:24px; padding:7px 17px; background:transparent; color:var(--text); font-size:13px; }
 #blend-builder .blend-quality[aria-pressed=true] { background:#c9b27d; color:#12202c; border-color:#c9b27d; }
 .blend-search-label,.blend-input-label { display:block; color:var(--muted); font-size:12px; margin:15px 0 7px; }
@@ -104,7 +118,7 @@
 .blend-profile-columns > div { padding:24px; }
 .blend-profile-cautions { background:#24241f; border-left:1px solid #594e36; }
 .blend-profile-columns h5 { margin-bottom:15px; }
-.blend-profile-columns p { font-size:13px; line-height:1.7; margin-bottom:13px; }
+.blend-profile-columns p { font-size:14px; line-height:1.7; margin-bottom:13px; }
 .blend-profile-columns p.blend-small { font-size:12px; }
 .blend-research + .blend-research { border-top:1px solid var(--border); padding-top:16px; margin-top:16px; }
 .blend-research > p:first-child { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }

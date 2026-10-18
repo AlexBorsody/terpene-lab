@@ -8,34 +8,32 @@ const CHEMISTRY = (() => {
     range.min >= 0 && range.max >= range.min && range.max <= 100;
   const quantified = record => Boolean((!record.status || record.status === "quantified") && validRange(record.range) && hasSources(record) &&
     record.material && record.sample && record.extraction && record.method && record.basis);
-  const tags = compound => [...(compound.functionalGroups || []),
-    ...(compound.chemicalClass === 'Flavonoid' ? ['flavonoid'] : [])];
+  const categoryNodes = TERPENE_DATA.chemicalTaxonomy?.nodes || [];
+  const categoryById = new Map(categoryNodes.map(node => [node.id, node]));
+  const categoryChildren = new Map();
+  categoryNodes.forEach(node => {
+    if (!categoryChildren.has(node.parentId)) categoryChildren.set(node.parentId, []);
+    categoryChildren.get(node.parentId).push(node);
+  });
+  const categoryMatch = (compound, node, visited = new Set()) => {
+    if (!node || visited.has(node.id)) return false;
+    visited.add(node.id);
+    const rule = node.match || {};
+    return (rule.chemicalClasses || []).includes(compound.chemicalClass) ||
+      (rule.functionalGroups || []).some(group => (compound.functionalGroups || []).includes(group)) ||
+      (rule.compoundIds || []).includes(compound.id) ||
+      (rule.includeDescendants === true && (categoryChildren.get(node.id) || []).some(child => categoryMatch(compound, child, visited)));
+  };
+  const tags = compound => [...new Set([...(compound.functionalGroups || []),
+    ...categoryNodes.filter(node => node.groupId && categoryMatch(compound, node)).map(node => node.groupId)])];
   const matches = (compound, query = '', primary = '', group = '') =>
     (!primary || compound.chemicalClass === primary) && (!group || tags(compound).includes(group)) &&
     [compound.name, compound.formula, compound.chemicalClass, compound.description,
       ...(compound.aliases || []), ...tags(compound)].join(' ').toLowerCase().includes(query.trim().toLowerCase());
-  const terpeneClasses = new Set(['Monoterpene', 'Monoterpenoid', 'Sesquiterpene', 'Sesquiterpenoid', 'Furanosesquiterpene']);
-  const matchesCategory = (compound, category = '') => {
-    if (!category) return true;
-    if (category === 'terpenes') return terpeneClasses.has(compound.chemicalClass);
-    if (category.startsWith('class:')) return compound.chemicalClass === category.slice(6);
-    if (category.startsWith('group:')) return tags(compound).includes(category.slice(6));
-    return false;
-  };
-  const classLabels = {
-    Monoterpene: 'Monoterpenes', Monoterpenoid: 'Monoterpenoids',
-    Sesquiterpene: 'Sesquiterpenes', Sesquiterpenoid: 'Sesquiterpenoids',
-    Furanosesquiterpene: 'Furanosesquiterpenes', Phenylpropanoid: 'Phenylpropanoids',
-    'Organosulfur compound': 'Organosulfur compounds'
-  };
-  const compoundCategories = [
-    { id: 'terpenes', label: 'Terpenes and terpenoids' },
-    ...[...new Set(TERPENE_DATA.compounds.map(c => c.chemicalClass))]
-      .filter(chemicalClass => chemicalClass !== 'Flavonoid')
-      .map(chemicalClass => ({ id: 'class:' + chemicalClass, label: classLabels[chemicalClass] || chemicalClass })),
-    ...groups.map(group => ({ id: 'group:' + group.id, label: group.label }))
-  ].filter(category => TERPENE_DATA.compounds.some(compound => matchesCategory(compound, category.id)))
-    .sort((a, b) => a.label.localeCompare(b.label));
+  const matchesCategory = (compound, category = '') => !category || categoryMatch(compound, categoryById.get(category));
+  const compoundCategories = categoryNodes.filter(node => node.selectable !== false &&
+    TERPENE_DATA.compounds.some(compound => categoryMatch(compound, node)))
+    .map(({id, label}) => ({id, label})).sort((a, b) => a.label.localeCompare(b.label));
   const evidenceFor = (oil, group) => (oil.chemicalEvidence || []).filter(e => e.group === group);
   // One qualified relationship per oil/compound for browsing and graph edges.
   // Keep every observation in chemicalEvidence; never aggregate their quantities.

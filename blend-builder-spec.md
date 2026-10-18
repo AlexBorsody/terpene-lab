@@ -4,6 +4,10 @@ Date: 2026-10-18
 Owner decisions: Alex Borsody (original 2026-10-17, Shopify flow updated 2026-10-18)
 Status: Builder implemented. Owner-approved update: $40, local recipes, one Shopify Recipe property, manual review before mixing.
 
+## Current owner-approved data architecture (2026-10-18)
+
+This update supersedes the original four-quality/starter-subset examples below. All 28 catalog oils are available for exploration. The first path selects hierarchical **research topics** from the shared oil-first `master-data.json`; cleaning, microbial, skin and other research retain their measured endpoints, material, model, evidence depth and precautions. Every site view and builder uses the same terms and scoped evidence. This is not a list of promised finished-product effects. Unknown stock, base and total oil load remain unknown. Product configuration and manual Shopify review are unchanged. See `master-data-schema.md` for the current canonical contract; `data.js` is generated, not separately maintained.
+
 ## One-line summary
 
 A custom essential-oil blend builder inside Terpene Lab (lab.sunnysshield.com), integrated with Sunny's Shield, where customers design their own blend, see the research and the warnings behind every choice, and buy it as the standard 8 oz Sunny's Shield spray.

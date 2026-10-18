@@ -17,6 +17,7 @@ const VARIANT = '123456789';
 const STORAGE = 'terpene-lab:blend:v1';
 const FIXTURE_NAME = 'TEST-ONLY checkout fixture A';
 const OILS = ['lavender','lemon','rosemary','peppermint','sweet-orange'];
+const TOPICS = {calm:'health-mental-health',focus:'health-cognitive',sleep:'health-mental-health-sleep',uplifting:'health-mental-health-mood'};
 const failures = [], allWrites = [], allFetches = [];
 let browser;
 
@@ -67,6 +68,19 @@ async function test(name, run) {
 }
 
 async function ready(page) { await page.locator('[data-blend-path="oils"]').waitFor(); }
+async function topic(page, id) {
+  const button=page.locator(`#blend-quality-picker [data-quality="${id}"]`);
+  const ancestors=await button.evaluate(node=>{
+    const ids=[];
+    for(let parent=node.parentElement;parent;parent=parent.parentElement) if(parent.matches('details[data-topic-branch]')) ids.unshift(parent.dataset.topicBranch);
+    return ids;
+  });
+  for(const ancestor of ancestors) {
+    const branch=page.locator(`[data-topic-branch="${ancestor}"]`);
+    if(!await branch.evaluate(node=>node.open)) await branch.locator(':scope > summary').click();
+  }
+  await button.click();
+}
 async function configure(page, overrides = {}) {
   await page.evaluate(({store,variant,overrides})=>{
     // Deliberately leave all unknown formulation/safety fields unknown.
@@ -132,11 +146,12 @@ async function cart(page) {
   assert.equal(result.encodedRecipe,expected.encodedRecipe);
   return result;
 }
-async function seedUrl(page, overrides = {}) {
-  return page.evaluate(({base,overrides})=>{
+async function seedUrl(page, overrides = {}, legacy = false) {
+  return page.evaluate(({base,overrides,legacy})=>{
     const recipe={v:1,catalogVersion:TERPENE_DATA.blendBuilder.catalogVersion,name:'Shared fixture A',path:'oils',qualityIds:[],petContext:false,oils:[{id:'lavender',percent:100}],...overrides};
-    return `${base}/?tab=blend&recipe=${BLEND_ENGINE.encodeRecipe(recipe,TERPENE_DATA)}`;
-  },{base,overrides});
+    const code=legacy?btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(recipe)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''):BLEND_ENGINE.encodeRecipe(recipe,TERPENE_DATA);
+    return `${base}/?tab=blend&recipe=${code}`;
+  },{base,overrides,legacy});
 }
 async function captureBeforeNavigation(page, scope = page) {
   const captures = [];
@@ -199,8 +214,14 @@ async function captureBeforeNavigation(page, scope = page) {
     await page.locator('[data-remove-oil="lemon"]').click();
     result=await cart(page);assert.deepEqual(result.recipe.oils,[{id:'lavender',percent:100}]);
     await page.locator('[data-blend-path="qualities"]').click();
-    await page.locator('[data-quality="calm"]').click();
-    result=await cart(page);assert.equal(result.recipe.path,'qualities');assert.deepEqual(result.recipe.qualityIds,['calm']);
+    await topic(page,TOPICS.calm);
+    result=await cart(page);assert.equal(result.recipe.path,'qualities');assert.deepEqual(result.recipe.qualityIds,[TOPICS.calm]);
+    previous=result;await topic(page,TOPICS.focus);
+    result=await cart(page);assert.notEqual(result.url.href,previous.url.href);
+    assert.deepEqual(result.recipe.qualityIds,[TOPICS.focus,TOPICS.calm].sort(),'Every currently selected topic enters canonical checkout metadata');
+    previous=result;await topic(page,TOPICS.calm);
+    result=await cart(page);assert.notEqual(result.url.href,previous.url.href);
+    assert.deepEqual(result.recipe.qualityIds,[TOPICS.focus],'Removed topics cannot remain in a stale checkout recipe');
     previous=result;
     await page.locator('[data-blend-path="oils"]').click();
     result=await cart(page);assert.notEqual(result.url.href,previous.url.href);
@@ -235,7 +256,10 @@ async function captureBeforeNavigation(page, scope = page) {
 
   await test('saved load, reload, shared links and Back restore the matching checkout recipe',async page=>{
     await open(page);await create(page,'Saved fixture A');
+    await page.locator('[data-blend-path="qualities"]').click();
+    await topic(page,TOPICS.sleep);await topic(page,TOPICS.focus);
     const saved=await cart(page);
+    assert.deepEqual(saved.recipe.qualityIds,[TOPICS.focus,TOPICS.sleep].sort());
     await page.locator('#blend-save').click();
     await page.locator('#blend-name').fill('Edited fixture B');
     assert.equal((await cart(page)).recipe.name,'Edited fixture B');
@@ -243,10 +267,13 @@ async function captureBeforeNavigation(page, scope = page) {
     assert.equal((await cart(page)).url.href,saved.url.href);
     await page.reload();await ready(page);await configure(page);await regenerate(page);
     assert.equal((await cart(page)).url.href,saved.url.href);
-    const url=await seedUrl(page,{name:'Shared fixture A',oils:[{id:'lavender',percent:60},{id:'lemon',percent:40}]});
+    const url=await seedUrl(page,{name:'Shared fixture A',path:'qualities',qualityIds:[TOPICS.calm,TOPICS.uplifting],oils:[{id:'lavender',percent:60},{id:'lemon',percent:40}]});
     await page.goto(url);await ready(page);await configure(page);await refresh(page);
     const shared=await cart(page);assert.equal(shared.recipe.name,'Shared fixture A');
+    assert.deepEqual(shared.recipe.qualityIds,[TOPICS.calm,TOPICS.uplifting].sort());
     await page.locator('#blend-name').fill('Unshared edit B');
+    await topic(page,TOPICS.uplifting);
+    assert.deepEqual((await cart(page)).recipe.qualityIds,[TOPICS.calm]);
     assert.notEqual((await cart(page)).url.href,shared.url.href);
     await page.getByRole('button',{name:'Oils',exact:true}).click();
     await page.goBack();await page.waitForURL(url);
@@ -255,6 +282,25 @@ async function captureBeforeNavigation(page, scope = page) {
     assert.equal(await page.locator('#tab-oils.active').count(),1);
     await page.getByRole('button',{name:'Blend Builder',exact:true}).click();
     assert.equal((await cart(page)).recipe.name,'Shared fixture A');
+  });
+
+  await test('legacy aliases migrate into canonical checkout metadata without duplicate topics',async page=>{
+    await open(page);
+    const topics=Object.values(TOPICS).sort();
+    const url=await seedUrl(page,{name:'Legacy fixture 🌿',path:'qualities',qualityIds:['calm',TOPICS.calm,'focus','sleep','uplifting']},true);
+    await page.goto(url);await ready(page);await configure(page);await refresh(page);
+    const result=await cart(page);
+    assert.equal(result.recipe.v,1);assert.equal(result.recipe.catalogVersion,'2026-10-18');
+    assert.deepEqual(result.recipe.qualityIds,topics,'Legacy aliases and overlapping canonical IDs deduplicate before serialization');
+    assert.deepEqual((await draft(page)).qualityIds,topics);
+    await page.locator('#blend-save').click();
+    await topic(page,TOPICS.calm);
+    assert.deepEqual((await cart(page)).recipe.qualityIds,topics.filter(id=>id!==TOPICS.calm));
+    await page.locator('[data-load-recipe="0"]').click();
+    assert.equal((await cart(page)).url.href,result.url.href,'Loading canonical saved bytes restores matching order metadata');
+    await page.locator('[data-blend-path="oils"]').click();
+    assert.deepEqual((await cart(page)).recipe.qualityIds,[]);
+    assert.deepEqual((await draft(page)).qualityIds,[]);
   });
 
   await test('excess-precision input removes usable checkout until correction and exploration',async page=>{
@@ -420,16 +466,25 @@ async function captureBeforeNavigation(page, scope = page) {
 
   await test('actual standalone click persists the current recipe before an intercepted GET handoff',async(page,t)=>{
     await open(page);await create(page,'Persist on click 🌿');
+    await page.locator('[data-blend-path="qualities"]').click();
+    await topic(page,TOPICS.sleep);await topic(page,TOPICS.focus);
     const expected=await cart(page);
+    assert.deepEqual(expected.recipe.qualityIds,[TOPICS.focus,TOPICS.sleep].sort());
+    const currentDraft=await draft(page);
+    assert.deepEqual(currentDraft.qualityIds,[TOPICS.sleep,TOPICS.focus],'Editable draft retains current selection order');
+    assert.deepEqual(currentDraft.qualityIds.slice().sort(),expected.recipe.qualityIds,'Draft and canonical handoff contain the same selected topics');
     const captures=await captureBeforeNavigation(page);
     t.expectedNavigations=1;
     await page.locator('#blend-checkout').click();
     await page.locator('#mock-handoff').waitFor();
     assert.equal(captures.length,1);
     assert.equal(captures[0].prevented,false,'Native anchor navigation is used');
-    assert.deepEqual(JSON.parse(captures[0].storage).draft,expected.recipe,'Draft is persisted synchronously before navigation');
+    assert.deepEqual(JSON.parse(captures[0].storage).draft,currentDraft,'The exact current draft is persisted synchronously before navigation');
     assert.equal(captures[0].href,expected.url.href);
-    assert.deepEqual(decodeHref(page.url()).properties,expected.properties);
+    const handoff=decodeHref(page.url());
+    assert.deepEqual(handoff.recipe,expected.recipe,'Navigation retains the independently canonicalized recipe');
+    assert.equal(handoff.encodedRecipe,expected.encodedRecipe,'Canonical recipe bytes are unchanged during handoff');
+    assert.deepEqual(handoff.properties,expected.properties);
   });
 
   await test('a real iframe targets the top document and persists before the intercepted handoff',async(page,t)=>{
@@ -440,14 +495,19 @@ async function captureBeforeNavigation(page, scope = page) {
     assert.ok(frame);await ready(frame);await configure(frame);await create(frame,'Iframe fixture 夜');
     assert.equal(await frame.locator('html.lab-embedded').count(),1);
     const expected=await cart(frame);
+    const currentDraft=await draft(frame);
     const captures=await captureBeforeNavigation(page,frame);
     t.expectedNavigations=1;
     await frame.locator('#blend-checkout').click();
     await page.locator('#mock-handoff').waitFor();
     assert.equal(page.frames().length,1,'Checkout replaced the top document, rather than remaining inside the iframe');
     assert.equal(captures.length,1);
-    assert.deepEqual(JSON.parse(captures[0].storage).draft,expected.recipe);
+    assert.deepEqual(JSON.parse(captures[0].storage).draft,currentDraft,'Iframe also persists the exact current draft');
     assert.equal(page.url(),expected.url.href);
+    const handoff=decodeHref(page.url());
+    assert.deepEqual(handoff.recipe,expected.recipe);
+    assert.equal(handoff.encodedRecipe,expected.encodedRecipe);
+    assert.deepEqual(handoff.properties,expected.properties);
   });
 
   await browser.close();browser=null;

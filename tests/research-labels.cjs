@@ -19,24 +19,36 @@ const assert = require('node:assert/strict');
   const cannabisIndex = oilOptions.findIndex(option => option.value === 'cannabis');
   assert.equal(oilOptions[cannabisIndex - 1].label, 'Bergamot');
   assert.equal(oilOptions[cannabisIndex + 1].label, 'Cinnamon Bark');
-  const counts = await page.evaluate(() => ({
-    composition: D.studies.filter(s => s.categories.some(c => c.type === 'botanical' && c.subcategory === 'composition')).length,
-    flavonoids: D.studies.filter(s => s.categories.some(c => c.type === 'botanical' && c.subcategory === 'nonvolatile-chemistry')).length,
-    aroma: D.studies.filter(s => s.categories.some(c => c.type === 'sensory')).length,
-    originalLabel: D.categories.find(c => c.type === 'botanical').label,
-    allTopicsMapped: D.studies.every(s => s.categories.every(c => domainByType[researchDomainId(c)]))
-  }));
-  assert.equal(counts.originalLabel, 'Botanical chemistry', 'Stored taxonomy is unchanged');
+  const counts = await page.evaluate(() => {
+    const descendants = id => {
+      const nodes = new Set([id]); let size;
+      do { size = nodes.size; D.taxonomy.nodes.forEach(node => { if (nodes.has(node.parentId)) nodes.add(node.id); }); } while (size !== nodes.size);
+      return nodes;
+    };
+    const countStudies = id => { const nodes = descendants(id); return new Set(D.studies.filter(study => study.useNodeIds.some(nodeId => nodes.has(nodeId))).map(study => study.id)).size; };
+    const countOilStudies = (oilId, id) => { const nodes = descendants(id); return new Set(D.evidenceAssertions.filter(a => a.kind === 'study-use' && a.oilId === oilId && nodes.has(a.useNodeId)).map(a => a.studyId)).size; };
+    return {
+      composition: countStudies('botanical-composition'), flavonoids: countStudies('botanical-nonvolatile-chemistry'),
+      aroma: countStudies('sensory'), botanical: countStudies('botanical'),
+      claryComposition: countOilStudies('clary-sage', 'botanical-composition'),
+      cannabisFlavonoids: countOilStudies('cannabis', 'botanical-nonvolatile-chemistry'),
+      flavonoidOils: D.oils.filter(oil => countOilStudies(oil.id, 'botanical-nonvolatile-chemistry')).length,
+      originalLabel: D.categories.find(c => c.type === 'botanical').label,
+      allTopicsMapped: D.studies.every(s => s.categories.every(c => domainByType[researchDomainId(c)]))
+    };
+  });
+  assert.equal(counts.originalLabel, 'Botanical chemistry', 'Legacy category labels are retained in compatibility data');
   assert.equal(counts.allTopicsMapped, true);
-  assert.equal(counts.flavonoids, 1);
+  assert.ok(counts.flavonoids > 0);
   for (const width of [320, 390, 412, 768, 1440]) {
     await page.setViewportSize({ width, height: 915 });
     for (const embed of [false, true]) {
       await page.goto(`${base}/?tab=oils${embed ? '&embed=1' : ''}`);
-      assert.equal(await page.locator('[data-oil="clary-sage"] .sub').innerText(), '2 studies on Pest / Repellent, Composition analysis');
+      assert.ok((await page.locator('[data-oil="clary-sage"] .sub').innerText()).includes('Composition analysis'));
       const cannabis = await page.locator('[data-oil="cannabis"] .sub').innerText();
-      assert.ok(cannabis.includes('Aroma research, Flavonoid research'));
-      assert.ok(!cannabis.includes('Composition analysis'), 'A flavonoid review is not an analytical study');
+      assert.ok(cannabis.includes('Aroma research'));
+      assert.ok(cannabis.includes('Flavonoid research'));
+      assert.ok(cannabis.includes('Composition analysis'), 'Audited chemical-profile papers appear alongside flavonoid research');
       assert.ok(!(await page.locator('#oil-grid').innerText()).includes('Botanical chemistry'));
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, `Overflow at ${width}, embed ${embed}`);
       if (width === 412 && !embed && process.env.LABEL_SCREENSHOT) {
@@ -100,31 +112,31 @@ const assert = require('node:assert/strict');
     await page.locator('#study-search').fill('');
   }
   await page.evaluate(() => presetStudyFilters({ domain: 'botanical' }));
-  assert.equal(await page.locator('#study-list .study').count(), counts.composition + counts.flavonoids);
+  assert.equal(await page.locator('#study-list .study').count(), counts.botanical);
   await page.goto(`${base}/?tab=oils&oil=clary-sage`);
-  await page.locator('#oil-domains [data-domain-filter="botanical:composition"]').click();
-  assert.equal(await page.locator('#study-list .study').count(), 1);
+  await page.locator('#oil-domains [data-domain-filter="botanical-composition"]').click();
+  assert.equal(await page.locator('#study-list .study').count(), counts.claryComposition);
   assert.ok((await page.locator('#study-list').innerText()).includes('Salvia sclarea Essential Oil Chemical Composition'));
   await page.getByRole('button', { name: 'Oils', exact: true }).click();
   assert.equal(await page.locator('#oil-grid').isVisible(), true);
   await page.locator('#oil-domain-filter').selectOption('botanical:nonvolatile-chemistry');
-  assert.equal(await page.locator('#oil-grid .card').count(), 1);
+  assert.equal(await page.locator('#oil-grid .card').count(), counts.flavonoidOils);
   assert.ok((await page.locator('#oil-grid').innerText()).includes('Cannabis'));
   await page.goto(`${base}/?tab=matrix`);
   await page.locator('#matrix-domain-filter').selectOption('botanical:nonvolatile-chemistry');
   assert.ok((await page.locator('#matrix-table thead').textContent()).includes('Flavonoid research'));
-  const cell = page.locator('#matrix-table [data-oil="cannabis"][data-domain="botanical:nonvolatile-chemistry"]');
-  assert.equal((await cell.innerText()).trim(), '1');
+  const cell = page.locator('#matrix-table [data-oil="cannabis"][data-domain="botanical-nonvolatile-chemistry"]');
+  assert.equal((await cell.innerText()).trim(), String(counts.cannabisFlavonoids));
   await cell.click();
-  assert.equal(await page.locator('#study-list .study').count(), 1);
+  assert.equal(await page.locator('#study-list .study').count(), counts.cannabisFlavonoids);
   assert.ok((await page.locator('#study-list').innerText()).includes('Flavonoids in Cannabis sativa'));
   await page.goto(`${base}/?tab=domains`);
-  await page.locator('[data-domain="botanical:composition"]').click();
+  await page.locator('[data-domain="botanical-composition"]').click();
   assert.equal(await page.locator('#domain-name').innerText(), 'Composition analysis');
   assert.equal(await page.locator('#domain-studies .study').count(), counts.composition);
-  assert.equal(await page.locator('#domain-subs button').count(), 0, 'Do not repeat a single topic as a second filter');
+  assert.equal(await page.locator('#domain-subs button').count(), await page.evaluate(() => R.children('botanical:composition').length), 'Show only immediate descendants');
   await page.goto(`${base}/?tab=domains&domain=botanical&sub=nonvolatile-chemistry`);
-  assert.equal(await page.locator('#domain-studies .study').count(), 1, 'Old taxonomy links still work');
+  assert.equal(await page.locator('#domain-studies .study').count(), counts.flavonoids, 'Old taxonomy links still work across the audited multitag catalog');
   assert.ok((await page.locator('#domain-name').innerText()).includes('Flavonoid research'));
   for (const [compound, heading, count] of [
     ['limonene', 'Found in these oils', 9],
@@ -146,6 +158,30 @@ const assert = require('node:assert/strict');
   await page.goBack();
   assert.equal(await page.locator('#compound-name').innerText(), 'Cannflavin A');
   assert.equal(await page.locator('#compound-oils-chart').isVisible(), false);
+  // Applicability caveats are visible before opening assessment details.
+  await page.goto(`${base}/?tab=studies&oil=eucalyptus&domain=health-respiratory`);
+  const cineole = page.locator('#study-list [data-study-id="juergens-2003-cineole"]');
+  assert.equal(await cineole.locator('.research-scope').isVisible(), true);
+  assert.equal(await cineole.locator('.research-scope').evaluate(node => !!node.closest('details')), false);
+  assert.equal(await cineole.locator('.research-assessments').getAttribute('open'), null);
+  const cineoleText = await cineole.locator('.research-scope').innerText();
+  assert.ok(cineoleText.includes('Medicinal oral 1,8-cineole preparations'));
+  assert.ok(cineoleText.includes('Library-linked evidence; applicability not independently verified'));
+  assert.ok(!cineoleText.includes('Source-reviewed direct research'));
+  for (const [oil, finding, wrongFinding, material] of [
+    ['myrrh', 'Myrrh-extract sitz baths improved REEDA healing scores', 'Frankincense-extract sitz baths did not', 'Commiphora myrrha extract sitz bath'],
+    ['frankincense', 'Frankincense-extract sitz baths did not significantly differ from betadine', 'Myrrh-extract sitz baths improved', 'Boswellia carteri extract sitz bath']
+  ]) {
+    await page.goto(`${base}/?tab=studies&oil=${oil}&domain=health-wound`);
+    const paper = page.locator('#study-list [data-study-id="nialeila-2020-myrrh-frankincense-wound"]');
+    const scope = paper.locator('.research-scope');
+    assert.equal(await scope.isVisible(), true);
+    assert.equal(await scope.evaluate(node => !!node.closest('details')), false);
+    assert.equal(await paper.locator('.research-assessments').getAttribute('open'), null);
+    const text = await scope.innerText();
+    assert.ok(text.includes(finding)); assert.ok(text.includes(material)); assert.ok(!text.includes(wrongFinding));
+    assert.equal(await paper.locator('.finding').count(), 1);
+  }
   assert.deepEqual(errors, []);
   await browser.close();
   console.log(`PASS: specific research labels; ${counts.composition} composition, ${counts.flavonoids} flavonoid and ${counts.aroma} aroma studies; mobile/embed layouts, search, filters, drill-downs and legacy links`);
