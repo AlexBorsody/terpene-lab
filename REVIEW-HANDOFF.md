@@ -2,7 +2,7 @@
 
 ## Start here
 
-Review [PR #13](https://github.com/AlexBorsody/terpene-lab/pull/13), including its final commit, review discussion and checks. The migration starts from main commit [`eb8a5b7eeb70e29c8bb53e0fbedeadb0554738f1`](https://github.com/AlexBorsody/terpene-lab/commit/eb8a5b7eeb70e29c8bb53e0fbedeadb0554738f1); the first implementation commit is [`a40476c838e222721f66816b39e3650c6a0c75bd`](https://github.com/AlexBorsody/terpene-lab/commit/a40476c838e222721f66816b39e3650c6a0c75bd). Follow the PR's final head/merge SHA rather than assuming that first commit is the release.
+Review [PR #13](https://github.com/AlexBorsody/terpene-lab/pull/13), including its final commit, review discussion and checks. The migration starts from main commit [`eb8a5b7eeb70e29c8bb53e0fbedeadb0554738f1`](https://github.com/AlexBorsody/terpene-lab/commit/eb8a5b7eeb70e29c8bb53e0fbedeadb0554738f1); the first implementation commit is [`a40476c838e222721f66816b39e3650c6a0c75bd`](https://github.com/AlexBorsody/terpene-lab/commit/a40476c838e222721f66816b39e3650c6a0c75bd). The canonical migration was released in merge commit [`d524cd81f1468abbe46889c52c9db10578e5bfd0`](https://github.com/AlexBorsody/terpene-lab/commit/d524cd81f1468abbe46889c52c9db10578e5bfd0). Follow the current main commit and release checks for subsequent fixes.
 
 Live site: <https://lab.sunnysshield.com/>. Builder: <https://lab.sunnysshield.com/?tab=blend>. Do not assume that a published page has the latest service worker; verify the current release and accept the Lab update when offered.
 
@@ -79,6 +79,7 @@ node tests/blend-engine.cjs
 node tests/chemistry.cjs
 node tests/research-labels-unit.cjs
 node tests/pwa-updates.cjs
+node tests/molecule-viewer.cjs
 python3 scripts/build-pwa.py
 git diff --exit-code -- data.js index.html sw.js
 ```
@@ -90,6 +91,7 @@ For browser checks, install the pinned Playwright release used by `.github/workf
 ```sh
 node tests/pwa.cjs
 node tests/browser.cjs
+node tests/molecule-viewer-browser.cjs
 node tests/research-labels.cjs
 node tests/taxonomy-browser.cjs
 node tests/blend-browser.cjs
@@ -99,6 +101,14 @@ node tests/blend-checkout.cjs
 `tests/pwa.cjs` and `tests/taxonomy-browser.cjs` serve isolated fixtures themselves. The remaining suites use the local HTTP server. Checkout fixtures intercept external navigation and writes; they must never create a merchant order or collect payment.
 
 Review the [PR checks](https://github.com/AlexBorsody/terpene-lab/pull/13/checks) and [Actions runs](https://github.com/AlexBorsody/terpene-lab/actions). The first submitted runs are [PR run 39142265078](https://github.com/AlexBorsody/terpene-lab/actions/runs/39142265078) and [push run 39142255995](https://github.com/AlexBorsody/terpene-lab/actions/runs/39142255995); use the latest run on the final head, not an earlier result. Screenshots are retained by the workflow. Local Chromium was blocked by the execution sandbox during implementation, so actual browser sign-off depends on CI and live verification.
+
+### Canonical release evidence
+
+The canonical migration merge `d524cd81f1468abbe46889c52c9db10578e5bfd0` passed [post-merge full CI](https://github.com/AlexBorsody/terpene-lab/actions/runs/39143797515) and [Pages deployment](https://github.com/AlexBorsody/terpene-lab/actions/runs/39143797219). The final PR head also passed [all browser suites](https://github.com/AlexBorsody/terpene-lab/actions/runs/39143575788), including all 21 builder and 14 intercepted checkout groups. The single automated review finding, migration CLI flag parsing, was fixed with 18 isolated subprocess regressions and independently reviewed.
+
+Live desktop/embed verification on October 18, 2026 accepted the actual update banner from the prior client. The old recipe URL, name, oil portions and saved entry survived; Calm migrated to its canonical topic. All 28 builder oils, cleaning/skin/microbial hierarchy, direct negative outcomes, contextual scope, unique-paper counts, filtered view drills, tab/reload history and Unicode save/share were checked. No purchase link was enabled. Only synthetic verification recipes were created and removed.
+
+The actual published master matched SHA-256 `35c824fc76df10b01ec005341e7f874deffde8faec4d73b635b57301841c2c58`. Live browser checks were desktop/embed; mobile widths and offline/update/corrupt-release cases were verified in CI. The GPU-disabled cloud browser could not certify real WebGL rendering; that separate illustration boundary is documented below. Recheck the current main commit, release and checks for subsequent changes rather than treating this dated verification as permanent.
 
 ### High-value acceptance tests
 
@@ -111,6 +121,14 @@ Review the [PR checks](https://github.com/AlexBorsody/terpene-lab/pull/13/checks
 - Tab away and back from filtered Studies, Oils and Matrix; inspect the URL, Back/Forward, reload and embed behavior.
 - Inspect 320/390/768/1440-pixel standalone/embedded layouts and source links. Verify precaution prominence, touch targets and keyboard disclosure controls.
 - At root and project paths, install/cache, go offline, open the dynamic builder and papers, save/reload, then simulate corrupt and valid releases. Verify atomic rejection, accepted update, URL preservation and unrelated-cache protection.
+
+## Molecular illustration boundary
+
+The existing compound-card 3D preview is an **illustrative carbon sketch**, generated deterministically from the compound ID and formula carbon count. It is **not a validated molecular structure**: its bonds, heteroatoms, stereochemistry and coordinates must not be interpreted as authoritative chemistry. The formula and linked chemical research remain separate data.
+
+A small follow-up labels the illustration explicitly and provides a visible fallback when the rendering dependency or WebGL is unavailable. GPU-disabled live-browser verification cannot certify actual GPU rendering; deterministic stub tests cover the successful initialization path and failure cleanup. The original live limitation was an empty “drag to rotate” box and an uncaught WebGL constructor error.
+
+A future molecular-viewer project should replace the illustrative algorithm with authoritative, source-identified structure data (for example reviewed SMILES/InChI plus validated coordinates), with provenance, license review, stereochemistry and known-structure regression tests. Do not infer an atom/bond graph from an oil's research associations or its molecular formula alone.
 
 ## Remaining merchant dependencies
 

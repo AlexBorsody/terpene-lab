@@ -571,11 +571,12 @@ function renderCompounds() {
   const grid = document.getElementById("compound-grid");
   const list = D.compounds.filter(c => CHEMISTRY.matches(c, q) && CHEMISTRY.matchesCategory(c, category));
   document.getElementById("compound-count").textContent = list.length + " compounds";
+  disposeMoleculeViewers();
   grid.innerHTML = list.map(c => {
     const n = oilsWithCompound(c.id).length;
     const s = studiesForCompound(c.id).length;
-    return `<div class="card compound-card" data-c="${c.id}" tabindex="0" role="button" aria-label="Explore ${esc(c.name)}">
-      ${c.showModel === false ? "" : `<div class="molecule3d" id="molecule3d-${c.id}" data-molecule-id="${c.id}" aria-label="Interactive 3D model of ${esc(c.name)}"><span>3D · drag to rotate</span></div>`}
+    return `<div class="card compound-card" data-c="${c.id}" tabindex="0" role="button" aria-label="Explore ${esc(c.name)}"${c.showModel === false ? "" : ` aria-describedby="molecule-note-${c.id}"`}>
+      ${c.showModel === false ? "" : `<div class="molecule3d" id="molecule3d-${c.id}" data-molecule-id="${c.id}" role="img" aria-label="Illustrative 3D sketch for ${esc(c.name)}. Not a validated molecular structure. Loading illustration."><span class="molecule-status">Loading illustration</span><span class="molecule-disclaimer" id="molecule-note-${c.id}">Illustrative sketch.<br>Not a validated molecular structure.</span></div>`}
       <h3>${esc(c.name)}</h3>
       <div class="compound-chemline"><span class="formula-chip">${formatFormula(c.formula)}</span></div>
       <p class="sub">${esc(c.chemicalClass)}${CHEMISTRY.tags(c).length ? " · " + CHEMISTRY.tags(c).map(esc).join(", ") : ""}</p>
@@ -593,6 +594,7 @@ document.getElementById("compound-category-filter").addEventListener("change", r
 
 /* ---------- lightweight 3D compound viewers ---------- */
 const moleculeViewers = new Map();
+const moleculeObservers = new Map();
 let threeLoading = null;
 const formulaCounts = f => {
   const out={C:0,H:0,O:0}; let m;
@@ -608,7 +610,7 @@ async function loadThree() {
 function makePseudoStructure(compound) {
   const n=formulaCounts(compound.formula).C || 10, atoms=[];
   // Deterministic compact carbon skeleton seeded by compound id. The viewer is
-  // a visual molecular model; formula and linked chemistry remain authoritative.
+  // an illustrative sketch, not validated molecular connectivity or geometry.
   let seed=[...compound.id].reduce((a,ch)=>((a*31+ch.charCodeAt(0))>>>0),2166136261);
   const rnd=()=>((seed=(1664525*seed+1013904223)>>>0)/4294967296);
   const ringish=!/myrcene|linalool|geraniol|citronell|citral|cinnamaldehyde/.test(compound.id);
@@ -624,35 +626,134 @@ function makePseudoStructure(compound) {
   if(ringish&&n>=6){bonds.splice(5,1);bonds.push([5,0]);for(let i=6;i<n;i++)bonds.push([Math.min(5,i-5),i]);}
   return {atoms,bonds};
 }
-async function initMolecule3D(host) {
-  if(!host || host.dataset.ready==="1") return;
-  const compound=compoundById[host.dataset.moleculeId]; if(!compound)return;
-  const THREE=await loadThree(); if(!THREE||!host.isConnected)return;
-  host.dataset.ready="1";
-  const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(34,1,.1,100); camera.position.z=8.6;
-  const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:"low-power"});
-  renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.45));
-  const resize=()=>{const w=Math.max(host.clientWidth,130),h=Math.max(host.clientHeight,130);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();};
-  resize(); host.prepend(renderer.domElement); renderer.domElement.style.cssText="position:absolute;inset:0;width:100%;height:100%";
-  scene.add(new THREE.AmbientLight(0xffffff,1.8)); const dl=new THREE.DirectionalLight(0xffffff,2);dl.position.set(4,5,7);scene.add(dl);
-  const group=new THREE.Group();scene.add(group);const {atoms,bonds}=makePseudoStructure(compound);
-  const ag=new THREE.SphereGeometry(.20,14,10),am=new THREE.MeshStandardMaterial({color:0x72b89a,roughness:.3}),bm=new THREE.MeshStandardMaterial({color:0xd9e7e1,roughness:.45});
-  atoms.forEach(p=>{const m=new THREE.Mesh(ag,am);m.position.set(...p);group.add(m)});
-  bonds.forEach(([a,b])=>{const p1=new THREE.Vector3(...atoms[a]),p2=new THREE.Vector3(...atoms[b]),mid=p1.clone().add(p2).multiplyScalar(.5),len=p1.distanceTo(p2),m=new THREE.Mesh(new THREE.CylinderGeometry(.055,.055,len,8),bm);m.position.copy(mid);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),p2.clone().sub(p1).normalize());group.add(m)});
-  group.rotation.set(-.3,.5,.12);
-  let drag=false,lx=0,ly=0,visible=true;
-  renderer.domElement.addEventListener("pointerdown",e=>{drag=true;lx=e.clientX;ly=e.clientY;renderer.domElement.setPointerCapture(e.pointerId);e.stopPropagation()});
-  renderer.domElement.addEventListener("pointermove",e=>{if(!drag)return;group.rotation.y+=(e.clientX-lx)*.012;group.rotation.x+=(e.clientY-ly)*.012;lx=e.clientX;ly=e.clientY;e.stopPropagation()});
-  renderer.domElement.addEventListener("pointerup",e=>{drag=false;e.stopPropagation()});renderer.domElement.addEventListener("click",e=>e.stopPropagation());
-  new IntersectionObserver(x=>visible=x[0].isIntersecting,{threshold:.02}).observe(host);
-  if("ResizeObserver"in window)new ResizeObserver(resize).observe(host);
-  const frame=()=>{if(!host.isConnected){renderer.dispose();moleculeViewers.delete(compound.id);return}requestAnimationFrame(frame);if(visible){if(!drag)group.rotation.y+=.003;renderer.render(scene,camera)}};frame();
-  moleculeViewers.set(compound.id,{renderer,host});
+function disposeMoleculeViewers() {
+  moleculeObservers.forEach(observer => observer.disconnect());
+  moleculeObservers.clear();
+  moleculeViewers.forEach(viewer => viewer.dispose());
 }
-function initVisibleMolecules(){
-  document.querySelectorAll(".molecule3d").forEach(host=>{
-    const io=new IntersectionObserver(entries=>{if(entries[0].isIntersecting){io.disconnect();initMolecule3D(host)}},{rootMargin:"220px"});
-    io.observe(host);
+function setMoleculeStatus(host, compound, status) {
+  host.querySelector(".molecule-status").textContent = status;
+  host.setAttribute("aria-label", `Illustrative 3D sketch for ${compound.name}. Not a validated molecular structure. ${status}`);
+}
+async function initMolecule3D(host) {
+  if (!host || !host.isConnected || host.dataset.ready) return;
+  const compound = compoundById[host.dataset.moleculeId];
+  if (!compound) return;
+  host.dataset.ready = "loading";
+  let renderer, visibilityObserver, resizeObserver, frameId = null, stopped = false;
+  const resources = [], listeners = [];
+  // Cleanup must also work after a partially constructed or failed renderer.
+  const safely = action => { try { action(); } catch (_) {} };
+  const dispose = () => {
+    if (stopped) return;
+    stopped = true;
+    if (frameId !== null) safely(() => cancelAnimationFrame(frameId));
+    safely(() => visibilityObserver?.disconnect());
+    safely(() => resizeObserver?.disconnect());
+    listeners.forEach(([target, type, handler]) => safely(() => target.removeEventListener(type, handler)));
+    resources.forEach(resource => safely(() => resource.dispose()));
+    safely(() => renderer?.dispose());
+    safely(() => renderer?.domElement.remove());
+    moleculeViewers.delete(host);
+    delete host.dataset.ready;
+  };
+  const unavailable = () => {
+    dispose();
+    if (!host.isConnected) return;
+    host.dataset.ready = "unavailable";
+    setMoleculeStatus(host, compound, "3D illustration unavailable");
+  };
+  const listen = (target, type, handler) => {
+    target.addEventListener(type, handler);
+    listeners.push([target, type, handler]);
+  };
+  const keep = resource => { resources.push(resource); return resource; };
+  moleculeViewers.set(host, { dispose });
+  try {
+    const THREE = await loadThree();
+    if (stopped) return;
+    if (!host.isConnected) { dispose(); return; }
+    if (!THREE) { unavailable(); return; }
+    const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(34, 1, .1, 100);
+    camera.position.z = 8.6;
+    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "low-power" });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.45));
+    const resize = () => {
+      const w = Math.max(host.clientWidth, 130), h = Math.max(host.clientHeight, 130);
+      renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+    };
+    resize();
+    renderer.domElement.style.cssText = "position:absolute;inset:0;width:100%;height:100%";
+    renderer.domElement.setAttribute("aria-hidden", "true");
+    host.prepend(renderer.domElement);
+    scene.add(new THREE.AmbientLight(0xffffff, 1.8));
+    const dl = new THREE.DirectionalLight(0xffffff, 2); dl.position.set(4, 5, 7); scene.add(dl);
+    const group = new THREE.Group(); scene.add(group);
+    const { atoms, bonds } = makePseudoStructure(compound);
+    const ag = keep(new THREE.SphereGeometry(.20, 14, 10));
+    const am = keep(new THREE.MeshStandardMaterial({ color: 0x72b89a, roughness: .3 }));
+    const bm = keep(new THREE.MeshStandardMaterial({ color: 0xd9e7e1, roughness: .45 }));
+    atoms.forEach(p => { const m = new THREE.Mesh(ag, am); m.position.set(...p); group.add(m); });
+    bonds.forEach(([a, b]) => {
+      const p1 = new THREE.Vector3(...atoms[a]), p2 = new THREE.Vector3(...atoms[b]);
+      const mid = p1.clone().add(p2).multiplyScalar(.5), len = p1.distanceTo(p2);
+      const m = new THREE.Mesh(keep(new THREE.CylinderGeometry(.055, .055, len, 8)), bm);
+      m.position.copy(mid); m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), p2.clone().sub(p1).normalize()); group.add(m);
+    });
+    group.rotation.set(-.3, .5, .12);
+    let drag = false, lx = 0, ly = 0, visible = true;
+    listen(renderer.domElement, "pointerdown", e => {
+      drag = true; lx = e.clientX; ly = e.clientY;
+      safely(() => renderer.domElement.setPointerCapture(e.pointerId)); e.stopPropagation();
+    });
+    listen(renderer.domElement, "pointermove", e => {
+      if (!drag) return;
+      group.rotation.y += (e.clientX - lx) * .012; group.rotation.x += (e.clientY - ly) * .012;
+      lx = e.clientX; ly = e.clientY; e.stopPropagation();
+    });
+    ["pointerup", "pointercancel", "lostpointercapture"].forEach(type => listen(renderer.domElement, type, e => { drag = false; e.stopPropagation(); }));
+    listen(renderer.domElement, "click", e => e.stopPropagation());
+    listen(renderer.domElement, "webglcontextlost", e => { e.preventDefault(); unavailable(); });
+    if ("IntersectionObserver" in window) {
+      visibilityObserver = new IntersectionObserver(entries => { visible = !!entries[0]?.isIntersecting; }, { threshold: .02 });
+      visibilityObserver.observe(host);
+    }
+    if ("ResizeObserver" in window) {
+      resizeObserver = new ResizeObserver(() => {
+        if (stopped) return;
+        if (!host.isConnected) { dispose(); return; }
+        try { resize(); } catch (_) { unavailable(); }
+      });
+      resizeObserver.observe(host);
+    }
+    const frame = () => {
+      frameId = null;
+      if (stopped) return;
+      if (!host.isConnected) { dispose(); return; }
+      try {
+        if (visible) { if (!drag) group.rotation.y += .003; renderer.render(scene, camera); }
+        frameId = requestAnimationFrame(frame);
+      } catch (_) { unavailable(); }
+    };
+    frame();
+    if (!stopped) {
+      host.dataset.ready = "1";
+      setMoleculeStatus(host, compound, "Drag to rotate");
+    }
+  } catch (_) { unavailable(); }
+}
+function initVisibleMolecules() {
+  document.querySelectorAll(".molecule3d").forEach(host => {
+    if (!host.isConnected || host.dataset.ready || moleculeObservers.has(host)) return;
+    if (!("IntersectionObserver" in window)) { void initMolecule3D(host); return; }
+    const observer = new IntersectionObserver(entries => {
+      if (!host.isConnected || entries.some(entry => entry.isIntersecting)) {
+        observer.disconnect(); moleculeObservers.delete(host);
+        if (host.isConnected) void initMolecule3D(host);
+      }
+    }, { rootMargin: "220px" });
+    moleculeObservers.set(host, observer);
+    observer.observe(host);
   });
 }
 
