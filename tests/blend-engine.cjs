@@ -132,6 +132,28 @@ const cleanCheckout = engine.cartPermalink(staleOilsFirst, fixture());
 assert.deepEqual(cleanCheckout.recipe.qualityIds, []);
 assert.doesNotMatch(cleanCheckout.properties.Recipe, /Purported qualities|None selected/);
 assert.deepEqual(staleOilsFirst.qualityIds, ['focus', 'calm'], 'Canonicalization must not mutate input');
+// Shared v1 recipes survive the canonical topic migration without hidden aliases.
+{
+  const d = fixture();
+  d.taxonomy = {version: 1, nodes: [{id: 'health-mental-health'}, {id: 'health-cognitive'}],
+    aliases: {calm: 'health-mental-health', focus: 'health-cognitive', invalid: 'missing'}};
+  const old = {...recipe(), path: 'qualities', qualityIds: ['calm', 'focus', 'health-mental-health']};
+  const original = copy(old);
+  const canonical = ['health-cognitive', 'health-mental-health'];
+  assert.equal(engine.resolveQualityId('calm', d), 'health-mental-health');
+  assert.equal(engine.resolveQualityId('invalid', d), null);
+  assert.equal(engine.resolveQualityId('__proto__', d), null);
+  assert.deepEqual(engine.validateRecipe(old, d).recipe.qualityIds, canonical);
+  assert.deepEqual(engine.decodeRecipe(encoded(old), d).qualityIds, canonical);
+  const code = engine.encodeRecipe(old, d);
+  assert.deepEqual(JSON.parse(Buffer.from(code, 'base64url').toString('utf8')).qualityIds, canonical);
+  assert.equal(engine.encodeRecipe(engine.decodeRecipe(code, d), d), code);
+  assert.deepEqual(engine.cartPermalink(old, d).recipe.qualityIds, canonical);
+  assert.deepEqual(engine.decodeRecipe(encoded({...old, path: 'oils'}), d).qualityIds, []);
+  assert.deepEqual(old, original);
+  invalid({...old, qualityIds: ['missing']}, 'unknown_quality', d);
+  invalid({...old, qualityIds: ['calm', 'calm']}, 'duplicate_quality', d);
+}
 assert.equal(engine.validateRecipe({...recipe(), name: '🌿'.repeat(60)}, fixture()).valid, true);
 for (const bad of ['', null, 2, 'a'.repeat(4097), 'a', 'a=', 'a+b/', '#blend=abc', 'ab', Buffer.from([0xff]).toString('base64url'), encoded(null), encoded({})]) {
   assert.throws(() => engine.decodeRecipe(bad, fixture()), engine.BlendValidationError, String(bad));

@@ -18,8 +18,8 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="shield-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" sizes="180x180">
-<link rel="stylesheet" href="blend-builder.css?v=50a13be928079f01">
-<link rel="stylesheet" href="styles.css?v=08c7926bfecb8936">
+<link rel="stylesheet" href="blend-builder.css?v=6201de5c247026bb">
+<link rel="stylesheet" href="styles.css?v=6549a08bcc0c96e1">
 <script src="vendor/echarts-5.5.1.min.js"></script>
 
 <style>
@@ -94,15 +94,10 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
           <option value="domains">Most research topics</option>
           <option value="compound">Top compound A to Z</option>
         </select>
-        <select id="oil-domain-filter" aria-label="Filter by research topic">
-          <option value="">All research topics</option>
-          <option value="health">Health</option>
-          <option value="cleaning">Cleaning</option>
-          <option value="microbial">Microbial</option>
-          <option value="pest">Pest / Repellent</option>
-        </select>
+        <select id="oil-domain-filter" aria-label="Filter by research topic"><option value="">All research topics</option></select>
         <span id="oil-count" class="count"></span>
       </div>
+      <div id="oil-domain-filter-navigation" class="topic-navigation hidden"></div>
       <div id="oil-grid" class="card-grid"></div>
     </div>
     <div id="oil-detail" class="detail hidden">
@@ -122,20 +117,23 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
       </div>
       <div class="oil-study-priority">
         <h3>Studies</h3>
+        <p class="hint research-context">Source-tagged research associations include context-only records. Material, model and oil-specific assessments matter; these counts do not establish finished-product efficacy.</p>
         <div id="oil-domains" class="chips"></div>
         <div id="oil-evidence" class="evidence-summary"></div>
         <div id="oil-studies"></div>
       </div>
       <details class="oil-more">
-        <summary>Composition, uses & safety</summary>
+        <summary>Composition & legacy profile notes</summary>
         <h3>Composition fingerprint</h3>
         <div id="oil-chart" class="chart"></div>
         <p class="hint">Only source-verified, sample-specific values are plotted. Literature findings are not a chemical analysis of the finished Sunny's Shield formula.</p>
         <div id="oil-compound-chips" class="chips"></div>
         <div id="oil-beyond"></div>
-        <h3>Common uses</h3>
+        <h3>Legacy uses · unverified</h3>
+        <p class="hint">Retained catalog text, not source-verified use recommendations. Explore the linked studies above for research topics.</p>
         <ul id="oil-uses" class="uses"></ul>
-        <h3>Safety</h3>
+        <h3>Legacy safety notes · unverified</h3>
+        <p class="hint">This text is not a reviewed safety assessment or a formulation guide.</p>
         <p id="oil-safety" class="safety"></p>
       </details>
     </div>
@@ -168,6 +166,7 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
       <p id="compound-chart-note" class="hint hidden">Each bar represents one cited oil sample, not a universal percentage. All recorded observations and their sources are listed below.</p>
       <div id="compound-material-evidence"></div>
       <h3>Studies</h3>
+      <p class="hint research-context">Linked papers may study isolated compounds or other materials. Source topics do not establish the effects of an oil or finished blend.</p>
       <div id="compound-studies"></div>
     </div>
   </section>
@@ -180,15 +179,11 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
         <option value="az">A to Z</option>
         <option value="studies">Most studied</option>
       </select>
-      <select id="matrix-domain-filter" aria-label="Show research topic">
-        <option value="">All research topics</option>
-        <option value="health">Health</option>
-        <option value="cleaning">Cleaning</option>
-        <option value="microbial">Microbial</option>
-        <option value="pest">Pest / Repellent</option>
-      </select>
+      <select id="matrix-domain-filter" aria-label="Show research topic"><option value="">All research topics</option></select>
       <span id="matrix-count" class="count"></span>
     </div>
+    <div id="matrix-domain-filter-navigation" class="topic-navigation hidden"></div>
+    <p class="hint research-context">Unique papers linked to each oil and topic, including context-only associations. Parent totals include descendants; overlapping columns must not be added together. Counts are not proof of efficacy.</p>
     <div class="matrix-scroll-cue" aria-hidden="true">
       <span>←</span><b>SWIPE TO SEE MORE RESEARCH</b><span>→</span>
     </div>
@@ -199,18 +194,20 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
 
   <!-- DOMAIN EXPLORER -->
   <section id="tab-domains" class="tab-panel">
+    <p class="panel-intro">Explore source-tagged research topics. Choose a topic, then narrow it at any depth. Research associations include context-only records and do not establish finished-product efficacy.</p>
     <div id="domain-tiles" class="domain-tiles"></div>
     <div id="domain-detail" class="hidden">
-      <button class="back" data-backto="domain-tiles">&larr; All domains</button>
+      <button class="back" data-backto="domain-tiles">&larr; All topics</button>
+      <nav id="domain-breadcrumb" class="topic-breadcrumb" aria-label="Research topic path"></nav>
       <h2 id="domain-name"></h2>
       <div id="domain-subs" class="chips" style="margin-bottom:18px"></div>
       <div class="domain-cols">
         <div>
-          <h3>Oils with evidence</h3>
+          <h3>Oils with research associations</h3>
           <div id="domain-oils"></div>
         </div>
         <div>
-          <h3>Compounds with evidence</h3>
+          <h3>Compounds linked to these papers</h3>
           <div id="domain-compounds"></div>
         </div>
       </div>
@@ -244,6 +241,8 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
       <select id="study-group-filter" aria-label="Study compound functional group or family"></select>
       <span id="study-count" class="count"></span>
     </div>
+    <div id="study-domain-filter-navigation" class="topic-navigation hidden"></div>
+    <p class="hint research-context">Topics describe what the sources discuss. Inspect the material, model and limitations; a linked paper does not establish efficacy or safety of a finished blend.</p>
     <div id="study-list"></div>
   <section class="plant-language" aria-labelledby="plant-language-title">
     <div class="language-photo-hero">
@@ -289,11 +288,12 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
   <p>Sunny's Shield Terpene Lab &middot; plant to molecule to paper &middot; inspect the evidence yourself. Not medical advice.</p>
 </footer>
 
-<script src="data.js?v=c2233102677bd260"></script>
-<script src="chemistry.js?v=bc9a042f59ea993f"></script>
-<script src="app.js?v=ff4f7c513af9f01c"></script>
-<script src="blend-engine.js?v=367065cc9891e4ed"></script>
-<script src="blend-builder.js?v=ddcdb58dd6f72ebe"></script>
+<script src="data.js?v=68f0f917ae791d65"></script>
+<script src="chemistry.js?v=09f64d79607afee2"></script>
+<script src="research.js?v=9adac5cca9e32904"></script>
+<script src="app.js?v=efc355c965031f74"></script>
+<script src="blend-engine.js?v=afcc32e0c4805fdb"></script>
+<script src="blend-builder.js?v=7bcfcc5617095671"></script>
 <script src="pwa.js?v=a52f02fdcb6a4716"></script>
 </body>
 </html>

@@ -16,7 +16,7 @@ function element(id) {
       contains: name => classes.has(name),
       toggle: (name, enabled) => enabled ? classes.add(name) : classes.delete(name)
     },
-    addEventListener() {}, querySelectorAll() { return []; }, scrollIntoView() {}
+    addEventListener() {}, querySelectorAll() { return []; }, querySelector() { return null; }, scrollIntoView() {}
   });
   return elements.get(id);
 }
@@ -32,7 +32,7 @@ const context = vm.createContext({
   URL, URLSearchParams, requestAnimationFrame: callback => callback(),
   echarts: { init: () => ({ setOption() {}, on() {}, dispose() {} }) }
 });
-for (const file of ['data.js', 'chemistry.js', 'app.js']) vm.runInContext(fs.readFileSync(file, 'utf8'), context, { filename: file });
+for (const file of ['data.js', 'chemistry.js', 'research.js', 'app.js']) vm.runInContext(fs.readFileSync(file === 'data.js' ? process.env.TEST_DATA_FILE || file : file, 'utf8'), context, { filename: file });
 const run = code => vm.runInContext(code, context);
 const snapshot = run('JSON.stringify(D)');
 const categoryOptions = [...element('compound-category-filter').innerHTML.matchAll(/<option value="([^"]*)">([^<]*)<\/option>/g)].map(match => ({ id: match[1], label: match[2] }));
@@ -58,18 +58,33 @@ element('compound-search').value = '';
 element('compound-category-filter').value = '';
 run('renderCompounds()');
 assert.equal(element('compound-count').textContent, `${run('D.compounds.length')} compounds`);
-const counts = run(`({
-  composition: domainStudyCount('botanical:composition'),
-  flavonoids: domainStudyCount('botanical:nonvolatile-chemistry'),
-  aroma: domainStudyCount('sensory')
-})`);
+// Derive expected counts independently from the shared taxonomy and assertion data.
+// Audits may add overlapping tags; category totals are never an additive shortcut.
+const data = JSON.parse(snapshot);
+const descendants = id => {
+  const found = new Set([id]);
+  let size;
+  do { size = found.size; data.taxonomy.nodes.forEach(node => { if (found.has(node.parentId)) found.add(node.id); }); } while (size !== found.size);
+  return found;
+};
+const expectedStudyIds = id => { const nodes = descendants(id); return [...new Set(data.studies.filter(study => study.useNodeIds.some(nodeId => nodes.has(nodeId))).map(study => study.id))]; };
+const expectedOilStudyIds = (oilId, id) => { const nodes = descendants(id); return [...new Set(data.evidenceAssertions.filter(a => a.kind === 'study-use' && a.oilId === oilId && nodes.has(a.useNodeId)).map(a => a.studyId))]; };
+const counts = {
+  composition: expectedStudyIds('botanical-composition').length,
+  flavonoids: expectedStudyIds('botanical-nonvolatile-chemistry').length,
+  aroma: expectedStudyIds('sensory').length,
+  botanical: expectedStudyIds('botanical').length
+};
 assert.equal(run('D.categories.find(c => c.type === "botanical").label'), 'Botanical chemistry');
 assert.ok(run('D.studies.every(s => s.categories.every(c => domainByType[researchDomainId(c)]))'));
-assert.equal(counts.flavonoids, 1);
-assert.equal(run('domainStudyCount("botanical")'), counts.composition + counts.flavonoids);
-assert.ok(element('oil-grid').innerHTML.includes('2 studies</strong> on Pest / Repellent, Composition analysis'));
+assert.ok(counts.flavonoids > 0);
+assert.equal(run('domainStudyCount("botanical")'), counts.botanical);
+assert.ok(run('R.resolve("botanical-bioactivity")'), 'Audited bioactivity branch is included without a renderer edit');
+assert.ok(element('oil-grid').innerHTML.includes('Composition analysis'));
+assert.ok(run('R.nodes.length > 0'), 'Generated taxonomy is loaded before app.js');
 assert.ok(!element('oil-grid').innerHTML.includes('Botanical chemistry'));
-assert.equal(run('domainsForOil("cannabis").map(id => domainByType[id].label).join(", ")'), 'Health, Aroma research, Flavonoid research');
+assert.ok(run('domainsForOil("cannabis").map(R.label).includes("Flavonoid research")'));
+assert.ok(run('domainsForOil("cannabis").map(R.label).includes("Aroma research")'));
 const options = [...element('study-oil-filter').innerHTML.matchAll(/<option value="([^"]*)">([^<]*)<\/option>/g)].map(match => ({ id: match[1], label: match[2] }));
 assert.deepEqual(options[0], { id: '', label: 'All oils' });
 assert.equal(options.length, run('D.oils.length') + 1);
@@ -85,7 +100,7 @@ for (const [id, label, count] of [
   ['botanical:composition', 'Composition analysis', counts.composition],
   ['botanical:nonvolatile-chemistry', 'Flavonoid research', counts.flavonoids],
   ['sensory', 'Aroma research', counts.aroma],
-  ['botanical', 'Composition and flavonoid research', counts.composition + counts.flavonoids]
+  ['botanical', run('R.label("botanical")'), counts.botanical]
 ]) {
   for (const filter of ['study-domain-filter', 'oil-domain-filter', 'matrix-domain-filter']) assert.ok(element(filter).innerHTML.includes(`value="${id}"`));
   element('study-domain-filter').value = id;
@@ -103,13 +118,13 @@ for (const [id, label, count] of [
 }
 element('oil-domain-filter').value = 'botanical:nonvolatile-chemistry';
 run('renderOils("")');
-assert.equal(element('oil-count').textContent, '1 oils');
+assert.equal(element('oil-count').textContent, `${data.oils.filter(oil => expectedOilStudyIds(oil.id, 'botanical-nonvolatile-chemistry').length).length} oils`);
 assert.ok(element('oil-grid').innerHTML.includes('data-oil="cannabis"'));
-assert.equal(run('matrixCell("cannabis", "botanical:composition").length'), 0);
-assert.equal(run('matrixCell("cannabis", "botanical:nonvolatile-chemistry").length'), 1);
-assert.equal(run('matrixCell("clary-sage", "botanical:composition").length'), 1);
+assert.equal(run('matrixCell("cannabis", "botanical:composition").length'), expectedOilStudyIds('cannabis', 'botanical-composition').length);
+assert.equal(run('matrixCell("cannabis", "botanical:nonvolatile-chemistry").length'), expectedOilStudyIds('cannabis', 'botanical-nonvolatile-chemistry').length);
+assert.equal(run('matrixCell("clary-sage", "botanical:composition").length'), expectedOilStudyIds('clary-sage', 'botanical-composition').length);
 run('showDomain("botanical", "nonvolatile-chemistry")');
-assert.equal((element('domain-studies').innerHTML.match(/class="study"/g) || []).length, 1);
+assert.equal((element('domain-studies').innerHTML.match(/class="study"/g) || []).length, counts.flavonoids);
 for (const [compound, heading, linkCount, hasChart] of [
   ['limonene', 'Found in these oils', 9, false],
   ['nobiletin', 'Found in these oils', 3, false],
@@ -131,7 +146,49 @@ for (const [compound, heading, linkCount, hasChart] of [
 run('showCompound("pmd")');
 assert.equal(element('compound-occurrence-note').textContent, 'No oil relationships are recorded here yet.');
 assert.equal(element('compound-oils-chart').classList.contains('hidden'), true, 'Hide a previous compound chart on repeat navigation');
+const previousOilName = element('oil-name').textContent;
+const previousCompoundName = element('compound-name').textContent;
+for (const id of ['constructor', '__proto__']) {
+  run(`showOil(${JSON.stringify(id)}); showCompound(${JSON.stringify(id)})`);
+  assert.equal(element('oil-name').textContent, previousOilName, 'Unknown prototype-shaped oil ID does not enter detail rendering');
+  assert.equal(element('compound-name').textContent, previousCompoundName, 'Unknown prototype-shaped compound ID does not enter detail rendering');
+  assert.equal(run(`oilById[${JSON.stringify(id)}]`), undefined);
+  assert.equal(run(`compoundById[${JSON.stringify(id)}]`), undefined);
+}
 assert.equal(run('JSON.stringify(D)'), snapshot, 'Rendering and sorting must not mutate source data');
+run('showOil("cannabis")');
+assert.ok(element('oil-studies').innerHTML.includes('Oil-specific source assessment'));
+assert.ok(element('oil-studies').innerHTML.includes('Library-linked evidence; applicability not independently verified'));
+assert.ok(fs.readFileSync('index.html', 'utf8').includes('Legacy uses · unverified'));
+assert.ok(fs.readFileSync('index.html', 'utf8').includes('Legacy safety notes · unverified'));
+// High-risk applicability and oil-specific results must be visible before disclosure.
+function visibleContext(studyId, oilId, nodeId) {
+  const card = run(`studyCard(D.studies.find(study => study.id === ${JSON.stringify(studyId)}), ${JSON.stringify(oilId)}, ${JSON.stringify(nodeId)})`);
+  const visible = card.match(/<div class="research-scope">([\s\S]*?)<\/div>/)?.[1];
+  assert.ok(visible, `${oilId}: visible source applicability`);
+  assert.ok(card.indexOf('<div class="research-scope">') < card.indexOf('<details'), 'Applicability must not require expanding details');
+  assert.equal((card.match(/class="finding"/g) || []).length, 1, 'The paper finding remains a single block');
+  return visible;
+}
+const juergens = data.evidenceAssertions.find(a => a.oilId === 'eucalyptus' && a.studyId === 'juergens-2003-cineole');
+assert.equal(juergens.material.kind, 'isolated-compound');
+assert.equal(juergens.route, null, 'Library-only routes stay unverified; the reported oral preparation remains visible in material');
+const cineoleContext = visibleContext('juergens-2003-cineole', 'eucalyptus', 'health-respiratory');
+assert.ok(cineoleContext.includes('Medicinal oral 1,8-cineole preparations'));
+assert.ok(cineoleContext.includes('Library-linked evidence; applicability not independently verified'));
+assert.ok(!cineoleContext.includes('Source-reviewed direct research'));
+const myrrhContext = visibleContext('nialeila-2020-myrrh-frankincense-wound', 'myrrh', 'health-wound');
+const frankincenseContext = visibleContext('nialeila-2020-myrrh-frankincense-wound', 'frankincense', 'health-wound');
+assert.ok(myrrhContext.includes('Myrrh-extract sitz baths improved REEDA healing scores'));
+assert.ok(!myrrhContext.includes('Frankincense-extract sitz baths did not'));
+assert.ok(frankincenseContext.includes('Frankincense-extract sitz baths did not significantly differ from betadine'));
+assert.ok(frankincenseContext.includes('Boswellia carteri extract sitz bath'));
+assert.ok(!frankincenseContext.includes('Myrrh-extract sitz baths improved'));
+const contraryContext = visibleContext('moss-2008-peppermint-cognition', 'ylang-ylang', 'health-cognitive-memory');
+assert.ok(contraryContext.includes('Source-reviewed direct research'), 'Verified contrary evidence is not mislabeled unverified/contextual');
+assert.ok(/impaired|worsened|reduced|negative/i.test(contraryContext), 'The adverse cognitive result is visible without disclosure');
+assert.ok(!contraryContext.includes('applicability not independently verified'));
+console.log('PASS: visible isolated-compound/oral applicability and distinct Faraji per-oil findings outside collapsed details');
 // A distinct filled action must retain the real paper URL and native link behavior.
 const papers = run('D.studies.map(studyCard).join("")');
 assert.equal((papers.match(/class="ext read-paper"/g) || []).length, run('D.studies.length'));
@@ -151,7 +208,7 @@ for (const background of ['#efbd69', '#f7cd86', '#dfac55']) {
   const contrast = (luminance(background) + 0.05) / (luminance('#0b1220') + 0.05);
   assert.ok(contrast >= 7, `Read paper contrast ${contrast.toFixed(2)}:1`);
 }
-console.log(`PASS: renderer/filter regression for ${counts.composition} composition, ${counts.flavonoids} flavonoid and ${counts.aroma} aroma studies; alphabetic selectors and unchanged taxonomy`);
+console.log(`PASS: shared-taxonomy renderer/filter regression; legacy aliases, alphabetic selectors and immutable source data`);
 console.log('PASS: filled Read paper action, 44px minimum target, keyboard focus and AAA text contrast');
 console.log('PASS: visible oil/material links, hidden empty charts, plant-only/empty evidence and repeat navigation');
 
@@ -160,8 +217,8 @@ const html = fs.readFileSync('index.html', 'utf8');
 const worker = fs.readFileSync('sw.js', 'utf8');
 const assets = JSON.parse(worker.match(/const ASSETS = (\{[\s\S]*?\});/)[1]);
 const { createHash } = require('node:crypto');
-for (const asset of ['index.html', 'styles.css', 'data.js', 'chemistry.js', 'app.js', 'pwa.js']) {
+for (const asset of (process.env.SKIP_RELEASE_CHECK ? [] : ['index.html', 'styles.css', 'data.js', 'chemistry.js', 'research.js', 'app.js', 'pwa.js'])) {
   assert.equal(assets[asset], createHash('sha256').update(fs.readFileSync(asset)).digest('hex'), `Offline release integrity: ${asset}`);
   if (asset !== 'index.html') assert.ok(html.includes(`${asset}?v=${assets[asset].slice(0,16)}`), `Fresh HTTP asset URL: ${asset}`);
 }
-console.log('PASS: offline release matches current HTML, styles, scripts and research');
+if (!process.env.SKIP_RELEASE_CHECK) console.log('PASS: offline release matches current HTML, styles, scripts and research');

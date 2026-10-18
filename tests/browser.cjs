@@ -1,10 +1,68 @@
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const assert = require('node:assert/strict');
 (async()=>{
- const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',args:['--no-sandbox']});
+ const browser=await chromium.launch({headless:true,...(process.env.CHROME_PATH ? {executablePath:process.env.CHROME_PATH} : {}),args:['--no-sandbox']});
  const context=await browser.newContext({serviceWorkers:'block'});
  const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const base=process.env.TEST_URL || 'http://127.0.0.1:8000';
+ // Unknown route IDs must not resolve inherited Object prototype properties.
+ for(const [tab,key,prefix] of [['oils','oil','oil'],['compounds','compound','compound']]) {
+  for(const id of ['constructor','__proto__']) {
+   await page.goto(`${base}/?tab=${tab}&${key}=${encodeURIComponent(id)}`);
+   assert.equal(await page.locator(`#${prefix}-list-view`).isVisible(),true);
+   assert.equal(await page.locator(`#${prefix}-detail`).isVisible(),false);
+   await page.evaluate(value=>{showOil(value);showCompound(value);},id);
+   assert.equal(await page.locator(`#${prefix}-list-view`).isVisible(),true);
+  }
+ }
+ // Returning by a main tab must serialize retained filters before reload/history.
+ for(const embed of [false,true]) {
+  const suffix=embed?'&embed=1':'';
+  await page.goto(`${base}/?tab=studies${suffix}`);
+  await page.locator('#study-domain-filter').selectOption('health');
+  await page.locator('#study-domain-filter-navigation .topic-child-select').selectOption('health-respiratory');
+  await page.locator('#study-oil-filter').selectOption('eucalyptus');
+  await page.locator('#study-compound-filter').selectOption('eucalyptol');
+  const studyIds=await page.locator('#study-list .study').evaluateAll(cards=>cards.map(card=>card.dataset.studyId).sort());
+  assert.ok(studyIds.length>0,'Filter-state test must retain a nonempty real result');
+  const assertStudyState=async()=>{
+   const params=new URL(page.url()).searchParams;
+   for(const [key,value] of [['tab','studies'],['oil','eucalyptus'],['compound','eucalyptol'],['domain','health-respiratory']]) assert.equal(params.get(key),value,`Retained study ${key}`);
+   assert.equal(await page.locator('#study-oil-filter').inputValue(),'eucalyptus');
+   assert.equal(await page.locator('#study-compound-filter').inputValue(),'eucalyptol');
+   assert.equal(await page.locator('#study-domain-filter').inputValue(),'health-respiratory');
+   assert.deepEqual(await page.locator('#study-list .study').evaluateAll(cards=>cards.map(card=>card.dataset.studyId).sort()),studyIds);
+   assert.equal(params.get('embed'),embed?'1':null);
+  };
+  await page.getByRole('button',{name:'Compounds',exact:true}).click();
+  await page.getByRole('button',{name:'Studies',exact:true}).click();
+  await assertStudyState();
+  await page.goBack(); assert.equal(await page.locator('#tab-compounds').isVisible(),true);
+  await page.goForward(); await assertStudyState();
+  await page.reload(); await assertStudyState();
+  for(const [tab,label,filter] of [['oils','Oils','oil-domain-filter'],['matrix','Matrix','matrix-domain-filter']]) {
+   await page.goto(`${base}/?tab=${tab}${suffix}`);
+   await page.locator(`#${filter}`).selectOption('health');
+   await page.locator(`#${filter}-navigation .topic-child-select`).selectOption('health-respiratory');
+   const snapshot=async()=>tab==='oils'
+    ? page.locator('#oil-grid .card').evaluateAll(cards=>cards.map(card=>card.dataset.oil).sort())
+    : page.locator('#matrix-table .cell').evaluateAll(cells=>cells.map(cell=>[cell.dataset.oil,cell.dataset.domain,cell.textContent.trim()]));
+   const expected=await snapshot(); assert.ok(expected.length>0);
+   const assertTopicState=async()=>{
+    const params=new URL(page.url()).searchParams;
+    assert.equal(params.get('tab'),tab); assert.equal(params.get('domain'),'health-respiratory');
+    assert.equal(await page.locator(`#${filter}`).inputValue(),'health-respiratory');
+    assert.deepEqual(await snapshot(),expected,`${label} result set survives navigation`);
+    assert.equal(params.get('embed'),embed?'1':null);
+   };
+   await page.getByRole('button',{name:'Compounds',exact:true}).click();
+   await page.getByRole('button',{name:label,exact:true}).click();
+   await assertTopicState();
+   await page.goBack(); assert.equal(await page.locator('#tab-compounds').isVisible(),true);
+   await page.goForward(); await assertTopicState();
+   await page.reload(); await assertTopicState();
+  }
+ }
  // Evidence links must bind once: one click, one history entry, one Back.
  for (const route of [
   {compound:'nobiletin',attribute:'data-goto-oil',target:'sweet-orange',destination:'oil'},

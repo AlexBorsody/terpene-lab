@@ -10,8 +10,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - run: python3 scripts/build-data.py --check
       - run: python3 scripts/build-pwa.py && git diff --exit-code -- index.html sw.js
-      - run: node tests/blend-engine.cjs && node tests/chemistry.cjs && node tests/research-labels-unit.cjs && node tests/pwa-updates.cjs
+      - run: node tests/master-data.cjs && node tests/research.cjs && node tests/research-audit.cjs && node tests/blend-engine.cjs && node tests/chemistry.cjs && node tests/research-labels-unit.cjs && node tests/pwa-updates.cjs
       - run: npm install --no-save --package-lock=false playwright@1.56.1
       - run: npx playwright install --with-deps chromium
       - name: Browser checks
@@ -21,6 +22,7 @@ jobs:
           python3 -m http.server 8000 >/tmp/lab-server.log 2>&1 &
           node tests/browser.cjs
           node tests/research-labels.cjs
+          node tests/taxonomy-browser.cjs
           node tests/blend-browser.cjs
           node tests/blend-checkout.cjs
       - name: Preserve blend review screenshots

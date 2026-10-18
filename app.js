@@ -2,31 +2,74 @@
    Views: Oils, Compounds, Matrix, Domains, Network, Studies. */
 
 const D = TERPENE_DATA;
-const oilById = Object.fromEntries(D.oils.map(o => [o.id, o]));
+const oilById = Object.assign(Object.create(null), Object.fromEntries(D.oils.map(o => [o.id, o])));
 const oilsByName = [...D.oils].sort((a, b) => a.name.localeCompare(b.name));
-const compoundById = Object.fromEntries(D.compounds.map(c => [c.id, c]));
-// Display the question each paper addresses without changing its stored taxonomy.
-const BOTANICAL_LABELS = {
-  composition: "Composition analysis",
-  "nonvolatile-chemistry": "Flavonoid research"
-};
-const researchDomains = D.categories.flatMap(domain => domain.type === "botanical"
-  ? domain.subcategories.map(sub => ({
-      type: `${domain.type}:${sub.id}`,
-      label: BOTANICAL_LABELS[sub.id] || sub.label,
-      subcategories: [{ ...sub, label: BOTANICAL_LABELS[sub.id] || sub.label }]
-    }))
-  : [{ ...domain, label: domain.type === "sensory" ? "Aroma research" : domain.label }]);
-const domainByType = Object.fromEntries([...D.categories, ...researchDomains].map(c => [c.type, c]));
-// Keep older links and callers using the parent category working.
-if (domainByType.botanical) domainByType.botanical = {
-  ...domainByType.botanical, label: "Composition and flavonoid research"
-};
+const compoundById = Object.assign(Object.create(null), Object.fromEntries(D.compounds.map(c => [c.id, c])));
+// Every research label and hierarchy comes from the shared master taxonomy.
+const R = RESEARCH.create(D);
+const researchDomains = R.roots().map(node => ({ ...node, type: node.id, label: R.label(node.id) }));
+function resolveUse(type, sub) {
+  return sub ? R.resolve({ type, subcategory: sub }) || R.resolve(sub) : R.resolve(type);
+}
 function researchDomainId(category) {
-  return category.type === "botanical" ? `${category.type}:${category.subcategory}` : category.type;
+  const id = R.resolve(category);
+  if (!id) return null;
+  return [...R.ancestors(id), R.node(id)].reverse().find(node => researchDomains.some(root => root.id === node.id))?.id || id;
 }
 function matchesDomain(category, type) {
-  return category.type === type || researchDomainId(category) === type;
+  const id = R.resolve(category), wanted = R.resolve(type);
+  return !!(id && wanted && R.descendants(wanted).includes(id));
+}
+const domainByType = Object.fromEntries(R.nodes.flatMap(node =>
+  [node.id, ...(node.aliases || [])].map(id => [id, { ...node, type: node.id, label: R.label(node.id) }])));
+
+// Keep the original filter IDs and legacy values for links and integrations.
+// Only navigation roots are offered initially; descendants are disclosed one
+// level at a time, with a breadcrumb back to any ancestor.
+const topicFilterIds = ["study-domain-filter", "oil-domain-filter", "matrix-domain-filter"];
+function topicOptions() {
+  const roots = new Set(researchDomains.map(node => node.id));
+  const options = R.nodes.map(node => `<option value="${esc(node.id)}"${roots.has(node.id) ? "" : " hidden"}>${esc(R.label(node.id))}</option>`);
+  const canonical = new Set(R.nodes.map(node => node.id));
+  const aliases = new Set();
+  R.nodes.forEach(node => (node.aliases || []).forEach(alias => {
+    if (!canonical.has(alias) && !aliases.has(alias)) {
+      aliases.add(alias);
+      options.push(`<option value="${esc(alias)}" hidden>${esc(R.label(node.id))}</option>`);
+    }
+  }));
+  return `<option value="">All research topics</option>` + options.join("");
+}
+function topicBreadcrumb(id, attribute, includeAll = true) {
+  const chain = id ? [...R.ancestors(id), R.node(id)] : [];
+  return (includeAll ? `<button type="button" class="topic-crumb" ${attribute}="">All topics</button>` : "") +
+    chain.map((node, index) => `<span aria-hidden="true">›</span><button type="button" class="topic-crumb" ${attribute}="${esc(node.id)}"${index === chain.length - 1 ? ' aria-current="true"' : ""}>${esc(R.label(node.id))}</button>`).join("");
+}
+function syncTopicFilter(id) {
+  const select = document.getElementById(id), host = document.getElementById(id + "-navigation");
+  if (!select || !host) return;
+  const nodeId = R.resolve(select.value);
+  if (host.dataset.topicNode === (nodeId || "")) return;
+  host.dataset.topicNode = nodeId || "";
+  host.classList.toggle("hidden", !nodeId);
+  if (!nodeId) { host.innerHTML = ""; return; }
+  const children = R.children(nodeId);
+  host.innerHTML = `<nav class="topic-breadcrumb" aria-label="Research topic path">${topicBreadcrumb(nodeId, "data-filter-node")}</nav>` +
+    (children.length ? `<label class="topic-child-label">Narrow topic<select class="topic-child-select" aria-label="Narrow ${esc(R.label(nodeId))}"><option value="">All within ${esc(R.label(nodeId))}</option>${children.map(node => `<option value="${esc(node.id)}">${esc(R.label(node.id))}</option>`).join("")}</select></label>` : "");
+  host.querySelectorAll("[data-filter-node]").forEach(button => button.addEventListener("click", () => setTopicFilter(id, button.dataset.filterNode, true)));
+  const childSelect = host.querySelector(".topic-child-select");
+  if (childSelect) childSelect.addEventListener("change", () => { if (childSelect.value) setTopicFilter(id, childSelect.value, true); });
+}
+function setTopicFilter(id, value, render = false) {
+  document.getElementById(id).value = R.resolve(value) || "";
+  syncTopicFilter(id);
+  if (render) {
+    if (id === "oil-domain-filter") { renderOils(document.getElementById("oil-search").value); routeUrl("oils", { domain: R.resolve(value) }); }
+    if (id === "matrix-domain-filter") { renderMatrix(); routeUrl("matrix", { domain: R.resolve(value) }); }
+    if (id === "study-domain-filter") { renderStudies(); routeStudyFilters(); }
+    const host = document.getElementById(id + "-navigation");
+    host?.querySelector(".topic-child-select, [aria-current]")?.focus();
+  }
 }
 
 const LEVEL_ORDER = { clinical: 0, preclinical: 1, laboratory: 2, review: 3 };
@@ -54,24 +97,21 @@ function formatFormula(formula) {
   return esc(formula).replace(/(\d+)/g, "<sub>$1</sub>");
 }
 
-function subLabel(type, sub) {
-  const d = domainByType[type];
-  if (!d) return sub;
-  const s = d.subcategories.find(x => x.id === sub);
-  return BOTANICAL_LABELS[type === "botanical" ? sub : ""] || (s ? s.label : sub);
-}
+function subLabel(type, sub) { return R.label(resolveUse(type, sub)) || sub || type; }
 
 /* ---------- shared data helpers ---------- */
-function studiesForOil(oilId) {
-  return D.studies.filter(s => s.oilIds.includes(oilId));
+function studiesForOil(oilId, useId = null) {
+  return R.studiesForOil(oilId, useId, { eligibleOnly: false });
 }
 function studiesForCompound(compoundId) {
-  return D.studies.filter(s => s.compoundIds.includes(compoundId));
+  return D.studies.filter(s => (s.compoundIds || []).includes(compoundId));
 }
 function domainsForOil(oilId) {
-  const set = new Set();
-  studiesForOil(oilId).forEach(s => s.categories.forEach(c => set.add(researchDomainId(c))));
-  return [...set];
+  return researchDomains.filter(node => studiesForOil(oilId, node.id).length).map(node => node.id);
+}
+function sourceTopicNodes(study, oilId = null, useId = null) {
+  if (!oilId) return R.studyNodes(study);
+  return [...new Set(R.assertions(oilId, study.id, useId).map(assertion => R.resolve(assertion.useNodeId)).filter(Boolean))].map(id => R.node(id));
 }
 function evidenceCounts(studies) {
   const c = { clinical: 0, preclinical: 0, laboratory: 0, review: 0 };
@@ -116,7 +156,11 @@ document.querySelectorAll(".tab").forEach(btn => {
       renderCompounds();
     }
     switchTab(tab);
-    routeUrl(tab);
+    if (tab === "studies") routeStudyFilters();
+    else if (tab === "oils" || tab === "matrix") {
+      const filter = document.getElementById(tab === "oils" ? "oil-domain-filter" : "matrix-domain-filter");
+      routeUrl(tab, { domain: R.resolve(filter?.value) });
+    } else routeUrl(tab);
   });
 });
 
@@ -131,6 +175,7 @@ function routeUrl(tab, params = {}, replace = false) {
     if (params[k]) url.searchParams.set(k, params[k]);
     else url.searchParams.delete(k);
   });
+  if (!replace && url.href === window.location.href) return;
   history[replace ? "replaceState" : "pushState"]({ tab, ...params }, "", url);
 }
 function applyRoute() {
@@ -141,12 +186,21 @@ function applyRoute() {
   const oil = p.get("oil"), compound = p.get("compound"), domain = p.get("domain"), sub = p.get("sub");
   if (tab === "oils" && oil && oilById[oil]) showOil(oil, true);
   else if (tab === "compounds" && compound && compoundById[compound]) showCompound(compound, true);
-  else if (tab === "domains" && domain && domainByType[domain]) showDomain(domain, sub || null);
+  else if (tab === "domains" && resolveUse(domain, sub)) showDomain(domain, sub || null);
+  else if (tab === "studies") {
+    document.getElementById("study-oil-filter").value = oil || "";
+    document.getElementById("study-compound-filter").value = compound || "";
+    setTopicFilter("study-domain-filter", resolveUse(domain, sub));
+    renderStudies();
+  } else if (tab === "matrix") {
+    setTopicFilter("matrix-domain-filter", resolveUse(domain, sub));
+    renderMatrix();
+  }
   else if (tab === "oils" || tab === "compounds") {
     const prefix = tab === "oils" ? "oil" : "compound";
     document.getElementById(prefix + "-list-view").classList.remove("hidden");
     document.getElementById(prefix + "-detail").classList.add("hidden");
-    if (tab === "oils") renderOils(document.getElementById("oil-search").value);
+    if (tab === "oils") { setTopicFilter("oil-domain-filter", resolveUse(domain, sub)); renderOils(document.getElementById("oil-search").value); }
     else renderCompounds();
   }
   routingFromHistory = false;
@@ -195,27 +249,72 @@ function evidenceBadge(s) {
 function prettyStudyType(t) {
   return t.split("-").join(" ");
 }
-function categoryChips(s) {
-  return s.categories.map(c => {
-    const topic = c.topic ? " / " + esc(c.topic) : "";
-    const domain = domainByType[researchDomainId(c)];
-    const label = domain ? domain.label : c.type;
-    const sub = ["botanical", "sensory"].includes(c.type) ? "" : ": " + esc(subLabel(c.type, c.subcategory));
-    return `<span class="catchip">${esc(label)}${sub}${topic}</span>`;
-  }).join("");
+function sourceTopicLabel(id) {
+  const node = R.node(id);
+  return node ? [...R.ancestors(id).filter(parent => parent.navigationRoot !== false), node].map(item => R.label(item.id)).join(" › ") : R.label(id);
 }
-function studyCard(s) {
-  const oilTags = s.oilIds.map(id => oilById[id]
-    ? `<button class="taglink" data-goto-oil="${id}">${esc(oilById[id].name)}</button>` : "").join("");
-  const compTags = s.compoundIds.map(id => compoundById[id]
-    ? `<button class="taglink" data-goto-compound="${id}">${esc(compoundById[id].name)}</button>` : "").join("");
-  return `<div class="study">
-    <div class="study-badge">${evidenceBadge(s)}</div>${s.material ? `<p class="hint">Material studied: ${esc(s.material)}</p>` : ""}
+function categoryChips(s, oilId = null, useId = null) {
+  return sourceTopicNodes(s, oilId, useId).map(node =>
+    `<button type="button" class="catchip" data-goto-use="${esc(node.id)}" title="Explore this source topic">${esc(sourceTopicLabel(node.id))}</button>`).join("");
+}
+function qualifierText(value) {
+  if (value === null || value === undefined || value === "") return "";
+  if (Array.isArray(value)) return value.map(qualifierText).filter(Boolean).join(", ");
+  if (typeof value === "object") return Object.entries(value).filter(([key]) => !["sourceIds", "urls"].includes(key)).map(([key, item]) => `${key}: ${qualifierText(item)}`).join(" · ");
+  return String(value);
+}
+function researchQualifiers(record) {
+  const fields = [["material", "Material"], ["model", "Model"], ["outcome", "Outcome"], ["route", "Route"], ["species", "Species"], ["relevance", "Relevance"]];
+  return fields.map(([key, label]) => qualifierText(record[key]) ? `<p><b>${label}:</b> ${esc(qualifierText(record[key]))}</p>` : "").join("");
+}
+function assertionStatus(assertion) {
+  const checked = ['source-checked', 'source-verified'].includes(assertion.verification?.status);
+  if (checked && assertion.relevance === 'direct') return 'Source-reviewed direct research';
+  if (checked && assertion.relevance === 'contextual') return 'Source-reviewed contextual evidence';
+  if (checked) return 'Source reviewed; oil applicability unverified';
+  return 'Library-linked evidence; applicability not independently verified';
+}
+function assertionContext(s, oilId, useId) {
+  if (!oilId) return "";
+  const assertions = R.assertions(oilId, s.id, useId);
+  if (!assertions.length) return `<p class="hint research-context">Catalog link only. No oil-specific topic assessment is recorded.</p>`;
+  return `<details class="research-assessments"><summary>Oil-specific source assessment · ${esc(oilById[oilId]?.name || oilId)}</summary>${assertions.map(a => `<div class="research-assessment">
+    <p><b>${esc(R.breadcrumb(a.useNodeId) || "Unmapped research topic")}</b> · ${esc(assertionStatus(a))}</p>
+    ${researchQualifiers(a)}${a.finding ? `<p><b>Oil-specific finding:</b> ${esc(a.finding)}</p>` : ""}${a.limitations ? `<p><b>Limitations:</b> ${esc(a.limitations)}</p>` : ""}
+    ${a.verification ? `<p class="hint"><b>Verification:</b> ${esc(qualifierText(a.verification))}</p>` : ""}
+    </div>`).join("")}</details>`;
+}
+function visibleAssertionContext(s, oilId, useId) {
+  if (!oilId) return "";
+  const assertions = R.assertions(oilId, s.id, useId);
+  if (!assertions.length) return '<p class="research-scope">Catalog association only; oil-specific material and applicability have not been reviewed.</p>';
+  const uniqueText = values => [...new Set(values.filter(Boolean))];
+  const labels = uniqueText(assertions.map(assertionStatus));
+  const materials = uniqueText(assertions.map(a => a.material?.label || a.material?.kind || (typeof a.material === "string" ? a.material : "")));
+  const models = uniqueText(assertions.map(a => a.model?.label || a.model?.kind || (typeof a.model === "string" ? a.model : "")));
+  const findings = uniqueText(assertions.map(a => a.finding));
+  const outcomes = uniqueText(assertions.map(a => a.outcome?.label || a.outcome?.direction));
+  return `<div class="research-scope"><p><b>For ${esc(oilById[oilId]?.name || oilId)}:</b> ${esc(labels.join(" · "))}</p>
+    <p><b>Material:</b> ${esc(materials.join("; ") || "Not verified")}<br><b>Model:</b> ${esc(models.join("; ") || "Not verified")}${outcomes.length ? `<br><b>Reported outcome:</b> ${esc(outcomes.join("; "))}` : ""}</p>
+    ${findings.map(finding => `<p><b>Oil-specific finding:</b> ${esc(finding)}</p>`).join("")}</div>`;
+}
+function studyCard(s, scope = {}, useIds = null) {
+  const oilId = typeof scope === "string" ? scope : scope?.oilId || null;
+  const useId = typeof scope === "string" || scope === null ? useIds : scope?.useId || null;
+  const oilTags = (s.oilIds || []).map(id => oilById[id]
+    ? `<button class="taglink" data-goto-oil="${esc(id)}">${esc(oilById[id].name)}</button>` : "").join("");
+  const compTags = (s.compoundIds || []).map(id => compoundById[id]
+    ? `<button class="taglink" data-goto-compound="${esc(id)}">${esc(compoundById[id].name)}</button>` : "").join("");
+  return `<div class="study" data-study-id="${esc(s.id)}">
+    <div class="study-badge">${evidenceBadge(s)}</div>
+    <div class="study-qualifiers">${researchQualifiers(s)}</div>
     <h4>${esc(s.title)}</h4>
     <p class="cite">${esc(s.authors)} &middot; ${esc(s.journal)} &middot; ${s.year}${s.pubmedId ? " &middot; PMID " + esc(s.pubmedId) : ""}</p>
-    <p class="finding"><span class="finding-label">Finding</span>${esc(s.finding)}</p>
+    ${visibleAssertionContext(s, oilId, useId)}
+    <p class="finding"><span class="finding-label">Paper finding</span>${esc(s.finding)}</p>
     ${s.limitations ? `<p class="limitations"><span class="finding-label">Limitations</span>${esc(s.limitations)}</p>` : ""}
-    <div class="catchips">${categoryChips(s)}</div>
+    <div class="catchips" aria-label="Source-tagged research topics">${categoryChips(s, oilId, useId)}</div>
+    ${assertionContext(s, oilId, useId)}
     <div class="tags">${oilTags}${compTags}<a class="ext read-paper" href="${esc(s.url)}" target="_blank" rel="noopener">Read paper</a></div>
   </div>`;
 }
@@ -224,6 +323,8 @@ function bindStudyLinks(root) {
     b.addEventListener("click", () => showOil(b.dataset.gotoOil)));
   root.querySelectorAll("[data-goto-compound]").forEach(b =>
     b.addEventListener("click", () => showCompound(b.dataset.gotoCompound)));
+  root.querySelectorAll("[data-goto-use]").forEach(b =>
+    b.addEventListener("click", () => showDomain(b.dataset.gotoUse)));
 }
 
 /* ---------- range bar chart ---------- */
@@ -313,7 +414,7 @@ function renderPathway(selectedId) {
   renderPathwayForOil(selected);
 }
 
-function renderPathwayForOil(oilId) {
+function renderPathwayForOil(oilId, useId = null) {
   const oil = oilById[oilId];
   if (!oil) return;
   const compoundWrap = document.getElementById("pathway-compounds");
@@ -328,30 +429,19 @@ function renderPathwayForOil(oilId) {
   compoundWrap.querySelectorAll("[data-path-compound]").forEach(b =>
     b.addEventListener("click", () => showCompound(b.dataset.pathCompound)));
 
-  const linked = studiesForOil(oilId);
-  const groups = [];
-  researchDomains.forEach(domain => {
-    domain.subcategories.forEach(sub => {
-      const ss = linked.filter(s => s.categories.some(c => matchesDomain(c, domain.type) && c.subcategory === sub.id));
-      if (ss.length) groups.push({ domain, sub, studies: ss });
-    });
-  });
-  groups.sort((x,y) => y.studies.length - x.studies.length);
-
+  const selectedUse = R.resolve(useId);
+  const groups = (selectedUse ? R.children(selectedUse) : R.roots()).map(node => ({ node, studies: studiesForOil(oilId, node.id) })).filter(group => group.studies.length);
   const useWrap = document.getElementById("pathway-uses");
-  useWrap.innerHTML = groups.length ? groups.map((g,i) => {
-    const lvl = strongestLevel(g.studies);
-    return `<button class="path-node use-node" data-path-use="${i}">
-      <span><strong>${esc(g.sub.label)}</strong><small>${esc(g.domain.label)} · ${g.studies.length} paper${g.studies.length === 1 ? "" : "s"}</small></span>
-      ${lvl ? `<span class="evidence-word evidence-${lvl}">${LEVEL_LABEL[lvl]}</span>` : ""}
-    </button>`;
-  }).join("") : `<p class="pathway-empty">No linked research yet</p>`;
-
-  useWrap.querySelectorAll("[data-path-use]").forEach(b =>
-    b.addEventListener("click", () => showPathwayEvidence(oil, groups[Number(b.dataset.pathUse)])));
+  useWrap.innerHTML = (selectedUse ? `<nav class="topic-breadcrumb" aria-label="Pathway research topics">${topicBreadcrumb(selectedUse, "data-path-parent")}</nav>` : "") +
+    (groups.length ? groups.map(g => `<button class="path-node use-node" data-path-use="${esc(g.node.id)}">
+      <span><strong>${esc(R.label(g.node.id))}</strong><small>${g.studies.length} linked paper${g.studies.length === 1 ? "" : "s"}${R.children(g.node.id).length ? " · Explore topics" : ""}</small></span>
+    </button>`).join("") : `<p class="pathway-empty">${selectedUse ? "No narrower topics with linked research" : "No linked research yet"}</p>`);
+  useWrap.querySelectorAll("[data-path-use]").forEach(button => button.addEventListener("click", () => renderPathwayForOil(oilId, button.dataset.pathUse)));
+  useWrap.querySelectorAll("[data-path-parent]").forEach(button => button.addEventListener("click", () => renderPathwayForOil(oilId, button.dataset.pathParent)));
   const evidence = document.getElementById("pathway-evidence");
-  evidence.classList.add("hidden");
+  evidence.classList.toggle("hidden", !selectedUse);
   evidence.innerHTML = "";
+  if (selectedUse) showPathwayEvidence(oil, { node: R.node(selectedUse), studies: studiesForOil(oilId, selectedUse) });
 }
 
 function showPathwayEvidence(oil, group) {
@@ -359,14 +449,13 @@ function showPathwayEvidence(oil, group) {
   const evidence = document.getElementById("pathway-evidence");
   evidence.classList.remove("hidden");
   evidence.innerHTML = `<div class="pathway-evidence-head">
-      <div><p class="eyebrow">${esc(group.domain.label)}</p><h3>${esc(oil.name)} → ${esc(group.sub.label)}</h3></div>
+      <div><p class="eyebrow">${esc(R.breadcrumb(group.node.id))}</p><h3>${esc(oil.name)} → ${esc(R.label(group.node.id))}</h3></div>
       <button type="button" class="back" id="pathway-close">Close</button>
     </div>
-    <p class="pathway-proof-note">These papers describe research on the ingredient or its compounds. They are not evidence that a finished Sunny's Shield product produces the same effect.</p>
-    ${group.studies.map(studyCard).join("")}`;
+    <p class="pathway-proof-note">Source-tagged research associations include context-only records. Inspect the material, model and oil-specific assessment. These papers do not establish efficacy of a finished Sunny's Shield product.</p>
+    ${group.studies.map(study => studyCard(study, { oilId: oil.id, useId: group.node.id })).join("")}`;
   bindStudyLinks(evidence);
   document.getElementById("pathway-close").addEventListener("click", () => evidence.classList.add("hidden"));
-  evidence.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 /* ================= OIL EXPLORER ================= */
@@ -375,9 +464,10 @@ function renderOils(filter) {
   const grid = document.getElementById("oil-grid");
   const domainFilter = document.getElementById("oil-domain-filter")?.value || "";
   const sort = document.getElementById("oil-sort")?.value || "az";
+  syncTopicFilter("oil-domain-filter");
   const oils = D.oils.filter(o =>
     (o.name.toLowerCase().includes(q) || o.latinName.toLowerCase().includes(q)) &&
-    (!domainFilter || studiesForOil(o.id).some(s => s.categories.some(c => matchesDomain(c, domainFilter))))
+    (!domainFilter || studiesForOil(o.id, domainFilter).length)
   ).sort((a,b) => {
     if (sort === "studies") return studiesForOil(b.id).length - studiesForOil(a.id).length || a.name.localeCompare(b.name);
     if (sort === "domains") return domainsForOil(b.id).length - domainsForOil(a.id).length || a.name.localeCompare(b.name);
@@ -399,7 +489,7 @@ function renderOils(filter) {
         <div><h3>${esc(o.name)}</h3><p class="latin">${esc(o.latinName)}</p></div>
       </div>
 ${top ? `<p class="top-terpene">Top compound: <b>${esc(top.compound.name)}</b></p>` : ""}
-      <p class="sub"><strong class="study-count">${n} stud${n === 1 ? "y" : "ies"}</strong>${domains.length ? " on " + domains.map(d => esc(domainByType[d].label)).join(", ") : ""}</p>
+      <p class="sub"><strong class="study-count">${n} stud${n === 1 ? "y" : "ies"}</strong>${domains.length ? " on " + domains.map(d => esc(R.label(d))).join(", ") : ""}</p>
     </div>`;
   }).join("") || `<p class="empty">No oils match.</p>`;
   grid.querySelectorAll(".card").forEach(c => {
@@ -409,7 +499,7 @@ ${top ? `<p class="top-terpene">Top compound: <b>${esc(top.compound.name)}</b></
 }
 document.getElementById("oil-search").addEventListener("input", e => renderOils(e.target.value));
 document.getElementById("oil-sort").addEventListener("change", () => renderOils(document.getElementById("oil-search").value));
-document.getElementById("oil-domain-filter").addEventListener("change", () => renderOils(document.getElementById("oil-search").value));
+document.getElementById("oil-domain-filter").addEventListener("change", e => setTopicFilter("oil-domain-filter", e.target.value, true));
 
 function showOil(id, fromRoute = false) {
   const o = oilById[id];
@@ -426,8 +516,9 @@ function showOil(id, fromRoute = false) {
   document.getElementById("oil-part").textContent = o.plantPart;
   document.getElementById("oil-extraction").textContent = o.extraction;
   document.getElementById("oil-aroma").textContent = o.aroma.join(", ");
-  document.getElementById("oil-uses").innerHTML = o.uses.map(u => `<li>${esc(u)}</li>`).join("");
-  document.getElementById("oil-safety").textContent = o.safety;
+  const legacyUses = o.legacy?.uses || (Array.isArray(o.uses) && o.uses.every(item => typeof item === "string") ? o.uses : []);
+  document.getElementById("oil-uses").innerHTML = legacyUses.map(use => `<li>${esc(use)}</li>`).join("") || `<li>No legacy use text retained.</li>`;
+  document.getElementById("oil-safety").textContent = o.precautions?.legacySafety || o.safety || "No reviewed safety guidance is recorded.";
 
   const rows = o.constituents
     .filter(CHEMISTRY.quantified)
@@ -450,20 +541,13 @@ function showOil(id, fromRoute = false) {
   const studies = studiesForOil(id);
   const domains = domainsForOil(id);
   document.getElementById("oil-domains").innerHTML = domains.length
-    ? domains.map(d => `<button class="catchip domain-filter-chip" data-domain-filter="${d}">${esc(domainByType[d].label)} <b>${studies.filter(s => s.categories.some(c => matchesDomain(c, d))).length}</b></button>`).join("")
-    : `<span class="catchip dim">No categorized studies yet</span>`;
+    ? domains.map(id => `<button class="catchip domain-filter-chip" data-domain-filter="${esc(id)}">${esc(R.label(id))} <b>${studiesForOil(o.id, id).length}</b></button>`).join("")
+    : `<span class="catchip dim">No oil-specific topic associations yet</span>`;
   document.querySelectorAll("#oil-domains [data-domain-filter]").forEach(btn => {
     btn.addEventListener("click", () => {
+      ["study-level-filter", "study-type-filter", "study-search", "study-class-filter", "study-group-filter"].forEach(id => { document.getElementById(id).value = ""; });
+      presetStudyFilters({ oil: o.id, domain: btn.dataset.domainFilter, compound: "" });
       switchTab("studies");
-      document.getElementById("study-oil-filter").value = id;
-      document.getElementById("study-domain-filter").value = btn.dataset.domainFilter;
-      document.getElementById("study-compound-filter").value = "";
-      document.getElementById("study-level-filter").value = "";
-      document.getElementById("study-type-filter").value = "";
-      document.getElementById("study-search").value = "";
-      document.getElementById("study-class-filter").value = "";
-      document.getElementById("study-group-filter").value = "";
-      renderStudies();
       document.getElementById("tab-studies").scrollIntoView({ behavior: "smooth", block: "start" });
     });
   });
@@ -475,7 +559,7 @@ function showOil(id, fromRoute = false) {
       .join(" <span class=\"evidence-sep\">·</span> ");
 
   const sWrap = document.getElementById("oil-studies");
-  sWrap.innerHTML = studies.length ? studies.map(studyCard).join("")
+  sWrap.innerHTML = studies.length ? studies.map(study => studyCard(study, { oilId: id })).join("")
     : `<p class="empty">No studies linked yet.</p>`;
   bindStudyLinks(sWrap);
 }
@@ -631,15 +715,16 @@ function showCompound(id, fromRoute = false) {
 
 /* ================= EVIDENCE MATRIX ================= */
 function matrixCell(oilId, domainType) {
-  return D.studies.filter(s =>
-    s.oilIds.includes(oilId) && s.categories.some(c => matchesDomain(c, domainType)));
+  return studiesForOil(oilId, domainType);
 }
 function renderMatrix() {
   const table = document.getElementById("matrix-table");
   const q = (document.getElementById("matrix-search")?.value || "").trim().toLowerCase();
   const sort = document.getElementById("matrix-sort")?.value || "az";
   const domainFilter = document.getElementById("matrix-domain-filter")?.value || "";
-  const domains = domainFilter ? [domainByType[domainFilter]].filter(Boolean) : researchDomains;
+  syncTopicFilter("matrix-domain-filter");
+  const selected = R.node(domainFilter);
+  const domains = selected ? [selected, ...R.children(selected.id)] : R.roots();
   const oils = D.oils.filter(o =>
     !q || o.name.toLowerCase().includes(q) || o.latinName.toLowerCase().includes(q)
   ).sort((x,y) => {
@@ -648,13 +733,13 @@ function renderMatrix() {
   });
   const count = document.getElementById("matrix-count");
   if (count) count.textContent = oils.length + " plants";
-  let html = `<thead><tr><th></th>${domains.map(d => `<th>${esc(d.label)}</th>`).join("")}</tr></thead><tbody>`;
+  let html = `<thead><tr><th></th>${domains.map(d => `<th>${esc(R.label(d.id))}</th>`).join("")}</tr></thead><tbody>`;
   oils.forEach(o => {
     html += `<tr><th class="rowlabel"><span class="swatch sm" style="background:${o.color}"></span>${esc(o.name)}</th>`;
     domains.forEach(d => {
-      const studies = matrixCell(o.id, d.type);
+      const studies = matrixCell(o.id, d.id);
       const n = studies.length;
-      html += `<td><button class="cell" data-oil="${o.id}" data-domain="${d.type}" ${n ? "" : "disabled"}>
+      html += `<td><button class="cell" data-oil="${o.id}" data-domain="${esc(d.id)}" ${n ? "" : "disabled"}>
         <span class="cell-n">${n}</span>
       </button></td>`;
     });
@@ -663,84 +748,71 @@ function renderMatrix() {
   table.innerHTML = html + `</tbody>`;
   table.querySelectorAll(".cell:not([disabled])").forEach(btn =>
     btn.addEventListener("click", () => {
-      presetStudyFilters({ oil: btn.dataset.oil, domain: btn.dataset.domain });
+      ["study-level-filter", "study-type-filter", "study-search", "study-class-filter", "study-group-filter"].forEach(id => { document.getElementById(id).value = ""; });
+      presetStudyFilters({ oil: btn.dataset.oil, domain: btn.dataset.domain, compound: "" });
       switchTab("studies");
     }));
 }
-["matrix-search","matrix-sort","matrix-domain-filter"].forEach(id => {
+["matrix-search","matrix-sort"].forEach(id => {
   const el = document.getElementById(id);
   if (el) el.addEventListener(id === "matrix-search" ? "input" : "change", renderMatrix);
 });
 
+document.getElementById("matrix-domain-filter").addEventListener("change", e => setTopicFilter("matrix-domain-filter", e.target.value, true));
+
 /* ================= DOMAIN EXPLORER ================= */
 let domainState = { type: null, sub: null };
 function domainStudyCount(type, sub) {
-  return D.studies.filter(s => s.categories.some(c =>
-    matchesDomain(c, type) && (!sub || c.subcategory === sub))).length;
+  const id = resolveUse(type, sub);
+  return id ? R.countStudies(id) : 0;
 }
 function renderDomainTiles() {
   const wrap = document.getElementById("domain-tiles");
   wrap.classList.remove("hidden");
   document.getElementById("domain-detail").classList.add("hidden");
-  wrap.innerHTML = researchDomains.map(d => {
-    const n = domainStudyCount(d.type);
-    return `<button class="domain-tile" data-domain="${d.type}">
-      <h3>${esc(d.label)}</h3>
-      <p class="domain-n">${n} stud${n === 1 ? "y" : "ies"}</p>
-      ${d.subcategories.length > 1 ? `<p class="sub">${d.subcategories.map(s => esc(s.label)).slice(0, 5).join(" &middot; ")}${d.subcategories.length > 5 ? " &middot; ..." : ""}</p>` : ""}
+  wrap.innerHTML = R.roots().map(node => {
+    const count = R.countStudies(node.id), children = R.children(node.id);
+    return `<button class="domain-tile" data-domain="${esc(node.id)}">
+      <h3>${esc(R.label(node.id))}</h3>
+      <p class="domain-n">${count} stud${count === 1 ? "y" : "ies"}</p>
+      ${children.length ? `<p class="sub">${children.slice(0, 5).map(child => esc(R.label(child.id))).join(" &middot; ")}${children.length > 5 ? " &middot; …" : ""}</p>` : ""}
     </button>`;
   }).join("");
-  wrap.querySelectorAll(".domain-tile").forEach(b =>
-    b.addEventListener("click", () => showDomain(b.dataset.domain, null)));
+  wrap.querySelectorAll(".domain-tile").forEach(button => button.addEventListener("click", () => showDomain(button.dataset.domain)));
 }
 function showDomain(type, sub) {
-  domainState = { type, sub };
-  const d = domainByType[type];
+  const id = resolveUse(type, sub), node = R.node(id);
+  if (!node) return;
+  switchTab("domains");
+  domainState = { type: id, sub: null };
+  routeUrl("domains", { domain: id });
   document.getElementById("domain-tiles").classList.add("hidden");
-  const detail = document.getElementById("domain-detail");
-  detail.classList.remove("hidden");
-  document.getElementById("domain-name").textContent =
-    d.label + (sub && subLabel(type, sub) !== d.label ? " / " + subLabel(type, sub) : "");
-
-  const subs = document.getElementById("domain-subs");
-  subs.innerHTML = d.subcategories.length > 1 ? `<button class="chip${!sub ? " on" : ""}" data-sub="">All</button>` +
-    d.subcategories.map(s =>
-      `<button class="chip${sub === s.id ? " on" : ""}" data-sub="${s.id}">${esc(subLabel(type, s.id))} <b>${domainStudyCount(type, s.id)}</b></button>`).join("") : "";
-  subs.querySelectorAll(".chip").forEach(c =>
-    c.addEventListener("click", () => showDomain(type, c.dataset.sub || null)));
-
-  const match = s => s.categories.some(c =>
-    matchesDomain(c, type) && (!sub || c.subcategory === sub));
-  const studies = D.studies.filter(match);
-
-  const oilCounts = {};
-  studies.forEach(s => s.oilIds.forEach(id => { oilCounts[id] = (oilCounts[id] || 0) + 1; }));
-  const oilRows = Object.entries(oilCounts)
-    .map(([id, n]) => ({ oil: oilById[id], n }))
-    .filter(r => r.oil)
-    .sort((a, b) => b.n - a.n);
-  document.getElementById("domain-oils").innerHTML = oilRows.length
-    ? oilRows.map(r => `<button class="chip" data-oil="${r.oil.id}">
-        <span class="swatch sm" style="background:${r.oil.color}"></span>${esc(r.oil.name)} <b>${r.n}</b></button>`).join("")
-    : `<p class="empty">No oils with evidence here yet.</p>`;
-  document.querySelectorAll("#domain-oils .chip").forEach(c =>
-    c.addEventListener("click", () => showOil(c.dataset.oil)));
-
-  const compCounts = {};
-  studies.forEach(s => s.compoundIds.forEach(id => { compCounts[id] = (compCounts[id] || 0) + 1; }));
-  const compRows = Object.entries(compCounts)
-    .map(([id, n]) => ({ c: compoundById[id], n }))
-    .filter(r => r.c)
-    .sort((a, b) => b.n - a.n);
-  document.getElementById("domain-compounds").innerHTML = compRows.length
-    ? compRows.map(r => `<button class="chip" data-c="${r.c.id}">${esc(r.c.name)} <b>${r.n}</b></button>`).join("")
-    : `<p class="empty">No compounds with evidence here yet.</p>`;
-  document.querySelectorAll("#domain-compounds .chip").forEach(c =>
-    c.addEventListener("click", () => showCompound(c.dataset.c)));
-
+  document.getElementById("domain-detail").classList.remove("hidden");
+  document.getElementById("domain-name").textContent = R.label(id);
+  const crumbs = document.getElementById("domain-breadcrumb");
+  if (crumbs) {
+    crumbs.innerHTML = topicBreadcrumb(id, "data-domain-parent");
+    crumbs.querySelectorAll("[data-domain-parent]").forEach(button => button.addEventListener("click", () => {
+      if (button.dataset.domainParent) showDomain(button.dataset.domainParent);
+      else { renderDomainTiles(); routeUrl("domains"); }
+    }));
+  }
+  const children = R.children(id), subs = document.getElementById("domain-subs");
+  subs.innerHTML = children.map(child => `<button class="chip" data-sub="${esc(child.id)}">${esc(R.label(child.id))} <b>${R.countStudies(child.id)}</b></button>`).join("");
+  subs.querySelectorAll(".chip").forEach(button => button.addEventListener("click", () => showDomain(button.dataset.sub)));
+  const studies = D.studies.filter(study => R.matchesStudy(study, id));
+  // Oil/topic edges come only from assertions, never a study's Cartesian set
+  // of oils and categories. Counts deduplicate papers at every depth.
+  const oilRows = D.oils.map(oil => ({ oil, n: studiesForOil(oil.id, id).length })).filter(row => row.n).sort((a, b) => b.n - a.n || a.oil.name.localeCompare(b.oil.name));
+  const oilWrap = document.getElementById("domain-oils");
+  oilWrap.innerHTML = oilRows.length ? oilRows.map(({ oil, n }) => `<button class="chip" data-oil="${esc(oil.id)}"><span class="swatch sm" style="background:${oil.color}"></span>${esc(oil.name)} <b>${n}</b></button>`).join("") : `<p class="empty">No oil-specific topic associations here yet.</p>`;
+  oilWrap.querySelectorAll(".chip").forEach(button => button.addEventListener("click", () => showOil(button.dataset.oil)));
+  const compRows = D.compounds.map(compound => ({ compound, n: studies.filter(study => (study.compoundIds || []).includes(compound.id)).length })).filter(row => row.n).sort((a, b) => b.n - a.n || a.compound.name.localeCompare(b.compound.name));
+  const compWrap = document.getElementById("domain-compounds");
+  compWrap.innerHTML = compRows.length ? compRows.map(({ compound, n }) => `<button class="chip" data-c="${esc(compound.id)}">${esc(compound.name)} <b>${n}</b></button>`).join("") : `<p class="empty">No compounds linked to these papers yet.</p>`;
+  compWrap.querySelectorAll(".chip").forEach(button => button.addEventListener("click", () => showCompound(button.dataset.c)));
   const sWrap = document.getElementById("domain-studies");
-  sWrap.innerHTML = studies.length ? studies.map(studyCard).join("")
-    : `<p class="empty">No studies here yet.</p>`;
+  sWrap.innerHTML = studies.length ? studies.map(studyCard).join("") : `<p class="empty">No studies here yet.</p>`;
   bindStudyLinks(sWrap);
 }
 
@@ -799,11 +871,15 @@ function renderNetwork() {
 }
 
 /* ================= STUDY LIBRARY ================= */
+function routeStudyFilters() {
+  routeUrl("studies", { oil: document.getElementById("study-oil-filter").value, compound: document.getElementById("study-compound-filter").value, domain: R.resolve(document.getElementById("study-domain-filter").value) });
+}
 function presetStudyFilters(f) {
   if (f.oil !== undefined) document.getElementById("study-oil-filter").value = f.oil || "";
-  if (f.domain !== undefined) document.getElementById("study-domain-filter").value = f.domain || "";
+  if (f.domain !== undefined) setTopicFilter("study-domain-filter", f.domain);
   if (f.compound !== undefined) document.getElementById("study-compound-filter").value = f.compound || "";
   renderStudies();
+  routeStudyFilters();
 }
 function renderStudies() {
   const q = document.getElementById("study-search").value.toLowerCase();
@@ -814,25 +890,26 @@ function renderStudies() {
   const typeF = document.getElementById("study-type-filter").value;
   const classF = document.getElementById("study-class-filter").value;
   const groupF = document.getElementById("study-group-filter").value;
+  syncTopicFilter("study-domain-filter");
+  const oilStudyIds = oilF ? new Set(studiesForOil(oilF, domF || null).map(study => study.id)) : null;
   const list = D.studies.filter(s =>
-    ((!classF && !groupF) || (!classF && (s.chemicalGroups || []).includes(groupF)) || s.compoundIds.some(id => compoundById[id] && CHEMISTRY.matches(compoundById[id], "", classF, groupF))) &&
-    (!oilF || s.oilIds.includes(oilF)) &&
-    (!compF || s.compoundIds.includes(compF)) &&
-    (!domF || s.categories.some(c => matchesDomain(c, domF))) &&
+    ((!classF && !groupF) || (!classF && (s.chemicalGroups || []).includes(groupF)) || (s.compoundIds || []).some(id => compoundById[id] && CHEMISTRY.matches(compoundById[id], "", classF, groupF))) &&
+    (!oilStudyIds || oilStudyIds.has(s.id)) &&
+    (!compF || (s.compoundIds || []).includes(compF)) &&
+    (oilF || !domF || R.matchesStudy(s, domF)) &&
     (!lvlF || s.evidenceLevel === lvlF) &&
     (!typeF || s.studyType === typeF) &&
-    ([s.title, s.finding, s.material || "", ...s.categories.map(c => [c.type, c.subcategory, c.topic, domainByType[researchDomainId(c)]?.label].join(" "))].join(" ").toLowerCase().includes(q)));
+    ([s.title, s.finding, s.material, s.model, s.outcome, s.limitations, s.route, s.species, s.relevance, ...sourceTopicNodes(s, oilF || null, domF || null).map(node => sourceTopicLabel(node.id))].map(qualifierText).join(" ").toLowerCase().includes(q)));
   document.getElementById("study-count").textContent = list.length + " studies";
   const wrap = document.getElementById("study-list");
-  wrap.innerHTML = list.map(studyCard).join("") || `<p class="empty">No studies match.</p>`;
+  wrap.innerHTML = list.map(study => studyCard(study, { oilId: oilF, useId: domF })).join("") || `<p class="empty">No studies match.</p>`;
   bindStudyLinks(wrap);
 }
-["study-search", "study-oil-filter", "study-compound-filter",
- "study-domain-filter", "study-level-filter", "study-type-filter", "study-class-filter", "study-group-filter"
-].forEach(id => {
+["study-search", "study-oil-filter", "study-compound-filter", "study-level-filter", "study-type-filter", "study-class-filter", "study-group-filter"].forEach(id => {
   const el = document.getElementById(id);
-  el.addEventListener(el.tagName === "SELECT" ? "change" : "input", renderStudies);
+  el.addEventListener(el.tagName === "SELECT" ? "change" : "input", () => { renderStudies(); routeStudyFilters(); });
 });
+document.getElementById("study-domain-filter").addEventListener("change", e => setTopicFilter("study-domain-filter", e.target.value, true));
 
 /* ---------- init ---------- */
 (function init() {
@@ -848,10 +925,10 @@ function renderStudies() {
   if (statClinical) statClinical.textContent = D.studies.filter(s => s.evidenceLevel === "clinical").length;
   const classes = [...new Set(D.compounds.map(c => c.chemicalClass))].sort();
   document.getElementById("compound-category-filter").innerHTML =
-    `<option value="">All compounds</option>` + CHEMISTRY.compoundCategories.map(category => `<option value="${category.id}">${esc(category.label)}</option>`).join("");
+    `<option value="">All compounds</option>` + CHEMISTRY.compoundCategories.map(category => `<option value="${esc(category.id)}">${esc(category.label)}</option>`).join("");
   document.getElementById("study-class-filter").innerHTML =
     `<option value="">All classes</option>` + classes.map(c => `<option>${esc(c)}</option>`).join("");
-  const groupOptions = `<option value="">All functional groups / families</option>` + CHEMISTRY.groups.map(g => `<option value="${g.id}">${esc(g.label)}</option>`).join("");
+  const groupOptions = `<option value="">All functional groups / families</option>` + CHEMISTRY.groups.map(g => `<option value="${esc(g.id)}">${esc(g.label)}</option>`).join("");
   document.getElementById("study-group-filter").innerHTML = groupOptions;
   document.getElementById("compound-beyond").innerHTML = beyondExplainer();
   bindChemistryLinks(document.getElementById("compound-beyond"));
@@ -859,11 +936,7 @@ function renderStudies() {
     `<option value="">All oils</option>` + oilsByName.map(o => `<option value="${o.id}">${esc(o.name)}</option>`).join("");
   document.getElementById("study-compound-filter").innerHTML =
     `<option value="">All compounds</option>` + D.compounds.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join("");
-  const researchOptions = researchDomains.map(d => `<option value="${d.type}">${esc(d.label)}</option>`).join("") +
-    `<option value="botanical" hidden>${esc(domainByType.botanical.label)}</option>`;
-  for (const id of ["study-domain-filter", "oil-domain-filter", "matrix-domain-filter"]) {
-    document.getElementById(id).innerHTML = `<option value="">All research topics</option>` + researchOptions;
-  }
+  topicFilterIds.forEach(id => { document.getElementById(id).innerHTML = topicOptions(); });
   const types = [...new Set(D.studies.map(s => s.studyType))].sort();
   document.getElementById("study-type-filter").innerHTML =
     `<option value="">All study types</option>` + types.map(t => `<option value="${t}">${esc(prettyStudyType(t))}</option>`).join("");
@@ -893,13 +966,13 @@ function sourceLinks(ids = []) {
   return sources.length ? `<ul class="chem-sources">${sources.map(s => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a> <span>${esc(s.type || "Composition / taxonomy source")}${s.evidenceLevel ? " · " + esc(s.evidenceLevel) : ""}</span></li>`).join("")}</ul>` : "";
 }
 function groupLinks(compound) {
-  return CHEMISTRY.tags(compound).map(id => `<button class="chip" data-chem-group="${id}">${esc(CHEMISTRY.groups.find(g => g.id === id)?.label || id)}</button>`).join("");
+  return CHEMISTRY.tags(compound).map(id => `<button class="chip" data-chem-group="${esc(id)}">${esc(CHEMISTRY.groups.find(g => g.id === id)?.label || id)}</button>`).join("");
 }
 function beyondExplainer() {
   return `<details class="beyond-terpenes"><summary>Beyond Terpenes: what else shapes plant chemistry?</summary>
     <p>A plant's scent is more than its terpenes. Tiny amounts of other volatile molecules can shape what we smell. Plants also contain nonvolatile compounds that belong to a different part of their chemistry.</p>
-    <div class="chem-group-grid">${CHEMISTRY.groups.map(g => `<section><h4>${esc(g.label)}</h4><p>${esc(g.description)}</p><details><summary>Examples and chemistry</summary><p>${esc(g.details)}</p><div class="chips">${g.compoundIds.map(id => `<button class="chip" data-goto-compound="${id}">${esc(compoundById[id].name)}</button>`).join("")}<button class="chip" data-chem-group="${g.id}">Browse ${esc(g.label.toLowerCase())}</button></div>${sourceLinks(g.sourceIds)}</details></section>`).join("")}</div>
-    <details><summary>How to read the evidence</summary><p>Functional groups overlap with primary chemical families. An aldehyde can also be a monoterpenoid. These groups are not additive slices of an oil.</p><p>Routine volatile-oil GC-MS may miss trace sulfur odorants. Sulfur-sensitive detection, GC×GC and sensory evaluation can provide different information. Typically nonvolatile flavonoids are commonly studied with LC/HPLC. Cold-pressed citrus oils can retain a nonvolatile fraction; it is shown separately from volatile fingerprints.</p><p>Published plant, oil and extract research is not testing of the finished Sunny's Shield formula. The records here are a curated selection, not exhaustive coverage.</p>${sourceLinks(['oswald-2021','oswald-2023','paryani-2024','bautista-2021'])}</details>
+    <div class="chem-group-grid">${CHEMISTRY.groups.map(g => `<section><h4>${esc(g.label)}</h4><p>${esc(g.description)}</p><details><summary>Examples and chemistry</summary><p>${esc(g.details)}</p><div class="chips">${g.compoundIds.map(id => `<button class="chip" data-goto-compound="${id}">${esc(compoundById[id].name)}</button>`).join("")}<button class="chip" data-chem-group="${esc(g.id)}">Browse ${esc(g.label.toLowerCase())}</button></div>${sourceLinks(g.sourceIds)}</details></section>`).join("")}</div>
+    <details><summary>How to read the evidence</summary><p>Functional groups overlap with primary chemical families. An aldehyde can also be a monoterpenoid. These groups are not additive slices of an oil.</p><p>Routine volatile-oil GC-MS may miss trace sulfur odorants. Sulfur-sensitive detection, GC×GC and sensory evaluation can provide different information. Typically nonvolatile flavonoids are commonly studied with LC/HPLC. Cold-pressed citrus oils can retain a nonvolatile fraction; it is shown separately from volatile fingerprints.</p><p>Published plant, oil and extract research is not testing of the finished Sunny's Shield formula. The records here are a curated selection, not exhaustive coverage.</p>${sourceLinks(D.editorialReferences?.chemistryExplainerSourceIds || [])}</details>
   </details>`;
 }
 function evidenceStatus(e) {
@@ -923,7 +996,7 @@ function oilChemistry(oil) {
   return `<details class="oil-chemistry" aria-label="Additional chemistry evidence for ${esc(oil.name)}"><summary>Extra compounds in ${esc(oil.name)} <span>${documented.length ? documented.length + " groups with published evidence" : "Evidence not yet curated"}</span></summary>
     <p class="hint">Literature findings for the named material, not a test of the finished formula.</p>${documented.map(g => {
       const entries = CHEMISTRY.evidenceFor(oil, g.id).filter(positive);
-      return `<details class="chem-evidence"><summary>${esc(g.label)} <span>${[...new Set(entries.map(e => e.material))].map(esc).join("; ")}</span></summary>${entries.map(e => `<article><p class="chem-status">${evidenceStatus(e)}</p>${evidenceBody(e)}</article>`).join("")}<button class="chip" data-chem-group="${g.id}">Browse ${esc(g.label.toLowerCase())}</button></details>`;
+      return `<details class="chem-evidence"><summary>${esc(g.label)} <span>${[...new Set(entries.map(e => e.material))].map(esc).join("; ")}</span></summary>${entries.map(e => `<article><p class="chem-status">${evidenceStatus(e)}</p>${evidenceBody(e)}</article>`).join("")}<button class="chip" data-chem-group="${esc(g.id)}">Browse ${esc(g.label.toLowerCase())}</button></details>`;
     }).join("")}
     ${gaps.length ? `<p class="hint">Evidence not yet found: ${gaps.map(g => esc(g.label.toLowerCase())).join(", ")}. This is a gap in this collection, not proof of absence.</p>` : ""}
     ${reviewedGaps.length ? `<details class="chem-source-details"><summary>Sources checked for remaining gaps</summary>${reviewedGaps.map(evidenceBody).join("")}</details>` : ""}

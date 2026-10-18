@@ -2,12 +2,12 @@
 (() => {
   'use strict';
   const E = window.BLEND_ENGINE, data = TERPENE_DATA, config = data.blendBuilder;
+  const research = window.RESEARCH?.create(data);
   const root = document.getElementById('blend-builder');
-  if (!root || !E || !config) return;
+  if (!root || !E || !config || !research) return;
   const oils = data.oils.filter(o => o.blend?.enabled);
   const byId = Object.fromEntries(oils.map(o => [o.id, o]));
   const compounds = Object.fromEntries(data.compounds.map(c => [c.id, c]));
-  const qualities = config.qualities;
   const STORAGE = 'terpene-lab:blend:v1';
   const priceLabel = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(config.product.price);
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -23,10 +23,10 @@
       const d = local.draft;
       if (Object.keys(d).length === 7 && ['v','catalogVersion','name','path','qualityIds','petContext','oils'].every(k => Object.hasOwn(d,k)) && d.v === 1 && d.catalogVersion === config.catalogVersion && ['qualities','oils'].includes(d.path) &&
           typeof d.name === 'string' && Array.from(d.name).length <= 60 && typeof d.petContext === 'boolean' &&
-          Array.isArray(d.qualityIds) && new Set(d.qualityIds).size === d.qualityIds.length && d.qualityIds.every(id => qualities.some(q => q.id === id)) &&
+          Array.isArray(d.qualityIds) && new Set(d.qualityIds).size === d.qualityIds.length && d.qualityIds.every(id => E.resolveQualityId(id,data)) &&
           Array.isArray(d.oils) && d.oils.length <= 5 && new Set(d.oils.map(o => o.id)).size === d.oils.length &&
           d.oils.every(o => o && Object.keys(o).length === 2 && typeof o.id === 'string' && Object.hasOwn(byId,o.id) && Number.isFinite(o.percent) && o.percent >= 0 && o.percent <= 100)) {
-        recipe = {...initial(),...d,qualityIds:d.path==='oils' ? [] : d.qualityIds}; chosenPath = true;
+        recipe = {...initial(),...d,qualityIds:d.path==='oils' ? [] : [...new Set(d.qualityIds.map(id=>E.resolveQualityId(id,data)))]}; chosenPath = true;
       }
     }
   } catch { storageError = true; }
@@ -49,7 +49,18 @@
     const el = document.getElementById('blend-status');
     el.textContent = message; el.classList.toggle('is-error',error);
   }
-  function labels(oil) { return [...new Set(oil.blend.qualityMappings.filter(m => m.supportsSuggestion !== false).map(m => qualities.find(q => q.id === m.qualityId)?.label).filter(Boolean))]; }
+  function labels(oil) {
+    const roots = research.roots();
+    const rows = research.assertions(oil.id).filter(row=>row.researchMatch===true);
+    return roots.filter(topic=>rows.some(row=>research.descendants(topic.id).includes(row.useNodeId))).map(topic=>research.label(topic.id));
+  }
+  function activeTopics() { return recipe.path==='qualities' ? recipe.qualityIds : []; }
+  function studyHref(oilId) {
+    const url=new URL(location.pathname,location.origin);url.searchParams.set('tab','studies');url.searchParams.set('oil',oilId);
+    if(activeTopics().length===1)url.searchParams.set('domain',activeTopics()[0]);
+    if(new URLSearchParams(location.search).get('embed')==='1')url.searchParams.set('embed','1');
+    return url.href;
+  }
   function total() { return Math.round(recipe.oils.reduce((sum,o) => sum + o.percent,0)*100)/100; }
   function sourceLink(source) {
     if (typeof source === 'string') source = data.sources.find(s => s.id === source) || source;
@@ -60,13 +71,13 @@
   root.innerHTML = `
     <div class="blend-hero">
       <div><p class="blend-eyebrow">THE FORMULA IS YOURS</p><h2>Create a custom blend.</h2>
-        <p class="blend-intro">Start with a quality or an essential oil. Explore the chemistry, shape the aroma, and see the evidence and precautions together.</p></div>
+        <p class="blend-intro">Start with a research topic or an essential oil. Explore the chemistry, shape the aroma, and see the evidence and precautions together.</p></div>
       <div class="blend-product"><span class="blend-product-size">SUNNY'S SHIELD / 8 OZ</span><strong>${esc(priceLabel)}<span> per custom blend</span></strong><p>Standard bottle, base and label.</p><span class="blend-pill">Manual review before mixing</span></div>
     </div>
     <p id="blend-link-error" class="blend-message is-error" role="alert" ${restoreError ? '' : 'hidden'}>${esc(restoreError)}</p>
     <div class="blend-step-title"><span>01</span><h3>Choose your starting point</h3></div>
     <div class="blend-paths" role="group" aria-label="Choose a starting point">
-      <button type="button" data-blend-path="qualities"><span class="blend-path-kicker">QUALITIES FIRST</span><strong>Find your direction</strong><span>Explore oils linked to purported calm, focus, sleep or uplifting qualities.</span><span class="blend-path-arrow" aria-hidden="true">↗</span></button>
+      <button type="button" data-blend-path="qualities"><span class="blend-path-kicker">TOPICS FIRST</span><strong>Find your direction</strong><span>Explore the same research topics used across the Lab, from aroma and skin to microbes and cleaning.</span><span class="blend-path-arrow" aria-hidden="true">↗</span></button>
       <button type="button" data-blend-path="oils"><span class="blend-path-kicker">OILS FIRST</span><strong>Follow your curiosity</strong><span>Pick familiar oils, then discover their aromas, chemistry and research.</span><span class="blend-path-arrow" aria-hidden="true">↗</span></button>
     </div>
     <div id="blend-workspace" hidden>
@@ -74,11 +85,11 @@
       <div class="blend-work-grid">
         <section class="blend-catalog" aria-labelledby="blend-catalog-title">
           <h4 id="blend-catalog-title">Explore the oils</h4>
-          <div id="blend-quality-picker"><p class="blend-small">Choose purported qualities to see relevant research matches.</p><div id="blend-qualities" class="blend-quality-buttons" role="group" aria-label="Purported qualities"></div></div>
-          <label class="blend-search-label" for="blend-search">Search the starter collection</label>
+          <div id="blend-quality-picker"><p class="blend-small">Choose research topics. Counts include related materials; each paper explains what was actually tested.</p><div id="blend-qualities" class="blend-quality-buttons" role="group" aria-label="Research topics"></div></div>
+          <label class="blend-search-label" for="blend-search">Search all oils in the Lab</label>
           <input id="blend-search" type="search" placeholder="Oil name or aroma..." autocomplete="off">
           <p id="blend-catalog-count" class="blend-small"></p><div id="blend-oil-catalog" class="blend-oil-catalog"></div>
-          <p class="blend-small blend-catalog-footnote">A starter collection for exploration. Stock and suitability for the finished spray still need review.</p>
+          <p class="blend-small blend-catalog-footnote">The full Lab catalog is available for exploration. Stock and suitability for the finished spray still need review.</p>
         </section>
         <section class="blend-mixer" aria-labelledby="blend-mixer-title">
           <div class="blend-mixer-top"><h4 id="blend-mixer-title">Your formula sketch</h4><span id="blend-selected-count" class="blend-small"></span></div>
@@ -103,16 +114,29 @@
     root.querySelectorAll('[data-blend-path]').forEach(b => b.setAttribute('aria-pressed',String(chosenPath && b.dataset.blendPath === recipe.path)));
     document.getElementById('blend-workspace').hidden = !chosenPath;
     document.getElementById('blend-quality-picker').hidden = recipe.path !== 'qualities';
-    document.getElementById('blend-qualities').innerHTML = qualities.map(q => `<button type="button" class="blend-quality" data-quality="${esc(q.id)}" aria-pressed="${recipe.qualityIds.includes(q.id)}" title="${esc(q.description)}">${esc(q.label)}</button>`).join('');
+    const previouslyOpen=new Set([...root.querySelectorAll('[data-topic-branch][open]')].map(el=>el.dataset.topicBranch));
+    function topicNode(topic) {
+      const children=research.children(topic.id), label=research.label(topic.id);
+      const count=research.countOils(topic.id,{eligibleOnly:false});
+      const button=`<button type="button" class="blend-quality" data-quality="${esc(topic.id)}" aria-pressed="${recipe.qualityIds.includes(topic.id)}" title="${esc(research.breadcrumb(topic.id))}">${children.length?'All '+esc(label):esc(label)} <small>${count}</small></button>`;
+      if(!children.length)return button;
+      const selected=recipe.qualityIds.filter(id=>research.descendants(topic.id).includes(id)).length;
+      return `<details class="blend-topic-branch" data-topic-branch="${esc(topic.id)}" ${previouslyOpen.has(topic.id)||selected?'open':''}><summary>${esc(label)} <span>${count} oils${selected?' · '+selected+' selected':''}</span></summary><div class="blend-topic-children">${button}${children.map(topicNode).join('')}</div></details>`;
+    }
+    document.getElementById('blend-qualities').innerHTML=research.roots().map(topicNode).join('');
   }
   function renderCatalog() {
-    const matchQuality = oil => !recipe.qualityIds.length || recipe.path !== 'qualities' || oil.blend.qualityMappings.some(m => m.supportsSuggestion !== false && recipe.qualityIds.includes(m.qualityId));
-    const matching = oils.filter(o => matchQuality(o) && `${o.name} ${o.latinName} ${o.aroma.join(' ')}`.toLowerCase().includes(search.toLowerCase())).sort((a,b)=>a.name.localeCompare(b.name));
-    document.getElementById('blend-catalog-count').textContent = `${matching.length} oils${recipe.path === 'qualities' && recipe.qualityIds.length ? ' with matching research topics' : ' in the starter collection'}. Research matches are not effectiveness rankings.`;
-    document.getElementById('blend-oil-catalog').innerHTML = matching.map(o => {
-      const selected = recipe.oils.some(s=>s.id===o.id), qualityLabels = labels(o);
-      return `<article class="blend-oil-card ${selected ? 'is-selected' : ''}"><div class="blend-oil-heading"><div><h5>${esc(o.name)}</h5><p class="blend-latin">${esc(o.latinName)}</p></div><span class="blend-oil-swatch" style="--oil-color:${/^#[0-9a-f]{3,8}$/i.test(o.color) ? o.color : '#72b89a'}" aria-hidden="true"></span></div><p class="blend-aroma">${esc(o.aroma.join(' · '))}</p><p class="blend-small">${qualityLabels.length ? 'Purported: '+esc(qualityLabels.join(', ')) : 'Limited research: no verified quality mapping yet.'}</p><button type="button" data-add-oil="${esc(o.id)}" ${selected || recipe.oils.length>=5 ? 'disabled' : ''}>${selected ? 'Added to your blend' : recipe.oils.length>=5 ? '5-oil limit reached' : '+ Add oil'}</button></article>`;
-    }).join('') || '<p class="blend-empty">No oils match this search. Try another aroma or quality.</p>';
+    const topics=activeTopics(), searching=search.toLowerCase();
+    const found=oils.filter(o=>`${o.name} ${o.latinName} ${o.aroma.join(' ')}`.toLowerCase().includes(searching)).sort((a,b)=>a.name.localeCompare(b.name));
+    const direct=topics.length ? found.filter(o=>research.studiesForOil(o.id,topics,{eligibleOnly:true}).length) : found;
+    const directIds=new Set(direct.map(o=>o.id));
+    const related=topics.length ? found.filter(o=>!directIds.has(o.id)&&research.studiesForOil(o.id,topics).length) : [];
+    document.getElementById('blend-catalog-count').textContent=topics.length ? `${direct.length} oils with reviewed research matches; ${related.length} with other linked research. These are research links, not effectiveness rankings.` : `${found.length} oils in the Lab catalog. Research links are not effectiveness rankings.`;
+    function oilCard(o, contextual=false) {
+      const selected=recipe.oils.some(s=>s.id===o.id), topicLabels=labels(o);
+      return `<article class="blend-oil-card ${selected?'is-selected':''}"><div class="blend-oil-heading"><div><h5>${esc(o.name)}</h5><p class="blend-latin">${esc(o.latinName)}</p></div><span class="blend-oil-swatch" style="--oil-color:${/^#[0-9a-f]{3,8}$/i.test(o.color)?o.color:'#72b89a'}" aria-hidden="true"></span></div><p class="blend-aroma">${esc(o.aroma.join(' · '))}</p><p class="blend-small">${contextual?'Other linked research. Open the evidence to check its preparation, outcome and relevance.':topicLabels.length?'Research: '+esc(topicLabels.join(', ')):'No reviewed whole-oil topic match yet. Related literature remains available.'}</p><button type="button" data-add-oil="${esc(o.id)}" ${selected||recipe.oils.length>=5?'disabled':''}>${selected?'Added to your blend':recipe.oils.length>=5?'5-oil limit reached':'+ Add oil'}</button></article>`;
+    }
+    document.getElementById('blend-oil-catalog').innerHTML=direct.map(o=>oilCard(o)).join('')+(related.length?`<details class="blend-related-catalog"><summary>Other linked research · ${related.length} oils</summary><p class="blend-small">These papers include contextual preparations, uncertain associations, or findings not counted as reviewed topic matches. Read each material, model and outcome; a missing match is not evidence of no effect.</p><div class="blend-oil-catalog">${related.map(o=>oilCard(o,true)).join('')}</div></details>`:'')||'<p class="blend-empty">No oils match this search. Try another aroma or research topic.</p>';
   }
   function renderSelected() {
     document.getElementById('blend-selected-count').textContent = recipe.oils.length + ' / 5 oils';
@@ -147,8 +171,13 @@
   function oilProfile(entry) {
     const oil=byId[entry.id], b=oil.blend;
     const constituents=oil.constituents.map(c=>`<li><span>${esc(compounds[c.compoundId]?.name || c.compoundId)}</span><span>${CHEMISTRY.quantified(c) ? `${c.range.min}-${c.range.max}% in cited sample` : 'No verified range yet'}</span></li>`).join('');
-    const mappings=b.qualityMappings;
-    return `<article class="blend-profile"><header><div><p class="blend-eyebrow">ESSENTIAL OIL / ${entry.percent}% OF BLEND</p><h4>${esc(oil.name)}</h4><p class="blend-latin">${esc(oil.latinName)}</p></div><span class="blend-pill">${esc(oil.aroma.join(' · '))}</span></header><div class="blend-profile-columns"><div><h5>Purported qualities & research</h5>${mappings.length ? mappings.map(m=>`<div class="blend-research"><p><strong>${esc(qualities.find(q=>q.id===m.qualityId)?.label || m.qualityId)}</strong><span class="blend-evidence-tier">${esc(m.evidenceTier)}</span></p><p>${esc(m.summary)}</p>${m.limitations ? `<p class="blend-small">Limitations: ${esc(m.limitations)}</p>` : ''}${safeUrl(m.url) ? `<a href="${esc(safeUrl(m.url))}" target="_blank" rel="noopener noreferrer">Read study${m.pmid ? ' · PMID '+esc(m.pmid) : ''}</a>` : '<p class="blend-small">No verified source link yet.</p>'}</div>`).join('') : '<p>Limited research. No verified data yet for these purported qualities.</p>'}</div><div class="blend-profile-cautions"><h5>Cautions & evidence gaps</h5><p>${b.dermalMaxPercent===null ? 'No verified leave-on dermal maximum yet. Suitability for the finished spray needs manual review.' : `Documented maximum in the finished product: ${esc(b.dermalMaxPercent)}%.`}</p>${b.dermalMaxSource ? `<p>Limit source: ${sourceLink(b.dermalMaxSource)}</p>` : ''}<p>${b.petSafer===true && b.petSource ? 'Pet context still requires species and exposure review.' : 'Pet suitability: no verified pet-safer approval.'}</p><p>${esc(b.sensitizationNotes || 'Sensitization data: no verified data yet.')}</p><p>${b.phototoxic===null ? 'Phototoxicity: no verified data yet for the supplied preparation.' : b.phototoxic ? 'Phototoxicity flagged. Preparation and exposure limits require review.' : 'No phototoxicity flag recorded; this is not a safety guarantee.'}</p><p>Interaction review applies to the whole blend. Missing information never means no risk.</p></div></div><div class="blend-constituents"><h5>Cataloged major constituents</h5><ul>${constituents || '<li>No verified data yet.</li>'}</ul><p class="blend-small">Whole essential oils contain more than terpenes. These are literature records, not a batch analysis or a complete chemical composition.</p></div></article>`;
+    const topics=activeTopics();
+    const linked=research.studiesForOil(oil.id,topics);
+    const audited=new Set(research.studiesForOil(oil.id,topics,{eligibleOnly:true}).map(study=>study.id));
+    linked.sort((a,b)=>Number(audited.has(b.id))-Number(audited.has(a.id)));
+    const paper=study=>studyCard(study,oil.id,topics);
+    const papers=linked.length ? linked.slice(0,2).map(paper).join('')+(linked.length>2?`<details class="blend-more-research"><summary>Read ${linked.length-2} more linked papers</summary>${linked.slice(2).map(paper).join('')}</details>`:'') : '<p>No study is linked to this oil for the selected research topics. This is a gap, not evidence of no effect.</p>';
+    return `<article class="blend-profile"><header><div><p class="blend-eyebrow">ESSENTIAL OIL / ${entry.percent}% OF BLEND</p><h4>${esc(oil.name)}</h4><p class="blend-latin">${esc(oil.latinName)}</p></div><span class="blend-pill">${esc(oil.aroma.join(' · '))}</span></header><div class="blend-profile-columns"><div><h5>Research from the Lab library</h5><p class="blend-small">${linked.length} linked papers · ${audited.size} with reviewed oil-specific topic matches. Related preparations and uncertain associations are identified below.</p>${papers}<a class="blend-library-link" href="${esc(studyHref(oil.id))}">Explore ${esc(oil.name)} in the study library</a></div><div class="blend-profile-cautions"><h5>Precautions & evidence gaps</h5><p>${b.dermalMaxPercent===null?'No verified leave-on dermal maximum yet. Suitability for the finished spray needs manual review.':`Documented maximum in the finished product: ${esc(b.dermalMaxPercent)}%.`}</p>${b.dermalMaxSource?`<p>Limit source: ${sourceLink(b.dermalMaxSource)}</p>`:''}<p>${b.petSafer===true&&b.petSource?'Pet context still requires species and exposure review.':'Pet suitability: no verified pet-safer approval.'}</p><p>${esc(b.sensitizationNotes||'Sensitization data: no verified data yet.')}</p><p>${b.phototoxic===null?'Phototoxicity: no verified data yet for the supplied preparation.':b.phototoxic?'Phototoxicity flagged. Preparation and exposure limits require review.':'No phototoxicity flag recorded; this is not a safety guarantee.'}</p><p>Interaction review applies to the whole blend. Missing information never means no risk.</p></div></div><div class="blend-constituents"><h5>Cataloged major constituents</h5><ul>${constituents||'<li>No verified data yet.</li>'}</ul><p class="blend-small">Whole essential oils contain more than terpenes. These are literature records, not a batch analysis or a complete chemical composition.</p></div></article>`;
   }
   function renderResults() {
     const section=document.getElementById('blend-results');
@@ -164,7 +193,7 @@
     const mapped=[...new Set(recipe.oils.flatMap(o=>labels(byId[o.id])))];
     section.hidden=false;
     section.innerHTML=`<div class="blend-step-title"><span>03</span><h3 id="blend-results-title" tabindex="-1">${esc(recipe.name || 'Your custom blend')}</h3><span class="blend-step-note">RECIPE V1</span></div>
-      <div class="blend-results-lead"><section class="blend-result-summary"><p class="blend-eyebrow">YOUR BLEND AT A GLANCE</p><h4>${recipe.oils.map(o=>esc(byId[o.id].name)).join(' + ')}</h4><ul class="blend-recipe-list">${recipe.oils.map(o=>`<li><span>${esc(byId[o.id].name)}</span><strong>${o.percent}%</strong></li>`).join('')}</ul><p>Purported qualities: ${mapped.length ? esc(mapped.join(', ')) : 'no verified mappings yet'}.</p><p class="blend-small">These proportions describe only the oil mixture. ${Number.isFinite(config.product.totalOilLoadPercent) ? 'Configured final spray oil concentration: '+esc(config.product.totalOilLoadPercent)+'% (subject to manual formulation review).' : 'Final spray concentration has not been set.'}</p></section>
+      <div class="blend-results-lead"><section class="blend-result-summary"><p class="blend-eyebrow">YOUR BLEND AT A GLANCE</p><h4>${recipe.oils.map(o=>esc(byId[o.id].name)).join(' + ')}</h4><ul class="blend-recipe-list">${recipe.oils.map(o=>`<li><span>${esc(byId[o.id].name)}</span><strong>${o.percent}%</strong></li>`).join('')}</ul><p>Reviewed research topics: ${mapped.length ? esc(mapped.join(', ')) : 'no oil-specific mappings verified yet'}.</p><p class="blend-small">These proportions describe only the oil mixture. ${Number.isFinite(config.product.totalOilLoadPercent) ? 'Configured final spray oil concentration: '+esc(config.product.totalOilLoadPercent)+'% (subject to manual formulation review).' : 'Final spray concentration has not been set.'}</p></section>
       <section class="blend-result-cautions" aria-labelledby="blend-cautions-title"><p class="blend-eyebrow">CAUTIONS COME WITH THE RESEARCH</p><h4 id="blend-cautions-title">Review before mixing</h4><p>Ingredient research does not validate this blend or the finished spray. No medical or therapeutic benefit is claimed.</p>${recipe.petContext ? '<p class="blend-inline-warning">Pet context is on. Do not assume this blend is safe around pets.</p>' : ''}<ul>${warningList([...priorityBlockers,...combinedWarnings(safety.warnings)])}</ul><p>Every custom recipe is reviewed before mixing. Final concentration, ingredient suitability and stock are confirmed during that review.</p></section></div>
       <div class="blend-recipe-actions"><button type="button" id="blend-save" class="blend-primary">Save recipe</button><button type="button" id="blend-share" class="blend-secondary">Copy share link</button><span id="blend-action-status" role="status" aria-live="polite"></span></div>
       <div id="blend-share-fallback" hidden><label for="blend-share-url">Copy this recipe link</label><input id="blend-share-url" readonly></div>
@@ -172,6 +201,7 @@
       <div class="blend-profile-list">${recipe.oils.map(oilProfile).join('')}</div>
       <section class="blend-checkout" aria-labelledby="blend-checkout-title"><div><p class="blend-eyebrow">CUSTOM BLEND / SUNNY'S SHIELD</p><h4 id="blend-checkout-title">Your recipe. Our standard 8 oz spray.</h4><p>${esc(priceLabel)} per bottle · Standard base, bottle and label.</p><p class="blend-small">Your recipe name, oil proportions and pet context travel with the order for manual review before mixing. Shopify handles payment and shipping.</p><p class="blend-small">Cosmetic use only. No medical claims.</p></div><div>${cart ? `<a id="blend-checkout" class="blend-primary" href="${esc(cart.url)}" target="_top" rel="noreferrer" aria-describedby="blend-checkout-status">Continue to Shopify · ${esc(priceLabel)}</a><p id="blend-checkout-status" class="blend-small">Opens Shopify checkout for this recipe. Check the cart contents before paying.</p>` : `<p id="blend-checkout-status" class="blend-order-pending" role="status">${esc(orderMessage)}</p>`}</div></section>
       ${safety.blockers.length ? `<section class="blend-review-requirements"><h4>What still needs review</h4><ul>${warningList(safety.blockers)}</ul></section>` : ''}`;
+    bindStudyLinks(section);
   }
   function renderSaved() {
     document.getElementById('blend-saved-list').innerHTML=saved.length ? saved.map((encoded,index)=>{
@@ -204,7 +234,7 @@
       if (recipe.path==='oils') recipe.qualityIds=[];
       chosenPath=true;renderPaths();renderCatalog();persist();renderResults();
     }
-    if (button.dataset.quality) { const id=button.dataset.quality; recipe.qualityIds=recipe.qualityIds.includes(id) ? recipe.qualityIds.filter(q=>q!==id) : [...recipe.qualityIds,id];renderPaths();renderCatalog();persist();renderResults();root.querySelector(`[data-quality="${id}"]`)?.focus(); }
+    if (button.dataset.quality) { const id=button.dataset.quality; if(!recipe.qualityIds.includes(id)&&recipe.qualityIds.length>=16){announce('Choose up to 16 research topics at a time.',true);return;} recipe.qualityIds=recipe.qualityIds.includes(id) ? recipe.qualityIds.filter(q=>q!==id) : [...recipe.qualityIds,id];renderPaths();renderCatalog();persist();renderResults();root.querySelector(`[data-quality="${id}"]`)?.focus(); }
     if (button.dataset.addOil) {
       if (recipe.oils.length>=5 || recipe.oils.some(o=>o.id===button.dataset.addOil)) return;
       if (recipe.oils.some(o=>o.percent<=0)) { announce('Give each existing oil a positive portion, or remove it, before adding another oil.',true); return; }
@@ -223,7 +253,7 @@
       document.getElementById('blend-results').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
       announce('Research and cautions are ready. This recipe still needs formulation review.');persist();
     }
-    if (button.id==='blend-save') { try {const encoded=E.encodeRecipe(recipe,data);saved=[encoded,...saved.filter(s=>s!==encoded)].slice(0,12);persist();renderSaved();document.getElementById('blend-action-status').textContent=storageError?'Could not save to this browser. Copy a share link instead.':'Recipe saved on this device.';}catch(error){document.getElementById('blend-action-status').textContent=error.message;} }
+    if (button.id==='blend-save') { try {const encoded=E.encodeRecipe(recipe,data);saved=[encoded,...new Set(saved.map(code=>{try{return E.encodeRecipe(E.decodeRecipe(code,data),data);}catch{return code;}}).filter(code=>code!==encoded))].slice(0,12);persist();renderSaved();document.getElementById('blend-action-status').textContent=storageError?'Could not save to this browser. Copy a share link instead.':'Recipe saved on this device.';}catch(error){document.getElementById('blend-action-status').textContent=error.message;} }
     if (button.id==='blend-share') {
       try {const url=new URL(location.pathname,location.origin);url.searchParams.set('tab','blend');url.searchParams.set('recipe',E.encodeRecipe(recipe,data));
         try {await navigator.clipboard.writeText(url.href);document.getElementById('blend-action-status').textContent='Recipe link copied.';}

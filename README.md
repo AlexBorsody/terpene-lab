@@ -4,12 +4,12 @@ Interactive essential oil evidence explorer. Plant to molecule to paper.
 
 ## Views
 
-- **Blend Builder**: qualities-first or oils-first custom oil recipes, written research and cautions, saved drafts and versioned share links. $40 / 8 oz custom product, manually reviewed before mixing; a Shopify cart permalink carries the recipe once the real product variant is configured. See [integration and launch requirements](blend-builder-integration.md).
+- **Blend Builder**: research-topics-first or oils-first custom oil recipes across the full catalog, written evidence and precautions, saved drafts and versioned share links. $40 / 8 oz custom product, manually reviewed before mixing; a Shopify cart permalink carries the recipe once the real product variant is configured. See [integration and launch requirements](blend-builder-integration.md).
 
 - **Oils**: oil explorer with composition fingerprint (range bars), research coverage, evidence summary, studies.
 - **Compounds**: terpene and compound drill-downs (chemically correct classes, not just "terpenes"), found-in charts, studies.
 - **Matrix**: oils x research domains heatmap. Color intensity is study count; the letter marks the strongest evidence level (C clinical, P preclinical, L laboratory, R review). Click a cell to see the papers.
-- **Domains**: start from a research question (Health, Cleaning, Microbial, Pest) and drill to subcategories, then oils, compounds, and papers.
+- **Domains**: start from any canonical research topic and follow its nested topics, oils, compounds, and papers. Options and counts come from the same hierarchical terms used throughout the Lab.
 - **Network**: force-directed oil-compound graph. Click any node to open it.
 - **Studies**: filterable research library (oil, compound, domain, evidence level, study type).
 
@@ -19,24 +19,29 @@ Interactive essential oil evidence explorer. Plant to molecule to paper.
 |---|---|
 | `index.html` | App shell |
 | `styles.css` | Laboratory instrument theme |
-| `app.js` | Rendering, charts (ECharts via CDN), interactions |
+| `app.js` | Rendering, self-hosted ECharts, interactions |
 | `chemistry.js` | Shared classification, search and quantitative-provenance guards |
-| `data.js` | **The dataset.** Full schema documented at the top of the file. |
+| `master-data.json` | **The single canonical dataset.** Oil-first records, shared registries, hierarchical uses, scoped evidence and provenance. |
+| `data.js` | Generated browser compatibility projection; do not edit by hand. |
+| `research.js` | Shared arbitrary-depth topic resolution, aliases, scoped evidence joins and deduplicated counts. |
+| `scripts/build-data.py` | Validates the master and deterministically generates `data.js`. |
+| `master-data-schema.md` | Canonical schema, migration rules and authoring guide. |
 | `spec.md` | Product and visualization spec (source of truth). |
 
 ## Data model
 
-`data.js` holds `TERPENE_DATA`: `{ version, categories, oils, compounds, studies, sources }`.
+Edit `master-data.json`, then run `python3 scripts/build-data.py`. Its oil-rooted tree references shared compounds, studies, sources and hierarchical use terms. Parent/child term IDs and many-to-many evidence references allow reverse views without duplicated papers. See [the schema and authoring guide](master-data-schema.md).
 
-- Composition uses source-verified, sample-specific **ranges** (`{min, max}`) where available. Unknown or unaudited quantities say **Not quantified** and produce no numerical bars. Existing unsourced legacy ranges remain in data for audit but are not displayed.
-- Compounds carry chemically correct classes (Monoterpene, Sesquiterpene, Phenylpropanoid, ...). The UI says "terpenes and compounds".
-- Every study has `studyType`, `context` (human/animal/in-vitro/...), and `evidenceLevel` (clinical/preclinical/laboratory/review).
-- Studies are tagged with use categories: `{type, subcategory, topic}` where type is health, cleaning, microbial, or pest.
-- Oil category coverage is **derived from linked studies**, never stored on oils.
-- `sources` holds composition/taxonomy references separately from efficacy studies. Both are discoverable from oil and compound details.
-- `chemicalGroups` supplies the four Beyond Terpenes explainers. `functionalGroups` on compounds supports overlapping aldehyde, ester and thiol browsing while preserving `chemicalClass`. Flavonoids are a primary family, not a functional group.
-- `oils[].chemicalEvidence` records material-specific published evidence separately from `constituents`. Every oil displays all four groups, including explicit evidence gaps. Plant material, extracts, volatile oil and nonvolatile oil fractions are kept distinct.
-- The Compounds tab has one category filter for chemical families and overlapping functional groups, including a terpenes-and-terpenoids umbrella. The Studies library can combine primary class, functional group/family, oil, compound, topic/domain and evidence filters. Aroma studies have their own sensory domain; analytical results are not efficacy claims.
+- Stable IDs, aliases and legacy bindings preserve existing links and recipe v1. Renaming or reparenting a term does not change its ID.
+- Topics describe research endpoints. Material, model, route, species, outcome and verification depth are independent facets. A human-cell experiment is not clinical evidence.
+- Each oil/study/topic assertion is scoped independently. Opposite results for different oils, contextual extracts, compound-only research and unknown preparation remain distinguishable. Global study tags never automatically become oil-specific claims.
+- Builder research matches require explicit source-checked relevance. Other related material stays visible as contextual evidence. All 28 oils are explorable; stock and fulfillment suitability are not assumed.
+- New hierarchy branches and chemical categories are data changes. Shared resolvers derive filters, breadcrumbs, chips, counts and builder topics, including arbitrary depths and multi-tag records. Counts deduplicate papers.
+- Composition uses source-verified, sample-specific ranges where available. Unknown or unaudited quantities show **Not quantified** and produce no numerical bars. Historical quantities, uses, safety prose and old builder summaries remain preserved for audit, not promoted to verified evidence.
+- `chemicalTaxonomy` defines chemical-family and functional-group browsing separately from the use hierarchy. Material-specific chemical observations remain separate from volatile composition fingerprints and functional-use evidence.
+- Exact citation duplicates share study references while source-specific sample/method/limitations remain intact. No fuzzy-title merging is used.
+
+The migration preserves 28 oils, 34 compounds, all 153 original studies, 45 sources and all 214 original oil-study links. The scoped audit adds three papers and recovered associations. Complete mapping review does not mean every paper received a new primary-source check: 45 of the original 214 oil-study edges (39 papers) were primary-rechecked, the remainder were library-reviewed with that depth recorded. The three additions were primary-verified. A reversible correction ledger preserves the original snapshot and documents deliberate source-based changes.
 
 Research rules: real publication URLs only (PubMed/DOI/journal). Findings stay faithful to the paper. Record null studies. Never infer finished-product claims from ingredient studies.
 
@@ -69,7 +74,7 @@ the dedicated maskable icon keeps the entire mark inside the safe area. iOS uses
 a 180px Apple touch icon. Install with the browser's install action, the Lab's
 install button when supported, or Safari's Share > Add to Home Screen.
 
-After one successful online visit, the app shell, full local `data.js` research
+After one successful online visit, the app shell, canonical `master-data.json`, generated `data.js` research
 summaries and self-hosted ECharts 5.5.1 are available offline. External paper
 links and Wikimedia photos still require a connection. We do not cache publisher
 pages or return app HTML for failed assets. ECharts' license is in `vendor/`.
@@ -86,7 +91,13 @@ may reset. Only caches belonging to the Lab are cleaned up. In an iframe or
 **After changing any shipped app, data, icon or manifest file:**
 
 ```sh
+python3 scripts/build-data.py
+python3 scripts/build-data.py --check
 python3 scripts/build-pwa.py
+node tests/master-data.cjs
+node tests/research.cjs
+node tests/research-audit.cjs
+node tests/blend-engine.cjs
 node tests/chemistry.cjs
 node tests/research-labels-unit.cjs
 # With Playwright available, plus Chrome or CHROME_PATH:
@@ -94,9 +105,12 @@ node tests/pwa.cjs
 # Existing UI suites additionally need the local HTTP server:
 node tests/browser.cjs
 node tests/research-labels.cjs
+node tests/taxonomy-browser.cjs
+node tests/blend-browser.cjs
+node tests/blend-checkout.cjs
 ```
 
-Commit regenerated `index.html` and `sw.js` with the changed assets.
+Commit regenerated `data.js`, `index.html` and `sw.js` with the changed master/assets. CI rejects projection drift, dangling references, invalid hierarchy or an inconsistent offline release.
 The script stamps content-specific script/style URLs to avoid stale HTTP caches. CI checks the generated
 release and regression tests before merging. The PWA suite serves its own isolated
 copies at root and `/terpene-lab/`, simulates offline reopening, a corrupt partial
@@ -118,4 +132,4 @@ The per-oil collection is a curated literature review, not exhaustive coverage o
 
 Run the data regression checks with `node tests/chemistry.cjs`. For browser checks, start the local server above, make Playwright available, then run `node tests/browser.cjs`. Set `PLAYWRIGHT_MODULE` to an installed module path, `CHROME_PATH` to a Chrome executable and `TEST_URL` to another local port as needed. The browser suite covers 320, 390, 768 and 1440 pixel widths in standalone/embed modes, combined filters, keyboard navigation, deep links and missing quantities.
 
-Research-topic labels are a presentation layer over the original study categories. Composition analysis, flavonoid research and aroma research stay distinct across the oil cards, study filters and matrix. Run `node tests/research-labels-unit.cjs` for deterministic renderer, filter and alphabetical-selector checks. Run `node tests/research-labels.cjs` with the same browser environment variables for responsive layouts and browser interactions.
+Research topics and display labels are canonical hierarchical terms shared by every view. Composition analysis, flavonoid research and aroma research stay distinct across the oil cards, study filters and matrix. Run `node tests/research-labels-unit.cjs` for deterministic renderer, filter and alphabetical-selector checks. Run `node tests/research-labels.cjs` with the same browser environment variables for responsive layouts and browser interactions.

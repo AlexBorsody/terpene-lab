@@ -122,21 +122,34 @@
   }
 
   function catalogInfo(data) {
+    var topicRows = object(data) && object(data.taxonomy) ? data.taxonomy.nodes :
+      object(data) && object(data.blendBuilder) ? data.blendBuilder.qualities : null;
     if (!object(data) || !object(data.blendBuilder) || data.blendBuilder.version !== '1' ||
         !text(data.blendBuilder.catalogVersion) || !Array.isArray(data.oils) ||
-        !Array.isArray(data.blendBuilder.qualities) || !dense(data.oils) || !dense(data.blendBuilder.qualities)) return null;
+        !Array.isArray(topicRows) || !dense(data.oils) || !dense(topicRows)) return null;
     var oils = new Map();
     var qualities = new Set();
+    var qualityAliases = new Map();
     var invalid = false;
     data.oils.forEach(function (oil) {
       if (!object(oil) || typeof oil.id !== 'string' || !ID_PATTERN.test(oil.id) || oils.has(oil.id)) invalid = true;
       else oils.set(oil.id, oil);
     });
-    data.blendBuilder.qualities.forEach(function (quality) {
+    topicRows.forEach(function (quality) {
       if (!object(quality) || typeof quality.id !== 'string' || !ID_PATTERN.test(quality.id) || qualities.has(quality.id)) invalid = true;
-      else qualities.add(quality.id);
+      else { qualities.add(quality.id); qualityAliases.set(quality.id, quality.id); }
     });
-    return invalid ? null : {config: data.blendBuilder, oils: oils, qualities: qualities};
+    if (object(data.taxonomy) && object(data.taxonomy.aliases)) {
+      Object.keys(data.taxonomy.aliases).forEach(function (alias) {
+        var target = data.taxonomy.aliases[alias];
+        if (ID_PATTERN.test(alias) && qualities.has(target)) qualityAliases.set(alias, target);
+      });
+    }
+    return invalid ? null : {config: data.blendBuilder, oils: oils, qualities: qualities, qualityAliases: qualityAliases};
+  }
+  function resolveQualityId(id, data) {
+    var catalog = catalogInfo(data);
+    return catalog && typeof id === 'string' && ID_PATTERN.test(id) ? catalog.qualityAliases.get(id) || null : null;
   }
   function validateRecipe(recipe, data) {
     var errors = [];
@@ -163,8 +176,8 @@
     } else {
       var seen = new Set();
       recipe.qualityIds.forEach(function (id) {
-        if (typeof id !== 'string' || !ID_PATTERN.test(id) || !catalog || !catalog.qualities.has(id)) {
-          errors.push(issue('unknown_quality', 'A selected quality is not in the current catalog.'));
+        if (typeof id !== 'string' || !ID_PATTERN.test(id) || !catalog || !catalog.qualityAliases.has(id)) {
+          errors.push(issue('unknown_quality', 'A selected research topic is not in the current catalog.'));
         } else if (seen.has(id)) errors.push(issue('duplicate_quality', 'A quality can be selected only once.'));
         seen.add(id);
       });
@@ -186,7 +199,7 @@
     var canonical = {
       v: 1, catalogVersion: catalog.config.catalogVersion, name: recipe.name.trim(), path: recipe.path,
       // Normalize older oils-first drafts/links without retaining invisible qualities.
-      qualityIds: recipe.path === 'oils' ? [] : recipe.qualityIds.slice().sort(), petContext: recipe.petContext,
+      qualityIds: recipe.path === 'oils' ? [] : Array.from(new Set(recipe.qualityIds.map(function (id) { return catalog.qualityAliases.get(id); }))).sort(), petContext: recipe.petContext,
       oils: recipe.oils.map(function (entry) { return {id: entry.id, percent: basisPoints(entry.percent) / 100}; })
         .sort(function (a, b) { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0; })
     };
@@ -426,7 +439,7 @@
   return Object.freeze({
     normalizePercentages: normalizePercentages, validateRecipe: validateRecipe,
     encodeRecipe: encodeRecipe, decodeRecipe: decodeRecipe, evaluateSafety: evaluateSafety,
-    cartPermalink: cartPermalink, BlendValidationError: BlendValidationError,
+    cartPermalink: cartPermalink, resolveQualityId: resolveQualityId, BlendValidationError: BlendValidationError,
     limits: Object.freeze({maxOils: MAX_OILS, maxNameLength: MAX_NAME_LENGTH, maxEncodedLength: MAX_ENCODED_LENGTH})
   });
 });
