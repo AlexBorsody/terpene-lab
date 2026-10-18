@@ -1,4 +1,4 @@
-/* ALL numeric safety limits and checkout settings in fixture() are synthetic,
+/* ALL numeric safety limits and Shopify settings in fixture() are synthetic,
  * test-only values. They are not formulation recommendations or production data.
  */
 const assert = require('node:assert/strict');
@@ -14,11 +14,10 @@ function fixture() {
     blendBuilder: {
       version: '1', catalogVersion: '2026-10-18',
       qualities: [{id: 'calm', label: 'Calm'}, {id: 'focus', label: 'Focus'}],
-      product: {name: 'Custom Blend', price: 45, currency: 'USD', size: '8 oz',
+      product: {name: 'Custom Blend', price: 40, currency: 'USD', size: '8 oz',
         totalOilLoadPercent: 2, totalOilLoadSource: copy(source),
         totalOilMaxPercent: 3, totalOilMaxSource: copy(source),
-        shopifyVariantId: '123456789', checkoutEndpoint: '/apps/test-only-blend/checkout',
-        checkoutAllowedHosts: ['test-only.myshopify.com'], serverValidationVerified: true}
+        shopifyStoreUrl: 'https://test-only.myshopify.com', shopifyVariantId: '123456789', baseVersion: null}
     },
     oils: ['alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta'].map(id => ({
       id, name: 'TEST-ONLY ' + id,
@@ -39,15 +38,16 @@ function invalid(value, code, data = fixture()) {
   assert.equal(result.valid, false, code);
   assert.equal(result.recipe, null);
   assert.ok(codes(result.errors).includes(code), JSON.stringify(result));
-  assert.equal(engine.evaluateSafety(value, data).canPurchase, false);
+  assert.equal(engine.evaluateSafety(value, data).requiresReview, true);
+  assert.ok(codes(engine.evaluateSafety(value, data).blockers).includes(code));
   assert.throws(() => engine.encodeRecipe(value, data), engine.BlendValidationError);
-  assert.throws(() => engine.checkoutPayload(value, data), engine.BlendValidationError);
+  assert.throws(() => engine.cartPermalink(value, data), engine.BlendValidationError);
 }
 function blocked(data, code, value = recipe()) {
   const result = engine.evaluateSafety(value, data);
-  assert.equal(result.canPurchase, false, code);
+  assert.equal(result.requiresReview, true, code);
+  assert.equal(Object.hasOwn(result, 'canPurchase'), false);
   assert.ok(codes(result.blockers).includes(code), JSON.stringify(result));
-  assert.throws(() => engine.checkoutPayload(value, data), engine.BlendValidationError);
   return result;
 }
 function encoded(value) { return Buffer.from(JSON.stringify(value), 'utf8').toString('base64url'); }
@@ -78,13 +78,16 @@ assert.equal(engine.validateRecipe({...recipe(), oils: [{id: 'alpha', percent: 3
 invalid(null, 'recipe_shape');
 invalid([], 'recipe_shape');
 invalid({...recipe(), checkoutEndpoint: 'https://example.test/bypass'}, 'recipe_shape');
-const missing = recipe(); delete missing.petContext; invalid(missing, 'recipe_shape');
+for (const key of Object.keys(recipe())) {
+  const missing = recipe(); delete missing[key]; invalid(missing, 'recipe_shape');
+}
 invalid({...recipe(), v: '1'}, 'recipe_version');
 invalid({...recipe(), v: 2}, 'recipe_version');
 invalid({...recipe(), catalogVersion: 'old'}, 'catalog_version');
 invalid({...recipe(), path: 'surprise'}, 'recipe_path');
 invalid({...recipe(), petContext: 'false'}, 'pet_context');
 invalid({...recipe(), name: 'a'.repeat(61)}, 'recipe_name');
+invalid({...recipe(), name: '🌿'.repeat(61)}, 'recipe_name');
 invalid({...recipe(), name: 'test\nname'}, 'recipe_name');
 invalid({...recipe(), name: '\ud800'}, 'recipe_name');
 invalid({...recipe(), name: {}}, 'recipe_name');
@@ -125,9 +128,9 @@ const staleOilsFirst = {...recipe(), qualityIds: ['focus', 'calm']};
 assert.deepEqual(engine.validateRecipe(staleOilsFirst, fixture()).recipe.qualityIds, []);
 assert.deepEqual(engine.decodeRecipe(encoded(staleOilsFirst), fixture()).qualityIds, []);
 assert.deepEqual(JSON.parse(Buffer.from(engine.encodeRecipe(staleOilsFirst, fixture()), 'base64url').toString('utf8')).qualityIds, []);
-const cleanCheckout = engine.checkoutPayload(staleOilsFirst, fixture());
+const cleanCheckout = engine.cartPermalink(staleOilsFirst, fixture());
 assert.deepEqual(cleanCheckout.recipe.qualityIds, []);
-assert.equal(cleanCheckout.items[0].properties['Purported qualities'], 'None selected');
+assert.doesNotMatch(cleanCheckout.properties.Recipe, /Purported qualities|None selected/);
 assert.deepEqual(staleOilsFirst.qualityIds, ['focus', 'calm'], 'Canonicalization must not mutate input');
 assert.equal(engine.validateRecipe({...recipe(), name: '🌿'.repeat(60)}, fixture()).valid, true);
 for (const bad of ['', null, 2, 'a'.repeat(4097), 'a', 'a=', 'a+b/', '#blend=abc', 'ab', Buffer.from([0xff]).toString('base64url'), encoded(null), encoded({})]) {
@@ -148,10 +151,10 @@ assert.equal(context.BLEND_ENGINE.encodeRecipe(unicode, fixture()), shared);
 assert.equal(context.BLEND_ENGINE.decodeRecipe(shared, fixture()).name, unicode.name.trim());
 
 // Finished-product concentration, never relative oil share, governs hard limits.
-assert.equal(engine.evaluateSafety(recipe(), fixture()).canPurchase, true);
+assert.equal(engine.evaluateSafety(recipe(), fixture()).blockers.length, 0);
 {
   const d = fixture(); d.oils[0].blend.dermalMaxPercent = 1;
-  assert.equal(engine.evaluateSafety(recipe(), d).canPurchase, true, '50% of a 2% oil load equals the 1% dermal maximum');
+  assert.equal(engine.evaluateSafety(recipe(), d).blockers.length, 0, '50% of a 2% oil load equals the 1% dermal maximum');
   const r = {...recipe(), oils: [{id: 'alpha', percent: 50.01}, {id: 'beta', percent: 49.99}]};
   const result = blocked(d, 'dermal_limit_exceeded', r);
   const message = result.blockers.find(item => item.code === 'dermal_limit_exceeded').message;
@@ -162,7 +165,7 @@ assert.equal(engine.evaluateSafety(recipe(), fixture()).canPurchase, true);
   const d = fixture(); d.blendBuilder.product.totalOilLoadPercent = 3.01;
   blocked(d, 'total_limit_exceeded');
   d.blendBuilder.product.totalOilLoadPercent = 3;
-  assert.equal(engine.evaluateSafety(recipe(), d).canPurchase, true, 'Total hard-cap equality passes');
+  assert.equal(engine.evaluateSafety(recipe(), d).blockers.length, 0, 'Total hard-cap equality passes');
 }
 for (const field of ['totalOilLoadPercent', 'totalOilLoadSource']) {
   const d = fixture(); d.blendBuilder.product[field] = null; blocked(d, 'total_load_unknown');
@@ -179,37 +182,21 @@ for (const field of ['dermalMaxPercent', 'dermalMaxSource']) {
 for (const badSource of ['unresolved-source', {label: 'No link'}, {label: 'Unsafe link', url: 'javascript:alert(1)'}, {label: '', url: 'https://example.test'}]) {
   const d = fixture(); d.oils[0].blend.dermalMaxSource = badSource; blocked(d, 'dermal_limit_unknown');
 }
-{ const d = fixture(); d.oils[0].blend.dermalMaxSource = 'test-only-source'; assert.equal(engine.evaluateSafety(recipe(), d).canPurchase, true); }
+{ const d = fixture(); d.oils[0].blend.dermalMaxSource = 'test-only-source'; assert.equal(engine.evaluateSafety(recipe(), d).blockers.length, 0); }
 for (const availability of [null, 'unconfirmed', 'unavailable', true]) {
-  const d = fixture(); d.oils[0].blend.availability = availability; blocked(d, 'oil_unavailable');
+  const d = fixture(); d.oils[0].blend.availability = availability;
+  assert.equal(engine.evaluateSafety(recipe(), d).blockers.length, 0, 'Stock is not a scientific finding');
+  assert.ok(engine.cartPermalink(recipe(), d).url, 'Shopify handles actual product availability');
 }
 { const d = fixture(); d.oils[0].blend.phototoxic = null; blocked(d, 'phototoxicity_unknown'); }
 for (const status of [null, 'unverified', 'reviewed', true]) {
   const d = fixture(); d.oils[0].blend.safetyReviewStatus = status; blocked(d, 'safety_review_unapproved');
 }
-for (const hosts of [null, [], ['*'], ['https://shop.example.test'], ['shop.example.test:443'], ['shop.example.test/path'],
-  ['.example.test'], ['-bad.example.test'], ['127.0.0.1'], ['shop.example.test', 'SHOP.example.test'], [,]]) {
-  const d = fixture(); d.blendBuilder.product.checkoutAllowedHosts = hosts; blocked(d, 'checkout_hosts_missing');
-}
-for (const field of ['shopifyVariantId', 'checkoutEndpoint', 'serverValidationVerified']) {
-  const d = fixture(); d.blendBuilder.product[field] = null;
-  blocked(d, {shopifyVariantId: 'checkout_variant_missing', checkoutEndpoint: 'checkout_endpoint_missing', serverValidationVerified: 'server_validation_unverified'}[field]);
-}
-for (const endpoint of ['https://user:secret@example.test/checkout', 'javascript:alert(1)', '//example.test/checkout', 'http://example.test/checkout', '/\\example.test/checkout']) {
-  const d = fixture(); d.blendBuilder.product.checkoutEndpoint = endpoint; blocked(d, 'checkout_endpoint_missing');
-}
-for (const variant of [0, -1, {}, true, '0', 'abc', Number.MAX_SAFE_INTEGER + 1]) {
-  const d = fixture(); d.blendBuilder.product.shopifyVariantId = variant; blocked(d, 'checkout_variant_missing');
-}
-for (const [key, value] of [['price', 46], ['currency', 'CAD'], ['size', '4 oz'], ['name', 'Other product']]) {
-  const d = fixture(); d.blendBuilder.product[key] = value; blocked(d, 'product_configuration');
-}
-
 // Warnings remain distinct from hard caps and show the source threshold.
 {
   const d = fixture(); d.oils[0].blend.cautionThresholds = [{percent: 0.9, reason: 'TEST-ONLY caution reason.', source: copy(source)}];
   const result = engine.evaluateSafety(recipe(), d);
-  assert.equal(result.canPurchase, true);
+  assert.equal(result.blockers.length, 0);
   const warning = result.warnings.find(row => row.code === 'caution_threshold_exceeded');
   assert.ok(warning); assert.match(warning.message, /0.9% caution threshold/); assert.deepEqual(warning.source, source);
   d.oils[0].blend.cautionThresholds[0].percent = 1;
@@ -225,12 +212,12 @@ for (const field of ['cautionThresholds', 'interactions']) {
   d.oils[0].blend.interactions = [interaction];
   d.oils[1].blend.interactions = [{...interaction, withOilId: 'alpha'}];
   const result = engine.evaluateSafety(recipe(), d);
-  assert.equal(result.canPurchase, true);
+  assert.equal(result.blockers.length, 0);
   assert.equal(result.warnings.filter(row => row.code === 'oil_interaction').length, 1, 'Mirrored interactions deduplicated');
   assert.match(result.warnings.find(row => row.code === 'oil_interaction').message, /TEST-ONLY alpha \+ TEST-ONLY beta/);
   d.oils[0].blend.interactions[0].severity = 'blocker'; blocked(d, 'oil_interaction');
   d.oils[0].blend.interactions[0].withOilId = 'gamma';
-  assert.equal(engine.evaluateSafety(recipe(), d).canPurchase, true, 'Only selected pairs trigger interactions');
+  assert.equal(engine.evaluateSafety(recipe(), d).blockers.length, 0, 'Only selected pairs trigger interactions');
   d.oils[0].blend.interactions[0].withOilId = 'nonexistent'; blocked(d, 'interaction_data_invalid');
 }
 {
@@ -242,39 +229,177 @@ for (const field of ['cautionThresholds', 'interactions']) {
 }
 for (const petSafer of [null, false, 'true']) {
   const d = fixture(); d.oils[0].blend.petSafer = petSafer;
-  assert.equal(engine.evaluateSafety(recipe(), d).canPurchase, true, 'Pet context is explicit');
+  assert.equal(engine.evaluateSafety(recipe(), d).blockers.length, 0, 'Pet context is explicit');
   blocked(d, 'pet_context_blocked', {...recipe(), petContext: true});
 }
 { const d = fixture(); d.oils[0].blend.petSource = null; blocked(d, 'pet_context_blocked', {...recipe(), petContext: true}); }
-assert.equal(engine.evaluateSafety({...recipe(), petContext: true}, fixture()).canPurchase, true);
+assert.equal(engine.evaluateSafety({...recipe(), petContext: true}, fixture()).blockers.length, 0);
 
-// Payload supports transparent fulfillment and declares its client-only trust.
-const payload = engine.checkoutPayload(recipe(), fixture());
-assert.equal(payload.endpoint, '/apps/test-only-blend/checkout');
-assert.deepEqual(payload.expectedPrice, {amount: 45, currency: 'USD'});
-assert.deepEqual(payload.validation, {mode: 'client-only', requiresServerValidation: true});
-assert.equal(payload.items.length, 1); assert.equal(payload.items[0].id, '123456789'); assert.equal(payload.items[0].quantity, 1);
-assert.match(payload.items[0].properties['Essential-oil shares'], /alpha.*50%/);
-assert.match(payload.items[0].properties['Finished spray concentrations'], /alpha: 1%/);
-assert.match(payload.items[0].properties['Product format'], /8 oz/);
-assert.equal(payload.items[0].properties['Recipe code'], payload.encodedRecipe);
+// A cart permalink has exactly one readable property and no client price override.
+const payload = engine.cartPermalink(recipe(), fixture());
+const url = new URL(payload.url);
+assert.equal(url.origin, 'https://test-only.myshopify.com');
+assert.equal(url.pathname, '/cart/123456789:1');
+assert.deepEqual([...url.searchParams.keys()], ['properties']);
+assert.match(url.searchParams.get('properties'), /^[A-Za-z0-9_-]+$/);
+const properties = JSON.parse(Buffer.from(url.searchParams.get('properties'), 'base64url').toString('utf8'));
+assert.deepEqual(properties, payload.properties);
+assert.deepEqual(Object.keys(properties), ['Recipe']);
+assert.match(properties.Recipe, /Name: Test-only recipe/);
+assert.match(properties.Recipe, /Recipe schema: v1; catalog: 2026-10-18/);
+assert.match(properties.Recipe, /Oil mixture \(relative portions, total 100%\): TEST-ONLY alpha \[alpha\] 50%; TEST-ONLY beta \[beta\] 50%/);
+assert.match(properties.Recipe, /Product: Custom Blend, standard 8 oz/);
+assert.match(properties.Recipe, /Manual formulation review required before fulfillment/);
+assert.match(properties.Recipe, /not finished-product concentrations/);
+assert.match(properties.Recipe, new RegExp('Recipe code: ' + payload.encodedRecipe + '$'));
+assert.doesNotMatch(properties.Recipe, /Base version|Purported qualities|approved|safe|Finished spray concentrations|Finished spray oil load/);
 assert.deepEqual(engine.decodeRecipe(payload.encodedRecipe, fixture()), payload.recipe);
+assert.equal(engine.checkoutPayload, undefined, 'No obsolete backend payload API');
+assert.equal(Object.hasOwn(payload, 'expectedPrice'), false);
+assert.equal(Object.hasOwn(payload, 'endpoint'), false);
+assert.equal(Object.hasOwn(engine.evaluateSafety(recipe(), fixture()), 'canPurchase'), false);
+assert.equal(engine.evaluateSafety(recipe(), fixture()).requiresReview, true, 'Every formulation needs manual review');
+assert.equal(context.BLEND_ENGINE.cartPermalink(recipe(), fixture()).url, payload.url, 'Pure browser implementation needs no URL/Buffer APIs');
+
+// Unicode and URL punctuation round-trip inside one UTF-8 base64url JSON property.
+{
+  const d = fixture(); d.oils[0].name = '夜の香り 🌿 & café + 50% / <oil> #=';
+  const value = {...unicode, name: '🌿'.repeat(60), petContext: true};
+  const result = engine.cartPermalink(value, d);
+  const href = new URL(result.url);
+  assert.equal(href.searchParams.size, 1);
+  const recovered = JSON.parse(Buffer.from(href.searchParams.get('properties'), 'base64url').toString('utf8'));
+  assert.deepEqual(recovered, result.properties);
+  assert.ok(recovered.Recipe.includes(d.oils[0].name + ' [alpha] 50%'));
+  assert.ok(recovered.Recipe.includes(value.name));
+  assert.match(recovered.Recipe, /Customer context: pets may be present/);
+  assert.doesNotMatch(recovered.Recipe, /pet-safe|pet-safer|Purported qualities/);
+  assert.deepEqual(engine.decodeRecipe(result.encodedRecipe, d), engine.validateRecipe(value, d).recipe);
+  assert.equal(context.BLEND_ENGINE.cartPermalink(value, d).url, result.url);
+}
+const decimals = {...recipe(), oils: [{id: 'alpha', percent: 33.34}, {id: 'beta', percent: 33.33}, {id: 'gamma', percent: 33.33}]};
+assert.match(engine.cartPermalink(decimals, fixture()).properties.Recipe, /\[alpha\] 33.34%/);
+const five = {...recipe(), oils: fixture().oils.slice(0, 5).map(oil => ({id: oil.id, percent: 20}))};
+assert.equal(engine.cartPermalink(five, fixture()).recipe.oils.length, 5);
+assert.match(engine.cartPermalink({...recipe(), name: '   '}, fixture()).properties.Recipe, /^Name: Custom Blend\n/);
+
+// Product and destination configuration are trusted separately from recipe input.
+function permalinkInvalid(data, code, value = recipe()) {
+  assert.throws(() => engine.cartPermalink(value, data), error =>
+    error instanceof engine.BlendValidationError && codes(error.errors).includes(code), code);
+}
+for (const field of ['shopifyStoreUrl', 'shopifyVariantId']) {
+  for (const missing of [undefined, null, '']) {
+    const d = fixture(); d.blendBuilder.product[field] = missing;
+    permalinkInvalid(d, field === 'shopifyStoreUrl' ? 'checkout_store_missing' : 'checkout_variant_missing');
+    assert.equal(engine.evaluateSafety(recipe(), d).blockers.length, 0, 'Checkout configuration is not scientific safety');
+  }
+}
+for (const store of [false, {}, [], 'http://test-only.myshopify.com', '//test-only.myshopify.com',
+  'https://user:password@test-only.myshopify.com', 'https://test-only.myshopify.com@evil.example',
+  'https://test-only.myshopify.com:443', 'https://test-only.myshopify.com:8443',
+  'https://test-only.myshopify.com/cart', 'https://test-only.myshopify.com//',
+  'https://test-only.myshopify.com?foo=1', 'https://test-only.myshopify.com/?foo=1',
+  'https://test-only.myshopify.com#x', 'https://test-only.myshopify.com/#x',
+  'https://test-only.myshopify.com\n', ' https://test-only.myshopify.com',
+  'https://test-only.myshopify.com ', 'https://test-only.myshopify.com\\@evil.example',
+  'https://test-only.myshopify.com%2f.evil.example', 'https://test-only..myshopify.com',
+  'https://-bad.myshopify.com', 'https://bad-.myshopify.com', 'https://shop.myshopify.com.',
+  'https://127.0.0.1', 'https://127.1', 'https://0x7f.0x1', 'https://2130706433',
+  'https://[::1]', 'https://localhost', 'javascript:alert(1)',
+  'https://' + 'a'.repeat(64) + '.myshopify.com', 'https://' + ('a'.repeat(63) + '.').repeat(4) + 'com']) {
+  const d = fixture(); d.blendBuilder.product.shopifyStoreUrl = store;
+  permalinkInvalid(d, 'checkout_store_missing');
+}
+for (const store of ['https://test-only.myshopify.com/', 'HTTPS://TEST-ONLY.MYSHOPIFY.COM', 'https://merchant.blend-fixture.test', 'https://xn--caf-dma.example']) {
+  const d = fixture(); d.blendBuilder.product.shopifyStoreUrl = store;
+  assert.equal(new URL(engine.cartPermalink(recipe(), d).url).origin, new URL(store).origin);
+}
+for (const variant of [0, -1, {}, [], true, '0', '00123', 'abc', 'gid://shopify/ProductVariant/123',
+  '123:2', '123,456:1', '123?x=1', '123#x', '123\n', ' 123', '123 ', '+123', '-123', '1e3', '0x123', 1n,
+  '1'.repeat(21), NaN, Infinity, 1.2, Number.MAX_SAFE_INTEGER + 1]) {
+  const d = fixture(); d.blendBuilder.product.shopifyVariantId = variant;
+  permalinkInvalid(d, 'checkout_variant_missing');
+}
+for (const variant of [1, 123456789, Number.MAX_SAFE_INTEGER, '12345678901234567890']) {
+  const d = fixture(); d.blendBuilder.product.shopifyVariantId = variant;
+  assert.equal(new URL(engine.cartPermalink(recipe(), d).url).pathname, '/cart/' + variant + ':1');
+}
+for (const [key, value] of [['price', 45], ['price', '40'], ['price', null], ['currency', 'CAD'], ['size', '4 oz'], ['name', 'Other product']]) {
+  const d = fixture(); d.blendBuilder.product[key] = value;
+  permalinkInvalid(d, 'product_configuration');
+  assert.equal(engine.evaluateSafety(recipe(), d).blockers.length, 0);
+}
+{ const d = fixture(); delete d.blendBuilder.product; permalinkInvalid(d, 'product_configuration'); }
+{ const d = fixture(); d.blendBuilder.product = null; permalinkInvalid(d, 'product_configuration'); }
+for (const field of ['shopifyStoreUrl', 'shopifyVariantId', 'baseVersion', 'price', 'quantity', 'properties', 'requiresReview', 'canPurchase']) {
+  invalid({...recipe(), [field]: 'forged'}, 'recipe_shape');
+  assert.throws(() => engine.decodeRecipe(encoded({...recipe(), [field]: 'forged'}), fixture()), engine.BlendValidationError);
+}
+for (const base of [undefined, null]) {
+  const d = fixture(); d.blendBuilder.product.baseVersion = base;
+  assert.doesNotMatch(engine.cartPermalink(recipe(), d).properties.Recipe, /Base version/);
+}
+{
+  const d = fixture(); d.blendBuilder.product.baseVersion = ' Test-only base α / v2 ';
+  assert.match(engine.cartPermalink(recipe(), d).properties.Recipe, /Base version: Test-only base α \/ v2/);
+}
+for (const base of [false, 1, {}, '', ' ', 'x'.repeat(121), 'base\nversion']) {
+  const d = fixture(); d.blendBuilder.product.baseVersion = base;
+  permalinkInvalid(d, 'product_configuration');
+}
+
+// Missing research and stock data do not masquerade as an automated approval gate.
+{
+  const d = fixture();
+  for (const field of ['totalOilLoadPercent', 'totalOilLoadSource', 'totalOilMaxPercent', 'totalOilMaxSource']) d.blendBuilder.product[field] = null;
+  for (const oil of d.oils) Object.assign(oil.blend, {availability: 'unconfirmed', safetyReviewStatus: 'unverified',
+    dermalMaxPercent: null, dermalMaxSource: null, phototoxic: null, petSafer: null, petSource: null,
+    cautionThresholds: null, interactions: null});
+  const value = {...recipe(), petContext: true};
+  const findings = engine.evaluateSafety(value, d);
+  assert.equal(findings.requiresReview, true); assert.ok(findings.blockers.length > 0);
+  assert.ok(engine.cartPermalink(value, d).url);
+}
+// Known, sourced total/dermal caps and blocking interactions remain enforced.
+{
+  const d = fixture(); d.blendBuilder.product.totalOilLoadPercent = 3.01;
+  permalinkInvalid(d, 'total_limit_exceeded');
+  d.blendBuilder.product.totalOilLoadSource = null;
+  assert.ok(engine.cartPermalink(recipe(), d).url, 'An unsourced load cannot establish a numeric violation');
+}
+{
+  const d = fixture(); d.oils[0].blend.dermalMaxPercent = 0.99;
+  permalinkInvalid(d, 'dermal_limit_exceeded');
+  d.oils[0].blend.dermalMaxSource = null;
+  assert.ok(engine.cartPermalink(recipe(), d).url, 'An unsourced cap is an unknown review finding');
+}
+{
+  const d = fixture(); d.oils[0].blend.interactions = [{withOilId: 'beta', severity: 'blocker', reason: 'TEST-ONLY blocking interaction.', source: copy(source)}];
+  permalinkInvalid(d, 'oil_interaction');
+  d.oils[0].blend.interactions[0].severity = 'warning';
+  assert.ok(engine.cartPermalink(recipe(), d).url, 'Warnings do not reject manual-review requests');
+}
 const immutableData = fixture(), immutableRecipe = recipe();
 const savedData = copy(immutableData), savedRecipe = copy(immutableRecipe);
-engine.evaluateSafety(immutableRecipe, immutableData); engine.checkoutPayload(immutableRecipe, immutableData);
+engine.evaluateSafety(immutableRecipe, immutableData); engine.cartPermalink(immutableRecipe, immutableData);
 assert.deepEqual(immutableData, savedData); assert.deepEqual(immutableRecipe, savedRecipe);
 
-// Current production research gaps must never become a purchasable blend.
+// The production origin is verified, but no Custom Blend variant is invented.
 const realContext = vm.createContext({});
 vm.runInContext(fs.readFileSync(path.join(__dirname, '../data.js'), 'utf8') + '\nthis.data = TERPENE_DATA;', realContext);
-if (realContext.data.blendBuilder) {
-  const data = realContext.data;
-  const oil = data.oils.find(row => row.blend && row.blend.enabled === true);
-  assert.ok(oil, 'Starter catalog contains enabled essential oils');
-  const realRecipe = {...recipe(), catalogVersion: data.blendBuilder.catalogVersion, oils: [{id: oil.id, percent: 100}]};
-  assert.equal(engine.validateRecipe(realRecipe, data).valid, true);
-  blocked(data, 'total_load_unknown', realRecipe);
-  assert.equal(data.blendBuilder.product.totalOilLoadPercent, null);
-  assert.equal(data.blendBuilder.product.serverValidationVerified, false);
-}
-console.log('PASS: blend normalization, strict validation, Unicode sharing, fail-closed finished-product safety, pet context, interactions and client-only checkout payload');
+const data = realContext.data;
+assert.ok(data.blendBuilder, 'Production blend configuration exists');
+const oil = data.oils.find(row => row.blend && row.blend.enabled === true);
+assert.ok(oil, 'Starter catalog contains enabled essential oils');
+const realRecipe = {...recipe(), catalogVersion: data.blendBuilder.catalogVersion, oils: [{id: oil.id, percent: 100}]};
+assert.equal(engine.validateRecipe(realRecipe, data).valid, true);
+assert.equal(data.blendBuilder.product.price, 40);
+assert.equal(data.blendBuilder.product.shopifyStoreUrl, 'https://sunnysshield.com');
+assert.equal(data.blendBuilder.product.shopifyVariantId, null);
+assert.equal(data.blendBuilder.product.baseVersion, null);
+assert.equal(data.blendBuilder.product.totalOilLoadPercent, null);
+for (const obsolete of ['checkoutEndpoint', 'checkoutAllowedHosts', 'serverValidationVerified']) assert.equal(Object.hasOwn(data.blendBuilder.product, obsolete), false);
+blocked(data, 'total_load_unknown', realRecipe);
+permalinkInvalid(data, 'checkout_variant_missing', realRecipe);
+console.log('PASS: strict recipes, deterministic normalization, Unicode sharing, safe single-property Shopify cart permalinks, manual review and separate sourced scientific limits');

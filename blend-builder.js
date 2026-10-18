@@ -1,4 +1,4 @@
-/* Blend Builder: an exploratory recipe, never a finished-product safety approval. */
+/* Blend Builder: local recipes and a Shopify handoff for manual review. */
 (() => {
   'use strict';
   const E = window.BLEND_ENGINE, data = TERPENE_DATA, config = data.blendBuilder;
@@ -9,16 +9,12 @@
   const compounds = Object.fromEntries(data.compounds.map(c => [c.id, c]));
   const qualities = config.qualities;
   const STORAGE = 'terpene-lab:blend:v1';
+  const priceLabel = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(config.product.price);
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const safeUrl = value => { try { const u = new URL(value); return u.protocol === 'https:' ? u.href : ''; } catch { return ''; } };
   const initial = () => ({v:1,catalogVersion:config.catalogVersion,name:'My custom blend',path:'qualities',qualityIds:[],petContext:false,oils:[]});
   let recipe = initial(), generated = false, chosenPath = false, saved = [], search = '', storageError = false;
   let lastLink = null, restoreError = '';
-  let checkoutInFlight = false, checkoutSequence = 0, checkoutController = null;
-  function cancelCheckout() {
-    if (!checkoutInFlight) return;
-    checkoutSequence++; checkoutController?.abort(); checkoutController=null; checkoutInFlight=false;
-  }
   try {
     const local = JSON.parse(localStorage.getItem(STORAGE) || 'null');
     if (local && Array.isArray(local.saved)) saved = local.saved.filter(s => typeof s === 'string').slice(0,12);
@@ -65,7 +61,7 @@
     <div class="blend-hero">
       <div><p class="blend-eyebrow">THE FORMULA IS YOURS</p><h2>Create a custom blend.</h2>
         <p class="blend-intro">Start with a quality or an essential oil. Explore the chemistry, shape the aroma, and see the evidence and cautions together.</p></div>
-      <div class="blend-product"><span class="blend-product-size">SUNNY'S SHIELD / 8 OZ</span><strong>$45<span> per custom blend</span></strong><p>Standard bottle, base and label.</p><span class="blend-pill">Ordering pending formula review</span></div>
+      <div class="blend-product"><span class="blend-product-size">SUNNY'S SHIELD / 8 OZ</span><strong>${esc(priceLabel)}<span> per custom blend</span></strong><p>Standard bottle, base and label.</p><span class="blend-pill">Manual review before mixing</span></div>
     </div>
     <p id="blend-link-error" class="blend-message is-error" role="alert" ${restoreError ? '' : 'hidden'}>${esc(restoreError)}</p>
     <div class="blend-step-title"><span>01</span><h3>Choose your starting point</h3></div>
@@ -152,25 +148,29 @@
     const oil=byId[entry.id], b=oil.blend;
     const constituents=oil.constituents.map(c=>`<li><span>${esc(compounds[c.compoundId]?.name || c.compoundId)}</span><span>${CHEMISTRY.quantified(c) ? `${c.range.min}-${c.range.max}% in cited sample` : 'No verified range yet'}</span></li>`).join('');
     const mappings=b.qualityMappings;
-    return `<article class="blend-profile"><header><div><p class="blend-eyebrow">ESSENTIAL OIL / ${entry.percent}% OF BLEND</p><h4>${esc(oil.name)}</h4><p class="blend-latin">${esc(oil.latinName)}</p></div><span class="blend-pill">${esc(oil.aroma.join(' · '))}</span></header><div class="blend-profile-columns"><div><h5>Purported qualities & research</h5>${mappings.length ? mappings.map(m=>`<div class="blend-research"><p><strong>${esc(qualities.find(q=>q.id===m.qualityId)?.label || m.qualityId)}</strong><span class="blend-evidence-tier">${esc(m.evidenceTier)}</span></p><p>${esc(m.summary)}</p>${m.limitations ? `<p class="blend-small">Limitations: ${esc(m.limitations)}</p>` : ''}${safeUrl(m.url) ? `<a href="${esc(safeUrl(m.url))}" target="_blank" rel="noopener noreferrer">Read study${m.pmid ? ' · PMID '+esc(m.pmid) : ''}</a>` : '<p class="blend-small">No verified source link yet.</p>'}</div>`).join('') : '<p>Limited research. No verified data yet for these purported qualities.</p>'}</div><div class="blend-profile-cautions"><h5>Cautions & evidence gaps</h5><p>${b.dermalMaxPercent===null ? 'No verified leave-on dermal maximum yet. This oil is not cleared for purchase in a custom spray.' : `Documented maximum in the finished product: ${esc(b.dermalMaxPercent)}%.`}</p>${b.dermalMaxSource ? `<p>Limit source: ${sourceLink(b.dermalMaxSource)}</p>` : ''}<p>${b.petSafer===true && b.petSource ? 'Pet context still requires species and exposure review.' : 'Pet suitability: no verified pet-safer approval.'}</p><p>${esc(b.sensitizationNotes || 'Sensitization data: no verified data yet.')}</p><p>${b.phototoxic===null ? 'Phototoxicity: no verified data yet for the supplied preparation.' : b.phototoxic ? 'Phototoxicity flagged. Preparation and exposure limits require review.' : 'No phototoxicity flag recorded; this is not a safety guarantee.'}</p><p>Interaction review applies to the whole blend. Missing information never means no risk.</p></div></div><div class="blend-constituents"><h5>Cataloged major constituents</h5><ul>${constituents || '<li>No verified data yet.</li>'}</ul><p class="blend-small">Whole essential oils contain more than terpenes. These are literature records, not a batch analysis or a complete chemical composition.</p></div></article>`;
+    return `<article class="blend-profile"><header><div><p class="blend-eyebrow">ESSENTIAL OIL / ${entry.percent}% OF BLEND</p><h4>${esc(oil.name)}</h4><p class="blend-latin">${esc(oil.latinName)}</p></div><span class="blend-pill">${esc(oil.aroma.join(' · '))}</span></header><div class="blend-profile-columns"><div><h5>Purported qualities & research</h5>${mappings.length ? mappings.map(m=>`<div class="blend-research"><p><strong>${esc(qualities.find(q=>q.id===m.qualityId)?.label || m.qualityId)}</strong><span class="blend-evidence-tier">${esc(m.evidenceTier)}</span></p><p>${esc(m.summary)}</p>${m.limitations ? `<p class="blend-small">Limitations: ${esc(m.limitations)}</p>` : ''}${safeUrl(m.url) ? `<a href="${esc(safeUrl(m.url))}" target="_blank" rel="noopener noreferrer">Read study${m.pmid ? ' · PMID '+esc(m.pmid) : ''}</a>` : '<p class="blend-small">No verified source link yet.</p>'}</div>`).join('') : '<p>Limited research. No verified data yet for these purported qualities.</p>'}</div><div class="blend-profile-cautions"><h5>Cautions & evidence gaps</h5><p>${b.dermalMaxPercent===null ? 'No verified leave-on dermal maximum yet. Suitability for the finished spray needs manual review.' : `Documented maximum in the finished product: ${esc(b.dermalMaxPercent)}%.`}</p>${b.dermalMaxSource ? `<p>Limit source: ${sourceLink(b.dermalMaxSource)}</p>` : ''}<p>${b.petSafer===true && b.petSource ? 'Pet context still requires species and exposure review.' : 'Pet suitability: no verified pet-safer approval.'}</p><p>${esc(b.sensitizationNotes || 'Sensitization data: no verified data yet.')}</p><p>${b.phototoxic===null ? 'Phototoxicity: no verified data yet for the supplied preparation.' : b.phototoxic ? 'Phototoxicity flagged. Preparation and exposure limits require review.' : 'No phototoxicity flag recorded; this is not a safety guarantee.'}</p><p>Interaction review applies to the whole blend. Missing information never means no risk.</p></div></div><div class="blend-constituents"><h5>Cataloged major constituents</h5><ul>${constituents || '<li>No verified data yet.</li>'}</ul><p class="blend-small">Whole essential oils contain more than terpenes. These are literature records, not a batch analysis or a complete chemical composition.</p></div></article>`;
   }
   function renderResults() {
     const section=document.getElementById('blend-results');
     if (!generated) { section.hidden=true; return; }
     const valid=E.validateRecipe(recipe,data);
-    if (!valid.valid) { section.hidden=true; generated=false; return; }
+    if (!valid.valid || root.querySelector('input:invalid')) { section.hidden=true; generated=false; return; }
     const safety=E.evaluateSafety(recipe,data);
+    let cart=null, orderMessage='Shopify ordering is being set up. Save your recipe for now.';
+    try { cart=E.cartPermalink(recipe,data); } catch(error) {
+      if (error.errors?.some(item=>['total_limit_exceeded','dermal_limit_exceeded','oil_interaction'].includes(item.code))) orderMessage='Resolve the sourced limit or interaction warnings before ordering.';
+    }
     const priorityBlockers=safety.blockers.filter(item=>['total_limit_exceeded','dermal_limit_exceeded','pet_context_blocked','oil_interaction'].includes(item.code));
     const mapped=[...new Set(recipe.oils.flatMap(o=>labels(byId[o.id])))];
     section.hidden=false;
     section.innerHTML=`<div class="blend-step-title"><span>03</span><h3 id="blend-results-title" tabindex="-1">${esc(recipe.name || 'Your custom blend')}</h3><span class="blend-step-note">RECIPE V1</span></div>
-      <div class="blend-results-lead"><section class="blend-result-summary"><p class="blend-eyebrow">YOUR BLEND AT A GLANCE</p><h4>${recipe.oils.map(o=>esc(byId[o.id].name)).join(' + ')}</h4><ul class="blend-recipe-list">${recipe.oils.map(o=>`<li><span>${esc(byId[o.id].name)}</span><strong>${o.percent}%</strong></li>`).join('')}</ul><p>Purported qualities: ${mapped.length ? esc(mapped.join(', ')) : 'no verified mappings yet'}.</p><p class="blend-small">These proportions describe only the oil mixture. ${Number.isFinite(config.product.totalOilLoadPercent) ? 'Configured final spray oil concentration: '+esc(config.product.totalOilLoadPercent)+'% (subject to server review).' : 'Final spray concentration has not been set.'}</p></section>
-      <section class="blend-result-cautions" aria-labelledby="blend-cautions-title"><p class="blend-eyebrow">CAUTIONS COME WITH THE RESEARCH</p><h4 id="blend-cautions-title">${safety.canPurchase ? 'Review the cautions' : 'Formula review still required'}</h4><p>Ingredient research does not validate this blend or the finished spray. No medical or therapeutic benefit is claimed.</p>${recipe.petContext ? '<p class="blend-inline-warning">Pet context is on. Do not assume this blend is safe around pets.</p>' : ''}<ul>${warningList([...priorityBlockers,...combinedWarnings(safety.warnings)])}</ul><p>${safety.canPurchase ? 'The configured checks pass. The checkout service must independently validate this exact recipe before purchase.' : 'Ordering remains unavailable until the formula, ingredient limits, stock and checkout validation are confirmed.'}</p></section></div>
+      <div class="blend-results-lead"><section class="blend-result-summary"><p class="blend-eyebrow">YOUR BLEND AT A GLANCE</p><h4>${recipe.oils.map(o=>esc(byId[o.id].name)).join(' + ')}</h4><ul class="blend-recipe-list">${recipe.oils.map(o=>`<li><span>${esc(byId[o.id].name)}</span><strong>${o.percent}%</strong></li>`).join('')}</ul><p>Purported qualities: ${mapped.length ? esc(mapped.join(', ')) : 'no verified mappings yet'}.</p><p class="blend-small">These proportions describe only the oil mixture. ${Number.isFinite(config.product.totalOilLoadPercent) ? 'Configured final spray oil concentration: '+esc(config.product.totalOilLoadPercent)+'% (subject to manual formulation review).' : 'Final spray concentration has not been set.'}</p></section>
+      <section class="blend-result-cautions" aria-labelledby="blend-cautions-title"><p class="blend-eyebrow">CAUTIONS COME WITH THE RESEARCH</p><h4 id="blend-cautions-title">Review before mixing</h4><p>Ingredient research does not validate this blend or the finished spray. No medical or therapeutic benefit is claimed.</p>${recipe.petContext ? '<p class="blend-inline-warning">Pet context is on. Do not assume this blend is safe around pets.</p>' : ''}<ul>${warningList([...priorityBlockers,...combinedWarnings(safety.warnings)])}</ul><p>Every custom recipe is reviewed before mixing. Final concentration, ingredient suitability and stock are confirmed during that review.</p></section></div>
       <div class="blend-recipe-actions"><button type="button" id="blend-save" class="blend-primary">Save recipe</button><button type="button" id="blend-share" class="blend-secondary">Copy share link</button><span id="blend-action-status" role="status" aria-live="polite"></span></div>
       <div id="blend-share-fallback" hidden><label for="blend-share-url">Copy this recipe link</label><input id="blend-share-url" readonly></div>
       <p class="blend-small">Saved on this device. Anyone with your link can see the recipe and its name.</p>
       <div class="blend-profile-list">${recipe.oils.map(oilProfile).join('')}</div>
-      <section class="blend-checkout" aria-labelledby="blend-checkout-title"><div><p class="blend-eyebrow">CUSTOM BLEND / SUNNY'S SHIELD</p><h4 id="blend-checkout-title">Your recipe. Our standard 8 oz spray.</h4><p>$45 flat price · Standard base, bottle and label.</p><p class="blend-small">Cosmetic use only. Purported qualities are research topics, not promised effects. No medical claims.</p></div><div>${safety.canPurchase ? `<button type="button" id="blend-checkout" class="blend-primary" ${checkoutInFlight ? 'disabled' : ''}>Continue to Shopify · $45</button>` : '<p class="blend-order-pending">Ordering opens after formula review.</p>'}<p id="blend-checkout-status" role="status">${checkoutInFlight ? 'Validating the recipe before checkout...' : ''}</p></div></section>
+      <section class="blend-checkout" aria-labelledby="blend-checkout-title"><div><p class="blend-eyebrow">CUSTOM BLEND / SUNNY'S SHIELD</p><h4 id="blend-checkout-title">Your recipe. Our standard 8 oz spray.</h4><p>${esc(priceLabel)} per bottle · Standard base, bottle and label.</p><p class="blend-small">Your recipe name, oil proportions and pet context travel with the order for manual review before mixing. Shopify handles payment and shipping.</p><p class="blend-small">Cosmetic use only. No medical claims.</p></div><div>${cart ? `<a id="blend-checkout" class="blend-primary" href="${esc(cart.url)}" target="_top" rel="noreferrer" aria-describedby="blend-checkout-status">Continue to Shopify · ${esc(priceLabel)}</a><p id="blend-checkout-status" class="blend-small">Opens Shopify checkout for this recipe. Check the cart contents before paying.</p>` : `<p id="blend-checkout-status" class="blend-order-pending" role="status">${esc(orderMessage)}</p>`}</div></section>
       ${safety.blockers.length ? `<section class="blend-review-requirements"><h4>What still needs review</h4><ul>${warningList(safety.blockers)}</ul></section>` : ''}`;
   }
   function renderSaved() {
@@ -187,8 +187,17 @@
   }
   function updated(message) { renderCatalog();renderSelected();renderResults();if(message)announce(message); }
   root.addEventListener('click',async event=>{
+    const checkout=event.target.closest('#blend-checkout');
+    if (checkout) {
+      // Revalidate the current recipe on handoff; the configured Shopify variant owns the price.
+      try {
+        if (root.querySelector('input:invalid')) throw new Error('Correct the highlighted percentage or recipe name before continuing.');
+        checkout.href=E.cartPermalink(recipe,data).url;persist();
+      }
+      catch(error) { event.preventDefault();renderResults();announce(error.message,true); }
+      return;
+    }
     const button=event.target.closest('button'); if (!button || button.disabled) return;
-    if (button.dataset.blendPath || button.dataset.quality || button.dataset.addOil || button.dataset.removeOil || button.dataset.loadRecipe !== undefined || ['blend-normalize','blend-reset'].includes(button.id)) cancelCheckout();
     if (button.dataset.blendPath) {
       recipe.path=button.dataset.blendPath;
       // The oils-first path has no quality picker; never retain hidden selections.
@@ -224,44 +233,15 @@
     if (button.dataset.loadRecipe!==undefined) {try{recipe=E.decodeRecipe(saved[Number(button.dataset.loadRecipe)],data);chosenPath=true;generated=true;search='';document.getElementById('blend-search').value='';refresh();announce('Saved recipe loaded and checked against the current catalog.');}catch(error){announce(error.message,true);} }
     if (button.dataset.deleteRecipe!==undefined) {saved.splice(Number(button.dataset.deleteRecipe),1);persist();renderSaved();announce('Saved recipe deleted from this device.');}
     if (button.id==='blend-reset') {recipe=initial();chosenPath=false;generated=false;search='';document.getElementById('blend-search').value='';const url=new URL(location.href);url.searchParams.delete('recipe');history.replaceState({},'',url);lastLink=null;restoreError='';document.getElementById('blend-link-error').hidden=true;refresh();root.querySelector('[data-blend-path]').focus();}
-    if (button.id==='blend-checkout') {
-      // A trusted endpoint must independently revalidate catalog, stock, formula and price.
-      // A client-side gate alone is never checkout enforcement.
-      if (checkoutInFlight) return;
-      checkoutInFlight=true; const sequence=++checkoutSequence;
-      checkoutController=new AbortController();
-      const requestController=checkoutController;
-      const timer=setTimeout(()=>requestController.abort(),30000);
-      button.disabled=true; const status=document.getElementById('blend-checkout-status');status.textContent='Validating the recipe before checkout...';
-      try {
-        const payload=E.checkoutPayload(recipe,data), snapshot=payload.encodedRecipe;
-        const response=await fetch(config.product.checkoutEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),credentials:'omit',signal:checkoutController.signal});
-        if(!response.ok)throw new Error('Checkout is unavailable. Please keep your recipe and try again later.');
-        const result=await response.json();
-        if(sequence!==checkoutSequence || snapshot!==E.encodeRecipe(recipe,data)) return;
-        const url=new URL(result.checkoutUrl), allowed=(config.product.checkoutAllowedHosts || []).map(host=>host.toLowerCase());
-        if(url.protocol!=='https:' || url.username || url.password || (url.port && url.port!=='443') || !allowed.includes(url.hostname))throw new Error('Checkout returned an unverified destination. Your recipe has been kept.');
-        window.location.assign(url.href);
-      } catch(error) {
-        if(sequence===checkoutSequence) {
-          const current=document.getElementById('blend-checkout-status');
-          if(current)current.textContent=error.name==='AbortError'?'Checkout validation timed out. Your recipe has been kept. Please try again.':error.message;
-        }
-      } finally {
-        clearTimeout(timer);
-        if(sequence===checkoutSequence){checkoutInFlight=false;checkoutController=null;const current=document.getElementById('blend-checkout');if(current)current.disabled=false;}
-      }
-    }
   });
   root.addEventListener('input',event=>{
     const el=event.target;
     if(el.id==='blend-search'){search=el.value;renderCatalog();return;}
-    if(el.id==='blend-name'){cancelCheckout();el.setCustomValidity(Array.from(el.value).length>60?'Use a recipe name of at most 60 characters.':'');recipe.name=el.value;persist();renderResults();return;}
+    if(el.id==='blend-name'){el.setCustomValidity(Array.from(el.value).length>60?'Use a recipe name of at most 60 characters.':'');recipe.name=el.value;persist();renderResults();return;}
     const id=el.dataset.portion || el.dataset.portionRange;
-    if(id){cancelCheckout();const value=el.value===''?0:Number(el.value);if(!Number.isFinite(value)||value<0||value>100){el.setCustomValidity('Use a percentage from 0 to 100.');generated=false;renderResults();announce('Each portion must be between 0 and 100%.',true);return;}el.setCustomValidity('');recipe.oils.find(o=>o.id===id).percent=Math.round(value*100)/100;const partner=root.querySelector(el.dataset.portion?`[data-portion-range="${id}"]`:`[data-portion="${id}"]`);partner.value=recipe.oils.find(o=>o.id===id).percent;partner.setCustomValidity('');renderSummary();renderResults();}
+    if(id){const value=el.value===''?0:Number(el.value);if(!Number.isFinite(value)||value<0||value>100){el.setCustomValidity('Use a percentage from 0 to 100.');generated=false;renderResults();announce('Each portion must be between 0 and 100%.',true);return;}if(Math.abs(value*100-Math.round(value*100))>1e-7){el.setCustomValidity('Use up to two decimal places.');generated=false;renderResults();announce('Use up to two decimal places for each portion.',true);return;}el.setCustomValidity('');recipe.oils.find(o=>o.id===id).percent=Math.round(value*100)/100;const partner=root.querySelector(el.dataset.portion?`[data-portion-range="${id}"]`:`[data-portion="${id}"]`);partner.value=recipe.oils.find(o=>o.id===id).percent;partner.setCustomValidity('');renderSummary();renderResults();}
   });
-  root.addEventListener('change',event=>{if(event.target.id==='blend-pets'){cancelCheckout();recipe.petContext=event.target.checked;renderSummary();renderResults();}});
-  document.addEventListener('click',event=>{const tab=event.target.closest('.tab');if(tab && tab.dataset.tab!=='blend'){cancelCheckout();renderResults();}});
-  window.addEventListener('popstate',()=>{cancelCheckout();readLink(true);refresh();document.getElementById('blend-link-error').hidden=!restoreError;document.getElementById('blend-link-error').textContent=restoreError;});
+  root.addEventListener('change',event=>{if(event.target.id==='blend-pets'){recipe.petContext=event.target.checked;renderSummary();renderResults();}});
+  window.addEventListener('popstate',()=>{readLink(true);refresh();document.getElementById('blend-link-error').hidden=!restoreError;document.getElementById('blend-link-error').textContent=restoreError;});
   refresh();
 })();

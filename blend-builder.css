@@ -72,6 +72,7 @@
 .blend-inline-warning { font-size:13px; padding:12px; color:#eed3ad; background:#302a24; border-left:3px solid #b89569; margin:10px 0 17px; }
 #blend-builder .blend-primary { background:#d8bc80; color:#14202d; padding:12px 18px; border:1px solid #d8bc80; border-radius:7px; font-size:13px; font-weight:650; }
 #blend-builder .blend-primary:hover { background:#ead4a4; }
+#blend-builder a.blend-primary { display:inline-flex; align-items:center; justify-content:center; min-height:44px; text-decoration:none; text-align:center; }
 #blend-generate { display:flex; justify-content:space-between; width:100%; }
 #blend-builder .blend-secondary { background:transparent; color:var(--text); border:1px solid #62725e; border-radius:7px; padding:12px 18px; font-size:13px; }
 .blend-message { font-size:12px; color:#abd2b8; margin-top:12px; line-height:1.6; }
