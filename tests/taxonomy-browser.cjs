@@ -202,7 +202,7 @@ const server = http.createServer((req, res) => {
     assert.equal(await page.locator('#matrix-table tbody tr').count(), fixture.oils.length, 'Unused topics remain visible for every oil');
     await page.locator('[data-matrix-view="study-topics"]').click();
     await page.locator('#matrix-search').fill('fixture-shared');
-    await page.locator('#matrix-table [data-matrix-inspect="study/fixture-shared"]').click();
+    await page.locator('#matrix-table tbody th [data-matrix-inspect="study/fixture-shared"]').click();
     assert.equal(await page.locator('#matrix-inspector .research-assessments').count(), 2, 'Paper inspector exposes every scoped oil assessment');
     // Retained Pathway works with the same hierarchy, even if not mounted in this shell.
     await page.evaluate(() => {
