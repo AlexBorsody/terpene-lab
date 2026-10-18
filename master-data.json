@@ -11813,7 +11813,7 @@
           "status": "identity-checked",
           "checkedAt": "2026-10-18",
           "provider": "Crossref",
-          "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1177%2F1934578X0700200518%22&format=json&resultType=core",
+          "sourceUrl": "https://api.crossref.org/works/10.1177%2F1934578x0700200518",
           "sourceTitle": "Chemical Composition, Olfactory Evaluation and Antioxidant Effects of the Leaf Essential Oil of\n                    Corymbia citriodora\n                    (Hook) from China",
           "doi": "10.1177/1934578x0700200518",
           "pubmedId": null,
@@ -11972,7 +11972,7 @@
           "status": "identity-checked",
           "checkedAt": "2026-10-18",
           "provider": "Crossref",
-          "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Fapp13179984%22&format=json&resultType=core",
+          "sourceUrl": "https://api.crossref.org/works/10.3390%2Fapp13179984",
           "sourceTitle": "Characterization of Chemical Composition and Antioxidant Activity of Eucalyptus globulus Leaves under Different Extraction Conditions",
           "doi": "10.3390/app13179984",
           "pubmedId": null,
@@ -12088,7 +12088,7 @@
           "status": "identity-checked",
           "checkedAt": "2026-10-18",
           "provider": "Crossref",
-          "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1016%2Fj.jff.2014.07.003%22&format=json&resultType=core",
+          "sourceUrl": "https://api.crossref.org/works/10.1016%2Fj.jff.2014.07.003",
           "sourceTitle": "Chemical characterization and anti-inflammatory activity of luteolin glycosides isolated from lemongrass",
           "doi": "10.1016/j.jff.2014.07.003",
           "pubmedId": null,
@@ -12127,7 +12127,7 @@
           "status": "identity-checked",
           "checkedAt": "2026-10-18",
           "provider": "Crossref",
-          "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1080%2F10412905.2014.982872%22&format=json&resultType=core",
+          "sourceUrl": "https://api.crossref.org/works/10.1080%2F10412905.2014.982872",
           "sourceTitle": "Comparison of lemon oil composition after using different extraction methods",
           "doi": "10.1080/10412905.2014.982872",
           "pubmedId": null,
@@ -12243,7 +12243,7 @@
           "status": "identity-checked",
           "checkedAt": "2026-10-18",
           "provider": "Crossref",
-          "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Fagriculture13010179%22&format=json&resultType=core",
+          "sourceUrl": "https://api.crossref.org/works/10.3390%2Fagriculture13010179",
           "sourceTitle": "Authenticity Analysis of Cold-Pressed Orange Essential Oils by GC/MS on Polymethoxyflavone Components",
           "doi": "10.3390/agriculture13010179",
           "pubmedId": null,
@@ -12322,7 +12322,7 @@
           "status": "identity-checked",
           "checkedAt": "2026-10-18",
           "provider": "Crossref",
-          "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1002%2Fffj.1041%22&format=json&resultType=core",
+          "sourceUrl": "https://api.crossref.org/works/10.1002%2Fffj.1041",
           "sourceTitle": "Characterization of aroma‐impact compounds in cold‐pressed grapefruit oil using time–intensity GC–olfactometry and GC–MS",
           "doi": "10.1002/ffj.1041",
           "pubmedId": null,
@@ -12399,7 +12399,7 @@
           "status": "identity-checked",
           "checkedAt": "2026-10-18",
           "provider": "Crossref",
-          "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1002%2Fffj.3188%22&format=json&resultType=core",
+          "sourceUrl": "https://api.crossref.org/works/10.1002%2Fffj.3188",
           "sourceTitle": "Determination of new bioflavonoids in bergamot (Citrus bergamia) peel oil by liquid chromatography coupled to tandem ion trap–time‐of‐flight mass spectrometry",
           "doi": "10.1002/ffj.3188",
           "pubmedId": null,
@@ -40865,6 +40865,107 @@
             "beforePresent": false,
             "afterPresent": true,
             "afterDigest": "b3b2584db76808e16446c84b820fd778714392d4817dc5fea80fda9781fda6fe"
+          }
+        ]
+      },
+      {
+        "id": "citation-provider-provenance-2026-10-18",
+        "kind": "research",
+        "date": "2026-10-18",
+        "reason": "Point each Crossref-backed identity check to the actual Crossref record, rather than the preceding unsuccessful Europe PMC lookup. Bibliographic findings and verification depth are unchanged.",
+        "sourceUrls": [
+          "https://api.crossref.org/works/10.1177%2F1934578x0700200518",
+          "https://api.crossref.org/works/10.3390%2Fapp13179984",
+          "https://api.crossref.org/works/10.1016%2Fj.jff.2014.07.003",
+          "https://api.crossref.org/works/10.1080%2F10412905.2014.982872",
+          "https://api.crossref.org/works/10.3390%2Fagriculture13010179",
+          "https://api.crossref.org/works/10.1002%2Fffj.1041",
+          "https://api.crossref.org/works/10.1002%2Fffj.3188"
+        ],
+        "changes": [
+          {
+            "path": [
+              "studies",
+              "composition-lemon-eucalyptus-2007",
+              "citationReview",
+              "sourceUrl"
+            ],
+            "beforePresent": true,
+            "before": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1177%2F1934578X0700200518%22&format=json&resultType=core",
+            "afterPresent": true,
+            "afterDigest": "7972eb0956a4aeaf68f23bcf93f69327e16d2b0fded3ce6faa038b645a3605c9"
+          },
+          {
+            "path": [
+              "studies",
+              "composition-eucalyptus-extract-2023",
+              "citationReview",
+              "sourceUrl"
+            ],
+            "beforePresent": true,
+            "before": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Fapp13179984%22&format=json&resultType=core",
+            "afterPresent": true,
+            "afterDigest": "a0895e8f02a5d8c0d6f6f8e67c066b4091f401de1e65bd3dd5a285f23815a600"
+          },
+          {
+            "path": [
+              "studies",
+              "composition-lemongrass-infusion-2014",
+              "citationReview",
+              "sourceUrl"
+            ],
+            "beforePresent": true,
+            "before": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1016%2Fj.jff.2014.07.003%22&format=json&resultType=core",
+            "afterPresent": true,
+            "afterDigest": "d37aee1eed1f1b6c149365e0520596fd44c40fb19aab8d4685e82887deecadb6"
+          },
+          {
+            "path": [
+              "studies",
+              "composition-cx01",
+              "citationReview",
+              "sourceUrl"
+            ],
+            "beforePresent": true,
+            "before": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1080%2F10412905.2014.982872%22&format=json&resultType=core",
+            "afterPresent": true,
+            "afterDigest": "98169146f50cdc7bff10e931efa334e7a29efafd988a688e4f9c37f8ddb2418e"
+          },
+          {
+            "path": [
+              "studies",
+              "composition-cx04",
+              "citationReview",
+              "sourceUrl"
+            ],
+            "beforePresent": true,
+            "before": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Fagriculture13010179%22&format=json&resultType=core",
+            "afterPresent": true,
+            "afterDigest": "e34aa978409b1971a11290828af57f4ee19014c0bcd087f5219ad99f6cafbc59"
+          },
+          {
+            "path": [
+              "studies",
+              "composition-cx07",
+              "citationReview",
+              "sourceUrl"
+            ],
+            "beforePresent": true,
+            "before": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1002%2Fffj.1041%22&format=json&resultType=core",
+            "afterPresent": true,
+            "afterDigest": "f86a2f530a6937d73b13db0a18fade6d0db68fb0336c06f5a8a71205d9cc37a8"
+          },
+          {
+            "path": [
+              "studies",
+              "composition-cx09",
+              "citationReview",
+              "sourceUrl"
+            ],
+            "beforePresent": true,
+            "before": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1002%2Fffj.3188%22&format=json&resultType=core",
+            "afterPresent": true,
+            "afterDigest": "319c94ec7b698ed901b18e8e5914801b1d9bae3cd7174c2f5aaed0a84fded60e"
           }
         ]
       }

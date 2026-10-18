@@ -74,6 +74,7 @@ test('Every publication has an independent citation check, separate from endpoin
   assert.equal(regs.studies.filter(s => s.summaryReview.status === 'abstract-screened').length, 154);
   assert.deepEqual(regs.studies.filter(s => s.summaryReview.status === 'abstract-unavailable').map(s => s.id), ['composition-lemongrass-infusion-2014', 'composition-cx01']);
   assert.ok(assertions.some(a => a.verification.status === 'library-reviewed'), 'Abstract screening must not silently promote every oil-specific edge');
+  all(regs.studies.filter(s => s.citationReview.provider === 'Crossref'), s => s.citationReview.sourceUrl.startsWith('https://api.crossref.org/works/'), 'Fallback provenance must identify the provider actually used');
 });
 test('Seven incorrect PubMed destinations are corrected without changing stable study IDs', () => {
   for (const [id, pmid] of Object.entries({
