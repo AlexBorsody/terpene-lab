@@ -42,8 +42,8 @@ async function choose(page, pathway = 'oils') { await page.locator(`[data-blend-
 async function add(page, id) { await page.locator(`[data-add-oil="${id}"]`).click(); }
 async function selected(page) { return page.locator('[data-portion]').evaluateAll(nodes=>nodes.map(node=>({id:node.dataset.portion,percent:Number(node.value)}))); }
 async function assertNoPurchase(page) {
-  assert.equal(await page.locator('#blend-checkout').count(), 0, 'Unknown production safety and checkout config must never expose purchase');
-  assert.match(await page.locator('#blend-results').innerText(), /Ordering (opens|remains unavailable)/);
+  assert.equal(await page.locator('#blend-checkout').count(), 0, 'Missing real Shopify variant must never expose purchase');
+  assert.match(await page.locator('#blend-results').innerText(), /Shopify ordering is being set up/);
 }
 async function assertNoOverflow(page, label) {
   const sizes = await page.evaluate(()=>({width:innerWidth,html:document.documentElement.scrollWidth,body:document.body.scrollWidth,builder:document.getElementById('blend-builder').getBoundingClientRect().right}));

@@ -1,8 +1,8 @@
 # Terpene Lab Blend Builder: Spec for Codex
 
-Date: 2026-10-17
-Owner decisions: Alex Borsody (locked in chat, 2026-10-17)
-Status: Ready to build. Pricing set by Habib per Alex's delegation.
+Date: 2026-10-18
+Owner decisions: Alex Borsody (original 2026-10-17, Shopify flow updated 2026-10-18)
+Status: Builder implemented. Owner-approved update: $40, local recipes, one Shopify Recipe property, manual review before mixing.
 
 ## One-line summary
 
@@ -17,7 +17,7 @@ The logic and the information are as complex as possible. The delivery, shipping
 - This is a BUYABLE product, not a free tool and not education-only.
 - Ships as the standard 8 oz Sunny's Shield spray bottle, standard base, standard label.
 - NO custom labels, no custom packaging, nothing new in fulfillment. It slots into the existing pack-and-ship flow (Pirate Ship, 4x6 labels).
-- Price: flat $45 per custom blend. No per-oil pricing, no tiers, no adders. Price does not change with oil selection.
+- Price: flat $40 per custom blend. No per-oil pricing, no tiers, no adders. Price does not change with oil selection.
 
 ## Terminology
 
@@ -35,10 +35,13 @@ The logic and the information are as complex as possible. The delivery, shipping
    - Live blend summary updates as percentages change.
 3. Generate:
    - Full results screen (see Information Engine below).
-   - Safety evaluation runs before purchase is possible (see Safety Rules).
+   - Research cautions and sourced limit checks stay visible (see Safety Rules). All custom recipes require manual review before mixing.
 4. Purchase:
-   - Add to cart / checkout through the existing Sunny's Shield Shopify setup as its own product ("Custom Blend" SKU), flat $45.
-   - The generated blend (oils + percentages) attaches to the order so fulfillment knows exactly what to mix.
+   - Add to cart / checkout through the existing Sunny's Shield Shopify setup as its own product ("Custom Blend" SKU), flat $40.
+   - One readable line-item property named Recipe carries the oil names/IDs, relative percentages, recipe/catalog versions, name and pet context to the merchant for review before mixing.
+   - Use a Shopify cart permalink from the Lab. No Lab login, backend, webhook, token or Plus dependency. Shopify owns payment, shipping and the actual variant price.
+   - Draft choices and saved recipes stay in local browser storage; share links are the portable fallback.
+   - A verified product variant must be configured before the handoff is enabled. Do not invent a variant, final oil concentration or base version.
 
 ## Information engine (the complex part)
 
@@ -55,9 +58,11 @@ For every generated blend, show as much verified information as exists:
 ## Safety rules (hard requirements)
 
 - No general percentage caps. Users may set percentages freely BELOW safe limits.
-- HARD CAP: any oil percentage above its documented safe limit for a leave-on spray blocks purchase until lowered. The block message names the oil, the limit, and the source.
+- HARD CAP: where sourced final loading and sourced limits are known, a finished-product oil concentration above its documented leave-on limit blocks the handoff until corrected. The message names the oil, limit and source. Relative oil-mixture shares are never compared directly to finished-product limits.
 - Total blend load cap likewise applies if the data supports one.
 - All limit data lives in the oil data records (see Data), never hardcoded in UI logic.
+- Missing research, inventory or formulation data stays explicitly unknown and is reviewed by the merchant before mixing. It is not treated as automatic safety approval or as a requirement to build a separate checkout-validation backend.
+- Customer-editable order properties are recipe requests, not validated manufacturing instructions. The merchant checks every order, including missing or altered properties, before fulfillment.
 - If research on an oil is thin, the results say so plainly ("limited research") instead of filling space.
 
 ## Data model

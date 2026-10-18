@@ -13,17 +13,18 @@
  * interactions: [{withOilId, severity: 'warning'|'blocker', reason, source}].
  * Optional sensitizationRisk: 'high' enables an explicitly labeled combination
  * warning; free-form sensitizationNotes are never interpreted as numeric data.
- * availability: only 'available' enables purchase. Oil safetyReviewStatus must
- * be 'approved'. Unknown reviews fail closed. product.checkoutAllowedHosts is
- * a nonempty, unique list of bare DNS hostnames for the returned checkout URL.
+ * Review findings are descriptive, not an automatic safety certification.
+ * A manual formulation review is required for every custom blend.
  *
  * validateRecipe -> {valid, errors, recipe: canonicalRecipe|null}.
- * encodeRecipe / decodeRecipe / normalizePercentages / checkoutPayload throw
+ * encodeRecipe / decodeRecipe / normalizePercentages / cartPermalink throw
  * BlendValidationError (with .errors) on invalid input.
- * evaluateSafety -> {canPurchase, blockers, warnings}.
- * All readiness here is CLIENT-ONLY. The checkout server must independently
- * reload its trusted catalog, validate the recipe and safety, enforce price,
- * availability and product variant, and reject direct-request bypasses.
+ * evaluateSafety -> {requiresReview: true, blockers, warnings}.
+ * cartPermalink -> {url, recipe, properties: {Recipe: string}, encodedRecipe}.
+ * Product/store/variant come only from the trusted catalog configuration, never
+ * the recipe. Shopify sets the real variant price and checks its availability.
+ * The encoded recipe is editable customer input, not signed manufacturing
+ * approval. No backend, authentication, tokens, or network calls are required.
  */
 (function (root, factory) {
   'use strict';
@@ -255,55 +256,44 @@
         !/^https:\/\/[^\s/?#:@]+(?::\d+)?(?:[/?#][^\s]*)?$/.test(source.url)) return null;
     return {label: source.label.trim(), url: source.url};
   }
-  function safeEndpoint(value) {
-    return typeof value === 'string' && (/^\/(?!\/)[A-Za-z0-9_./~%-]+$/.test(value) ||
-      /^https:\/\/[^\s/?#:@]+(?::\d+)?(?:\/[^\s#]*)?$/.test(value));
-  }
-  function validCheckoutHosts(value) {
-    if (!Array.isArray(value) || value.length < 1 || value.length > 16 || !dense(value)) return false;
-    var domains = new Set();
-    return value.every(function (host) {
-      if (typeof host !== 'string' || host.length > 253 ||
-          !/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+$/i.test(host) ||
-          /^\d+(?:\.\d+){3}$/.test(host) || domains.has(host.toLowerCase())) return false;
-      domains.add(host.toLowerCase());
-      return true;
-    });
+  function storeOrigin(value) {
+    // Accept only an HTTPS DNS origin, with an optional single root slash.
+    // In particular, do not allow credentials, ports, IP literals, URL syntax
+    // tricks, paths, queries, or fragments in a configured destination.
+    if (typeof value !== 'string') return null;
+    var match = /^https:\/\/([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+)\/?$/i.exec(value);
+    if (!match || match[0] !== value || match[1].length > 253) return null;
+    var hostname = match[1].toLowerCase();
+    var tld = hostname.split('.').pop();
+    // Numeric/hexadecimal last labels can be interpreted as IPv4 by browsers.
+    if (!/^[a-z](?:[a-z0-9-]*[a-z0-9])?$/.test(tld)) return null;
+    return 'https://' + hostname;
   }
   function validVariant(value) {
-    return (typeof value === 'string' && /^[1-9]\d{0,19}$/.test(value)) ||
+    return (typeof value === 'string' && /^[1-9]\d{0,19}$/.test(value) && !/\D/.test(value)) ||
       (typeof value === 'number' && Number.isSafeInteger(value) && value > 0);
   }
   function formattedPercent(value) { return String(Math.round(value * 1000000) / 1000000) + '%'; }
 
   function evaluateSafety(recipe, data) {
     var validation = validateRecipe(recipe, data);
-    if (!validation.valid) return {canPurchase: false, blockers: validation.errors, warnings: []};
+    if (!validation.valid) return {requiresReview: true, blockers: validation.errors, warnings: []};
     recipe = validation.recipe;
     var catalog = catalogInfo(data);
     var product = object(catalog.config.product) ? catalog.config.product : {};
     var blockers = [];
     var warnings = [];
     var load = product.totalOilLoadPercent;
-    var loadKnown = validPercent(load);
     var loadSource = resolveSource(product.totalOilLoadSource, data);
+    var loadKnown = validPercent(load) && !!loadSource;
     var totalMax = product.totalOilMaxPercent;
     var totalMaxSource = resolveSource(product.totalOilMaxSource, data);
-    if (!loadKnown || !loadSource) blockers.push(issue('total_load_unknown', 'The finished spray oil concentration and its verified formulation source are required before purchase.'));
+    if (!loadKnown) blockers.push(issue('total_load_unknown', 'The finished spray oil concentration and its formulation source require manual review.'));
     if (!validPercent(totalMax) || !totalMaxSource) {
       blockers.push(issue('total_limit_unknown', 'The finished spray total oil-load safety limit and its source have not been verified.'));
     } else if (loadKnown && load > totalMax + 1e-10) {
       blockers.push(issue('total_limit_exceeded', 'The finished spray contains ' + formattedPercent(load) + ' essential oils, above the ' +
         formattedPercent(totalMax) + ' total limit. Source: ' + totalMaxSource.label + '.', {source: totalMaxSource}));
-    }
-    if (product.name !== 'Custom Blend' || product.price !== 45 || product.currency !== 'USD' || product.size !== '8 oz') {
-      blockers.push(issue('product_configuration', 'The standard 8 oz Custom Blend product must be configured at a flat $45 USD.'));
-    }
-    if (!validVariant(product.shopifyVariantId)) blockers.push(issue('checkout_variant_missing', 'A verified Custom Blend Shopify variant is required before purchase.'));
-    if (!safeEndpoint(product.checkoutEndpoint)) blockers.push(issue('checkout_endpoint_missing', 'A server-validated checkout endpoint has not been configured.'));
-    if (!validCheckoutHosts(product.checkoutAllowedHosts)) blockers.push(issue('checkout_hosts_missing', 'A verified checkout destination allowlist is required before purchase.'));
-    if (product.serverValidationVerified !== true) {
-      blockers.push(issue('server_validation_unverified', 'Checkout must independently enforce the recipe, safety limits, availability, variant, and $45 price before purchase is enabled.'));
     }
     var selectedIds = new Set(recipe.oils.map(function (entry) { return entry.id; }));
     var selected = recipe.oils.map(function (entry) { return {entry: entry, oil: catalog.oils.get(entry.id)}; });
@@ -317,7 +307,6 @@
       var maximum = blend.dermalMaxPercent;
       var maximumSource = resolveSource(blend.dermalMaxSource, data);
       if (blend.safetyReviewStatus !== 'approved') blockers.push(issue('safety_review_unapproved', name + ': the finished-spray safety review has not been approved.', extras));
-      if (blend.availability !== 'available') blockers.push(issue('oil_unavailable', name + ': production availability has not been confirmed.', extras));
       if (!validPercent(maximum) || !maximumSource) {
         blockers.push(issue('dermal_limit_unknown', name + ': no verified leave-on spray dermal maximum and source are available.', extras));
       } else if (loadKnown && concentration > maximum + 1e-10) {
@@ -371,49 +360,64 @@
         {oilIds: matching.map(function (row) { return row.oil.id; })}));
     });
     if (recipe.petContext) warnings.push(issue('pet_context_scope', 'A pet-safer assessment is context-specific and is not a claim that this spray is safe to apply to pets.'));
-    return {canPurchase: blockers.length === 0, blockers: blockers, warnings: warnings};
+    return {requiresReview: true, blockers: blockers, warnings: warnings};
   }
 
-  function checkoutPayload(recipe, data) {
+  function cartPermalink(recipe, data) {
     var validation = validateRecipe(recipe, data);
     if (!validation.valid) throw new BlendValidationError(validation.errors);
-    var safety = evaluateSafety(validation.recipe, data);
-    if (!safety.canPurchase) throw new BlendValidationError(safety.blockers);
     var canonical = validation.recipe;
     var catalog = catalogInfo(data);
-    var product = catalog.config.product;
+    var product = object(catalog.config.product) ? catalog.config.product : {};
+    var origin = storeOrigin(product.shopifyStoreUrl);
+    var errors = [];
+    if (product.name !== 'Custom Blend' || product.price !== 40 || product.currency !== 'USD' || product.size !== '8 oz') {
+      errors.push(issue('product_configuration', 'The standard 8 oz Custom Blend product must be configured at a flat $40 USD.'));
+    }
+    if (!origin) errors.push(issue('checkout_store_missing', 'A verified HTTPS Shopify store URL is required to continue to Shopify.'));
+    if (!validVariant(product.shopifyVariantId)) errors.push(issue('checkout_variant_missing', 'A verified Custom Blend Shopify variant is required to continue to Shopify.'));
+    if (product.baseVersion !== undefined && product.baseVersion !== null &&
+        (typeof product.baseVersion !== 'string' || !product.baseVersion.trim() ||
+         product.baseVersion.length > 120 || /[\u0000-\u001f\u007f]/.test(product.baseVersion))) {
+      errors.push(issue('product_configuration', 'A supplied base version must be a short, nonempty text identifier.'));
+    }
+    if (errors.length) throw new BlendValidationError(errors);
+    // Only explicitly sourced, known formulation violations prevent a request.
+    // Missing review/load/pet data remains visible for manual review, not a
+    // requirement for checkout or an implicit claim that the recipe is safe.
+    var knownViolations = evaluateSafety(canonical, data).blockers.filter(function (finding) {
+      return ['total_limit_exceeded', 'dermal_limit_exceeded', 'oil_interaction'].includes(finding.code);
+    });
+    if (knownViolations.length) throw new BlendValidationError(knownViolations);
     var encoded = encodeRecipe(canonical, data);
-    var properties = {
-      'Blend name': canonical.name || 'Custom Blend',
-      'Essential-oil shares': canonical.oils.map(function (entry) {
+    var lines = [
+      'Name: ' + (canonical.name || 'Custom Blend'),
+      'Recipe schema: v' + canonical.v + '; catalog: ' + canonical.catalogVersion,
+      'Oil mixture (relative portions, total 100%): ' + canonical.oils.map(function (entry) {
         var oil = catalog.oils.get(entry.id);
-        return (oil.name || entry.id) + ' [' + entry.id + '] ' + formattedPercent(entry.percent);
+        return (text(oil.name) ? oil.name.trim() : entry.id) + ' [' + entry.id + '] ' + formattedPercent(entry.percent);
       }).join('; '),
-      'Finished spray oil load': formattedPercent(product.totalOilLoadPercent),
-      'Finished spray concentrations': canonical.oils.map(function (entry) {
-        return entry.id + ': ' + formattedPercent(entry.percent * product.totalOilLoadPercent / 100);
-      }).join('; '),
-      'Pet context': canonical.petContext ? 'Yes' : 'No',
-      'Purported qualities': canonical.qualityIds.join(', ') || 'None selected',
-      'Product format': 'Standard 8 oz spray, standard base and label',
-      'Catalog version': canonical.catalogVersion,
-      'Recipe version': '1',
-      'Recipe code': encoded,
-      'Use disclaimer': 'Ingredient research does not establish finished-product effects. Purported qualities only; no medical claims.'
-    };
+      'Product: Custom Blend, standard 8 oz'
+    ];
+    if (product.baseVersion != null) lines.push('Base version: ' + product.baseVersion.trim());
+    if (canonical.petContext) lines.push('Customer context: pets may be present. Species and exposure require review.');
+    lines.push('Manual formulation review required before fulfillment. Oil shares are relative portions of the oil mixture, not finished-product concentrations.');
+    lines.push('Recipe code: ' + encoded);
+    var properties = {Recipe: lines.join('\n')};
+    var encodedProperties;
+    try { encodedProperties = base64Encode(utf8Bytes(JSON.stringify(properties))); }
+    catch (_) { fail('product_configuration', 'The product recipe metadata must contain valid Unicode text.'); }
     return {
-      endpoint: product.checkoutEndpoint,
-      items: [{id: String(product.shopifyVariantId), quantity: 1, properties: properties}],
+      url: origin + '/cart/' + String(product.shopifyVariantId) + ':1?properties=' + encodedProperties,
       recipe: canonical,
-      encodedRecipe: encoded,
-      expectedPrice: {amount: 45, currency: 'USD'},
-      validation: {mode: 'client-only', requiresServerValidation: true}
+      properties: properties,
+      encodedRecipe: encoded
     };
   }
   return Object.freeze({
     normalizePercentages: normalizePercentages, validateRecipe: validateRecipe,
     encodeRecipe: encodeRecipe, decodeRecipe: decodeRecipe, evaluateSafety: evaluateSafety,
-    checkoutPayload: checkoutPayload, BlendValidationError: BlendValidationError,
+    cartPermalink: cartPermalink, BlendValidationError: BlendValidationError,
     limits: Object.freeze({maxOils: MAX_OILS, maxNameLength: MAX_NAME_LENGTH, maxEncodedLength: MAX_ENCODED_LENGTH})
   });
 });

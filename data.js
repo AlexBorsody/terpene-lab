@@ -18,6 +18,10 @@
    blendBuilder: versioned, descriptive starter catalog and product configuration.
      product totalOilLoadPercent and totalOilMaxPercent refer to the finished
      product, not to percentages within the essential-oil portion.
+     product.shopifyStoreUrl is the verified storefront origin; shopifyVariantId
+     stays null until the $40 USD / standard 8 oz Custom Blend variant is verified.
+     Cart permalinks carry one readable Recipe property and require manual review.
+     baseVersion is optional; null means no base identifier has been supplied.
    oils[].blend: opt-in builder records. Missing/null safety values mean unknown,
      never safe. availability:'unconfirmed' is not an inventory assertion.
      qualityMappings: { qualityId, evidenceTier, summary, studyId, pmid, url,
@@ -82,17 +86,16 @@ const TERPENE_DATA = {
     ],
     "product": {
       "name": "Custom Blend",
-      "price": 45,
+      "price": 40,
       "currency": "USD",
       "size": "8 oz",
       "totalOilLoadPercent": null,
       "totalOilLoadSource": null,
       "totalOilMaxPercent": null,
       "totalOilMaxSource": null,
+      "shopifyStoreUrl": "https://sunnysshield.com",
       "shopifyVariantId": null,
-      "checkoutEndpoint": null,
-      "checkoutAllowedHosts": [],
-      "serverValidationVerified": false
+      "baseVersion": null
     },
     "starterOilIds": [
       "lavender",

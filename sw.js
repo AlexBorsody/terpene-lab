@@ -1,15 +1,15 @@
 // Generated release and SHA-256 map: run python3 scripts/build-pwa.py after edits.
-const RELEASE = "7f8b4c73dae6d153";
+const RELEASE = "b7512624e0ad5baf";
 const ASSETS = {
-  "index.html": "a2e71c71a933edda0aac2740fdf54c63a93d68f8480c8d2ebc80a76e274dc924",
+  "index.html": "e9efbaaa3468a61bb7a3ad4fc25f7d218f67c2deae73fa53dc5f43b38b152977",
   "styles.css": "08c7926bfecb8936ad1310172da1fbf27de8bdcafff5f820c1970c73c3faa1ff",
   "app.js": "ff4f7c513af9f01ccdbf4113c54e786ac21d6b7a92c45c9a3ca565ec275abc17",
   "chemistry.js": "bc9a042f59ea993fd0df0dba5ac187579745ce158748dfa3686657f2c5b07507",
-  "data.js": "b553712bcc1a94257f43d89854b1b669c2ba035e7cd1768f6874fe523dd0dc2e",
+  "data.js": "c2233102677bd260a7ad00e451e6d070382d05d4f1e639933ff4e134f5c7ca61",
   "pwa.js": "a52f02fdcb6a47168e81c5c7f7eff4c332da8c6952b05e60b9bd8fff9901f21f",
-  "blend-engine.js": "996aabaca58f1ef43566dfe0126d7c6f9a0cad182654ce4167d6dd4041caa99c",
-  "blend-builder.js": "c3e661b8ec708ca2796d465a1ee301a4fbd7e67399bdefd39b095013716452d9",
-  "blend-builder.css": "780b169ef110b2a1c18151b5668137d30a8acd01a4ac7a528b57434cae8be361",
+  "blend-engine.js": "8fcef37856c17e78e0b38611f3db93833b0ffaed4ee657648be238fc759753cd",
+  "blend-builder.js": "aa6408aa954ed971eaed47cca4cce530cfede1b417bd724b6e47a36c420c371f",
+  "blend-builder.css": "50a13be928079f0169ace8e2502ab059e3c6360791ce08d1ef6367b8ea27506d",
   "manifest.webmanifest": "e85307edce52944b5afd4da7ad5082893d4a4dff1fd25a8abed6469eeaee1271",
   "shield-icon.svg": "b6a4fa5ec8968f651ec6bb9441f4cb6a3c5c5b333c45628c2e43ca348d2a5562",
   "vendor/echarts-5.5.1.min.js": "e84270bd0cd5bdf60fefc26d00c2a391cb2e81f4d26a7a9ee16185a54773a3cf",

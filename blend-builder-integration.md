@@ -1,147 +1,136 @@
-# Custom Blend: implementation and launch gate
+# Custom Blend: simple Shopify handoff
 
-The builder adds a focused `?tab=blend` view to the existing static Lab. It uses
-whole essential oils, a maximum of five ingredients, versioned recipes, and the
-existing literature dataset. It does not create a medically validated formula.
+The Lab is a static, account-free builder at `lab.sunnysshield.com`. Customers
+choose up to five oils and relative portions totaling 100%, then continue to
+Shopify for a **$40 USD, standard 8 oz Custom Blend**. Every custom recipe is
+reviewed manually before mixing. No Lab backend, webhook, API token, extra login
+or Shopify Plus feature is required.
 
-## What works now
+## Current configuration
 
-- Equal qualities-first and oils-first entry points; selected qualities are
-  research-topic filters, never efficacy rankings.
-- One to five oils, relative oil-mixture percentages, proportional rebalancing,
-  live totals, and validation before results/save/share.
-- Written study summaries with evidence tiers, limitations and primary-source
-  links. Counterevidence is retained. Isolated-constituent findings are not
-  promoted into whole-oil claims.
-- Per-oil chemistry with the existing provenance checks. Unverified legacy
-  ranges remain hidden rather than becoming invented typical percentages.
-- Cautions alongside research, pet-context warnings, and explicit missing data.
-- Local drafts and up to 12 saved recipes; account-free, portable share links.
-  Anyone with a link can read its recipe name and contents. No personal profile,
-  account token, cart token or payment information is encoded.
-- Offline exploration using the existing integrity-checked PWA release.
+`data.js` → `TERPENE_DATA.blendBuilder.product` is the product configuration:
 
-## Product decisions
+- `name: "Custom Blend"`, `price: 40`, `currency: "USD"`, `size: "8 oz"`.
+- `shopifyStoreUrl: "https://sunnysshield.com"`, the verified existing storefront.
+- `shopifyVariantId: null` until the actual Custom Blend variant is verified.
+- `baseVersion: null` unless the merchant supplies a real base version.
+- Existing final-loading/limit fields stay unknown unless supported by reviewed
+  formulation data. No dilution, base composition or stock is inferred.
 
-Custom Blend is a flat **$45 USD**, standard **8 oz Sunny's Shield spray**,
-standard base, bottle, label, and shipping workflow. There are no oil adders,
-custom packaging options, subscriptions, or additional product sizes.
+As of 2026-10-18, the public store does not list a Custom Blend product. The Lab
+therefore shows a concise setup message rather than an active purchase link.
+The handoff is implemented and tested with fixtures; no real custom order,
+merchant order-property display or payment has been verified.
 
-Percentages in a recipe add to 100% **of the essential-oil mixture**. They are
-not percentages in the finished spray. The finished-product oil loading must
-be supplied separately and reviewed before any purchase is possible. For a
-configured final oil load `L` and recipe portion `P`, the oil concentration
-checked against its sourced finished-product dermal maximum is `L * P / 100`.
+## Cart link and recipe field
 
-Do not fill missing fields with conventional dilution guesses or infer loading
-from an older Sunny's Shield recipe. A nominal bottle size does not establish
-mass, density, stability, preservation, dispersion, exposure or safe loading.
-The static builder is not a manufacturing instruction generator.
+`BLEND_ENGINE.cartPermalink(recipe, data)` revalidates the canonical recipe and
+configured product, then returns `{url, recipe, properties, encodedRecipe}`.
+The link is constructed only from the trusted store configuration:
 
-## Data ownership and review
+`https://sunnysshield.com/cart/{verified-variant-id}:1?properties={encoded-properties}`
 
-`TERPENE_DATA.blendBuilder` contains the catalog version, controlled quality
-labels, product configuration and starter IDs. Each `oils[].blend` contains
-quality mappings, availability, review status, sourced dermal limits, separate
-caution thresholds, phototoxicity, sensitization, pet context and interactions.
-The eight starter oils are an exploratory collection; inventory is unconfirmed.
+`encoded-properties` is UTF-8 Base64URL encoding of a JSON object containing
+exactly one string property, **Recipe**. The readable value includes:
 
-The shipped records intentionally contain null limits and unconfirmed stock.
-Legacy `oil.safety` text is retained for audit but is not a verified purchase
-rule. `legacySafetyNotesVerified:false` and `safetyReviewStatus:'unverified'`
-make that distinction explicit. No source-linked final safety review has been
-supplied. German chamomile and ginger can be added once their identity,
-whole-oil research, supplier preparation and review records are available.
+- Recipe name, recipe schema version and catalog version.
+- Oil names, stable oil IDs and relative percentages totaling 100% of the oil
+  mixture. These are not finished-spray concentrations.
+- Pet context as a customer-supplied review flag, not a pet-safety claim.
+- Base version only if actually configured.
+- A canonical recipe code for exact reconstruction and manual-review wording.
 
-`blend-engine.js` documents the machine-readable source, caution and interaction
-schemas. All percentages used in safety records refer to the finished product.
-An unknown source or malformed safety record blocks checkout; an absence of
-warnings is not evidence of safety. Pet context requires an explicit,
-source-backed review, not just an oil being absent from a toxicity list.
-Review must also cover combined/constituent exposure and the intended spray
-application; individual dermal caps alone are insufficient.
+There are no efficacy promises, safety certificates, automatic approvals,
+customer addresses, emails, tokens or payment details in the property. Shopify
+collects checkout information and owns the actual price, taxes and shipping.
+The displayed $40 is not a client-side override of the Shopify variant price.
 
-Update `catalogVersion` after material recipe/safety changes. Old or unsupported
-catalog links are rejected with a visible message, rather than silently
-substituting oils or accepting stale safety assumptions.
+The property belongs to this order line, not the product description or the
+order-wide note. Only one custom product/quantity is sent per handoff. Shopify's
+permalink documentation permits up to 25 properties on the first product; this
+implementation deliberately uses only one. It does not promise merging an
+existing cart or preserving multiple custom blends across separate visits.
+Customers are prompted to check cart contents before paying.
 
-## Shopify boundary
+The anchor is rebuilt whenever the recipe changes, revalidated on click and
+targets the top window so embedded Lab users reach Shopify checkout outside the
+iframe. Draft choices are persisted before navigation. There is no asynchronous
+checkout POST, returned redirect URL or application server to configure.
 
-The Lab is hosted on GitHub Pages at `lab.sunnysshield.com`, outside a Shopify
-theme. Do not call cross-origin Shopify Ajax `/cart/add.js`; the Ajax API is
-intended for Shopify-hosted themes. No Custom Blend product or variant ID has
-been verified in this repository, and no checkout service is deployed here.
+## Validation and manual review
 
-The optional client adapter POSTs the engine's canonical `checkoutPayload` to
-`product.checkoutEndpoint`. It redirects only to an HTTPS URL whose hostname
-is in `product.checkoutAllowedHosts`. All these settings default to unavailable.
-The response contract is `{ "checkoutUrl": "https://<verified-host>/..." }`.
-Network failures, malformed responses, and unapproved destinations keep the
-recipe available and never report an order as completed. One in-flight request
-is allowed per button. There is no payment collection in this repository.
+Schema validation continues to reject missing/unknown oils, duplicates, more
+than five oils, invalid percentages, totals other than 100%, unsupported recipe
+or catalog versions, invalid names and extra fields. Oils-first recipes never
+retain invisible selected qualities, including older saved/shared recipes.
+Store URLs must be HTTPS root origins without credentials, query, fragment or
+custom port. Variant IDs must be valid positive numeric IDs; recipes cannot
+change the destination or product configuration.
 
-A production service must independently:
+Research and cautions remain equally prominent. Missing formulation, stock or
+ingredient-review data is information for manual review, not an automatic
+approval or a requirement for a separate checkout service. If actually sourced
+final loading and a sourced hard limit establish an excess, or a sourced
+blocking interaction exists, the Lab does not offer the handoff until corrected.
 
-1. Validate the payload schema, recipe/catalog versions and allowed oil IDs.
-2. Re-read current inventory, reviewed formula loading, oil and combined limits,
-   pet context, and approval state from trusted server-side data.
-3. Resolve the real Custom Blend SKU/variant and enforce the $45 USD price.
-   Never trust client price, variant, attributes or readiness flags.
-4. Store an immutable canonical recipe and a server-generated approval identity
-   for fulfillment; attach readable oil names/portions, recipe version, review
-   reference and finalized loading to the actual Shopify order. Customer name
-   fields and arbitrary line attributes must not become mixing instructions.
-5. Create a Shopify cart or approved draft-order handoff with line properties,
-   and verify the actual checkout/order preserves the correct recipe. Exercise
-   accelerated checkout, direct variant purchase, altered attributes, old PWA
-   clients, quantities, cart merging, out-of-stock changes and duplicate clicks.
-6. Reject unapproved orders at the authoritative checkout/approval boundary.
-   A disabled browser button or a signed-looking client attribute is insufficient.
+The browser is not an enforcement boundary. Anyone can alter a URL or buy the
+variant directly. Every order must be treated as an unreviewed recipe request,
+including orders without a Recipe property. Before mixing, the merchant checks
+the oils and stock, proportions, final formulation/loading, base, application,
+combined risks and pet context. Missing, changed or unsuitable requests require
+merchant resolution before fulfillment; no automatic mixing workflow is implied.
 
-There are two possible production approaches. Choose based on the shop's real
-plan and operations, not an assumption in this static app:
+The Lab does not invent a refund policy or guarantee fulfillment of every
+requested combination. The merchant's product page should explain the actual
+review and resolution policy.
 
-- A verified app-backed cart and checkout validation integration, available on
-  the actual shop, that checks a server-approved recipe. Shopify Functions
-  availability depends on app distribution and plan; a bespoke custom Function
-  must not be assumed to work on a non-Plus store.
-- Manual formula review followed by an approved-recipe draft order. The custom
-  SKU must not permit arbitrary unreviewed direct purchases. The customer-facing
-  review request and merchant review workflow are not implemented or faked here.
+## Enable the real handoff
 
-Set `serverValidationVerified:true` only after an end-to-end test proves that
-unreviewed/tampered recipes cannot be purchased. Merely deploying an endpoint
-or setting an admin flag does not constitute verification. Production checkout
-configuration requires a new reviewed change; share links cannot enable it.
+1. Create or identify the actual standard 8 oz Custom Blend variant in Shopify,
+   confirm $40 USD, availability and the merchant's manual review process.
+2. Verify the numeric variant ID and storefront, then set `shopifyVariantId` in
+   a reviewed change. Do not paste credentials or a Shopify Admin API token.
+3. Verify a test handoff on the actual store: correct product/price/quantity,
+   Unicode recipe, readable Recipe property, changed recipe, existing cart,
+   mobile/embedded navigation and unavailable product behavior. Inspect the
+   merchant order line with an authorized test order before claiming end-to-end
+   order verification. No paid order is part of the current implementation.
+4. Keep fulfillment manual and review orders missing or carrying altered recipe
+   data. A client-rendered link is not safety certification.
 
-Official references:
-- [Shopify Ajax API scope](https://shopify.dev/docs/api/ajax)
-- [Storefront Cart API](https://shopify.dev/docs/storefronts/headless/building-with-the-storefront-api/cart/manage)
-- [Cart and Checkout Validation](https://shopify.dev/docs/api/functions/latest/cart-and-checkout-validation)
-- [Shopify Functions availability](https://shopify.dev/docs/apps/build/functions)
+## Local cache and sharing
+
+The existing `terpene-lab:blend:v1` local-storage record holds the draft and up to
+12 saved recipes. It includes the name, starting path, visible selected
+qualities, oils, percentages and pet context. No account is created. Browser
+storage can be cleared, blocked or device-specific; share links provide a
+portable fallback. Anyone with a share link can read its recipe and name.
+No Shopify cart secret is stored in those links or cached by the Lab.
+
+The integrity-checked PWA caches the explorer for offline use. Shopify checkout
+still requires a network connection. After asset edits, regenerate `index.html`
+and `sw.js` with `python3 scripts/build-pwa.py`; existing installed clients use
+the app's update control to accept the new release.
 
 ## Verification
 
 ```sh
 python3 scripts/build-pwa.py
-node --check blend-engine.js && node --check blend-builder.js
 node tests/blend-engine.cjs
 node tests/chemistry.cjs
 node tests/research-labels-unit.cjs
 node tests/pwa-updates.cjs
-# With Playwright and Chromium installed:
-export PLAYWRIGHT_MODULE=playwright
-export CHROME_PATH=/path/to/chromium
+# Playwright + Chromium and local HTTP server required:
 node tests/pwa.cjs
 python3 -m http.server 8000
-# In another shell with the same browser variables:
 node tests/browser.cjs
 node tests/research-labels.cjs
 node tests/blend-browser.cjs
 node tests/blend-checkout.cjs
 ```
 
-Synthetic engine test limits are fixtures only and must never be copied into
-production data. Browser tests do not purchase anything. The checkout-adapter suite uses explicitly synthetic in-memory records and intercepts all test POSTs locally, with external traffic blocked. Regenerate and commit
-`index.html` and `sw.js` after changing any shipped asset, including the new
-builder CSS/JS; CI checks release integrity and regressions.
+The handoff browser suite uses synthetic variant/store fixtures and intercepts
+all external navigation. It never reaches Shopify, creates an order or collects
+payment. Synthetic safety values are fixtures, not production recommendations.
+
+Official reference: [Shopify cart permalinks and line-item properties](https://shopify.dev/docs/apps/build/checkout/create-cart-permalinks).

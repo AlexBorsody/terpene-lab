@@ -1,10 +1,10 @@
-/* Optional checkout-adapter browser regressions. THIS FILE USES SYNTHETIC DATA.
- * No values below are production approvals or formulation recommendations.
- * Each isolated page patches only its in-memory catalog. Every checkout POST is
- * intercepted and fulfilled locally; all external traffic is aborted. Nothing
- * reaches a backend, Shopify, or any checkout destination.
+/* Minimal Shopify cart-permalink regressions. ALL merchant/configuration/safety
+ * fixtures below are SYNTHETIC and are not production approvals or formulas.
+ * Only the local TEST_URL origin may receive real GET requests. All non-GET
+ * requests and all external traffic are blocked. The two deliberate handoffs
+ * to a reserved .test merchant are fulfilled in Playwright with an inert page.
+ * No backend, merchant, Shopify, payment, or order request leaves these tests.
  *
- * Run with the same local HTTP server/environment as tests/blend-browser.cjs:
  * TEST_URL=http://127.0.0.1:8000 PLAYWRIGHT_MODULE=playwright
  * CHROME_PATH=/path/to/chromium node tests/blend-checkout.cjs
  */
@@ -12,266 +12,429 @@ const {chromium} = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const assert = require('node:assert/strict');
 const base = (process.env.TEST_URL || 'http://127.0.0.1:8000').replace(/\/$/,'');
 const origin = new URL(base).origin;
-const endpoint = '/__test_checkout';
-const allowedHost = 'checkout.blend-fixture.test';
-const approvedButNeverVisited = `https://${allowedHost}/never-open-this-test-checkout`;
-const failures = [];
+const STORE = 'https://merchant.blend-fixture.test';
+const VARIANT = '123456789';
+const STORAGE = 'terpene-lab:blend:v1';
+const FIXTURE_NAME = 'TEST-ONLY checkout fixture A';
+const OILS = ['lavender','lemon','rosemary','peppermint','sweet-orange'];
+const failures = [], allWrites = [], allFetches = [];
 let browser;
 
-async function frameTurn(page) {
-  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
-}
-async function test(name,run) {
-  const context = await browser.newContext({serviceWorkers:'block',reducedMotion:'reduce'});
+async function test(name, run) {
+  const context = await browser.newContext({serviceWorkers:'block',reducedMotion:'reduce',viewport:{width:1440,height:1000}});
   const page = await context.newPage();
   page.setDefaultTimeout(8000);
-  const posts=[],unexpectedWrites=[],externalNavigations=[],pageErrors=[];
-  page.on('pageerror',error=>pageErrors.push(error.message));
+  const navigations = [], pageErrors = [];
+  const t = {context, expectedNavigations:0};
+  page.on('pageerror', error=>pageErrors.push(error.message));
   await context.route('**/*', async route=>{
-    const request=route.request(),url=new URL(request.url());
-    if(request.method()==='POST' && url.origin===origin && url.pathname===endpoint) {
-      // Save the route, but never continue it. The test will fulfill it locally.
-      posts.push({route,request,payload:request.postDataJSON(),answered:false});
-      return;
-    }
-    if(!['GET','HEAD','OPTIONS'].includes(request.method())) {
-      unexpectedWrites.push(`${request.method()} ${request.url()}`);
+    const request = route.request(), url = new URL(request.url());
+    if (request.method() !== 'GET') {
+      allWrites.push(`${name}: ${request.method()} ${request.url()}`);
       return route.abort('blockedbyclient');
     }
-    if(url.origin!==origin) {
-      if(request.isNavigationRequest()) externalNavigations.push(request.url());
+    if (['fetch','xhr'].includes(request.resourceType())) {
+      allFetches.push(`${name}: ${request.resourceType()} ${request.url()}`);
+      return route.abort('blockedbyclient');
+    }
+    if (url.origin !== origin) {
+      if (request.isNavigationRequest()) {
+        const mainFrame = request.frame() === page.mainFrame();
+        navigations.push({url:request.url(),method:request.method(),mainFrame});
+        if (navigations.length <= t.expectedNavigations && mainFrame && url.origin === STORE && url.pathname === `/cart/${VARIANT}:1`) {
+          // This is a local mock response, never route.continue()/route.fetch().
+          return route.fulfill({status:200,contentType:'text/html',body:'<!doctype html><title>Synthetic handoff only</title><h1 id="mock-handoff">Intercepted test handoff. No merchant contacted.</h1>'});
+        }
+      }
       return route.abort('blockedbyclient');
     }
     return route.continue();
   });
   try {
-    await page.goto(base+'/?tab=blend');
-    await page.locator('[data-blend-path="oils"]').waitFor();
-    await page.evaluate(({endpoint,allowedHost})=>{
-      const source={label:'TEST-ONLY synthetic reviewed formulation; NOT production data',url:'https://example.test/test-only-synthetic-review'};
-      Object.assign(TERPENE_DATA.blendBuilder.product,{
-        name:'Custom Blend',price:45,currency:'USD',size:'8 oz',
-        totalOilLoadPercent:2,totalOilLoadSource:{...source},
-        totalOilMaxPercent:3,totalOilMaxSource:{...source},
-        shopifyVariantId:'123456789',checkoutEndpoint:endpoint,
-        checkoutAllowedHosts:[allowedHost],serverValidationVerified:true
-      });
-      const lavender=TERPENE_DATA.oils.find(oil=>oil.id==='lavender');
-      Object.assign(lavender.blend,{
-        enabled:true,availability:'available',safetyReviewStatus:'approved',
-        dermalMaxPercent:2,dermalMaxSource:{...source},phototoxic:false,
-        sensitizationNotes:'TEST-ONLY synthetic review note. Not a production safety assessment.',
-        cautionThresholds:[],interactions:[],petSafer:true,petSource:{...source}
-      });
-      // Track cancellation and completion. ignoreAbort simulates a late transport
-      // response that cannot be cancelled, exercising the sequence/snapshot gate.
-      const actualFetch=window.fetch.bind(window);
-      window.checkoutFixture={ignoreAbort:false,started:[],settled:[]};
-      window.fetch=async(input,options)=>{
-        const url=new URL(typeof input==='string'?input:input.url,location.href);
-        if(url.pathname!==endpoint || (options?.method || 'GET')!=='POST') return actualFetch(input,options);
-        const fixture=window.checkoutFixture,index=fixture.started.length;
-        fixture.started.push({signal:options.signal,body:options.body});
-        try {
-          const response=await actualFetch(input,fixture.ignoreAbort?{...options,signal:undefined}:options);
-          const body=await response.text();
-          fixture.settled.push({index,kind:'response'});
-          return new Response(body,{status:response.status,headers:response.headers});
-        } catch(error) {
-          fixture.settled.push({index,kind:'error',name:error.name});throw error;
-        }
-      };
-    },{endpoint,allowedHost});
-    await page.locator('[data-blend-path="oils"]').click();
-    await page.locator('[data-add-oil="lavender"]').click();
-    await page.locator('#blend-name').fill('TEST-ONLY checkout fixture A');
-    await page.locator('#blend-generate').click();
-    assert.equal(await page.locator('#blend-checkout').count(),1,'Synthetic approved fixture enables only the test adapter');
-    assert.equal(await page.locator('#blend-checkout').isEnabled(),true);
-    const controls={
-      posts,
-      async started(count) {
-        await page.waitForFunction(count=>window.checkoutFixture.started.length===count,count);
-        // The browser fetch call precedes Playwright's route notification.
-        const deadline=Date.now()+8000;
-        while(posts.length<count && Date.now()<deadline) await new Promise(resolve=>setTimeout(resolve,10));
-        assert.equal(posts.length,count,`Exactly ${count} intercepted local POST request(s)`);
-      },
-      async reply(index,body,status=200) {
-        const post=posts[index];assert.ok(post,`POST ${index} exists`);assert.equal(post.answered,false);
-        post.answered=true;
-        await post.route.fulfill({status,contentType:'application/json',body:typeof body==='string'?body:JSON.stringify(body)});
-        await page.waitForFunction(index=>window.checkoutFixture.settled.some(item=>item.index===index),index);
-        await frameTurn(page);
-      },
-      async click() { await page.locator('#blend-checkout').click(); },
-      async ignoreAbort() { await page.evaluate(()=>window.checkoutFixture.ignoreAbort=true); },
-      async signalAborted(index) { return page.evaluate(index=>window.checkoutFixture.started[index].signal.aborted,index); },
-      async noNavigation() { assert.deepEqual(externalNavigations,[],'No stale/invalid response may attempt external navigation');assert.equal(new URL(page.url()).origin,origin); }
-    };
-    await run(page,controls);
-    assert.deepEqual(unexpectedWrites,[],'Every POST must target and stay inside the local mocked endpoint');
-    assert.deepEqual(externalNavigations,[],'No checkout navigation is permitted in these tests');
+    await run(page,t);
+    assert.equal(navigations.length,t.expectedNavigations,'Only explicitly mocked synthetic navigations are allowed');
+    for (const navigation of navigations) {
+      assert.equal(new URL(navigation.url).origin,STORE);
+      assert.equal(navigation.method,'GET');
+      assert.equal(navigation.mainFrame,true,'Handoff navigates the top frame, including inside a real iframe');
+    }
     assert.deepEqual(pageErrors,[],'No uncaught browser errors');
     console.log('PASS: '+name);
-  } catch(error) {
-    failures.push(`${name}: ${error.stack || error}`);console.error(`FAIL: ${name}: ${error.message}`);
-  } finally {
-    // Aborted/pending test requests are never released to a server during cleanup.
-    for(const post of posts) if(!post.answered) await post.route.abort('blockedbyclient').catch(()=>{});
-    await context.close();
-  }
+  } catch (error) {
+    failures.push(`${name}: ${error.stack || error}`);
+    console.error(`FAIL: ${name}: ${error.message}`);
+  } finally { await context.close(); }
+}
+
+async function ready(page) { await page.locator('[data-blend-path="oils"]').waitFor(); }
+async function configure(page, overrides = {}) {
+  await page.evaluate(({store,variant,overrides})=>{
+    // Deliberately leave all unknown formulation/safety fields unknown.
+    Object.assign(TERPENE_DATA.blendBuilder.product,{
+      name:'Custom Blend',price:40,currency:'USD',size:'8 oz',
+      shopifyStoreUrl:store,shopifyVariantId:variant,...overrides
+    });
+  },{store:STORE,variant:VARIANT,overrides});
+}
+async function open(page, configured = true) {
+  await page.goto(base+'/?tab=blend');
+  await ready(page);
+  if (configured) await configure(page);
+}
+async function create(page, name = FIXTURE_NAME) {
+  await page.locator('[data-blend-path="oils"]').click();
+  await page.locator('[data-add-oil="lavender"]').click();
+  await page.locator('#blend-name').fill(name);
+  await page.locator('#blend-generate').click();
+}
+async function draft(page) { return page.evaluate(key=>JSON.parse(localStorage.getItem(key)).draft,STORAGE); }
+async function regenerate(page) { await page.locator('#blend-generate').click(); }
+async function refresh(page) {
+  // Force the ordinary edit path after changing only an in-memory test fixture.
+  await page.locator('#blend-name').evaluate(input=>input.dispatchEvent(new Event('input',{bubbles:true})));
+}
+async function noVisibleCart(page) {
+  assert.equal(await page.locator('#blend-checkout:visible').count(),0,'Invalid/unconfigured drafts have no visible Shopify link');
+}
+function decodeHref(href) {
+  const url = new URL(href);
+  assert.equal(url.origin,STORE);
+  assert.equal(url.pathname,`/cart/${VARIANT}:1`,'Exactly one configured Custom variant, quantity one');
+  assert.deepEqual([...url.searchParams.keys()],['properties'],'Only line-item properties are sent');
+  assert.equal(url.hash,'');
+  const encoded = url.searchParams.get('properties');
+  assert.match(encoded,/^[A-Za-z0-9_-]+$/,'Properties use unpadded Base64URL');
+  const properties = JSON.parse(Buffer.from(encoded,'base64url').toString('utf8'));
+  assert.deepEqual(Object.keys(properties),['Recipe'],'Exactly one readable Recipe property');
+  assert.equal(typeof properties.Recipe,'string');
+  assert.ok(properties.Recipe.length>0);
+  assert.equal(Buffer.from(JSON.stringify(properties),'utf8').toString('base64url'),encoded,'UTF-8 property payload round-trips exactly');
+  const match = properties.Recipe.match(/^Recipe code: ([A-Za-z0-9_-]+)$/m);
+  assert.ok(match,'Readable Recipe retains a versioned recipe code');
+  const recipe = JSON.parse(Buffer.from(match[1],'base64url').toString('utf8'));
+  return {url,properties,recipe,encodedRecipe:match[1]};
+}
+async function cart(page) {
+  const anchor = page.locator('#blend-checkout');
+  assert.equal(await anchor.isVisible(),true);
+  assert.equal(await anchor.evaluate(node=>node.tagName),'A','Checkout is a browser-native link');
+  assert.equal(await anchor.innerText(),'Continue to Shopify · $40');
+  assert.equal(await anchor.getAttribute('target'),'_top');
+  assert.ok((await anchor.getAttribute('rel')).split(/\s+/).includes('noreferrer'));
+  const result = decodeHref(await anchor.getAttribute('href'));
+  const expected = await page.evaluate(key=>{
+    const recipe=JSON.parse(localStorage.getItem(key)).draft;
+    return BLEND_ENGINE.cartPermalink(recipe,TERPENE_DATA);
+  },STORAGE);
+  assert.equal(result.url.href,expected.url,'Visible href is derived from the current persisted draft');
+  assert.deepEqual(result.properties,expected.properties);
+  assert.deepEqual(result.recipe,expected.recipe);
+  assert.equal(result.encodedRecipe,expected.encodedRecipe);
+  return result;
+}
+async function seedUrl(page, overrides = {}) {
+  return page.evaluate(({base,overrides})=>{
+    const recipe={v:1,catalogVersion:TERPENE_DATA.blendBuilder.catalogVersion,name:'Shared fixture A',path:'oils',qualityIds:[],petContext:false,oils:[{id:'lavender',percent:100}],...overrides};
+    return `${base}/?tab=blend&recipe=${BLEND_ENGINE.encodeRecipe(recipe,TERPENE_DATA)}`;
+  },{base,overrides});
+}
+async function captureBeforeNavigation(page, scope = page) {
+  const captures = [];
+  await page.exposeFunction('__recordSyntheticHandoff',snapshot=>captures.push(snapshot));
+  await scope.evaluate(key=>{
+    document.addEventListener('click',event=>{
+      const anchor=event.target.closest('#blend-checkout');
+      if (anchor) window.__recordSyntheticHandoff({storage:localStorage.getItem(key),href:anchor.href,prevented:event.defaultPrevented});
+    });
+    // Prove the click handler persists again, rather than relying on an earlier edit.
+    localStorage.removeItem(key);
+  },STORAGE);
+  return captures;
 }
 
 (async()=>{
-  browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',args:['--no-sandbox']});
-  await test('path switch removes hidden qualities from synthetic checkout metadata',async(page,t)=>{
+  browser = await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',args:['--no-sandbox']});
+
+  await test('production ordering stays unavailable until a verified Custom variant is configured',async page=>{
+    await open(page,false);await create(page);
+    await noVisibleCart(page);
+    assert.match(await page.locator('#blend-checkout-status').innerText(),/Shopify ordering is being set up/);
+    const config=await page.evaluate(()=>TERPENE_DATA.blendBuilder.product);
+    assert.equal(config.shopifyVariantId,null,'Never substitute an existing merchant product');
+    assert.equal(config.price,40);assert.equal(config.currency,'USD');assert.equal(config.size,'8 oz');
+    assert.equal(config.totalOilLoadPercent,null);assert.equal(config.baseVersion,null);
+    assert.match(await page.locator('.blend-product').innerText(),/\$40/);
+    assert.doesNotMatch(await page.locator('#blend-builder').innerText(),/\$45/);
+    await configure(page);await refresh(page);await cart(page);
+  });
+
+  await test('unknown safety fields allow manual review without invented formula or certification claims',async page=>{
+    await open(page);await create(page);
+    const result=await cart(page);
+    assert.equal(result.recipe.name,FIXTURE_NAME);
+    assert.deepEqual(result.recipe.oils,[{id:'lavender',percent:100}]);
+    assert.match(result.properties.Recipe,/Lavender \[lavender\] 100%/);
+    assert.match(result.properties.Recipe,/Manual formulation review required/);
+    assert.match(result.properties.Recipe,/relative portions.*not finished-product concentrations/);
+    assert.doesNotMatch(result.properties.Recipe,/Base version:|certified|certification|Final spray concentration:|Finished spray oil load:/i);
+    assert.match(await page.locator('.blend-result-summary').innerText(),/Final spray concentration has not been set/);
+    assert.match(await page.locator('.blend-result-cautions').innerText(),/reviewed before mixing/);
+    const safety=await page.evaluate(key=>BLEND_ENGINE.evaluateSafety(JSON.parse(localStorage.getItem(key)).draft,TERPENE_DATA),STORAGE);
+    assert.equal(safety.requiresReview,true);
+    assert.ok(Array.isArray(safety.blockers));assert.ok(Array.isArray(safety.warnings));
+    assert.equal(Object.hasOwn(safety,'canPurchase'),false,'Transport readiness does not claim safety approval');
+  });
+
+  await test('oil changes, portions, quality path and pet context always regenerate the href',async page=>{
+    await open(page);await create(page);
+    let previous=await cart(page);
+    await page.locator('[data-add-oil="lemon"]').click();
+    let result=await cart(page);
+    assert.notEqual(result.url.href,previous.url.href);
+    assert.deepEqual(result.recipe.oils,[{id:'lavender',percent:50},{id:'lemon',percent:50}]);
+    await page.locator('[data-portion="lavender"]').fill('70');await noVisibleCart(page);
+    await page.locator('[data-portion="lemon"]').fill('30');await regenerate(page);
+    result=await cart(page);
+    assert.deepEqual(result.recipe.oils,[{id:'lavender',percent:70},{id:'lemon',percent:30}]);
+    await page.locator('[data-remove-oil="lemon"]').click();
+    result=await cart(page);assert.deepEqual(result.recipe.oils,[{id:'lavender',percent:100}]);
     await page.locator('[data-blend-path="qualities"]').click();
     await page.locator('[data-quality="calm"]').click();
+    result=await cart(page);assert.equal(result.recipe.path,'qualities');assert.deepEqual(result.recipe.qualityIds,['calm']);
+    previous=result;
     await page.locator('[data-blend-path="oils"]').click();
-    await t.click();await t.started(1);
-    const payload=t.posts[0].payload;
-    assert.equal(payload.recipe.path,'oils');assert.deepEqual(payload.recipe.qualityIds,[]);
-    assert.equal(payload.items[0].properties['Purported qualities'],'None selected');
-    assert.deepEqual(JSON.parse(Buffer.from(payload.encodedRecipe,'base64url').toString('utf8')).qualityIds,[]);
-    assert.deepEqual(payload.recipe.oils,[{id:'lavender',percent:100}]);
-    await t.reply(0,{error:'TEST-ONLY deliberate failure'},503);await t.noNavigation();
+    result=await cart(page);assert.notEqual(result.url.href,previous.url.href);
+    assert.equal(result.recipe.path,'oils');assert.deepEqual(result.recipe.qualityIds,[],'No hidden quality selections enter the order');
+    await page.locator('#blend-pets').check();
+    result=await cart(page);assert.equal(result.recipe.petContext,true);
+    assert.match(result.properties.Recipe,/pets may be present/);
+    assert.match(await page.locator('.blend-result-cautions').innerText(),/Pet context is on/);
+    await page.locator('#blend-pets').uncheck();
+    result=await cart(page);assert.equal(result.recipe.petContext,false);
+    assert.doesNotMatch(result.properties.Recipe,/Customer context: pets/);
   });
-  await test('synthetic configured concentration copy and exact fulfillment payload',async(page,t)=>{
-    const summary=await page.locator('.blend-result-summary').innerText();
-    assert.match(summary,/Configured final spray oil concentration: 2% \(subject to server review\)/);
-    assert.doesNotMatch(summary,/Final spray concentration has not been set/);
-    assert.match(await page.locator('.blend-result-cautions').innerText(),/checkout service must independently validate this exact recipe/);
-    assert.match(await page.locator('.blend-profile-cautions').innerText(),/TEST-ONLY synthetic reviewed formulation/);
-    await t.click();await t.started(1);
-    const payload=t.posts[0].payload;
-    assert.equal(payload.endpoint,endpoint);
-    assert.deepEqual(payload.expectedPrice,{amount:45,currency:'USD'});
-    assert.deepEqual(payload.validation,{mode:'client-only',requiresServerValidation:true});
-    assert.equal(payload.recipe.name,'TEST-ONLY checkout fixture A');
-    assert.deepEqual(payload.recipe.oils,[{id:'lavender',percent:100}]);
-    assert.equal(payload.items.length,1);assert.equal(payload.items[0].id,'123456789');assert.equal(payload.items[0].quantity,1);
-    assert.equal(payload.items[0].properties['Finished spray oil load'],'2%');
-    assert.match(payload.items[0].properties['Finished spray concentrations'],/lavender: 2%/);
-    await t.reply(0,{error:'TEST-ONLY deliberate failure'},503);
-    assert.match(await page.locator('#blend-checkout-status').innerText(),/Checkout is unavailable.*recipe.*try again/);
-    assert.equal(await page.locator('#blend-checkout').isEnabled(),true);await t.noNavigation();
+
+  await test('five oils and maximum Unicode names round-trip; invalid drafts cannot expose a link',async page=>{
+    await open(page);await create(page,'Café 夜 🌿 & <garden>');
+    assert.equal((await cart(page)).recipe.name,'Café 夜 🌿 & <garden>');
+    for (const id of OILS.slice(1)) await page.locator(`[data-add-oil="${id}"]`).click();
+    await page.locator('#blend-name').fill('🌿'.repeat(60));
+    const result=await cart(page);
+    assert.equal(Array.from(result.recipe.name).length,60);assert.equal(result.recipe.name,'🌿'.repeat(60));
+    assert.equal(result.recipe.oils.length,5);
+    assert.equal(result.recipe.oils.reduce((sum,oil)=>sum+Math.round(oil.percent*100),0),10000);
+    assert.equal(await page.locator('[data-add-oil]:not(:disabled)').count(),0);
+    await page.locator('[data-add-oil="bergamot"]').evaluate(button=>button.click());
+    assert.deepEqual((await cart(page)).recipe.oils,result.recipe.oils,'Sixth oil cannot be added');
+    await page.locator('#blend-name').fill('x'.repeat(61));await noVisibleCart(page);
+    assert.equal(await page.locator('#blend-name').evaluate(input=>input.checkValidity()),false);
+    await page.locator('#blend-name').fill('Recovered fixture');await regenerate(page);await cart(page);
+    await page.locator('[data-portion="lavender"]').fill('0');await noVisibleCart(page);
+    await page.locator('[data-portion="lavender"]').fill(String(result.recipe.oils.find(oil=>oil.id==='lavender').percent));await regenerate(page);await cart(page);
   });
-  await test('synthetic dermal hard limit blocks purchase with oil, limit and source at top',async(page,t)=>{
-    await page.evaluate(()=>{
-      const oil=TERPENE_DATA.oils.find(oil=>oil.id==='lavender');
-      oil.blend.dermalMaxPercent=1;
-      oil.blend.dermalMaxSource={label:'TEST-ONLY synthetic 1% dermal ceiling',url:'https://example.test/test-only-dermal-ceiling'};
-    });
-    // A harmless draft edit triggers a fresh safety evaluation of the in-memory fixture.
-    await page.locator('#blend-name').fill('TEST-ONLY dermal hard-stop fixture');
-    assert.equal(await page.locator('#blend-checkout').count(),0);
-    const top=await page.locator('.blend-result-cautions').innerText();
-    assert.match(top,/Lavender/);assert.match(top,/2% of the finished spray/);assert.match(top,/1% dermal maximum/);
-    assert.match(top,/TEST-ONLY synthetic 1% dermal ceiling/);
-    assert.equal(await page.locator('.blend-result-cautions a[href="https://example.test/test-only-dermal-ceiling"]').count(),1);
-    assert.match(await page.locator('#blend-cautions-title').innerText(),/Formula review still required/);
-    assert.equal(t.posts.length,0);await t.noNavigation();
-  });
-  await test('synthetic total-oil hard limit blocks purchase with limit and source at top',async(page,t)=>{
-    await page.evaluate(()=>{
-      TERPENE_DATA.blendBuilder.product.totalOilMaxPercent=1.5;
-      TERPENE_DATA.blendBuilder.product.totalOilMaxSource={label:'TEST-ONLY synthetic 1.5% total ceiling',url:'https://example.test/test-only-total-ceiling'};
-    });
-    await page.locator('#blend-name').fill('TEST-ONLY total hard-stop fixture');
-    assert.equal(await page.locator('#blend-checkout').count(),0);
-    const top=await page.locator('.blend-result-cautions').innerText();
-    assert.match(top,/finished spray contains 2% essential oils/);assert.match(top,/1\.5% total limit/);
-    assert.match(top,/TEST-ONLY synthetic 1\.5% total ceiling/);
-    assert.equal(await page.locator('.blend-result-cautions a[href="https://example.test/test-only-total-ceiling"]').count(),1);
-    assert.match(await page.locator('#blend-cautions-title').innerText(),/Formula review still required/);
-    assert.equal(t.posts.length,0);await t.noNavigation();
-  });
-  await test('double-click and results re-render cannot duplicate pending checkout',async(page,t)=>{
-    await page.locator('#blend-checkout').evaluate(button=>{button.click();button.click();});await t.started(1);
-    assert.equal(await page.locator('#blend-checkout').isDisabled(),true);
-    await page.locator('#blend-generate').click();
-    assert.equal(await page.locator('#blend-checkout').isDisabled(),true,'Re-render preserves pending lock');
-    await page.locator('#blend-checkout').evaluate(button=>button.click());await frameTurn(page);
-    assert.equal(t.posts.length,1);assert.equal(await page.evaluate(()=>window.checkoutFixture.started.length),1);
-    await t.reply(0,{checkoutUrl:'https://not-allowed.blend-fixture.test/checkout'});
-    assert.match(await page.locator('#blend-checkout-status').innerText(),/unverified destination/);
-    assert.equal(await page.locator('#blend-checkout').isEnabled(),true);await t.noNavigation();
-  });
-  await test('editing cancels pending fetch and allows a deliberate replacement request',async(page,t)=>{
-    await t.click();await t.started(1);
-    await page.locator('#blend-name').fill('TEST-ONLY checkout fixture B');
-    assert.equal(await t.signalAborted(0),true,'Editing aborts previous request signal');
-    await page.waitForFunction(()=>window.checkoutFixture.settled.some(item=>item.index===0 && item.kind==='error' && item.name==='AbortError'));
-    assert.equal(await page.locator('#blend-checkout').isEnabled(),true);
-    await t.click();await t.started(2);
-    assert.equal(t.posts[1].payload.recipe.name,'TEST-ONLY checkout fixture B');
-    assert.notEqual(t.posts[0].payload.encodedRecipe,t.posts[1].payload.encodedRecipe);
-    await t.reply(1,{error:'TEST-ONLY replacement rejected'},503);
-    assert.match(await page.locator('#blend-checkout-status').innerText(),/Checkout is unavailable/);
-    assert.equal(await page.locator('#blend-name').inputValue(),'TEST-ONLY checkout fixture B');
-    await t.noNavigation();
-  });
-  await test('late previous response cannot navigate or unlock a newer checkout request',async(page,t)=>{
-    await t.ignoreAbort();await t.click();await t.started(1);
-    await page.locator('#blend-name').fill('TEST-ONLY checkout fixture B');assert.equal(await t.signalAborted(0),true);
-    await t.click();await t.started(2);
-    await t.reply(0,{checkoutUrl:approvedButNeverVisited});
-    await t.noNavigation();
-    assert.equal(await page.locator('#blend-checkout').isDisabled(),true,'Old finally block must not unlock new request');
-    assert.match(await page.locator('#blend-checkout-status').innerText(),/Validating the recipe/);
-    await t.reply(1,{checkoutUrl:'https://not-allowed.blend-fixture.test/current'});
-    assert.match(await page.locator('#blend-checkout-status').innerText(),/unverified destination/);
-    assert.equal(await page.locator('#blend-checkout').isEnabled(),true);
-    await t.click();await t.started(3);
-    assert.equal(t.posts[2].payload.recipe.name,'TEST-ONLY checkout fixture B');
-    await t.reply(2,{error:'TEST-ONLY final retry rejected'},503);
-    assert.match(await page.locator('#blend-checkout-status').innerText(),/Checkout is unavailable/);await t.noNavigation();
-  });
-  await test('reset discards late checkout response without restoring old UI',async(page,t)=>{
-    await t.ignoreAbort();await t.click();await t.started(1);
-    await page.locator('#blend-reset').click();assert.equal(await t.signalAborted(0),true);
-    await t.reply(0,{checkoutUrl:approvedButNeverVisited});await t.noNavigation();
-    assert.equal(await page.locator('#blend-workspace').isVisible(),false);
-    assert.equal(await page.locator('#blend-results').isVisible(),false);
-    assert.equal(await page.locator('#blend-name').inputValue(),'My custom blend');
-    assert.equal(await page.locator('[data-portion]').count(),0);
-    await page.locator('[data-blend-path="oils"]').click();await page.locator('[data-add-oil="lavender"]').click();await page.locator('#blend-generate').click();
-    assert.equal(await page.locator('#blend-checkout').isEnabled(),true);
-    await t.click();await t.started(2);await t.reply(1,{error:'TEST-ONLY after reset'},503);
-  });
-  await test('tab exit discards late checkout response and preserves deliberate return',async(page,t)=>{
-    await t.ignoreAbort();await t.click();await t.started(1);
-    await page.getByRole('button',{name:'Oils',exact:true}).click();assert.equal(await t.signalAborted(0),true);
-    const exitedUrl=page.url();await t.reply(0,{checkoutUrl:approvedButNeverVisited});await t.noNavigation();
-    assert.equal(page.url(),exitedUrl);assert.equal(await page.locator('#tab-oils.active').count(),1);
+
+  await test('saved load, reload, shared links and Back restore the matching checkout recipe',async page=>{
+    await open(page);await create(page,'Saved fixture A');
+    const saved=await cart(page);
+    await page.locator('#blend-save').click();
+    await page.locator('#blend-name').fill('Edited fixture B');
+    assert.equal((await cart(page)).recipe.name,'Edited fixture B');
+    await page.locator('[data-load-recipe="0"]').click();
+    assert.equal((await cart(page)).url.href,saved.url.href);
+    await page.reload();await ready(page);await configure(page);await regenerate(page);
+    assert.equal((await cart(page)).url.href,saved.url.href);
+    const url=await seedUrl(page,{name:'Shared fixture A',oils:[{id:'lavender',percent:60},{id:'lemon',percent:40}]});
+    await page.goto(url);await ready(page);await configure(page);await refresh(page);
+    const shared=await cart(page);assert.equal(shared.recipe.name,'Shared fixture A');
+    await page.locator('#blend-name').fill('Unshared edit B');
+    assert.notEqual((await cart(page)).url.href,shared.url.href);
+    await page.getByRole('button',{name:'Oils',exact:true}).click();
+    await page.goBack();await page.waitForURL(url);
+    assert.equal((await cart(page)).url.href,shared.url.href,'Back uses the recipe in the URL, not a stale edited href');
+    await page.goForward();
+    assert.equal(await page.locator('#tab-oils.active').count(),1);
     await page.getByRole('button',{name:'Blend Builder',exact:true}).click();
-    assert.equal(await page.locator('#blend-checkout').isEnabled(),true);
-    assert.equal(await page.locator('#blend-name').inputValue(),'TEST-ONLY checkout fixture A');
-    await t.click();await t.started(2);await t.reply(1,{error:'TEST-ONLY after tab return'},503);
-    assert.match(await page.locator('#blend-checkout-status').innerText(),/Checkout is unavailable/);
+    assert.equal((await cart(page)).recipe.name,'Shared fixture A');
   });
-  await test('backend errors and unverified destinations keep the recipe and never navigate',async(page,t)=>{
-    const originalUrl=page.url();
-    const responses=[
-      {body:{error:'TEST-ONLY server failure'},status:500,pattern:/Checkout is unavailable/},
-      {body:'{TEST-ONLY invalid JSON',status:200,pattern:/JSON|Unexpected|property name|position/i},
-      {body:{checkoutUrl:'https://not-allowed.blend-fixture.test/checkout'},status:200,pattern:/unverified destination/},
-      {body:{checkoutUrl:`http://${allowedHost}/checkout`},status:200,pattern:/unverified destination/},
-      {body:{checkoutUrl:`https://user:password@${allowedHost}/checkout`},status:200,pattern:/unverified destination/},
-      {body:{checkoutUrl:`https://${allowedHost}:444/checkout`},status:200,pattern:/unverified destination/},
-      {body:{checkoutUrl:'javascript:alert("TEST-ONLY")'},status:200,pattern:/unverified destination/}
+
+  await test('excess-precision input removes usable checkout until correction and exploration',async page=>{
+    await open(page);await create(page);await page.locator('[data-add-oil="lemon"]').click();
+    assert.deepEqual((await cart(page)).recipe.oils,[{id:'lavender',percent:50},{id:'lemon',percent:50}]);
+    await page.evaluate(()=>window.__priorSyntheticHandoff=document.getElementById('blend-checkout'));
+    await page.locator('[data-portion="lavender"]').fill('49.999');
+    await noVisibleCart(page);
+    assert.equal(await page.locator('[data-portion="lavender"]').evaluate(input=>input.checkValidity()),false);
+    await page.evaluate(()=>{
+      // If the hidden old anchor remains in the DOM, even a programmatic click
+      // must reject the invalid visible input rather than use rounded state.
+      if (window.__priorSyntheticHandoff.isConnected) window.__priorSyntheticHandoff.click();
+    });
+    await regenerate(page);await noVisibleCart(page);
+    await page.locator('[data-portion="lavender"]').fill('49.99');
+    await page.locator('[data-portion="lemon"]').fill('50.01');
+    await noVisibleCart(page);
+    await regenerate(page);
+    const result=await cart(page);
+    assert.deepEqual(result.recipe.oils,[{id:'lavender',percent:49.99},{id:'lemon',percent:50.01}]);
+    // Also exercise the click guard without firing an edit/render event.
+    await page.locator('[data-portion="lavender"]').evaluate(input=>input.setCustomValidity('TEST-ONLY invalid input'));
+    await page.locator('#blend-checkout').click();await noVisibleCart(page);
+    assert.equal(new URL(page.url()).origin,origin);
+  });
+
+  await test('missing/invalid variants, unsafe store URLs and mismatched products fail closed',async page=>{
+    await open(page);await create(page);
+    const good=(await cart(page)).url.href;
+    const invalid=[
+      ...[null,'','not-a-variant','gid://shopify/ProductVariant/123456789','0','-1','12.5','1:1',0,12.5].map(shopifyVariantId=>({shopifyVariantId})),
+      ...[null,'','http://merchant.blend-fixture.test','https://user:pass@merchant.blend-fixture.test',
+        'https://merchant.blend-fixture.test:444','https://merchant.blend-fixture.test/cart',
+        'https://merchant.blend-fixture.test/?redirect=elsewhere','https://merchant.blend-fixture.test/#fragment',
+        'https://localhost','https://127.0.0.1','https://[::1]','javascript:alert(1)',
+        '//merchant.blend-fixture.test','https://merchant..test'].map(shopifyStoreUrl=>({shopifyStoreUrl})),
+      {price:45},{currency:'EUR'},{name:'Blue Formula'},{size:'16 oz'}
     ];
-    for(const [index,response] of responses.entries()) {
-      await t.click();await t.started(index+1);await t.reply(index,response.body,response.status);
-      assert.match(await page.locator('#blend-checkout-status').innerText(),response.pattern);
-      assert.equal(await page.locator('#blend-checkout').isEnabled(),true);
-      assert.equal(await page.locator('#blend-name').inputValue(),'TEST-ONLY checkout fixture A');
-      assert.equal(await page.locator('#blend-results').isVisible(),true);
-      assert.equal(page.url(),originalUrl);await t.noNavigation();
+    for (const patch of invalid) {
+      await configure(page,patch);await refresh(page);await noVisibleCart(page);
+      assert.equal(await page.locator('#blend-checkout').count(),0,JSON.stringify(patch));
+      assert.ok((await page.locator('#blend-checkout-status').innerText()).length>0);
+      await configure(page);await refresh(page);
+      assert.equal((await cart(page)).url.href,good,'Restoring trusted configuration restores the same recipe');
     }
+    await configure(page,{shopifyStoreUrl:STORE+'/',shopifyVariantId:Number(VARIANT)});await refresh(page);
+    assert.equal((await cart(page)).url.href,good,'Root slash and a safe numeric variant normalize to the configured origin');
   });
+
+  await test('a previously rendered link is revalidated if configuration becomes invalid before click',async page=>{
+    await open(page);await create(page);await cart(page);
+    await page.evaluate(()=>{
+      TERPENE_DATA.blendBuilder.product.shopifyVariantId=null;
+      window.__blockedSyntheticHandoffs=[];
+      document.addEventListener('click',event=>{
+        if (event.target.closest('#blend-checkout')) window.__blockedSyntheticHandoffs.push(event.defaultPrevented);
+      });
+    });
+    // No edit or render has refreshed the href; the click must still fail closed.
+    await page.locator('#blend-checkout').click();
+    await noVisibleCart(page);
+    assert.equal(new URL(page.url()).origin,origin);
+    assert.deepEqual(await page.evaluate(()=>window.__blockedSyntheticHandoffs),[true]);
+    assert.match(await page.locator('#blend-status').innerText(),/verified Custom Blend Shopify variant/);
+    await configure(page);await refresh(page);await cart(page);
+    await page.evaluate(()=>{
+      Object.assign(TERPENE_DATA.blendBuilder.product,{
+        totalOilLoadPercent:2,totalOilLoadSource:{label:'TEST-ONLY load',url:'https://example.test/click-load'},
+        totalOilMaxPercent:1,totalOilMaxSource:{label:'TEST-ONLY ceiling',url:'https://example.test/click-ceiling'}
+      });
+    });
+    await page.locator('#blend-checkout').click();await noVisibleCart(page);
+    assert.deepEqual(await page.evaluate(()=>window.__blockedSyntheticHandoffs),[true,true]);
+    assert.match(await page.locator('.blend-result-cautions').innerText(),/1% total limit/);
+  });
+
+  await test('recipe data cannot override destination, variant, quantity, price or properties',async page=>{
+    await open(page);await create(page);
+    const current=await draft(page),good=(await cart(page)).url.href;
+    const overrides=[{shopifyStoreUrl:'https://attacker.blend-fixture.test'},{shopifyVariantId:'987654321'},
+      {url:'https://attacker.blend-fixture.test'},{quantity:20},{price:0},{currency:'EUR'},
+      {properties:{Recipe:'tampered'}},{product:{shopifyVariantId:'987654321'}}];
+    for (const patch of overrides) {
+      const rejected=await page.evaluate(({recipe,patch})=>{
+        try { BLEND_ENGINE.cartPermalink({...recipe,...patch},TERPENE_DATA);return false; }
+        catch(error) { return error.name==='BlendValidationError'; }
+      },{recipe:current,patch});
+      assert.equal(rejected,true,`Untrusted recipe override rejected: ${JSON.stringify(patch)}`);
+      assert.equal((await cart(page)).url.href,good);
+    }
+    const malicious={...current,shopifyVariantId:'987654321'};
+    await page.goto(`${base}/?tab=blend&recipe=${Buffer.from(JSON.stringify(malicious),'utf8').toString('base64url')}`);
+    await ready(page);await configure(page);await noVisibleCart(page);
+    assert.equal(await page.locator('#blend-link-error').isVisible(),true);
+    assert.equal(await page.locator('#blend-name').inputValue(),current.name,'Invalid shared data preserves the draft');
+  });
+
+  await test('sourced hard caps block handoff with the oil, limit and source visibly named',async page=>{
+    await open(page);await create(page);
+    await page.evaluate(()=>{
+      const product=TERPENE_DATA.blendBuilder.product;
+      product.totalOilLoadPercent=2;
+      product.totalOilLoadSource=null;
+      Object.assign(TERPENE_DATA.oils.find(oil=>oil.id==='lavender').blend,{
+        dermalMaxPercent:1,dermalMaxSource:{label:'TEST-ONLY synthetic 1% dermal ceiling',url:'https://example.test/dermal-ceiling'}
+      });
+    });
+    await refresh(page);await cart(page); // Unsourced concentration is not a verified hard-cap comparison.
+    await page.evaluate(()=>TERPENE_DATA.blendBuilder.product.totalOilLoadSource={label:'TEST-ONLY synthetic 2% load',url:'https://example.test/oil-load'});
+    await refresh(page);await noVisibleCart(page);
+    let warning=await page.locator('.blend-result-cautions').innerText();
+    assert.match(warning,/Lavender/);assert.match(warning,/2% of the finished spray/);assert.match(warning,/1% dermal maximum/);
+    assert.equal(await page.locator('.blend-result-cautions a[href="https://example.test/dermal-ceiling"]').isVisible(),true);
+    assert.match(await page.locator('#blend-checkout-status').innerText(),/sourced limit or interaction/);
+    await page.evaluate(()=>{
+      TERPENE_DATA.oils.find(oil=>oil.id==='lavender').blend.dermalMaxPercent=3;
+      Object.assign(TERPENE_DATA.blendBuilder.product,{
+        totalOilMaxPercent:1.5,totalOilMaxSource:{label:'TEST-ONLY synthetic 1.5% total ceiling',url:'https://example.test/total-ceiling'}
+      });
+    });
+    await refresh(page);await noVisibleCart(page);
+    warning=await page.locator('.blend-result-cautions').innerText();
+    assert.match(warning,/2% essential oils/);assert.match(warning,/1\.5% total limit/);
+    assert.equal(await page.locator('.blend-result-cautions a[href="https://example.test/total-ceiling"]').isVisible(),true);
+  });
+
+  await test('named interaction warnings stay visible and sourced blocking interactions prevent handoff',async page=>{
+    await open(page);await create(page);await page.locator('[data-add-oil="lemon"]').click();
+    await page.evaluate(()=>TERPENE_DATA.oils.find(oil=>oil.id==='lavender').blend.interactions=[{
+      withOilId:'lemon',severity:'warning',reason:'TEST-ONLY pair requires manual review.',
+      source:{label:'TEST-ONLY synthetic interaction review',url:'https://example.test/interaction'}
+    }]);
+    await refresh(page);await cart(page);
+    const cautions=page.locator('.blend-result-cautions');
+    let warning=await cautions.innerText();
+    assert.match(warning,/Lavender \+ Lemon/);assert.match(warning,/TEST-ONLY pair requires manual review/);
+    assert.equal(await cautions.locator('a[href="https://example.test/interaction"]').isVisible(),true);
+    assert.equal(await cautions.evaluate(node=>node.closest('details')===null),true,'Warning is never hidden behind disclosure');
+    await page.evaluate(()=>TERPENE_DATA.oils.find(oil=>oil.id==='lavender').blend.interactions[0].severity='blocker');
+    await refresh(page);await noVisibleCart(page);
+    warning=await cautions.innerText();assert.match(warning,/Lavender \+ Lemon/);
+    assert.match(await page.locator('#blend-checkout-status').innerText(),/sourced limit or interaction/);
+  });
+
+  await test('actual standalone click persists the current recipe before an intercepted GET handoff',async(page,t)=>{
+    await open(page);await create(page,'Persist on click 🌿');
+    const expected=await cart(page);
+    const captures=await captureBeforeNavigation(page);
+    t.expectedNavigations=1;
+    await page.locator('#blend-checkout').click();
+    await page.locator('#mock-handoff').waitFor();
+    assert.equal(captures.length,1);
+    assert.equal(captures[0].prevented,false,'Native anchor navigation is used');
+    assert.deepEqual(JSON.parse(captures[0].storage).draft,expected.recipe,'Draft is persisted synchronously before navigation');
+    assert.equal(captures[0].href,expected.url.href);
+    assert.deepEqual(decodeHref(page.url()).properties,expected.properties);
+  });
+
+  await test('a real iframe targets the top document and persists before the intercepted handoff',async(page,t)=>{
+    // Same-origin ephemeral harness, never written to the app or published.
+    await page.goto(base+'/?tab=oils');
+    await page.setContent(`<iframe title="Embedded blend builder" style="width:390px;height:1000px;border:0" src="${base}/?tab=blend"></iframe>`);
+    const frame=await (await page.locator('iframe').elementHandle()).contentFrame();
+    assert.ok(frame);await ready(frame);await configure(frame);await create(frame,'Iframe fixture 夜');
+    assert.equal(await frame.locator('html.lab-embedded').count(),1);
+    const expected=await cart(frame);
+    const captures=await captureBeforeNavigation(page,frame);
+    t.expectedNavigations=1;
+    await frame.locator('#blend-checkout').click();
+    await page.locator('#mock-handoff').waitFor();
+    assert.equal(page.frames().length,1,'Checkout replaced the top document, rather than remaining inside the iframe');
+    assert.equal(captures.length,1);
+    assert.deepEqual(JSON.parse(captures[0].storage).draft,expected.recipe);
+    assert.equal(page.url(),expected.url.href);
+  });
+
   await browser.close();browser=null;
+  assert.deepEqual(allWrites,[],'No non-GET request may be attempted');
+  assert.deepEqual(allFetches,[],'The permalink path makes no fetch/XHR/backend request');
   assert.deepEqual(failures,[],failures.join('\n\n'));
-  console.log('PASS: checkout adapter fixtures; all POSTs mocked locally, no backend/Shopify traffic or checkout navigation');
+  console.log('PASS: cart-permalink regressions; external navigation mocked, zero merchant/order traffic and zero write requests');
 })().catch(async error=>{console.error(error);if(browser)await browser.close().catch(()=>{});process.exit(1);});
