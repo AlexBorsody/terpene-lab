@@ -63,7 +63,7 @@ function setTopicFilter(id, value, render = false) {
   syncTopicFilter(id);
   if (render) {
     if (id === "oil-domain-filter") { renderOils(document.getElementById("oil-search").value); routeUrl("oils", { domain: R.resolve(value) }); }
-    if (id === "matrix-domain-filter") { renderMatrix(); routeUrl("matrix", { domain: R.resolve(value) }); }
+    if (id === "matrix-domain-filter") { renderMatrix(); routeMatrix(); }
     if (id === "study-domain-filter") { renderStudies(); routeStudyFilters(); }
     const host = document.getElementById(id + "-navigation");
     host?.querySelector(".topic-child-select, [aria-current]")?.focus();
@@ -89,6 +89,11 @@ function esc(s) {
   return String(s == null ? "" : s)
     .replace(/&/g, "&amp;").replace(/</g, "&lt;")
     .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+// Decorative, local SVG symbols keep interface icons available offline.
+function uiIcon(name) {
+  return `<svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#lab-icon-${esc(name)}"/></svg>`;
 }
 
 function formatFormula(formula) {
@@ -155,7 +160,8 @@ document.querySelectorAll(".tab").forEach(btn => {
     }
     switchTab(tab);
     if (tab === "studies") routeStudyFilters();
-    else if (tab === "oils" || tab === "matrix") {
+    else if (tab === "matrix") routeMatrix();
+    else if (tab === "oils") {
       const filter = document.getElementById(tab === "oils" ? "oil-domain-filter" : "matrix-domain-filter");
       routeUrl(tab, { domain: R.resolve(filter?.value) });
     } else routeUrl(tab);
@@ -169,7 +175,7 @@ function routeUrl(tab, params = {}, replace = false) {
   const url = new URL(window.location.href);
   url.searchParams.set("tab", tab);
   if (tab !== "blend") url.searchParams.delete("recipe");
-  ["oil","compound","domain","sub"].forEach(k => {
+  ["oil","compound","domain","sub","matrixMode","matrixGroup","matrixOil","matrixChemical","matrixSearch","matrixSort","inspect"].forEach(k => {
     if (params[k]) url.searchParams.set(k, params[k]);
     else url.searchParams.delete(k);
   });
@@ -178,7 +184,7 @@ function routeUrl(tab, params = {}, replace = false) {
 }
 function applyRoute() {
   const p = new URLSearchParams(location.search);
-  const tab = p.get("tab") || "oils";
+  const tab = p.get("tab") || (p.has("oil") ? "oils" : p.has("compound") ? "compounds" : p.has("domain") ? "domains" : "blend");
   routingFromHistory = true;
   switchTab(tab);
   const oil = p.get("oil"), compound = p.get("compound"), domain = p.get("domain"), sub = p.get("sub");
@@ -191,6 +197,13 @@ function applyRoute() {
     setTopicFilter("study-domain-filter", resolveUse(domain, sub));
     renderStudies();
   } else if (tab === "matrix") {
+    matrixState.mode = matrixModes.includes(p.get("matrixMode")) ? p.get("matrixMode") : 'oil-topics';
+    matrixState.group = matrixGroups().some(group => group.id === p.get('matrixGroup')) ? p.get('matrixGroup') : matrixGroups()[0]?.id;
+    matrixState.oil = oilById[p.get('matrixOil')] ? p.get('matrixOil') : '';
+    matrixState.chemical = CHEMISTRY.compoundCategories.some(group => group.id === p.get('matrixChemical')) ? p.get('matrixChemical') : '';
+    matrixState.inspection = p.get('inspect') || '';
+    document.getElementById('matrix-search').value = p.get('matrixSearch') || '';
+    document.getElementById('matrix-sort').value = p.get('matrixSort') === 'studies' ? 'studies' : 'az';
     setTopicFilter("matrix-domain-filter", resolveUse(domain, sub));
     renderMatrix();
   }
@@ -484,12 +497,13 @@ function renderOils(filter) {
     const domains = domainFilter ? [R.resolve(domainFilter)] : domainsForOil(o.id);
     return `<div class="card" data-oil="${o.id}" tabindex="0" role="button" aria-label="Explore ${esc(o.name)}">
       <div class="card-top">
-        <div class="swatch" style="background:${o.color}"></div>
+        <div class="oil-emblem" style="--oil-color:${esc(o.color)}">${uiIcon("oils")}</div>
         <div><h3>${esc(o.name)}</h3><p class="latin">${esc(o.latinName)}</p></div>
       </div>
 ${top ? `<p class="top-terpene">Top compound: <b>${esc(top.compound.name)}</b></p>` : ""}
-      <p class="oil-card-aroma">${o.aroma.map(esc).join(" · ")}</p>
+      <p class="oil-card-aroma">${uiIcon("aroma")}<span>${o.aroma.map(esc).join(" · ")}</span></p>
       <p class="sub"><strong class="study-count">${n} stud${n === 1 ? "y" : "ies"}</strong>${domains.length ? " on " + domains.map(d => esc(R.label(d))).join(", ") : ""}</p>
+      <div class="oil-card-footer"><span>${esc(o.plantPart)}</span>${uiIcon("arrow")}</div>
     </div>`;
   }).join("") || `<p class="empty">No oils match.</p>`;
   grid.querySelectorAll(".card").forEach(c => {
@@ -814,52 +828,191 @@ function showCompound(id, fromRoute = false) {
   bindStudyLinks(sWrap);
 }
 
-/* ================= EVIDENCE MATRIX ================= */
-function matrixCell(oilId, domainType) {
-  return studiesForOil(oilId, domainType);
+/* ================= CANONICAL RELATIONSHIP MATRIX ================= */
+const matrixState = { mode: 'oil-topics', group: D.taxonomy.matrixGroups?.[0]?.id || 'unclassified', oil: '', chemical: '', inspection: '' };
+const matrixModes = ['oil-topics', 'oil-compounds', 'compound-topics', 'study-topics'];
+function matrixGroups() {
+  const groups = [...(D.taxonomy.matrixGroups || [])];
+  if (R.children().some(node => !node.matrixGroupId)) groups.push({ id: 'unclassified', label: 'Unclassified topics', description: 'These taxonomy roots have no display family assigned yet. Their records remain available here.' });
+  return groups;
+}
+function matrixGroupFor(value) {
+  return [...R.ancestors(value), R.node(value)].find(node => node?.matrixGroupId)?.matrixGroupId || 'unclassified';
+}
+function routeMatrix(replace = false) {
+  routeUrl('matrix', { domain: R.resolve(document.getElementById('matrix-domain-filter').value), matrixMode: matrixState.mode, matrixGroup: matrixState.group, matrixOil: matrixState.oil, matrixChemical: matrixState.chemical, matrixSearch: document.getElementById('matrix-search').value, matrixSort: document.getElementById('matrix-sort').value, inspect: matrixState.inspection }, replace);
+}
+function matrixCell(oilId, domainType) { return studiesForOil(oilId, domainType); }
+function matrixPapers(kind, id, topic = null) {
+  if (kind === 'oil') return studiesForOil(id, topic);
+  if (kind === 'compound') return studiesForCompound(id).filter(study => !topic || R.matchesStudy(study, topic));
+  return D.studies.filter(study => study.id === id && (!topic || R.matchesStudy(study, topic)));
+}
+function matrixRecords(oilId, compoundId) {
+  const oil = oilById[oilId];
+  if (!oil) return [];
+  return [...oil.constituents.filter(row => row.compoundId === compoundId).map(record => ({ record, kind: 'catalog' })),
+    ...(oil.chemicalEvidence || []).filter(record => (record.compoundIds || []).includes(compoundId)).map(record => ({ record, kind: 'observation' }))];
+}
+function matrixRecordLabel(records) {
+  if (!records.length) return '—';
+  const measured = records.filter(({record}) => CHEMISTRY.quantified(record));
+  const quantified = measured.filter(({record}) => ['Essential oil', 'Essential oil: nonvolatile fraction'].includes(record.material));
+  if (measured.length && !quantified.length) return 'Other material';
+  if (quantified.length === 1) return quantityLabel(quantified[0].record.range);
+  if (quantified.length > 1) return quantified.length + ' samples';
+  if (records.every(({record}) => record.status === 'not-detected')) return 'Not detected';
+  if (records.every(({record}) => record.status === 'not-found' || record.status === 'not-reviewed')) return 'Unreviewed';
+  if (records.every(({record}) => record.material && !['Essential oil', 'Essential oil: nonvolatile fraction'].includes(record.material))) return 'Other material';
+  return records.some(({record}) => CHEMISTRY.hasSources(record)) ? 'Reported' : 'Catalog only';
+}
+function matrixSelect(inspection) {
+  matrixState.inspection = inspection;
+  renderMatrixInspector(); routeMatrix();
+  document.getElementById('matrix-inspector-title')?.focus?.();
+  document.getElementById('matrix-inspector')?.scrollIntoView?.({block:'start'});
+}
+function matrixBindInspector(host) {
+  // Linked entities stay in the master explorer. Full-profile actions outside
+  // paper cards remain available when the separate library view is wanted.
+  for (const kind of ['oil', 'compound']) host.querySelectorAll(`[data-goto-${kind}]:not([data-matrix-profile])`).forEach(button => {
+    button.setAttribute('data-matrix-inspect', `${kind}/${button.getAttribute('data-goto-' + kind)}`);
+    button.removeAttribute('data-goto-' + kind);
+  });
+  host.querySelectorAll('[data-matrix-inspect]').forEach(button => button.addEventListener('click', () => matrixSelect(button.dataset.matrixInspect)));
+  host.querySelectorAll('[data-matrix-focus]').forEach(button => button.addEventListener('click', () => {
+    matrixState.mode = 'oil-compounds'; matrixState.oil = button.dataset.matrixFocus; matrixState.inspection = '';
+    document.getElementById('matrix-search').value = ''; renderMatrix(); routeMatrix();
+    document.getElementById('matrix-title')?.focus?.();
+    document.getElementById('matrix-title')?.scrollIntoView?.({block:'start'});
+  }));
+  host.querySelectorAll('[data-matrix-close]').forEach(button => button.addEventListener('click', () => {
+    matrixState.inspection = ''; renderMatrixInspector(); routeMatrix(); document.getElementById('matrix-title')?.focus?.();
+  }));
+  host.querySelectorAll('[data-goto-use]').forEach(button => {
+    const topic = button.dataset.gotoUse;
+    button.setAttribute('data-matrix-topic-link', topic);
+    button.addEventListener('click', () => {
+      if (matrixState.mode === 'oil-compounds') matrixState.mode = 'oil-topics';
+      matrixState.inspection = '';
+      setTopicFilter('matrix-domain-filter', topic, true);
+      document.getElementById('matrix-title')?.focus?.();
+      document.getElementById('matrix-title')?.scrollIntoView?.({block:'start'});
+    });
+    button.removeAttribute('data-goto-use');
+  });
+  bindChemistryLinks(host);
+}
+function matrixPaperList(studies, oilId = null, useId = null) {
+  return studies.length ? studies.map(study => studyCard(study, {oilId, useId})).join('') : '<p class="empty">No linked papers for this relationship. This is a data gap, not evidence of no effect.</p>';
+}
+function renderMatrixInspector() {
+  const host = document.getElementById('matrix-inspector');
+  if (!host) return;
+  host.hidden = !matrixState.inspection;
+  if (host.hidden) { host.innerHTML = ''; return; }
+  const [kind, id, target] = matrixState.inspection.split('/');
+  let title = '', intro = '', body = '';
+  if (kind === 'oil' && oilById[id]) {
+    const oil = oilById[id], papers = studiesForOil(id);
+    title = oil.name;
+    intro = `${esc(oil.latinName)} · ${esc(oil.plantPart)} · ${esc(oil.extraction)}`;
+    const compounds = D.compounds.map(compound => ({compound, records:matrixRecords(id, compound.id)})).filter(row => row.records.length);
+    body = `<p>${esc(oil.description)}</p><div class="matrix-detail-actions"><button class="chip" data-matrix-focus="${esc(id)}">${uiIcon('compounds')}Compare this oil’s compounds</button><button class="chip" data-matrix-profile data-goto-oil="${esc(id)}">Full oil profile</button></div>
+      <h4>Compounds and material records</h4><p class="hint">A catalog association, a measured oil sample and a report in other plant material are different kinds of evidence. Open a compound relationship to inspect the distinction.</p>
+      <div class="matrix-records">${compounds.map(({compound,records}) => `<button data-matrix-inspect="relationship/${esc(id)}/${esc(compound.id)}"><span>${esc(compound.name)}<small>${formatFormula(compound.formula)}</small></span><span>${esc(matrixRecordLabel(records))} ${uiIcon('arrow')}</span></button>`).join('') || '<p>No constituent relationships are recorded.</p>'}</div>
+      <details class="matrix-evidence-disclosure"><summary>All chemical observations · ${(oil.chemicalEvidence || []).length}</summary>${(oil.chemicalEvidence || []).map(record => `<article class="chem-evidence"><h4>${esc(record.analyte || record.group)}</h4>${evidenceBody(record)}</article>`).join('') || '<p>No chemical observations recorded.</p>'}</details>
+      <details class="matrix-evidence-disclosure"><summary>Precautions · ${esc(oil.precautions?.reviewStatus || 'unreviewed')}</summary><p class="hint">Historical catalog notes; not a verified formulation limit or interaction assessment.</p><p>${esc(oil.precautions?.legacySafety || 'No reviewed safety guidance recorded.')}</p></details>
+      <h4>Linked papers · ${papers.length}</h4>${matrixPaperList(papers, id)}`;
+  } else if (kind === 'relationship' && oilById[id] && compoundById[target]) {
+    title = `${oilById[id].name} → ${compoundById[target].name}`;
+    intro = 'Every recorded observation for this oil–compound relationship. Sample percentages are not universal composition or finished-product concentrations.';
+    const records = matrixRecords(id, target);
+    body = `<div class="matrix-detail-actions"><button class="chip" data-matrix-inspect="oil/${esc(id)}">${esc(oilById[id].name)}</button><button class="chip" data-matrix-inspect="compound/${esc(target)}">All ${esc(compoundById[target].name)} connections</button></div>` +
+      (records.map(({record,kind}) => kind === 'catalog' ? `<article class="chem-evidence"><h4>Catalog constituent</h4><p>${CHEMISTRY.quantified(record) ? `${quantityLabel(record.range)} in the cited sample.` : 'No source-qualified percentage is available for this catalog entry. Historical ranges are not plotted.'}</p>${sourceLinks(record.sourceIds || [])}</article>` : `<article class="chem-evidence"><h4>${esc(evidenceStatus(record))}</h4>${evidenceBody(record)}</article>`).join('') || '<p>No recorded relationship.</p>');
+  } else if (kind === 'compound' && compoundById[id]) {
+    const compound = compoundById[id], papers = studiesForCompound(id);
+    title = compound.name; intro = `${esc(compound.formula)} · ${esc(compound.chemicalClass)}`;
+    const oils = D.oils.map(oil => ({oil, records:matrixRecords(oil.id, id)})).filter(row => row.records.length);
+    body = `<p>${esc(compound.description)}</p><button class="chip" data-matrix-profile data-goto-compound="${esc(id)}">Full compound profile</button><h4>Oil and material connections</h4><div class="matrix-records">${oils.map(({oil,records}) => `<button data-matrix-inspect="relationship/${esc(oil.id)}/${esc(id)}"><span>${esc(oil.name)}</span><span>${esc(matrixRecordLabel(records))} ${uiIcon('arrow')}</span></button>`).join('') || '<p>No oil/material connection recorded.</p>'}</div><h4>Compound bibliography · ${papers.length}</h4><p class="hint">These papers may study whole oils, isolated compounds or other preparations. A bibliography link does not establish that the compound caused an oil’s effects.</p>${matrixPaperList(papers)}`;
+  } else if (['oil-topic', 'compound-topic'].includes(kind) && R.node(target) && (kind === 'oil-topic' ? oilById[id] : compoundById[id])) {
+    const isOil = kind === 'oil-topic', entity = isOil ? oilById[id] : compoundById[id];
+    const papers = matrixPapers(isOil ? 'oil' : 'compound', id, target);
+    title = `${entity.name} → ${R.label(target)}`;
+    intro = isOil ? 'Oil-specific evidence, including contextual materials and uncertain associations. Read the actual outcome and limitations.' : 'Compound-linked bibliography for this topic. It does not establish whole-oil or isolated-compound efficacy.';
+    body = `<p class="matrix-inspector-path">${esc(R.breadcrumb(target))} · ${papers.length} unique papers</p>${matrixPaperList(papers, isOil ? id : null, target)}`;
+  } else if (kind === 'sources') {
+    title = 'Source registry'; intro = 'Composition, taxonomy and other source records referenced by the canonical dataset. Publication records remain in the Studies × topics view.';
+    body = D.sources.map(source => `<article class="chem-evidence"><h4>${esc(source.label || source.title || source.id)}</h4>${sourceLinks([source.id])}<details><summary>Canonical source metadata</summary><pre>${esc(JSON.stringify(source, null, 2))}</pre></details></article>`).join('');
+  } else if (kind === 'study') {
+    const study = D.studies.find(row => row.id === id);
+    if (study) { title = 'Publication record'; intro = 'The source, reported finding and scoped oil assessments.'; body = matrixPaperList([study]) + '<h4>Oil-specific assessments</h4>' + (study.oilIds || []).map(oilId => assertionContext(study, oilId, null)).join(''); }
+  }
+  if (!title) { title = 'Record unavailable'; body = '<p>This selection does not match the current canonical data.</p>'; }
+  host.innerHTML = `<header><div><p class="section-kicker">Inside the matrix</p><h3 id="matrix-inspector-title" tabindex="-1">${esc(title)}</h3><p>${intro}</p></div><button class="back" data-matrix-close>Close details</button></header><div class="matrix-inspector-body">${body}</div>`;
+  matrixBindInspector(host);
 }
 function renderMatrix() {
-  const table = document.getElementById("matrix-table");
-  const q = (document.getElementById("matrix-search")?.value || "").trim().toLowerCase();
-  const sort = document.getElementById("matrix-sort")?.value || "az";
-  const domainFilter = document.getElementById("matrix-domain-filter")?.value || "";
-  syncTopicFilter("matrix-domain-filter");
-  const selected = R.node(domainFilter);
-  const domains = selected ? [selected, ...R.children(selected.id)] : R.roots();
-  const oils = D.oils.filter(o =>
-    !q || o.name.toLowerCase().includes(q) || o.latinName.toLowerCase().includes(q)
-  ).sort((x,y) => {
-    if (sort === "studies") return studiesForOil(y.id).length - studiesForOil(x.id).length || x.name.localeCompare(y.name);
-    return x.name.localeCompare(y.name);
-  });
-  const count = document.getElementById("matrix-count");
-  if (count) count.textContent = oils.length + " plants";
-  let html = `<thead><tr><th></th>${domains.map(d => `<th>${esc(R.label(d.id))}</th>`).join("")}</tr></thead><tbody>`;
-  oils.forEach(o => {
-    html += `<tr><th class="rowlabel"><span class="swatch sm" style="background:${o.color}"></span>${esc(o.name)}</th>`;
-    domains.forEach(d => {
-      const studies = matrixCell(o.id, d.id);
-      const n = studies.length;
-      html += `<td><button class="cell" data-oil="${o.id}" data-domain="${esc(d.id)}" ${n ? "" : "disabled"}>
-        <span class="cell-n">${n}</span>
-      </button></td>`;
+  const table = document.getElementById('matrix-table');
+  const groupSelect = document.getElementById('matrix-group-filter'), topicSelect = document.getElementById('matrix-domain-filter');
+  const q = (document.getElementById('matrix-search').value || '').trim().toLowerCase();
+  const sort = document.getElementById('matrix-sort').value || 'az';
+  const topics = matrixState.mode !== 'oil-compounds', oilRows = matrixState.mode.startsWith('oil-');
+  const selected = topics ? R.node(topicSelect.value) : null;
+  if (selected) matrixState.group = matrixGroupFor(selected.id);
+  const groups = matrixGroups();
+  if (!groups.some(group => group.id === matrixState.group)) matrixState.group = groups[0]?.id || 'unclassified';
+  const group = groups.find(group => group.id === matrixState.group);
+  groupSelect.innerHTML = groups.map(group => `<option value="${esc(group.id)}">${esc(group.label)}</option>`).join(''); groupSelect.value = matrixState.group;
+  const roots = R.children().filter(node => matrixGroupFor(node.id) === matrixState.group);
+  const options = selected && !roots.some(node => node.id === selected.id) ? [...roots, selected] : roots;
+  topicSelect.innerHTML = '<option value="">All in this family</option>' + options.map(node => `<option value="${esc(node.id)}">${esc(node.parentId ? R.breadcrumb(node.id) : R.label(node.id))}</option>`).join('');
+  topicSelect.value = selected?.id || '';
+  syncTopicFilter('matrix-domain-filter');
+  document.getElementById('matrix-domain-filter-navigation').hidden = !topics;
+  for (const id of ['matrix-group-control','matrix-topic-control']) document.getElementById(id).hidden = !topics;
+  document.getElementById('matrix-chemical-control').hidden = topics;
+  document.getElementById('matrix-oil-control').hidden = !oilRows;
+  const oilFilter = document.getElementById('matrix-oil-filter');
+  oilFilter.innerHTML = '<option value="">All oils</option>' + oilsByName.map(oil => `<option value="${esc(oil.id)}">${esc(oil.name)}</option>`).join(''); oilFilter.value = matrixState.oil;
+  const chemicalFilter = document.getElementById('matrix-chemical-filter');
+  chemicalFilter.innerHTML = '<option value="">All compounds</option>' + CHEMISTRY.compoundCategories.map(group => `<option value="${esc(group.id)}">${esc(group.label)}</option>`).join(''); chemicalFilter.value = matrixState.chemical;
+  document.querySelectorAll('[data-matrix-view]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.matrixView === matrixState.mode)));
+  const inventory = document.getElementById('matrix-inventory');
+  inventory.innerHTML = `${D.oils.length} oils · ${D.compounds.length} compounds · ${R.nodes.length} topic terms · ${D.studies.length} papers · <button data-matrix-inspect="sources">${D.sources.length} source records</button>`;
+  matrixBindInspector(inventory);
+  document.getElementById('matrix-context').textContent = topics ? `${group?.description || ''} Click a column to descend the hierarchy. Parent counts include descendants; do not add overlapping columns. ${oilRows ? 'Numbers are unique oil-linked papers, not effectiveness scores.' : matrixState.mode === 'compound-topics' ? 'Numbers are compound-bibliography links, not proof of the compound’s effects.' : 'A mark means the paper carries that topic or a descendant.'}` : 'Cells show recorded oil–compound relationships. Percentages belong to cited samples; “Catalog only” means no source-qualified measurement. “Other material” includes plant/extract evidence. A dash means no recorded link, not chemical absence.';
+  const columns = topics ? selected ? [selected, ...R.children(selected.id)] : roots : D.compounds.filter(compound => CHEMISTRY.matchesCategory(compound, matrixState.chemical));
+  const kind = oilRows ? 'oil' : matrixState.mode === 'compound-topics' ? 'compound' : 'study';
+  let rows = (oilRows ? D.oils : kind === 'compound' ? D.compounds : D.studies).filter(row => (!oilRows || !matrixState.oil || row.id === matrixState.oil) && (!q || [row.name, row.latinName, row.title, row.formula, row.authors, row.pubmedId, row.doi].filter(Boolean).join(' ').toLowerCase().includes(q)));
+  rows.sort((a,b) => (sort === 'studies' ? matrixPapers(kind,b.id).length - matrixPapers(kind,a.id).length : 0) || (a.name || a.title).localeCompare(b.name || b.title));
+  document.getElementById('matrix-count').textContent = `${rows.length} ${kind === 'oil' ? 'oil' : kind === 'compound' ? 'compound' : 'paper'}${rows.length === 1 ? '' : 's'} × ${columns.length} columns`;
+  let html = `<caption class="matrix-caption">${topics ? group?.label || 'Research topics' : 'Oil–compound records'}</caption><thead><tr><th scope="col" class="rowlabel">${kind === 'oil' ? 'Essential oil' : kind === 'compound' ? 'Compound' : 'Publication'}<small>Select a name to explore</small></th>${columns.map(column => `<th scope="col"><button ${topics ? 'data-matrix-topic' : 'data-matrix-inspect'}="${topics ? esc(column.id) : 'compound/' + esc(column.id)}">${esc(topics ? R.label(column.id) : column.name)}${topics && R.children(column.id).length ? '<small>Explore subtopics ↓</small>' : !topics ? `<small>${formatFormula(column.formula)}</small>` : ''}</button></th>`).join('')}</tr></thead><tbody>`;
+  rows.forEach(row => {
+    html += `<tr><th scope="row" class="rowlabel"><button data-matrix-inspect="${kind}/${esc(row.id)}">${oilRows ? `<span class="swatch sm" style="background:${esc(row.color)}"></span>` : ''}${esc(row.name || row.title)}<small>${esc(oilRows ? row.latinName : kind === 'compound' ? row.formula : `${row.year} · ${row.journal}`)}</small></button></th>`;
+    columns.forEach(column => {
+      const records = topics ? [] : matrixRecords(row.id,column.id), papers = topics ? matrixPapers(kind,row.id,column.id) : [];
+      const present = topics ? papers.length : records.length;
+      const inspection = topics ? kind === 'study' ? `study/${row.id}` : `${kind}-topic/${row.id}/${column.id}` : `relationship/${row.id}/${column.id}`;
+      const value = topics ? kind === 'study' ? present ? '●' : '—' : String(present) : matrixRecordLabel(records);
+      const label = topics ? `${row.name || row.title}, ${R.label(column.id)}: ${papers.length} linked papers` : `${row.name}, ${column.name}: ${value}`;
+      html += `<td><button class="cell${topics ? '' : ' composition-cell'}" data-oil="${oilRows ? esc(row.id) : ''}" data-domain="${topics ? esc(column.id) : ''}" data-matrix-inspect="${esc(inspection)}" aria-label="${esc(label)}" ${present ? '' : 'disabled'}><span class="cell-n">${esc(value)}</span></button></td>`;
     });
-    html += `</tr>`;
+    html += '</tr>';
   });
-  table.innerHTML = html + `</tbody>`;
-  table.querySelectorAll(".cell:not([disabled])").forEach(btn =>
-    btn.addEventListener("click", () => {
-      ["study-level-filter", "study-type-filter", "study-search", "study-class-filter", "study-group-filter"].forEach(id => { document.getElementById(id).value = ""; });
-      presetStudyFilters({ oil: btn.dataset.oil, domain: btn.dataset.domain, compound: "" });
-      switchTab("studies");
-    }));
+  table.innerHTML = html + '</tbody>';
+  if (!rows.length) table.innerHTML += `<tfoot><tr><td colspan="${columns.length + 1}">No rows match. Clear the search or oil filter.</td></tr></tfoot>`;
+  table.querySelectorAll('[data-matrix-topic]').forEach(button => button.addEventListener('click', () => { matrixState.inspection = ''; setTopicFilter('matrix-domain-filter',button.dataset.matrixTopic,true); }));
+  table.querySelectorAll('[data-matrix-inspect]:not([disabled])').forEach(button => button.addEventListener('click', () => matrixSelect(button.dataset.matrixInspect)));
+  renderMatrixInspector();
 }
-["matrix-search","matrix-sort"].forEach(id => {
-  const el = document.getElementById(id);
-  if (el) el.addEventListener(id === "matrix-search" ? "input" : "change", renderMatrix);
-});
+document.querySelectorAll('[data-matrix-view]').forEach(button => button.addEventListener('click', () => { matrixState.mode = button.dataset.matrixView; matrixState.inspection = ''; renderMatrix(); routeMatrix(); }));
+for (const id of ['matrix-search', 'matrix-sort']) document.getElementById(id)?.addEventListener(id === 'matrix-search' ? 'input' : 'change', () => { renderMatrix(); routeMatrix(id === 'matrix-search'); });
+document.getElementById('matrix-group-filter')?.addEventListener('change', event => { matrixState.group = event.target.value; matrixState.inspection = ''; document.getElementById('matrix-domain-filter').value = ''; renderMatrix(); routeMatrix(); });
+document.getElementById('matrix-oil-filter')?.addEventListener('change', event => { matrixState.oil = event.target.value; matrixState.inspection = ''; renderMatrix(); routeMatrix(); });
+document.getElementById('matrix-chemical-filter')?.addEventListener('change', event => { matrixState.chemical = event.target.value; matrixState.inspection = ''; renderMatrix(); routeMatrix(); });
+document.getElementById('matrix-domain-filter').addEventListener('change', event => { matrixState.inspection = ''; setTopicFilter('matrix-domain-filter',event.target.value,true); });
 
-document.getElementById("matrix-domain-filter").addEventListener("change", e => setTopicFilter("matrix-domain-filter", e.target.value, true));
 
 /* ================= DOMAIN EXPLORER ================= */
 let domainState = { type: null, sub: null };
@@ -874,7 +1027,7 @@ function renderDomainTiles() {
   wrap.innerHTML = R.roots().map(node => {
     const count = R.countStudies(node.id), children = R.children(node.id);
     return `<button class="domain-tile" data-domain="${esc(node.id)}">
-      <h3>${esc(R.label(node.id))}</h3>
+      <span class="domain-icon">${uiIcon("domains")}</span><h3>${esc(R.label(node.id))}</h3>
       <p class="domain-n">${count} stud${count === 1 ? "y" : "ies"}</p>
       ${children.length ? `<p class="sub">${children.slice(0, 5).map(child => esc(R.label(child.id))).join(" &middot; ")}${children.length > 5 ? " &middot; …" : ""}</p>` : ""}
     </button>`;

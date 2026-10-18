@@ -6,11 +6,11 @@ For an independent engineering/scientific review of the canonical migration, sta
 
 ## Views
 
-- **Blend Builder**: research-topics-first or oils-first custom oil recipes across the full catalog, written evidence and precautions, saved drafts and versioned share links. $40 / 8 oz custom product, manually reviewed before mixing; a Shopify cart permalink carries the recipe once the real product variant is configured. See [integration and launch requirements](blend-builder-integration.md).
+- **Blend Builder** (first tab and default landing view): research-topics-first or oils-first custom oil recipes across the full catalog, written evidence and precautions, saved drafts and versioned share links. $40 / 8 oz custom product, manually reviewed before mixing; a Shopify cart permalink carries the recipe once the real product variant is configured. See [integration and launch requirements](blend-builder-integration.md).
 
 - **Oils**: oil explorer with composition fingerprint (range bars), research coverage, evidence summary, studies.
 - **Compounds**: terpene and compound drill-downs (chemically correct classes, not just "terpenes"), found-in charts, studies.
-- **Matrix**: oils x research domains heatmap. Color intensity is study count; the letter marks the strongest evidence level (C clinical, P preclinical, L laboratory, R review). Click a cell to see the papers.
+- **Matrix**: master relationship explorer for the canonical dataset. Switch among oils × topics, oils × compounds, compounds × topics, and studies × topics. Canonical families separate uses/outcomes, composition/sensory research, and other biological assays. Column headers descend the hierarchy; names and cells open oil/compound records, scoped papers, chemical observations and sources in place. Counts are unique papers, not effectiveness scores; percentages are source-qualified sample measurements. Filters and open details are shareable URL state.
 - **Domains**: start from any canonical research topic and follow its nested topics, oils, compounds, and papers. Options and counts come from the same hierarchical terms used throughout the Lab.
 - **Network**: force-directed oil-compound graph. Click any node to open it.
 - **Studies**: filterable research library (oil, compound, domain, evidence level, study type).

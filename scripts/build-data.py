@@ -126,6 +126,10 @@ def validate(master):
     studies = registry(regs['studies'], 'studies')
     sources = registry(regs['sources'], 'sources')
     nodes = registry(regs['useNodes'], 'useNodes')
+    matrix_groups = registry(regs.get('matrixTopicGroups', []), 'matrixTopicGroups')
+    for group in matrix_groups.values():
+        require(bool(ID.fullmatch(group['id'])), 'Invalid matrix group ID')
+        require(all(isinstance(group.get(key), str) and group[key].strip() for key in ('label', 'description')), 'Matrix groups need a label and description')
     assertions = registry(regs['evidenceAssertions'], 'evidenceAssertions')
     groups = registry(regs['chemicalGroups'], 'chemicalGroups')
     chemical_nodes = registry(regs['chemicalTaxonomy'], 'chemicalTaxonomy')
@@ -189,6 +193,10 @@ def validate(master):
             require(ancestor['id'] not in visited, f'Taxonomy cycle at {node["id"]}')
             visited.add(ancestor['id'])
             ancestor = nodes.get(ancestor['parentId'])
+    for node in nodes.values():
+        if 'matrixGroupId' in node:
+            require(node.get('parentId') is None, f'{node["id"]}: matrix grouping belongs on taxonomy roots')
+            require(node['matrixGroupId'] in matrix_groups, f'{node["id"]}: unknown matrix group')
     for source in sources.values():
         if 'studyRef' in source:
             require(source['studyRef'] in studies, f'{source["id"]}: unknown studyRef')
@@ -425,6 +433,7 @@ def project(master, metadata=True):
     result['sources'] = [citation_fields(source, studies) for source in regs['sources']]
     if metadata:
         result['taxonomy'] = {'version': master['taxonomyVersion'], 'nodes': copy.deepcopy(regs['useNodes']), 'aliases': aliases}
+        result['taxonomy']['matrixGroups'] = copy.deepcopy(regs.get('matrixTopicGroups', []))
         result['evidenceAssertions'] = copy.deepcopy(regs['evidenceAssertions'])
         result['schemaVersion'] = master['schemaVersion']
         result['chemicalTaxonomy'] = {'version': 1, 'nodes': copy.deepcopy(regs['chemicalTaxonomy'])}

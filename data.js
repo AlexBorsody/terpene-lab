@@ -15936,7 +15936,8 @@ const TERPENE_DATA = {
             "type": "health"
           }
         ],
-        "declared": true
+        "declared": true,
+        "matrixGroupId": "uses"
       },
       {
         "id": "health-mental-health",
@@ -16275,7 +16276,8 @@ const TERPENE_DATA = {
             "type": "cleaning"
           }
         ],
-        "declared": true
+        "declared": true,
+        "matrixGroupId": "uses"
       },
       {
         "id": "cleaning-surface",
@@ -16357,7 +16359,8 @@ const TERPENE_DATA = {
             "type": "microbial"
           }
         ],
-        "declared": true
+        "declared": true,
+        "matrixGroupId": "uses"
       },
       {
         "id": "microbial-bacteria",
@@ -16529,7 +16532,8 @@ const TERPENE_DATA = {
             "type": "pest"
           }
         ],
-        "declared": true
+        "declared": true,
+        "matrixGroupId": "uses"
       },
       {
         "id": "pest-mosquitoes",
@@ -16663,7 +16667,8 @@ const TERPENE_DATA = {
           }
         ],
         "declared": true,
-        "displayLabel": "Aroma research"
+        "displayLabel": "Aroma research",
+        "matrixGroupId": "composition"
       },
       {
         "id": "sensory-aroma-chemistry",
@@ -16732,7 +16737,8 @@ const TERPENE_DATA = {
         ],
         "declared": true,
         "displayLabel": "Composition and flavonoid research",
-        "navigationRoot": false
+        "navigationRoot": false,
+        "matrixGroupId": "composition"
       },
       {
         "id": "botanical-nonvolatile-chemistry",
@@ -17240,7 +17246,8 @@ const TERPENE_DATA = {
         ],
         "declared": true,
         "displayLabel": "Biological activity",
-        "navigationRoot": true
+        "navigationRoot": true,
+        "matrixGroupId": "assays"
       },
       {
         "id": "health-skin-dandruff",
@@ -17763,7 +17770,24 @@ const TERPENE_DATA = {
       "pest/beetles/harmonia-axyridis": "pest-beetles-harmonia-axyridis",
       "health-metabolic-alpha-amylase-inhibition": "health-metabolic-alpha-amylase-inhibition",
       "health-skin-barrier-repair": "health-skin-barrier-repair"
-    }
+    },
+    "matrixGroups": [
+      {
+        "id": "uses",
+        "label": "Uses & outcomes",
+        "description": "Health, cleaning, microbial and pest endpoints. Counts describe linked research, including contextual and unfavorable findings."
+      },
+      {
+        "id": "composition",
+        "label": "Composition & sensory research",
+        "description": "Analytical composition, constituent variation and aroma research. These columns describe chemistry and sensory questions, not application benefits."
+      },
+      {
+        "id": "assays",
+        "label": "Other biological assays",
+        "description": "Biological assays that are not assigned to a practical use or outcome. Inspect the model and material before drawing conclusions."
+      }
+    ]
   },
   "evidenceAssertions": [
     {

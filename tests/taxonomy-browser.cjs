@@ -191,8 +191,10 @@ const server = http.createServer((req, res) => {
     assert.equal((await page.locator('#matrix-table [data-oil="lemon"][data-domain="fixture-leaf"]').innerText()).trim(), '2');
     assert.equal((await page.locator('#matrix-table [data-oil="lavender"][data-domain="fixture-leaf"]').innerText()).trim(), '0');
     await page.locator('#matrix-table [data-oil="lemon"][data-domain="fixture-leaf"]').click();
-    assert.equal(await page.locator('#study-list .study').count(), 2);
-    await page.goBack(); assert.equal(await page.locator('#tab-matrix').isVisible(), true);
+    assert.equal(await page.locator('#matrix-inspector .study').count(), 2);
+    assert.equal(await page.locator('#tab-matrix').isVisible(), true);
+    assert.equal(await page.locator('#matrix-group-filter').inputValue(), 'unclassified', 'Unassigned JSON roots remain discoverable');
+    await page.goBack(); assert.equal(await page.locator('#matrix-inspector').isVisible(), false);
     // Retained Pathway works with the same hierarchy, even if not mounted in this shell.
     await page.evaluate(() => {
       for (const id of ['pathway-plants', 'pathway-compounds', 'pathway-uses', 'pathway-evidence']) {
