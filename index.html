@@ -18,6 +18,7 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="shield-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" sizes="180x180">
+<link rel="stylesheet" href="blend-builder.css?v=780b169ef110b2a1">
 <link rel="stylesheet" href="styles.css?v=08c7926bfecb8936">
 <script src="vendor/echarts-5.5.1.min.js"></script>
 
@@ -66,6 +67,7 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
     </div>
     <nav class="tabs">
       <button class="tab active" data-tab="oils">Oils</button>
+      <button class="tab blend-tab" data-tab="blend">Blend Builder</button>
       <button class="tab" data-tab="studies">Studies</button>
       <button class="tab" data-tab="compounds">Compounds</button>
       <button class="tab" data-tab="matrix">Matrix</button>
@@ -76,6 +78,7 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
 </header>
 
 <main id="app">
+  <section id="tab-blend" class="tab-panel"><div id="blend-builder"></div></section>
   <!-- OIL EXPLORER -->
   <section id="tab-oils" class="tab-panel active">
     <div id="oil-list-view">
@@ -286,9 +289,11 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
   <p>Sunny's Shield Terpene Lab &middot; plant to molecule to paper &middot; inspect the evidence yourself. Not medical advice.</p>
 </footer>
 
-<script src="data.js?v=52121e01f09f880e"></script>
+<script src="data.js?v=b553712bcc1a9425"></script>
 <script src="chemistry.js?v=bc9a042f59ea993f"></script>
-<script src="app.js?v=3af294fa0a31d2cc"></script>
+<script src="app.js?v=ff4f7c513af9f01c"></script>
+<script src="blend-engine.js?v=019d22378361d4f5"></script>
+<script src="blend-builder.js?v=35f9409a25bba929"></script>
 <script src="pwa.js?v=a52f02fdcb6a4716"></script>
 </body>
 </html>

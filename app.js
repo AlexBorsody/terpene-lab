@@ -126,6 +126,7 @@ function routeUrl(tab, params = {}, replace = false) {
   if (routingFromHistory) return;
   const url = new URL(window.location.href);
   url.searchParams.set("tab", tab);
+  if (tab !== "blend") url.searchParams.delete("recipe");
   ["oil","compound","domain","sub"].forEach(k => {
     if (params[k]) url.searchParams.set(k, params[k]);
     else url.searchParams.delete(k);
