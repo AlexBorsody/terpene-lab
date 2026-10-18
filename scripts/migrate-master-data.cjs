@@ -4,10 +4,26 @@
 const fs = require('node:fs');
 const crypto = require('node:crypto');
 const path = require('node:path');
-const input = process.argv[2];
-const output = process.argv[3] || path.join(__dirname, '..', 'master-data.json');
-if (!input) throw new Error('Usage: node scripts/migrate-master-data.cjs baseline.snapshot.json [master-data.json]');
-if (fs.existsSync(output) && !process.argv.includes('--force')) throw new Error('Refusing to replace existing master; use --force only for an intentional fresh migration.');
+const usage = 'Usage: node scripts/migrate-master-data.cjs [--force] baseline.snapshot.json [master-data.json]';
+function cliError(message) {
+  console.error(message + '\n' + usage);
+  process.exit(2);
+}
+const positional = [];
+let force = false;
+let parseOptions = true;
+for (const argument of process.argv.slice(2)) {
+  if (parseOptions && argument === '--') parseOptions = false;
+  else if (parseOptions && argument === '--force') force = true;
+  else if (parseOptions && argument.startsWith('-')) cliError('Unknown option: ' + argument);
+  else positional.push(argument);
+}
+if (positional.length < 1 || positional.length > 2 || positional.some(argument => !argument)) {
+  cliError('Expected a baseline snapshot path and at most one output path.');
+}
+const [input] = positional;
+const output = positional[1] ?? path.join(__dirname, '..', 'master-data.json');
+if (fs.existsSync(output) && !force) throw new Error('Refusing to replace existing master; use --force only for an intentional fresh migration.');
 const baseline = JSON.parse(fs.readFileSync(input, 'utf8'));
 const copy = value => JSON.parse(JSON.stringify(value));
 const stable = value => JSON.stringify(value, function (key, val) {

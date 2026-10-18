@@ -83,7 +83,7 @@ python3 scripts/build-pwa.py
 git diff --exit-code -- data.js index.html sw.js
 ```
 
-The canonical suite has 78 checks in ordinary mode; supplying the exact original snapshot adds a separate baseline comparison. The focused research suite has 29 checks. Numbers may grow with later fixes; read the actual run output.
+The canonical suite has 96 checks in ordinary mode; supplying the exact original snapshot adds a separate baseline comparison. The focused research suite has 29 checks. Numbers may grow with later fixes; read the actual run output.
 
 For browser checks, install the pinned Playwright release used by `.github/workflows/test.yml`, install Chromium, set `CHROME_PATH` to its executable and start `python3 -m http.server 8000` in another terminal:
 

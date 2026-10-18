@@ -561,15 +561,27 @@ async function assertNoOverflow(page, label) {
       await page.locator('#blend-reset').click();await choose(page,'qualities');
       await topic(page,'microbial');
       assert.deepEqual(await selectedTopics(page),['microbial']);
-      await assertCatalog(page,['microbial']);
+      const matches=await assertCatalog(page,['microbial']);
+      assert.ok(matches.direct.length>0,'The real Microbial topic has reviewed oil matches');
+      // Keep the responsive width, but frame the expanded picker and a complete
+      // real oil card. A narrow-screen hierarchy can legitimately exceed 1000px.
+      const captureHeight=await page.evaluate(()=>{
+        const branch=document.querySelector('[data-topic-branch="microbial"]').getBoundingClientRect();
+        const firstOil=document.querySelector('#blend-oil-catalog > .blend-oil-card').getBoundingClientRect();
+        const header=document.querySelector('.lab-header').getBoundingClientRect().height;
+        return Math.max(1000,Math.ceil(header+firstOil.bottom-branch.top+48));
+      });
+      await page.setViewportSize({width,height:captureHeight});
       await page.locator('[data-topic-branch="microbial"]').evaluate(node=>{
         const header=document.querySelector('.lab-header').getBoundingClientRect().height;
         scrollTo(0,scrollY+node.getBoundingClientRect().top-header-16);
       });
       const branch=await page.locator('[data-topic-branch="microbial"]').boundingBox();
-      const catalog=await page.locator('#blend-oil-catalog').boundingBox();
-      assert.ok(branch.y>=0 && branch.y<1000,'Selected Microbial hierarchy is in the screenshot');
-      assert.ok(catalog.y>=0 && catalog.y<920,'Matching catalog is visible below the research picker');
+      const firstOil=await page.locator('#blend-oil-catalog > .blend-oil-card').first().boundingBox();
+      const header=await page.locator('.lab-header').boundingBox();
+      const geometry=JSON.stringify({width,captureHeight,branch,firstOil,header});
+      assert.ok(branch.y>=header.y+header.height && branch.y+branch.height<=captureHeight-16,`Expanded Microbial hierarchy is fully visible below the header: ${geometry}`);
+      assert.ok(firstOil.y>=branch.y+branch.height && firstOil.y+firstOil.height<=captureHeight-16,`A complete matching oil card is visible below the picker: ${geometry}`);
       await assertNoOverflow(page,`${width}px real-data topics picker`);
       await page.screenshot({path:`/tmp/terpene-blend-topics-${label}.png`});
     }

@@ -108,6 +108,54 @@ function main() {
     assert.equal(digest(restored), master.migration.baselineDigest, 'Lossless baseline fingerprint mismatch: undocumented legacy data change'); checks++;
     assert.deepEqual(counts(restored), BASELINE_COUNTS); checks++;
     assert.deepEqual(master.migration.baselineCounts, BASELINE_COUNTS); checks++;
+
+    // Exercise the actual migration CLI in a copied temporary project. The
+    // script's __dirname-based default can never point at the production master.
+    const migrationProject = path.join(tmp, 'migration-project');
+    fs.mkdirSync(path.join(migrationProject, 'scripts'), {recursive: true});
+    const migrationScript = path.join(migrationProject, 'scripts', 'migrate-master-data.cjs');
+    fs.copyFileSync(path.join(ROOT, 'scripts', 'migrate-master-data.cjs'), migrationScript);
+    fs.writeFileSync(path.join(migrationProject, 'baseline.json'), JSON.stringify(restored));
+    const productionMasterBefore = fs.readFileSync(path.join(ROOT, 'master-data.json'), 'utf8');
+    const defaultMaster = path.join(migrationProject, 'master-data.json');
+    const explicitMaster = path.join(migrationProject, 'explicit-master.json');
+    const migrate = (...args) => spawnSync(process.execPath, [migrationScript, ...args], {cwd: migrationProject, encoding: 'utf8'});
+    function migrated(result, output) {
+      assert.equal(result.status, 0, result.stderr);
+      assert.equal(JSON.parse(fs.readFileSync(output, 'utf8')).migration.baselineDigest, BASELINE_DIGEST);
+      assert.ok(!fs.existsSync(path.join(migrationProject, '--force')), '--force must never become an output filename');
+      checks++;
+    }
+    migrated(migrate('baseline.json'), defaultMaster);
+    for (const [args, output] of [
+      [['baseline.json'], defaultMaster],
+      [['baseline.json', 'explicit-master.json'], explicitMaster]
+    ]) {
+      fs.writeFileSync(output, 'TEST-ONLY existing master sentinel');
+      const result = migrate(...args);
+      assert.notEqual(result.status, 0);
+      assert.match(result.stderr, /Refusing to replace existing master/);
+      assert.equal(fs.readFileSync(output, 'utf8'), 'TEST-ONLY existing master sentinel'); checks++;
+    }
+    migrated(migrate('baseline.json', '--force'), defaultMaster);
+    migrated(migrate('--force', 'baseline.json'), defaultMaster);
+    migrated(migrate('baseline.json', 'explicit-master.json', '--force'), explicitMaster);
+    migrated(migrate('baseline.json', '--force', 'explicit-master.json'), explicitMaster);
+    migrated(migrate('--force', 'baseline.json', 'explicit-master.json'), explicitMaster);
+    migrated(migrate('baseline.json', 'new-explicit-master.json'), path.join(migrationProject, 'new-explicit-master.json'));
+    fs.writeFileSync(path.join(migrationProject, '-baseline.json'), JSON.stringify(restored));
+    migrated(migrate('--', '-baseline.json', '-explicit-master.json'), path.join(migrationProject, '-explicit-master.json'));
+    for (const args of [[], ['--force'], ['--unknown', 'baseline.json'], ['baseline.json', '--froce'],
+      ['baseline.json', 'unused-output.json', 'extra-output.json'], [''], ['baseline.json', '']]) {
+      const beforeFiles = fs.readdirSync(migrationProject).sort();
+      const beforeDefault = fs.readFileSync(defaultMaster, 'utf8');
+      const result = migrate(...args);
+      assert.equal(result.status, 2, 'Invalid CLI arguments must fail before migration: ' + JSON.stringify(args));
+      assert.match(result.stderr, /Usage:/);
+      assert.deepEqual(fs.readdirSync(migrationProject).sort(), beforeFiles, 'Invalid arguments must not create files');
+      assert.equal(fs.readFileSync(defaultMaster, 'utf8'), beforeDefault, 'Invalid arguments must not overwrite the default master'); checks++;
+    }
+    assert.equal(fs.readFileSync(path.join(ROOT, 'master-data.json'), 'utf8'), productionMasterBefore, 'CLI regression tests must never modify production master'); checks++;
     const baselineIndex = process.argv.indexOf('--baseline');
     if (baselineIndex >= 0) {
       const baseline = JSON.parse(fs.readFileSync(process.argv[baselineIndex + 1], 'utf8'));
