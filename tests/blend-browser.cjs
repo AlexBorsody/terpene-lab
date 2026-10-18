@@ -249,13 +249,18 @@ async function assertNoOverflow(page, label) {
     assert.equal(new URL(href).searchParams.get('tab'),'studies');
     assert.equal(new URL(href).searchParams.get('oil'),'lavender');
     assert.equal(new URL(href).searchParams.get('domain'),'fixture-blend-leaf');
+    const builderUrl=page.url();
     await page.locator('.blend-library-link').click();
+    await page.waitForURL(href,{waitUntil:'load'});
     const library=page.locator('#tab-studies .study[data-study-id="fixture-blend-direct"]');
+    await library.waitFor({state:'visible'});
     assert.equal(await library.isVisible(),true);
     assert.equal(await library.locator('h4').innerText(),title);
     assert.equal(await library.locator('.finding').innerText(),finding);
     assert.equal(await page.locator('#tab-studies .study').count(),1);
     await page.goBack();
+    await page.waitForURL(builderUrl,{waitUntil:'load'});
+    await page.locator('#blend-quality-picker').waitFor({state:'visible'});
     assert.deepEqual(await selectedTopics(page),['fixture-blend-leaf']);
     assert.deepEqual(await selected(page),[{id:'lavender',percent:100}]);
   },null,dynamicFixture());
@@ -500,13 +505,27 @@ async function assertNoOverflow(page, label) {
     assert.equal(await page.locator('#tab-blend.active').count(),1);
     assert.equal(await page.locator('#blend-results-title').innerText(),'Evening garden','Back restores recipe A named by URL, not edited draft B');
     await page.goForward();assert.equal(await page.locator('#tab-oils.active').count(),1);
+    const oilsUrl=page.url();
+    assert.equal(await page.evaluate(()=>window.testPushCount),1,'Back and Forward do not create new history entries');
     for(let i=0;i<3;i++) {
       await page.getByRole('button',{name:'Blend Builder',exact:true}).click();
+      assert.equal(await page.evaluate(()=>window.testPushCount),2,i===0?'The Oils-to-Builder transition pushes once':'Repeated clicks on the active Builder tab add no duplicate history');
       await choose(page,i%2?'qualities':'oils');
+      assert.equal(await page.evaluate(()=>window.testPushCount),2,'Builder pathway edits do not create route entries');
       assert.equal(await page.locator('.tab-panel.active').count(),1);
       assert.equal((await selected(page)).length,2);
     }
-    assert.equal(await page.evaluate(()=>window.testPushCount),4,'One history push per tab click, no doubled handlers');
+    const builderUrl=page.url();
+    await page.getByRole('button',{name:'Oils',exact:true}).click();
+    assert.equal(await page.evaluate(()=>window.testPushCount),3,'A new Builder-to-Oils transition pushes exactly once');
+    await page.getByRole('button',{name:'Blend Builder',exact:true}).click();
+    assert.equal(await page.evaluate(()=>window.testPushCount),4,'A new Oils-to-Builder transition pushes exactly once');
+    await page.goBack();await page.waitForURL(oilsUrl);
+    assert.equal(await page.locator('#tab-oils.active').count(),1);
+    await page.goBack();await page.waitForURL(builderUrl);
+    assert.equal(await page.locator('#tab-blend.active').count(),1,'Back reaches the prior real transition without duplicate active-tab entries');
+    assert.equal(await page.evaluate(()=>window.testPushCount),4,'History restoration does not push another entry');
+    assert.equal((await selected(page)).length,2);
   });
   await test('320/390/768/1440 standalone and embed layouts; caution ordering and screenshots',async page=>{
     const five=seed({name:'A long garden blend with five essential oils',oils:oilIds.map(id=>({id,percent:20}))});
@@ -535,6 +554,24 @@ async function assertNoOverflow(page, label) {
         await page.screenshot({path:'/tmp/terpene-blend-mobile-results.png'});
         await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:'/tmp/terpene-blend-mobile.png'});
       }
+    }
+    // Real catalog evidence for the dynamic picker, separate from synthetic fixtures.
+    for(const [width,label] of [[1440,'desktop'],[390,'mobile']]) {
+      await page.setViewportSize({width,height:1000});await open(page);
+      await page.locator('#blend-reset').click();await choose(page,'qualities');
+      await topic(page,'microbial');
+      assert.deepEqual(await selectedTopics(page),['microbial']);
+      await assertCatalog(page,['microbial']);
+      await page.locator('[data-topic-branch="microbial"]').evaluate(node=>{
+        const header=document.querySelector('.lab-header').getBoundingClientRect().height;
+        scrollTo(0,scrollY+node.getBoundingClientRect().top-header-16);
+      });
+      const branch=await page.locator('[data-topic-branch="microbial"]').boundingBox();
+      const catalog=await page.locator('#blend-oil-catalog').boundingBox();
+      assert.ok(branch.y>=0 && branch.y<1000,'Selected Microbial hierarchy is in the screenshot');
+      assert.ok(catalog.y>=0 && catalog.y<920,'Matching catalog is visible below the research picker');
+      await assertNoOverflow(page,`${width}px real-data topics picker`);
+      await page.screenshot({path:`/tmp/terpene-blend-topics-${label}.png`});
     }
   });
   await test('long shared names and Unicode names remain safe and fit on mobile',async page=>{

@@ -2,6 +2,8 @@
 
 Interactive essential oil evidence explorer. Plant to molecule to paper.
 
+For an independent engineering/scientific review of the canonical migration, start with [REVIEW-HANDOFF.md](REVIEW-HANDOFF.md).
+
 ## Views
 
 - **Blend Builder**: research-topics-first or oils-first custom oil recipes across the full catalog, written evidence and precautions, saved drafts and versioned share links. $40 / 8 oz custom product, manually reviewed before mixing; a Shopify cart permalink carries the recipe once the real product variant is configured. See [integration and launch requirements](blend-builder-integration.md).
