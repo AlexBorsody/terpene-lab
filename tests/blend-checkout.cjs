@@ -125,6 +125,18 @@ async function test(name,run) {
 
 (async()=>{
   browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',args:['--no-sandbox']});
+  await test('path switch removes hidden qualities from synthetic checkout metadata',async(page,t)=>{
+    await page.locator('[data-blend-path="qualities"]').click();
+    await page.locator('[data-quality="calm"]').click();
+    await page.locator('[data-blend-path="oils"]').click();
+    await t.click();await t.started(1);
+    const payload=t.posts[0].payload;
+    assert.equal(payload.recipe.path,'oils');assert.deepEqual(payload.recipe.qualityIds,[]);
+    assert.equal(payload.items[0].properties['Purported qualities'],'None selected');
+    assert.deepEqual(JSON.parse(Buffer.from(payload.encodedRecipe,'base64url').toString('utf8')).qualityIds,[]);
+    assert.deepEqual(payload.recipe.oils,[{id:'lavender',percent:100}]);
+    await t.reply(0,{error:'TEST-ONLY deliberate failure'},503);await t.noNavigation();
+  });
   await test('synthetic configured concentration copy and exact fulfillment payload',async(page,t)=>{
     const summary=await page.locator('.blend-result-summary').innerText();
     assert.match(summary,/Configured final spray oil concentration: 2% \(subject to server review\)/);

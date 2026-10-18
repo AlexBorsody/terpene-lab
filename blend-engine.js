@@ -181,7 +181,8 @@
     if (errors.length) return {valid: false, errors: errors, recipe: null};
     var canonical = {
       v: 1, catalogVersion: catalog.config.catalogVersion, name: recipe.name.trim(), path: recipe.path,
-      qualityIds: recipe.qualityIds.slice().sort(), petContext: recipe.petContext,
+      // Normalize older oils-first drafts/links without retaining invisible qualities.
+      qualityIds: recipe.path === 'oils' ? [] : recipe.qualityIds.slice().sort(), petContext: recipe.petContext,
       oils: recipe.oils.map(function (entry) { return {id: entry.id, percent: basisPoints(entry.percent) / 100}; })
         .sort(function (a, b) { return a.id < b.id ? -1 : a.id > b.id ? 1 : 0; })
     };
