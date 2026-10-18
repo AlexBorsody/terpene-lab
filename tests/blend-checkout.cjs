@@ -132,7 +132,7 @@ async function cart(page) {
   const anchor = page.locator('#blend-checkout');
   assert.equal(await anchor.isVisible(),true);
   assert.equal(await anchor.evaluate(node=>node.tagName),'A','Checkout is a browser-native link');
-  assert.equal(await anchor.innerText(),'Continue to Shopify · $40');
+  assert.equal(await anchor.innerText(),'Continue to Shopify · $40.00');
   assert.equal(await anchor.getAttribute('target'),'_top');
   assert.ok((await anchor.getAttribute('rel')).split(/\s+/).includes('noreferrer'));
   const result = decodeHref(await anchor.getAttribute('href'));
