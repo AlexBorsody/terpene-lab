@@ -30,7 +30,7 @@
           Array.isArray(d.qualityIds) && new Set(d.qualityIds).size === d.qualityIds.length && d.qualityIds.every(id => qualities.some(q => q.id === id)) &&
           Array.isArray(d.oils) && d.oils.length <= 5 && new Set(d.oils.map(o => o.id)).size === d.oils.length &&
           d.oils.every(o => o && Object.keys(o).length === 2 && typeof o.id === 'string' && Object.hasOwn(byId,o.id) && Number.isFinite(o.percent) && o.percent >= 0 && o.percent <= 100)) {
-        recipe = {...initial(),...d}; chosenPath = true;
+        recipe = {...initial(),...d,qualityIds:d.path==='oils' ? [] : d.qualityIds}; chosenPath = true;
       }
     }
   } catch { storageError = true; }
@@ -189,7 +189,12 @@
   root.addEventListener('click',async event=>{
     const button=event.target.closest('button'); if (!button || button.disabled) return;
     if (button.dataset.blendPath || button.dataset.quality || button.dataset.addOil || button.dataset.removeOil || button.dataset.loadRecipe !== undefined || ['blend-normalize','blend-reset'].includes(button.id)) cancelCheckout();
-    if (button.dataset.blendPath) { recipe.path=button.dataset.blendPath;chosenPath=true;renderPaths();renderCatalog();persist();renderResults(); }
+    if (button.dataset.blendPath) {
+      recipe.path=button.dataset.blendPath;
+      // The oils-first path has no quality picker; never retain hidden selections.
+      if (recipe.path==='oils') recipe.qualityIds=[];
+      chosenPath=true;renderPaths();renderCatalog();persist();renderResults();
+    }
     if (button.dataset.quality) { const id=button.dataset.quality; recipe.qualityIds=recipe.qualityIds.includes(id) ? recipe.qualityIds.filter(q=>q!==id) : [...recipe.qualityIds,id];renderPaths();renderCatalog();persist();renderResults();root.querySelector(`[data-quality="${id}"]`)?.focus(); }
     if (button.dataset.addOil) {
       if (recipe.oils.length>=5 || recipe.oils.some(o=>o.id===button.dataset.addOil)) return;
