@@ -296,7 +296,7 @@ const TERPENE_DATA = {
         },
         {
           "id": "bioactivity",
-          "label": "Bioactivity",
+          "label": "Biological activity",
           "topics": [
             "animal-cognition",
             "oral-tolerability",
@@ -470,20 +470,41 @@ const TERPENE_DATA = {
               "evidenceIds": [],
               "children": [
                 {
-                  "useNodeId": "health-mental-health-mood",
-                  "evidenceIds": [
-                    "use-4c83ae7120a0492e05653061"
-                  ],
-                  "children": []
-                },
-                {
                   "useNodeId": "health-mental-health-anxiety",
                   "evidenceIds": [
                     "use-e0d9439b4df9cb9a11621ff9"
                   ],
                   "children": []
+                },
+                {
+                  "useNodeId": "health-mental-health-mood",
+                  "evidenceIds": [
+                    "use-4c83ae7120a0492e05653061",
+                    "use-cff1034d6f3aeade79ac3be0"
+                  ],
+                  "children": []
                 }
               ]
+            },
+            {
+              "useNodeId": "health-skin",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-skin-barrier-repair",
+                  "evidenceIds": [
+                    "use-0c5b2c7de5f6afbe3b6472ab"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "health-pain-inflammation",
+              "evidenceIds": [
+                "use-d33a0f87937988ce1969c552"
+              ],
+              "children": []
             },
             {
               "useNodeId": "health-oral-dental",
@@ -493,6 +514,45 @@ const TERPENE_DATA = {
                   "useNodeId": "health-oral-dental-oral-malodor",
                   "evidenceIds": [
                     "use-3d6547a0f9f01283989f6ddd"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "health-immune",
+              "evidenceIds": [
+                "use-4d7644892abe41b9ef68291b"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "health-cardiovascular",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-cardiovascular-acute-physiology",
+                  "evidenceIds": [
+                    "use-d51db7afb8eb0a7af5b110f4"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "cleaning",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "cleaning-surface",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "cleaning-surface-soil-removal",
+                  "evidenceIds": [
+                    "use-4a10299d162eb945202bf4e5"
                   ],
                   "children": []
                 }
@@ -512,16 +572,16 @@ const TERPENE_DATA = {
               ],
               "children": [
                 {
-                  "useNodeId": "microbial-bacteria-formulation-preservation",
+                  "useNodeId": "microbial-bacteria-gram-negative",
                   "evidenceIds": [
-                    "use-a206d1b8918ac54505369303"
+                    "use-85e9a1ddaf3f06b1db4a8012"
                   ],
                   "children": []
                 },
                 {
-                  "useNodeId": "microbial-bacteria-gram-negative",
+                  "useNodeId": "microbial-bacteria-formulation-preservation",
                   "evidenceIds": [
-                    "use-85e9a1ddaf3f06b1db4a8012"
+                    "use-a206d1b8918ac54505369303"
                   ],
                   "children": []
                 },
@@ -543,17 +603,17 @@ const TERPENE_DATA = {
               "children": []
             },
             {
-              "useNodeId": "microbial-biofilms",
+              "useNodeId": "microbial-viruses",
               "evidenceIds": [
-                "use-b11d3965cf490b62d2114190",
-                "use-a32ad8743767e3ea07ceb625"
+                "use-22816df0543e7d1bdff83b69"
               ],
               "children": []
             },
             {
-              "useNodeId": "microbial-viruses",
+              "useNodeId": "microbial-biofilms",
               "evidenceIds": [
-                "use-22816df0543e7d1bdff83b69"
+                "use-b11d3965cf490b62d2114190",
+                "use-a32ad8743767e3ea07ceb625"
               ],
               "children": []
             }
@@ -598,25 +658,6 @@ const TERPENE_DATA = {
               ]
             }
           ]
-        },
-        {
-          "useNodeId": "cleaning",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "cleaning-surface",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "cleaning-surface-soil-removal",
-                  "evidenceIds": [
-                    "use-4a10299d162eb945202bf4e5"
-                  ],
-                  "children": []
-                }
-              ]
-            }
-          ]
         }
       ],
       "evidenceIds": [
@@ -641,7 +682,12 @@ const TERPENE_DATA = {
         "use-ebaa6d1b5e020eb6ca375fb8",
         "use-1af194d4ffb8f9b00377977a",
         "use-6b208df69c4c24e46cb17f01",
-        "use-4a10299d162eb945202bf4e5"
+        "use-4a10299d162eb945202bf4e5",
+        "use-cff1034d6f3aeade79ac3be0",
+        "use-4d7644892abe41b9ef68291b",
+        "use-d51db7afb8eb0a7af5b110f4",
+        "use-0c5b2c7de5f6afbe3b6472ab",
+        "use-d33a0f87937988ce1969c552"
       ],
       "precautions": {
         "legacySafety": "Phototoxic on skin in sunlight; avoid undiluted topical use.",
@@ -661,7 +707,7 @@ const TERPENE_DATA = {
         "soft"
       ],
       "color": "#9b7ed9",
-      "description": "Steam-distilled from flowering tops. Linalool and linalyl acetate drive its well-studied calming profile.",
+      "description": "Steam-distilled flowering tops with a floral, herbal aroma. Linalool and linalyl acetate are prominent in many analyzed samples.",
       "uses": [
         "Bedding and linen",
         "Evening routines",
@@ -819,32 +865,29 @@ const TERPENE_DATA = {
                   "children": []
                 },
                 {
-                  "useNodeId": "health-mental-health-sleep",
-                  "evidenceIds": [
-                    "use-c3cf11a0912f426a90160819",
-                    "use-632a4ca42703e3ad296e6026"
-                  ],
-                  "children": []
-                },
-                {
                   "useNodeId": "health-mental-health-stress",
                   "evidenceIds": [
                     "use-7085b1ba254905c0500335b5",
                     "use-b27b92afe8872af80852fb41"
                   ],
                   "children": []
+                },
+                {
+                  "useNodeId": "health-mental-health-mood",
+                  "evidenceIds": [
+                    "use-67a63def7ed8f3141bbbcc2a"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "health-mental-health-sleep",
+                  "evidenceIds": [
+                    "use-c3cf11a0912f426a90160819",
+                    "use-632a4ca42703e3ad296e6026"
+                  ],
+                  "children": []
                 }
               ]
-            },
-            {
-              "useNodeId": "health-pain-inflammation",
-              "evidenceIds": [
-                "use-7bcac00f98d25339fd83ea2c",
-                "use-a11cc5be9269778c454d497a",
-                "use-e21475dfd1e531f26d60cce0",
-                "use-854cc2927f1e95288bb91cf9"
-              ],
-              "children": []
             },
             {
               "useNodeId": "health-cognitive",
@@ -861,10 +904,35 @@ const TERPENE_DATA = {
               ]
             },
             {
+              "useNodeId": "health-skin",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-skin-barrier-repair",
+                  "evidenceIds": [
+                    "use-161716dec2fa9b809445a1fd"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "health-pain-inflammation",
+              "evidenceIds": [
+                "use-7bcac00f98d25339fd83ea2c",
+                "use-a11cc5be9269778c454d497a",
+                "use-e21475dfd1e531f26d60cce0",
+                "use-854cc2927f1e95288bb91cf9",
+                "use-98bcfdc9c47d83c5c4997715"
+              ],
+              "children": []
+            },
+            {
               "useNodeId": "health-immune",
               "evidenceIds": [
                 "use-c27fac0eebffe5af9edfbb38",
-                "use-16411e3e0141564604d91d91"
+                "use-16411e3e0141564604d91d91",
+                "use-5cc7fc9dcebc227151daebd3"
               ],
               "children": []
             },
@@ -875,54 +943,20 @@ const TERPENE_DATA = {
                 "use-6ac10aceab143651d82a1499",
                 "use-65020c1ce89029dfb1696d28"
               ],
-              "children": []
-            },
-            {
-              "useNodeId": "health-wound",
-              "evidenceIds": [
-                "use-b34fc6cc6240ca9fc389df40"
-              ],
-              "children": []
-            }
-          ]
-        },
-        {
-          "useNodeId": "pest",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "pest-ticks",
-              "evidenceIds": [
-                "use-1d0aadb9dc2404b7f24879bf"
-              ],
               "children": [
                 {
-                  "useNodeId": "pest-ticks-repellency",
+                  "useNodeId": "health-cardiovascular-acute-physiology",
                   "evidenceIds": [
-                    "use-6e982cee5ca4dcfc7c6af3f1"
+                    "use-1639b396b8fc1ca6280889c5"
                   ],
                   "children": []
                 }
               ]
             },
             {
-              "useNodeId": "pest-mosquitoes",
+              "useNodeId": "health-wound",
               "evidenceIds": [
-                "use-a0d5ff7e790b56f4a2aaea3d"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "pest-fleas",
-              "evidenceIds": [
-                "use-7ecf43d5681330dc2fb69990"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "pest-mites",
-              "evidenceIds": [
-                "use-2c18b140ae5622a285241c86"
+                "use-b34fc6cc6240ca9fc389df40"
               ],
               "children": []
             }
@@ -968,6 +1002,48 @@ const TERPENE_DATA = {
               "evidenceIds": [
                 "use-e72fcbf86957163bc0109c6b",
                 "use-0439ed164a28e632031e1289"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "useNodeId": "pest",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "pest-mosquitoes",
+              "evidenceIds": [
+                "use-a0d5ff7e790b56f4a2aaea3d"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-ticks",
+              "evidenceIds": [
+                "use-1d0aadb9dc2404b7f24879bf"
+              ],
+              "children": [
+                {
+                  "useNodeId": "pest-ticks-repellency",
+                  "evidenceIds": [
+                    "use-6e982cee5ca4dcfc7c6af3f1"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "pest-fleas",
+              "evidenceIds": [
+                "use-7ecf43d5681330dc2fb69990"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-mites",
+              "evidenceIds": [
+                "use-2c18b140ae5622a285241c86"
               ],
               "children": []
             }
@@ -1034,7 +1110,12 @@ const TERPENE_DATA = {
         "use-edbddf65fc33e8b62241ef50",
         "use-854cc2927f1e95288bb91cf9",
         "use-d9c0f69856f1701cade9131a",
-        "use-2907c129960095a71edf0b48"
+        "use-2907c129960095a71edf0b48",
+        "use-67a63def7ed8f3141bbbcc2a",
+        "use-5cc7fc9dcebc227151daebd3",
+        "use-1639b396b8fc1ca6280889c5",
+        "use-161716dec2fa9b809445a1fd",
+        "use-98bcfdc9c47d83c5c4997715"
       ],
       "precautions": {
         "legacySafety": "Generally well tolerated; patch test for sensitive skin.",
@@ -1169,32 +1250,38 @@ const TERPENE_DATA = {
               "evidenceIds": [],
               "children": [
                 {
-                  "useNodeId": "health-mental-health-sleep",
+                  "useNodeId": "health-mental-health-mood",
                   "evidenceIds": [
-                    "use-ddc87d44354ad367bb711d4b"
+                    "use-f53f57245534265d5932fcd5"
                   ],
                   "children": []
                 },
                 {
-                  "useNodeId": "health-mental-health-mood",
+                  "useNodeId": "health-mental-health-sleep",
                   "evidenceIds": [
-                    "use-f53f57245534265d5932fcd5"
+                    "use-ddc87d44354ad367bb711d4b"
                   ],
                   "children": []
                 }
               ]
             },
             {
-              "useNodeId": "health-digestive",
+              "useNodeId": "health-cognitive",
               "evidenceIds": [
-                "use-9c9d15424beff4fcd16b54bc",
-                "use-94e0eab005746c5e3e510453"
+                "use-acd1a7e8d32e5b33e24c2b8a"
               ],
               "children": [
                 {
-                  "useNodeId": "health-digestive-ibs",
+                  "useNodeId": "health-cognitive-memory",
                   "evidenceIds": [
-                    "use-83d918365c960ee1a1eea925"
+                    "use-20a1862c1f68db5f9cd13159"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "health-cognitive-alertness",
+                  "evidenceIds": [
+                    "use-31d21d62ce7cca4091ab8e8e"
                   ],
                   "children": []
                 }
@@ -1229,64 +1316,20 @@ const TERPENE_DATA = {
               ]
             },
             {
-              "useNodeId": "health-cognitive",
+              "useNodeId": "health-digestive",
               "evidenceIds": [
-                "use-acd1a7e8d32e5b33e24c2b8a"
+                "use-9c9d15424beff4fcd16b54bc",
+                "use-94e0eab005746c5e3e510453"
               ],
               "children": [
                 {
-                  "useNodeId": "health-cognitive-memory",
+                  "useNodeId": "health-digestive-ibs",
                   "evidenceIds": [
-                    "use-20a1862c1f68db5f9cd13159"
-                  ],
-                  "children": []
-                },
-                {
-                  "useNodeId": "health-cognitive-alertness",
-                  "evidenceIds": [
-                    "use-31d21d62ce7cca4091ab8e8e"
+                    "use-83d918365c960ee1a1eea925"
                   ],
                   "children": []
                 }
               ]
-            }
-          ]
-        },
-        {
-          "useNodeId": "pest",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "pest-flies",
-              "evidenceIds": [
-                "use-67b442327a53efcb957d118d",
-                "use-6028afa8358a59d4e580a8a3",
-                "use-7de53e15016b63844ac2f47a"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "pest-ticks",
-              "evidenceIds": [
-                "use-cae4e5554fec98ae9dc9e298",
-                "use-9f6bee492505359b5665035b",
-                "use-41312716610a785250eee149"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "pest-mosquitoes",
-              "evidenceIds": [
-                "use-fe8928b4772e3d2d9c140995"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "pest-ants",
-              "evidenceIds": [
-                "use-2cf2a4090a077b79d8d0216f"
-              ],
-              "children": []
             }
           ]
         },
@@ -1302,17 +1345,53 @@ const TERPENE_DATA = {
               "children": []
             },
             {
+              "useNodeId": "microbial-fungi",
+              "evidenceIds": [
+                "use-a89a2e5b4235532d5d3b9f2b"
+              ],
+              "children": []
+            },
+            {
               "useNodeId": "microbial-biofilms",
               "evidenceIds": [
                 "use-64c6d6e7044c1c2cf9cc7ab6",
                 "use-ad28b49fe54c841b88526a4e"
               ],
               "children": []
+            }
+          ]
+        },
+        {
+          "useNodeId": "pest",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "pest-mosquitoes",
+              "evidenceIds": [
+                "use-fe8928b4772e3d2d9c140995"
+              ],
+              "children": []
             },
             {
-              "useNodeId": "microbial-fungi",
+              "useNodeId": "pest-ticks",
               "evidenceIds": [
-                "use-a89a2e5b4235532d5d3b9f2b"
+                "use-cae4e5554fec98ae9dc9e298",
+                "use-9f6bee492505359b5665035b",
+                "use-41312716610a785250eee149"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-flies",
+              "evidenceIds": [
+                "use-67b442327a53efcb957d118d"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-ants",
+              "evidenceIds": [
+                "use-2cf2a4090a077b79d8d0216f"
               ],
               "children": []
             }
@@ -1322,6 +1401,13 @@ const TERPENE_DATA = {
           "useNodeId": "botanical",
           "evidenceIds": [],
           "children": [
+            {
+              "useNodeId": "botanical-nonvolatile-chemistry",
+              "evidenceIds": [
+                "use-c4334f9e78bcea6f8b96db1b"
+              ],
+              "children": []
+            },
             {
               "useNodeId": "botanical-composition",
               "evidenceIds": [],
@@ -1341,13 +1427,6 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
-            },
-            {
-              "useNodeId": "botanical-nonvolatile-chemistry",
-              "evidenceIds": [
-                "use-c4334f9e78bcea6f8b96db1b"
-              ],
-              "children": []
             }
           ]
         }
@@ -1375,8 +1454,6 @@ const TERPENE_DATA = {
         "use-13085b704bbf791206741876",
         "use-94e0eab005746c5e3e510453",
         "use-41312716610a785250eee149",
-        "use-6028afa8358a59d4e580a8a3",
-        "use-7de53e15016b63844ac2f47a",
         "use-acd1a7e8d32e5b33e24c2b8a",
         "use-a89a2e5b4235532d5d3b9f2b",
         "use-ad28b49fe54c841b88526a4e",
@@ -1400,7 +1477,7 @@ const TERPENE_DATA = {
         "sharp"
       ],
       "color": "#6fb7a6",
-      "description": "Steam-distilled from leaves. Very high in 1,8-cineole (eucalyptol), the compound behind its penetrating, clearing aroma.",
+      "description": "Steam-distilled leaves with a penetrating, cineole-rich aroma. The catalog material is Eucalyptus globulus.",
       "uses": [
         "Shower steamers",
         "Chest blends",
@@ -1522,19 +1599,26 @@ const TERPENE_DATA = {
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "microbial-viruses",
-              "evidenceIds": [
-                "use-5de69ba083bc274408d37ffd",
-                "use-2100b68754af0da1c52c5835"
-              ],
-              "children": []
-            },
-            {
               "useNodeId": "microbial-bacteria",
               "evidenceIds": [
                 "use-6e747bced155edf20e7fe0d4",
                 "use-31c9ff43c82be0f2c83dc915",
                 "use-eead6999bcad0fe95e9a92a6"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-fungi",
+              "evidenceIds": [
+                "use-f6be6b5f78431276ce1628cc"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-viruses",
+              "evidenceIds": [
+                "use-5de69ba083bc274408d37ffd",
+                "use-2100b68754af0da1c52c5835"
               ],
               "children": []
             },
@@ -1547,13 +1631,6 @@ const TERPENE_DATA = {
                 "use-a7819a1d26c9d909feaccee1"
               ],
               "children": []
-            },
-            {
-              "useNodeId": "microbial-fungi",
-              "evidenceIds": [
-                "use-f6be6b5f78431276ce1628cc"
-              ],
-              "children": []
             }
           ]
         },
@@ -1562,9 +1639,9 @@ const TERPENE_DATA = {
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "pest-flies",
+              "useNodeId": "pest-mosquitoes",
               "evidenceIds": [
-                "use-92156ae29749b59d11b0802b"
+                "use-36bb898d0f9c3049a9dd16f8"
               ],
               "children": []
             },
@@ -1576,9 +1653,9 @@ const TERPENE_DATA = {
               "children": []
             },
             {
-              "useNodeId": "pest-mosquitoes",
+              "useNodeId": "pest-flies",
               "evidenceIds": [
-                "use-36bb898d0f9c3049a9dd16f8"
+                "use-92156ae29749b59d11b0802b"
               ],
               "children": []
             },
@@ -1595,6 +1672,13 @@ const TERPENE_DATA = {
           "useNodeId": "botanical",
           "evidenceIds": [],
           "children": [
+            {
+              "useNodeId": "botanical-nonvolatile-chemistry",
+              "evidenceIds": [
+                "use-74056e862c1e2524fedf5418"
+              ],
+              "children": []
+            },
             {
               "useNodeId": "botanical-composition",
               "evidenceIds": [],
@@ -1614,13 +1698,6 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
-            },
-            {
-              "useNodeId": "botanical-nonvolatile-chemistry",
-              "evidenceIds": [
-                "use-74056e862c1e2524fedf5418"
-              ],
-              "children": []
             }
           ]
         }
@@ -1670,7 +1747,7 @@ const TERPENE_DATA = {
         "sharp"
       ],
       "color": "#8fc16f",
-      "description": "Steam-distilled from leaves. Terpinen-4-ol is the signature compound behind its long-documented antimicrobial profile.",
+      "description": "Steam-distilled leaves with a fresh, medicinal aroma. Terpinen-4-ol is a characteristic component.",
       "uses": [
         "Surface cleaning blends",
         "Skin spot blends",
@@ -1737,73 +1814,6 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
-          "useNodeId": "microbial",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "microbial-bacteria",
-              "evidenceIds": [
-                "use-a6368d767cd1c279ddf2ac2e",
-                "use-78e0e1c401063aa2ff8ba97b",
-                "use-cc9d828bd221604e75bb2d02",
-                "use-72f10dfd7f30e7f6a7e95dfd"
-              ],
-              "children": [
-                {
-                  "useNodeId": "microbial-bacteria-formulation-preservation",
-                  "evidenceIds": [
-                    "use-c1a403b56fcc16bab68bf203"
-                  ],
-                  "children": []
-                }
-              ]
-            },
-            {
-              "useNodeId": "microbial-fungi",
-              "evidenceIds": [
-                "use-e309f8807fe540e6d5a6539e",
-                "use-20a2c4999a081e81a2d9fb7d"
-              ],
-              "children": [
-                {
-                  "useNodeId": "microbial-fungi-dermatophytes",
-                  "evidenceIds": [
-                    "use-80761b8497b7552e0581ff11",
-                    "use-0d9d9da75899758b7f7fa53d"
-                  ],
-                  "children": []
-                },
-                {
-                  "useNodeId": "microbial-fungi-yeast",
-                  "evidenceIds": [
-                    "use-67359e89f3beed1301a00ef5",
-                    "use-7545fb9f52346da660992ba5"
-                  ],
-                  "children": []
-                }
-              ]
-            },
-            {
-              "useNodeId": "microbial-viruses",
-              "evidenceIds": [
-                "use-66ef0b16145d6165861d97a5",
-                "use-3a8c67f6e53e988f76dcc0b2"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "microbial-biofilms",
-              "evidenceIds": [
-                "use-cda937ef79879d0b98325174",
-                "use-cbd24a0b38c5e5ec0bd6e453",
-                "use-5e911da482d65d604143b62b",
-                "use-c627192aaee6b02e838646cc"
-              ],
-              "children": []
-            }
-          ]
-        },
-        {
           "useNodeId": "health",
           "evidenceIds": [],
           "children": [
@@ -1851,6 +1861,73 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "microbial",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "microbial-bacteria",
+              "evidenceIds": [
+                "use-a6368d767cd1c279ddf2ac2e",
+                "use-78e0e1c401063aa2ff8ba97b",
+                "use-cc9d828bd221604e75bb2d02",
+                "use-72f10dfd7f30e7f6a7e95dfd"
+              ],
+              "children": [
+                {
+                  "useNodeId": "microbial-bacteria-formulation-preservation",
+                  "evidenceIds": [
+                    "use-c1a403b56fcc16bab68bf203"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "microbial-fungi",
+              "evidenceIds": [
+                "use-e309f8807fe540e6d5a6539e",
+                "use-20a2c4999a081e81a2d9fb7d"
+              ],
+              "children": [
+                {
+                  "useNodeId": "microbial-fungi-yeast",
+                  "evidenceIds": [
+                    "use-67359e89f3beed1301a00ef5",
+                    "use-7545fb9f52346da660992ba5"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "microbial-fungi-dermatophytes",
+                  "evidenceIds": [
+                    "use-80761b8497b7552e0581ff11",
+                    "use-0d9d9da75899758b7f7fa53d"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "microbial-viruses",
+              "evidenceIds": [
+                "use-66ef0b16145d6165861d97a5",
+                "use-3a8c67f6e53e988f76dcc0b2"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-biofilms",
+              "evidenceIds": [
+                "use-cda937ef79879d0b98325174",
+                "use-cbd24a0b38c5e5ec0bd6e453",
+                "use-5e911da482d65d604143b62b",
+                "use-c627192aaee6b02e838646cc"
+              ],
+              "children": []
             }
           ]
         },
@@ -1917,7 +1994,7 @@ const TERPENE_DATA = {
         "balsamic"
       ],
       "color": "#d9a45b",
-      "description": "Steam-distilled from tree resin. Rich in alpha-pinene with a warm base that anchors blends and slows evaporation.",
+      "description": "Steam-distilled Boswellia serrata resin with a resinous, woody aroma. Other Boswellia species and resin extracts are identified separately in the research.",
       "uses": [
         "Meditation blends",
         "Skin blends",
@@ -1980,43 +2057,24 @@ const TERPENE_DATA = {
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "health-pain-inflammation",
-              "evidenceIds": [
-                "use-6a4af63350202bc5a06c5045",
-                "use-4dda5422cc22303e55f08b52",
-                "use-aa7dc1d13c3c2319630d16c8",
-                "use-d76d6644e1c846434dca3aa1",
-                "use-ec7e872601b766330af85b20",
-                "use-60cb5a39dd5f82a9b83c2f1a"
-              ],
-              "children": []
-            },
-            {
               "useNodeId": "health-mental-health",
               "evidenceIds": [],
               "children": [
-                {
-                  "useNodeId": "health-mental-health-fatigue",
-                  "evidenceIds": [
-                    "use-60b5ed96b4aec91a860b8612"
-                  ],
-                  "children": []
-                },
                 {
                   "useNodeId": "health-mental-health-anxiety",
                   "evidenceIds": [
                     "use-c34e824b01a699c2613ab6b1"
                   ],
                   "children": []
+                },
+                {
+                  "useNodeId": "health-mental-health-fatigue",
+                  "evidenceIds": [
+                    "use-60b5ed96b4aec91a860b8612"
+                  ],
+                  "children": []
                 }
               ]
-            },
-            {
-              "useNodeId": "health-wound",
-              "evidenceIds": [
-                "use-4f8f592c0af0c861bcc5b1b1"
-              ],
-              "children": []
             },
             {
               "useNodeId": "health-skin",
@@ -2030,6 +2088,25 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
+            },
+            {
+              "useNodeId": "health-pain-inflammation",
+              "evidenceIds": [
+                "use-6a4af63350202bc5a06c5045",
+                "use-4dda5422cc22303e55f08b52",
+                "use-aa7dc1d13c3c2319630d16c8",
+                "use-d76d6644e1c846434dca3aa1",
+                "use-ec7e872601b766330af85b20",
+                "use-60cb5a39dd5f82a9b83c2f1a"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "health-wound",
+              "evidenceIds": [
+                "use-4f8f592c0af0c861bcc5b1b1"
+              ],
+              "children": []
             }
           ]
         },
@@ -2054,21 +2131,15 @@ const TERPENE_DATA = {
           ]
         },
         {
-          "useNodeId": "botanical",
+          "useNodeId": "botanical-bioactivity",
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "botanical-bioactivity",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "botanical-bioactivity-cellular-cytotoxicity",
-                  "evidenceIds": [
-                    "use-eacb7f4c95f4f27b9be96f16"
-                  ],
-                  "children": []
-                }
-              ]
+              "useNodeId": "botanical-bioactivity-cellular-cytotoxicity",
+              "evidenceIds": [
+                "use-eacb7f4c95f4f27b9be96f16"
+              ],
+              "children": []
             }
           ]
         }
@@ -2161,6 +2232,21 @@ const TERPENE_DATA = {
           "evidenceIds": [],
           "children": [
             {
+              "useNodeId": "health-cognitive",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-cognitive-memory",
+                  "evidenceIds": [
+                    "use-5f43b0ee78374412acea88a7",
+                    "use-8ec6dc07ebdd680e7870c0ab",
+                    "use-86155011801fb7dcab051f5a"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
               "useNodeId": "health-pain-inflammation",
               "evidenceIds": [
                 "use-15298882bee716382fd44b9b"
@@ -2179,19 +2265,6 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
-            },
-            {
-              "useNodeId": "health-cognitive",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "health-cognitive-memory",
-                  "evidenceIds": [
-                    "use-86155011801fb7dcab051f5a"
-                  ],
-                  "children": []
-                }
-              ]
             }
           ]
         },
@@ -2204,14 +2277,6 @@ const TERPENE_DATA = {
               "evidenceIds": [
                 "use-50057e89d4567eeae922c469",
                 "use-f0c5940a4c92e345dd560785"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "microbial-biofilms",
-              "evidenceIds": [
-                "use-2ff199c5e385a120872ca2f2",
-                "use-9f05feb398cacb09041dd7fc"
               ],
               "children": []
             },
@@ -2244,26 +2309,14 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
-            }
-          ]
-        },
-        {
-          "useNodeId": "botanical",
-          "evidenceIds": [],
-          "children": [
+            },
             {
-              "useNodeId": "botanical-bioactivity",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "botanical-bioactivity-animal-cognition",
-                  "evidenceIds": [
-                    "use-5f43b0ee78374412acea88a7",
-                    "use-8ec6dc07ebdd680e7870c0ab"
-                  ],
-                  "children": []
-                }
-              ]
+              "useNodeId": "microbial-biofilms",
+              "evidenceIds": [
+                "use-2ff199c5e385a120872ca2f2",
+                "use-9f05feb398cacb09041dd7fc"
+              ],
+              "children": []
             }
           ]
         },
@@ -2272,18 +2325,18 @@ const TERPENE_DATA = {
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "pest-ticks",
-              "evidenceIds": [
-                "use-a8c81ad9895d636ee613f455",
-                "use-8c630c19c498c8d47d0b4bc2"
-              ],
-              "children": []
-            },
-            {
               "useNodeId": "pest-mosquitoes",
               "evidenceIds": [
                 "use-92724007256c15e4d24c807b",
                 "use-2e121967f4419f4a0fd90a92"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-ticks",
+              "evidenceIds": [
+                "use-a8c81ad9895d636ee613f455",
+                "use-8c630c19c498c8d47d0b4bc2"
               ],
               "children": []
             },
@@ -2336,7 +2389,7 @@ const TERPENE_DATA = {
         "juicy"
       ],
       "color": "#f59e42",
-      "description": "Cold-pressed from orange peel. One of the highest limonene contents of any oil, with a rounder, sweeter profile than lemon.",
+      "description": "Cold-pressed orange peel with a sweet citrus aroma and a typically limonene-rich volatile profile.",
       "uses": [
         "Uplifting room blends",
         "Kitchen freshening",
@@ -2473,32 +2526,6 @@ const TERPENE_DATA = {
           ]
         },
         {
-          "useNodeId": "botanical",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "botanical-composition",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "botanical-composition-flavonoid-analysis",
-                  "evidenceIds": [
-                    "use-40943ef4084a78dd1e53d938"
-                  ],
-                  "children": []
-                },
-                {
-                  "useNodeId": "botanical-composition-essential-oil-composition",
-                  "evidenceIds": [
-                    "use-f4b63ddb2b9f69555ec6dccf"
-                  ],
-                  "children": []
-                }
-              ]
-            }
-          ]
-        },
-        {
           "useNodeId": "cleaning",
           "evidenceIds": [],
           "children": [
@@ -2510,6 +2537,32 @@ const TERPENE_DATA = {
                   "useNodeId": "cleaning-surface-soil-removal",
                   "evidenceIds": [
                     "use-dc3d06113dbceb577eef419c"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "botanical",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "botanical-composition",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "botanical-composition-essential-oil-composition",
+                  "evidenceIds": [
+                    "use-f4b63ddb2b9f69555ec6dccf"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "botanical-composition-flavonoid-analysis",
+                  "evidenceIds": [
+                    "use-40943ef4084a78dd1e53d938"
                   ],
                   "children": []
                 }
@@ -2546,7 +2599,7 @@ const TERPENE_DATA = {
         "sharp"
       ],
       "color": "#b8c96f",
-      "description": "Steam-distilled from tropical grass leaves. Citronellal-rich and long used as a botanical insect repellent, though human evidence shows short protection times versus DEET.",
+      "description": "Steam-distilled Cymbopogon nardus leaves with a lemony, grassy aroma. Species and formula differences matter when comparing repellent studies.",
       "uses": [
         "Outdoor blends",
         "Patio candles",
@@ -2655,6 +2708,26 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
+          "useNodeId": "microbial",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "microbial-fungi",
+              "evidenceIds": [
+                "use-5bdc9074e854c6c2ce3c824c"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-biofilms",
+              "evidenceIds": [
+                "use-04a64cbcebbc344e02a3b5ac"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
           "useNodeId": "pest",
           "evidenceIds": [],
           "children": [
@@ -2700,26 +2773,6 @@ const TERPENE_DATA = {
               ]
             }
           ]
-        },
-        {
-          "useNodeId": "microbial",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "microbial-fungi",
-              "evidenceIds": [
-                "use-5bdc9074e854c6c2ce3c824c"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "microbial-biofilms",
-              "evidenceIds": [
-                "use-04a64cbcebbc344e02a3b5ac"
-              ],
-              "children": []
-            }
-          ]
         }
       ],
       "evidenceIds": [
@@ -2751,7 +2804,7 @@ const TERPENE_DATA = {
         "warm"
       ],
       "color": "#8aa653",
-      "description": "Steam-distilled from leaves and flowers. Thymol chemotype is one of the most potent antimicrobial essential oils in laboratory testing.",
+      "description": "Steam-distilled leaves and flowers. Thyme has several chemotypes; this catalog profile focuses on thymol-rich material.",
       "uses": [
         "Surface cleaning blends",
         "Diffusion",
@@ -2903,20 +2956,15 @@ const TERPENE_DATA = {
               ]
             },
             {
-              "useNodeId": "microbial-environmental-counts",
-              "evidenceIds": [],
+              "useNodeId": "microbial-fungi",
+              "evidenceIds": [
+                "use-385617371befbd78fc17610f"
+              ],
               "children": [
                 {
-                  "useNodeId": "microbial-environmental-counts-surfaces",
+                  "useNodeId": "microbial-fungi-mold",
                   "evidenceIds": [
-                    "use-ea7c8f7e3c3bfcd90001875f"
-                  ],
-                  "children": []
-                },
-                {
-                  "useNodeId": "microbial-environmental-counts-air",
-                  "evidenceIds": [
-                    "use-16eb2f7f6be801daa8e4ee71"
+                    "use-bae8d9622eefd4d0664806da"
                   ],
                   "children": []
                 }
@@ -2932,15 +2980,20 @@ const TERPENE_DATA = {
               "children": []
             },
             {
-              "useNodeId": "microbial-fungi",
-              "evidenceIds": [
-                "use-385617371befbd78fc17610f"
-              ],
+              "useNodeId": "microbial-environmental-counts",
+              "evidenceIds": [],
               "children": [
                 {
-                  "useNodeId": "microbial-fungi-mold",
+                  "useNodeId": "microbial-environmental-counts-surfaces",
                   "evidenceIds": [
-                    "use-bae8d9622eefd4d0664806da"
+                    "use-ea7c8f7e3c3bfcd90001875f"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "microbial-environmental-counts-air",
+                  "evidenceIds": [
+                    "use-16eb2f7f6be801daa8e4ee71"
                   ],
                   "children": []
                 }
@@ -3114,6 +3167,35 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
+          "useNodeId": "health",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "health-respiratory",
+              "evidenceIds": [
+                "use-a6195a3ae8fcf2a8666c828b",
+                "use-62abe9f47950fea71e2037b0"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "health-immune",
+              "evidenceIds": [
+                "use-475a8db7c766f8b669ecf195",
+                "use-d2704ff5d02fa722347026aa"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "botanical-bioactivity-oral-tolerability",
+              "evidenceIds": [
+                "use-241f76bf1d038dbb4f3a039b"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
           "useNodeId": "microbial",
           "evidenceIds": [],
           "children": [
@@ -3143,6 +3225,13 @@ const TERPENE_DATA = {
               ]
             },
             {
+              "useNodeId": "microbial-viruses",
+              "evidenceIds": [
+                "use-29e4484c0286183707efdd59"
+              ],
+              "children": []
+            },
+            {
               "useNodeId": "microbial-biofilms",
               "evidenceIds": [
                 "use-fa7c1ee84176e6a61ffdcb9e",
@@ -3150,13 +3239,6 @@ const TERPENE_DATA = {
                 "use-7673d6d30f35ab511926c4ef",
                 "use-113d4fd1396bb9c9dabae3ad",
                 "use-c1327811e0144d8b2e878ca1"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "microbial-viruses",
-              "evidenceIds": [
-                "use-29e4484c0286183707efdd59"
               ],
               "children": []
             }
@@ -3184,44 +3266,9 @@ const TERPENE_DATA = {
           ]
         },
         {
-          "useNodeId": "health",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "health-respiratory",
-              "evidenceIds": [
-                "use-a6195a3ae8fcf2a8666c828b",
-                "use-62abe9f47950fea71e2037b0"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "health-immune",
-              "evidenceIds": [
-                "use-475a8db7c766f8b669ecf195",
-                "use-d2704ff5d02fa722347026aa"
-              ],
-              "children": []
-            }
-          ]
-        },
-        {
           "useNodeId": "botanical",
           "evidenceIds": [],
           "children": [
-            {
-              "useNodeId": "botanical-bioactivity",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "botanical-bioactivity-oral-tolerability",
-                  "evidenceIds": [
-                    "use-241f76bf1d038dbb4f3a039b"
-                  ],
-                  "children": []
-                }
-              ]
-            },
             {
               "useNodeId": "botanical-composition",
               "evidenceIds": [],
@@ -3289,7 +3336,7 @@ const TERPENE_DATA = {
         "bright"
       ],
       "color": "#cdd25f",
-      "description": "Steam-distilled from tropical grass. Citral gives it an intense lemon character; studied in repellent blends including PMD-based formulas.",
+      "description": "Steam-distilled Cymbopogon citratus leaves with an intense citral-associated lemon aroma. Studies of other Cymbopogon species are marked separately.",
       "uses": [
         "Outdoor blends",
         "Kitchen freshening",
@@ -3390,66 +3437,9 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
-          "useNodeId": "pest",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "pest-mosquitoes",
-              "evidenceIds": [
-                "use-7656e33f4a6572a2bb79e605"
-              ],
-              "children": [
-                {
-                  "useNodeId": "pest-mosquitoes-repellency",
-                  "evidenceIds": [
-                    "use-160e2e095063e78514a4adf2"
-                  ],
-                  "children": []
-                }
-              ]
-            },
-            {
-              "useNodeId": "pest-flies",
-              "evidenceIds": [
-                "use-34edeab92e2daf2f70c3ef21"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "pest-fleas",
-              "evidenceIds": [
-                "use-f85ec91d3314138aa67f7b7c"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "pest-ticks",
-              "evidenceIds": [
-                "use-966e3641f89f43cc45cbb21f"
-              ],
-              "children": []
-            }
-          ]
-        },
-        {
           "useNodeId": "health",
           "evidenceIds": [],
           "children": [
-            {
-              "useNodeId": "health-oral-dental",
-              "evidenceIds": [
-                "use-d944803f3f888bf13b4f3e77"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "health-pain-inflammation",
-              "evidenceIds": [
-                "use-bbb1149e389c26dca7e14790",
-                "use-36e24aa00fbe2ec7c57967c8"
-              ],
-              "children": []
-            },
             {
               "useNodeId": "health-skin",
               "evidenceIds": [],
@@ -3462,6 +3452,21 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
+            },
+            {
+              "useNodeId": "health-pain-inflammation",
+              "evidenceIds": [
+                "use-bbb1149e389c26dca7e14790",
+                "use-36e24aa00fbe2ec7c57967c8"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "health-oral-dental",
+              "evidenceIds": [
+                "use-d944803f3f888bf13b4f3e77"
+              ],
+              "children": []
             }
           ]
         },
@@ -3483,6 +3488,48 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "pest",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "pest-mosquitoes",
+              "evidenceIds": [
+                "use-7656e33f4a6572a2bb79e605"
+              ],
+              "children": [
+                {
+                  "useNodeId": "pest-mosquitoes-repellency",
+                  "evidenceIds": [
+                    "use-160e2e095063e78514a4adf2"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "pest-ticks",
+              "evidenceIds": [
+                "use-966e3641f89f43cc45cbb21f"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-fleas",
+              "evidenceIds": [
+                "use-f85ec91d3314138aa67f7b7c"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-flies",
+              "evidenceIds": [
+                "use-34edeab92e2daf2f70c3ef21"
+              ],
+              "children": []
             }
           ]
         },
@@ -3549,7 +3596,7 @@ const TERPENE_DATA = {
         "clean"
       ],
       "color": "#7fc8a9",
-      "description": "Steam-distilled from leaves. Very high in citronellal; the refined derivative PMD (p-menthane-3,8-diol) is the botanical repellent with the strongest human evidence base.",
+      "description": "Steam-distilled Corymbia citriodora leaves with a citronellal-rich lemon aroma. Processed PMD-rich repellent material is different from this essential oil.",
       "uses": [
         "Outdoor blends",
         "Travel spray",
@@ -3792,6 +3839,19 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
+          "useNodeId": "health",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "health-metabolic",
+              "evidenceIds": [
+                "use-cbc3ddd1c4d0ca03cc97d12d"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
           "useNodeId": "microbial",
           "evidenceIds": [],
           "children": [
@@ -3804,46 +3864,33 @@ const TERPENE_DATA = {
               "children": []
             },
             {
-              "useNodeId": "microbial-biofilms",
-              "evidenceIds": [
-                "use-9cbc7a44358a4ddd804d997c",
-                "use-9dc6141c760d4148272abd7d",
-                "use-fc8d7306d3c9b26c0e174b00"
-              ],
-              "children": []
-            },
-            {
               "useNodeId": "microbial-fungi",
               "evidenceIds": [
                 "use-11fac7bdf825c0e258cda1e7"
               ],
               "children": [
                 {
-                  "useNodeId": "microbial-fungi-mold",
-                  "evidenceIds": [
-                    "use-b7f8007ecbd326f9ed431ff7"
-                  ],
-                  "children": []
-                },
-                {
                   "useNodeId": "microbial-fungi-yeast",
                   "evidenceIds": [
                     "use-3fcaa67dbf4a6847b1ad781f"
                   ],
                   "children": []
+                },
+                {
+                  "useNodeId": "microbial-fungi-mold",
+                  "evidenceIds": [
+                    "use-b7f8007ecbd326f9ed431ff7"
+                  ],
+                  "children": []
                 }
               ]
-            }
-          ]
-        },
-        {
-          "useNodeId": "health",
-          "evidenceIds": [],
-          "children": [
+            },
             {
-              "useNodeId": "health-metabolic",
+              "useNodeId": "microbial-biofilms",
               "evidenceIds": [
-                "use-cbc3ddd1c4d0ca03cc97d12d"
+                "use-9cbc7a44358a4ddd804d997c",
+                "use-9dc6141c760d4148272abd7d",
+                "use-fc8d7306d3c9b26c0e174b00"
               ],
               "children": []
             }
@@ -3946,22 +3993,37 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
-          "useNodeId": "microbial",
+          "useNodeId": "health",
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "microbial-fungi",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "microbial-fungi-dermatophytes",
-                  "evidenceIds": [
-                    "use-409567737cd6bcd2d73933a8"
-                  ],
-                  "children": []
-                }
-              ]
+              "useNodeId": "health-pain-inflammation",
+              "evidenceIds": [
+                "use-6fe4e3fe08d51b77c3495ba7",
+                "use-f956159286ae5110ae69a219"
+              ],
+              "children": []
             },
+            {
+              "useNodeId": "health-oral-dental",
+              "evidenceIds": [
+                "use-7c3768bd42147e0661804499"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "health-wound",
+              "evidenceIds": [
+                "use-2b53f2314c71867a9a27b227"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "useNodeId": "microbial",
+          "evidenceIds": [],
+          "children": [
             {
               "useNodeId": "microbial-bacteria",
               "evidenceIds": [],
@@ -3981,34 +4043,19 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
-            }
-          ]
-        },
-        {
-          "useNodeId": "health",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "health-oral-dental",
-              "evidenceIds": [
-                "use-7c3768bd42147e0661804499"
-              ],
-              "children": []
             },
             {
-              "useNodeId": "health-pain-inflammation",
-              "evidenceIds": [
-                "use-6fe4e3fe08d51b77c3495ba7",
-                "use-f956159286ae5110ae69a219"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "health-wound",
-              "evidenceIds": [
-                "use-2b53f2314c71867a9a27b227"
-              ],
-              "children": []
+              "useNodeId": "microbial-fungi",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "microbial-fungi-dermatophytes",
+                  "evidenceIds": [
+                    "use-409567737cd6bcd2d73933a8"
+                  ],
+                  "children": []
+                }
+              ]
             }
           ]
         }
@@ -4035,7 +4082,7 @@ const TERPENE_DATA = {
         "clear"
       ],
       "color": "#6f9e7a",
-      "description": "Steam-distilled from leaves. High in eucalyptol and camphor; the most researched oil for memory and alertness effects.",
+      "description": "Steam-distilled leaves with a herbal, camphoraceous aroma. Cineole, camphor and pinene proportions vary by chemotype and sample.",
       "extraction": "Steam distillation",
       "family": "Lamiaceae",
       "latinName": "Rosmarinus officinalis",
@@ -4130,40 +4177,6 @@ const TERPENE_DATA = {
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "health-cognitive",
-              "evidenceIds": [
-                "use-cb0c0554f97ab6b02ea9ccf1",
-                "use-63559e3ecdce183aaa8fe5d7",
-                "use-093fa0bbb1a3be779eadeebf",
-                "use-c845a83dcd6faea1c533fbf2"
-              ],
-              "children": [
-                {
-                  "useNodeId": "health-cognitive-memory",
-                  "evidenceIds": [
-                    "use-164a611934d4943efa1c14fe",
-                    "use-bac7351c7ddca36ba71193cf",
-                    "use-e7ed61805d083035c8a30b8e"
-                  ],
-                  "children": []
-                },
-                {
-                  "useNodeId": "health-cognitive-attention",
-                  "evidenceIds": [
-                    "use-b1841f45a8c9a4547e51d781"
-                  ],
-                  "children": []
-                },
-                {
-                  "useNodeId": "health-cognitive-alertness",
-                  "evidenceIds": [
-                    "use-85134766b5c86bd66f4ddad5"
-                  ],
-                  "children": []
-                }
-              ]
-            },
-            {
               "useNodeId": "health-mental-health",
               "evidenceIds": [],
               "children": [
@@ -4185,6 +4198,40 @@ const TERPENE_DATA = {
                   "useNodeId": "health-mental-health-sleep",
                   "evidenceIds": [
                     "use-dbf2b8b16241b81f46882322"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "health-cognitive",
+              "evidenceIds": [
+                "use-cb0c0554f97ab6b02ea9ccf1",
+                "use-63559e3ecdce183aaa8fe5d7",
+                "use-093fa0bbb1a3be779eadeebf",
+                "use-c845a83dcd6faea1c533fbf2"
+              ],
+              "children": [
+                {
+                  "useNodeId": "health-cognitive-attention",
+                  "evidenceIds": [
+                    "use-b1841f45a8c9a4547e51d781"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "health-cognitive-memory",
+                  "evidenceIds": [
+                    "use-164a611934d4943efa1c14fe",
+                    "use-bac7351c7ddca36ba71193cf",
+                    "use-e7ed61805d083035c8a30b8e"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "health-cognitive-alertness",
+                  "evidenceIds": [
+                    "use-85134766b5c86bd66f4ddad5"
                   ],
                   "children": []
                 }
@@ -4228,18 +4275,18 @@ const TERPENE_DATA = {
               ]
             },
             {
+              "useNodeId": "microbial-viruses",
+              "evidenceIds": [
+                "use-90ed855da5a21ba9eef60842"
+              ],
+              "children": []
+            },
+            {
               "useNodeId": "microbial-biofilms",
               "evidenceIds": [
                 "use-529ee2682445396d5861ab73",
                 "use-de30645587b7f0bf86751c87",
                 "use-2c3c7f46f03fbbaebfdbf8dc"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "microbial-viruses",
-              "evidenceIds": [
-                "use-90ed855da5a21ba9eef60842"
               ],
               "children": []
             }
@@ -4250,16 +4297,16 @@ const TERPENE_DATA = {
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "pest-ants",
+              "useNodeId": "pest-mosquitoes",
               "evidenceIds": [
-                "use-196a064983bf3438d09a6e62"
+                "use-109655d2e84a41034473a3cd"
               ],
               "children": []
             },
             {
-              "useNodeId": "pest-mosquitoes",
+              "useNodeId": "pest-ants",
               "evidenceIds": [
-                "use-109655d2e84a41034473a3cd"
+                "use-196a064983bf3438d09a6e62"
               ],
               "children": []
             }
@@ -4310,7 +4357,7 @@ const TERPENE_DATA = {
         "fresh"
       ],
       "color": "#4e7d5b",
-      "description": "Steam-distilled from needles and twigs. Rich in alpha- and beta-pinene; studied for bactericidal and biofilm-dispersal activity.",
+      "description": "Steam-distilled Pinus sylvestris needles and twigs with a resinous, forest-like aroma and a pinene-rich volatile profile.",
       "uses": [
         "Surface cleaning blends",
         "Forest diffusion",
@@ -4412,7 +4459,7 @@ const TERPENE_DATA = {
         "sweet"
       ],
       "color": "#b98a9e",
-      "description": "Steam-distilled from tropical grass. Very high in geraniol; top performer against cat fleas and scabies mites in comparative screens.",
+      "description": "Steam-distilled Cymbopogon martinii grass with a soft, rosy aroma associated with geraniol.",
       "uses": [
         "Outdoor blends",
         "Skin blends",
@@ -4507,22 +4554,28 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
-          "useNodeId": "pest",
+          "useNodeId": "health",
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "pest-fleas",
+              "useNodeId": "health-pain-inflammation",
               "evidenceIds": [
-                "use-0cfc0abfa826d856df55e5fe"
+                "use-80bcb1f03fe05fd5e14ca15c"
               ],
               "children": []
             },
             {
-              "useNodeId": "pest-mites",
-              "evidenceIds": [
-                "use-b47aa9bbcdb07504aeebdbe7"
-              ],
-              "children": []
+              "useNodeId": "health-metabolic",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-metabolic-alpha-amylase-inhibition",
+                  "evidenceIds": [
+                    "use-3e9823ab4f9db346590dd4c6"
+                  ],
+                  "children": []
+                }
+              ]
             }
           ]
         },
@@ -4568,20 +4621,20 @@ const TERPENE_DATA = {
           ]
         },
         {
-          "useNodeId": "health",
+          "useNodeId": "pest",
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "health-metabolic",
+              "useNodeId": "pest-fleas",
               "evidenceIds": [
-                "use-3e9823ab4f9db346590dd4c6"
+                "use-0cfc0abfa826d856df55e5fe"
               ],
               "children": []
             },
             {
-              "useNodeId": "health-pain-inflammation",
+              "useNodeId": "pest-mites",
               "evidenceIds": [
-                "use-80bcb1f03fe05fd5e14ca15c"
+                "use-b47aa9bbcdb07504aeebdbe7"
               ],
               "children": []
             }
@@ -4641,7 +4694,7 @@ const TERPENE_DATA = {
         "mild"
       ],
       "color": "#a08b6d",
-      "description": "Steam-distilled oleoresin. Exceptionally rich in beta-caryophyllene; strongest residual efficacy against cat fleas in comparative testing.",
+      "description": "Oil distilled from Copaifera reticulata oleoresin, with a woody, balsamic aroma and a commonly caryophyllene-rich profile.",
       "uses": [
         "Outdoor blends",
         "Research reference"
@@ -4718,7 +4771,7 @@ const TERPENE_DATA = {
         "bitter"
       ],
       "color": "#f0d060",
-      "description": "Cold-pressed from peel. Limonene-dominant like other citrus; botanical source of nootkatone, the 14-day tick repellent.",
+      "description": "Cold-pressed peel with a bright, slightly bitter citrus aroma. Whole-oil research is distinguished from isolated nootkatone experiments.",
       "uses": [
         "Uplifting blends",
         "Cleaning blends",
@@ -4828,20 +4881,39 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
+          "useNodeId": "cleaning",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "cleaning-surface",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "cleaning-surface-soil-removal",
+                  "evidenceIds": [
+                    "use-97739563300f2b2e17048243"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
           "useNodeId": "pest",
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "pest-fleas",
+              "useNodeId": "pest-ticks",
               "evidenceIds": [
-                "use-709e5b4d4bd339bdc7ba918e"
+                "use-0f87b3ee13a000eea51a2ec1"
               ],
               "children": []
             },
             {
-              "useNodeId": "pest-ticks",
+              "useNodeId": "pest-fleas",
               "evidenceIds": [
-                "use-0f87b3ee13a000eea51a2ec1"
+                "use-709e5b4d4bd339bdc7ba918e"
               ],
               "children": []
             }
@@ -4884,25 +4956,6 @@ const TERPENE_DATA = {
               ]
             }
           ]
-        },
-        {
-          "useNodeId": "cleaning",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "cleaning-surface",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "cleaning-surface-soil-removal",
-                  "evidenceIds": [
-                    "use-97739563300f2b2e17048243"
-                  ],
-                  "children": []
-                }
-              ]
-            }
-          ]
         }
       ],
       "evidenceIds": [
@@ -4934,7 +4987,7 @@ const TERPENE_DATA = {
         "musky"
       ],
       "color": "#8a9ec9",
-      "description": "Steam-distilled from flowering tops. Linalyl acetate dominant; tested against cat flea life stages.",
+      "description": "Steam-distilled flowering tops with a herbal, floral aroma. Linalyl acetate and linalool are prominent in many samples.",
       "uses": [
         "Evening blends",
         "Research reference"
@@ -5036,6 +5089,46 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
+          "useNodeId": "health",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "health-pain-inflammation",
+              "evidenceIds": [
+                "use-3cd3455bdbc98c697794a95a"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "useNodeId": "microbial",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "microbial-bacteria",
+              "evidenceIds": [
+                "use-c2a42ea34131184f059c5fa9"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-fungi",
+              "evidenceIds": [
+                "use-de6997ad32894443d3af7e5a"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-biofilms",
+              "evidenceIds": [
+                "use-406775d3dd7f6408da9fb2ec"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
           "useNodeId": "pest",
           "evidenceIds": [],
           "children": [
@@ -5079,46 +5172,6 @@ const TERPENE_DATA = {
               ]
             }
           ]
-        },
-        {
-          "useNodeId": "microbial",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "microbial-bacteria",
-              "evidenceIds": [
-                "use-c2a42ea34131184f059c5fa9"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "microbial-biofilms",
-              "evidenceIds": [
-                "use-406775d3dd7f6408da9fb2ec"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "microbial-fungi",
-              "evidenceIds": [
-                "use-de6997ad32894443d3af7e5a"
-              ],
-              "children": []
-            }
-          ]
-        },
-        {
-          "useNodeId": "health",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "health-pain-inflammation",
-              "evidenceIds": [
-                "use-3cd3455bdbc98c697794a95a"
-              ],
-              "children": []
-            }
-          ]
         }
       ],
       "evidenceIds": [
@@ -5151,7 +5204,7 @@ const TERPENE_DATA = {
         "green"
       ],
       "color": "#c9758f",
-      "description": "Steam-distilled from leaves. Citronellol and geraniol rich; third most effective oil against scabies mites in a ten-oil screen.",
+      "description": "Steam-distilled leaves with a rosy, green aroma associated with citronellol and geraniol.",
       "uses": [
         "Skin blends",
         "Floral blends",
@@ -5252,32 +5305,6 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
-          "useNodeId": "pest",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "pest-mites",
-              "evidenceIds": [
-                "use-40489d86e961e1ccd7697f7a"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "pest-beetles",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "pest-beetles-harmonia-axyridis",
-                  "evidenceIds": [
-                    "use-7a700a62fa141c9488b27a24"
-                  ],
-                  "children": []
-                }
-              ]
-            }
-          ]
-        },
-        {
           "useNodeId": "microbial",
           "evidenceIds": [],
           "children": [
@@ -5288,17 +5315,17 @@ const TERPENE_DATA = {
               ],
               "children": [
                 {
-                  "useNodeId": "microbial-bacteria-gram-negative",
+                  "useNodeId": "microbial-bacteria-gram-positive",
                   "evidenceIds": [
-                    "use-26ec34695ab1632cad696482",
-                    "use-c9905f00ca01194e1c62a3bf"
+                    "use-44e0df194000b74cfa142947"
                   ],
                   "children": []
                 },
                 {
-                  "useNodeId": "microbial-bacteria-gram-positive",
+                  "useNodeId": "microbial-bacteria-gram-negative",
                   "evidenceIds": [
-                    "use-44e0df194000b74cfa142947"
+                    "use-26ec34695ab1632cad696482",
+                    "use-c9905f00ca01194e1c62a3bf"
                   ],
                   "children": []
                 }
@@ -5330,6 +5357,32 @@ const TERPENE_DATA = {
                 "use-2ce35b4e5760777272ed1f14"
               ],
               "children": []
+            }
+          ]
+        },
+        {
+          "useNodeId": "pest",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "pest-mites",
+              "evidenceIds": [
+                "use-40489d86e961e1ccd7697f7a"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-beetles",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "pest-beetles-harmonia-axyridis",
+                  "evidenceIds": [
+                    "use-7a700a62fa141c9488b27a24"
+                  ],
+                  "children": []
+                }
+              ]
             }
           ]
         },
@@ -5393,7 +5446,7 @@ const TERPENE_DATA = {
         "camphor"
       ],
       "color": "#7d9b6a",
-      "description": "Steam-distilled from leaves. Larvicidal against Aedes aegypti and Culex mosquitoes at 50 to 125 ppm.",
+      "description": "Steam-distilled Vitex negundo leaves with a herbal, woody aroma. The linked research identifies the tested species and preparation.",
       "uses": [
         "Outdoor blends",
         "Research reference"
@@ -5483,7 +5536,7 @@ const TERPENE_DATA = {
         "sweet"
       ],
       "color": "#d4b855",
-      "description": "Cold-pressed from peel. Limonene and linalyl acetate rich; reduced exam anxiety in a 57-student RCT.",
+      "description": "Cold-pressed peel with a citrus, floral aroma. Limonene, linalyl acetate and linalool contribute to the studied volatile profile.",
       "uses": [
         "Anxiety blends",
         "Uplifting blends",
@@ -5649,17 +5702,17 @@ const TERPENE_DATA = {
               "evidenceIds": [],
               "children": [
                 {
-                  "useNodeId": "botanical-composition-flavonoid-analysis",
-                  "evidenceIds": [
-                    "use-6faae00dde3905db22822c81"
-                  ],
-                  "children": []
-                },
-                {
                   "useNodeId": "botanical-composition-essential-oil-composition",
                   "evidenceIds": [
                     "use-ccf269cde5a9b71136e96750",
                     "use-8120c51c5fa8ca0ebb32c118"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "botanical-composition-flavonoid-analysis",
+                  "evidenceIds": [
+                    "use-6faae00dde3905db22822c81"
                   ],
                   "children": []
                 }
@@ -5696,7 +5749,7 @@ const TERPENE_DATA = {
         "exotic"
       ],
       "color": "#dfa0c8",
-      "description": "Steam-distilled from flowers. Lowered blood pressure and self-rated tension in human trials.",
+      "description": "Flower oil with a rich, sweet floral aroma. Distillation fraction and collection time can substantially change its composition.",
       "uses": [
         "Evening blends",
         "Floral blends",
@@ -5797,32 +5850,17 @@ const TERPENE_DATA = {
               ],
               "children": [
                 {
-                  "useNodeId": "health-mental-health-calm",
-                  "evidenceIds": [
-                    "use-5f07f90e17eb53cc3b39298f",
-                    "use-41461537d60c8103152b664e"
-                  ],
-                  "children": []
-                },
-                {
                   "useNodeId": "health-mental-health-mood",
                   "evidenceIds": [
                     "use-dba3a9a6e81663299af41218"
                   ],
                   "children": []
-                }
-              ]
-            },
-            {
-              "useNodeId": "health-cardiovascular",
-              "evidenceIds": [
-                "use-f1dc214d495de36d6f8d4776"
-              ],
-              "children": [
+                },
                 {
-                  "useNodeId": "health-cardiovascular-acute-physiology",
+                  "useNodeId": "health-mental-health-calm",
                   "evidenceIds": [
-                    "use-735a60b7ea7b7986cf9fabce"
+                    "use-5f07f90e17eb53cc3b39298f",
+                    "use-41461537d60c8103152b664e"
                   ],
                   "children": []
                 }
@@ -5843,6 +5881,21 @@ const TERPENE_DATA = {
                   "useNodeId": "health-cognitive-alertness",
                   "evidenceIds": [
                     "use-0e8c2bebf147db2dc1e04e1b"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "health-cardiovascular",
+              "evidenceIds": [
+                "use-f1dc214d495de36d6f8d4776"
+              ],
+              "children": [
+                {
+                  "useNodeId": "health-cardiovascular-acute-physiology",
+                  "evidenceIds": [
+                    "use-735a60b7ea7b7986cf9fabce"
                   ],
                   "children": []
                 }
@@ -5903,7 +5956,7 @@ const TERPENE_DATA = {
         "medicinal"
       ],
       "color": "#6fa87c",
-      "description": "Steam-distilled from leaves. Cineole-rich tea tree relative; selective cytotoxicity against lung cancer cells in vitro.",
+      "description": "Steam-distilled Melaleuca quinquenervia leaves. This profile concerns cineole-rich material; laboratory cell findings remain separate from human outcomes.",
       "uses": [
         "Respiratory blends",
         "Research reference"
@@ -5946,21 +5999,15 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
-          "useNodeId": "botanical",
+          "useNodeId": "botanical-bioactivity",
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "botanical-bioactivity",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "botanical-bioactivity-cellular-cytotoxicity",
-                  "evidenceIds": [
-                    "use-5bf71e657b684faf9a1bb3a8"
-                  ],
-                  "children": []
-                }
-              ]
+              "useNodeId": "botanical-bioactivity-cellular-cytotoxicity",
+              "evidenceIds": [
+                "use-5bf71e657b684faf9a1bb3a8"
+              ],
+              "children": []
             }
           ]
         }
@@ -5986,7 +6033,7 @@ const TERPENE_DATA = {
         "eucalyptus"
       ],
       "color": "#a3c48d",
-      "description": "Steam-distilled from leaves (cineole chemotype, not camphor chemotype). Anti-MRSA activity in vitro.",
+      "description": "Steam-distilled Cinnamomum camphora leaves of the cineole chemotype. Camphor-rich and other chemotypes are different research materials.",
       "uses": [
         "Respiratory blends",
         "Research reference"
@@ -6211,21 +6258,6 @@ const TERPENE_DATA = {
                 "use-d90372a30c9a428fdd45b2a8"
               ],
               "children": []
-            },
-            {
-              "useNodeId": "health-cognitive",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "health-cognitive-plant-chemistry",
-                  "evidenceIds": [
-                    "use-a28d42748ed9b58e47d3db2e",
-                    "use-da358240c13538cfcc908638",
-                    "use-8cbca5d7bc05b5fbff4c4e57"
-                  ],
-                  "children": []
-                }
-              ]
             }
           ]
         },
@@ -6291,7 +6323,17 @@ const TERPENE_DATA = {
                 "use-709a3dece9276a89f9cc42c6",
                 "use-1343901a2afe118ad6f240d1"
               ],
-              "children": []
+              "children": [
+                {
+                  "useNodeId": "health-cognitive-plant-chemistry",
+                  "evidenceIds": [
+                    "use-a28d42748ed9b58e47d3db2e",
+                    "use-da358240c13538cfcc908638",
+                    "use-8cbca5d7bc05b5fbff4c4e57"
+                  ],
+                  "children": []
+                }
+              ]
             }
           ]
         }
@@ -6331,7 +6373,16 @@ const TERPENE_DATA = {
       "aroma": [
         "citrus"
       ],
-      "description": "The defining compound of citrus peels. One of the most abundant terpenes in nature and widely studied for mood, stress, and cleaning applications."
+      "description": "A monoterpene hydrocarbon common in citrus-peel volatile profiles. Its enantiomers share a molecular formula but can differ in aroma.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/22311",
+        "provider": "PubChem",
+        "formula": "C10H16",
+        "pubchemCid": 22311,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "linalool",
@@ -6342,7 +6393,16 @@ const TERPENE_DATA = {
         "floral",
         "soft"
       ],
-      "description": "The calming backbone of lavender. Among the most researched terpenes for relaxation and sleep-related outcomes."
+      "description": "A floral-scented monoterpenoid alcohol found in lavender and many other aromatic plants.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/6549",
+        "provider": "PubChem",
+        "formula": "C10H18O",
+        "pubchemCid": 6549,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "linalyl-acetate",
@@ -6360,7 +6420,16 @@ const TERPENE_DATA = {
       "volatility": "volatile",
       "sourceIds": [
         "chebi-linalyl-acetate"
-      ]
+      ],
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/8294",
+        "provider": "PubChem",
+        "formula": "C12H20O2",
+        "pubchemCid": 8294,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "menthol",
@@ -6371,7 +6440,16 @@ const TERPENE_DATA = {
         "mint",
         "cooling"
       ],
-      "description": "Activates TRPM8 cold receptors, producing the cooling sensation. The signature compound of peppermint."
+      "description": "Activates TRPM8 cold receptors, producing the cooling sensation. The signature compound of peppermint.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/1254",
+        "provider": "PubChem",
+        "formula": "C10H20O",
+        "pubchemCid": 1254,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "menthone",
@@ -6382,7 +6460,16 @@ const TERPENE_DATA = {
         "minty",
         "fresh"
       ],
-      "description": "Peppermint's secondary ketone; adds the sharp, fresh mint edge beneath menthol."
+      "description": "Peppermint's secondary ketone; adds the sharp, fresh mint edge beneath menthol.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/26447",
+        "provider": "PubChem",
+        "formula": "C10H18O",
+        "pubchemCid": 26447,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "eucalyptol",
@@ -6392,7 +6479,16 @@ const TERPENE_DATA = {
       "aroma": [
         "camphor"
       ],
-      "description": "The penetrating compound in eucalyptus and rosemary. Studied for respiratory and anti-inflammatory applications."
+      "description": "Also called 1,8-cineole, a cyclic monoterpenoid ether found in eucalyptus and other oils. Oral compound studies are distinguished from whole-oil research.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/2758",
+        "provider": "PubChem",
+        "formula": "C10H18O",
+        "pubchemCid": 2758,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "terpinen-4-ol",
@@ -6403,7 +6499,16 @@ const TERPENE_DATA = {
         "peppery",
         "green"
       ],
-      "description": "Tea tree's signature compound and the main driver of its documented antimicrobial activity."
+      "description": "A monoterpenoid alcohol characteristic of tea tree oil. Isolated-compound findings do not establish the effect of an arbitrary oil blend.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/11230",
+        "provider": "PubChem",
+        "formula": "C10H18O",
+        "pubchemCid": 11230,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "alpha-pinene",
@@ -6414,7 +6519,16 @@ const TERPENE_DATA = {
         "pine",
         "resinous"
       ],
-      "description": "The smell of pine forests. Common across conifers, frankincense, and rosemary; studied for alertness and respiratory effects."
+      "description": "A bicyclic monoterpene hydrocarbon associated with pine-like aroma and reported in many conifer and resin oils.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/6654",
+        "provider": "PubChem",
+        "formula": "C10H16",
+        "pubchemCid": 6654,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "beta-pinene",
@@ -6425,7 +6539,16 @@ const TERPENE_DATA = {
         "woody",
         "pine"
       ],
-      "description": "Alpha-pinene's close relative; contributes dry woody notes to citrus and conifer oils."
+      "description": "Alpha-pinene's close relative; contributes dry woody notes to citrus and conifer oils.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/14896",
+        "provider": "PubChem",
+        "formula": "C10H16",
+        "pubchemCid": 14896,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "beta-caryophyllene",
@@ -6436,7 +6559,16 @@ const TERPENE_DATA = {
         "spicy",
         "woody"
       ],
-      "description": "A dietary sesquiterpene (also in black pepper) notable for interacting with CB2 receptors. Found in clove, copaiba, and lavender."
+      "description": "A dietary sesquiterpene (also in black pepper) notable for interacting with CB2 receptors. Found in clove, copaiba, and lavender.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/5281515",
+        "provider": "PubChem",
+        "formula": "C15H24",
+        "pubchemCid": 5281515,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "eugenol",
@@ -6447,7 +6579,16 @@ const TERPENE_DATA = {
         "clove",
         "warm spice"
       ],
-      "description": "A warm, spicy compound reported in clove bud oil. Long used in dentistry; potent, so dilution matters. Not a terpene: a phenylpropanoid."
+      "description": "A warm, spicy compound reported in clove bud oil. Long used in dentistry; potent, so dilution matters. Not a terpene: a phenylpropanoid.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/3314",
+        "provider": "PubChem",
+        "formula": "C10H12O2",
+        "pubchemCid": 3314,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "gamma-terpinene",
@@ -6458,7 +6599,16 @@ const TERPENE_DATA = {
         "citrusy",
         "herbal"
       ],
-      "description": "Common citrus and tea-tree constituent; contributes fresh herbal lift."
+      "description": "Common citrus and tea-tree constituent; contributes fresh herbal lift.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/7461",
+        "provider": "PubChem",
+        "formula": "C10H16",
+        "pubchemCid": 7461,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "alpha-terpinene",
@@ -6469,7 +6619,16 @@ const TERPENE_DATA = {
         "woody",
         "citrus"
       ],
-      "description": "Tea tree and citrus constituent with a warm woody-citrus character."
+      "description": "Tea tree and citrus constituent with a warm woody-citrus character.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/7462",
+        "provider": "PubChem",
+        "formula": "C10H16",
+        "pubchemCid": 7462,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "alpha-humulene",
@@ -6480,7 +6639,16 @@ const TERPENE_DATA = {
         "woody",
         "earthy"
       ],
-      "description": "Sesquiterpene in clove and hops; adds earthy depth."
+      "description": "Sesquiterpene in clove and hops; adds earthy depth.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/5281520",
+        "provider": "PubChem",
+        "formula": "C15H24",
+        "pubchemCid": 5281520,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "myrcene",
@@ -6491,7 +6659,16 @@ const TERPENE_DATA = {
         "herbal",
         "balsamic"
       ],
-      "description": "Common in citrus, hops, and cannabis; soft herbal-balsamic background note."
+      "description": "Common in citrus, hops, and cannabis; soft herbal-balsamic background note.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/31253",
+        "provider": "PubChem",
+        "formula": "C10H16",
+        "pubchemCid": 31253,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "citronellal",
@@ -6509,7 +6686,16 @@ const TERPENE_DATA = {
       "volatility": "volatile",
       "sourceIds": [
         "chebi-citronellal"
-      ]
+      ],
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/7794",
+        "provider": "PubChem",
+        "formula": "C10H18O",
+        "pubchemCid": 7794,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "geraniol",
@@ -6520,7 +6706,16 @@ const TERPENE_DATA = {
         "rosy",
         "citronella"
       ],
-      "description": "Floral-rosy alcohol common in citronella, geranium, and palmarosa."
+      "description": "Floral-rosy alcohol common in citronella, geranium, and palmarosa.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/637566",
+        "provider": "PubChem",
+        "formula": "C10H18O",
+        "pubchemCid": 637566,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "thymol",
@@ -6531,7 +6726,16 @@ const TERPENE_DATA = {
         "medicinal",
         "herbal"
       ],
-      "description": "Potent antimicrobial phenol; the signature compound of thyme oil."
+      "description": "A monoterpenoid phenol found in thymol-type thyme oils. Laboratory findings depend on the tested material and concentration.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/6989",
+        "provider": "PubChem",
+        "formula": "C10H14O",
+        "pubchemCid": 6989,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "carvacrol",
@@ -6542,7 +6746,16 @@ const TERPENE_DATA = {
         "warm",
         "spicy"
       ],
-      "description": "Oregano signature phenol with broad documented in-vitro antibacterial activity."
+      "description": "Oregano signature phenol with broad documented in-vitro antibacterial activity.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/10364",
+        "provider": "PubChem",
+        "formula": "C10H14O",
+        "pubchemCid": 10364,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "cinnamaldehyde",
@@ -6560,7 +6773,16 @@ const TERPENE_DATA = {
       "volatility": "volatile",
       "sourceIds": [
         "chebi-cinnamaldehyde"
-      ]
+      ],
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/637511",
+        "provider": "PubChem",
+        "formula": "C9H8O",
+        "pubchemCid": 637511,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "citral",
@@ -6582,7 +6804,16 @@ const TERPENE_DATA = {
       ],
       "sourceIds": [
         "pubchem-citral"
-      ]
+      ],
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/638011",
+        "provider": "PubChem",
+        "formula": "C10H16O",
+        "pubchemCid": 638011,
+        "scope": "Citral comprises geranial and neral; the reference is geranial. Both isomers share this formula. Not a single-structure identity claim for the mixture."
+      }
     },
     {
       "id": "pmd",
@@ -6593,7 +6824,16 @@ const TERPENE_DATA = {
         "minty",
         "fresh"
       ],
-      "description": "Refined from lemon eucalyptus citronellal. The botanical repellent compound with the strongest human trial evidence."
+      "description": "p-Menthane-3,8-diol, an oxygenated monoterpenoid used in specific repellent preparations. PMD-rich processed material is distinct from unrefined lemon-eucalyptus oil.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/556998",
+        "provider": "PubChem",
+        "formula": "C10H20O2",
+        "pubchemCid": 556998,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "p-cymene",
@@ -6605,18 +6845,36 @@ const TERPENE_DATA = {
         "herbal",
         "woody"
       ],
-      "description": "A common aromatic monoterpene in oregano and thyme oils and a biosynthetic relative of carvacrol and thymol."
+      "description": "A common aromatic monoterpene in oregano and thyme oils and a biosynthetic relative of carvacrol and thymol.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/7463",
+        "provider": "PubChem",
+        "formula": "C10H14",
+        "pubchemCid": 7463,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "furanoeudesma-1-3-diene",
       "name": "Furanoeudesma-1,3-diene",
       "chemicalClass": "Furanosesquiterpene",
-      "formula": "C15H20O",
+      "formula": "C15H18O",
       "aroma": [
         "resinous",
         "myrrh"
       ],
-      "description": "A characteristic furanosesquiterpene reported in Commiphora myrrh preparations."
+      "description": "A characteristic furanosesquiterpene reported in Commiphora myrrh preparations.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/13874240",
+        "provider": "PubChem",
+        "formula": "C15H18O",
+        "pubchemCid": 13874240,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "curzerene",
@@ -6627,7 +6885,16 @@ const TERPENE_DATA = {
         "resinous",
         "warm"
       ],
-      "description": "A furanosesquiterpene reported in myrrh and other aromatic botanicals."
+      "description": "A furanosesquiterpene reported in myrrh and other aromatic botanicals.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C17910097",
+        "provider": "NIST Chemistry WebBook",
+        "formula": "C15H20O",
+        "inchiKey": "HICAMHOOTMOHPA-DZGCQCFKSA-N",
+        "scope": "CAS 17910-09-7. PubChem name search returned CID 165365640 with conflicting hydrogenation; NIST confirms the retained formula. No batch stereochemistry is inferred."
+      }
     },
     {
       "aroma": [
@@ -6635,10 +6902,19 @@ const TERPENE_DATA = {
         "sharp"
       ],
       "chemicalClass": "Monoterpenoid",
-      "description": "Sharp, cooling compound prominent in rosemary; stimulating in aroma studies.",
+      "description": "A bicyclic monoterpenoid ketone with a strong camphoraceous aroma. Its proportion varies markedly across botanical chemotypes.",
       "formula": "C10H16O",
       "id": "camphor",
-      "name": "Camphor"
+      "name": "Camphor",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/2537",
+        "provider": "PubChem",
+        "formula": "C10H16O",
+        "pubchemCid": 2537,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "nootkatone",
@@ -6649,7 +6925,16 @@ const TERPENE_DATA = {
         "grapefruit",
         "woody"
       ],
-      "description": "Grapefruit-derived sesquiterpenoid; repelled 100% of Ixodes scapularis nymphs through 14 days in field trials."
+      "description": "A sesquiterpenoid ketone associated with grapefruit aroma. Repellent studies of isolated nootkatone do not establish protection from grapefruit oil.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/1268142",
+        "provider": "PubChem",
+        "formula": "C15H22O",
+        "pubchemCid": 1268142,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "citronellol",
@@ -6660,7 +6945,16 @@ const TERPENE_DATA = {
         "rosy",
         "citronella"
       ],
-      "description": "Rosy alcohol prominent in geranium and citronella; softer counterpart to citronellal."
+      "description": "Rosy alcohol prominent in geranium and citronella; softer counterpart to citronellal.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/8842",
+        "provider": "PubChem",
+        "formula": "C10H20O",
+        "pubchemCid": 8842,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "prenylthiol",
@@ -6684,7 +6978,16 @@ const TERPENE_DATA = {
         "oswald-2021",
         "cx02"
       ],
-      "showModel": false
+      "showModel": false,
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/146586",
+        "provider": "PubChem",
+        "formula": "C5H10S",
+        "pubchemCid": 146586,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "cannflavin-a",
@@ -6700,7 +7003,16 @@ const TERPENE_DATA = {
       "sourceIds": [
         "bautista-2021"
       ],
-      "showModel": false
+      "showModel": false,
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/10071695",
+        "provider": "PubChem",
+        "formula": "C26H28O6",
+        "pubchemCid": 10071695,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "menthyl-acetate",
@@ -6718,7 +7030,16 @@ const TERPENE_DATA = {
         "peppermint-2012"
       ],
       "volatility": "volatile",
-      "showModel": false
+      "showModel": false,
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/27867",
+        "provider": "PubChem",
+        "formula": "C12H22O2",
+        "pubchemCid": 27867,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "geranyl-acetate",
@@ -6736,7 +7057,16 @@ const TERPENE_DATA = {
         "lemongrass-2014"
       ],
       "volatility": "volatile",
-      "showModel": false
+      "showModel": false,
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/1549026",
+        "provider": "PubChem",
+        "formula": "C12H20O2",
+        "pubchemCid": 1549026,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "grapefruit-thiol",
@@ -6757,7 +7087,16 @@ const TERPENE_DATA = {
       "sourceIds": [
         "cx07"
       ],
-      "showModel": false
+      "showModel": false,
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/6429308",
+        "provider": "PubChem",
+        "formula": "C6H14OS",
+        "pubchemCid": 6429308,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     },
     {
       "id": "nobiletin",
@@ -6775,7 +7114,16 @@ const TERPENE_DATA = {
         "cx08",
         "cx09"
       ],
-      "showModel": false
+      "showModel": false,
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/72344",
+        "provider": "PubChem",
+        "formula": "C21H22O8",
+        "pubchemCid": 72344,
+        "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
     }
   ],
   "studies": [
@@ -6785,13 +7133,30 @@ const TERPENE_DATA = {
       "authors": "Komori T, Fujiwara R, Tanida M, Nomura J, Yokoyama MM",
       "journal": "Neuroimmunomodulation",
       "year": 1995,
-      "pubmedId": "8719697",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/8719697/",
+      "pubmedId": "8646568",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/8646568/",
       "studyType": "controlled-human-study",
       "context": "human",
       "evidenceLevel": "clinical",
-      "finding": "Citrus fragrance exposure was associated with normalized immune markers and reduced depressive scores in the study group.",
-      "limitations": "Small sample; early study design.",
+      "finding": "Citrus fragrance was studied in 12 patients with depression; reduced antidepressant requirements and changes in neuroendocrine and immune measures were reported.",
+      "limitations": "Small study; the abstract does not establish a single catalog oil, a blinded placebo comparison or benefit from a custom blend. Medication changes were study outcomes, not self-care instructions.",
+      "doi": "10.1159/000096889",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A8646568+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Effects of citrus fragrance on immune function and depressive states",
+        "doi": "10.1159/000096889",
+        "pubmedId": "8646568",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/8646568/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lemon"
       ],
@@ -6811,17 +7176,34 @@ const TERPENE_DATA = {
     },
     {
       "id": "kasper-2010-silexan",
-      "title": "Silexan, an orally administered Lavandula oil preparation, is effective in the treatment of subsyndromal anxiety disorder",
-      "authors": "Kasper S, Gastpar M, Muller WE, et al.",
-      "journal": "International Journal of Neuropsychopharmacology",
+      "title": "Silexan, an orally administered Lavandula oil preparation, is effective in the treatment of 'subsyndromal' anxiety disorder: a randomized, double-blind, placebo controlled trial",
+      "authors": "Kasper S, Gastpar M, Müller WE, Volz HP, Möller HJ, Dienel A, Schläfke S",
+      "journal": "International clinical psychopharmacology",
       "year": 2010,
-      "pubmedId": "20587112",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/20587112/",
+      "pubmedId": "20512042",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20512042/",
       "studyType": "randomized-controlled-trial",
       "context": "human",
       "evidenceLevel": "clinical",
-      "finding": "Lavender oil preparation showed anxiolytic effects in subsyndromal anxiety in a randomized controlled trial.",
-      "limitations": "Used a standardized oral preparation, not diffused oil.",
+      "finding": "In 221 adults, a defined oral lavender-oil preparation (80 mg/day for 10 weeks) improved anxiety and sleep scores more than placebo.",
+      "limitations": "Specific oral capsule preparation and patient population; not evidence for inhaled, topical or custom-blended lavender.",
+      "doi": "10.1097/yic.0b013e32833b3242",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A20512042+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Silexan, an orally administered Lavandula oil preparation, is effective in the treatment of 'subsyndromal' anxiety disorder: a randomized, double-blind, placebo controlled trial",
+        "doi": "10.1097/yic.0b013e32833b3242",
+        "pubmedId": "20512042",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/20512042/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender"
       ],
@@ -6842,17 +7224,34 @@ const TERPENE_DATA = {
     },
     {
       "id": "carson-2006-teatree",
-      "title": "Melaleuca alternifolia (Tea Tree) Oil: a Review of Antimicrobial and Other Medicinal Properties",
+      "title": "Melaleuca alternifolia (Tea Tree) oil: a review of antimicrobial and other medicinal properties",
       "authors": "Carson CF, Hammer KA, Riley TV",
-      "journal": "Clinical Microbiology Reviews",
+      "journal": "Clinical microbiology reviews",
       "year": 2006,
-      "pubmedId": "16428753",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/16428753/",
+      "pubmedId": "16418522",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16418522/",
       "studyType": "narrative-review",
       "context": "in-vitro",
       "evidenceLevel": "review",
       "finding": "Comprehensive review documenting tea tree oil's broad-spectrum antimicrobial activity, attributed largely to terpinen-4-ol.",
       "limitations": "Review of mostly in-vitro work; not clinical efficacy evidence.",
+      "doi": "10.1128/cmr.19.1.50-62.2006",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A16418522+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Melaleuca alternifolia (Tea Tree) oil: a review of antimicrobial and other medicinal properties",
+        "doi": "10.1128/cmr.19.1.50-62.2006",
+        "pubmedId": "16418522",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/16418522/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "tea-tree"
       ],
@@ -6876,17 +7275,34 @@ const TERPENE_DATA = {
     },
     {
       "id": "juergens-2003-cineole",
-      "title": "Anti-inflammatory activity of 1,8-cineol (eucalyptol) in bronchial asthma: a double-blind placebo-controlled trial",
-      "authors": "Juergens UR, Dethlefsen U, Steinkraus G, Gillissen A, Repges R, Vetter H",
-      "journal": "Respiratory Medicine",
+      "title": "Anti-inflammatory activity of 1.8-cineol (eucalyptol) in bronchial asthma: a double-blind placebo-controlled trial",
+      "authors": "Juergens UR, Dethlefsen U, Steinkamp G, Gillissen A, Repges R, Vetter H",
+      "journal": "Respiratory medicine",
       "year": 2003,
-      "pubmedId": "12657144",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/12657144/",
+      "pubmedId": "12645832",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12645832/",
       "studyType": "randomized-controlled-trial",
       "context": "human",
       "evidenceLevel": "clinical",
-      "finding": "1,8-cineole showed anti-inflammatory effects in asthma patients in a controlled trial setting.",
-      "limitations": "Tested isolated 1,8-cineole capsules, not eucalyptus oil.",
+      "finding": "In 32 steroid-dependent asthma patients, oral 1,8-cineole capsules reduced prednisolone requirements more than placebo during a supervised 12-week trial.",
+      "limitations": "Isolated cineole, 200 mg three times daily alongside treatment; not eucalyptus-oil inhalation or evidence for a spray. The study does not support self-directed steroid reduction.",
+      "doi": "10.1053/rmed.2003.1432",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1053%2Frmed.2003.1432%22&format=json&resultType=core",
+        "sourceTitle": "Anti-inflammatory activity of 1.8-cineol (eucalyptol) in bronchial asthma: a double-blind placebo-controlled trial",
+        "doi": "10.1053/rmed.2003.1432",
+        "pubmedId": "12645832",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/12645832/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "eucalyptus"
       ],
@@ -6916,6 +7332,23 @@ const TERPENE_DATA = {
       "evidenceLevel": "preclinical",
       "finding": "Beta-caryophyllene was identified as a selective CB2 receptor agonist with anti-inflammatory effects in animal models.",
       "limitations": "Animal and cell models; not human efficacy data.",
+      "doi": "10.1073/pnas.0803601105",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A18574142+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Beta-caryophyllene is a dietary cannabinoid",
+        "doi": "10.1073/pnas.0803601105",
+        "pubmedId": "18574142",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/18574142/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "clove",
         "lavender",
@@ -6949,6 +7382,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Across 15 studies, the majority reported improved sleep with inhaled essential oils, most commonly lavender, and no adverse events were reported.",
       "limitations": "Small sample sizes across included studies; stronger study designs needed (per the authors).",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A24720812+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "A systematic review of the effect of inhaled essential oils on sleep",
+        "doi": "10.1089/acm.2013.0311",
+        "pubmedId": "24720812",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/24720812/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender",
         "peppermint"
@@ -6974,7 +7423,7 @@ const TERPENE_DATA = {
       "authors": "Khanna R, MacDonald JK, Levesque BG",
       "journal": "Journal of Clinical Gastroenterology",
       "year": 2014,
-      "doi": "10.1097/MCG.0b013e3182a88357",
+      "doi": "10.1097/mcg.0b013e3182a88357",
       "pubmedId": "24100754",
       "url": "https://pubmed.ncbi.nlm.nih.gov/24100754/",
       "studyType": "systematic-review",
@@ -6983,6 +7432,22 @@ const TERPENE_DATA = {
       "sampleSize": 726,
       "finding": "Peppermint oil outperformed placebo for global IBS symptoms (RR 2.23) and abdominal pain (RR 2.14) across 726 patients, with mild transient adverse events.",
       "limitations": "Substantial heterogeneity among trials; adverse events sparsely reported.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A24100754+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Peppermint oil for the treatment of irritable bowel syndrome: a systematic review and meta-analysis",
+        "doi": "10.1097/mcg.0b013e3182a88357",
+        "pubmedId": "24100754",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/24100754/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "peppermint"
       ],
@@ -7020,6 +7485,22 @@ const TERPENE_DATA = {
       "sampleSize": 124,
       "finding": "Both 5% tea tree oil gel and 5% benzoyl peroxide significantly reduced inflamed and non-inflamed acne lesions over three months, with tea tree showing slower onset but fewer side effects.",
       "limitations": "Single-blind design; older trial; acne lesion counts are observer-dependent.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A2145499+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "A comparative study of tea-tree oil versus benzoylperoxide in the treatment of acne",
+        "doi": "10.5694/j.1326-5377.1990.tb126150.x",
+        "pubmedId": "2145499",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/2145499/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "tea-tree"
       ],
@@ -7043,15 +7524,31 @@ const TERPENE_DATA = {
       "authors": "Fradin MS, Day JF",
       "journal": "New England Journal of Medicine",
       "year": 2002,
-      "doi": "10.1056/NEJMoa011699",
+      "doi": "10.1056/nejmoa011699",
       "pubmedId": "12097535",
       "url": "https://pubmed.ncbi.nlm.nih.gov/12097535/",
       "studyType": "controlled-human-study",
       "context": "human",
       "evidenceLevel": "clinical",
       "sampleSize": 15,
-      "finding": "NEGATIVE RESULT for botanical repellents: citronella-based products protected for under 20 minutes versus 301.5 minutes for 23.8% DEET, leading the authors to conclude non-DEET products cannot be relied on for prolonged protection.",
-      "limitations": "Small human arm-exposure comparison of commercial products; short protection under these conditions is retained. Citronella-containing products do not authenticate a C. nardus-only oil or establish long-lasting protection.",
+      "finding": "In 15 volunteers, 23.8% DEET averaged 301.5 minutes of protection and a soybean-oil product 94.6 minutes. Other tested botanical products, including citronella formulations, averaged under 20 minutes.",
+      "limitations": "Historical comparison of specific products and conditions; not a verdict on every botanical repellent. Citronella formulations do not authenticate a C. nardus-only oil or a custom blend.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A12097535+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Comparative efficacy of insect repellents against mosquito bites",
+        "doi": "10.1056/nejmoa011699",
+        "pubmedId": "12097535",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/12097535/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "citronella"
       ],
@@ -7084,6 +7581,22 @@ const TERPENE_DATA = {
       "sampleSize": 32,
       "finding": "Peppermint oil with ethanol significantly reduced headache sensitivity (analgesic effect), while the peppermint-eucalyptus-ethanol combination improved cognitive performance with a muscle-relaxing effect.",
       "limitations": "Small sample (n=32); laboratory algesimetric measures rather than real-world headache outcomes.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A7954745+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Effect of peppermint and eucalyptus oil preparations on neurophysiological and experimental algesimetric headache parameters",
+        "doi": "10.1046/j.1468-2982.1994.014003228.x",
+        "pubmedId": "7954745",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/7954745/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "peppermint",
         "eucalyptus"
@@ -7119,6 +7632,22 @@ const TERPENE_DATA = {
       "finding": "In 73 healthy volunteers, ground-clove gel and benzocaine reduced dental needle-insertion pain relative to placebo; the active groups did not differ significantly.",
       "limitations": "A single buccal-mucosa application before a needle insertion. No essential-oil analgesia, toothache treatment or arbitrary topical formulation claim.",
       "material": "Homemade ground-clove and glycerin gel; not distilled clove essential oil.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A16530911+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "The effect of clove and benzocaine versus placebo as topical anesthetics",
+        "doi": "10.1016/j.jdent.2006.01.009",
+        "pubmedId": "16530911",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/16530911/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "clove"
       ],
@@ -7151,6 +7680,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "In vitro, thyme and oregano essential oils and their constituents (thymol, carvacrol, eugenol, cinnamaldehyde) inhibited Listeria, Salmonella, and E. coli O157:H7 at 0.2–10 µl/ml, though higher concentrations were required in foods.",
       "limitations": "Review of in-vitro work; food-matrix effects limit direct translation to products.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A15246235+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Essential oils: their antibacterial properties and potential applications in foods--a review",
+        "doi": "10.1016/j.ijfoodmicro.2004.03.022",
+        "pubmedId": "15246235",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/15246235/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "thyme",
         "oregano"
@@ -7184,15 +7729,31 @@ const TERPENE_DATA = {
       "authors": "Graham PH, Browne L, Cox H, et al.",
       "journal": "Journal of Clinical Oncology",
       "year": 2003,
-      "doi": "10.1200/JCO.2003.10.126",
+      "doi": "10.1200/jco.2003.10.126",
       "pubmedId": "12805340",
       "url": "https://pubmed.ncbi.nlm.nih.gov/12805340/",
       "studyType": "randomized-controlled-trial",
       "context": "human",
       "evidenceLevel": "clinical",
       "sampleSize": 313,
-      "finding": "NULL RESULT: in 313 radiotherapy patients, inhaled aromatherapy (lavender/bergamot/cedarwood) did not significantly reduce anxiety or depression versus carrier-oil controls.",
-      "limitations": "Self-report outcome measures; radiotherapy setting may limit generalizability.",
+      "finding": "In 313 radiotherapy patients, anxiety scores were lower with carrier oil alone than in either fragrant arm (P = .04). Depression and broader symptom scores did not differ significantly.",
+      "limitations": "The lavender, bergamot and cedarwood blend did not benefit anxiety in this setting. Individual oil effects cannot be separated; results concern the studied exposure, not all aromatherapy.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A12805340+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Inhalation aromatherapy during radiotherapy: results of a placebo-controlled double-blind randomized trial",
+        "doi": "10.1200/jco.2003.10.126",
+        "pubmedId": "12805340",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/12805340/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender",
         "bergamot"
@@ -7217,7 +7778,7 @@ const TERPENE_DATA = {
       "authors": "Buck DS, Nidorf DM, Addino JG",
       "journal": "Journal of Family Practice",
       "year": 1994,
-      "doi": "",
+      "doi": "10.1016/s0965-2299(98)80022-8",
       "pubmedId": "8195735",
       "url": "https://pubmed.ncbi.nlm.nih.gov/8195735/",
       "studyType": "randomized-controlled-trial",
@@ -7226,6 +7787,22 @@ const TERPENE_DATA = {
       "sampleSize": 117,
       "finding": "After 6 months of twice-daily application in 117 patients with culture-proven toenail onychomycosis, 100% tea tree oil and 1% clotrimazole produced comparable culture cure (TT 18%, CL 11%) and partial-or-full clinical resolution (TT 60%, CL 61%).",
       "limitations": "High recurrence after treatment; no DOI on PubMed record; older trial.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A8195735+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Comparison of two topical preparations for the treatment of onychomycosis: Melaleuca alternifolia (tea tree) oil and clotrimazole",
+        "doi": "10.1016/s0965-2299(98)80022-8",
+        "pubmedId": "8195735",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/8195735/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "tea-tree"
       ],
@@ -7262,8 +7839,24 @@ const TERPENE_DATA = {
       "context": "environmental",
       "evidenceLevel": "laboratory",
       "sampleSize": null,
-      "finding": "Lemon eucalyptus oil (C. citriodora, minimum 50% PMD) and lavender oil at 30% each showed 100% repellency against I. ricinus nymphs in lab bioassays, and 74–85% repellency on day 1 of field blanket-drag tests, declining to 42–45% by day 6.",
-      "limitations": "Field repellency declined over days; blanket-dragging is an indirect measure of human protection.",
+      "finding": "Lavender and geranium at 30% repelled ticks in laboratory tests; 1% was much less effective. Field blanket results concerned a commercial repellent and processed lemon-eucalyptus material containing at least 50% PMD.",
+      "limitations": "Laboratory oil results and field formulation results are separate. Neither blanket dragging nor a laboratory concentration establishes safe skin dosing or protection from a custom oil blend.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A16892632+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Repellency of oils of lemon eucalyptus, geranium, and lavender and the mosquito repellent MyggA natural to Ixodes ricinus (Acari: Ixodidae) in the laboratory and field",
+        "doi": "10.1603/0022-2585(2006)43[731:rooole]2.0.co;2",
+        "pubmedId": "16892632",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/16892632/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender"
       ],
@@ -7297,6 +7890,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "A low-cost PMD/lemongrass-oil repellent gave over 98% protection for 5 hours in Guatemala and 95% for 6 hours in Peru, significantly exceeding the 15–20% DEET controls (92% and 64%) under high biting pressure.",
       "limitations": "Single-night Latin-square trials per site; efficacy measured by landing counts, not malaria infection outcomes.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A17678537+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "A low-cost repellent for malaria vectors in the Americas: results of two field trials in Guatemala and Peru",
+        "doi": "10.1186/1475-2875-6-101",
+        "pubmedId": "17678537",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/17678537/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lemongrass"
       ],
@@ -7334,6 +7943,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Aqueous thyme essential oil solutions (2.5% and 5%) applied by nebulization and direct contact reduced mesophilic and psychrophilic bacteria and environmental fungi in both air and on indoor surfaces.",
       "limitations": "Indoor trial settings; long-term efficacy and cost-effectiveness not assessed.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A38804294+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Eco-Friendly Sanitization of Indoor Environments: Effectiveness of Thyme Essential Oil in Controlling Bioaerosol Levels and Disinfecting Surfaces",
+        "doi": "10.3390/biotech13020012",
+        "pubmedId": "38804294",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/38804294/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "thyme"
       ],
@@ -7373,7 +7998,7 @@ const TERPENE_DATA = {
       "authors": "Shen H, Zhang LJ, Zhu WY",
       "journal": "Holistic Nursing Practice",
       "year": 2026,
-      "doi": "10.1097/HNP.0000000000000734",
+      "doi": "10.1097/hnp.0000000000000734",
       "pubmedId": "40600743",
       "url": "https://pubmed.ncbi.nlm.nih.gov/40600743/",
       "studyType": "systematic-review",
@@ -7382,6 +8007,22 @@ const TERPENE_DATA = {
       "sampleSize": 628,
       "finding": "Meta-analysis of 11 randomized controlled trials reported a statistically significant improvement in adult sleep quality associated with lavender essential-oil interventions.",
       "limitations": "The authors noted limitations in the quantity and quality of included studies; interventions and routes varied.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A40600743+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "The Sleep-Enhancing Effect of Lavender Essential Oil in Adults: A Systematic Review and Meta-Analysis",
+        "doi": "10.1097/hnp.0000000000000734",
+        "pubmedId": "40600743",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/40600743/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender"
       ],
@@ -7411,6 +8052,22 @@ const TERPENE_DATA = {
       "evidenceLevel": "review",
       "finding": "Systematic review of 14 eligible studies reported antibacterial, antibiofilm, anti-virulence and anti-quorum-sensing activity for eugenol across multiple bacterial strains.",
       "limitations": "Predominantly laboratory evidence; does not establish clinical or finished-product efficacy.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A39293727+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Eugenol as a promising antibiofilm and anti-quorum sensing agent: A systematic review",
+        "doi": "10.1016/j.micpath.2024.106937",
+        "pubmedId": "39293727",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/39293727/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "clove"
       ],
@@ -7446,6 +8103,22 @@ const TERPENE_DATA = {
       "evidenceLevel": "laboratory",
       "finding": "Clove essential oil and eugenol inhibited tested Candida, Aspergillus and dermatophyte strains; experiments implicated fungal membrane damage and reduced ergosterol.",
       "limitations": "In-vitro study; results do not establish treatment efficacy in humans.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A19589904+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Antifungal activity of the clove essential oil from Syzygium aromaticum on Candida, Aspergillus and dermatophyte species",
+        "doi": "10.1099/jmm.0.010538-0",
+        "pubmedId": "19589904",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/19589904/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "clove"
       ],
@@ -7494,6 +8167,22 @@ const TERPENE_DATA = {
       "evidenceLevel": "laboratory",
       "finding": "C. zeylanicum and C. cassia bark oils and cinnamaldehyde exhibited antibacterial and antibiofilm activity against tested bacterial biofilms.",
       "limitations": "In-vitro concentrations and biofilm models do not establish efficacy of a consumer spray.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A29977171+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Antibacterial and Antibiofilm Activities of Cinnamomum Sp. Essential Oil and Cinnamaldehyde: Antimicrobial Activities",
+        "doi": "10.1155/2018/7405736",
+        "pubmedId": "29977171",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/29977171/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "cinnamon"
       ],
@@ -7529,6 +8218,22 @@ const TERPENE_DATA = {
       "evidenceLevel": "laboratory",
       "finding": "Lemon essential oil was characterized as 60.7% limonene, 12.6% beta-pinene and 10.3% gamma-terpinene and showed antimicrobial, antibiofilm and insecticidal activity in the reported laboratory and food-model assays.",
       "limitations": "Laboratory and food-model evidence; composition is batch-specific and not a universal lemon-oil percentage.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A38498554+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Citrus limon Essential Oil: Chemical Composition and Selected Biological Properties Focusing on the Antimicrobial (In Vitro, In Situ), Antibiofilm, Insecticidal Activity and Preservative Effect against Salmonella enterica Inoculated in Carrot",
+        "doi": "10.3390/plants13040524",
+        "pubmedId": "38498554",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/38498554/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lemon"
       ],
@@ -7576,6 +8281,22 @@ const TERPENE_DATA = {
       "evidenceLevel": "laboratory",
       "finding": "A commercial mixed-Boswellia essential oil dominated by alpha-pinene and limonene showed antimicrobial, antioxidant and anti-inflammatory activity in laboratory assays.",
       "limitations": "Commercial mixture of several Boswellia species; laboratory evidence only.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A37891886+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Boswellia Essential Oil: Natural Antioxidant as an Effective Antimicrobial and Anti-Inflammatory Agent",
+        "doi": "10.3390/antiox12101807",
+        "pubmedId": "37891886",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/37891886/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "frankincense"
       ],
@@ -7617,6 +8338,22 @@ const TERPENE_DATA = {
       "evidenceLevel": "laboratory",
       "finding": "Commiphora molmol oil and a separate ethanol extract inhibited tested dermatophytes in vitro. Furanoeudesma-1,3-diene and menthofuran were major oil components; curzerene was described among major extract components.",
       "limitations": "Oil and extract are separate materials. Laboratory fungal inhibition is not clinical skin treatment or wound-healing evidence.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A26427766+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "The anti-dermatophyte activity of Commiphora molmol",
+        "doi": "10.3109/13880209.2015.1072831",
+        "pubmedId": "26427766",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/26427766/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "myrrh"
       ],
@@ -7649,6 +8386,22 @@ const TERPENE_DATA = {
       "evidenceLevel": "laboratory",
       "finding": "Oregano essential oil inhibited L. monocytogenes in laboratory assays and reduced biofilm coverage on glass slides; mechanistic experiments implicated multiple cellular effects.",
       "limitations": "Laboratory and food-model evidence; does not establish efficacy at consumer-product concentrations.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A39025378+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Inhibitory effect and mechanism of oregano essential oil on Listeria monocytogenes cells, toxins and biofilms",
+        "doi": "10.1016/j.micpath.2024.106801",
+        "pubmedId": "39025378",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/39025378/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "oregano"
       ],
@@ -7676,16 +8429,32 @@ const TERPENE_DATA = {
       "context": "human",
       "doi": "10.1080/00207450390161903",
       "evidenceLevel": "clinical",
-      "finding": "Rosemary aroma significantly improved overall memory quality and secondary memory versus controls, while lavender impaired working memory and slowed reaction times on memory and attention tasks.",
+      "finding": "In 144 healthy adults, rosemary aroma improved memory quality but slowed memory responses. Lavender impaired working memory and reaction times. Rosemary participants were more alert; both aroma groups reported greater contentment than controls.",
       "id": "moss-cook-2003",
       "journal": "International Journal of Neuroscience",
-      "limitations": "Healthy young adults; single brief exposure; laboratory setting.",
+      "limitations": "Acute laboratory exposure with multiple outcomes, not lasting cognitive improvement. This is separate from the later 20-person blood-cineole correlation study.",
       "pubmedId": "12690999",
       "sampleSize": 144,
       "studyType": "randomized-controlled-trial",
       "title": "Aromas of rosemary and lavender essential oils differentially affect cognition and mood in healthy adults",
       "url": "https://pubmed.ncbi.nlm.nih.gov/12690999/",
       "year": 2003,
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A12690999+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Aromas of rosemary and lavender essential oils differentially affect cognition and mood in healthy adults",
+        "doi": "10.1080/00207450390161903",
+        "pubmedId": "12690999",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/12690999/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "rosemary",
         "lavender"
@@ -7726,6 +8495,22 @@ const TERPENE_DATA = {
       "title": "Effects of Aromatherapy Massage on Pregnant Women's Stress and Immune Function: A Longitudinal, Prospective, Randomized Controlled Trial",
       "url": "https://pubmed.ncbi.nlm.nih.gov/28783372/",
       "year": 2017,
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A28783372+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Effects of Aromatherapy Massage on Pregnant Women's Stress and Immune Function: A Longitudinal, Prospective, Randomized Controlled Trial",
+        "doi": "10.1089/acm.2016.0426",
+        "pubmedId": "28783372",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/28783372/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender"
       ],
@@ -7751,7 +8536,7 @@ const TERPENE_DATA = {
     {
       "authors": "Can Çiçek S, Demir Ş, Yılmaz D, Açıkgöz A, et al.",
       "context": "human",
-      "doi": "10.1097/HNP.0000000000000526",
+      "doi": "10.1097/hnp.0000000000000526",
       "evidenceLevel": "clinical",
       "finding": "Lavender aromatherapy by inhalation and foot massage reduced blood pressure, heart rate, serum cortisol, and anxiety in patients with essential hypertension.",
       "id": "can-cicek-2022",
@@ -7763,6 +8548,22 @@ const TERPENE_DATA = {
       "title": "The Effect of Aromatherapy on Blood Pressure and Stress Responses by Inhalation and Foot Massage in Patients With Essential Hypertension: Randomized Clinical Trial",
       "url": "https://pubmed.ncbi.nlm.nih.gov/35708557/",
       "year": 2022,
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A35708557+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "The Effect of Aromatherapy on Blood Pressure and Stress Responses by Inhalation and Foot Massage in Patients With Essential Hypertension: Randomized Clinical Trial",
+        "doi": "10.1097/hnp.0000000000000526",
+        "pubmedId": "35708557",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/35708557/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender"
       ],
@@ -7794,6 +8595,22 @@ const TERPENE_DATA = {
       "title": "Wound healing potential of lavender oil by acceleration of granulation and wound contraction through induction of TGF-β in a rat model",
       "url": "https://pubmed.ncbi.nlm.nih.gov/27229681/",
       "year": 2016,
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A27229681+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Wound healing potential of lavender oil by acceleration of granulation and wound contraction through induction of TGF-β in a rat model",
+        "doi": "10.1186/s12906-016-1128-7",
+        "pubmedId": "27229681",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/27229681/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender"
       ],
@@ -7825,6 +8642,22 @@ const TERPENE_DATA = {
       "title": "Antiviral activity of Australian tea tree oil and eucalyptus oil against herpes simplex virus in cell culture",
       "url": "https://pubmed.ncbi.nlm.nih.gov/11338678/",
       "year": 2001,
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A11338678+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Antiviral activity of Australian tea tree oil and eucalyptus oil against herpes simplex virus in cell culture",
+        "doi": null,
+        "pubmedId": "11338678",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/11338678/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "tea-tree",
         "eucalyptus"
@@ -7858,6 +8691,22 @@ const TERPENE_DATA = {
       "title": "Carvacrol-rich oregano oil and thymol-rich thyme red oil inhibit biofilm formation and the virulence of uropathogenic Escherichia coli",
       "url": "https://pubmed.ncbi.nlm.nih.gov/28980415/",
       "year": 2017,
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A28980415+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Carvacrol-rich oregano oil and thymol-rich thyme red oil inhibit biofilm formation and the virulence of uropathogenic Escherichia coli",
+        "doi": "10.1111/jam.13602",
+        "pubmedId": "28980415",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/28980415/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "oregano",
         "thyme"
@@ -7881,16 +8730,32 @@ const TERPENE_DATA = {
       "context": "environmental",
       "doi": "10.1111/j.1365-2915.2011.00945.x",
       "evidenceLevel": "laboratory",
-      "finding": "Peppermint oil was the most effective housefly repellent of six oils screened, and formulated peppermint and eucalyptus oils cut fly density 96-98% in field trials.",
+      "finding": "Peppermint was the strongest housefly repellent among six oils screened. The peppermint formulation reduced fly density by 96% on treated cattle and 98% on treated plots in field experiments.",
       "id": "kumar-mishra-2011",
       "journal": "Medical and Veterinary Entomology",
-      "limitations": "Laboratory bioassays with limited field validation; not a human-use repellent trial.",
+      "limitations": "Those field percentages belong to the formulated peppermint arm, not eucalyptus. Experimental emulsifiable concentrates are not interchangeable with a custom spray.",
       "pubmedId": "21338379",
       "sampleSize": null,
       "studyType": "in-vitro-study",
       "title": "Repellent, larvicidal and pupicidal properties of essential oils and their formulations against the housefly, Musca domestica",
       "url": "https://pubmed.ncbi.nlm.nih.gov/21338379/",
       "year": 2011,
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A21338379+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Repellent, larvicidal and pupicidal properties of essential oils and their formulations against the housefly, Musca domestica",
+        "doi": "10.1111/j.1365-2915.2011.00945.x",
+        "pubmedId": "21338379",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/21338379/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "peppermint",
         "eucalyptus",
@@ -7931,6 +8796,22 @@ const TERPENE_DATA = {
       "title": "Reduction of mouth malodour and volatile sulphur compounds in intensive care patients using an essential oil mouthwash",
       "url": "https://pubmed.ncbi.nlm.nih.gov/17380550/",
       "year": 2007,
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A17380550+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Reduction of mouth malodour and volatile sulphur compounds in intensive care patients using an essential oil mouthwash",
+        "doi": "10.1002/ptr.2127",
+        "pubmedId": "17380550",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/17380550/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "tea-tree",
         "peppermint",
@@ -7955,18 +8836,34 @@ const TERPENE_DATA = {
     {
       "authors": "Ball EL, Owen-Booth B, Gray A, Shenkin SD, et al.",
       "context": "human",
-      "doi": "10.1002/14651858.CD003150.pub3",
+      "doi": "10.1002/14651858.cd003150.pub3",
       "evidenceLevel": "review",
-      "finding": "NULL RESULT: across 12 included trials, the Cochrane reviewers found no convincing evidence that aromatherapy benefits people with dementia, with very low certainty throughout.",
+      "finding": "Across 13 trials involving 708 people with dementia, the review found no convincing overall benefit. Results were inconsistent; certainty varied from moderate to very low. Two cognition trials found no significant effect; a third supplied no usable data.",
       "id": "ball-owen-booth-2020",
       "journal": "Cochrane Database of Systematic Reviews",
-      "limitations": "Very low certainty evidence; inconsistent outcomes and poor harms reporting across trials.",
+      "limitations": "Heterogeneous interventions, small trials and incomplete reporting prevented firm conclusions. Harms were poorly reported; absence of convincing evidence is not proof of no possible effect.",
       "pubmedId": "32813272",
       "sampleSize": null,
       "studyType": "systematic-review",
       "title": "Aromatherapy for dementia",
       "url": "https://pubmed.ncbi.nlm.nih.gov/32813272/",
       "year": 2020,
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A32813272+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Aromatherapy for dementia",
+        "doi": "10.1002/14651858.cd003150.pub3",
+        "pubmedId": "32813272",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/32813272/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender"
       ],
@@ -7999,6 +8896,22 @@ const TERPENE_DATA = {
       "title": "Immunological and Psychological Benefits of Aromatherapy Massage",
       "url": "https://pubmed.ncbi.nlm.nih.gov/15937558/",
       "year": 2005,
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A15937558+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Immunological and Psychological Benefits of Aromatherapy Massage",
+        "doi": "10.1093/ecam/neh087",
+        "pubmedId": "15937558",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/15937558/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender"
       ],
@@ -8030,6 +8943,22 @@ const TERPENE_DATA = {
       "title": "Relaxation effects of lavender aromatherapy improve coronary flow velocity reserve in healthy men evaluated by transthoracic Doppler echocardiography",
       "url": "https://pubmed.ncbi.nlm.nih.gov/17689755/",
       "year": 2008,
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A17689755+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Relaxation effects of lavender aromatherapy improve coronary flow velocity reserve in healthy men evaluated by transthoracic Doppler echocardiography",
+        "doi": "10.1016/j.ijcard.2007.06.064",
+        "pubmedId": "17689755",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/17689755/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender"
       ],
@@ -8061,6 +8990,22 @@ const TERPENE_DATA = {
       "title": "The effects of lavender aromatherapy on stress and pain perception in children during dental treatment: A randomized clinical trial",
       "url": "https://pubmed.ncbi.nlm.nih.gov/32891272/",
       "year": 2020,
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A32891272+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "The effects of lavender aromatherapy on stress and pain perception in children during dental treatment: A randomized clinical trial",
+        "doi": "10.1016/j.ctcp.2020.101182",
+        "pubmedId": "32891272",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/32891272/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender"
       ],
@@ -8093,6 +9038,22 @@ const TERPENE_DATA = {
       "title": "Effect of inhalation aromatherapy with lavender essential oil on stress and vital signs in patients undergoing coronary artery bypass surgery: A single-blinded randomized clinical trial",
       "url": "https://pubmed.ncbi.nlm.nih.gov/26051567/",
       "year": 2015,
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A26051567+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Effect of inhalation aromatherapy with lavender essential oil on stress and vital signs in patients undergoing coronary artery bypass surgery: A single-blinded randomized clinical trial",
+        "doi": "10.1016/j.ctim.2014.12.001",
+        "pubmedId": "26051567",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/26051567/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender"
       ],
@@ -8125,6 +9086,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "In scopolamine-treated mice, repeated clove-oil pretreatment significantly reversed measures of acquisition and retention memory impairment in elevated-plus-maze and passive-avoidance tasks.",
       "limitations": "Mouse model using injected clove oil and pharmacologically induced memory impairment; does not establish cognitive benefit in humans or from normal aromatic use.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A21157682+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Clove oil reverses learning and memory deficits in scopolamine-treated mice",
+        "doi": "10.1055/s-0030-1250605",
+        "pubmedId": "21157682",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/21157682/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "clove"
       ],
@@ -8133,13 +9110,13 @@ const TERPENE_DATA = {
       ],
       "categories": [
         {
-          "type": "botanical",
-          "subcategory": "bioactivity",
-          "topic": "animal-cognition"
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "memory"
         }
       ],
       "useNodeIds": [
-        "botanical-bioactivity-animal-cognition"
+        "health-cognitive-memory"
       ]
     },
     {
@@ -8157,6 +9134,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Acute clove-oil administration significantly improved scopolamine-induced retention-memory deficits in mice at tested doses; the study also evaluated analgesic effects.",
       "limitations": "Mouse model with intraperitoneal administration and scopolamine-induced impairment; not evidence of human cognitive enhancement.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A22453493+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Acute effect of essential oil of Eugenia caryophyllata on cognition and pain in mice",
+        "doi": "10.1007/s00210-012-0742-2",
+        "pubmedId": "22453493",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/22453493/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "clove"
       ],
@@ -8165,20 +9158,20 @@ const TERPENE_DATA = {
       ],
       "categories": [
         {
-          "type": "botanical",
-          "subcategory": "bioactivity",
-          "topic": "animal-cognition"
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "memory"
         }
       ],
       "useNodeIds": [
-        "botanical-bioactivity-animal-cognition"
+        "health-cognitive-memory"
       ]
     },
     {
       "id": "eugenol-2021-memory-neurogenesis",
       "title": "Effects of Eugenol on Memory Performance, Neurogenesis, and Dendritic Complexity of Neurons in Mice Analyzed by Behavioral Tests and Golgi Staining of Brain Tissue",
-      "authors": "Irie Y, et al.",
-      "journal": "International Journal of Molecular Sciences",
+      "authors": "Akbar L, Juliandi B, Boediono A, Batubara I, Subangkit M",
+      "journal": "Journal of stem cells & regenerative medicine",
       "year": 2021,
       "pubmedId": "34434006",
       "url": "https://pubmed.ncbi.nlm.nih.gov/34434006/",
@@ -8188,6 +9181,23 @@ const TERPENE_DATA = {
       "sampleSize": 21,
       "finding": "Oral eugenol increased spatial and recognition-memory measures in mice and was associated with increased neurogenesis and dendritic complexity in hippocampal regions, although Morris-water-maze escape latency was not significantly changed.",
       "limitations": "Small mouse study of isolated eugenol; findings do not establish cognitive benefit in humans or from clove-oil aroma.",
+      "doi": "10.46582/jsrm.1701005",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A34434006+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Effects of Eugenol on Memory Performance, Neurogenesis, and Dendritic Complexity of Neurons in Mice Analyzed by Behavioral Tests and Golgi Staining of Brain Tissue",
+        "doi": "10.46582/jsrm.1701005",
+        "pubmedId": "34434006",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/34434006/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "clove"
       ],
@@ -8220,6 +9230,22 @@ const TERPENE_DATA = {
       "sampleSize": 126,
       "finding": "In a randomized trial, 5% tea tree oil shampoo improved the dandruff severity score by 41% versus 11% with placebo after four weeks.",
       "limitations": "Specific 5% shampoo formulation; results do not establish effects of other tea-tree products.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A12451368+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Treatment of dandruff with 5% tea tree oil shampoo",
+        "doi": "10.1067/mjd.2002.122734",
+        "pubmedId": "12451368",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/12451368/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "tea-tree"
       ],
@@ -8252,6 +9278,22 @@ const TERPENE_DATA = {
       "sampleSize": 60,
       "finding": "In 60 participants, 5% tea tree oil gel produced significantly greater improvement in acne lesion counts and severity than placebo over 45 days.",
       "limitations": "Specific topical gel and acne population; does not establish efficacy of diluted sprays or other formulations.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A17314442+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "The efficacy of 5% topical tea tree oil gel in mild to moderate acne vulgaris: a randomized, double-blind placebo-controlled study",
+        "doi": "10.4103/0378-6323.30646",
+        "pubmedId": "17314442",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/17314442/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "tea-tree"
       ],
@@ -8284,6 +9326,22 @@ const TERPENE_DATA = {
       "sampleSize": 68,
       "finding": "Oral rosemary powder for one month was associated with improvements in prospective and retrospective memory, anxiety, depression and several sleep-quality measures versus placebo.",
       "limitations": "Studied oral rosemary powder, not rosemary essential oil or inhalation.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A29389474+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Effects of Rosmarinus officinalis L. on memory performance, anxiety, depression, and sleep quality in university students: A randomized clinical trial",
+        "doi": "10.1016/j.ctcp.2017.11.004",
+        "pubmedId": "29389474",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/29389474/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "rosemary"
       ],
@@ -8337,6 +9395,22 @@ const TERPENE_DATA = {
       "sampleSize": 46,
       "finding": "Fifteen minutes of lemon essential-oil inhalation reduced test-anxiety scores in nursing students compared with control.",
       "limitations": "Small student sample and acute exposure; does not establish treatment of anxiety disorders.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A35190270+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Effectiveness of lemon essential oil in reducing test anxiety in nursing students",
+        "doi": "10.1016/j.explore.2022.02.003",
+        "pubmedId": "35190270",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/35190270/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lemon"
       ],
@@ -8369,6 +9443,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Commercial oregano, eucalyptus, rosemary, clove and peppermint oil samples showed antibacterial and antibiofilm activity against tested S. aureus, E. coli and P. aeruginosa, with substantial sample-to-sample variation.",
       "limitations": "In-vitro sample- and concentration-dependent effects, often weak or undetected at lower dilutions. Biofilm-formation testing does not establish mature-biofilm removal, cleaning or disinfection.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A37508287+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Antibacterial and Antibiofilm Effects of Different Samples of Five Commercially Available Essential Oils",
+        "doi": "10.3390/antibiotics12071191",
+        "pubmedId": "37508287",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/37508287/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "oregano",
         "eucalyptus",
@@ -8411,8 +9501,24 @@ const TERPENE_DATA = {
       "context": "environmental",
       "evidenceLevel": "laboratory",
       "sampleSize": null,
-      "finding": "Lavender, tea tree and lemon essential oils were evaluated as antimicrobial ingredients in washing liquid and body-balm formulations against bacteria and Candida.",
-      "limitations": "Formulation-specific laboratory testing; not finished Sunny's Shield evidence.",
+      "finding": "Oil-containing washing liquids passed preservation criteria for some organisms, but not Pseudomonas. Oils alone at 0.5% failed to preserve body balm; tea tree oil with a solubilizer and synthetic preservative met the tested criterion.",
+      "limitations": "Formula-specific challenge tests, not soil removal. Tested concentrations are experimental conditions, not validated limits or a preservation system for this product.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A20572887+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Lavender, tea tree and lemon oils as antimicrobials in washing liquids and soft body balms",
+        "doi": "10.1111/j.1468-2494.2010.00582.x",
+        "pubmedId": "20572887",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/20572887/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender",
         "tea-tree",
@@ -8450,7 +9556,7 @@ const TERPENE_DATA = {
       "authors": "Brożyna M, et al.",
       "journal": "Molecules",
       "year": 2022,
-      "doi": "",
+      "doi": "10.3390/molecules27134096",
       "pubmedId": "35807343",
       "url": "https://pubmed.ncbi.nlm.nih.gov/35807343/",
       "studyType": "in-vitro-study",
@@ -8459,6 +9565,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Across seven oils tested against P. aeruginosa, liquid and volatile rosemary and tea tree oils showed notable antibiofilm activity in the reported assays.",
       "limitations": "In-vitro study; activity differed between liquid and vapor phases and cannot be extrapolated to clinical efficacy.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A35807343+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Chemical Composition and Antibacterial Activity of Liquid and Volatile Phase of Essential Oils against Planktonic and Biofilm-Forming Cells of Pseudomonas aeruginosa",
+        "doi": "10.3390/molecules27134096",
+        "pubmedId": "35807343",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/35807343/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "tea-tree",
         "rosemary",
@@ -8500,6 +9622,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Liquid and vapor phases of selected essential oils were tested against 16 biofilm-forming S. aureus strains, demonstrating oil- and phase-dependent antimicrobial and antibiofilm activity.",
       "limitations": "Laboratory biofilm models only; effectiveness varied substantially by oil and assay.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A34578239+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "The Antimicrobial and Antibiofilm In Vitro Activity of Liquid and Vapour Phases of Selected Essential Oils against Staphylococcus aureus",
+        "doi": "10.3390/pathogens10091207",
+        "pubmedId": "34578239",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/34578239/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "tea-tree",
         "rosemary",
@@ -8529,18 +9667,34 @@ const TERPENE_DATA = {
     {
       "id": "tick-eo-2024",
       "title": "Comparative analysis of essential oil efficacy against the Asian longhorned tick Haemaphysalis longicornis (Acari: Ixodidae)",
-      "authors": "Kim D, et al.",
-      "journal": "Journal article",
+      "authors": "Islam MS, Haque MS, You MJ",
+      "journal": "Parasites, hosts and diseases",
       "year": 2024,
-      "doi": "",
+      "doi": "10.3347/phd.23097",
       "pubmedId": "38835262",
       "url": "https://pubmed.ncbi.nlm.nih.gov/38835262/",
       "studyType": "in-vitro-study",
       "context": "environmental",
       "evidenceLevel": "laboratory",
       "sampleSize": null,
-      "finding": "Clove, eucalyptus, lavender and mint oils showed concentration-dependent acaricidal and repellent activity against Asian longhorned ticks; clove performed strongly in the reported assays.",
-      "limitations": "Laboratory/host-attachment model against one tick species; not a human-use repellent trial.",
+      "finding": "Clove, eucalyptus, lavender and mint oils showed concentration-dependent activity against Asian longhorned ticks. Clove performed best in the reported mortality and host-attachment assays.",
+      "limitations": "One tick species and specific experimental exposures; not a human protection trial. Mint species is not authenticated by the abstract. This paper provides no fly evidence.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A38835262+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Comparative analysis of essential oil efficacy against the Asian longhorned tick Haemaphysalis longicornis (Acari: Ixodidae)",
+        "doi": "10.3347/phd.23097",
+        "pubmedId": "38835262",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/38835262/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "clove",
         "eucalyptus",
@@ -8557,32 +9711,43 @@ const TERPENE_DATA = {
         {
           "type": "pest",
           "subcategory": "ticks"
-        },
-        {
-          "type": "pest",
-          "subcategory": "flies"
         }
       ],
       "useNodeIds": [
-        "pest-ticks",
-        "pest-flies"
+        "pest-ticks"
       ]
     },
     {
       "id": "lone-star-tick-eo-2024",
       "title": "Repellent activity of essential oils to the Lone Star tick, Amblyomma americanum",
-      "authors": "Bissinger BW, et al.",
-      "journal": "Journal article",
+      "authors": "Le Mauff A, Norris EJ, Li AY, Swale DR",
+      "journal": "Parasites & vectors",
       "year": 2024,
-      "doi": "",
+      "doi": "10.1186/s13071-024-06246-0",
       "pubmedId": "38711138",
       "url": "https://pubmed.ncbi.nlm.nih.gov/38711138/",
       "studyType": "in-vitro-study",
       "context": "environmental",
       "evidenceLevel": "laboratory",
       "sampleSize": null,
-      "finding": "In contact repellency assays against Lone Star tick nymphs, clove ranked highest among the natural oils tested, with oregano and peppermint also evaluated.",
-      "limitations": "Bioassay evidence against one tick species; does not establish duration or safety of a consumer repellent formulation.",
+      "finding": "Clove ranked highest among oils in contact assays; thyme and cassia led spatial assays. In the human fingertip assay, only patchouli significantly repelled ticks among the oils tested.",
+      "limitations": "Repellency depended on assay and delivery. Contact rankings do not establish skin protection or duration. This paper studied ticks, not flies.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A38711138+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Repellent activity of essential oils to the Lone Star tick, Amblyomma americanum",
+        "doi": "10.1186/s13071-024-06246-0",
+        "pubmedId": "38711138",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/38711138/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "clove",
         "oregano",
@@ -8597,24 +9762,19 @@ const TERPENE_DATA = {
         {
           "type": "pest",
           "subcategory": "ticks"
-        },
-        {
-          "type": "pest",
-          "subcategory": "flies"
         }
       ],
       "useNodeIds": [
-        "pest-ticks",
-        "pest-flies"
+        "pest-ticks"
       ]
     },
     {
       "id": "mosquito-eo-repellency-1998",
       "title": "Efficacy of plant extracts and oils as mosquito repellents",
-      "authors": "Jaenson TGT, Pålsson K, Borg-Karlson AK",
-      "journal": "Phytomedicine",
+      "authors": "Thorsell W, Mikiver A, Malander I, Tunón H",
+      "journal": "Phytomedicine : international journal of phytotherapy and phytopharmacology",
       "year": 1998,
-      "doi": "10.1016/S0944-7113(98)80072-X",
+      "doi": "10.1016/s0944-7113(98)80072-x",
       "pubmedId": "23195905",
       "url": "https://pubmed.ncbi.nlm.nih.gov/23195905/",
       "studyType": "controlled-human-study",
@@ -8623,6 +9783,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Laboratory and field testing of multiple natural products found good mosquito repellency for several extracts and oils, including eucalyptus, with activity varying by product and mosquito species.",
       "limitations": "Older comparative repellent work with heterogeneous natural products; formulation and exposure details limit direct product comparisons.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A23195905+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Efficacy of plant extracts and oils as mosquito repellents",
+        "doi": "10.1016/s0944-7113(98)80072-x",
+        "pubmedId": "23195905",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/23195905/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "clove",
         "eucalyptus",
@@ -8651,7 +9827,7 @@ const TERPENE_DATA = {
       "authors": "Borhani Haghighi A, et al.",
       "journal": "International Journal of Clinical Practice",
       "year": 2010,
-      "doi": "",
+      "doi": "10.1111/j.1742-1241.2009.02215.x",
       "pubmedId": "20456191",
       "url": "https://pubmed.ncbi.nlm.nih.gov/20456191/",
       "studyType": "randomized-controlled-trial",
@@ -8660,6 +9836,22 @@ const TERPENE_DATA = {
       "sampleSize": 35,
       "finding": "In a crossover study of 35 patients and 118 migraine attacks, topical 10% menthol solution was evaluated for pain-free and pain-relief migraine endpoints versus a low-concentration control.",
       "limitations": "Tested isolated menthol solution rather than peppermint oil; small crossover study.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A20456191+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Cutaneous application of menthol 10% solution as an abortive treatment of migraine without aura: a randomised, double-blind, placebo-controlled, crossed-over study",
+        "doi": "10.1111/j.1742-1241.2009.02215.x",
+        "pubmedId": "20456191",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/20456191/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "peppermint"
       ],
@@ -8682,7 +9874,7 @@ const TERPENE_DATA = {
       "authors": "Worth H, Schacher C, Dethlefsen U",
       "journal": "Respiratory Research",
       "year": 2009,
-      "doi": "",
+      "doi": "10.1186/1465-9921-10-69",
       "pubmedId": "19624838",
       "url": "https://pubmed.ncbi.nlm.nih.gov/19624838/",
       "studyType": "randomized-controlled-trial",
@@ -8691,6 +9883,22 @@ const TERPENE_DATA = {
       "sampleSize": 242,
       "finding": "In 242 patients with stable COPD, six months of oral cineole adjunct therapy reduced the combined frequency, severity and duration of exacerbations compared with placebo.",
       "limitations": "Oral purified cineole adjunct therapy, not eucalyptus oil or inhaled use.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A19624838+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Concomitant therapy with Cineole (Eucalyptole) reduces exacerbations in COPD: a placebo-controlled double-blind trial",
+        "doi": "10.1186/1465-9921-10-69",
+        "pubmedId": "19624838",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/19624838/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "eucalyptus"
       ],
@@ -8722,6 +9930,22 @@ const TERPENE_DATA = {
       "sampleSize": 152,
       "finding": "Oral cineole produced significantly greater reductions in a rhinosinusitis symptom-sum score than placebo after four and seven days.",
       "limitations": "Purified oral cineole, not eucalyptus essential oil or topical/inhaled use.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A15064633+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Therapy for acute nonpurulent rhinosinusitis with cineole: results of a double-blind, randomized, placebo-controlled trial",
+        "doi": "10.1097/00005537-200404000-00027",
+        "pubmedId": "15064633",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/15064633/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "eucalyptus"
       ],
@@ -8753,6 +9977,22 @@ const TERPENE_DATA = {
       "sampleSize": 242,
       "finding": "A multicenter placebo-controlled trial evaluated 600 mg/day oral cineole for ten days in 242 patients with acute bronchitis and reported faster improvement in bronchitis symptoms.",
       "limitations": "Purified oral cineole; not evidence for eucalyptus-oil spray or inhalation.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A24261680+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Efficacy of cineole in patients suffering from acute bronchitis: a placebo-controlled double-blind trial",
+        "doi": "10.1186/1745-9974-9-25",
+        "pubmedId": "24261680",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/24261680/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "eucalyptus"
       ],
@@ -8784,6 +10024,22 @@ const TERPENE_DATA = {
       "sampleSize": 247,
       "finding": "In 247 asthma patients, six months of oral cineole adjunct therapy was evaluated for lung function, asthma symptoms and quality of life versus placebo.",
       "limitations": "Purified oral cineole as adjunct therapy; not eucalyptus essential oil and not a replacement for asthma treatment.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A22978309+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Patients with asthma benefit from concomitant therapy with cineole: a placebo-controlled, double-blind trial",
+        "doi": "10.3109/02770903.2012.717657",
+        "pubmedId": "22978309",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/22978309/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "eucalyptus"
       ],
@@ -8813,8 +10069,24 @@ const TERPENE_DATA = {
       "context": "human",
       "evidenceLevel": "clinical",
       "sampleSize": 33,
-      "finding": "In 33 moderate asthma patients, oral carvacrol adjunct therapy improved respiratory symptoms, pulmonary-function measures and several inflammatory/oxidative markers versus baseline and placebo.",
-      "limitations": "Small trial of purified oral carvacrol used alongside routine asthma medication; not oregano oil.",
+      "finding": "In 33 patients receiving routine asthma treatment, the oral-carvacrol group showed changes in respiratory symptoms, lung function, oxidative markers and cytokines over two months.",
+      "limitations": "The abstract emphasizes within-group changes; treated-group significance and placebo nonsignificance do not alone prove a between-group effect. Specific oral compound preparation, not inhaled oil.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A33773189+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Carvacrol improves pulmonary function tests, oxidant/antioxidant parameters and cytokine levels in asthmatic patients: A randomized, double-blind, clinical trial",
+        "doi": "10.1016/j.phymed.2021.153539",
+        "pubmedId": "33773189",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/33773189/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "oregano"
       ],
@@ -8849,8 +10121,24 @@ const TERPENE_DATA = {
       "context": "human",
       "evidenceLevel": "clinical",
       "sampleSize": 23,
-      "finding": "In a small phase II trial, two months of oral carvacrol improved pulmonary-function measures and reduced several respiratory symptoms and inflammatory markers compared with placebo.",
-      "limitations": "Small study of purified oral carvacrol; not oregano essential oil.",
+      "finding": "In a small placebo-controlled trial, the oral-carvacrol group showed improved lung-function measures and lower respiratory symptoms and inflammatory markers over two months.",
+      "limitations": "The abstract reports changes over time in the treated group and no significant changes in placebo; that alone does not establish a significant between-group difference. Isolated oral carvacrol is not oregano oil.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A29193478+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Possible therapeutic effect of carvacrol on asthmatic patients: A randomized, double blind, placebo-controlled, Phase II clinical trial",
+        "doi": "10.1002/ptr.5967",
+        "pubmedId": "29193478",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/29193478/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "oregano"
       ],
@@ -8887,6 +10175,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "One month of oral carvacrol at 1 or 2 mg/kg/day was generally tolerated in healthy subjects; measured laboratory values remained within normal ranges despite several statistically significant changes.",
       "limitations": "Safety/tolerability study of purified oral carvacrol, not evidence of oregano-oil efficacy.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A30486682+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Safety and tolerability of carvacrol in healthy subjects: a phase I clinical study",
+        "doi": "10.1080/01480545.2018.1538233",
+        "pubmedId": "30486682",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/30486682/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "oregano"
       ],
@@ -8910,7 +10214,7 @@ const TERPENE_DATA = {
       "authors": "Ernst E, Huntley A",
       "journal": "Forschende Komplementärmedizin",
       "year": 2000,
-      "doi": "",
+      "doi": "10.1159/000057164",
       "pubmedId": "10800248",
       "url": "https://pubmed.ncbi.nlm.nih.gov/10800248/",
       "studyType": "systematic-review",
@@ -8919,6 +10223,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "A systematic review located four randomized trials and judged tea-tree-oil evidence for acne and fungal infections promising but not compelling at that time.",
       "limitations": "Older review with only four trials; later studies should be considered separately.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A10800248+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Tea tree oil: a systematic review of randomized clinical trials",
+        "doi": "10.1159/000057164",
+        "pubmedId": "10800248",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/10800248/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "tea-tree"
       ],
@@ -8951,6 +10271,22 @@ const TERPENE_DATA = {
       "finding": "Across 24 RCTs, cinnamon supplementation significantly reduced fasting blood sugar, HOMA-IR, and HbA1c versus control, with no significant change in serum insulin.",
       "limitations": "Heterogeneous oral cinnamon preparations and doses across trials. Secondary evidence does not support metabolic effects of cinnamon essential oil or a spray.",
       "material": "Oral cinnamon supplements in a systematic review; not cinnamon bark essential oil.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A37818728+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "The effect of cinnamon supplementation on glycemic control in patients with type 2 diabetes mellitus: An updated systematic review and dose-response meta-analysis of randomized controlled trials",
+        "doi": "10.1002/ptr.8026",
+        "pubmedId": "37818728",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/37818728/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "cinnamon"
       ],
@@ -8982,6 +10318,22 @@ const TERPENE_DATA = {
       "sampleSize": 20,
       "finding": "Higher blood 1,8-cineole levels after rosemary aroma exposure correlated with better speed and accuracy on cognitive tasks, with no speed-accuracy trade-off.",
       "limitations": "Correlational design, n=20, single exposure session.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A23983963+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Plasma 1,8-cineole correlates with cognitive performance following exposure to rosemary essential oil aroma",
+        "doi": "10.1177/2045125312436573",
+        "pubmedId": "23983963",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/23983963/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "rosemary"
       ],
@@ -9019,6 +10371,22 @@ const TERPENE_DATA = {
       "sampleSize": 28,
       "finding": "MIXED DOSE RESPONSE: 750 mg dried rosemary leaf improved speed of memory in older adults, while 6000 mg significantly impaired cognitive performance and alertness.",
       "limitations": "Dried leaf powder, not essential oil; acute single-dose effects only.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A21877951+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Short-term study on the effects of rosemary on cognitive function in an elderly population",
+        "doi": "10.1089/jmf.2011.0005",
+        "pubmedId": "21877951",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/21877951/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "rosemary"
       ],
@@ -9063,6 +10431,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Topical aromatherapy with a lavender, clary sage, and rose blend significantly reduced menstrual cramp severity versus placebo.",
       "limitations": "Topical lavender, clary sage and rose blend; individual oil contributions were not isolated. No arbitrary spray or single-oil efficacy inference.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A16884344+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Effect of aromatherapy on symptoms of dysmenorrhea in college students: A randomized placebo-controlled clinical trial",
+        "doi": "10.1089/acm.2006.12.535",
+        "pubmedId": "16884344",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/16884344/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender",
         "clary-sage"
@@ -9093,8 +10477,24 @@ const TERPENE_DATA = {
       "context": "human",
       "evidenceLevel": "clinical",
       "sampleSize": 60,
-      "finding": "0.25% lemongrass oil mouthwash reduced plaque and gingival indices in children comparably to 0.2% chlorhexidine over 21 days.",
-      "limitations": "n=60 children; 21-day follow-up; no adult data.",
+      "finding": "In 60 children, plaque and gingival indices decreased within both the lemongrass-mouthwash and chlorhexidine groups between days 14 and 21.",
+      "limitations": "Short trial of formulated mouthwash with oral prophylaxis. The reported within-group improvements do not establish equivalence to chlorhexidine or suitability of a custom oil mixture for oral use.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A35965722+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Anti-Plaque and Anti-Gingivitis Efficacy of 0.25% Lemongrass Oil and 0.2% Chlorhexidine Mouthwash in Children",
+        "doi": "10.18502/fid.v18i32.7237",
+        "pubmedId": "35965722",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/35965722/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lemongrass"
       ],
@@ -9117,7 +10517,7 @@ const TERPENE_DATA = {
       "authors": "Smith CA, Collins CT, Crowther CA",
       "journal": "Cochrane Database of Systematic Reviews",
       "year": 2011,
-      "doi": "10.1002/14651858.CD009215",
+      "doi": "10.1002/14651858.cd009215",
       "pubmedId": "21735438",
       "url": "https://pubmed.ncbi.nlm.nih.gov/21735438/",
       "studyType": "systematic-review",
@@ -9126,6 +10526,22 @@ const TERPENE_DATA = {
       "sampleSize": 535,
       "finding": "NULL RESULT: across 2 trials (535 women), aromatherapy showed no difference versus control for labor pain intensity, assisted vaginal birth, or caesarean section.",
       "limitations": "Only 2 trials; authors concluded evidence is insufficient for practice recommendations.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A21735438+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Aromatherapy for pain management in labour",
+        "doi": "10.1002/14651858.cd009215",
+        "pubmedId": "21735438",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/21735438/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender",
         "frankincense",
@@ -9159,6 +10575,22 @@ const TERPENE_DATA = {
       "sampleSize": 33,
       "finding": "NULL RESULT for peppermint: nausea scores fell equally with peppermint, isopropyl alcohol, and saline placebo; authors attributed relief to controlled breathing rather than aroma.",
       "limitations": "n=33; saline placebo equally effective, suggesting non-specific effects.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A14770380+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Aromatherapy with peppermint, isopropyl alcohol, or placebo is equally effective in relieving postoperative nausea",
+        "doi": "10.1016/j.jopan.2003.11.001",
+        "pubmedId": "14770380",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/14770380/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "peppermint"
       ],
@@ -9190,6 +10622,22 @@ const TERPENE_DATA = {
       "sampleSize": 158,
       "finding": "In 158 patients, tea tree oil solution improved clinical symptoms of interdigital tinea pedis versus placebo in a blinded RCT.",
       "limitations": "Symptom improvement exceeded mycological cure rates.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A12121393+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Treatment of interdigital tinea pedis with 25% and 50% tea tree oil solution: a randomized, placebo-controlled, blinded study",
+        "doi": "10.1046/j.1440-0960.2002.00590.x",
+        "pubmedId": "12121393",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/12121393/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "tea-tree"
       ],
@@ -9233,6 +10681,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Thyme oil rich in thymol inhibited biofilm formation and quorum-sensing virulence factors in a hospital Pseudomonas aeruginosa strain, with docking data suggesting thymol and carvacrol bind its quorum-sensing receptors.",
       "limitations": "In-vitro only; single hospital strain.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A39777967+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Evaluation of Antibacterial Activity in Some Algerian Essential Oils and Selection of Thymus vulgaris as a Potential Biofilm and Quorum Sensing Inhibitor Against Pseudomonas aeruginosa",
+        "doi": "10.1002/cbdv.202402691",
+        "pubmedId": "39777967",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/39777967/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "thyme"
       ],
@@ -9271,6 +10735,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Thyme and oregano oils acted synergistically to disrupt dual-species Klebsiella pneumoniae and Acinetobacter baumannii biofilms by over 90%, downregulating biofilm-associated genes.",
       "limitations": "In-vitro; no human data.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A41854771+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Antibacterial and anti-biofilm activities of thyme oil, oregano oil, and their combination against Klebsiella pneumoniae and Acinetobacter baumannii polymicrobial biofilms",
+        "doi": "10.1007/s10482-026-02284-z",
+        "pubmedId": "41854771",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/41854771/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "thyme",
         "oregano"
@@ -9310,6 +10790,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Scots pine and lemon oils showed strong bactericidal and biofilm-dispersal activity against multidrug-resistant Neisseria gonorrhoeae, attributed to alpha/beta-pinene and limonene acting on the bacterial outer membrane.",
       "limitations": "In-vitro; clinical relevance untested.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A37857249+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Essential oils of Pinus sylvestris, Citrus limon and Origanum vulgare exhibit high bactericidal and anti-biofilm activities against Neisseria gonorrhoeae and Streptococcus suis",
+        "doi": "10.1016/j.biopha.2023.115703",
+        "pubmedId": "37857249",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/37857249/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "pine",
         "lemon",
@@ -9357,6 +10853,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Tea tree oil inhibited Candida albicans biofilm formation but could not eradicate more than 50 percent of mature biofilm at the concentrations tested.",
       "limitations": "In-vitro; mature-biofilm eradication not achieved.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A39881994+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Innovative antifungal strategies: enhanced biofilm inhibition of Candida albicans by a modified tea tree oil formulation",
+        "doi": "10.3389/fmicb.2024.1518598",
+        "pubmedId": "39881994",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/39881994/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "tea-tree"
       ],
@@ -9392,8 +10904,24 @@ const TERPENE_DATA = {
       "context": "in-vitro",
       "evidenceLevel": "laboratory",
       "sampleSize": null,
-      "finding": "Tea tree oil and terpinen-4-ol interfered with Candida albicans biofilm formation in a 60-second rinse simulation, supporting potential use in oral candidiasis.",
-      "limitations": "In-vitro; brief-exposure model only.",
+      "finding": "Lemon and thyme oils inhibited Candida in laboratory assays, including brief exposures intended to simulate rinsing.",
+      "limitations": "Cultured organisms and a rinse simulation, not a clinical oral-candidiasis treatment trial. Experimental concentrations are not mouthwash recommendations.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A32578760+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Antibiofilm efficacy of tea tree oil and of its main component terpinen-4-ol against Candida albicans",
+        "doi": "10.1590/1807-3107bor-2020.vol34.0050",
+        "pubmedId": "32578760",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/32578760/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "tea-tree"
       ],
@@ -9422,7 +10950,7 @@ const TERPENE_DATA = {
       "authors": "Garozzo A, Timpanaro R, Bisignano B, et al.",
       "journal": "Letters in Applied Microbiology",
       "year": 2009,
-      "doi": "10.1111/j.1472-765X.2009.02740.x",
+      "doi": "10.1111/j.1472-765x.2009.02740.x",
       "pubmedId": "19843207",
       "url": "https://pubmed.ncbi.nlm.nih.gov/19843207/",
       "studyType": "in-vitro-study",
@@ -9431,6 +10959,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Tea tree oil and terpinen-4-ol inhibited influenza A H1N1 replication below cytotoxic doses, with no virucidal activity and no effect on the other viruses tested.",
       "limitations": "In-vitro; influenza only among the viruses screened.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A19843207+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "In vitro antiviral activity of Melaleuca alternifolia essential oil",
+        "doi": "10.1111/j.1472-765x.2009.02740.x",
+        "pubmedId": "19843207",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/19843207/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "tea-tree"
       ],
@@ -9460,8 +11004,24 @@ const TERPENE_DATA = {
       "context": "in-vitro",
       "evidenceLevel": "laboratory",
       "sampleSize": null,
-      "finding": "Among 19 oils screened, eucalyptus and rosemary oils showed anti-H1N1 activity with low cytotoxicity, with eucalyptol correlating positively with cell viability.",
-      "limitations": "In-vitro screening; no human data.",
+      "finding": "In cell-culture H1N1 assays, two rosemary hybrids (Salvia × lavandulaceus and S. × mendizabalii), Eucalyptus globulus and Juniperus communis oils showed antiviral activity.",
+      "limitations": "The rosemary hybrids are not the catalog rosemary species. Cell viability and antiviral endpoints do not establish prevention or treatment of influenza in people.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A34176386+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Screening of the essential oil effects on human H1N1 influenza virus infection: an in vitro study in MDCK cells",
+        "doi": "10.1080/14786419.2021.1944137",
+        "pubmedId": "34176386",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/34176386/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "eucalyptus",
         "rosemary"
@@ -9492,8 +11052,24 @@ const TERPENE_DATA = {
       "context": "in-vitro",
       "evidenceLevel": "laboratory",
       "sampleSize": null,
-      "finding": "Lemon essential oil significantly reduced feline calicivirus infectivity, a cultivable surrogate for human norovirus, suggesting surface-sanitizing potential.",
-      "limitations": "Surrogate virus in-vitro; not tested against human norovirus.",
+      "finding": "Lemon oil reduced feline calicivirus titres by 0.75 log at 302 µg/mL and 1.25 log at 3020 µg/mL after eight hours. The lower concentration already exceeded the maximum noncytotoxic limit.",
+      "limitations": "Cultured surrogate virus, not human norovirus. Long contact times and modest reductions do not establish an effective or safe surface disinfectant.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A36830233+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Virucidal Activity of Lemon Essential Oil against Feline Calicivirus Used as Surrogate for Norovirus",
+        "doi": "10.3390/antibiotics12020322",
+        "pubmedId": "36830233",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/36830233/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lemon"
       ],
@@ -9524,8 +11100,24 @@ const TERPENE_DATA = {
       "context": "in-vitro",
       "evidenceLevel": "laboratory",
       "sampleSize": null,
-      "finding": "Carvacrol inactivated murine norovirus within one hour by disrupting the viral capsid, outperforming oregano oil and suggesting use as a surface sanitizer.",
-      "limitations": "Surrogate virus in-vitro; high concentrations required.",
+      "finding": "Carvacrol reduced murine norovirus infectivity by up to 3.87 log within one hour; oregano oil achieved a smaller reduction, up to 1.07 log after 24 hours.",
+      "limitations": "Isolated compound and whole oil differed substantially. A cultured surrogate-virus assay does not establish human norovirus protection or a finished disinfectant.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A24779581+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Antiviral efficacy and mechanisms of action of oregano essential oil and its primary component carvacrol against murine norovirus",
+        "doi": "10.1111/jam.12453",
+        "pubmedId": "24779581",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/24779581/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "oregano"
       ],
@@ -9555,8 +11147,24 @@ const TERPENE_DATA = {
       "context": "in-vitro",
       "evidenceLevel": "laboratory",
       "sampleSize": null,
-      "finding": "Vapours of cinnamon, clove, lemongrass, and thyme oils completely inhibited bakery-spoilage molds including Aspergillus and Penicillium species.",
-      "limitations": "Vapour-phase lab model; efficacy dropped in real food matrices.",
+      "finding": "Cinnamon leaf, clove, bay, lemongrass and thyme vapors fully inhibited the tested molds on wheat-flour agar, but activity was much more limited in sponge-cake analogues.",
+      "limitations": "Strong substrate dependence. Cinnamon leaf is a different material from catalog cinnamon bark. Laboratory vapor exposure is not a food-preservation or household-use recipe.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A12694455+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Antifungal activity of volatile compounds generated by essential oils against fungi commonly causing deterioration of bakery products",
+        "doi": "10.1046/j.1365-2672.2003.01927.x",
+        "pubmedId": "12694455",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/12694455/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "cinnamon",
         "clove",
@@ -9595,6 +11203,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Cotton fabric treated with cyclodextrin-encapsulated lavender, lemon, and rosemary oils retained antibacterial activity through multiple wash cycles.",
       "limitations": "Textile-finishing lab study; no worn-garment testing.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A36433025+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Highly Durable Antibacterial Properties of Cellulosic Fabric via β-Cyclodextrin/Essential Oils Inclusion Complex",
+        "doi": "10.3390/polym14224899",
+        "pubmedId": "36433025",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/36433025/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender",
         "lemon",
@@ -9636,6 +11260,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "NULL/MIXED RESULT: parsley and lovage oils showed no inhibition against any tested bacteria, and most thyme-oil combinations were antagonistic rather than synergistic.",
       "limitations": "Food-bacteria panel only; disc-diffusion screening.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A28911683+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Antibacterial activity and interactions of plant essential oil combinations against Gram-positive and Gram-negative bacteria",
+        "doi": "10.1016/j.jfda.2016.06.002",
+        "pubmedId": "28911683",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/28911683/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "thyme"
       ],
@@ -9668,6 +11308,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Geraniol showed the lowest LC50 values against cat flea eggs, pupae, adults, and whole life-cycle inhibition, while Cymbopogon martinii (palmarosa) oil was most potent against larvae and kept repellency at 90% or higher for 48 hours.",
       "limitations": "Off-animal filter-paper assays; no pet treatment, host safety or field validation. The lemongrass arm was Cymbopogon flexuosus, not the catalog C. citratus. Each oil and geraniol arm must remain distinct.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A42579967+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "In vitro insecticidal and repellent activity of Cymbopogon essential oils and geraniol against cat flea",
+        "doi": "10.1016/j.vetpar.2026.110886",
+        "pubmedId": "42579967",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/42579967/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "citronella",
         "lemongrass",
@@ -9701,6 +11357,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "All four oils showed insecticidal and repellent activity against cat flea life stages in vitro, with beta-caryophyllene-rich copaiba oil showing the strongest residual efficacy.",
       "limitations": "In vitro only; Lavandula hybrida (lavandin) mapped to lavender; no host-animal testing.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A39147955+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Insecticidal and Repellent Activity of Essential Oils from Copaifera reticulata, Citrus paradisi, Lavandula hybrida and Salvia sclarea Against Immature and Adult Stages of Ctenocephalides felis felis",
+        "doi": "10.1007/s11686-024-00874-3",
+        "pubmedId": "39147955",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/39147955/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "copaiba",
         "grapefruit",
@@ -9738,6 +11410,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Five percent tea tree oil and its component terpinen-4-ol were highly effective at reducing scabies mite survival times in vitro, comparable to 5% permethrin and ivermectin.",
       "limitations": "In vitro continuous-exposure assay; mites from a single crusted-scabies patient.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A15148100+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Acaricidal activity of Melaleuca alternifolia (tea tree) oil: in vitro sensitivity of sarcoptes scabiei var hominis to terpinen-4-ol",
+        "doi": "10.1001/archderm.140.5.563",
+        "pubmedId": "15148100",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/15148100/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "tea-tree"
       ],
@@ -9769,6 +11457,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "In contact assays 1% clove oil killed all scabies mites within 20 minutes and palmarosa within 50 minutes; efficacy order was clove, palmarosa, geranium, tea tree, then lavender.",
       "limitations": "Mites from experimentally infected pigs; in vitro only.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A27876081+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "In vitro activity of ten essential oils against Sarcoptes scabiei",
+        "doi": "10.1186/s13071-016-1889-3",
+        "pubmedId": "27876081",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/27876081/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "clove",
         "palmarosa",
@@ -9807,8 +11511,24 @@ const TERPENE_DATA = {
       "context": "environmental",
       "evidenceLevel": "laboratory",
       "sampleSize": null,
-      "finding": "Eucalyptus citriodora oil showed strong contact-fumigant toxicity to both house dust mite species, with citronellal the most toxic constituent and 100% vapor-phase mortality.",
-      "limitations": "Laboratory bioassays at high applied doses; no bedroom-scale testing.",
+      "finding": "Lemon-eucalyptus oil showed toxicity and repellency against dust mites. The reported 100% vapor-phase mortality belonged to isolated citronellal and ethyl phenylacetate; citronellol had the strongest repellency.",
+      "limitations": "Oil and constituent assays must remain separate. Laboratory mite effects do not establish household exposure safety, allergy relief or protection from a finished spray.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A41424559+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Biotoxicity of essential oil of <i>Eucalyptus citriodora</i> Hook (Myrtaceae) to dust mites",
+        "doi": "10.3389/fpls.2025.1708798",
+        "pubmedId": "41424559",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/41424559/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lemon-eucalyptus"
       ],
@@ -9840,6 +11560,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Oregano oil strongly repelled red and hybrid imported fire ants, with carvacrol (minimum repellent dose 0.98 ug/g) identified as the primary active constituent.",
       "limitations": "Laboratory repellency assays; no field colony-level data.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A41099098+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Repellent effect of oregano essential oil and carvacrol analogs against imported fire ants",
+        "doi": "10.1002/ps.70297",
+        "pubmedId": "41099098",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/41099098/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "oregano"
       ],
@@ -9871,6 +11607,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "MIXED RESULT: tansy, cucumber, and soybean-extract home remedies failed to deter Argentine ants even at 4 to 10 times the recommended dose, while 1% peppermint oil was the most deterrent treatment and fresh rosemary and spearmint leaves also deterred harboring.",
       "limitations": "Laboratory harborage assay; short 2 to 4 hour observation window.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A39452344+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Common Home Remedies Do Not Deter Argentine Ants, Linepithema humile (Hymenoptera: Formicidae), from a Preferred Harborage",
+        "doi": "10.3390/insects15100768",
+        "pubmedId": "39452344",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/39452344/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "peppermint",
         "rosemary"
@@ -9903,6 +11655,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Of 38 oils screened on human forearms, only undiluted citronella, patchouli, clove, and makaen oils gave 2 hours of complete repellency against Aedes aegypti, with clove lasting longest (2 to 4 hours) across three mosquito species; no oil at 10 to 50% lasted 2 hours.",
       "limitations": "Small volunteer panel; laboratory forearm assay, not field conditions.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A16041723+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Comparative repellency of 38 essential oils against mosquito bites",
+        "doi": "10.1002/ptr.1637",
+        "pubmedId": "16041723",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/16041723/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "citronella",
         "clove"
@@ -9935,6 +11703,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Vitex trifolia and Vitex negundo oils killed Aedes aegypti and Culex quinquefasciatus larvae at 50 to 125 ppm, with LC50 values around 51 to 58 ppm for Ae. aegypti.",
       "limitations": "Laboratory larval assays; no field or non-target testing.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A31365621+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Larvicidal activity of essential oil from Vitex negundo and Vitex trifolia on dengue vector mosquito Aedes aegypti",
+        "doi": "10.1590/0037-8682-0459-2018",
+        "pubmedId": "31365621",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/31365621/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "vitex"
       ],
@@ -9968,6 +11752,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "NULL RESULT: rosemary oil showed no significant repellency against Aedes aegypti in the study's attraction assay, unlike peppermint oil which strongly reduced attraction at the first time point.",
       "limitations": "Single laboratory assay design; short observation window.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A31612914+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Efficacy of Active Ingredients From the EPA 25(B) List in Reducing Attraction of Aedes aegypti (Diptera: Culicidae) to Humans",
+        "doi": "10.1093/jme/tjz178",
+        "pubmedId": "31612914",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/31612914/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "rosemary"
       ],
@@ -10000,6 +11800,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "In field-plot tick drags, nootkatone and a permethrin standard each repelled 100% of Ixodes scapularis nymphs through 14 days, slightly outperforming carvacrol (90.7%) and a plant-oil product (97.7%).",
       "limitations": "Field-plot tick-drag evaluation. Isolated nootkatone and carvacrol are distinct from grapefruit and oregano essential oils; no arbitrary spray protection claim.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A22299371+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Experimental use of two standard tick collection methods to evaluate the relative effectiveness of several plant-derived and synthetic repellents against Ixodes scapularis and Amblyomma americanum (Acari: Ixodidae)",
+        "doi": "10.1603/ec10421",
+        "pubmedId": "22299371",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/22299371/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "grapefruit",
         "oregano"
@@ -10033,6 +11849,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Exposure to lemongrass oil, citral, or geraniol significantly impaired adult female Ixodes scapularis ticks' ability to detect and respond to host attractant, regardless of pathogen infection status.",
       "limitations": "Electrophysiology and Y-tube lab assays; behavioral disruption rather than bite prevention was measured.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A39386116+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Lemongrass essential oil and DEET inhibit attractant detection in infected and non-infected Ixodes scapularis ticks",
+        "doi": "10.1016/j.cris.2024.100096",
+        "pubmedId": "39386116",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/39386116/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lemongrass"
       ],
@@ -10065,6 +11897,22 @@ const TERPENE_DATA = {
       "sampleSize": 84,
       "finding": "Sweet orange inhalation significantly reduced labor pain intensity over time (p=0.0411) and anxiety (p<0.0001) versus a distilled-water placebo, while also lowering maternal blood pressure, heart rate, respiratory rate and fetal heart rate.",
       "limitations": "Single-blind, single-center Brazilian trial; labor setting limits generalizability.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A39577393+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Effectiveness of aromatherapy with sweet orange oil (Citrus sinensis L.) in relieving pain and anxiety during labor",
+        "doi": "10.1016/j.explore.2024.103081",
+        "pubmedId": "39577393",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/39577393/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "sweet-orange"
       ],
@@ -10101,6 +11949,22 @@ const TERPENE_DATA = {
       "sampleSize": 57,
       "finding": "Bergamot aroma stones used for 3 days before examinations significantly lowered state anxiety scores versus water-stone controls on all three days (Cohen's d > 0.8) with no reported adverse events.",
       "limitations": "Open-label, single-center design; 57 students; short 3-day intervention.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A42755326+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Evaluation of the Anxiety-Reducing Effects of Aroma Stones with Bergamot Essential Oil before Examinations: A Randomized Controlled Trial",
+        "doi": "10.1177/27683605261488658",
+        "pubmedId": "42755326",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/42755326/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "bergamot"
       ],
@@ -10134,6 +11998,22 @@ const TERPENE_DATA = {
       "sampleSize": 40,
       "finding": "Transdermal ylang ylang oil significantly decreased blood pressure and increased skin temperature in 40 healthy volunteers, who also rated themselves calmer and more relaxed than the control group.",
       "limitations": "Short-term transdermal exposure; no dose-response tested.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A16807875+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Relaxing effect of ylang ylang oil on humans after transdermal absorption",
+        "doi": "10.1002/ptr.1950",
+        "pubmedId": "16807875",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/16807875/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "ylang-ylang"
       ],
@@ -10172,6 +12052,22 @@ const TERPENE_DATA = {
       "sampleSize": 34,
       "finding": "Sticker pads containing lavender and ylang ylang oils worn for 14 days significantly reduced systolic blood pressure and pulse rate versus placebo in volunteers with high blood pressure, with no adverse reactions.",
       "limitations": "34 high-BP volunteers in efficacy phase; longer-term effects unknown.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A38087747+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Effect of Lavandula angustifolia and Cananga odorata on decrease of blood pressure in high blood pressure volunteers: A randomized controlled trial",
+        "doi": "10.1016/j.explore.2023.11.013",
+        "pubmedId": "38087747",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/38087747/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender",
         "ylang-ylang"
@@ -10208,8 +12104,24 @@ const TERPENE_DATA = {
       "context": "in-vitro",
       "evidenceLevel": "laboratory",
       "sampleSize": null,
-      "finding": "Geranium oil inhibited the growth of Gram-negative clinical strains isolated from difficult-to-heal wounds, suggesting it may be a useful component of therapy against resistant wound pathogens.",
-      "limitations": "In vitro study only; clinical wound efficacy and safety not tested.",
+      "finding": "Geranium oil inhibited cultured bacteria isolated from difficult-to-heal wounds.",
+      "limitations": "The organisms came from wounds; the study did not test wound healing or treatment of patients.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A24290961+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "The antibacterial activity of geranium oil against Gram-negative bacteria isolated from difficult-to-heal wounds",
+        "doi": "10.1016/j.burns.2013.11.002",
+        "pubmedId": "24290961",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/24290961/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "geranium"
       ],
@@ -10243,6 +12155,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "MIXED RESULT: 5% rose geranium essential oil showed no antibacterial activity (though 100% oil was strongly effective against E. coli), while it and the rose geranium extracts showed antifungal activity against Aspergillus niger and dose-dependent antiviral activity, with no toxicity at tested dilutions.",
       "limitations": "In vitro study only; antibacterial efficacy highly concentration-dependent.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A33921899+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Evaluation of Essential Oils and Extracts of Rose Geranium and Rose Petals as Natural Preservatives in Terms of Toxicity, Antimicrobial, and Antiviral Activity",
+        "doi": "10.3390/pathogens10040494",
+        "pubmedId": "33921899",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/33921899/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "geranium"
       ],
@@ -10284,15 +12212,31 @@ const TERPENE_DATA = {
       "authors": "Amrita, et al.",
       "journal": "Russ Agric Sci",
       "year": 2023,
-      "doi": "10.3103/S1068367423010044",
+      "doi": "10.3103/s1068367423010044",
       "pubmedId": "37124716",
       "url": "https://pubmed.ncbi.nlm.nih.gov/37124716/",
       "studyType": "in-vitro-study",
       "context": "in-vitro",
       "evidenceLevel": "laboratory",
       "sampleSize": null,
-      "finding": "Palmarosa essential oil, with geraniol as its major component, showed antibacterial, antifungal, anti-inflammatory and alpha-amylase-inhibitory (antidiabetic) activity in vitro along with strong antioxidant capacity.",
-      "limitations": "In vitro and biochemical assays only; no animal or human data.",
+      "finding": "Palmarosa oil showed antimicrobial activity and inhibited α-amylase in laboratory assays. The paper also reported antioxidant and inflammation-related assay results.",
+      "limitations": "Enzyme inhibition is not evidence that palmarosa treats diabetes. These are laboratory endpoints, not clinical effects or validated product concentrations.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A37124716+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Underutilized Plant Cymbopogan martinii Derived Essential Oil Is Excellent Source of Bioactives with Diverse Biological Activities",
+        "doi": "10.3103/s1068367423010044",
+        "pubmedId": "37124716",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/37124716/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "palmarosa"
       ],
@@ -10317,10 +12261,6 @@ const TERPENE_DATA = {
         },
         {
           "type": "health",
-          "subcategory": "metabolic"
-        },
-        {
-          "type": "health",
           "subcategory": "pain-inflammation"
         }
       ],
@@ -10328,7 +12268,7 @@ const TERPENE_DATA = {
         "microbial-bacteria-gram-positive",
         "microbial-bacteria-gram-negative",
         "microbial-fungi-mold",
-        "health-metabolic",
+        "health-metabolic-alpha-amylase-inhibition",
         "health-pain-inflammation"
       ]
     },
@@ -10347,6 +12287,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Niaouli leaf essential oil (1,8-cineole 31.57%, alpha-pinene isomers 21.26%) showed selective cytotoxicity against A549 lung cancer cells (IC50 18.09 ug/mL), inhibited cell migration, and induced apoptosis and G0-G1 cell-cycle arrest.",
       "limitations": "Cell-culture and computational research; no in-vivo or human efficacy. Cytotoxicity does not establish immune support or a therapeutic blend use.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A40573169+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Chemical Composition and Anti-Lung Cancer Activities of <i>Melaleuca quinquenervia</i> Leaf Essential Oil: Integrating Gas Chromatography-Mass Spectrometry (GC/MS) Profiling, Network Pharmacology, and Molecular Docking",
+        "doi": "10.3390/ph18060771",
+        "pubmedId": "40573169",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/40573169/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "niaouli"
       ],
@@ -10380,6 +12336,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Cinnamomum camphora leaf essential oil showed anti-MRSA activity (MIC 0.8 mg/mL, MBC 1.6 mg/mL), damaging bacterial cell membranes and disrupting amino acid metabolism according to GC-MS metabolomics.",
       "limitations": "In vitro study only; chemotype-dependent composition may vary.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A32035880+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Metabolomics analysis to evaluate the antibacterial activity of the essential oil from the leaves of Cinnamomum camphora (Linn.) Presl",
+        "doi": "10.1016/j.jep.2020.112652",
+        "pubmedId": "32035880",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/32035880/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "ravintsara"
       ],
@@ -10425,6 +12397,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Frankincense oil suppressed viability of J82 bladder transitional carcinoma cells but not normal urothelial cells, activating genes for cell-cycle arrest, growth suppression and apoptosis.",
       "limitations": "Boswellia carteri oil in bladder-cell cultures, not the catalog Boswellia serrata. Cell cytotoxicity is neither immune support nor clinical cancer or skin efficacy.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A19296830+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Frankincense oil derived from Boswellia carteri induces tumor cell specific cytotoxicity",
+        "doi": "10.1186/1472-6882-9-6",
+        "pubmedId": "19296830",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/19296830/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "frankincense"
       ],
@@ -10458,6 +12446,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Cinnamon bark essential oil was potently fungicidal against both planktonic and sessile (biofilm) Candida albicans, though sessile MICs were 8 to 16 times higher than planktonic MICs.",
       "limitations": "In vitro study only; much higher concentrations needed against biofilms than planktonic cells.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A27665976+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Effect of essential oils prepared from Thai culinary herbs on sessile Candida albicans cultures",
+        "doi": "10.2334/josnusd.15-0736",
+        "pubmedId": "27665976",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/27665976/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "cinnamon"
       ],
@@ -10500,6 +12504,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Myrrh essential oil achieved greater than 99.999% killing of Staphylococcus aureus and Pseudomonas aeruginosa within 2 hours, showed bactericidal activity against multidrug-resistant clinical isolates, and a 5% myrrh mouthwash killed about 99.999% of S. aureus in saliva within 30 minutes.",
       "limitations": "In vitro study only; cytotoxicity data limited to cell lines.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A31993779+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Bactericidal activity of Myrrh extracts and two dosage forms against standard bacterial strains and multidrug-resistant clinical isolates with GC/MS profiling",
+        "doi": "10.1186/s13568-020-0958-3",
+        "pubmedId": "31993779",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/31993779/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "myrrh"
       ],
@@ -10544,6 +12564,22 @@ const TERPENE_DATA = {
       "sampleSize": 60,
       "finding": "NULL RESULT: Lavender essential oil inhalation produced no statistically significant difference in anxiety scores versus a distilled-water placebo in patients after coronary artery bypass graft surgery, although anxiety decreased in both groups.",
       "limitations": "60 patients; 2-day intervention in acute post-surgical setting; results may not generalize.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A25558253+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "The effect of lavender essential oil on anxiety level in patients undergoing coronary artery bypass graft surgery: A double-blinded randomized clinical trial",
+        "doi": null,
+        "pubmedId": "25558253",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/25558253/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender"
       ],
@@ -10576,6 +12612,22 @@ const TERPENE_DATA = {
       "sampleSize": 144,
       "finding": "In 144 healthy adults, peppermint aroma improved memory and subjective alertness. Ylang-ylang aroma increased calmness but reduced alertness, impaired memory and slowed processing.",
       "limitations": "Single acute laboratory exposure with expectancy and scent-masking limitations; no treatment or finished-product performance claim.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A18041606+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Modulation of cognitive performance and mood by aromas of peppermint and ylang-ylang",
+        "doi": "10.1080/00207450601042094",
+        "pubmedId": "18041606",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/18041606/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "peppermint",
         "ylang-ylang"
@@ -10632,6 +12684,22 @@ const TERPENE_DATA = {
       "sampleSize": 91,
       "finding": "Twice-weekly massage using frankincense and myrrh essential oils produced greater reductions in pain and disability scores than jojoba-oil massage or no massage in adults with chronic low back pain.",
       "limitations": "Combination intervention; cannot separate effects of frankincense from myrrh, and massage is a co-intervention.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A37121835+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "The effects of massage with frankincense and myrrh oil in chronic low back pain: A three-arm randomised controlled trial",
+        "doi": "10.1016/j.explore.2023.04.004",
+        "pubmedId": "37121835",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/37121835/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "frankincense",
         "myrrh"
@@ -10662,6 +12730,22 @@ const TERPENE_DATA = {
       "sampleSize": 90,
       "finding": "Frankincense-and-myrrh aromatherapy massage increased several comfort measures versus comparator groups, but post-procedure pain scores did not significantly differ between groups.",
       "limitations": "Mixed result; combination oils plus massage prevents attribution to either oil alone. Authors called for more rigorous pain research.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A37783585+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "The effect of back massage with frankincense and myrrh oil before the cardiac electrophysiological procedure on back pain intensity and comfort: A single-blind randomized controlled trial",
+        "doi": "10.1016/j.explore.2023.09.007",
+        "pubmedId": "37783585",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/37783585/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "frankincense",
         "myrrh"
@@ -10683,7 +12767,7 @@ const TERPENE_DATA = {
       "authors": "Reis D, et al.",
       "journal": "Cancer Nursing",
       "year": 2023,
-      "doi": "10.1097/NCC.0000000000001080",
+      "doi": "10.1097/ncc.0000000000001080",
       "pubmedId": "35245227",
       "url": "https://pubmed.ncbi.nlm.nih.gov/35245227/",
       "studyType": "randomized-controlled-trial",
@@ -10692,6 +12776,22 @@ const TERPENE_DATA = {
       "sampleSize": 70,
       "finding": "Frankincense oil applied to the feet around chemotherapy did not significantly reduce cancer-related fatigue compared with carrier-oil control.",
       "limitations": "Pilot trial; negative result. Topical-foot application and oncology population limit generalization.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A35245227+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Cancer-Related Fatigue: A Pilot Study Evaluating the Effect of Frankincense Essential Oil in Patients With Cancer Receiving Chemotherapy",
+        "doi": "10.1097/ncc.0000000000001080",
+        "pubmedId": "35245227",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/35245227/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "frankincense"
       ],
@@ -10723,6 +12823,22 @@ const TERPENE_DATA = {
       "finding": "Among 90 women, myrrh-extract sitz baths improved episiotomy REEDA healing scores more than frankincense extract or betadine. Frankincense and betadine did not differ significantly.",
       "limitations": "Specific extract preparations and postpartum clinical setting; no whole-oil or spray inference. Frankincense was Boswellia carteri, not the catalog Boswellia serrata.",
       "material": "Separate myrrh and frankincense botanical-extract sitz baths, not essential oils.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A32971163+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Episiotomy wound healing by Commiphora myrrha (Nees) Engl. and Boswellia carteri Birdw. in primiparous women: A randomized controlled trial",
+        "doi": "10.1016/j.jep.2020.113396",
+        "pubmedId": "32971163",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/32971163/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "myrrh",
         "frankincense"
@@ -10752,6 +12868,23 @@ const TERPENE_DATA = {
       "sampleSize": 120,
       "finding": "In 120 men undergoing prostate biopsy, lavender and frankincense aromatherapy delivered by nebulizer were compared with placebo for procedural anxiety and pain.",
       "limitations": "Procedure-specific clinical setting; separate oil groups should be interpreted from the full paper before making comparative claims.",
+      "doi": "10.1016/j.ctim.2026.103396",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A42302879+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Aromatherapy effects on pain and anxiety during transrectal ultrasound-guided prostate biopsy: A randomized controlled trial",
+        "doi": "10.1016/j.ctim.2026.103396",
+        "pubmedId": "42302879",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/42302879/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender",
         "frankincense"
@@ -10790,6 +12923,22 @@ const TERPENE_DATA = {
       "sampleSize": null,
       "finding": "Selected terpenes found in Cannabis sativa produced cannabinoid-like behavioral effects in mice and interacted with cannabinoid signaling in experimental models.",
       "limitations": "Preclinical mouse and cellular work on selected isolated terpenes; does not establish effects of cannabis aroma, essential oil, or a finished product in humans.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A33859287+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Cannabis sativa terpenes are cannabimimetic and selectively enhance cannabinoid activity",
+        "doi": "10.1038/s41598-021-87740-8",
+        "pubmedId": "33859287",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/33859287/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "cannabis"
       ],
@@ -10812,17 +12961,34 @@ const TERPENE_DATA = {
     {
       "id": "cannabis-terpene-profiles-2022",
       "title": "Terpene Synthases and Terpene Variation in Cannabis sativa",
-      "authors": "Booth JK, Bohlmann J",
-      "journal": "Plant Science / phytochemistry research",
-      "year": 2019,
-      "pubmedId": "30690172",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/30690172/",
-      "studyType": "review",
-      "context": "plant",
-      "evidenceLevel": "review",
+      "authors": "Booth JK, Yuen MMS, Jancsik S, Madilao LL, Page JE, Bohlmann J",
+      "journal": "Plant physiology",
+      "year": 2020,
+      "pubmedId": "32591428",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32591428/",
+      "studyType": "analytical-study",
+      "context": "laboratory",
+      "evidenceLevel": "laboratory",
       "sampleSize": null,
-      "finding": "Reviews the diverse monoterpenes and sesquiterpenes produced by Cannabis sativa and the terpene synthases underlying cultivar-dependent aroma profiles.",
-      "limitations": "Plant chemistry review, not evidence of therapeutic efficacy.",
+      "finding": "Metabolite profiling and terpene-synthase characterization showed substantial variation within and between cannabis cultivar labels.",
+      "limitations": "Original analytical and gene-function research, not a review or evidence of cognitive benefit.",
+      "doi": "10.1104/pp.20.00593",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A32591428+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Terpene Synthases and Terpene Variation in Cannabis sativa",
+        "doi": "10.1104/pp.20.00593",
+        "pubmedId": "32591428",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/32591428/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "cannabis"
       ],
@@ -10854,18 +13020,34 @@ const TERPENE_DATA = {
     {
       "id": "cannabis-terpene-diversity-2016",
       "title": "Terpenes in Cannabis sativa - From plant genome to humans",
-      "authors": "Booth JK, Page JE, Bohlmann J",
-      "journal": "Plant Science",
-      "year": 2017,
-      "doi": "10.1016/j.plantsci.2017.03.018",
-      "pubmedId": "28602488",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/28602488/",
+      "authors": "Booth JK, Bohlmann J",
+      "journal": "Plant science : an international journal of experimental plant biology",
+      "year": 2019,
+      "doi": "10.1016/j.plantsci.2019.03.022",
+      "pubmedId": "31084880",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31084880/",
       "studyType": "review",
       "context": "plant",
       "evidenceLevel": "review",
       "sampleSize": null,
       "finding": "Reviews Cannabis sativa terpene biosynthesis, genetic diversity, ecological roles, and potential relevance of volatile terpenes to human exposure.",
       "limitations": "Narrative plant-science review; potential human relevance should not be interpreted as demonstrated clinical benefit.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A31084880+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Terpenes in Cannabis sativa - From plant genome to humans",
+        "doi": "10.1016/j.plantsci.2019.03.022",
+        "pubmedId": "31084880",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/31084880/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "cannabis"
       ],
@@ -10914,6 +13096,22 @@ const TERPENE_DATA = {
         "thiol",
         "ester"
       ],
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A37901519+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Minor, Nonterpenoid Volatile Compounds Drive the Aroma Differences of Exotic Cannabis",
+        "doi": "10.1021/acsomega.3c04496",
+        "pubmedId": "37901519",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/37901519/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "cannabis"
       ],
@@ -10941,17 +13139,34 @@ const TERPENE_DATA = {
     {
       "id": "cannabis-volatile-classification-2022",
       "title": "The phytochemical diversity of commercial Cannabis in the United States",
-      "authors": "Smith CJ, et al.",
-      "journal": "PLoS ONE",
+      "authors": "Smith CJ, Vergara D, Keegan B, Jikomes N",
+      "journal": "PloS one",
       "year": 2022,
-      "pubmedId": "35446892",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/35446892/",
+      "pubmedId": "35588111",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35588111/",
       "studyType": "observational-study",
       "context": "plant",
       "evidenceLevel": "laboratory",
       "sampleSize": null,
       "finding": "Large-scale chemical profiling of commercial Cannabis samples demonstrated substantial phytochemical diversity and showed that conventional strain labels poorly capture underlying chemistry.",
       "limitations": "Commercial-sample chemistry study; not clinical evidence and includes cannabinoids as well as volatile chemistry.",
+      "doi": "10.1371/journal.pone.0267498",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A35588111+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "The phytochemical diversity of commercial Cannabis in the United States",
+        "doi": "10.1371/journal.pone.0267498",
+        "pubmedId": "35588111",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/35588111/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "cannabis"
       ],
@@ -10994,6 +13209,22 @@ const TERPENE_DATA = {
       "finding": "Chemical analysis and sensory assessment associated prenylthiol with skunky aroma in the cannabis flowers and concentrated extracts studied.",
       "limitations": "Flowers from 13 cultivars and three hydrocarbon extracts, plus a plant-development series. Not a steam-distilled oil analysis or efficacy study.",
       "material": "Flowers and hydrocarbon extracts",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A34869990+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Identification of a New Family of Prenylated Volatile Sulfur Compounds in <i>Cannabis</i> Revealed by Comprehensive Two-Dimensional Gas Chromatography",
+        "doi": "10.1021/acsomega.1c04196",
+        "pubmedId": "34869990",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/34869990/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "cannabis"
       ],
@@ -11036,6 +13267,22 @@ const TERPENE_DATA = {
         "thiol",
         "ester"
       ],
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A38973868+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Nonterpenoid Chemical Diversity of Cannabis Phenotypes Predicts Differentiated Aroma Characteristics",
+        "doi": "10.1021/acsomega.4c03225",
+        "pubmedId": "38973868",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/38973868/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "cannabis"
       ],
@@ -11072,6 +13319,22 @@ const TERPENE_DATA = {
       "finding": "Reviews the biosynthesis and research literature on cannflavins in Cannabis sativa.",
       "limitations": "Review of plant compounds and experimental research, not a distilled-oil analysis or clinical evidence for the finished formula.",
       "material": "Plant material and reviewed preparations",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A33681553+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Flavonoids in Cannabis sativa: Biosynthesis, Bioactivities, and Biotechnology",
+        "doi": "10.1021/acsomega.1c00318",
+        "pubmedId": "33681553",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/33681553/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "cannabis"
       ],
@@ -11112,6 +13375,23 @@ const TERPENE_DATA = {
       "finding": "Menthyl acetate was reported in the study oil. The same hydrodistilled oil inhibited tested fungi and Candida biofilm formation in laboratory assays.",
       "limitations": "One characterized hydrodistilled sample differs from the catalog steam-distillation label. No human fungal treatment or disinfection claim.",
       "material": "Essential oil; Hydrodistilled air-dried flowering aerial parts of Mentha piperita, Fars, Iran",
+      "pubmedId": "23304561",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.5402%2F2012%2F718645%22&format=json&resultType=core",
+        "sourceTitle": "Chemical Composition, Antifungal and Antibiofilm Activities of the Essential Oil of Mentha piperita L",
+        "doi": "10.5402/2012/718645",
+        "pubmedId": "23304561",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.5402/2012/718645",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "peppermint"
       ],
@@ -11157,6 +13437,23 @@ const TERPENE_DATA = {
       "finding": "Isobutyl isobutyrate was reported in the commercial sample. The same commercial oil was tested in bacterial, fungal, biofilm and vapor-phase food-model assays.",
       "limitations": "One commercial sample; laboratory and food matrices do not establish human skin treatment or cleaning. 1,8-cineole is a cyclic ether, not an epoxide.",
       "material": "Essential oil; Commercial Hanus oil from fresh Eucalyptus globulus leaves cultivated in Spain",
+      "pubmedId": "36903935",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Fplants12051076%22&format=json&resultType=core",
+        "sourceTitle": "Chemical Composition and Biological Activities of Eucalyptus globulus Essential Oil",
+        "doi": "10.3390/plants12051076",
+        "pubmedId": "36903935",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3390/plants12051076",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "eucalyptus"
       ],
@@ -11201,6 +13498,23 @@ const TERPENE_DATA = {
       "finding": "Citronellal was reported in this C. nardus sample. The same C. nardus oil inhibited many Candida isolates and mature biofilms, with variable susceptibility and mammalian-cell cytotoxicity.",
       "limitations": "C. nardus differs from C. winterianus; sample preparation differs from the catalog label. Cytotoxicity occurred below some antifungal MICs; no clinical skin treatment or topical safety inference.",
       "material": "Essential oil; Cymbopogon nardus leaves collected July 2013 in a Brazilian medicinal-plant garden",
+      "pubmedId": "27517903",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Fijms17081252%22&format=json&resultType=core",
+        "sourceTitle": "Essential Oil of Cymbopogon nardus (L.) Rendle: A Strategy to Combat Fungal Infections Caused by Candida Species",
+        "doi": "10.3390/ijms17081252",
+        "pubmedId": "27517903",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3390/ijms17081252",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "citronella"
       ],
@@ -11249,6 +13563,23 @@ const TERPENE_DATA = {
       "finding": "Linalyl acetate was measured in sample #1.",
       "limitations": "Chemotype-specific findings. Literature profiles in the paper are not additional measured samples. This record summarizes chemical evidence; biological results are not inferred from the title.",
       "material": "Essential oil; Four directly measured Thymus vulgaris chemotypes from France and Serbia, May 2015, air-dried aerial parts",
+      "pubmedId": "28231164",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Ffoods5040070%22&format=json&resultType=core",
+        "sourceTitle": "Essential Oil Characterization of Thymus vulgaris from Various Geographical Locations",
+        "doi": "10.3390/foods5040070",
+        "pubmedId": "28231164",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3390/foods5040070",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "thyme"
       ],
@@ -11286,6 +13617,23 @@ const TERPENE_DATA = {
       "finding": "Linalyl acetate was reported in the studied regional profile.",
       "limitations": "Regional oil profile, not universal oregano composition. Colorimetric total phenolics do not identify named flavonoids. This record summarizes chemical evidence; biological results are not inferred from the title.",
       "material": "Essential oil; Dried flowering aerial parts of Origanum vulgare, Socoroma/Putre, Chile, November 2019",
+      "pubmedId": "33081116",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Fmetabo10100414%22&format=json&resultType=core",
+        "sourceTitle": "Antioxidant and Antibacterial Capacities of Origanum vulgare L. Essential Oil from the Arid Andean Region of Chile and its Chemical Characterization by GC-MS",
+        "doi": "10.3390/metabo10100414",
+        "pubmedId": "33081116",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3390/metabo10100414",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "oregano"
       ],
@@ -11322,6 +13670,23 @@ const TERPENE_DATA = {
       "finding": "Geranyl acetate was reported in the study oil. The same oil inhibited fungal growth in culture and reduced experimentally induced mouse-ear edema.",
       "limitations": "Fresh/dried feedstock reporting is inconsistent. Fungal cultures and topical mouse experiments are separate models; neither establishes human skin benefit or safe inhalation.",
       "material": "Essential oil; Cymbopogon citratus leaf/aerial material, Chiffa/Blida, Algeria, May 2013",
+      "pubmedId": "25242268",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3402%2Fljm.v9.25431%22&format=json&resultType=core",
+        "sourceTitle": "Lemon grass (Cymbopogon citratus) essential oil as a potent anti-inflammatory and antifungal drugs",
+        "doi": "10.3402/ljm.v9.25431",
+        "pubmedId": "25242268",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3402/ljm.v9.25431",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lemongrass"
       ],
@@ -11363,7 +13728,7 @@ const TERPENE_DATA = {
       "authors": "Jirovetz Leopold, Bail Stefanie, Buchbauer Gerhard et al.",
       "journal": "Natural Product Communications",
       "year": 2007,
-      "doi": "10.1177/1934578X0700200518",
+      "doi": "10.1177/1934578x0700200518",
       "url": "https://doi.org/10.1177/1934578X0700200518",
       "studyType": "analytical-study",
       "context": "laboratory",
@@ -11376,6 +13741,22 @@ const TERPENE_DATA = {
       "finding": "Citronellal was reported; the source has a numerical value but sample-specific extraction is not established, so no composition number is imported.",
       "limitations": "General introduction on steam distillation does not establish preparation of this sample. Rutin/quercetin assay comparators are not oil constituents. Not a PMD-rich processed product. This record summarizes chemical evidence; biological results are not inferred from the title.",
       "material": "Essential oil; Chinese Corymbia citriodora leaf oil, commercial product 800319, Kurt Kitzing",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Crossref",
+        "sourceUrl": "https://api.crossref.org/works/10.1177%2F1934578x0700200518",
+        "sourceTitle": "Chemical Composition, Olfactory Evaluation and Antioxidant Effects of the Leaf Essential Oil of\n                    Corymbia citriodora\n                    (Hook) from China",
+        "doi": "10.1177/1934578x0700200518",
+        "pubmedId": null,
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.1177/1934578X0700200518",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lemon-eucalyptus"
       ],
@@ -11412,6 +13793,22 @@ const TERPENE_DATA = {
       "finding": "Citronellyl citronellate was reported as a trace constituent; no numerical amount was obtained.",
       "limitations": "Trace ester reported; numerical concentration not available in the accessible abstract. This record summarizes chemical evidence; biological results are not inferred from the title.",
       "material": "Essential oil; Corymbia citriodora leaf oil from Réunion Island",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1080%2F10412905.2004.9698798%22&format=json&resultType=core",
+        "sourceTitle": "GC/MS analysis of the volatile constituents of Corymbia citriodora Hook. from Reunion Island",
+        "doi": "10.1080/10412905.2004.9698798",
+        "pubmedId": null,
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.1080/10412905.2004.9698798",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lemon-eucalyptus"
       ],
@@ -11446,6 +13843,23 @@ const TERPENE_DATA = {
       "finding": "(E)-Cinnamaldehyde was reported in this bark-oil sample. The same bark oil showed antistaphylococcal and antibiofilm effects against canine-otitis isolates in vitro.",
       "limitations": "C. zeylanicum is a synonym of C. verum. Canine-source cultures are not treated dogs; bark oil differs from leaf/root oils. No veterinary treatment or dermal suitability claim.",
       "material": "Essential oil; Commercial Laszlo Cinnamomum zeylanicum stem-bark oil, manufacturer-reported Sri Lankan origin",
+      "pubmedId": "35052881",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Fantibiotics11010004%22&format=json&resultType=core",
+        "sourceTitle": "Anti-Staphylococcal Activity of Cinnamomum zeylanicum Essential Oil against Planktonic and Biofilm Cells Isolated from Canine Otological Infections",
+        "doi": "10.3390/antibiotics11010004",
+        "pubmedId": "35052881",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3390/antibiotics11010004",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "cinnamon"
       ],
@@ -11491,6 +13905,23 @@ const TERPENE_DATA = {
       "finding": "Eriocitrin and luteolin-7-O-rutinoside were reported. Flavonoids cannot be attributed to the added oil fraction.",
       "limitations": "Not an essential-oil finding. Any source quantities are not imported here and cannot be attributed to distilled oil. This record summarizes chemical evidence; biological results are not inferred from the title.",
       "material": "Plant extract / infusion; 23 commercial peppermint tinctures from Polish pharmacies",
+      "pubmedId": "31878211",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Fmolecules25010069%22&format=json&resultType=core",
+        "sourceTitle": "Analysis of Polyphenolic Composition of a Herbal Medicinal Product-Peppermint Tincture",
+        "doi": "10.3390/molecules25010069",
+        "pubmedId": "31878211",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3390/molecules25010069",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "peppermint"
       ],
@@ -11529,6 +13960,22 @@ const TERPENE_DATA = {
       "finding": "Epicatechin, isoquercitrin and quercitrin were reported in leaf extracts.",
       "limitations": "Not an essential-oil finding. Any source quantities are not imported here and cannot be attributed to distilled oil. This record summarizes chemical evidence; biological results are not inferred from the title.",
       "material": "Plant extract / infusion; Eucalyptus globulus leaves from Haman-gun, Republic of Korea",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Crossref",
+        "sourceUrl": "https://api.crossref.org/works/10.3390%2Fapp13179984",
+        "sourceTitle": "Characterization of Chemical Composition and Antioxidant Activity of Eucalyptus globulus Leaves under Different Extraction Conditions",
+        "doi": "10.3390/app13179984",
+        "pubmedId": null,
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3390/app13179984",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "eucalyptus"
       ],
@@ -11567,6 +14014,23 @@ const TERPENE_DATA = {
       "finding": "Luteolin-7-O-beta-glucuronide and apigenin-7-O-beta-glucoside were reported. The paper did not show a clear apoptotic effect for common-thyme extract; no treatment claim is inferred.",
       "limitations": "Not an essential-oil finding. Any source quantities are not imported here and cannot be attributed to distilled oil. This record summarizes chemical evidence; biological results are not inferred from the title.",
       "material": "Plant extract / infusion; Commercial Polish Thymus vulgaris herb, aqueous polyphenol-enriched extracts",
+      "pubmedId": "35784715",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3389%2Ffphar.2022.867709%22&format=json&resultType=core",
+        "sourceTitle": "Modulatory Impact of Lamiaceae Metabolites on Apoptosis of Human Leukemia Cells",
+        "doi": "10.3389/fphar.2022.867709",
+        "pubmedId": "35784715",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3389/fphar.2022.867709",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "thyme"
       ],
@@ -11600,6 +14064,23 @@ const TERPENE_DATA = {
       "finding": "Luteolin, naringenin, rutin and apigenin were reported.",
       "limitations": "Not an essential-oil finding. Any source quantities are not imported here and cannot be attributed to distilled oil. This record summarizes chemical evidence; biological results are not inferred from the title.",
       "material": "Plant extract / infusion; Origanum vulgare from the Atacama Desert Andean region",
+      "pubmedId": "33917599",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Fmolecules26072100%22&format=json&resultType=core",
+        "sourceTitle": "UHPLC-DAD Characterization of Origanum vulgare L. from Atacama Desert Andean Region and Antioxidant, Antibacterial and Enzyme Inhibition Activities",
+        "doi": "10.3390/molecules26072100",
+        "pubmedId": "33917599",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3390/molecules26072100",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "oregano"
       ],
@@ -11633,6 +14114,22 @@ const TERPENE_DATA = {
       "finding": "Cynaroside and isoorientin were identified in the leaf-infusion research.",
       "limitations": "Not an essential-oil finding. Any source quantities are not imported here and cannot be attributed to distilled oil. This record summarizes chemical evidence; biological results are not inferred from the title.",
       "material": "Plant extract / infusion; Cymbopogon citratus leaf infusion and isolated glycosides",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Crossref",
+        "sourceUrl": "https://api.crossref.org/works/10.1016%2Fj.jff.2014.07.003",
+        "sourceTitle": "Chemical characterization and anti-inflammatory activity of luteolin glycosides isolated from lemongrass",
+        "doi": "10.1016/j.jff.2014.07.003",
+        "pubmedId": null,
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-unavailable",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.1016/j.jff.2014.07.003",
+        "scope": "Citation identity checked; this provider did not supply an abstract. Existing detailed claims require full-text review."
+      },
       "oilIds": [
         "lemongrass"
       ],
@@ -11667,6 +14164,22 @@ const TERPENE_DATA = {
       "finding": "Geranyl acetate was reported in the cold-pressed Kibris column.",
       "limitations": "Cultivar-specific. Hydrodistilled and supercritical-extract columns are separate samples. This record summarizes chemical evidence, not efficacy inferred from the publication title.",
       "material": "Essential oil; Kibris cultivar Citrus limon peel oil; cold-pressed comparison column",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Crossref",
+        "sourceUrl": "https://api.crossref.org/works/10.1080%2F10412905.2014.982872",
+        "sourceTitle": "Comparison of lemon oil composition after using different extraction methods",
+        "doi": "10.1080/10412905.2014.982872",
+        "pubmedId": null,
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-unavailable",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.1080/10412905.2014.982872",
+        "scope": "Citation identity checked; this provider did not supply an abstract. Existing detailed claims require full-text review."
+      },
       "oilIds": [
         "lemon"
       ],
@@ -11704,6 +14217,23 @@ const TERPENE_DATA = {
       "finding": "Prenylthiol and a thiol-bearing acetate ester were identified in Lisbon peel extract. This leaves a gap for cold-pressed oil.",
       "limitations": "Peel extract is not cold-pressed commercial lemon essential oil. This record summarizes chemical evidence, not efficacy inferred from the publication title.",
       "material": "Peel solvent extract; Lisbon cultivar Citrus limon peel solvent extract",
+      "pubmedId": "25639384",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1021%2Fjf505177r%22&format=json&resultType=core",
+        "sourceTitle": "Identification, synthesis, and characterization of novel sulfur-containing volatile compounds from the in-depth analysis of Lisbon lemon peels (Citrus limon L. Burm. f. cv. Lisbon)",
+        "doi": "10.1021/jf505177r",
+        "pubmedId": "25639384",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.1021/jf505177r",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lemon"
       ],
@@ -11739,6 +14269,23 @@ const TERPENE_DATA = {
       "finding": "No direct positive PMF record for cold-pressed lemon oil is established by this curated source.",
       "limitations": "Selected lemon samples lacked PMFs. Coumarins and furanocoumarins are not flavonoids; non-detection is not universal absence. This record summarizes chemical evidence, not efficacy inferred from the publication title.",
       "material": "Essential oil; Authentic lemon and orange essential-oil profiles",
+      "pubmedId": "28911443",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1016%2Fj.jfda.2014.05.008%22&format=json&resultType=core",
+        "sourceTitle": "Authenticity analysis of citrus essential oils by HPLC-UV-MS on oxygenated heterocyclic components",
+        "doi": "10.1016/j.jfda.2014.05.008",
+        "pubmedId": "28911443",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.1016/j.jfda.2014.05.008",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lemon"
       ],
@@ -11772,6 +14319,22 @@ const TERPENE_DATA = {
       "finding": "Tangeretin, sinensetin and nobiletin were verified with standards in cold-pressed orange oils. Source quantities are not imported.",
       "limitations": "Commercial, crude and compounded samples are separate; do not merge them into a typical range. This record summarizes chemical evidence, not efficacy inferred from the publication title.",
       "material": "Essential oil: nonvolatile fraction; Commercial and crude cold-pressed orange oils, nonvolatile fraction",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Crossref",
+        "sourceUrl": "https://api.crossref.org/works/10.3390%2Fagriculture13010179",
+        "sourceTitle": "Authenticity Analysis of Cold-Pressed Orange Essential Oils by GC/MS on Polymethoxyflavone Components",
+        "doi": "10.3390/agriculture13010179",
+        "pubmedId": null,
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3390/agriculture13010179",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "sweet-orange"
       ],
@@ -11808,6 +14371,23 @@ const TERPENE_DATA = {
       "finding": "Neryl acetate (called nerol acetate in the paper) was reported in the cold-pressed orange comparison. No concentration is imported.",
       "limitations": "Orange and tangor are distinct samples; enrichment versus hydrodistillation is not a universal quantity. This record summarizes chemical evidence, not efficacy inferred from the publication title.",
       "material": "Essential oil; Cold-pressed Citrus sinensis orange peel oil, separate from tangor samples",
+      "pubmedId": "38370058",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1002%2Ffsn3.3785%22&format=json&resultType=core",
+        "sourceTitle": "The effects of different extraction methods on essential oils from orange and tangor: From the peel to the essential oil",
+        "doi": "10.1002/fsn3.3785",
+        "pubmedId": "38370058",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.1002/fsn3.3785",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "sweet-orange"
       ],
@@ -11844,6 +14424,22 @@ const TERPENE_DATA = {
       "finding": "4-Mercapto-4-methyl-2-pentanol was detected, with low aroma activity in the tested oil.",
       "limitations": "Aroma intensity is not concentration. Non-detection of particular thiols applies only to the studied samples. This record summarizes chemical evidence, not efficacy inferred from the publication title.",
       "material": "Essential oil; Cold-pressed Citrus paradisi oil studied in aroma-impact analysis",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Crossref",
+        "sourceUrl": "https://api.crossref.org/works/10.1002%2Fffj.1041",
+        "sourceTitle": "Characterization of aroma‐impact compounds in cold‐pressed grapefruit oil using time–intensity GC–olfactometry and GC–MS",
+        "doi": "10.1002/ffj.1041",
+        "pubmedId": null,
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.1002/ffj.1041",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "grapefruit"
       ],
@@ -11879,6 +14475,23 @@ const TERPENE_DATA = {
       "finding": "Nobiletin, heptamethoxyflavone and tangeretin were quantified in the source. Individual sample quantities are not imported here.",
       "limitations": "Commercial oils varied. Analytical quality-control findings do not establish clinical safety for arbitrary uses. This record summarizes chemical evidence, not efficacy inferred from the publication title.",
       "material": "Essential oil: nonvolatile fraction; Varietal and commercial cold-pressed grapefruit oils, nonvolatile fraction",
+      "pubmedId": "40686995",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1021%2Facsomega.5c03454%22&format=json&resultType=core",
+        "sourceTitle": "An Ultrahigh-Performance Liquid Chromatography Coupled with Tandem Mass Spectrometry (UHPLC-MS/MS) Method for Toxicity and Safety Level Assessment of Oxygen Heterocyclic Compounds and Terpene in Cold-Pressed Grapefruit Essential Oils",
+        "doi": "10.1021/acsomega.5c03454",
+        "pubmedId": "40686995",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.1021/acsomega.5c03454",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "grapefruit"
       ],
@@ -11914,6 +14527,22 @@ const TERPENE_DATA = {
       "finding": "Sinensetin, nobiletin, tetra-O-methylscutellarein and tangeretin were identified in the nonvolatile oil fraction. Cultivar-specific quantities are not imported.",
       "limitations": "Cultivar-specific findings, not juice or a bergamot-polyphenol supplement. This record summarizes chemical evidence, not efficacy inferred from the publication title.",
       "material": "Essential oil: nonvolatile fraction; Femminello, Castagnaro and Fantastico bergamot peel oils, nonvolatile fraction",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Crossref",
+        "sourceUrl": "https://api.crossref.org/works/10.1002%2Fffj.3188",
+        "sourceTitle": "Determination of new bioflavonoids in bergamot (Citrus bergamia) peel oil by liquid chromatography coupled to tandem ion trap–time‐of‐flight mass spectrometry",
+        "doi": "10.1002/ffj.3188",
+        "pubmedId": null,
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.1002/ffj.3188",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "bergamot"
       ],
@@ -11949,6 +14578,23 @@ const TERPENE_DATA = {
       "finding": "Neral and geranial were reported in the liquid oil; sample-specific extraction is not verified, so no numerical value is imported.",
       "limitations": "Liquid composition is not inhaled-headspace composition. Extraction provenance is incomplete. This record summarizes chemical evidence, not efficacy inferred from the publication title.",
       "material": "Essential oil; Liquid bergamot essential oil and its separately measured headspace",
+      "pubmedId": "29098462",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1186%2Fs13065-017-0340-y%22&format=json&resultType=core",
+        "sourceTitle": "Aromatherapy: composition of the gaseous phase at equilibrium with liquid bergamot essential oil",
+        "doi": "10.1186/s13065-017-0340-y",
+        "pubmedId": "29098462",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.1186/s13065-017-0340-y",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "bergamot"
       ],
@@ -11985,6 +14631,23 @@ const TERPENE_DATA = {
       "finding": "Bornyl formate, bornyl acetate, neryl acetate and geranyl acetate were reported in the hydrodistilled study oil.",
       "limitations": "Different preparation from the catalog steam-distilled oil. Reported elemental S8 is not an organic thiol; replication/provenance is unresolved. This record summarizes chemical evidence, not efficacy inferred from the publication title.",
       "material": "Essential oil; Lavandula angustifolia aerial-parts oil from Xinjiang",
+      "pubmedId": "32664436",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Fmolecules25143166%22&format=json&resultType=core",
+        "sourceTitle": "Study on Lavender Essential Oil Chemical Compositions by GC-MS and Improved pGC",
+        "doi": "10.3390/molecules25143166",
+        "pubmedId": "32664436",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3390/molecules25143166",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender"
       ],
@@ -12021,6 +14684,23 @@ const TERPENE_DATA = {
       "finding": "Linalyl acetate (called linalool acetate in the paper) was reported. The same commercial oil also showed variable antimicrobial/biofilm effects and laboratory insecticidal activity against Oxycarenus lavaterae; isolated caryophyllene was tested separately.",
       "limitations": "Single commercial sample and laboratory/food models; constituent results are not whole-oil results. No clinical benefit, finished-product effect or safe pest application established.",
       "material": "Essential oil; One commercial Salvia sclarea branches/leaves oil",
+      "pubmedId": "36982252",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Fijms24065179%22&format=json&resultType=core",
+        "sourceTitle": "Salvia sclarea Essential Oil Chemical Composition and Biological Activities",
+        "doi": "10.3390/ijms24065179",
+        "pubmedId": "36982252",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3390/ijms24065179",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "clary-sage"
       ],
@@ -12080,6 +14760,23 @@ const TERPENE_DATA = {
       "finding": "Citronellyl formate, geranyl formate, citronellyl acetate, citronellyl propionate, citronellyl pentanoate and geranyl valerate were reported. The same commercial oil also showed sample-specific antibacterial and biofilm effects, and laboratory mortality of Harmonia axyridis.",
       "limitations": "One producer/sample and laboratory/food models; biofilm effects and insect mortality do not establish household disinfection, safe exposure or field control.",
       "material": "Essential oil; Commercial Pelargonium graveolens fresh-plant-material oil",
+      "pubmedId": "38201061",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Ffoods13010033%22&format=json&resultType=core",
+        "sourceTitle": "An In-Depth Study on the Chemical Composition and Biological Effects of Pelargonium graveolens Essential Oil",
+        "doi": "10.3390/foods13010033",
+        "pubmedId": "38201061",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3390/foods13010033",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "geranium"
       ],
@@ -12132,6 +14829,23 @@ const TERPENE_DATA = {
       "finding": "Benzaldehyde and phenylacetaldehyde were reported in time fractions; heptanal occurred in the early fraction. No whole-oil quantity is inferred.",
       "limitations": "Fractions differ; not a single steam-distilled whole oil. Compound assignments depend on the reported analytical methods. This record summarizes chemical evidence, not efficacy inferred from the publication title.",
       "material": "Essential oil; Early and late hydrodistilled Cananga odorata flower fractions from Mayotte",
+      "pubmedId": "23364750",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Fmolecules18021783%22&format=json&resultType=core",
+        "sourceTitle": "Improvement of ylang-ylang essential oil characterization by GC×GC-TOFMS",
+        "doi": "10.3390/molecules18021783",
+        "pubmedId": "23364750",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3390/molecules18021783",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "ylang-ylang"
       ],
@@ -12165,6 +14879,23 @@ const TERPENE_DATA = {
       "finding": "Benzyl acetate, methyl benzoate, cinnamyl acetate and benzyl benzoate characterize studied oils, including the steam-water sample.",
       "limitations": "Steam-water differs from dry steam, hydrodistillation and microwave methods; do not combine columns. This record summarizes chemical evidence, not efficacy inferred from the publication title.",
       "material": "Essential oil; Cananga odorata flower oils; steam-water comparison sample",
+      "pubmedId": "41157774",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Fplants14203217%22&format=json&resultType=core",
+        "sourceTitle": "Improving the Quality of Ylang-Ylang Essential Oils [<i>Cananga odorata</i> (Lam.) Hook.f. &Thomson] Through Microwave-Assisted Extraction Compared to Conventional Extraction Methods",
+        "doi": "10.3390/plants14203217",
+        "pubmedId": "41157774",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3390/plants14203217",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "ylang-ylang"
       ],
@@ -12199,6 +14930,23 @@ const TERPENE_DATA = {
       "finding": "Supplier-provided composition listed neryl formate, neryl acetate, geranyl butyrate, geranyl caproate and geranyl caprylate. Quantities are not imported. The same palmarosa oil inhibited several cultured clinical isolates; P. aeruginosa was inactive at the tested range, and HepG2 viability declined at the highest oil concentration.",
       "limitations": "Supplier composition was not independently remeasured. Clinical isolates are not a clinical trial. No wound, skin, respiratory or safety benefit established.",
       "material": "Essential oil; Cymbopogon martini var. motia oil, batch OF012293",
+      "pubmedId": "41599146",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Fpharmaceutics18010039%22&format=json&resultType=core",
+        "sourceTitle": "Antibacterial Activity of Palmarosa (Cymbopogon martini (Roxb.) Will.Watson) Essential Oil and Geraniol Against Clinical Isolates from Respiratory, Skin, and Soft Tissue Infections",
+        "doi": "10.3390/pharmaceutics18010039",
+        "pubmedId": "41599146",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3390/pharmaceutics18010039",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "palmarosa"
       ],
@@ -12239,6 +14987,23 @@ const TERPENE_DATA = {
       "finding": "Linalyl acetate, lavandulyl acetate and hexyl butanoate occur in the extraction comparison. Sample-column values are not imported.",
       "limitations": "Scale, drying and method vary together. Column-specific amounts are not imported. This record summarizes chemical evidence, not efficacy inferred from the publication title.",
       "material": "Essential oil; Lavender steam-distilled/hydrodistilled comparison",
+      "pubmedId": "42357503",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Fmolecules31122105%22&format=json&resultType=core",
+        "sourceTitle": "Impact of Extraction Scale and Method on the Chemical Profile of Essential Oils: A Comparative Study Between Laboratory Hydrodistillation and Semi-Industrial Dry Steam Distillation",
+        "doi": "10.3390/molecules31122105",
+        "pubmedId": "42357503",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3390/molecules31122105",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lavender"
       ],
@@ -12274,6 +15039,23 @@ const TERPENE_DATA = {
       "finding": "Flavonoids were profiled at class level in the leaf extract, separate from the oil.",
       "limitations": "Leaf-extract findings do not establish flavonoids in steam-distilled geranium oil. This record summarizes chemical evidence, not efficacy inferred from the publication title.",
       "material": "Leaf solvent extract; Pelargonium graveolens methanol-aqueous leaf extract",
+      "pubmedId": "39339589",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.3390%2Fplants13182612%22&format=json&resultType=core",
+        "sourceTitle": "Pelargonium graveolens: Towards In-Depth Metabolite Profiling, Antioxidant and Enzyme-Inhibitory Potential",
+        "doi": "10.3390/plants13182612",
+        "pubmedId": "39339589",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.3390/plants13182612",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "geranium"
       ],
@@ -12307,6 +15089,23 @@ const TERPENE_DATA = {
       "finding": "Geranyl acetate was measured in steam-distilled palmarosa biomass oil.",
       "limitations": "Treatments and harvests are distinct samples, not a retail oil specification. This record summarizes chemical evidence, not efficacy inferred from the publication title.",
       "material": "Essential oil; Cymbopogon martinii palmarosa biomass oils across agronomic treatments and harvests",
+      "pubmedId": "26437026",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1371%2Fjournal.pone.0139195%22&format=json&resultType=core",
+        "sourceTitle": "Ethanol and High-Value Terpene Co-Production from Lignocellulosic Biomass of Cymbopogon flexuosus and Cymbopogon martinii",
+        "doi": "10.1371/journal.pone.0139195",
+        "pubmedId": "26437026",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.1371/journal.pone.0139195",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "palmarosa"
       ],
@@ -12342,6 +15141,22 @@ const TERPENE_DATA = {
       "finding": "Linalyl acetate was reported in the cold-pressed ripe Turkish oil.",
       "limitations": "Ripeness and season affect composition; this value is not universal. This record summarizes chemical evidence, not efficacy inferred from the publication title.",
       "material": "Essential oil; Cold-pressed ripe Turkish bergamot peel oil",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A%2210.1080%2F10412905.2001.9699710%22&format=json&resultType=core",
+        "sourceTitle": "The compositions of Turkish bergamot oils produced by cold-pressing and steam distillation",
+        "doi": "10.1080/10412905.2001.9699710",
+        "pubmedId": null,
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://doi.org/10.1080/10412905.2001.9699710",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "bergamot"
       ],
@@ -12377,6 +15192,22 @@ const TERPENE_DATA = {
       "finding": "Visual tests showed grease removal by tested citrus oils.",
       "limitations": "Visual endpoint; detergent received different handling. Fractions are distinct materials; no dilute finished-product or surface-compatibility validation.",
       "precaution": "Experimental quantities are not a recipe; cleaning results do not establish disinfection or skin safety.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A34540881+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Effects of Molecular Distillation on the Chemical Components, Cleaning, and Antibacterial Abilities of Four Different Citrus Oils",
+        "doi": "10.3389/fnut.2021.731724",
+        "pubmedId": "34540881",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8440794/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "lemon",
         "sweet-orange",
@@ -12412,6 +15243,22 @@ const TERPENE_DATA = {
       "finding": "Proliferation, collagen III, IP-10 and ICAM-1 declined.",
       "limitations": "Mechanistic cell results, not clinical benefit or collagen boosting. Species match to catalog Boswellia serrata unresolved. Manufacturer-funded; authors were manufacturer employees.",
       "precaution": "Cell concentrations do not set topical safety or dosing; no wound, scar or anti-aging efficacy established.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A29450138+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Biological activities of frankincense essential oil in human dermal fibroblasts",
+        "doi": "10.1016/j.biopen.2017.01.003",
+        "pubmedId": "29450138",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5801908/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "frankincense"
       ],
@@ -12447,6 +15294,22 @@ const TERPENE_DATA = {
       "finding": "Hair counts increased at six months in both groups; no significant between-group difference. Neither improved at three months. Itching increased in both groups.",
       "limitations": "No vehicle placebo; lack of significant difference does not prove equivalence. Tested a standardized lotion, not arbitrary rosemary oil or spray.",
       "precaution": "Research regimen is not a formulation recipe or recommendation; scalp irritation occurred.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A25842469+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Rosemary oil vs minoxidil 2% for the treatment of androgenetic alopecia: a randomized comparative trial",
+        "doi": null,
+        "pubmedId": "25842469",
+        "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/25842469/",
+        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+      },
       "oilIds": [
         "rosemary"
       ],
@@ -12460,6 +15323,70 @@ const TERPENE_DATA = {
       ],
       "useNodeIds": [
         "health-skin-scalp-hair"
+      ]
+    },
+    {
+      "id": "kiecolt-glaser-2008-olfactory",
+      "title": "Olfactory influences on mood and autonomic, endocrine, and immune function",
+      "authors": "Kiecolt-Glaser JK, Graham JE, Malarkey WB, Porter K, Lemeshow S, Glaser R",
+      "journal": "Psychoneuroendocrinology",
+      "year": 2008,
+      "doi": "10.1016/j.psyneuen.2007.11.015",
+      "pubmedId": "18178322",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18178322/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 56,
+      "finding": "Lemon enhanced positive mood; lavender did not. Most physiological outcomes were unchanged; both oils reduced one measured immune response.",
+      "limitations": "Acute inhalation in healthy adults. Both oils were steam-extracted; catalog lemon is cold-pressed. No custom blend was tested.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A18178322+AND+SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Olfactory influences on mood and autonomic, endocrine, and immune function",
+        "doi": "10.1016/j.psyneuen.2007.11.015",
+        "pubmedId": "18178322",
+        "scope": "Publication identity only."
+      },
+      "summaryReview": {
+        "status": "full-text-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://cpb-us-e1.wpmucdn.com/sites.psu.edu/dist/9/54275/files/2016/07/olfactory-influences-on-mood-and-autonomic-endocrine-and-immune-function-2008.pdf",
+        "scope": "Methods and reported endpoints; preparation differences retained."
+      },
+      "oilIds": [
+        "lemon",
+        "lavender"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "mood"
+        },
+        {
+          "type": "health",
+          "subcategory": "immune"
+        },
+        {
+          "type": "health",
+          "subcategory": "cardiovascular",
+          "topic": "acute-physiology"
+        },
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "useNodeIds": [
+        "health-mental-health-mood",
+        "health-immune",
+        "health-cardiovascular-acute-physiology",
+        "health-skin-barrier-repair",
+        "health-pain-inflammation"
       ]
     }
   ],
@@ -12995,7 +15922,7 @@ const TERPENE_DATA = {
     }
   ],
   "taxonomy": {
-    "version": 1,
+    "version": 2,
     "nodes": [
       {
         "id": "health",
@@ -13146,13 +16073,21 @@ const TERPENE_DATA = {
         "aliases": [
           "health-cognitive-memory",
           "health:cognitive:memory",
-          "health/cognitive/memory"
+          "health/cognitive/memory",
+          "botanical-bioactivity-animal-cognition",
+          "botanical:bioactivity:animal-cognition",
+          "botanical/bioactivity/animal-cognition"
         ],
         "legacyBindings": [
           {
             "type": "health",
             "subcategory": "cognitive",
             "topic": "memory"
+          },
+          {
+            "type": "botanical",
+            "subcategory": "bioactivity",
+            "topic": "animal-cognition"
           }
         ],
         "declared": true
@@ -14073,8 +17008,8 @@ const TERPENE_DATA = {
       },
       {
         "id": "health-cognitive-plant-chemistry",
-        "label": "plant chemistry",
-        "parentId": "health-cognitive",
+        "label": "Terpene biosynthesis and variation",
+        "parentId": "botanical-composition",
         "aliases": [
           "health-cognitive-plant-chemistry",
           "health:cognitive:plant chemistry",
@@ -14290,8 +17225,8 @@ const TERPENE_DATA = {
       },
       {
         "id": "botanical-bioactivity",
-        "label": "Bioactivity",
-        "parentId": "botanical",
+        "label": "Biological activity",
+        "parentId": null,
         "aliases": [
           "botanical-bioactivity",
           "botanical:bioactivity",
@@ -14304,26 +17239,8 @@ const TERPENE_DATA = {
           }
         ],
         "declared": true,
-        "displayLabel": "Cellular and preclinical research",
+        "displayLabel": "Biological activity",
         "navigationRoot": true
-      },
-      {
-        "id": "botanical-bioactivity-animal-cognition",
-        "label": "Animal cognition",
-        "parentId": "botanical-bioactivity",
-        "aliases": [
-          "botanical-bioactivity-animal-cognition",
-          "botanical:bioactivity:animal-cognition",
-          "botanical/bioactivity/animal-cognition"
-        ],
-        "legacyBindings": [
-          {
-            "type": "botanical",
-            "subcategory": "bioactivity",
-            "topic": "animal-cognition"
-          }
-        ],
-        "declared": true
       },
       {
         "id": "health-skin-dandruff",
@@ -14363,8 +17280,8 @@ const TERPENE_DATA = {
       },
       {
         "id": "botanical-bioactivity-oral-tolerability",
-        "label": "Oral tolerability",
-        "parentId": "botanical-bioactivity",
+        "label": "Tolerability",
+        "parentId": "health",
         "aliases": [
           "botanical-bioactivity-oral-tolerability",
           "botanical:bioactivity:oral-tolerability",
@@ -14558,6 +17475,26 @@ const TERPENE_DATA = {
           }
         ],
         "declared": true
+      },
+      {
+        "id": "health-metabolic-alpha-amylase-inhibition",
+        "label": "α-Amylase inhibition",
+        "parentId": "health-metabolic",
+        "aliases": [
+          "health-metabolic-alpha-amylase-inhibition"
+        ],
+        "legacyBindings": [],
+        "declared": true
+      },
+      {
+        "id": "health-skin-barrier-repair",
+        "label": "Skin barrier repair",
+        "parentId": "health-skin",
+        "aliases": [
+          "health-skin-barrier-repair"
+        ],
+        "legacyBindings": [],
+        "declared": true
       }
     ],
     "aliases": {
@@ -14590,6 +17527,9 @@ const TERPENE_DATA = {
       "health-cognitive-memory": "health-cognitive-memory",
       "health:cognitive:memory": "health-cognitive-memory",
       "health/cognitive/memory": "health-cognitive-memory",
+      "botanical-bioactivity-animal-cognition": "health-cognitive-memory",
+      "botanical:bioactivity:animal-cognition": "health-cognitive-memory",
+      "botanical/bioactivity/animal-cognition": "health-cognitive-memory",
       "health-cognitive-alertness": "health-cognitive-alertness",
       "health:cognitive:alertness": "health-cognitive-alertness",
       "health/cognitive/alertness": "health-cognitive-alertness",
@@ -14780,9 +17720,6 @@ const TERPENE_DATA = {
       "botanical-bioactivity": "botanical-bioactivity",
       "botanical:bioactivity": "botanical-bioactivity",
       "botanical/bioactivity": "botanical-bioactivity",
-      "botanical-bioactivity-animal-cognition": "botanical-bioactivity-animal-cognition",
-      "botanical:bioactivity:animal-cognition": "botanical-bioactivity-animal-cognition",
-      "botanical/bioactivity/animal-cognition": "botanical-bioactivity-animal-cognition",
       "health-skin-dandruff": "health-skin-dandruff",
       "health:skin:dandruff": "health-skin-dandruff",
       "health/skin/dandruff": "health-skin-dandruff",
@@ -14823,7 +17760,9 @@ const TERPENE_DATA = {
       "pest/beetles": "pest-beetles",
       "pest-beetles-harmonia-axyridis": "pest-beetles-harmonia-axyridis",
       "pest:beetles:harmonia-axyridis": "pest-beetles-harmonia-axyridis",
-      "pest/beetles/harmonia-axyridis": "pest-beetles-harmonia-axyridis"
+      "pest/beetles/harmonia-axyridis": "pest-beetles-harmonia-axyridis",
+      "health-metabolic-alpha-amylase-inhibition": "health-metabolic-alpha-amylase-inhibition",
+      "health-skin-barrier-repair": "health-skin-barrier-repair"
     }
   },
   "evidenceAssertions": [
@@ -16590,7 +19529,7 @@ const TERPENE_DATA = {
         "status": "library-reviewed",
         "sourceIds": [],
         "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/8719697/"
+          "https://pubmed.ncbi.nlm.nih.gov/8646568/"
         ],
         "checkedAt": null,
         "notes": "library-record-reviewed-only Small sample; early study design. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
@@ -16635,7 +19574,7 @@ const TERPENE_DATA = {
         "status": "library-reviewed",
         "sourceIds": [],
         "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/20587112/"
+          "https://pubmed.ncbi.nlm.nih.gov/20512042/"
         ],
         "checkedAt": null,
         "notes": "library-record-reviewed-only Used a standardized oral preparation, not diffused oil. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
@@ -16680,7 +19619,7 @@ const TERPENE_DATA = {
         "status": "library-reviewed",
         "sourceIds": [],
         "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/16428753/"
+          "https://pubmed.ncbi.nlm.nih.gov/16418522/"
         ],
         "checkedAt": null,
         "notes": "library-record-only Exact material/species/chemotype and oil-specific results need primary verification before positive suggestion. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
@@ -16725,7 +19664,7 @@ const TERPENE_DATA = {
         "status": "library-reviewed",
         "sourceIds": [],
         "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/16428753/"
+          "https://pubmed.ncbi.nlm.nih.gov/16418522/"
         ],
         "checkedAt": null,
         "notes": "library-record-only Exact material/species/chemotype and oil-specific results need primary verification before positive suggestion. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
@@ -16770,7 +19709,7 @@ const TERPENE_DATA = {
         "status": "library-reviewed",
         "sourceIds": [],
         "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/12657144/"
+          "https://pubmed.ncbi.nlm.nih.gov/12645832/"
         ],
         "checkedAt": null,
         "notes": "library-record-only Never present as eucalyptus-oil, inhalation, household spray or finished-product clinical evidence. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
@@ -17461,43 +20400,42 @@ const TERPENE_DATA = {
       "oilId": "lavender",
       "studyId": "graham-browne-cox-2003",
       "useNodeId": "health-mental-health-anxiety",
-      "finding": null,
-      "limitations": null,
+      "finding": "Anxiety was lower with carrier oil alone than in the fragrant arms.",
+      "limitations": "Individual oil contributions were not isolated.",
       "material": {
         "kind": "combination",
-        "label": "essential-oil-blend",
+        "label": "Lavender, bergamot and cedarwood inhalation blend",
         "relevance": "related-preparation",
-        "speciesMatch": "not-independently-verified"
+        "speciesMatch": "not-established"
       },
       "model": {
         "kind": "human",
         "label": "human",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "null"
+        "direction": "negative",
+        "label": "Anxiety was lower with carrier oil alone than in the fragrant arms.",
+        "verification": "source-checked"
       },
-      "route": null,
+      "route": "inhalation",
       "species": "not-independently-authenticated",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/12805340/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed-only Self-report outcome measures; radiotherapy setting may limit generalizability. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of indexed abstract; source scope is limited to the named material, endpoint and model. No finished-product inference."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "notes": "Exposure checked in indexed abstract."
       }
     },
     {
@@ -18527,43 +21465,42 @@ const TERPENE_DATA = {
       "oilId": "rosemary",
       "studyId": "moss-cook-2003",
       "useNodeId": "health-cognitive-memory",
-      "finding": null,
-      "limitations": null,
+      "finding": "Memory quality improved but memory responses slowed.",
+      "limitations": "Acute laboratory exposure with multiple outcomes, not lasting cognitive improvement. This is separate from the later 20-person blood-cineole correlation study.",
       "material": {
         "kind": "essential-oil",
-        "label": "Rosmarinus officinalis essential-oil aroma",
-        "relevance": "whole-oil-direct",
-        "speciesMatch": "not-explicitly-verified"
+        "label": "Rosmarinus officinalis aroma",
+        "relevance": "whole-oil",
+        "speciesMatch": "matches"
       },
       "model": {
         "kind": "human",
-        "label": "Healthy-adult brief-exposure experiment and n=20 exposure/cineole correlation study",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "human",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
+        "direction": "mixed",
+        "label": "Memory quality improved but memory responses slowed.",
+        "verification": "source-checked"
       },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "unreviewed",
-      "researchMatch": false,
+      "route": "inhalation",
+      "species": "Rosmarinus officinalis",
+      "relevance": "direct",
+      "researchMatch": true,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/12690999/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Acute experiments; blood-cineole association is correlational and not proof of mechanism or treatment. Not independently source-reverified in this pass."
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of indexed abstract; source scope is limited to the named material, endpoint and model. No finished-product inference."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "notes": "Exposure checked in indexed abstract."
       }
     },
     {
@@ -18572,43 +21509,42 @@ const TERPENE_DATA = {
       "oilId": "lavender",
       "studyId": "moss-cook-2003",
       "useNodeId": "health-cognitive-memory",
-      "finding": null,
-      "limitations": null,
+      "finding": "Working memory and reaction times worsened.",
+      "limitations": "Acute laboratory exposure with multiple outcomes, not lasting cognitive improvement. This is separate from the later 20-person blood-cineole correlation study.",
       "material": {
         "kind": "essential-oil",
-        "label": "essential-oil",
+        "label": "Lavandula angustifolia aroma",
         "relevance": "whole-oil",
-        "speciesMatch": "not-independently-verified"
+        "speciesMatch": "matches"
       },
       "model": {
         "kind": "human",
         "label": "human",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "mixed"
+        "direction": "negative",
+        "label": "Working memory and reaction times worsened.",
+        "verification": "source-checked"
       },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "unreviewed",
-      "researchMatch": false,
+      "route": "inhalation",
+      "species": "Lavandula angustifolia",
+      "relevance": "direct",
+      "researchMatch": true,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/12690999/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed-only Healthy young adults; single brief exposure; laboratory setting. Not independently source-reverified in this pass. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of indexed abstract; source scope is limited to the named material, endpoint and model. No finished-product inference."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "notes": "Exposure checked in indexed abstract."
       }
     },
     {
@@ -19468,7 +22404,7 @@ const TERPENE_DATA = {
       "kind": "study-use",
       "oilId": "clove",
       "studyId": "halder-2011-clove-memory",
-      "useNodeId": "botanical-bioactivity-animal-cognition",
+      "useNodeId": "health-cognitive-memory",
       "finding": null,
       "limitations": null,
       "material": {
@@ -19513,7 +22449,7 @@ const TERPENE_DATA = {
       "kind": "study-use",
       "oilId": "clove",
       "studyId": "halder-2012-clove-acute-cognition",
-      "useNodeId": "botanical-bioactivity-animal-cognition",
+      "useNodeId": "health-cognitive-memory",
       "finding": null,
       "limitations": null,
       "material": {
@@ -23832,43 +26768,42 @@ const TERPENE_DATA = {
       "oilId": "rosemary",
       "studyId": "najar-2022",
       "useNodeId": "microbial-viruses",
-      "finding": null,
+      "finding": "Antiviral activity was reported for rosemary hybrids, not the catalog species.",
       "limitations": null,
       "material": {
         "kind": "essential-oil",
-        "label": "Named whole-oil sample; preparation details were not independently recorded.",
-        "relevance": "whole-oil-direct",
-        "speciesMatch": "not-explicitly-verified"
+        "label": "Salvia × lavandulaceus and S. × mendizabalii oils",
+        "relevance": "related-species",
+        "speciesMatch": "different-species"
       },
       "model": {
         "kind": "in-vitro",
         "label": "in-vitro",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "not-assessed"
+        "direction": "positive-in-studied-model",
+        "label": "Antiviral activity was reported for rosemary hybrids, not the catalog species.",
+        "verification": "source-checked"
       },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "unreviewed",
+      "route": "cell-culture",
+      "species": "Salvia × lavandulaceus; Salvia × mendizabalii",
+      "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/34176386/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Exact material/species/chemotype and oil-specific results need primary verification before positive suggestion. Not independently source-reverified in this pass. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of indexed abstract; source scope is limited to the named material, endpoint and model. No finished-product inference."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "notes": "Exposure checked in indexed abstract."
       }
     },
     {
@@ -23966,43 +26901,42 @@ const TERPENE_DATA = {
       "oilId": "cinnamon",
       "studyId": "guynot-2003",
       "useNodeId": "microbial-fungi-mold",
-      "finding": null,
+      "finding": "Cinnamon leaf vapor inhibited molds on agar; effectiveness declined in cake analogues.",
       "limitations": null,
       "material": {
         "kind": "essential-oil",
-        "label": "Named whole-oil sample; preparation details were not independently recorded.",
-        "relevance": "whole-oil-direct",
-        "speciesMatch": "not-explicitly-verified"
+        "label": "Cinnamon leaf oil; catalog oil is bark",
+        "relevance": "different-plant-part",
+        "speciesMatch": "not-established"
       },
       "model": {
         "kind": "in-vitro",
         "label": "in-vitro",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
+        "direction": "mixed",
+        "label": "Cinnamon leaf vapor inhibited molds on agar; effectiveness declined in cake analogues.",
+        "verification": "source-checked"
       },
-      "route": null,
+      "route": "vapor",
       "species": "not-independently-authenticated",
-      "relevance": "unreviewed",
+      "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/12694455/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed; detailed-primary-verification-pending Vapour-phase lab model; efficacy dropped in real food matrices. Not independently source-reverified in this pass. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of indexed abstract; source scope is limited to the named material, endpoint and model. No finished-product inference."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "notes": "Exposure checked in indexed abstract."
       }
     },
     {
@@ -24952,8 +27886,8 @@ const TERPENE_DATA = {
       "oilId": "lemon-eucalyptus",
       "studyId": "cai-2025-dustmite",
       "useNodeId": "pest-mites",
-      "finding": null,
-      "limitations": null,
+      "finding": "Whole oil showed contact toxicity and repellency. Complete vapor mortality was reported for isolated compounds.",
+      "limitations": "Oil and constituent assays must remain separate. Laboratory mite effects do not establish household exposure safety, allergy relief or protection from a finished spray.",
       "material": {
         "kind": "essential-oil",
         "label": "Commercial Eucalyptus citriodora (= Corymbia citriodora) essential oil from Xiya Reagent; unusual sample composition; extraction not verified.",
@@ -24968,7 +27902,7 @@ const TERPENE_DATA = {
       },
       "outcome": {
         "direction": "positive",
-        "label": "positive",
+        "label": "Whole oil showed contact toxicity and repellency. Complete vapor mortality was reported for isolated compounds.",
         "verification": "source-checked"
       },
       "route": "laboratory-contact-and-vapor",
@@ -26205,7 +29139,7 @@ const TERPENE_DATA = {
       "kind": "study-use",
       "oilId": "palmarosa",
       "studyId": "amrita-2023-palmarosa-bioactivities",
-      "useNodeId": "health-metabolic",
+      "useNodeId": "health-metabolic-alpha-amylase-inhibition",
       "finding": null,
       "limitations": null,
       "material": {
@@ -27411,43 +30345,42 @@ const TERPENE_DATA = {
       "oilId": "cannabis",
       "studyId": "cannabis-terpene-profiles-2022",
       "useNodeId": "health-cognitive-plant-chemistry",
-      "finding": null,
+      "finding": "Analyzed plant chemistry; no clinical or functional use tested.",
       "limitations": null,
       "material": {
-        "kind": "review",
-        "label": "Plant material and varied preparations; includes nonvolatile compounds",
-        "relevance": "review",
-        "speciesMatch": "not-explicitly-verified"
+        "kind": "plant-material",
+        "label": "Cannabis sativa plant material",
+        "relevance": "related-preparation",
+        "speciesMatch": "matches"
       },
       "model": {
-        "kind": "plant",
-        "label": "Reviews and commercial-sample chemistry",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "kind": "analytical",
+        "label": "Plant metabolite analysis",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "not-assessed"
+        "direction": "analytical-not-efficacy",
+        "label": "Chemical variation; no functional benefit tested.",
+        "verification": "source-checked"
       },
-      "route": null,
-      "species": "not-independently-authenticated",
+      "route": "not-applicable",
+      "species": "Cannabis sativa",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/30690172/"
+          "https://pubmed.ncbi.nlm.nih.gov/32591428/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Remove cognitive health tagging for plant-chemistry records. Cannabinoid-rich extracts and flavonoids cannot establish essential-oil function. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-18",
+        "notes": "Corrected primary citation and abstract checked. Plant chemistry is not cognitive or other functional-use evidence; the material is not a distilled essential oil."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "not-applicable",
+        "notes": "Analytical plant chemistry; no application route."
       }
     },
     {
@@ -27456,43 +30389,42 @@ const TERPENE_DATA = {
       "oilId": "cannabis",
       "studyId": "cannabis-terpene-diversity-2016",
       "useNodeId": "health-cognitive-plant-chemistry",
-      "finding": null,
+      "finding": "Analyzed plant chemistry; no clinical or functional use tested.",
       "limitations": null,
       "material": {
-        "kind": "review",
-        "label": "Plant material and varied preparations; includes nonvolatile compounds",
-        "relevance": "review",
-        "speciesMatch": "not-explicitly-verified"
+        "kind": "plant-material",
+        "label": "Cannabis sativa plant material",
+        "relevance": "related-preparation",
+        "speciesMatch": "matches"
       },
       "model": {
-        "kind": "plant",
-        "label": "Reviews and commercial-sample chemistry",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "kind": "analytical",
+        "label": "Plant metabolite analysis",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "not-assessed"
+        "direction": "analytical-not-efficacy",
+        "label": "Chemical variation; no functional benefit tested.",
+        "verification": "source-checked"
       },
-      "route": null,
-      "species": "not-independently-authenticated",
+      "route": "not-applicable",
+      "species": "Cannabis sativa",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/28602488/"
+          "https://pubmed.ncbi.nlm.nih.gov/31084880/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Remove cognitive health tagging for plant-chemistry records. Cannabinoid-rich extracts and flavonoids cannot establish essential-oil function. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-18",
+        "notes": "Corrected primary citation and abstract checked. Plant chemistry is not cognitive or other functional-use evidence; the material is not a distilled essential oil."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "not-applicable",
+        "notes": "Analytical plant chemistry; no application route."
       }
     },
     {
@@ -27546,43 +30478,42 @@ const TERPENE_DATA = {
       "oilId": "cannabis",
       "studyId": "cannabis-volatile-classification-2022",
       "useNodeId": "health-cognitive-plant-chemistry",
-      "finding": null,
+      "finding": "Analyzed plant chemistry; no clinical or functional use tested.",
       "limitations": null,
       "material": {
-        "kind": "related-preparation",
-        "label": "Plant material and varied preparations; includes nonvolatile compounds",
-        "relevance": "related-species/preparation",
-        "speciesMatch": "not-explicitly-verified"
+        "kind": "plant-material",
+        "label": "Cannabis sativa plant material",
+        "relevance": "related-preparation",
+        "speciesMatch": "matches"
       },
       "model": {
-        "kind": "plant",
-        "label": "Reviews and commercial-sample chemistry",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "kind": "analytical",
+        "label": "Plant metabolite analysis",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
+        "direction": "analytical-not-efficacy",
+        "label": "Chemical variation; no functional benefit tested.",
+        "verification": "source-checked"
       },
-      "route": null,
-      "species": "not-independently-authenticated",
+      "route": "not-applicable",
+      "species": "Cannabis sativa",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/35446892/"
+          "https://pubmed.ncbi.nlm.nih.gov/35588111/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Remove cognitive health tagging for plant-chemistry records. Cannabinoid-rich extracts and flavonoids cannot establish essential-oil function. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-18",
+        "notes": "Corrected primary citation and abstract checked. Plant chemistry is not cognitive or other functional-use evidence; the material is not a distilled essential oil."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "not-applicable",
+        "notes": "Analytical plant chemistry; no application route."
       }
     },
     {
@@ -29718,96 +32649,6 @@ const TERPENE_DATA = {
       }
     },
     {
-      "id": "use-6028afa8358a59d4e580a8a3",
-      "kind": "study-use",
-      "oilId": "peppermint",
-      "studyId": "tick-eo-2024",
-      "useNodeId": "pest-flies",
-      "finding": null,
-      "limitations": null,
-      "route": null,
-      "species": "not-independently-authenticated",
-      "material": {
-        "kind": "essential-oil",
-        "label": "Study essential oils and formulations",
-        "relevance": "whole-oil-direct",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "environmental",
-        "label": "Housefly and tick models",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
-      },
-      "relevance": "unreviewed",
-      "researchMatch": false,
-      "supportsFunctionalUse": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/38835262/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-only Species, formulation, concentration and endpoints differ; no human-use repellent efficacy assurance. Not independently source-reverified in this pass. Audit did not clear this relation for suggestion."
-      },
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
-      "id": "use-7de53e15016b63844ac2f47a",
-      "kind": "study-use",
-      "oilId": "peppermint",
-      "studyId": "lone-star-tick-eo-2024",
-      "useNodeId": "pest-flies",
-      "finding": null,
-      "limitations": null,
-      "route": null,
-      "species": "not-independently-authenticated",
-      "material": {
-        "kind": "essential-oil",
-        "label": "Study essential oils and formulations",
-        "relevance": "whole-oil-direct",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "environmental",
-        "label": "Housefly and tick models",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
-      },
-      "relevance": "unreviewed",
-      "researchMatch": false,
-      "supportsFunctionalUse": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/38711138/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-only Species, formulation, concentration and endpoints differ; no human-use repellent efficacy assurance. Not independently source-reverified in this pass. Audit did not clear this relation for suggestion."
-      },
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
       "id": "use-acd1a7e8d32e5b33e24c2b8a",
       "kind": "study-use",
       "oilId": "peppermint",
@@ -30229,43 +33070,42 @@ const TERPENE_DATA = {
       "oilId": "rosemary",
       "studyId": "moss-cook-2003",
       "useNodeId": "health-cognitive",
-      "finding": null,
-      "limitations": null,
-      "route": null,
-      "species": "not-independently-authenticated",
+      "finding": "Memory quality improved but memory responses slowed.",
+      "limitations": "Acute laboratory exposure with multiple outcomes, not lasting cognitive improvement. This is separate from the later 20-person blood-cineole correlation study.",
+      "route": "inhalation",
+      "species": "Rosmarinus officinalis",
       "material": {
         "kind": "essential-oil",
-        "label": "Rosmarinus officinalis essential-oil aroma",
-        "relevance": "whole-oil-direct",
-        "speciesMatch": "not-explicitly-verified"
+        "label": "Rosmarinus officinalis aroma",
+        "relevance": "whole-oil",
+        "speciesMatch": "matches"
       },
       "model": {
         "kind": "human",
-        "label": "Healthy-adult brief-exposure experiment and n=20 exposure/cineole correlation study",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "human",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
+        "direction": "mixed",
+        "label": "Memory quality improved but memory responses slowed.",
+        "verification": "source-checked"
       },
-      "relevance": "unreviewed",
-      "researchMatch": false,
+      "relevance": "direct",
+      "researchMatch": true,
       "supportsFunctionalUse": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/12690999/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Acute experiments; blood-cineole association is correlational and not proof of mechanism or treatment. Not independently source-reverified in this pass."
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of indexed abstract; source scope is limited to the named material, endpoint and model. No finished-product inference."
       },
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "notes": "Exposure checked in indexed abstract."
       }
     },
     {
@@ -30587,43 +33427,42 @@ const TERPENE_DATA = {
       "oilId": "cannabis",
       "studyId": "cannabis-terpene-profiles-2022",
       "useNodeId": "botanical-composition",
-      "finding": null,
+      "finding": "Analyzed plant chemistry; no clinical or functional use tested.",
       "limitations": null,
       "route": "not-applicable",
-      "species": "not-independently-authenticated",
+      "species": "Cannabis sativa",
       "material": {
-        "kind": "review",
-        "label": "Plant material and varied preparations; includes nonvolatile compounds",
-        "relevance": "review",
-        "speciesMatch": "not-explicitly-verified"
+        "kind": "plant-material",
+        "label": "Cannabis sativa plant material",
+        "relevance": "related-preparation",
+        "speciesMatch": "matches"
       },
       "model": {
         "kind": "analytical",
-        "label": "Chemical analysis of the cited sample.",
-        "verification": "library-reported-unverified",
+        "label": "Plant metabolite analysis",
+        "verification": "source-checked",
         "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "not-assessed"
+        "direction": "analytical-not-efficacy",
+        "label": "Chemical variation; no functional benefit tested.",
+        "verification": "source-checked"
       },
       "relevance": "contextual",
       "researchMatch": false,
       "supportsFunctionalUse": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/30690172/"
+          "https://pubmed.ncbi.nlm.nih.gov/32591428/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Remove cognitive health tagging for plant-chemistry records. Cannabinoid-rich extracts and flavonoids cannot establish essential-oil function. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-18",
+        "notes": "Corrected primary citation and abstract checked. Plant chemistry is not cognitive or other functional-use evidence; the material is not a distilled essential oil."
       },
       "routeVerification": {
         "status": "not-applicable",
-        "notes": "Chemical-analysis endpoint; biological administration routes do not apply."
+        "notes": "Analytical plant chemistry; no application route."
       }
     },
     {
@@ -30632,43 +33471,42 @@ const TERPENE_DATA = {
       "oilId": "cannabis",
       "studyId": "cannabis-terpene-diversity-2016",
       "useNodeId": "botanical-composition",
-      "finding": null,
+      "finding": "Analyzed plant chemistry; no clinical or functional use tested.",
       "limitations": null,
       "route": "not-applicable",
-      "species": "not-independently-authenticated",
+      "species": "Cannabis sativa",
       "material": {
-        "kind": "review",
-        "label": "Plant material and varied preparations; includes nonvolatile compounds",
-        "relevance": "review",
-        "speciesMatch": "not-explicitly-verified"
+        "kind": "plant-material",
+        "label": "Cannabis sativa plant material",
+        "relevance": "related-preparation",
+        "speciesMatch": "matches"
       },
       "model": {
         "kind": "analytical",
-        "label": "Chemical analysis of the cited sample.",
-        "verification": "library-reported-unverified",
+        "label": "Plant metabolite analysis",
+        "verification": "source-checked",
         "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "not-assessed"
+        "direction": "analytical-not-efficacy",
+        "label": "Chemical variation; no functional benefit tested.",
+        "verification": "source-checked"
       },
       "relevance": "contextual",
       "researchMatch": false,
       "supportsFunctionalUse": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/28602488/"
+          "https://pubmed.ncbi.nlm.nih.gov/31084880/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Remove cognitive health tagging for plant-chemistry records. Cannabinoid-rich extracts and flavonoids cannot establish essential-oil function. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-18",
+        "notes": "Corrected primary citation and abstract checked. Plant chemistry is not cognitive or other functional-use evidence; the material is not a distilled essential oil."
       },
       "routeVerification": {
         "status": "not-applicable",
-        "notes": "Chemical-analysis endpoint; biological administration routes do not apply."
+        "notes": "Analytical plant chemistry; no application route."
       }
     },
     {
@@ -30722,43 +33560,42 @@ const TERPENE_DATA = {
       "oilId": "cannabis",
       "studyId": "cannabis-volatile-classification-2022",
       "useNodeId": "botanical-composition",
-      "finding": null,
+      "finding": "Analyzed plant chemistry; no clinical or functional use tested.",
       "limitations": null,
       "route": "not-applicable",
-      "species": "not-independently-authenticated",
+      "species": "Cannabis sativa",
       "material": {
-        "kind": "related-preparation",
-        "label": "Plant material and varied preparations; includes nonvolatile compounds",
-        "relevance": "related-species/preparation",
-        "speciesMatch": "not-explicitly-verified"
+        "kind": "plant-material",
+        "label": "Cannabis sativa plant material",
+        "relevance": "related-preparation",
+        "speciesMatch": "matches"
       },
       "model": {
         "kind": "analytical",
-        "label": "Chemical analysis of the cited sample.",
-        "verification": "library-reported-unverified",
+        "label": "Plant metabolite analysis",
+        "verification": "source-checked",
         "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
+        "direction": "analytical-not-efficacy",
+        "label": "Chemical variation; no functional benefit tested.",
+        "verification": "source-checked"
       },
       "relevance": "contextual",
       "researchMatch": false,
       "supportsFunctionalUse": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/35446892/"
+          "https://pubmed.ncbi.nlm.nih.gov/35588111/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Remove cognitive health tagging for plant-chemistry records. Cannabinoid-rich extracts and flavonoids cannot establish essential-oil function. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-18",
+        "notes": "Corrected primary citation and abstract checked. Plant chemistry is not cognitive or other functional-use evidence; the material is not a distilled essential oil."
       },
       "routeVerification": {
         "status": "not-applicable",
-        "notes": "Chemical-analysis endpoint; biological administration routes do not apply."
+        "notes": "Analytical plant chemistry; no application route."
       }
     },
     {
@@ -31629,43 +34466,42 @@ const TERPENE_DATA = {
       "oilId": "bergamot",
       "studyId": "graham-browne-cox-2003",
       "useNodeId": "health-mental-health-anxiety",
-      "finding": null,
-      "limitations": "Blend results cannot be attributed to this individual oil.",
-      "route": null,
+      "finding": "Anxiety was lower with carrier oil alone than in the fragrant arms.",
+      "limitations": "Individual oil contributions were not isolated.",
+      "route": "inhalation",
       "species": "not-independently-authenticated",
       "material": {
         "kind": "combination",
-        "label": "Lavender, bergamot and cedarwood inhalation blend.",
+        "label": "Lavender, bergamot and cedarwood inhalation blend",
         "relevance": "related-preparation",
-        "speciesMatch": "not-independently-authenticated"
+        "speciesMatch": "not-established"
       },
       "model": {
         "kind": "human",
-        "label": "Human randomized trial of a multi-oil blend.",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "human",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "reportedDirection": "null",
-        "label": "Reported blend-level result; individual oil contribution not isolated.",
-        "verification": "library-reported-unverified"
+        "direction": "negative",
+        "label": "Anxiety was lower with carrier oil alone than in the fragrant arms.",
+        "verification": "source-checked"
       },
       "relevance": "contextual",
       "researchMatch": false,
       "supportsFunctionalUse": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/12805340/"
         ],
-        "checkedAt": null,
-        "notes": "Recovered contextual blend component from the canonical paper; no independent source recheck of this arm in this pass."
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of indexed abstract; source scope is limited to the named material, endpoint and model. No finished-product inference."
       },
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "notes": "Exposure checked in indexed abstract."
       }
     },
     {
@@ -31887,6 +34723,456 @@ const TERPENE_DATA = {
       "routeVerification": {
         "status": "source-checked",
         "notes": "Endpoint-specific method from the checked publication."
+      }
+    },
+    {
+      "id": "use-cff1034d6f3aeade79ac3be0",
+      "kind": "study-use",
+      "oilId": "lemon",
+      "studyId": "kiecolt-glaser-2008-olfactory",
+      "useNodeId": "health-mental-health-mood",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Steam-extracted lemon oil",
+        "relevance": "different-extraction",
+        "speciesMatch": "matches"
+      },
+      "model": {
+        "kind": "human",
+        "label": "human",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive-in-studied-model",
+        "label": "Positive mood increased.",
+        "verification": "source-checked"
+      },
+      "finding": "Positive mood increased.",
+      "route": "inhalation",
+      "species": "Citrus limonum",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "notes": "Exposure checked in full text, methods §2.4 and results."
+      },
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/18178322/",
+          "https://cpb-us-e1.wpmucdn.com/sites.psu.edu/dist/9/54275/files/2016/07/olfactory-influences-on-mood-and-autonomic-endocrine-and-immune-function-2008.pdf"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of full text, methods §2.4 and results; source scope is limited to the named material, endpoint and model. No finished-product inference."
+      }
+    },
+    {
+      "id": "use-4d7644892abe41b9ef68291b",
+      "kind": "study-use",
+      "oilId": "lemon",
+      "studyId": "kiecolt-glaser-2008-olfactory",
+      "useNodeId": "health-immune",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Steam-extracted lemon oil",
+        "relevance": "different-extraction",
+        "speciesMatch": "matches"
+      },
+      "model": {
+        "kind": "human",
+        "label": "human",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mechanistic-mixed",
+        "label": "Reduced delayed hypersensitivity response; no consistent cytokine changes.",
+        "verification": "source-checked"
+      },
+      "finding": "Reduced delayed hypersensitivity response; no consistent cytokine changes.",
+      "route": "inhalation",
+      "species": "Citrus limonum",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "notes": "Exposure checked in full text, methods §2.4 and results."
+      },
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/18178322/",
+          "https://cpb-us-e1.wpmucdn.com/sites.psu.edu/dist/9/54275/files/2016/07/olfactory-influences-on-mood-and-autonomic-endocrine-and-immune-function-2008.pdf"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of full text, methods §2.4 and results; source scope is limited to the named material, endpoint and model. No finished-product inference."
+      }
+    },
+    {
+      "id": "use-d51db7afb8eb0a7af5b110f4",
+      "kind": "study-use",
+      "oilId": "lemon",
+      "studyId": "kiecolt-glaser-2008-olfactory",
+      "useNodeId": "health-cardiovascular-acute-physiology",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Steam-extracted lemon oil",
+        "relevance": "different-extraction",
+        "speciesMatch": "matches"
+      },
+      "model": {
+        "kind": "human",
+        "label": "human",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "null",
+        "label": "No reliable heart-rate or blood-pressure change.",
+        "verification": "source-checked"
+      },
+      "finding": "No reliable heart-rate or blood-pressure change.",
+      "route": "inhalation",
+      "species": "Citrus limonum",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "notes": "Exposure checked in full text, methods §2.4 and results."
+      },
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/18178322/",
+          "https://cpb-us-e1.wpmucdn.com/sites.psu.edu/dist/9/54275/files/2016/07/olfactory-influences-on-mood-and-autonomic-endocrine-and-immune-function-2008.pdf"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of full text, methods §2.4 and results; source scope is limited to the named material, endpoint and model. No finished-product inference."
+      }
+    },
+    {
+      "id": "use-0c5b2c7de5f6afbe3b6472ab",
+      "kind": "study-use",
+      "oilId": "lemon",
+      "studyId": "kiecolt-glaser-2008-olfactory",
+      "useNodeId": "health-skin-barrier-repair",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Steam-extracted lemon oil",
+        "relevance": "different-extraction",
+        "speciesMatch": "matches"
+      },
+      "model": {
+        "kind": "human",
+        "label": "human",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "null",
+        "label": "No reliable acceleration of barrier repair.",
+        "verification": "source-checked"
+      },
+      "finding": "No reliable acceleration of barrier repair.",
+      "route": "inhalation",
+      "species": "Citrus limonum",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "notes": "Exposure checked in full text, methods §2.4 and results."
+      },
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/18178322/",
+          "https://cpb-us-e1.wpmucdn.com/sites.psu.edu/dist/9/54275/files/2016/07/olfactory-influences-on-mood-and-autonomic-endocrine-and-immune-function-2008.pdf"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of full text, methods §2.4 and results; source scope is limited to the named material, endpoint and model. No finished-product inference."
+      }
+    },
+    {
+      "id": "use-d33a0f87937988ce1969c552",
+      "kind": "study-use",
+      "oilId": "lemon",
+      "studyId": "kiecolt-glaser-2008-olfactory",
+      "useNodeId": "health-pain-inflammation",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Steam-extracted lemon oil",
+        "relevance": "different-extraction",
+        "speciesMatch": "matches"
+      },
+      "model": {
+        "kind": "human",
+        "label": "human",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "null",
+        "label": "No reliable reduction in cold-pressor pain.",
+        "verification": "source-checked"
+      },
+      "finding": "No reliable reduction in cold-pressor pain.",
+      "route": "inhalation",
+      "species": "Citrus limonum",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "notes": "Exposure checked in full text, methods §2.4 and results."
+      },
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/18178322/",
+          "https://cpb-us-e1.wpmucdn.com/sites.psu.edu/dist/9/54275/files/2016/07/olfactory-influences-on-mood-and-autonomic-endocrine-and-immune-function-2008.pdf"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of full text, methods §2.4 and results; source scope is limited to the named material, endpoint and model. No finished-product inference."
+      }
+    },
+    {
+      "id": "use-67a63def7ed8f3141bbbcc2a",
+      "kind": "study-use",
+      "oilId": "lavender",
+      "studyId": "kiecolt-glaser-2008-olfactory",
+      "useNodeId": "health-mental-health-mood",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Steam-extracted lavender oil",
+        "relevance": "whole-oil",
+        "speciesMatch": "matches"
+      },
+      "model": {
+        "kind": "human",
+        "label": "human",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "null",
+        "label": "No mood enhancement.",
+        "verification": "source-checked"
+      },
+      "finding": "No mood enhancement.",
+      "route": "inhalation",
+      "species": "Lavandula angustifolia",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "notes": "Exposure checked in full text, methods §2.4 and results."
+      },
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/18178322/",
+          "https://cpb-us-e1.wpmucdn.com/sites.psu.edu/dist/9/54275/files/2016/07/olfactory-influences-on-mood-and-autonomic-endocrine-and-immune-function-2008.pdf"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of full text, methods §2.4 and results; source scope is limited to the named material, endpoint and model. No finished-product inference."
+      }
+    },
+    {
+      "id": "use-5cc7fc9dcebc227151daebd3",
+      "kind": "study-use",
+      "oilId": "lavender",
+      "studyId": "kiecolt-glaser-2008-olfactory",
+      "useNodeId": "health-immune",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Steam-extracted lavender oil",
+        "relevance": "whole-oil",
+        "speciesMatch": "matches"
+      },
+      "model": {
+        "kind": "human",
+        "label": "human",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mechanistic-mixed",
+        "label": "Reduced delayed hypersensitivity response; no consistent cytokine changes.",
+        "verification": "source-checked"
+      },
+      "finding": "Reduced delayed hypersensitivity response; no consistent cytokine changes.",
+      "route": "inhalation",
+      "species": "Lavandula angustifolia",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "notes": "Exposure checked in full text, methods §2.4 and results."
+      },
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/18178322/",
+          "https://cpb-us-e1.wpmucdn.com/sites.psu.edu/dist/9/54275/files/2016/07/olfactory-influences-on-mood-and-autonomic-endocrine-and-immune-function-2008.pdf"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of full text, methods §2.4 and results; source scope is limited to the named material, endpoint and model. No finished-product inference."
+      }
+    },
+    {
+      "id": "use-1639b396b8fc1ca6280889c5",
+      "kind": "study-use",
+      "oilId": "lavender",
+      "studyId": "kiecolt-glaser-2008-olfactory",
+      "useNodeId": "health-cardiovascular-acute-physiology",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Steam-extracted lavender oil",
+        "relevance": "whole-oil",
+        "speciesMatch": "matches"
+      },
+      "model": {
+        "kind": "human",
+        "label": "human",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "null",
+        "label": "No reliable heart-rate or blood-pressure change.",
+        "verification": "source-checked"
+      },
+      "finding": "No reliable heart-rate or blood-pressure change.",
+      "route": "inhalation",
+      "species": "Lavandula angustifolia",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "notes": "Exposure checked in full text, methods §2.4 and results."
+      },
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/18178322/",
+          "https://cpb-us-e1.wpmucdn.com/sites.psu.edu/dist/9/54275/files/2016/07/olfactory-influences-on-mood-and-autonomic-endocrine-and-immune-function-2008.pdf"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of full text, methods §2.4 and results; source scope is limited to the named material, endpoint and model. No finished-product inference."
+      }
+    },
+    {
+      "id": "use-161716dec2fa9b809445a1fd",
+      "kind": "study-use",
+      "oilId": "lavender",
+      "studyId": "kiecolt-glaser-2008-olfactory",
+      "useNodeId": "health-skin-barrier-repair",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Steam-extracted lavender oil",
+        "relevance": "whole-oil",
+        "speciesMatch": "matches"
+      },
+      "model": {
+        "kind": "human",
+        "label": "human",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "null",
+        "label": "No reliable acceleration of barrier repair.",
+        "verification": "source-checked"
+      },
+      "finding": "No reliable acceleration of barrier repair.",
+      "route": "inhalation",
+      "species": "Lavandula angustifolia",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "notes": "Exposure checked in full text, methods §2.4 and results."
+      },
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/18178322/",
+          "https://cpb-us-e1.wpmucdn.com/sites.psu.edu/dist/9/54275/files/2016/07/olfactory-influences-on-mood-and-autonomic-endocrine-and-immune-function-2008.pdf"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of full text, methods §2.4 and results; source scope is limited to the named material, endpoint and model. No finished-product inference."
+      }
+    },
+    {
+      "id": "use-98bcfdc9c47d83c5c4997715",
+      "kind": "study-use",
+      "oilId": "lavender",
+      "studyId": "kiecolt-glaser-2008-olfactory",
+      "useNodeId": "health-pain-inflammation",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Steam-extracted lavender oil",
+        "relevance": "whole-oil",
+        "speciesMatch": "matches"
+      },
+      "model": {
+        "kind": "human",
+        "label": "human",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "null",
+        "label": "No reliable reduction in cold-pressor pain.",
+        "verification": "source-checked"
+      },
+      "finding": "No reliable reduction in cold-pressor pain.",
+      "route": "inhalation",
+      "species": "Lavandula angustifolia",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "notes": "Exposure checked in full text, methods §2.4 and results."
+      },
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/18178322/",
+          "https://cpb-us-e1.wpmucdn.com/sites.psu.edu/dist/9/54275/files/2016/07/olfactory-influences-on-mood-and-autonomic-endocrine-and-immune-function-2008.pdf"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of full text, methods §2.4 and results; source scope is limited to the named material, endpoint and model. No finished-product inference."
       }
     }
   ],

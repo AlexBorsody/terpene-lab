@@ -9,7 +9,7 @@
   const byId = Object.fromEntries(oils.map(o => [o.id, o]));
   const compounds = Object.fromEntries(data.compounds.map(c => [c.id, c]));
   const STORAGE = 'terpene-lab:blend:v1';
-  const priceLabel = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(config.product.price);
+  const priceLabel = new Intl.NumberFormat('en-US',{style:'currency',currency:config.product.currency}).format(config.product.price);
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const safeUrl = value => { try { const u = new URL(value); return u.protocol === 'https:' ? u.href : ''; } catch { return ''; } };
   const initial = () => ({v:1,catalogVersion:config.catalogVersion,name:'My custom blend',path:'qualities',qualityIds:[],petContext:false,oils:[]});
@@ -72,7 +72,7 @@
     <div class="blend-hero">
       <div><p class="blend-eyebrow">THE FORMULA IS YOURS</p><h2>Create a custom blend.</h2>
         <p class="blend-intro">Start with a research topic or an essential oil. Explore the chemistry, shape the aroma, and see the evidence and precautions together.</p></div>
-      <div class="blend-product"><span class="blend-product-size">SUNNY'S SHIELD / 8 OZ</span><strong>${esc(priceLabel)}<span> per custom blend</span></strong><p>Standard bottle, base and label.</p><span class="blend-pill">Manual review before mixing</span></div>
+      <div class="blend-product"><span class="blend-product-size">${esc(config.product.name)} / ${esc(config.product.size)}</span><strong>${esc(priceLabel)}<span> per custom blend</span></strong><p>Standard bottle, base and label.</p><span class="blend-pill">Manual review before mixing</span></div>
     </div>
     <p id="blend-link-error" class="blend-message is-error" role="alert" ${restoreError ? '' : 'hidden'}>${esc(restoreError)}</p>
     <div class="blend-step-title"><span>01</span><h3>Choose your starting point</h3></div>
@@ -199,7 +199,7 @@
       <div id="blend-share-fallback" hidden><label for="blend-share-url">Copy this recipe link</label><input id="blend-share-url" readonly></div>
       <p class="blend-small">Saved on this device. Anyone with your link can see the recipe and its name.</p>
       <div class="blend-profile-list">${recipe.oils.map(oilProfile).join('')}</div>
-      <section class="blend-checkout" aria-labelledby="blend-checkout-title"><div><p class="blend-eyebrow">CUSTOM BLEND / SUNNY'S SHIELD</p><h4 id="blend-checkout-title">Your recipe. Our standard 8 oz spray.</h4><p>${esc(priceLabel)} per bottle · Standard base, bottle and label.</p><p class="blend-small">Your recipe name, oil proportions and pet context travel with the order for manual review before mixing. Shopify handles payment and shipping.</p><p class="blend-small">Cosmetic use only. No medical claims.</p></div><div>${cart ? `<a id="blend-checkout" class="blend-primary" href="${esc(cart.url)}" target="_top" rel="noreferrer" aria-describedby="blend-checkout-status">Continue to Shopify · ${esc(priceLabel)}</a><p id="blend-checkout-status" class="blend-small">Opens Shopify checkout for this recipe. Check the cart contents before paying.</p>` : `<p id="blend-checkout-status" class="blend-order-pending" role="status">${esc(orderMessage)}</p>`}</div></section>
+      <section class="blend-checkout" aria-labelledby="blend-checkout-title"><div><p class="blend-eyebrow">${esc(config.product.name)} / SUNNY'S SHIELD</p><h4 id="blend-checkout-title">Your recipe. Our ${esc(config.product.size)} bottle.</h4><p>${esc(priceLabel)} per bottle · Standard base, bottle and label.</p><p class="blend-small">Your recipe name, oil proportions and pet context travel with the order for manual review before mixing. Shopify handles payment and shipping.</p><p class="blend-small">Explore every research category. Final use and concentration need review for the finished product.</p></div><div>${cart ? `<a id="blend-checkout" class="blend-primary" href="${esc(cart.url)}" target="_top" rel="noreferrer" aria-describedby="blend-checkout-status">Continue to Shopify · ${esc(priceLabel)}</a><p id="blend-checkout-status" class="blend-small">Opens Shopify checkout for this recipe. Check the cart contents before paying.</p>` : `<p id="blend-checkout-status" class="blend-order-pending" role="status">${esc(orderMessage)}</p>`}</div></section>
       ${safety.blockers.length ? `<section class="blend-review-requirements"><h4>What still needs review</h4><ul>${warningList(safety.blockers)}</ul></section>` : ''}`;
     bindStudyLinks(section);
   }

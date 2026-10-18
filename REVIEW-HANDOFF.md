@@ -1,5 +1,27 @@
 # Terpene Lab: independent review handoff
 
+## Independent source review — October 18, 2026
+
+The next review corrected the canonical master rather than accepting passing migration tests as scientific verification. All **156 existing publication identities** were checked using Europe PMC/PubMed or Crossref; **154 available abstracts** were screened. Two indexed records supplied no abstract (`composition-lemongrass-infusion-2014`, `composition-cx01`). One additional controlled human study was checked against its full text. All **34 compound formulas** were cross-checked against PubChem, with NIST used to resolve a conflicting curzerene name-search result. The original 28 oil profiles were reviewed and unsupported rankings/outcome shortcuts removed.
+
+Current inventory: **28 oils, 34 compounds, 157 studies, 45 inherited source records, 90 use nodes, 348 study-use assertions and 53 chemical observations**. There are 224 oil-study links, 62 source-checked oil-paper pairs and 88 direct research-topic assertions. These are relationship counts, not counts of proven benefits.
+
+### Corrections that affect what customers see
+
+- Seven PubMed destinations pointed to unrelated papers. Stable IDs remain, but the links, DOI/PMID metadata, affected years and active provenance URLs are corrected: Komori citrus (8646568), Kasper Silexan (20512042), Carson tea tree review (16418522), Juergens cineole (12645832), and three cannabis chemistry papers (32591428, 31084880, 35588111).
+- Tick studies no longer carry fly tags. Plant terpene chemistry now sits under composition, not cognition. Animal memory endpoints use the same memory node as other models; the model remains an independent facet. Historical links still resolve.
+- Moss 2003 retains both rosemary's improved memory quality and slower responses, and lavender's adverse cognitive results. Graham 2003 reports lower anxiety with carrier alone than with fragrant arms. The dementia review includes 13 trials, with differing certainty and incomplete harms reporting.
+- Cinnamon leaf versus bark, rosemary hybrids, PMD-rich processed material versus lemon-eucalyptus oil, isolated compounds versus whole oils, formulation preservation versus cleaning, and laboratory surrogate-virus reductions remain explicit. The peppermint field result is no longer attributed to eucalyptus.
+- The added [Kiecolt-Glaser 2008 study](https://pubmed.ncbi.nlm.nih.gov/18178322/) carries separate oil/outcome assertions. Steam-extracted lemon is contextual to the cold-pressed catalog material; lavender's null physiological outcomes remain visible. No trial of a custom blend is implied.
+- Furanoeudesma-1,3-diene is corrected to C15H18O. Formula-source links are visible on compound pages; citral's mixture scope and the curzerene source conflict are recorded.
+- Topic menus no longer include hidden duplicate aliases. Filtered oil cards and their study sorting use the selected topic's unique papers. Oil aromas are visible/searchable. Product name, currency, price and size come from the canonical configuration. All research categories remain available.
+
+### Verification scope and remaining limits
+
+Identity checks and abstract screening are now separate metadata from oil-specific source verification. They **do not mean every full paper, quantitative composition table or safety threshold has been independently verified**. Detailed source gaps remain explicit; no missing concentration, interaction, stock or formulation limit has been invented. The comparison and source tests cover the new corrections while the reversible ledger still restores the original baseline exactly.
+
+The earlier handoff below is historical release evidence for main through `fc98bb3`; it does not certify publication of these later corrections. Merchant configuration still lacks a verified Custom Blend variant and finished-product formulation. The scientific library supports exploration across uses; it does not establish a safe or effective finished product for every use.
+
 ## Start here
 
 Review [PR #13](https://github.com/AlexBorsody/terpene-lab/pull/13), including its final commit, review discussion and checks. The migration starts from main commit [`eb8a5b7eeb70e29c8bb53e0fbedeadb0554738f1`](https://github.com/AlexBorsody/terpene-lab/commit/eb8a5b7eeb70e29c8bb53e0fbedeadb0554738f1); the first implementation commit is [`a40476c838e222721f66816b39e3650c6a0c75bd`](https://github.com/AlexBorsody/terpene-lab/commit/a40476c838e222721f66816b39e3650c6a0c75bd). The canonical migration was released in merge commit [`d524cd81f1468abbe46889c52c9db10578e5bfd0`](https://github.com/AlexBorsody/terpene-lab/commit/d524cd81f1468abbe46889c52c9db10578e5bfd0). Follow the current main commit and release checks for subsequent fixes.
