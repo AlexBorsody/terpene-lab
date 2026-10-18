@@ -470,15 +470,21 @@ async function captureBeforeNavigation(page, scope = page) {
     await topic(page,TOPICS.sleep);await topic(page,TOPICS.focus);
     const expected=await cart(page);
     assert.deepEqual(expected.recipe.qualityIds,[TOPICS.focus,TOPICS.sleep].sort());
+    const currentDraft=await draft(page);
+    assert.deepEqual(currentDraft.qualityIds,[TOPICS.sleep,TOPICS.focus],'Editable draft retains current selection order');
+    assert.deepEqual(currentDraft.qualityIds.slice().sort(),expected.recipe.qualityIds,'Draft and canonical handoff contain the same selected topics');
     const captures=await captureBeforeNavigation(page);
     t.expectedNavigations=1;
     await page.locator('#blend-checkout').click();
     await page.locator('#mock-handoff').waitFor();
     assert.equal(captures.length,1);
     assert.equal(captures[0].prevented,false,'Native anchor navigation is used');
-    assert.deepEqual(JSON.parse(captures[0].storage).draft,expected.recipe,'Draft is persisted synchronously before navigation');
+    assert.deepEqual(JSON.parse(captures[0].storage).draft,currentDraft,'The exact current draft is persisted synchronously before navigation');
     assert.equal(captures[0].href,expected.url.href);
-    assert.deepEqual(decodeHref(page.url()).properties,expected.properties);
+    const handoff=decodeHref(page.url());
+    assert.deepEqual(handoff.recipe,expected.recipe,'Navigation retains the independently canonicalized recipe');
+    assert.equal(handoff.encodedRecipe,expected.encodedRecipe,'Canonical recipe bytes are unchanged during handoff');
+    assert.deepEqual(handoff.properties,expected.properties);
   });
 
   await test('a real iframe targets the top document and persists before the intercepted handoff',async(page,t)=>{
@@ -489,14 +495,19 @@ async function captureBeforeNavigation(page, scope = page) {
     assert.ok(frame);await ready(frame);await configure(frame);await create(frame,'Iframe fixture 夜');
     assert.equal(await frame.locator('html.lab-embedded').count(),1);
     const expected=await cart(frame);
+    const currentDraft=await draft(frame);
     const captures=await captureBeforeNavigation(page,frame);
     t.expectedNavigations=1;
     await frame.locator('#blend-checkout').click();
     await page.locator('#mock-handoff').waitFor();
     assert.equal(page.frames().length,1,'Checkout replaced the top document, rather than remaining inside the iframe');
     assert.equal(captures.length,1);
-    assert.deepEqual(JSON.parse(captures[0].storage).draft,expected.recipe);
+    assert.deepEqual(JSON.parse(captures[0].storage).draft,currentDraft,'Iframe also persists the exact current draft');
     assert.equal(page.url(),expected.url.href);
+    const handoff=decodeHref(page.url());
+    assert.deepEqual(handoff.recipe,expected.recipe);
+    assert.equal(handoff.encodedRecipe,expected.encodedRecipe);
+    assert.deepEqual(handoff.properties,expected.properties);
   });
 
   await browser.close();browser=null;
