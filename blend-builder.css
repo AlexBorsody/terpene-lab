@@ -18,7 +18,7 @@
 .blend-product { flex:0 0 350px; display:flex; align-items:center; gap:20px; padding:26px; color:#23392b; background:#e5dfcc; border:1px solid #e5dfcc; border-radius:2px; }
 .blend-product-size { font-size:11px; letter-spacing:.5px; color:#4f604d; }
 .blend-product strong { display:block; font:36px Georgia,serif; margin:8px 0; color:#243a2b; }
-.blend-product strong span { font:12px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; color:#4f604d; }
+.blend-product strong span { display:block; margin-top:6px; white-space:nowrap; font:12px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; color:#4f604d; }
 .blend-product p { color:#4f604d; font-size:13px; margin-bottom:14px; }
 .blend-pill { display:inline-block; border:1px solid #45523f; border-radius:20px; padding:4px 9px; color:#d2d8bd; font-size:11px; line-height:1.5; }
 .blend-step-title { display:flex; align-items:center; gap:13px; margin:30px 0 18px; flex-wrap:wrap; }

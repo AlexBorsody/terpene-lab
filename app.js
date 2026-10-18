@@ -833,7 +833,7 @@ const matrixState = { mode: 'oil-topics', group: D.taxonomy.matrixGroups?.[0]?.i
 const matrixModes = ['oil-topics', 'oil-compounds', 'compound-topics', 'study-topics'];
 function matrixGroups() {
   const groups = [...(D.taxonomy.matrixGroups || [])];
-  if (R.children().some(node => !node.matrixGroupId)) groups.push({ id: 'unclassified', label: 'Unclassified topics', description: 'These taxonomy roots have no display family assigned yet. Their records remain available here.' });
+  if (!groups.some(group => group.id === 'unclassified') && R.children().some(node => !node.matrixGroupId)) groups.push({ id: 'unclassified', label: 'Unclassified topics', description: 'These taxonomy roots have no display family assigned yet. Their records remain available here.' });
   return groups;
 }
 function matrixGroupFor(value) {
