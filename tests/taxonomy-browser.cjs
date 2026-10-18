@@ -200,6 +200,10 @@ const server = http.createServer((req, res) => {
     await page.locator('#matrix-group-filter').selectOption('fixture-family');
     assert.equal(await page.locator('#matrix-table [data-matrix-topic="fixture-family-root"]').count(), 1, 'New JSON-only family is rendered without application edits');
     assert.equal(await page.locator('#matrix-table tbody tr').count(), fixture.oils.length, 'Unused topics remain visible for every oil');
+    await page.locator('[data-matrix-view="study-topics"]').click();
+    await page.locator('#matrix-search').fill('fixture-shared');
+    await page.locator('#matrix-table [data-matrix-inspect="study/fixture-shared"]').click();
+    assert.equal(await page.locator('#matrix-inspector .research-assessments').count(), 2, 'Paper inspector exposes every scoped oil assessment');
     // Retained Pathway works with the same hierarchy, even if not mounted in this shell.
     await page.evaluate(() => {
       for (const id of ['pathway-plants', 'pathway-compounds', 'pathway-uses', 'pathway-evidence']) {

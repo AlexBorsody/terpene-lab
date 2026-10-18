@@ -138,16 +138,15 @@ const assert = require('node:assert/strict');
   const startUrl=page.url();
   const link=page.locator(`#compound-material-evidence [${route.attribute}="${route.target}"]`).first();
   await link.locator('xpath=ancestor::details[contains(@class,"chem-evidence")]').locator(':scope > summary').click();
-  const initialLength=await page.evaluate(()=>{
+  await page.evaluate(()=>{
    window.testPushCount=0;
    const original=history.pushState.bind(history);
    history.pushState=(...args)=>{window.testPushCount++;return original(...args);};
-   return history.length;
   });
   await link.click();
   assert.equal(new URL(page.url()).searchParams.get(route.destination),route.target);
   assert.equal(await page.evaluate(()=>window.testPushCount),1,'One evidence click must navigate once');
-  assert.equal(await page.evaluate(()=>history.length),initialLength+1,'One evidence click must add one history entry');
+  // pushState count plus Back verifies a single entry without Chromium's 50-entry history cap.
   await page.goBack();
   await page.waitForURL(startUrl);
   assert.equal(await page.locator('#compound-name').textContent(),route.compound==='citral'?'Citral':'Nobiletin');
