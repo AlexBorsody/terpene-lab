@@ -152,6 +152,53 @@ assert.equal(context.BLEND_ENGINE.decodeRecipe(shared, fixture()).name, unicode.
 
 // Finished-product concentration, never relative oil share, governs hard limits.
 assert.equal(engine.evaluateSafety(recipe(), fixture()).blockers.length, 0);
+// A sourced zero hard maximum prohibits any positive finished-product amount.
+for (const kind of ['dermal', 'total']) {
+  for (const load of [2, 1e-12, Number.MIN_VALUE]) {
+    const d = fixture(); d.blendBuilder.product.totalOilLoadPercent = load;
+    if (kind === 'dermal') d.oils[0].blend.dermalMaxPercent = 0;
+    else d.blendBuilder.product.totalOilMaxPercent = 0;
+    const value = {...recipe(), oils: [{id: 'alpha', percent: 0.01}, {id: 'beta', percent: 99.99}]};
+    const code = kind + '_limit_exceeded';
+    const result = blocked(d, code, value);
+    assert.ok(!codes(result.blockers).includes(kind + '_limit_unknown'));
+    const finding = result.blockers.find(item => item.code === code);
+    assert.deepEqual(finding.source, source);
+    assert.match(finding.message, kind === 'dermal' ? /is present in the finished spray, above its 0% dermal maximum/ : /contains essential oils, above the 0% total limit/);
+    permalinkInvalid(d, code, value);
+  }
+  for (const load of [0, null, NaN, '2']) {
+    const d = fixture(); d.blendBuilder.product.totalOilLoadPercent = load;
+    if (kind === 'dermal') d.oils[0].blend.dermalMaxPercent = 0;
+    else d.blendBuilder.product.totalOilMaxPercent = 0;
+    const result = blocked(d, 'total_load_unknown');
+    assert.ok(!codes(result.blockers).includes(kind + '_limit_exceeded'));
+    assert.ok(engine.cartPermalink(recipe(), d).url, 'Unknown loads cannot establish a zero-cap violation');
+  }
+  const d = fixture();
+  if (kind === 'dermal') d.oils[0].blend.dermalMaxPercent = 1 - 5e-11;
+  else d.blendBuilder.product.totalOilMaxPercent = 2 - 5e-11;
+  assert.equal(engine.evaluateSafety(recipe(), d).blockers.length, 0, 'Positive-cap comparison tolerance remains unchanged');
+}
+// Hard maxima are nonnegative numbers with resolved sources, not coerced values.
+for (const kind of ['dermal', 'total']) {
+  for (const bad of [-1, -Infinity, Infinity, NaN, '0', '2', false, null, undefined, 101]) {
+    const d = fixture();
+    if (kind === 'dermal') d.oils[0].blend.dermalMaxPercent = bad;
+    else d.blendBuilder.product.totalOilMaxPercent = bad;
+    const result = blocked(d, kind + '_limit_unknown');
+    assert.ok(!codes(result.blockers).includes(kind + '_limit_exceeded'));
+    assert.ok(engine.cartPermalink(recipe(), d).url, 'An invalid hard cap stays a manual-review finding');
+  }
+  for (const badSource of [null, 'unresolved-source', {label: 'No link'}]) {
+    const d = fixture();
+    if (kind === 'dermal') Object.assign(d.oils[0].blend, {dermalMaxPercent: 0, dermalMaxSource: badSource});
+    else Object.assign(d.blendBuilder.product, {totalOilMaxPercent: 0, totalOilMaxSource: badSource});
+    const result = blocked(d, kind + '_limit_unknown');
+    assert.ok(!codes(result.blockers).includes(kind + '_limit_exceeded'));
+    assert.ok(engine.cartPermalink(recipe(), d).url, 'An unsourced zero cap stays a manual-review finding');
+  }
+}
 {
   const d = fixture(); d.oils[0].blend.dermalMaxPercent = 1;
   assert.equal(engine.evaluateSafety(recipe(), d).blockers.length, 0, '50% of a 2% oil load equals the 1% dermal maximum');

@@ -380,6 +380,24 @@ async function captureBeforeNavigation(page, scope = page) {
     warning=await page.locator('.blend-result-cautions').innerText();
     assert.match(warning,/2% essential oils/);assert.match(warning,/1\.5% total limit/);
     assert.equal(await page.locator('.blend-result-cautions a[href="https://example.test/total-ceiling"]').isVisible(),true);
+    await page.evaluate(()=>{
+      TERPENE_DATA.blendBuilder.product.totalOilMaxPercent=0;
+      TERPENE_DATA.blendBuilder.product.totalOilMaxSource.label='TEST-ONLY synthetic 0% total ceiling';
+    });
+    await refresh(page);await noVisibleCart(page);
+    warning=await page.locator('.blend-result-cautions').innerText();
+    assert.match(warning,/0% total limit/);
+    assert.match(warning,/TEST-ONLY synthetic 0% total ceiling/);
+    await page.evaluate(()=>{
+      TERPENE_DATA.blendBuilder.product.totalOilMaxPercent=3;
+      TERPENE_DATA.blendBuilder.product.totalOilMaxSource.label='TEST-ONLY synthetic 3% total ceiling';
+      const oil=TERPENE_DATA.oils.find(oil=>oil.id==='lavender').blend;
+      oil.dermalMaxPercent=0;oil.dermalMaxSource.label='TEST-ONLY synthetic 0% dermal ceiling';
+    });
+    await refresh(page);await noVisibleCart(page);
+    warning=await page.locator('.blend-result-cautions').innerText();
+    assert.match(warning,/Lavender/);assert.match(warning,/0% dermal maximum/);
+    assert.match(warning,/TEST-ONLY synthetic 0% dermal ceiling/);
   });
 
   await test('named interaction warnings stay visible and sourced blocking interactions prevent handoff',async page=>{
