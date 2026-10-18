@@ -5,11 +5,11 @@ root = pathlib.Path(__file__).resolve().parent.parent
 # Fresh HTTP-cache URLs also protect first visits before a worker controls them.
 html_path = root / 'index.html'
 html = html_path.read_text()
-for name in ['styles.css', 'app.js', 'chemistry.js', 'data.js', 'pwa.js']:
+for name in ['styles.css', 'app.js', 'chemistry.js', 'data.js', 'pwa.js', 'blend-engine.js', 'blend-builder.js', 'blend-builder.css']:
     digest = hashlib.sha256((root / name).read_bytes()).hexdigest()[:16]
     html = re.sub(re.escape(name) + r'\?v=[a-zA-Z0-9]+', name + '?v=' + digest, html)
 html_path.write_text(html)
-files = ['index.html', 'styles.css', 'app.js', 'chemistry.js', 'data.js', 'pwa.js',
+files = ['index.html', 'styles.css', 'app.js', 'chemistry.js', 'data.js', 'pwa.js', 'blend-engine.js', 'blend-builder.js', 'blend-builder.css',
          'manifest.webmanifest', 'shield-icon.svg', 'vendor/echarts-5.5.1.min.js']
 files += sorted(str(p.relative_to(root)) for p in (root / 'icons').glob('*.png'))
 entries = {name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in files}

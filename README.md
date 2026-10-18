@@ -4,6 +4,8 @@ Interactive essential oil evidence explorer. Plant to molecule to paper.
 
 ## Views
 
+- **Blend Builder**: qualities-first or oils-first custom oil recipes, written research and cautions, saved drafts and versioned share links. $45 / 8 oz product intent; ordering is gated until formula, safety, stock and checkout review are complete. See [integration and launch requirements](blend-builder-integration.md).
+
 - **Oils**: oil explorer with composition fingerprint (range bars), research coverage, evidence summary, studies.
 - **Compounds**: terpene and compound drill-downs (chemically correct classes, not just "terpenes"), found-in charts, studies.
 - **Matrix**: oils x research domains heatmap. Color intensity is study count; the letter marks the strongest evidence level (C clinical, P preclinical, L laboratory, R review). Click a cell to see the papers.

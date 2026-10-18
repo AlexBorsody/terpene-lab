@@ -3,7 +3,7 @@
    ----------------------------------------------------------------------------
    SAMPLE DATA v0.2 - implements the spec.md schema. Replace with research.
 
-   Top-level: { version, categories, oils, compounds, studies, sources }
+   Top-level: { version, blendBuilder, categories, oils, compounds, studies, sources }
 
    categories: controlled taxonomy of research domains.
      { type, label, subcategories: [{ id, label, topics: [] }] }
@@ -12,8 +12,21 @@
      { id, name, latinName, family, plantPart, extraction, aroma: [],
        color, description, uses: [], safety,
        constituents: [{ compoundId, range: {min, max}, basis, sourceIds: [],
-         material, sample, extraction, method }], chemicalEvidence: [] }
+         material, sample, extraction, method }], chemicalEvidence: [], blend? }
      Composition uses RANGES, not false single-number precision.
+
+   blendBuilder: versioned, descriptive starter catalog and product configuration.
+     product totalOilLoadPercent and totalOilMaxPercent refer to the finished
+     product, not to percentages within the essential-oil portion.
+   oils[].blend: opt-in builder records. Missing/null safety values mean unknown,
+     never safe. availability:'unconfirmed' is not an inventory assertion.
+     qualityMappings: { qualityId, evidenceTier, summary, studyId, pmid, url,
+       limitations, supportsSuggestion }. Counterevidence remains visible;
+       supportsSuggestion:false must not count as positive recommendation support.
+     safetyReviewStatus:'unverified' means no leave-on formulation clearance.
+     legacySafetyNotes are preserved for audit only and are not verified limits.
+     Empty interactions/cautionThresholds mean no validated entries yet, not none
+     exist. researchGaps describe missing evidence in this catalog only.
 
    compounds (terpenes & compounds):
      { id, name, chemicalClass, functionalGroups: [], aliases: [],
@@ -42,6 +55,56 @@
 
 const TERPENE_DATA = {
   "version": "0.8.0-beyond-terpenes",
+  "blendBuilder": {
+    "version": "1",
+    "catalogVersion": "2026-10-18",
+    "qualities": [
+      {
+        "id": "calm",
+        "label": "Calm",
+        "description": "Explore the purported calm quality and the limits of ingredient research on relaxation-related experiences. No finished-spray effect is established."
+      },
+      {
+        "id": "focus",
+        "label": "Focus",
+        "description": "Explore the purported focus quality through short-term aroma, attention and memory research. Findings can be mixed and do not establish everyday performance benefits."
+      },
+      {
+        "id": "sleep",
+        "label": "Sleep / wind-down",
+        "description": "Explore the purported sleep / wind-down quality. Ingredient sleep studies do not establish that this cosmetic spray improves sleep or treats a sleep condition."
+      },
+      {
+        "id": "uplifting",
+        "label": "Uplifting",
+        "description": "Explore the purported uplifting quality through limited studies of subjective contentment and mood. These are not claims of a lasting mood benefit from the spray."
+      }
+    ],
+    "product": {
+      "name": "Custom Blend",
+      "price": 45,
+      "currency": "USD",
+      "size": "8 oz",
+      "totalOilLoadPercent": null,
+      "totalOilLoadSource": null,
+      "totalOilMaxPercent": null,
+      "totalOilMaxSource": null,
+      "shopifyVariantId": null,
+      "checkoutEndpoint": null,
+      "checkoutAllowedHosts": [],
+      "serverValidationVerified": false
+    },
+    "starterOilIds": [
+      "lavender",
+      "rosemary",
+      "peppermint",
+      "lemon",
+      "sweet-orange",
+      "bergamot",
+      "ylang-ylang",
+      "frankincense"
+    ]
+  },
   "categories": [
     {
       "type": "health",
@@ -367,7 +430,41 @@ const TERPENE_DATA = {
           "valueState": "source_values_not_imported",
           "limitations": "Selected lemon samples lacked PMFs. Coumarins and furanocoumarins are not flavonoids; non-detection is not universal absence."
         }
-      ]
+      ],
+      "blend": {
+        "enabled": true,
+        "availability": "unconfirmed",
+        "qualityMappings": [
+          {
+            "qualityId": "calm",
+            "evidenceTier": "human clinical",
+            "summary": "Research relevant to the purported calm quality: a small randomized study reported lower test-anxiety scores after a brief exposure to lemon essential-oil aroma than in its control group.",
+            "studyId": "lemon-test-anxiety-2022",
+            "pmid": "35190270",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/35190270/",
+            "limitations": "46 nursing students and one acute test setting. This is whole lemon oil, not isolated limonene; the result does not establish treatment of anxiety or lasting relaxation. No evidence of the effectiveness or safety of this finished spray or a custom combination is established by this study.",
+            "supportsSuggestion": true
+          }
+        ],
+        "dermalMaxPercent": null,
+        "dermalMaxSource": null,
+        "cautionThresholds": [],
+        "phototoxic": null,
+        "sensitizationNotes": "No verified sensitization assessment yet for this oil in the proposed leave-on spray. Legacy profile notes are unaudited and do not establish formulation safety.",
+        "petSafer": null,
+        "petSource": null,
+        "interactions": [],
+        "safetyReviewStatus": "unverified",
+        "legacySafetyNotes": "Phototoxic on skin in sunlight; avoid undiluted topical use.",
+        "legacySafetyNotesVerified": false,
+        "researchGaps": [
+          "Earlier citrus-fragrance research is not treated as lemon-only evidence for an uplifting quality.",
+          "No verified focus, sleep or uplifting mapping for this oil is provided in the starter catalog."
+        ],
+        "relatedStudyIds": [
+          "komori-1995-citrus"
+        ]
+      }
     },
     {
       "id": "lavender",
@@ -463,7 +560,59 @@ const TERPENE_DATA = {
           "valueState": "source_values_not_imported",
           "limitations": "Different preparation from the catalog steam-distilled oil. Reported elemental S8 is not an organic thiol; replication/provenance is unresolved."
         }
-      ]
+      ],
+      "blend": {
+        "enabled": true,
+        "availability": "unconfirmed",
+        "qualityMappings": [
+          {
+            "qualityId": "calm",
+            "evidenceTier": "human clinical",
+            "summary": "Research relevant to the purported calm quality: a trial of lavender aromatherapy massage reported lower salivary cortisol immediately after treatment than usual care.",
+            "studyId": "chen-chou-2017",
+            "pmid": "28783372",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/28783372/",
+            "limitations": "Whole lavender oil was used with massage in 52 pregnant participants. There was no massage-only comparison, so the contribution of the oil cannot be separated from massage. Cortisol is not a direct measure of feeling calm. This does not establish safety during pregnancy. No evidence of the effectiveness or safety of this finished spray or a custom combination is established by this study.",
+            "supportsSuggestion": true
+          },
+          {
+            "qualityId": "calm",
+            "evidenceTier": "human clinical",
+            "summary": "Counterevidence for the purported calm quality: a randomized trial of a lavender, bergamot and cedarwood aroma mixture did not show benefit; the carrier-only group had lower anxiety scores than the fragrant groups at treatment completion.",
+            "studyId": "graham-browne-cox-2003",
+            "pmid": "12805340",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/12805340/",
+            "limitations": "This was a multi-oil intervention in 313 radiotherapy patients. Its findings cannot be assigned to lavender alone or generalized to everyday cosmetic use. No evidence of the effectiveness or safety of this finished spray or a custom combination is established by this study.",
+            "supportsSuggestion": false
+          },
+          {
+            "qualityId": "sleep",
+            "evidenceTier": "review",
+            "summary": "Research relevant to the purported sleep / wind-down quality: a review combining 11 randomized trials reported better adult sleep-quality scores with lavender essential-oil interventions overall.",
+            "studyId": "shen-2026-lavender-sleep-meta",
+            "pmid": "40600743",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/40600743/",
+            "limitations": "Review of whole-oil interventions, not isolated linalool. Study quality, routes, concentrations and duration varied; some subgroup results were not significant. This does not establish treatment of insomnia or an effective spray formulation. No evidence of the effectiveness or safety of this finished spray or a custom combination is established by this study.",
+            "supportsSuggestion": true
+          }
+        ],
+        "dermalMaxPercent": null,
+        "dermalMaxSource": null,
+        "cautionThresholds": [],
+        "phototoxic": null,
+        "sensitizationNotes": "No verified sensitization assessment yet for this oil in the proposed leave-on spray. Legacy profile notes are unaudited and do not establish formulation safety.",
+        "petSafer": null,
+        "petSource": null,
+        "interactions": [],
+        "safetyReviewStatus": "unverified",
+        "legacySafetyNotes": "Generally well tolerated; patch test for sensitive skin.",
+        "legacySafetyNotesVerified": false,
+        "researchGaps": [
+          "No verified finished-product study or tested custom-blend ratio is provided in this catalog.",
+          "Standardized oral lavender preparations and isolated-compound findings are not used as evidence that this topical spray has the same effects."
+        ],
+        "relatedStudyIds": []
+      }
     },
     {
       "id": "peppermint",
@@ -547,7 +696,41 @@ const TERPENE_DATA = {
           "valueState": "source_values_not_imported",
           "limitations": "Not an essential-oil finding. Any source quantities are not imported here and cannot be attributed to distilled oil."
         }
-      ]
+      ],
+      "blend": {
+        "enabled": true,
+        "availability": "unconfirmed",
+        "qualityMappings": [
+          {
+            "qualityId": "focus",
+            "evidenceTier": "human clinical",
+            "summary": "Research relevant to the purported focus quality: peppermint whole-oil aroma was associated with better memory measures and higher self-rated alertness in a laboratory study.",
+            "studyId": "moss-2008-peppermint-cognition",
+            "pmid": "18041606",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/18041606/",
+            "limitations": "Single-session aroma exposure in healthy volunteers. This is whole-oil evidence, not a trial of isolated menthol, and does not establish improved everyday work or study performance. No evidence of the effectiveness or safety of this finished spray or a custom combination is established by this study.",
+            "supportsSuggestion": true
+          }
+        ],
+        "dermalMaxPercent": null,
+        "dermalMaxSource": null,
+        "cautionThresholds": [],
+        "phototoxic": null,
+        "sensitizationNotes": "No verified sensitization assessment yet for this oil in the proposed leave-on spray. Legacy profile notes are unaudited and do not establish formulation safety.",
+        "petSafer": null,
+        "petSource": null,
+        "interactions": [],
+        "safetyReviewStatus": "unverified",
+        "legacySafetyNotes": "Keep away from young children; can irritate eyes and mucous membranes.",
+        "legacySafetyNotesVerified": false,
+        "researchGaps": [
+          "A general sleep review is linked to peppermint elsewhere in the catalog, but its overall result is not used as a peppermint-specific sleep benefit.",
+          "No verified calm, sleep or uplifting mapping for this oil is provided in the starter catalog."
+        ],
+        "relatedStudyIds": [
+          "lillehei-halcon-2014"
+        ]
+      }
     },
     {
       "id": "eucalyptus",
@@ -735,7 +918,32 @@ const TERPENE_DATA = {
           }
         }
       ],
-      "chemicalEvidence": []
+      "chemicalEvidence": [],
+      "blend": {
+        "enabled": true,
+        "availability": "unconfirmed",
+        "qualityMappings": [],
+        "dermalMaxPercent": null,
+        "dermalMaxSource": null,
+        "cautionThresholds": [],
+        "phototoxic": null,
+        "sensitizationNotes": "No verified sensitization assessment yet for this oil in the proposed leave-on spray. Legacy profile notes are unaudited and do not establish formulation safety.",
+        "petSafer": null,
+        "petSource": null,
+        "interactions": [],
+        "safetyReviewStatus": "unverified",
+        "legacySafetyNotes": "Generally well tolerated; patch test for sensitive skin.",
+        "legacySafetyNotesVerified": false,
+        "researchGaps": [
+          "Limited research: no verified calm, focus, sleep or uplifting mapping for frankincense is provided in this starter catalog.",
+          "The linked procedural lavender/frankincense trial has insufficient outcome detail in the catalog to support a quality recommendation.",
+          "The linked topical-foot fatigue pilot found no significant benefit. It does not establish an uplifting quality or a benefit from this spray."
+        ],
+        "relatedStudyIds": [
+          "aydinli-2026-lavender-frankincense-biopsy",
+          "reis-2023-frankincense-fatigue"
+        ]
+      }
     },
     {
       "id": "clove",
@@ -876,7 +1084,39 @@ const TERPENE_DATA = {
           "sourceQuantityNote": "Source measurements use micrograms per milliliter; values are not transcribed here.",
           "limitations": "Commercial, crude and compounded samples are separate; do not merge them into a typical range."
         }
-      ]
+      ],
+      "blend": {
+        "enabled": true,
+        "availability": "unconfirmed",
+        "qualityMappings": [
+          {
+            "qualityId": "calm",
+            "evidenceTier": "human clinical",
+            "summary": "Research relevant to the purported calm quality: a trial reported lower anxiety scores with sweet-orange essential-oil inhalation than a water control during labor.",
+            "studyId": "nascimento-2025-sweet-orange-labor",
+            "pmid": "39577393",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/39577393/",
+            "limitations": "Single-blind trial in 84 participants at one center. The labor setting limits generalization, and the study does not establish safety of this spray during pregnancy or a general uplifting effect. The intervention was whole oil, not isolated limonene. No evidence of the effectiveness or safety of this finished spray or a custom combination is established by this study.",
+            "supportsSuggestion": true
+          }
+        ],
+        "dermalMaxPercent": null,
+        "dermalMaxSource": null,
+        "cautionThresholds": [],
+        "phototoxic": null,
+        "sensitizationNotes": "No verified sensitization assessment yet for this oil in the proposed leave-on spray. Legacy profile notes are unaudited and do not establish formulation safety.",
+        "petSafer": null,
+        "petSource": null,
+        "interactions": [],
+        "safetyReviewStatus": "unverified",
+        "legacySafetyNotes": "Mild phototoxicity risk; oxidized oil can irritate skin.",
+        "legacySafetyNotesVerified": false,
+        "researchGaps": [
+          "No verified focus, sleep or uplifting mapping for this oil is provided in the starter catalog.",
+          "Existing free-text phototoxicity and skin notes have not been validated for the supplied oil or the proposed formulation."
+        ],
+        "relatedStudyIds": []
+      }
     },
     {
       "id": "citronella",
@@ -1541,7 +1781,59 @@ const TERPENE_DATA = {
         "Study blends",
         "Morning diffusion"
       ],
-      "chemicalEvidence": []
+      "chemicalEvidence": [],
+      "blend": {
+        "enabled": true,
+        "availability": "unconfirmed",
+        "qualityMappings": [
+          {
+            "qualityId": "focus",
+            "evidenceTier": "human clinical",
+            "summary": "Research relevant to the purported focus quality: rosemary whole-oil aroma improved some memory-quality measures and relative alertness in a laboratory study, but also slowed memory speed.",
+            "studyId": "moss-cook-2003",
+            "pmid": "12690999",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/12690999/",
+            "limitations": "Mixed outcomes after a single brief exposure in healthy adults. Better results on some tasks do not establish general cognitive enhancement. No evidence of the effectiveness or safety of this finished spray or a custom combination is established by this study.",
+            "supportsSuggestion": true
+          },
+          {
+            "qualityId": "focus",
+            "evidenceTier": "human clinical",
+            "summary": "Research relevant to the purported focus quality: after rosemary whole-oil aroma exposure, blood 1,8-cineole levels correlated with performance on some cognitive tasks.",
+            "studyId": "moss-oliver-2012-cineole",
+            "pmid": "23983963",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/23983963/",
+            "limitations": "Small correlational study of 20 volunteers. The exposure was whole rosemary oil; measuring one constituent does not establish that isolated 1,8-cineole caused the results, or that other oils containing it have the same effect. No evidence of the effectiveness or safety of this finished spray or a custom combination is established by this study.",
+            "supportsSuggestion": true
+          },
+          {
+            "qualityId": "uplifting",
+            "evidenceTier": "human clinical",
+            "summary": "Research relevant to the purported uplifting quality: the rosemary-aroma group reported greater contentment than the no-aroma control group after cognitive testing.",
+            "studyId": "moss-cook-2003",
+            "pmid": "12690999",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/12690999/",
+            "limitations": "Subjective mood finding from one short laboratory exposure in healthy adults, alongside mixed cognitive outcomes. This is not evidence for treatment of a mood condition or a lasting change in mood. No evidence of the effectiveness or safety of this finished spray or a custom combination is established by this study.",
+            "supportsSuggestion": true
+          }
+        ],
+        "dermalMaxPercent": null,
+        "dermalMaxSource": null,
+        "cautionThresholds": [],
+        "phototoxic": null,
+        "sensitizationNotes": "No verified sensitization assessment yet for this oil in the proposed leave-on spray. Legacy profile notes are unaudited and do not establish formulation safety.",
+        "petSafer": null,
+        "petSource": null,
+        "interactions": [],
+        "safetyReviewStatus": "unverified",
+        "legacySafetyNotes": "Avoid in pregnancy and with epilepsy; may raise blood pressure.",
+        "legacySafetyNotesVerified": false,
+        "researchGaps": [
+          "Studies of swallowed rosemary leaf or powder are not treated as evidence for rosemary essential oil in a spray.",
+          "No verified calm or sleep mapping for this oil is provided in the starter catalog."
+        ],
+        "relatedStudyIds": []
+      }
     },
     {
       "id": "pine",
@@ -2154,7 +2446,51 @@ const TERPENE_DATA = {
           "valueState": "source_values_not_imported",
           "limitations": "Cultivar-specific findings, not juice or a bergamot-polyphenol supplement."
         }
-      ]
+      ],
+      "blend": {
+        "enabled": true,
+        "availability": "unconfirmed",
+        "qualityMappings": [
+          {
+            "qualityId": "calm",
+            "evidenceTier": "human clinical",
+            "summary": "Research relevant to the purported calm quality: students using bergamot whole-oil aroma stones reported lower state-anxiety scores before examinations than students using water stones.",
+            "studyId": "wakui-2026-bergamot-exam-anxiety",
+            "pmid": "42755326",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/42755326/",
+            "limitations": "Open-label, single-center trial with 57 students over three days. Expectations may influence self-reports. The study does not establish a safe dermal concentration or an effect from isolated constituents. No evidence of the effectiveness or safety of this finished spray or a custom combination is established by this study.",
+            "supportsSuggestion": true
+          },
+          {
+            "qualityId": "uplifting",
+            "evidenceTier": "human clinical",
+            "summary": "Research relevant to the purported uplifting quality: the bergamot-aroma group had higher subjective-happiness scores on the day before the exam; broader depression, anxiety and stress scores did not differ significantly between groups.",
+            "studyId": "wakui-2026-bergamot-exam-anxiety",
+            "pmid": "42755326",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/42755326/",
+            "limitations": "Secondary, time-specific self-reported finding in a small open-label student trial. It does not establish a general or lasting mood benefit. No evidence of the effectiveness or safety of this finished spray or a custom combination is established by this study.",
+            "supportsSuggestion": true
+          }
+        ],
+        "dermalMaxPercent": null,
+        "dermalMaxSource": null,
+        "cautionThresholds": [],
+        "phototoxic": null,
+        "sensitizationNotes": "No verified sensitization assessment yet for this oil in the proposed leave-on spray. Legacy profile notes are unaudited and do not establish formulation safety.",
+        "petSafer": null,
+        "petSource": null,
+        "interactions": [],
+        "safetyReviewStatus": "unverified",
+        "legacySafetyNotes": "Phototoxic risk; avoid sun exposure after topical use.",
+        "legacySafetyNotesVerified": false,
+        "researchGaps": [
+          "No verified focus or sleep mapping for this oil is provided in the starter catalog.",
+          "Extraction method, furocoumarin content and the actual supplier specification require review before phototoxicity or dermal limits can be assigned."
+        ],
+        "relatedStudyIds": [
+          "graham-browne-cox-2003"
+        ]
+      }
     },
     {
       "id": "ylang-ylang",
@@ -2224,7 +2560,39 @@ const TERPENE_DATA = {
           "valueState": "source_values_not_imported",
           "limitations": "Fractions differ; not a single steam-distilled whole oil. Compound assignments depend on the reported analytical methods."
         }
-      ]
+      ],
+      "blend": {
+        "enabled": true,
+        "availability": "unconfirmed",
+        "qualityMappings": [
+          {
+            "qualityId": "calm",
+            "evidenceTier": "human clinical",
+            "summary": "Research relevant to the purported calm quality: participants receiving ylang-ylang whole oil through the skin rated themselves calmer and more relaxed than the control group.",
+            "studyId": "hongratanaworakit-2006-ylang-ylang-transdermal",
+            "pmid": "16807875",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/16807875/",
+            "limitations": "Short-term controlled study in 40 healthy volunteers. No dose-response was established. Perceived relaxation does not establish improved sleep or focus, and the study is not a leave-on-spray safety assessment. No evidence of the effectiveness or safety of this finished spray or a custom combination is established by this study.",
+            "supportsSuggestion": true
+          }
+        ],
+        "dermalMaxPercent": null,
+        "dermalMaxSource": null,
+        "cautionThresholds": [],
+        "phototoxic": null,
+        "sensitizationNotes": "No verified sensitization assessment yet for this oil in the proposed leave-on spray. Legacy profile notes are unaudited and do not establish formulation safety.",
+        "petSafer": null,
+        "petSource": null,
+        "interactions": [],
+        "safetyReviewStatus": "unverified",
+        "legacySafetyNotes": "Strong scent; dilute well; can cause headaches in sensitive users.",
+        "legacySafetyNotesVerified": false,
+        "researchGaps": [
+          "No verified focus, sleep or uplifting mapping for this oil is provided in the starter catalog.",
+          "A whole-oil study does not establish the same result for isolated linalool or another oil that contains it."
+        ],
+        "relatedStudyIds": []
+      }
     },
     {
       "id": "niaouli",
