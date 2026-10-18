@@ -52,6 +52,9 @@
   var validPercent = function (value) {
     return typeof value === 'number' && Number.isFinite(value) && value > 0 && value <= 100;
   };
+  var validSafetyMaximum = function (value) {
+    return typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 100;
+  };
   var basisPoints = function (value) {
     if (!validPercent(value)) return null;
     var points = Math.round(value * 100);
@@ -289,11 +292,13 @@
     var totalMax = product.totalOilMaxPercent;
     var totalMaxSource = resolveSource(product.totalOilMaxSource, data);
     if (!loadKnown) blockers.push(issue('total_load_unknown', 'The finished spray oil concentration and its formulation source require manual review.'));
-    if (!validPercent(totalMax) || !totalMaxSource) {
+    if (!validSafetyMaximum(totalMax) || !totalMaxSource) {
       blockers.push(issue('total_limit_unknown', 'The finished spray total oil-load safety limit and its source have not been verified.'));
-    } else if (loadKnown && load > totalMax + 1e-10) {
-      blockers.push(issue('total_limit_exceeded', 'The finished spray contains ' + formattedPercent(load) + ' essential oils, above the ' +
-        formattedPercent(totalMax) + ' total limit. Source: ' + totalMaxSource.label + '.', {source: totalMaxSource}));
+    } else if (loadKnown && (totalMax === 0 || load > totalMax + 1e-10)) {
+      blockers.push(issue('total_limit_exceeded', (totalMax === 0 ?
+        'The finished spray contains essential oils, above the 0% total limit.' :
+        'The finished spray contains ' + formattedPercent(load) + ' essential oils, above the ' + formattedPercent(totalMax) + ' total limit.') +
+        ' Source: ' + totalMaxSource.label + '.', {source: totalMaxSource}));
     }
     var selectedIds = new Set(recipe.oils.map(function (entry) { return entry.id; }));
     var selected = recipe.oils.map(function (entry) { return {entry: entry, oil: catalog.oils.get(entry.id)}; });
@@ -307,11 +312,15 @@
       var maximum = blend.dermalMaxPercent;
       var maximumSource = resolveSource(blend.dermalMaxSource, data);
       if (blend.safetyReviewStatus !== 'approved') blockers.push(issue('safety_review_unapproved', name + ': the finished-spray safety review has not been approved.', extras));
-      if (!validPercent(maximum) || !maximumSource) {
+      // Valid recipes and known loads are strictly positive: a zero cap must
+      // block even when concentration arithmetic underflows or is below tolerance.
+      if (!validSafetyMaximum(maximum) || !maximumSource) {
         blockers.push(issue('dermal_limit_unknown', name + ': no verified leave-on spray dermal maximum and source are available.', extras));
-      } else if (loadKnown && concentration > maximum + 1e-10) {
-        blockers.push(issue('dermal_limit_exceeded', name + ' is ' + formattedPercent(concentration) + ' of the finished spray, above its ' +
-          formattedPercent(maximum) + ' dermal maximum. Source: ' + maximumSource.label + '.', {oilIds: [oil.id], source: maximumSource}));
+      } else if (loadKnown && (maximum === 0 || concentration > maximum + 1e-10)) {
+        blockers.push(issue('dermal_limit_exceeded', name + (maximum === 0 ?
+          ' is present in the finished spray, above its 0% dermal maximum.' :
+          ' is ' + formattedPercent(concentration) + ' of the finished spray, above its ' + formattedPercent(maximum) + ' dermal maximum.') +
+          ' Source: ' + maximumSource.label + '.', {oilIds: [oil.id], source: maximumSource}));
       }
       if (typeof blend.phototoxic !== 'boolean') blockers.push(issue('phototoxicity_unknown', name + ': phototoxicity review is missing.', extras));
       else if (blend.phototoxic) warnings.push(issue('phototoxic_oil', name + ' is flagged for phototoxicity. Its formulation and exposure restrictions require care.', extras));
