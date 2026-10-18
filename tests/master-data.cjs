@@ -216,7 +216,17 @@ function main() {
     fixture(m => m.registries.studies[0].url = 'http://example.test/insecure', false, /valid HTTPS URL/);
     fixture(m => m.registries.studies[0].url = 'https://', false, /valid HTTPS URL/);
     fixture(m => m.registries.sources.find(s => !s.studyRef).url = 42, false, /valid HTTPS URL/);
-    fixture(m => m.registries.studies[0].url = 'https://doi.org/10.0000/test-only-fixture', true);
+    fixture(m => m.registries.studies[0].url = 'https://doi.org/' + m.registries.studies[0].doi, true);
+    fixture(m => m.registries.studies[0].url = 'https://doi.org/10.0000/test-only-fixture', false, /citation URL and DOI disagree/);
+    fixture(m => m.registries.studies[0].url = 'https://pubmed.ncbi.nlm.nih.gov/8719697/', false, /citation URL and PubMed ID disagree/);
+    fixture(m => {
+      m.registries.studies[0].pubmedId = '8719697';
+      m.registries.studies[0].url = 'https://pubmed.ncbi.nlm.nih.gov/8719697/';
+    }, false, /identifiers differ from reviewed source/);
+    fixture(m => m.registries.compounds[0].formula = 'C1H1', false, /formula differs from reviewed identity/);
+    fixture(m => m.blendBuilder.product.price = '40', false, /positive finite number/);
+    fixture(m => m.blendBuilder.product.currency = 'US', false, /currency code/);
+    fixture(m => Object.assign(m.blendBuilder.product, {name:'Configured blend',price:45.5,currency:'CAD',size:'4 oz'}), true);
     fixture(m => {
       const original = m.registries.studies.find(s => s.doi), next = m.registries.studies.find(s => s.id !== original.id);
       next.doi = 'https://doi.org/' + original.doi.toUpperCase();

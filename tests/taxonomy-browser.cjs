@@ -15,7 +15,9 @@ const parents = [null, ids[0], ids[1], ids[2], ids[2]];
 ids.forEach((id, i) => fixture.registries.useNodes.push({ id, label: labels[i], parentId: parents[i], aliases: [], legacyBindings: [], declared: false }));
 const seed = fixture.registries.studies[0];
 function addStudy(id, tags, oilIds, compoundIds) {
-  fixture.registries.studies.push({ ...JSON.parse(JSON.stringify(seed)), id, title: id, doi: `10.9999/${id}`, pubmedId: String(900000000 + fixture.registries.studies.length), url: `https://example.org/research/${id}`, finding: 'A fixture-only finding; not a real clinical claim.', useNodeIds: tags });
+  const record = { ...JSON.parse(JSON.stringify(seed)), id, title: id, doi: `10.9999/${id}`, pubmedId: String(900000000 + fixture.registries.studies.length), url: `https://example.org/research/${id}`, finding: 'A fixture-only finding; not a real clinical claim.', useNodeIds: tags };
+  delete record.citationReview; delete record.summaryReview; // Synthetic paper has no real source review.
+  fixture.registries.studies.push(record);
   oilIds.forEach((oilId, order) => fixture.oils.find(oil => oil.id === oilId).studyLinks.push({ studyId: id, order }));
   compoundIds.forEach((compoundId, order) => fixture.registries.compounds.find(compound => compound.id === compoundId).studyLinks.push({ studyId: id, order }));
 }
@@ -25,8 +27,8 @@ addStudy('fixture-multitag', [ids[3], ids[4]], ['lemon'], ['limonene']);
 function addAssertion(oilId, studyId, useNodeId, direct) {
   const id = `assert-${oilId}-${studyId}-${useNodeId}`;
   fixture.registries.evidenceAssertions.push({ id, kind: 'study-use', oilId, studyId, useNodeId, researchMatch: direct,
-    finding: 'Scoped fixture finding', limitations: 'Fixture limitation', material: { label: 'Fixture material' },
-    model: { label: 'Fixture experimental model' }, outcome: { label: 'Fixture measured outcome' },
+    finding: 'Scoped fixture finding', limitations: 'Fixture limitation', material: { kind: 'essential-oil', label: 'Fixture material' },
+    model: { label: 'Fixture experimental model' }, outcome: { direction: 'null', label: 'Fixture measured outcome' },
     route: 'Fixture route', species: 'Fixture species', relevance: direct ? 'direct' : 'unreviewed',
     verification: { status: direct ? 'source-checked' : 'unreviewed', sourceIds: [], urls: [], checkedAt: null, notes: 'Synthetic regression fixture' } });
   const oil = fixture.oils.find(oil => oil.id === oilId);
@@ -147,7 +149,7 @@ const server = http.createServer((req, res) => {
     assert.equal(await page.locator('#compound-studies [data-study-id="fixture-shared"] [data-goto-use="fixture-leaf"]').count(), 1);
     await page.goBack(); assert.equal(await page.locator('#domain-name').textContent(), 'Fixture leaf');
     await page.goto(`${base}/?tab=studies`);
-    assert.equal(await page.locator('#study-domain-filter option[value="fixture-leaf"]').getAttribute('hidden'), '', 'Only roots offered at first');
+    assert.equal(await page.locator('#study-domain-filter option[value="fixture-leaf"]').count(), 0, 'Only roots offered at first; hidden native options can leak to accessibility');
     await page.locator('#study-domain-filter').selectOption('fixture-topic');
     assert.equal(await page.locator('#study-list .study').count(), 3);
     for (const id of ['fixture-system', 'fixture-model', 'fixture-leaf']) await page.locator('#study-domain-filter-navigation .topic-child-select').selectOption(id);

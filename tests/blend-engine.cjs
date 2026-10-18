@@ -317,7 +317,7 @@ assert.deepEqual(Object.keys(properties), ['Recipe']);
 assert.match(properties.Recipe, /Name: Test-only recipe/);
 assert.match(properties.Recipe, /Recipe schema: v1; catalog: 2026-10-18/);
 assert.match(properties.Recipe, /Oil mixture \(relative portions, total 100%\): TEST-ONLY alpha \[alpha\] 50%; TEST-ONLY beta \[beta\] 50%/);
-assert.match(properties.Recipe, /Product: Custom Blend, standard 8 oz/);
+assert.match(properties.Recipe, /Product: Custom Blend, 8 oz/);
 assert.match(properties.Recipe, /Manual formulation review required before fulfillment/);
 assert.match(properties.Recipe, /not finished-product concentrations/);
 assert.match(properties.Recipe, new RegExp('Recipe code: ' + payload.encodedRecipe + '$'));
@@ -394,10 +394,15 @@ for (const variant of [1, 123456789, Number.MAX_SAFE_INTEGER, '12345678901234567
   const d = fixture(); d.blendBuilder.product.shopifyVariantId = variant;
   assert.equal(new URL(engine.cartPermalink(recipe(), d).url).pathname, '/cart/' + variant + ':1');
 }
-for (const [key, value] of [['price', 45], ['price', '40'], ['price', null], ['currency', 'CAD'], ['size', '4 oz'], ['name', 'Other product']]) {
+for (const [key, value] of [['price', 0], ['price', -1], ['price', Infinity], ['price', '40'], ['price', null], ['currency', 'US'], ['size', ''], ['name', ''], ['name', 'Bad\nName']]) {
   const d = fixture(); d.blendBuilder.product[key] = value;
   permalinkInvalid(d, 'product_configuration');
   assert.equal(engine.evaluateSafety(recipe(), d).blockers.length, 0);
+}
+{
+  const d = fixture(); Object.assign(d.blendBuilder.product, {name:'Catalog-defined blend', price:45.5, currency:'CAD', size:'4 oz'});
+  const result = engine.cartPermalink(recipe(), d);
+  assert.match(result.properties.Recipe, /Product: Catalog-defined blend, 4 oz/);
 }
 { const d = fixture(); delete d.blendBuilder.product; permalinkInvalid(d, 'product_configuration'); }
 { const d = fixture(); d.blendBuilder.product = null; permalinkInvalid(d, 'product_configuration'); }

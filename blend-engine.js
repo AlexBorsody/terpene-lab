@@ -393,8 +393,10 @@
     var product = object(catalog.config.product) ? catalog.config.product : {};
     var origin = storeOrigin(product.shopifyStoreUrl);
     var errors = [];
-    if (product.name !== 'Custom Blend' || product.price !== 40 || product.currency !== 'USD' || product.size !== '8 oz') {
-      errors.push(issue('product_configuration', 'The standard 8 oz Custom Blend product must be configured at a flat $40 USD.'));
+    if (!text(product.name) || product.name.length > 120 || /[\u0000-\u001f\u007f]/.test(product.name) ||
+        typeof product.price !== 'number' || !Number.isFinite(product.price) || product.price <= 0 ||
+        typeof product.currency !== 'string' || !/^[A-Z]{3}$/.test(product.currency) || !text(product.size) || product.size.length > 80 || /[\u0000-\u001f\u007f]/.test(product.size)) {
+      errors.push(issue('product_configuration', 'The catalog needs a product name, positive price, currency code and bottle size.'));
     }
     if (!origin) errors.push(issue('checkout_store_missing', 'A verified HTTPS Shopify store URL is required to continue to Shopify.'));
     if (!validVariant(product.shopifyVariantId)) errors.push(issue('checkout_variant_missing', 'A verified Custom Blend Shopify variant is required to continue to Shopify.'));
@@ -419,7 +421,7 @@
         var oil = catalog.oils.get(entry.id);
         return (text(oil.name) ? oil.name.trim() : entry.id) + ' [' + entry.id + '] ' + formattedPercent(entry.percent);
       }).join('; '),
-      'Product: Custom Blend, standard 8 oz'
+      'Product: ' + product.name.trim() + ', ' + product.size.trim()
     ];
     if (product.baseVersion != null) lines.push('Base version: ' + product.baseVersion.trim());
     if (canonical.petContext) lines.push('Customer context: pets may be present. Species and exposure require review.');

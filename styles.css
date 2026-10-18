@@ -110,6 +110,11 @@ main {
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
 
+.catalog-intro { margin-bottom: 18px; max-width: 720px; }
+.catalog-intro h2 { font-size: clamp(22px, 3vw, 30px); line-height: 1.2; margin-bottom: 8px; }
+.catalog-intro p { color: var(--muted); line-height: 1.55; }
+.card .oil-card-aroma { color: var(--text); font-size: 13px; line-height: 1.5; margin: 10px 0; }
+
 .toolbar {
   display: flex;
   gap: 10px;
@@ -160,6 +165,7 @@ main {
 .card h3 { font-size: 16px; }
 .card .latin { font-style: italic; color: var(--muted); font-size: 13px; }
 .card .sub { font-size: 12px; color: var(--muted); font-family: var(--mono); margin-top: 6px; }
+#oil-grid .card .sub { font-family: inherit; line-height: 1.55; }
 .card .top-terpene { font-size: 13px; margin-top: 8px; color: var(--text); }
 .card .top-terpene b { color: var(--amber); }
 

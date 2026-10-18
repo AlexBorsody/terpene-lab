@@ -98,8 +98,8 @@ const assert = require('node:assert/strict');
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, `Study overflow at ${width}`);
   }
   for (const [id, label, count] of [
-    ['botanical:composition', 'Composition analysis', counts.composition],
-    ['botanical:nonvolatile-chemistry', 'Flavonoid research', counts.flavonoids],
+    ['botanical-composition', 'Composition analysis', counts.composition],
+    ['botanical-nonvolatile-chemistry', 'Flavonoid research', counts.flavonoids],
     ['sensory', 'Aroma research', counts.aroma]
   ]) {
     await page.locator('#study-domain-filter').selectOption(id);
@@ -119,11 +119,11 @@ const assert = require('node:assert/strict');
   assert.ok((await page.locator('#study-list').innerText()).includes('Salvia sclarea Essential Oil Chemical Composition'));
   await page.getByRole('button', { name: 'Oils', exact: true }).click();
   assert.equal(await page.locator('#oil-grid').isVisible(), true);
-  await page.locator('#oil-domain-filter').selectOption('botanical:nonvolatile-chemistry');
+  await page.locator('#oil-domain-filter').selectOption('botanical-nonvolatile-chemistry');
   assert.equal(await page.locator('#oil-grid .card').count(), counts.flavonoidOils);
   assert.ok((await page.locator('#oil-grid').innerText()).includes('Cannabis'));
   await page.goto(`${base}/?tab=matrix`);
-  await page.locator('#matrix-domain-filter').selectOption('botanical:nonvolatile-chemistry');
+  await page.locator('#matrix-domain-filter').selectOption('botanical-nonvolatile-chemistry');
   assert.ok((await page.locator('#matrix-table thead').textContent()).includes('Flavonoid research'));
   const cell = page.locator('#matrix-table [data-oil="cannabis"][data-domain="botanical-nonvolatile-chemistry"]');
   assert.equal((await cell.innerText()).trim(), String(counts.cannabisFlavonoids));

@@ -328,7 +328,7 @@ async function captureBeforeNavigation(page, scope = page) {
     assert.equal(new URL(page.url()).origin,origin);
   });
 
-  await test('missing/invalid variants, unsafe store URLs and mismatched products fail closed',async page=>{
+  await test('missing/invalid variants, unsafe store URLs and malformed products fail closed',async page=>{
     await open(page);await create(page);
     const good=(await cart(page)).url.href;
     const invalid=[
@@ -338,7 +338,7 @@ async function captureBeforeNavigation(page, scope = page) {
         'https://merchant.blend-fixture.test/?redirect=elsewhere','https://merchant.blend-fixture.test/#fragment',
         'https://localhost','https://127.0.0.1','https://[::1]','javascript:alert(1)',
         '//merchant.blend-fixture.test','https://merchant..test'].map(shopifyStoreUrl=>({shopifyStoreUrl})),
-      {price:45},{currency:'EUR'},{name:'Blue Formula'},{size:'16 oz'}
+      {price:0},{currency:'US'},{name:''},{size:''}
     ];
     for (const patch of invalid) {
       await configure(page,patch);await refresh(page);await noVisibleCart(page);

@@ -23,8 +23,8 @@ function all(list, predicate, message) {
 
 test('Canonical inventories and unique publications', () => {
   assert.equal(master.oils.length, 28); assert.equal(regs.compounds.length, 34);
-  assert.equal(regs.studies.length, 156); assert.equal(regs.sources.length, 45);
-  assert.equal(new Set(regs.studies.map(s => s.id)).size, 156);
+  assert.equal(regs.studies.length, 157); assert.equal(regs.sources.length, 45);
+  assert.equal(new Set(regs.studies.map(s => s.id)).size, 157);
   for (const field of ['doi', 'pubmedId']) {
     const values = regs.studies.map(s => s[field]?.toLowerCase()).filter(Boolean);
     assert.equal(new Set(values).size, values.length, 'Duplicate publication ' + field);
@@ -67,7 +67,71 @@ test('Targeted source checking is distinct from complete library coverage', () =
   assert.equal(master.migration.audit.libraryReviewedOnlyExistingRelations, 169);
   assert.equal(master.migration.audit.newPrimaryPublications, 3);
   const primaryPairs = new Set(assertions.filter(a => a.verification.status === 'source-checked').map(a => a.oilId + '/' + a.studyId));
-  assert.equal(primaryPairs.size, 51); // 45 existing + recovered ylang arm + five new-paper oil relations.
+  assert.equal(primaryPairs.size, 62); // Prior 51, nine corrected existing pairs, two new-paper oil relations.
+});
+test('Every publication has an independent citation check, separate from endpoint verification', () => {
+  all(regs.studies, s => s.citationReview.status === 'identity-checked' && s.citationReview.checkedAt === '2026-10-18', 'citation review');
+  assert.equal(regs.studies.filter(s => s.summaryReview.status === 'abstract-screened').length, 154);
+  assert.deepEqual(regs.studies.filter(s => s.summaryReview.status === 'abstract-unavailable').map(s => s.id), ['composition-lemongrass-infusion-2014', 'composition-cx01']);
+  assert.ok(assertions.some(a => a.verification.status === 'library-reviewed'), 'Abstract screening must not silently promote every oil-specific edge');
+});
+test('Seven incorrect PubMed destinations are corrected without changing stable study IDs', () => {
+  for (const [id, pmid] of Object.entries({
+    'komori-1995-citrus': '8646568', 'kasper-2010-silexan': '20512042',
+    'carson-2006-teatree': '16418522', 'juergens-2003-cineole': '12645832',
+    'cannabis-terpene-profiles-2022': '32591428', 'cannabis-terpene-diversity-2016': '31084880',
+    'cannabis-volatile-classification-2022': '35588111'
+  })) {
+    const s = studies.get(id);
+    assert.equal(s.pubmedId, pmid); assert.equal(s.url, `https://pubmed.ncbi.nlm.nih.gov/${pmid}/`);
+    assert.equal(s.citationReview.pubmedId, pmid);
+  }
+  assert.equal(studies.get('cannabis-terpene-profiles-2022').evidenceLevel, 'laboratory');
+});
+test('Tick papers do not become fly evidence', () => {
+  for (const id of ['tick-eo-2024', 'lone-star-tick-eo-2024']) {
+    assert.ok(!studies.get(id).useNodeIds.some(n => n.startsWith('pest-flies')));
+    all(rows(id), a => !a.useNodeId.startsWith('pest-flies'), id);
+  }
+  assert.match(studies.get('lone-star-tick-eo-2024').finding, /only patchouli/i);
+});
+test('Biochemistry is not cognition, and model labels do not split memory endpoints', () => {
+  const research = require('../research.js').create(loadGenerated(path.join(root, 'data.js')));
+  assert.ok(!research.descendants('health-cognitive').includes('health-cognitive-plant-chemistry'));
+  assert.ok(research.descendants('botanical-composition').includes('health-cognitive-plant-chemistry'));
+  assert.equal(research.resolve('botanical:bioactivity:animal-cognition'), 'health-cognitive-memory');
+  for (const id of ['halder-2011-clove-memory','halder-2012-clove-acute-cognition'])
+    all(rows(id), a => a.useNodeId === 'health-cognitive-memory' && a.model.kind === 'animal' && !a.researchMatch, id);
+});
+test('Moss 2003 retains slower rosemary memory responses and adverse lavender outcomes', () => {
+  all(rows('moss-cook-2003', 'rosemary'), a => a.outcome.direction === 'mixed' && a.researchMatch && !a.supportsFunctionalUse && /slowed/.test(a.finding), 'rosemary mixed result');
+  all(rows('moss-cook-2003', 'lavender'), a => a.outcome.direction === 'negative' && a.researchMatch && /worsened/.test(a.finding), 'lavender adverse result');
+  assert.doesNotMatch(rows('moss-cook-2003', 'rosemary')[0].model.label, /20|correlation/);
+});
+test('Radiotherapy anxiety was worse than carrier, not merely nonsignificant', () => {
+  all(rows('graham-browne-cox-2003'), a => a.outcome.direction === 'negative' && a.material.kind === 'combination' && !a.researchMatch, 'blend-level unfavorable outcome');
+  assert.match(studies.get('graham-browne-cox-2003').finding, /carrier oil alone/);
+  assert.match(studies.get('ball-owen-booth-2020').finding, /13 trials.*708/);
+});
+test('Rosemary hybrids and cinnamon leaf remain different from catalog materials', () => {
+  all(rows('najar-2022','rosemary'), a => a.material.speciesMatch === 'different-species' && !a.researchMatch, 'rosemary hybrids');
+  all(rows('guynot-2003','cinnamon'), a => a.material.relevance === 'different-plant-part' && !a.researchMatch, 'cinnamon leaf');
+  assert.match(studies.get('guynot-2003').finding, /much more limited/);
+});
+test('New controlled study retains null outcomes and different lemon extraction', () => {
+  const id = 'kiecolt-glaser-2008-olfactory';
+  all(rows(id, 'lemon'), a => !a.researchMatch && a.material.relevance === 'different-extraction', 'steam-extracted lemon versus cold-pressed catalog');
+  all(rows(id, 'lavender'), a => a.researchMatch && !a.supportsFunctionalUse && ['null','mechanistic-mixed'].includes(a.outcome.direction), 'direct lavender research without a benefit claim');
+  assert.equal(rows(id, 'lemon').find(a => node(a,'mood')).outcome.direction, 'positive-in-studied-model');
+  assert.equal(rows(id, 'lavender').find(a => node(a,'mood')).outcome.direction, 'null');
+  assert.equal(studies.get(id).summaryReview.status, 'full-text-screened');
+});
+test('Every compound has formula provenance, including ambiguous name-search results', () => {
+  all(regs.compounds, c => c.identityReview.formula === c.formula && c.identityReview.sourceUrl.startsWith('https://'), 'formula provenance');
+  assert.equal(regs.compounds.find(c => c.id === 'furanoeudesma-1-3-diene').formula, 'C15H18O');
+  const curzerene = regs.compounds.find(c => c.id === 'curzerene');
+  assert.equal(curzerene.formula, 'C15H20O'); assert.equal(curzerene.identityReview.provider, 'NIST Chemistry WebBook');
+  assert.match(regs.compounds.find(c => c.id === 'citral').identityReview.scope, /mixture/);
 });
 test('Faraji attribution and opposite extract outcomes are preserved', () => {
   const id = 'nialeila-2020-myrrh-frankincense-wound';
@@ -157,9 +221,9 @@ test('Named species cannot accidentally become an exposure route', () => {
   for (const id of ['lee-kim-2017','guo-2024-oregano-listeria','sateriale-forgione-2024'])
     all(rows(id), a => a.material.kind === 'essential-oil', 'Extraction qualifier must not be parsed as an extract: ' + id);
 });
-test('Recovered blend components remain contextual and retain null result', () => {
+test('Recovered blend components remain contextual and retain the checked result', () => {
   all(rows('han-2006-dysmenorrhea','clary-sage'), a => !a.researchMatch && a.material.kind === 'combination', 'clary blend');
-  all(rows('graham-browne-cox-2003','bergamot'), a => !a.researchMatch && a.outcome.reportedDirection === 'null', 'bergamot blend null');
+  all(rows('graham-browne-cox-2003','bergamot'), a => !a.researchMatch && a.outcome.direction === 'negative', 'bergamot blend unfavorable anxiety result');
 });
 test('Legacy profile and builder text never become active audited evidence', () => {
   assert.equal(master.blendDefaults.availability, 'unconfirmed');
@@ -171,9 +235,11 @@ test('Legacy profile and builder text never become active audited evidence', () 
     assert.ok(regs.useNodes.find(n => n.id === id).aliases.includes(alias));
 });
 test('Route and model facets are explicit, scoped and independently verified', () => {
+  const research = require('../research.js').create(loadGenerated(path.join(root, 'data.js')));
+  const chemistryNodes = new Set([...research.descendants('botanical-composition'), ...research.descendants('botanical-nonvolatile-chemistry')]);
   for (const a of assertions) {
     assert.ok(a.routeVerification && a.model.verification && a.model.scope);
-    const chemicalOnly = a.useNodeId.startsWith('botanical-composition') || a.useNodeId.startsWith('botanical-nonvolatile-chemistry');
+    const chemicalOnly = chemistryNodes.has(a.useNodeId) || a.route === 'not-applicable';
     if (chemicalOnly) {
       assert.equal(a.route, 'not-applicable');
       assert.equal(a.model.kind, 'analytical');

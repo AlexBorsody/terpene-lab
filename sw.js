@@ -1,17 +1,17 @@
 // Generated release and SHA-256 map: run python3 scripts/build-pwa.py after edits.
-const RELEASE = "0bfdc6df907d9552";
+const RELEASE = "b90ea9a5eb057121";
 const ASSETS = {
-  "index.html": "c3b0c3a443ef33fe7a69f00e98e317b44f6dab9f83e85a2e1b4a298eacb7daec",
-  "styles.css": "9ba35e6b47c0d0a1dfbbbbf154b101e1d5d449606d641abd3ea9fec8c4e77b30",
-  "app.js": "8e39c555407bf97d493c292664bed381ce124d7acd92007048c0a989ac42d1ea",
+  "index.html": "70d5b4cdad1bd6f18e48590e32156524ff5f9382a47a6518f79f99761154210b",
+  "styles.css": "07dab877331d8d66b4136cd86cc122ed4b14e15b2d519f049afbc807c016eb0f",
+  "app.js": "200ee718cb4d9d91191765145d0b7db5a47f0dbd93d27b8312287c7a800ef9de",
   "chemistry.js": "09f64d79607afee21306dd8a6fa4d1b28087d8bccd42dd924e958d7baaa4d132",
   "research.js": "9adac5cca9e32904e624fe828d932e955a0a7dd4a28d7352dd866f62c282fdec",
-  "data.js": "68f0f917ae791d655db87bd447ff85c7cb8dd7920753447e7feb2725fdc7348b",
+  "data.js": "4910385d96391193d3d4bc83f690cb3997baa82e593d31bd5b1d4e64452e4033",
   "pwa.js": "a52f02fdcb6a47168e81c5c7f7eff4c332da8c6952b05e60b9bd8fff9901f21f",
-  "blend-engine.js": "afcc32e0c4805fdb9bb00ce5c0a16e2aa5a3fa90e75be41c7d80bae99b0b1014",
-  "blend-builder.js": "7bcfcc56170956717f7401374a4d60cb745e78b853bb162687ee28f0917b6f3d",
+  "blend-engine.js": "b0c95678d8b1ede6ef9a61031dd8f30cd5866b1f909c80b3a8d5fa52a09938e7",
+  "blend-builder.js": "813b23e4977c70670bd0b028a40c1cc96e9bc5d9f898095b67707473a4cc621a",
   "blend-builder.css": "6201de5c247026bb3990555c820ba8a4cf53892851b59a4502eb528396b908eb",
-  "master-data.json": "35c824fc76df10b01ec005341e7f874deffde8faec4d73b635b57301841c2c58",
+  "master-data.json": "2debebd5a9aa6fdd8b72d03807a67c23d84a0ec7a7ea25ff98d0f3e0108d825d",
   "manifest.webmanifest": "e85307edce52944b5afd4da7ad5082893d4a4dff1fd25a8abed6469eeaee1271",
   "shield-icon.svg": "b6a4fa5ec8968f651ec6bb9441f4cb6a3c5c5b333c45628c2e43ca348d2a5562",
   "vendor/echarts-5.5.1.min.js": "e84270bd0cd5bdf60fefc26d00c2a391cb2e81f4d26a7a9ee16185a54773a3cf",

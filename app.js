@@ -27,18 +27,14 @@ const domainByType = Object.fromEntries(R.nodes.flatMap(node =>
 // Only navigation roots are offered initially; descendants are disclosed one
 // level at a time, with a breadcrumb back to any ancestor.
 const topicFilterIds = ["study-domain-filter", "oil-domain-filter", "matrix-domain-filter"];
-function topicOptions() {
-  const roots = new Set(researchDomains.map(node => node.id));
-  const options = R.nodes.map(node => `<option value="${esc(node.id)}"${roots.has(node.id) ? "" : " hidden"}>${esc(R.label(node.id))}</option>`);
-  const canonical = new Set(R.nodes.map(node => node.id));
-  const aliases = new Set();
-  R.nodes.forEach(node => (node.aliases || []).forEach(alias => {
-    if (!canonical.has(alias) && !aliases.has(alias)) {
-      aliases.add(alias);
-      options.push(`<option value="${esc(alias)}" hidden>${esc(R.label(node.id))}</option>`);
-    }
-  }));
-  return `<option value="">All research topics</option>` + options.join("");
+function topicOptions(selected = null) {
+  // Native selects can expose hidden options to assistive technology. Aliases
+  // belong in the resolver, never in the menu. Retain only a selected descendant.
+  const selectedId = R.resolve(selected);
+  const nodes = [...researchDomains];
+  if (selectedId && !nodes.some(node => node.id === selectedId)) nodes.push(R.node(selectedId));
+  return `<option value="">All research topics</option>` + nodes.map(node =>
+    `<option value="${esc(node.id)}">${esc(researchDomains.some(root => root.id === node.id) ? R.label(node.id) : R.breadcrumb(node.id))}</option>`).join("");
 }
 function topicBreadcrumb(id, attribute, includeAll = true) {
   const chain = id ? [...R.ancestors(id), R.node(id)] : [];
@@ -61,7 +57,9 @@ function syncTopicFilter(id) {
   if (childSelect) childSelect.addEventListener("change", () => { if (childSelect.value) setTopicFilter(id, childSelect.value, true); });
 }
 function setTopicFilter(id, value, render = false) {
-  document.getElementById(id).value = R.resolve(value) || "";
+  const select = document.getElementById(id), nodeId = R.resolve(value);
+  select.innerHTML = topicOptions(nodeId);
+  select.value = nodeId || "";
   syncTopicFilter(id);
   if (render) {
     if (id === "oil-domain-filter") { renderOils(document.getElementById("oil-search").value); routeUrl("oils", { domain: R.resolve(value) }); }
@@ -314,6 +312,7 @@ function studyCard(s, scope = {}, useIds = null) {
     <p class="finding"><span class="finding-label">Paper finding</span>${esc(s.finding)}</p>
     ${s.limitations ? `<p class="limitations"><span class="finding-label">Limitations</span>${esc(s.limitations)}</p>` : ""}
     <div class="catchips" aria-label="Source-tagged research topics">${categoryChips(s, oilId, useId)}</div>
+    ${s.summaryReview ? `<p class="hint source-review">${s.summaryReview.status === "full-text-screened" ? "Full text screened" : s.summaryReview.status === "abstract-screened" ? "Abstract screened" : "Citation checked; abstract unavailable"} · ${esc(s.summaryReview.checkedAt)}. Oil-specific checks are shown separately.</p>` : ""}
     ${assertionContext(s, oilId, useId)}
     <div class="tags">${oilTags}${compTags}<a class="ext read-paper" href="${esc(s.url)}" target="_blank" rel="noopener">Read paper</a></div>
   </div>`;
@@ -466,10 +465,10 @@ function renderOils(filter) {
   const sort = document.getElementById("oil-sort")?.value || "az";
   syncTopicFilter("oil-domain-filter");
   const oils = D.oils.filter(o =>
-    (o.name.toLowerCase().includes(q) || o.latinName.toLowerCase().includes(q)) &&
+    (o.name.toLowerCase().includes(q) || o.latinName.toLowerCase().includes(q) || o.aroma.some(note => note.toLowerCase().includes(q))) &&
     (!domainFilter || studiesForOil(o.id, domainFilter).length)
   ).sort((a,b) => {
-    if (sort === "studies") return studiesForOil(b.id).length - studiesForOil(a.id).length || a.name.localeCompare(b.name);
+    if (sort === "studies") return studiesForOil(b.id, domainFilter || null).length - studiesForOil(a.id, domainFilter || null).length || a.name.localeCompare(b.name);
     if (sort === "domains") return domainsForOil(b.id).length - domainsForOil(a.id).length || a.name.localeCompare(b.name);
     if (sort === "compound") {
       const ac = topConstituent(a)?.compound?.name || "";
@@ -481,14 +480,15 @@ function renderOils(filter) {
   document.getElementById("oil-count").textContent = oils.length + " oils";
   grid.innerHTML = oils.map(o => {
     const top = topConstituent(o);
-    const n = studiesForOil(o.id).length;
-    const domains = domainsForOil(o.id);
+    const n = studiesForOil(o.id, domainFilter || null).length;
+    const domains = domainFilter ? [R.resolve(domainFilter)] : domainsForOil(o.id);
     return `<div class="card" data-oil="${o.id}" tabindex="0" role="button" aria-label="Explore ${esc(o.name)}">
       <div class="card-top">
         <div class="swatch" style="background:${o.color}"></div>
         <div><h3>${esc(o.name)}</h3><p class="latin">${esc(o.latinName)}</p></div>
       </div>
 ${top ? `<p class="top-terpene">Top compound: <b>${esc(top.compound.name)}</b></p>` : ""}
+      <p class="oil-card-aroma">${o.aroma.map(esc).join(" · ")}</p>
       <p class="sub"><strong class="study-count">${n} stud${n === 1 ? "y" : "ies"}</strong>${domains.length ? " on " + domains.map(d => esc(R.label(d))).join(", ") : ""}</p>
     </div>`;
   }).join("") || `<p class="empty">No oils match.</p>`;
@@ -770,7 +770,7 @@ function showCompound(id, fromRoute = false) {
   document.getElementById("compound-desc").textContent = c.description;
   document.getElementById("compound-aroma").textContent = c.aroma.join(", ");
 
-  document.getElementById("compound-chemistry").innerHTML = `<p>${esc(c.volatility || "")} ${groupLinks(c)}</p>${sourceLinks(c.sourceIds)}`;
+  document.getElementById("compound-chemistry").innerHTML = `<p>${esc(c.volatility || "")} ${groupLinks(c)}</p>${sourceLinks(c.sourceIds)}${c.identityReview ? `<p class="hint">Formula checked against <a href="${esc(c.identityReview.sourceUrl)}" target="_blank" rel="noopener">${esc(c.identityReview.provider)}</a>. ${esc(c.identityReview.scope)}</p>` : ""}`;
   bindChemistryLinks(document.getElementById("compound-chemistry"));
   const relationships = oilsWithCompound(id);
   const materialRecords = D.oils.flatMap(oil => (oil.chemicalEvidence || [])

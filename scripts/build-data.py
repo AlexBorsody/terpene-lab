@@ -8,6 +8,7 @@ import argparse
 import copy
 import hashlib
 import json
+import math
 from pathlib import Path
 import re
 import sys
@@ -83,6 +84,37 @@ def citation_fields(source, studies):
         for key in inherited:
             result[key] = copy.deepcopy(study[key])
     return result
+
+
+def normalized_doi(value):
+    value = re.sub(r'^doi:\s*', '', str(value or '').strip(), flags=re.IGNORECASE)
+    value = re.sub(r'^https?://(?:dx\.)?doi\.org/', '', value, flags=re.IGNORECASE)
+    return unquote(value).lower()
+
+
+def validate_citation_identity(study):
+    """Catch internal drift; external bibliographic verification remains research work."""
+    sid = study['id']
+    parsed = urlsplit(study['url'])
+    path = unquote(parsed.path).strip('/')
+    if parsed.hostname == 'pubmed.ncbi.nlm.nih.gov':
+        require(path.isdigit() and str(int(path)) == str(study.get('pubmedId')),
+                f'{sid}: citation URL and PubMed ID disagree')
+    if parsed.hostname in ('doi.org', 'dx.doi.org'):
+        require(normalized_doi(path) == normalized_doi(study.get('doi')),
+                f'{sid}: citation URL and DOI disagree')
+    review = study.get('citationReview')
+    if review is not None:
+        require(review.get('status') == 'identity-checked', f'{sid}: invalid citation review status')
+        https_url(review.get('sourceUrl'), f'{sid}.citationReview.sourceUrl')
+        require(normalized_doi(review.get('doi')) == normalized_doi(study.get('doi')) and
+                (review.get('pubmedId') or None) == (study.get('pubmedId') or None),
+                f'{sid}: citation identifiers differ from reviewed source')
+        require(isinstance(review.get('sourceTitle'), str) and review['sourceTitle'], f'{sid}: reviewed source title required')
+    summary = study.get('summaryReview')
+    if summary is not None:
+        require(summary.get('status') in ('abstract-screened', 'abstract-unavailable', 'full-text-screened'), f'{sid}: invalid summary review status')
+        https_url(summary.get('sourceUrl'), f'{sid}.summaryReview.sourceUrl')
 
 
 def validate(master):
@@ -192,6 +224,8 @@ def validate(master):
         refs(study['useNodeIds'], nodes, f'{study["id"]}.useNodeIds')
         require(not any(key in study for key in ('oilIds', 'compoundIds', 'categories')), f'{study["id"]}: duplicated reverse associations')
         refs(study.get('chemicalGroups', []), groups, f'{study["id"]}.chemicalGroups')
+    for study in studies.values():
+        validate_citation_identity(study)
     link_orders = {'oil': {}, 'compound': {}}
     for kind, records in [('oil', oils), ('compound', compounds)]:
         for record in records.values():
@@ -204,6 +238,11 @@ def validate(master):
             if kind == 'compound':
                 refs(record.get('sourceIds', []), sources, f'{record["id"]}.sourceIds')
                 refs(record.get('functionalGroups', []), groups, f'{record["id"]}.functionalGroups')
+                identity = record.get('identityReview')
+                if identity is not None:
+                    require(identity.get('status') == 'formula-checked' and identity.get('formula') == record.get('formula'),
+                            f'{record["id"]}: formula differs from reviewed identity')
+                    https_url(identity.get('sourceUrl'), f'{record["id"]}.identityReview.sourceUrl')
     for kind, links in link_orders.items():
         for study_id, positions in links.items():
             require(sorted(positions) == list(range(len(positions))), f'{study_id}: {kind} study link order must be unique and contiguous')
@@ -234,6 +273,11 @@ def validate(master):
                 require(verification['status'] in ('source-checked', 'source-verified'), f'{aid}: researchMatch needs source verification')
                 require(assertion['relevance'] == 'direct', f'{aid}: researchMatch needs direct relevance')
                 require(all(assertion[field] is not None for field in ('material', 'model', 'outcome')), f'{aid}: researchMatch needs explicit material/model/outcome facets')
+                require(assertion['material'].get('kind') in ('essential-oil', 'single-oil-topical-formulation'), f'{aid}: researchMatch needs whole-oil material')
+                require(assertion['material'].get('speciesMatch') != 'different-species', f'{aid}: researchMatch cannot cross species')
+                require(assertion.get('route') not in ('oral', 'injection'), f'{aid}: oral or injected preparations are contextual')
+                direction = assertion['outcome'].get('direction')
+                require(isinstance(direction, str) and direction and direction != 'unverified', f'{aid}: researchMatch needs a verified outcome')
         elif assertion.get('kind') == 'chemical-observation':
             require(assertion['researchMatch'] is False, f'{aid}: chemical observations cannot be efficacy matches')
             observation = assertion['observation']
@@ -308,6 +352,14 @@ def validate(master):
             require(field in defaults and defaults[field] is None, f'Default {field} must explicitly remain unknown')
     refs(master['blendBuilder'].get('starterOilIds', []), oils, 'blendBuilder.starterOilIds')
     registry(master['blendBuilder'].get('qualities', []), 'blendBuilder.qualities')
+    product = master['blendBuilder'].get('product')
+    require(isinstance(product, dict), 'blendBuilder.product: object required')
+    for field, maximum in (('name', 120), ('size', 80)):
+        value = product.get(field)
+        require(isinstance(value, str) and value.strip() and len(value) <= maximum and not re.search(r'[\x00-\x1f\x7f]', value), f'blendBuilder.product.{field}: invalid text')
+    price = product.get('price')
+    require(isinstance(price, (int, float)) and not isinstance(price, bool) and math.isfinite(price) and price > 0, 'blendBuilder.product.price: positive finite number required')
+    require(isinstance(product.get('currency'), str) and re.fullmatch(r'[A-Z]{3}', product['currency']), 'blendBuilder.product.currency: three-letter currency code required')
     for field in ('totalOilLoadSource', 'totalOilMaxSource'):
         source_reference(master['blendBuilder']['product'].get(field), sources, f'blendBuilder.product.{field}')
     return aliases

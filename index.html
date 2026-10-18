@@ -19,7 +19,7 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
 <link rel="icon" href="shield-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" sizes="180x180">
 <link rel="stylesheet" href="blend-builder.css?v=6201de5c247026bb">
-<link rel="stylesheet" href="styles.css?v=9ba35e6b47c0d0a1">
+<link rel="stylesheet" href="styles.css?v=07dab877331d8d66">
 <script src="vendor/echarts-5.5.1.min.js"></script>
 
 <style>
@@ -82,12 +82,16 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
   <!-- OIL EXPLORER -->
   <section id="tab-oils" class="tab-panel active">
     <div id="oil-list-view">
+      <div class="catalog-intro">
+        <h2>Find the oils that fit your idea.</h2>
+        <p>Explore by use, compare aromas, and inspect the studies behind each oil. Bring your choices together in the Blend Builder.</p>
+      </div>
       <details class="essential-oils-explainer">
         <summary>Are essential oils fatty oils?</summary>
         <p>Essential oils aren’t fatty oils like olive or coconut oil. They’re concentrated mixtures of volatile plant compounds, often rich in terpenes and terpenoids.</p>
       </details>
       <div class="toolbar">
-        <input id="oil-search" type="search" placeholder="Search oils...">
+        <input id="oil-search" type="search" placeholder="Search oils or aromas..." aria-label="Search oils or aromas">
         <select id="oil-sort" aria-label="Sort plants">
           <option value="az">A to Z</option>
           <option value="studies">Most studied</option>
@@ -288,12 +292,12 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
   <p>Sunny's Shield Terpene Lab &middot; plant to molecule to paper &middot; inspect the evidence yourself. Not medical advice.</p>
 </footer>
 
-<script src="data.js?v=68f0f917ae791d65"></script>
+<script src="data.js?v=4910385d96391193"></script>
 <script src="chemistry.js?v=09f64d79607afee2"></script>
 <script src="research.js?v=9adac5cca9e32904"></script>
-<script src="app.js?v=8e39c555407bf97d"></script>
-<script src="blend-engine.js?v=afcc32e0c4805fdb"></script>
-<script src="blend-builder.js?v=7bcfcc5617095671"></script>
+<script src="app.js?v=200ee718cb4d9d91"></script>
+<script src="blend-engine.js?v=b0c95678d8b1ede6"></script>
+<script src="blend-builder.js?v=813b23e4977c7067"></script>
 <script src="pwa.js?v=a52f02fdcb6a4716"></script>
 </body>
 </html>

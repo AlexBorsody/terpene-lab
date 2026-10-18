@@ -17,6 +17,12 @@ or Shopify Plus feature is required.
 - Existing final-loading/limit fields stay unknown unless supported by reviewed
   formulation data. No dilution, base composition or stock is inferred.
 
+Product name, price, currency and size are read from this configuration for the
+display and readable recipe. The engine validates their shape rather than
+maintaining another hard-coded product definition. The current offer remains
+$40 USD / 8 oz. A recipe cannot override these values, the destination or variant;
+Shopify remains authoritative for the actual price and availability.
+
 As of 2026-10-18, the public store does not list a Custom Blend product. The Lab
 therefore shows a concise setup message rather than an active purchase link.
 The handoff is implemented and tested with fixtures; no real custom order,

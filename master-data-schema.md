@@ -17,7 +17,7 @@ The one-time `scripts/migrate-master-data.cjs` imports an explicit original snap
 ## Document shape
 
 - `schemaVersion`: data-contract version, currently 1.
-- `taxonomyVersion`: taxonomy API version, currently 1.
+- `taxonomyVersion`: taxonomy API version, currently 2. Stable IDs and historical aliases survive reparenting and endpoint consolidation.
 - `version`: existing dataset release identifier.
 - `blendBuilder`: original recipe/product configuration. Recipe version 1 and catalogVersion `2026-10-18` remain unchanged.
 - `blendDefaults` (optional): exploratory builder defaults for every catalog oil. Default stock is unconfirmed; safety review, limits, phototoxicity and pet suitability remain unknown/unverified. Existing per-oil compatibility overlays are retained.
@@ -66,6 +66,18 @@ IDs match `^[a-z0-9][a-z0-9-]{0,63}$`. They are assigned once and persisted. Cha
 `declared` preserves the original legacy category declaration, including unused nodes. All original observed category paths are represented even if they were absent from those declarations. The initial migration retained 53 distinct used paths and 66 total nodes. Optional `displayLabel` and `navigationRoot` supply presentation metadata without application-specific category switches. By default, a parentless node is a navigation root.
 
 Material, model, route, species, verification, and outcome are independent evidence facets. They must not be encoded as extra levels under use categories.
+
+Version 2 moves plant terpene chemistry out of cognition, consolidates animal-cognition tags into the shared memory endpoint (retaining the old ID as an alias), and keeps tolerability outside a misleading preclinical-only label. The old plant-chemistry ID still begins with `health-`; use `parentId`, never ID prefixes, to infer ancestry. Native topic selectors offer navigation roots plus the selected descendant; legacy aliases are resolved before selection, not inserted as duplicate hidden options.
+
+## Publication and compound review provenance
+
+`studies[].citationReview` records the date, provider, public source URL, source title and resolved DOI/PMID from an identity check. The generator rejects discrepancies between these identifiers, the active citation and a PubMed/DOI destination. This detects subsequent internal drift; it is not a substitute for reading the external record.
+
+`studies[].summaryReview` distinguishes `abstract-screened`, `abstract-unavailable` and `full-text-screened`, with a date, source URL and explicit scope. **Neither publication identity nor abstract screening promotes an oil-use assertion.** Preparation, species, route and outcome checks remain on each assertion. Exact composition values require their own sample/method provenance.
+
+`compounds[].identityReview` records a name/formula cross-check and its source. It is not a validated molecular structure, batch analysis or stereochemical identification. Mixtures and conflicting name-search results require an explicit scope note. The generator rejects formula drift from the reviewed value. Curzerene retains the NIST formula despite a conflicting PubChem name-search result; citral is a mixture with a representative isomer reference.
+
+`migration.audit` preserves the earlier review snapshot. `migration.independentReview` records the later library-wide citation/abstract screen and its limits. Derive current counts from the active registries rather than treating either dated snapshot as a live tally.
 
 ## Evidence assertions
 

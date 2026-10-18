@@ -102,8 +102,14 @@ for (const [id, label, count] of [
   ['sensory', 'Aroma research', counts.aroma],
   ['botanical', run('R.label("botanical")'), counts.botanical]
 ]) {
-  for (const filter of ['study-domain-filter', 'oil-domain-filter', 'matrix-domain-filter']) assert.ok(element(filter).innerHTML.includes(`value="${id}"`));
-  element('study-domain-filter').value = id;
+  for (const filter of ['study-domain-filter', 'oil-domain-filter', 'matrix-domain-filter']) {
+    run(`setTopicFilter(${JSON.stringify(filter)}, ${JSON.stringify(id)})`);
+    assert.equal(element(filter).value, run(`R.resolve(${JSON.stringify(id)})`));
+    const values = [...element(filter).innerHTML.matchAll(/value="([^"]*)"/g)].map(m => m[1]);
+    assert.equal(new Set(values).size, values.length);
+    assert.ok(!values.includes('botanical:composition'), 'Legacy aliases resolve without duplicate native options');
+    assert.ok(!element(filter).innerHTML.includes(' hidden'), 'Do not depend on native option hiding');
+  }
   run('renderStudies()');
   assert.equal(element('study-count').textContent, `${count} studies`);
   if (id !== 'botanical') {
@@ -120,6 +126,8 @@ element('oil-domain-filter').value = 'botanical:nonvolatile-chemistry';
 run('renderOils("")');
 assert.equal(element('oil-count').textContent, `${data.oils.filter(oil => expectedOilStudyIds(oil.id, 'botanical-nonvolatile-chemistry').length).length} oils`);
 assert.ok(element('oil-grid').innerHTML.includes('data-oil="cannabis"'));
+const filteredCards = [...element('oil-grid').innerHTML.matchAll(/data-oil="([^"]+)"[\s\S]*?class="study-count">(\d+)/g)];
+for (const [, oilId, count] of filteredCards) assert.equal(Number(count), expectedOilStudyIds(oilId, 'botanical-nonvolatile-chemistry').length, 'Card counts follow the selected topic');
 assert.equal(run('matrixCell("cannabis", "botanical:composition").length'), expectedOilStudyIds('cannabis', 'botanical-composition').length);
 assert.equal(run('matrixCell("cannabis", "botanical:nonvolatile-chemistry").length'), expectedOilStudyIds('cannabis', 'botanical-nonvolatile-chemistry').length);
 assert.equal(run('matrixCell("clary-sage", "botanical:composition").length'), expectedOilStudyIds('clary-sage', 'botanical-composition').length);
