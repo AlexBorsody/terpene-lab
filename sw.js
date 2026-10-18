@@ -1,9 +1,9 @@
 // Generated release and SHA-256 map: run python3 scripts/build-pwa.py after edits.
-const RELEASE = "5c1b940823831fa9";
+const RELEASE = "0bfdc6df907d9552";
 const ASSETS = {
-  "index.html": "d0681e5bc37ba93fe420fd6670d407bded6cc9fed7991abc9330c9fde9c10579",
-  "styles.css": "6549a08bcc0c96e164e8c0a7a71c557cba313d052a985922deb62f9918050852",
-  "app.js": "efc355c965031f74381c69b2e55486f5986e4dbc92a95df0bd1c1a020d2327fd",
+  "index.html": "c3b0c3a443ef33fe7a69f00e98e317b44f6dab9f83e85a2e1b4a298eacb7daec",
+  "styles.css": "9ba35e6b47c0d0a1dfbbbbf154b101e1d5d449606d641abd3ea9fec8c4e77b30",
+  "app.js": "8e39c555407bf97d493c292664bed381ce124d7acd92007048c0a989ac42d1ea",
   "chemistry.js": "09f64d79607afee21306dd8a6fa4d1b28087d8bccd42dd924e958d7baaa4d132",
   "research.js": "9adac5cca9e32904e624fe828d932e955a0a7dd4a28d7352dd866f62c282fdec",
   "data.js": "68f0f917ae791d655db87bd447ff85c7cb8dd7920753447e7feb2725fdc7348b",
