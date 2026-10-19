@@ -425,7 +425,10 @@ async function assertNoOverflow(page, label) {
       assert.equal(await profile.locator('.study-badge').count(),papers.length,'Every canonical paper carries its evidence tier');
       for(const paper of papers) {
         const card=profile.locator(`[data-study-id="${paper.id}"]`);
-        assert.ok((await card.locator('.finding').textContent()).includes(paper.finding),'Finding comes from the canonical paper');
+        const scopedFindings = [...new Set(research.assertions(oil.id,paper.id).map(a=>a.finding || paper.finding).filter(Boolean))];
+        if(!scopedFindings.length && paper.finding) scopedFindings.push(paper.finding);
+        const resultText = await card.locator('.finding').textContent();
+        for(const finding of scopedFindings) assert.ok(resultText.includes(finding),'Finding comes from the canonical oil-specific assessment');
         assert.equal(await card.locator('.read-paper').getAttribute('href'),paper.url);
       }
       if(papers.length>2) {
