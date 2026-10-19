@@ -23,8 +23,8 @@ function all(list, predicate, message) {
 
 test('Canonical inventories and unique publications', () => {
   assert.equal(master.oils.length, 33); assert.equal(regs.compounds.length, 42);
-  assert.equal(regs.studies.length, 174); assert.equal(regs.sources.length, 50);
-  assert.equal(new Set(regs.studies.map(s => s.id)).size, 174);
+  assert.equal(regs.studies.length, 176); assert.equal(regs.sources.length, 50);
+  assert.equal(new Set(regs.studies.map(s => s.id)).size, 176);
   for (const field of ['doi', 'pubmedId']) {
     const values = regs.studies.map(s => s[field]?.toLowerCase()).filter(Boolean);
     assert.equal(new Set(values).size, values.length, 'Duplicate publication ' + field);
@@ -58,7 +58,7 @@ test('Unverified is unknown, not a null or adverse study conclusion', () => {
 });
 test('Verified public provenance contains no private paths', () => {
   all(assertions.filter(a => a.verification.status === 'source-checked'), a =>
-    a.verification.checkedAt === '2026-10-18' && a.verification.urls.length && a.verification.urls.every(u => /^https:\/\//.test(u)), 'public primary URLs and check date');
+    ['2026-10-18','2026-10-19'].includes(a.verification.checkedAt) && a.verification.urls.length && a.verification.urls.every(u => /^https:\/\//.test(u)), 'public primary URLs and check date');
   assert.doesNotMatch(JSON.stringify(master), /\/workspace\/|\/agent_notes\/|provenancePacket|dream_notes/);
 });
 test('Targeted source checking is distinct from complete library coverage', () => {
@@ -67,11 +67,11 @@ test('Targeted source checking is distinct from complete library coverage', () =
   assert.equal(master.migration.audit.libraryReviewedOnlyExistingRelations, 169);
   assert.equal(master.migration.audit.newPrimaryPublications, 3);
   const primaryPairs = new Set(assertions.filter(a => a.verification.status === 'source-checked').map(a => a.oilId + '/' + a.studyId));
-  assert.equal(primaryPairs.size, 81); // Prior 51, nine corrected existing pairs, two new-paper oil relations.
+  assert.equal(primaryPairs.size, 87); // Prior 51, nine corrected existing pairs, two new-paper oil relations.
 });
 test('Every publication has an independent citation check, separate from endpoint verification', () => {
-  all(regs.studies, s => s.citationReview.status === 'identity-checked' && s.citationReview.checkedAt === '2026-10-18', 'citation review');
-  assert.equal(regs.studies.filter(s => s.summaryReview.status === 'abstract-screened').length, 163);
+  all(regs.studies, s => s.citationReview.status === 'identity-checked' && ['2026-10-18','2026-10-19'].includes(s.citationReview.checkedAt), 'citation review');
+  assert.equal(regs.studies.filter(s => s.summaryReview.status === 'abstract-screened').length, 165);
   assert.deepEqual(regs.studies.filter(s => s.summaryReview.status === 'abstract-unavailable').map(s => s.id), ['composition-lemongrass-infusion-2014', 'composition-cx01']);
   assert.ok(assertions.some(a => a.verification.status === 'library-reviewed'), 'Abstract screening must not silently promote every oil-specific edge');
   all(regs.studies.filter(s => s.citationReview.provider === 'Crossref'), s => s.citationReview.sourceUrl.startsWith('https://api.crossref.org/works/'), 'Fallback provenance must identify the provider actually used');
@@ -102,7 +102,7 @@ test('Biochemistry is not cognition, and model labels do not split memory endpoi
   assert.ok(research.descendants('botanical-composition').includes('health-cognitive-plant-chemistry'));
   assert.equal(research.resolve('botanical:bioactivity:animal-cognition'), 'health-cognitive-memory');
   for (const id of ['halder-2011-clove-memory','halder-2012-clove-acute-cognition'])
-    all(rows(id), a => a.useNodeId === 'health-cognitive-memory' && a.model.kind === 'animal' && !a.researchMatch, id);
+    all(rows(id), a => ['health-cognitive-memory','health-pain-inflammation'].includes(a.useNodeId) && a.model.kind === 'animal' && !a.researchMatch, id);
 });
 test('Moss 2003 retains slower rosemary memory responses and adverse lavender outcomes', () => {
   all(rows('moss-cook-2003', 'rosemary'), a => a.outcome.direction === 'mixed' && a.researchMatch && !a.supportsFunctionalUse && /slowed/.test(a.finding), 'rosemary mixed result');
@@ -156,8 +156,8 @@ test('Primary citation metadata corrected while stable IDs survive', () => {
   assert.equal(cannabis.pubmedId, '33859287');
   assert.equal(cannabis.url, 'https://pubmed.ncbi.nlm.nih.gov/33859287/');
 });
-test('Only Yang’s actual soil-removal assays use cleaning tags', () => {
-  all(assertions.filter(a => a.useNodeId.startsWith('cleaning')), a => a.studyId === 'yang-2021-citrus-cleaning' && a.useNodeId === 'cleaning-surface-soil-removal', 'cleaning endpoint precision');
+test('Cleaning application tags distinguish soil removal, disinfection and hand hygiene', () => {
+  all(assertions.filter(a => a.useNodeId === 'cleaning-surface-soil-removal'), a => a.studyId === 'yang-2021-citrus-cleaning' && a.useNodeId === 'cleaning-surface-soil-removal', 'cleaning endpoint precision');
   all(rows('yang-2021-citrus-cleaning'), a => a.researchMatch && a.route === 'bench-soil-removal' && a.material.kind === 'essential-oil', 'crude-oil arms separated from fractions');
   assert.deepEqual(rows('yang-2021-citrus-cleaning').map(a => a.oilId).sort(), ['grapefruit', 'lemon', 'sweet-orange']);
   assert.match(studies.get('yang-2021-citrus-cleaning').limitations, /Visual endpoint/);
@@ -199,7 +199,7 @@ test('Isolated compounds and oral products never match whole-oil functional uses
 });
 test('Injection, related species and chemotype mismatches stay contextual', () => {
   for (const id of ['halder-2011-clove-memory','halder-2012-clove-acute-cognition'])
-    all(rows(id), a => !a.researchMatch && a.model.kind === 'animal' && a.route === null && a.routeVerification.status === 'unverified', id);
+    all(rows(id), a => !a.researchMatch && a.model.kind === 'animal' && a.route === 'injection' && a.routeVerification.status === 'source-checked', id);
   all(rows('lima-campos-2024','lavender'), a => !a.researchMatch, 'lavandin differs from lavender');
   all(rows('chaves-campos-2026','lemongrass'), a => !a.researchMatch, 'C. flexuosus differs from C. citratus');
   all(rows('chen-2020-ravintsara-mrsa'), a => !a.researchMatch, 'ravintsara chemotype mismatch');

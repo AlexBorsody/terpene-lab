@@ -46,7 +46,7 @@ const assert = require('node:assert/strict');
       await page.goto(`${base}/?tab=oils${embed ? '&embed=1' : ''}`);
       assert.ok((await page.locator('[data-oil="clary-sage"] .sub').innerText()).includes('Composition analysis'));
       const cannabis = await page.locator('[data-oil="cannabis"] .sub').innerText();
-      assert.ok(cannabis.includes('Aroma research'));
+      assert.ok(cannabis.includes('Scent chemistry'));
       assert.ok(cannabis.includes('Flavonoid research'));
       assert.ok(cannabis.includes('Composition analysis'), 'Audited chemical-profile papers appear alongside flavonoid research');
       assert.ok(!(await page.locator('#oil-grid').innerText()).includes('Botanical chemistry'));
@@ -102,7 +102,7 @@ const assert = require('node:assert/strict');
   for (const [id, label, count] of [
     ['botanical-composition', 'Composition analysis', counts.composition],
     ['botanical-nonvolatile-chemistry', 'Flavonoid research', counts.flavonoids],
-    ['sensory', 'Aroma research', counts.aroma]
+    ['sensory', 'Scent chemistry', counts.aroma]
   ]) {
     await page.locator('#study-domain-filter').selectOption(id);
     assert.equal(await page.locator('#study-domain-filter option:checked').innerText(), label);

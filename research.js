@@ -114,7 +114,10 @@
       return new Set(source.filter(study => allowed ? allowed.has(study.id) : matchesStudy(study,value)).map(study => study.id)).size;
     }
     function matchingOilIds(value = null, options = {eligibleOnly: true}) {
-      return (data.oils || []).filter(oil => studiesForOil(oil.id, value, options).length > 0).map(oil => oil.id);
+      const selections = Array.isArray(value) ? value : [value];
+      return (data.oils || []).filter(oil => options.match === 'all' && selectedIds(value) !== null
+        ? selections.every(topic => studiesForOil(oil.id, topic, options).length > 0)
+        : studiesForOil(oil.id, value, options).length > 0).map(oil => oil.id);
     }
     const countOils = (value = null, options = {eligibleOnly: true}) => matchingOilIds(value, options).length;
     function unknownStudyTags(study) {

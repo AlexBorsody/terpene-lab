@@ -78,15 +78,13 @@ async function selectedTopics(page) { return page.locator('[data-quality][aria-p
 async function catalogIds(page, contextual=false) {
   return page.locator(contextual?'.blend-related-catalog [data-add-oil]':'#blend-oil-catalog > .blend-oil-card [data-add-oil]').evaluateAll(nodes=>nodes.map(node=>node.dataset.addOil).sort());
 }
-async function assertCatalog(page, topics, source=data) {
+async function assertCatalog(page, topics, source=data, mode='all') {
   const r=Research.create(source), oils=source.oils.filter(o=>o.blend?.enabled);
-  const direct=oils.filter(o=>!topics.length || r.studiesForOil(o.id,topics,{eligibleOnly:true}).length).map(o=>o.id).sort();
-  const related=topics.length?oils.filter(o=>!direct.includes(o.id) && r.studiesForOil(o.id,topics).length).map(o=>o.id).sort():[];
-  assert.deepEqual(await catalogIds(page),direct,'Only reviewed oil/topic pairs enter the direct catalog');
-  assert.deepEqual(await catalogIds(page,true),related,'Contextual-only oil/topic pairs stay separate');
-  const text=await page.locator('#blend-catalog-count').innerText();
-  assert.ok(text.includes(topics.length?`${direct.length} research matches · ${related.length} related oils`:`${direct.length} oils`),text);
-  return {direct,related};
+  const expected=oils.filter(o=>!topics.length || topics[mode==='all'?'every':'some'](id=>r.studiesForOil(o.id,id).length)).map(o=>o.id).sort();
+  assert.deepEqual(await catalogIds(page),expected,'Visible catalog must match the same scoped bibliography as Matrix');
+  assert.deepEqual(await catalogIds(page,true),[],'No matching oils hidden in another catalog');
+  assert.match(await page.locator('#blend-catalog-count').innerText(),new RegExp('^'+expected.length+' oils'));
+  return {direct:expected,related:[]};
 }
 function dynamicFixture() {
   const fixture=JSON.parse(JSON.stringify(data));
@@ -150,14 +148,14 @@ async function assertNoOverflow(page, label) {
     await page.locator('#blend-search').fill('lavandula');
     assert.equal(await page.locator('[data-add-oil="lavender"]').count(),1);
   });
-  await test('data-only deep taxonomy appears progressively with parent-descendant and OR counts',async page=>{
+  await test('Data-only taxonomy supports parent navigation and explicit all/any matching',async page=>{
     const fixture=dynamicFixture(), r=Research.create(fixture);
     await open(page);await choose(page,'qualities');
     const root=page.locator('[data-topic-branch="fixture-blend-root"]');
     assert.equal(await root.evaluate(node=>node.open),false,'A new top-level branch starts collapsed');
     assert.equal(await page.locator('[data-quality="fixture-blend-leaf"]').isVisible(),false,'Deep topic is not dumped into the initial picker');
     const rendered=await page.locator('#blend-qualities [data-quality]').evaluateAll(nodes=>nodes.map(node=>node.dataset.quality));
-    const reachable=[...new Set(r.roots().flatMap(node=>r.descendants(node.id)))];
+    const reachable=[...new Set(r.roots().flatMap(node=>r.descendants(node.id)))].filter(id=>fixture.oils.some(o=>o.blend?.enabled && r.studiesForOil(o.id,id).length));
     assert.deepEqual(rendered.slice().sort(),reachable.sort(),'Picker derives all reachable topics from data');
     for(const id of ['fixture-blend-root','fixture-blend-system','fixture-blend-model']) {
       const summary=page.locator(`[data-topic-branch="${id}"] > summary`);
@@ -167,38 +165,38 @@ async function assertNoOverflow(page, label) {
     assert.equal(await page.locator('[data-quality="fixture-blend-leaf"]').isVisible(),true);
     assert.equal(await page.locator('[data-quality="fixture-blend-leaf"] small').innerText(),'2','Count includes one direct and one contextual oil');
     await topic(page,'fixture-blend-leaf');
-    assert.deepEqual((await assertCatalog(page,['fixture-blend-leaf'],fixture)).direct,['lavender']);
+    assert.deepEqual((await assertCatalog(page,['fixture-blend-leaf'],fixture)).direct,['lavender','lemon']);
     await topic(page,'fixture-blend-sibling');
-    assert.deepEqual((await assertCatalog(page,['fixture-blend-leaf','fixture-blend-sibling'],fixture)).direct,['lavender','lemon','rosemary'],'Multiple topics use an OR union');
+    assert.deepEqual((await assertCatalog(page,['fixture-blend-leaf','fixture-blend-sibling'],fixture)).direct,['lemon'],'Default matches every selected topic');
+    await page.locator('[data-filter-mode=any]').click();
+    assert.deepEqual((await assertCatalog(page,['fixture-blend-leaf','fixture-blend-sibling'],fixture,'any')).direct,['lavender','lemon','rosemary']);
+    await page.locator('[data-filter-mode=all]').click();
     assert.equal(await page.locator('.blend-related-catalog').count(),0,'An oil with any reviewed selected-topic match appears once in the direct group');
     await topic(page,'fixture-blend-leaf');await topic(page,'fixture-blend-sibling');
     await topic(page,'fixture-blend-root');
     assert.equal(await page.locator('[data-quality="fixture-blend-root"] small').innerText(),'3','Parent count deduplicates oils across descendant topics');
     assert.deepEqual((await assertCatalog(page,['fixture-blend-root'],fixture)).direct,['lavender','lemon','rosemary'],'Parent includes every descendant branch');
     await topic(page,'fixture-blend-leaf');
-    assert.deepEqual((await assertCatalog(page,['fixture-blend-root','fixture-blend-leaf'],fixture)).direct,['lavender','lemon','rosemary'],'Parent plus child does not double count oils');
+    assert.deepEqual(await selectedTopics(page),['fixture-blend-leaf'],'Selecting a child replaces its broad parent');
+    assert.deepEqual((await assertCatalog(page,['fixture-blend-leaf'],fixture)).direct,['lavender','lemon']);
     await add(page,'lavender');await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').isVisible()) await page.locator('.blend-research-disclosure > summary').click();
     assert.deepEqual(await page.locator('.blend-profile .study').evaluateAll(nodes=>nodes.map(node=>node.dataset.studyId)),['fixture-blend-direct'],'Parent plus child does not repeat the same paper');
     for(const id of ['fixture-blend-system','fixture-blend-model','fixture-blend-sibling']) await topic(page,id);
-    const allFive=fixture.taxonomy.nodes.filter(node=>node.id.startsWith('fixture-blend-')).map(node=>node.id).sort();
-    assert.deepEqual(await selectedTopics(page),allFive,'The topic picker is not limited to the four legacy qualities');
+    const allFive=['fixture-blend-model','fixture-blend-sibling'].sort();
+    assert.deepEqual(await selectedTopics(page),allFive,'Unrelated branches coexist without redundant ancestors');
     await page.locator('#blend-save').click();
     const code=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).saved[0],STORAGE);
     assert.deepEqual(JSON.parse(Buffer.from(code,'base64url').toString('utf8')).qualityIds,allFive,'Every selected data-only topic survives serialization');
     await page.goto(`${base}/?tab=blend&recipe=${code}`);
     assert.deepEqual(await selectedTopics(page),allFive,'Data-only topics survive a shared recipe reload');
   },null,dynamicFixture());
-  await test('contextual-only topics stay collapsed and explicitly qualify the canonical paper',async page=>{
+  await test('Contextual matches stay visible and explicitly qualify the canonical paper',async page=>{
     const fixture=dynamicFixture();
     await open(page);await choose(page,'qualities');await topic(page,'fixture-blend-leaf');
     await assertCatalog(page,['fixture-blend-leaf'],fixture);
-    const related=page.locator('.blend-related-catalog');
-    assert.equal(await related.evaluate(node=>node.open),false);
-    assert.equal(await page.locator('[data-add-oil="lemon"]').isVisible(),false);
-    await related.locator(':scope > summary').focus();await page.keyboard.press('Space');
-    assert.equal(await related.evaluate(node=>node.open),true,'Contextual bibliography expands through a native keyboard disclosure');
-    assert.match(await related.innerText(),/missing match is not evidence of no effect/);
-    assert.match(await related.innerText(),/Other linked research/);
+    assert.equal(await page.locator('.blend-related-catalog').count(),0);
+    assert.equal(await page.locator('[data-add-oil="lemon"]').isVisible(),true);
+    assert.match(await page.locator('.blend-oil-card').filter({has:page.locator('[data-add-oil="lemon"]')}).innerText(),/scope unreviewed/i);
     await add(page,'lemon');await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').isVisible()) await page.locator('.blend-research-disclosure > summary').click();
     const profile=page.locator('.blend-profile');
     assert.match(await profile.innerText(),/1 linked papers · 0 with reviewed oil-specific topic matches/);
@@ -209,6 +207,34 @@ async function assertNoOverflow(page, label) {
     assert.equal(await profile.locator('.blend-profile-cautions').isVisible(),true);
     await assertNoPurchase(page);
   },null,dynamicFixture());
+  await test('Every topic count matches visible oils; reset clears filters and preserves the blend',async page=>{
+    await open(page);await choose(page,'qualities');
+    const ids=await page.locator('[data-quality]').evaluateAll(nodes=>nodes.map(n=>n.dataset.quality));
+    for(const id of ids){
+      const button=await revealTopic(page,id);
+      const count=Number(await button.locator('small').innerText());
+      assert.ok(count>0,`No empty category: ${id}`);
+      await button.click();
+      assert.equal((await catalogIds(page)).length,count,`Count and results agree: ${id}`);
+      await assertCatalog(page,[id]);
+      await page.locator('#blend-reset-choices').click();
+    }
+    await topic(page,'health-cognitive-attention');
+    assert.ok((await catalogIds(page)).includes('rosemary'));
+    await page.locator('#blend-reset-choices').click();
+    await topic(page,'health-cognitive');
+    assert.ok((await catalogIds(page)).includes('clove'));
+    await add(page,'clove');
+    await page.locator('#blend-search').fill('nothing-matches');
+    await page.locator('#blend-reset-choices').click();
+    assert.equal(await page.locator('#blend-search').inputValue(),'');
+    assert.deepEqual(await selectedTopics(page),[]);
+    await assertCatalog(page,[]);
+    assert.equal((await selected(page))[0].id,'clove');
+    await page.reload();
+    assert.deepEqual(await selectedTopics(page),[]);
+    await assertCatalog(page,[]);
+  });
   await test('legacy topic drafts, saved recipes and shared links migrate and deduplicate canonical aliases',async page=>{
     const old=seed({path:'qualities',qualityIds:['calm',TOPICS.calm,'focus','sleep','uplifting']});
     const canonical=Object.values(TOPICS).sort(), oldCode=Buffer.from(JSON.stringify(old),'utf8').toString('base64url');
