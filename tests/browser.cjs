@@ -5,6 +5,11 @@ const assert = require('node:assert/strict');
  const context=await browser.newContext({serviceWorkers:'block'});
  const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const base=process.env.TEST_URL || 'http://127.0.0.1:8000';
+ const openView=async label=>{
+  const button=page.getByRole('button',{name:label,exact:true});
+  if(!await button.isVisible()) await page.getByRole('button',{name:['Matrix','Network'].includes(label)?'Visualize':'Oils',exact:true}).click();
+  await button.click();
+ };
  // New visits open the first tab; explicit oil links and browser Back still work.
  for (const embed of [false,true]) {
   await page.goto(`${base}/${embed?'?embed=1':''}`);
@@ -18,6 +23,29 @@ const assert = require('node:assert/strict');
   await page.goto(`${base}/?oil=lemon${embed?'&embed=1':''}`);
   assert.equal(await page.locator('#oil-name').textContent(),'Lemon');
  }
+ // Each nested destination restores the correct section, including history and mobile keyboard use.
+ assert.deepEqual(await page.locator('.tabs .tab').allTextContents(),['Blend Builder','Oils','Visualize']);
+ for(const [view,section] of [['oils','oils'],['studies','oils'],['compounds','oils'],['domains','oils'],['matrix','visualize'],['network','visualize']]) {
+  await page.goto(`${base}/?tab=${view}`);
+  assert.equal(await page.locator(`.tabs [data-section="${section}"]`).getAttribute('aria-current'),'page');
+  assert.equal(await page.locator(`[data-section-nav="${section}"] [data-tab="${view}"]`).getAttribute('aria-current'),'page');
+  assert.equal(await page.locator('[data-section-nav]:visible').count(),1);
+  assert.equal(await page.locator('.tab-panel.active').count(),1);
+ }
+ await page.setViewportSize({width:390,height:844});
+ await page.getByRole('button',{name:'Oils',exact:true}).click();
+ await page.getByRole('button',{name:'Studies',exact:true}).focus(); await page.keyboard.press('Enter');
+ assert.equal(await page.locator('#tab-studies').isVisible(),true);
+ await page.getByRole('button',{name:'Visualize',exact:true}).click();
+ assert.equal(await page.getByRole('button',{name:'Studies',exact:true}).isVisible(),false);
+ await page.getByRole('button',{name:'Network',exact:true}).click();
+ await page.goBack(); assert.equal(await page.locator('#tab-matrix').isVisible(),true);
+ await page.goBack(); assert.equal(await page.locator('#tab-studies').isVisible(),true);
+ assert.equal(await page.locator('.tabs [data-section="oils"]').getAttribute('aria-current'),'page');
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
+ await page.getByRole('button',{name:'Blend Builder',exact:true}).click();
+ assert.equal(await page.locator('[data-section-nav]:visible').count(),0);
+ await page.setViewportSize({width:1280,height:900});
  // The Matrix is a complete relationship browser, with distinct canonical topic families.
  await page.goto(`${base}/?tab=matrix`);
  assert.deepEqual(await page.locator('#matrix-table [data-matrix-topic]').evaluateAll(nodes=>nodes.map(n=>n.dataset.matrixTopic)),['health','cleaning','microbial','pest']);
@@ -100,7 +128,7 @@ const assert = require('node:assert/strict');
    assert.deepEqual(await page.locator('#study-list .study').evaluateAll(cards=>cards.map(card=>card.dataset.studyId).sort()),studyIds);
    assert.equal(params.get('embed'),embed?'1':null);
   };
-  await page.getByRole('button',{name:'Compounds',exact:true}).click();
+  await openView('Compounds');
   await page.getByRole('button',{name:'Studies',exact:true}).click();
   await assertStudyState();
   await page.goBack(); assert.equal(await page.locator('#tab-compounds').isVisible(),true);
@@ -121,8 +149,8 @@ const assert = require('node:assert/strict');
     assert.deepEqual(await snapshot(),expected,`${label} result set survives navigation`);
     assert.equal(params.get('embed'),embed?'1':null);
    };
-   await page.getByRole('button',{name:'Compounds',exact:true}).click();
-   await page.getByRole('button',{name:label,exact:true}).click();
+   await openView('Compounds');
+   await openView(label);
    await assertTopicState();
    await page.goBack(); assert.equal(await page.locator('#tab-compounds').isVisible(),true);
    await page.goForward(); await assertTopicState();
@@ -167,7 +195,7 @@ const assert = require('node:assert/strict');
    if(width===390 && !embed) await page.locator('#oil-beyond').screenshot({path:'/tmp/terpene-beyond-mobile.png',style:'.lab-header { visibility:hidden; }'});
   }
  }
- await page.getByRole('button',{name:'Compounds',exact:true}).click();
+ await openView('Compounds');
  await page.locator('#compound-category-filter').selectOption('group:aldehyde');
  assert.equal(await page.locator('#compound-grid .card').count(),3);
  await page.locator('#compound-search').fill('neral');
@@ -183,7 +211,7 @@ const assert = require('node:assert/strict');
  await page.locator('#study-group-filter').selectOption('thiol');
  assert.ok((await page.locator('#study-list').innerText()).includes('Oswald'));
  for(const tab of ['Oils','Matrix','Uses','Network','Compounds','Studies']) {
-  await page.getByRole('button',{name:tab,exact:true}).click();
+  await openView(tab);
   assert.equal(await page.locator('.tab-panel.active').count(),1);
  }
  await page.goto(`${base}/?tab=compounds&compound=cannflavin-a&embed=1`);
@@ -199,7 +227,7 @@ const assert = require('node:assert/strict');
   assert.ok((await page.locator(`#compound-oil-links [data-goto-oil="${oil}"]`).innerText()).includes(`${value}% in cited sample`));
  }
  assert.equal(await page.locator('#oil-sort option[value="compound"]').evaluate(el=>el.disabled && el.hidden),true);
- await page.getByRole('button',{name:'Network',exact:true}).click();
+ await openView('Network');
  const graph=await page.evaluate(()=>echarts.getInstanceByDom(document.getElementById('network-chart')).getOption().series[0]);
  for(const node of graph.data.filter(n=>n.id.startsWith('compound:'))) assert.ok(graph.links.some(e=>e.target===node.id),`orphan ${node.id}`);
  for(const id of ['menthyl-acetate','geranyl-acetate','grapefruit-thiol','nobiletin']) assert.ok(graph.links.some(e=>e.target===`compound:${id}`));

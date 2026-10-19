@@ -11,10 +11,10 @@
 #blend-builder h4 { font-size:20px; line-height:1.35; font-weight:600; }
 #blend-builder h5 { font-size:16px; font-weight:600; }
 .blend-tab { border-color:var(--amber-dim); }
-.blend-hero { display:flex; align-items:center; justify-content:space-between; gap:52px; padding:22px 0 40px; border-bottom:1px solid var(--border); }
+.blend-hero { display:flex; align-items:center; justify-content:space-between; gap:52px; padding:16px 0 28px; border-bottom:1px solid var(--border); }
 .blend-eyebrow { font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--blend-accent); margin:0 0 10px; }
 .blend-hero h2 { font-family:Georgia,'Times New Roman',serif; font-weight:400; font-size:clamp(35px,4vw,58px); letter-spacing:-1.8px; line-height:1.14; }
-.blend-intro { max-width:630px; margin:17px 0 0; color:#bdc7b9; font-size:16px; line-height:1.7; }
+.blend-intro { max-width:630px; margin:17px 0 0; color:#bdc7b9; font-size:16px; line-height:1.6; }
 .blend-product { flex:0 0 350px; display:flex; align-items:center; gap:20px; padding:26px; color:#23392b; background:#e5dfcc; border:1px solid #e5dfcc; border-radius:2px; }
 .blend-product-size { font-size:11px; letter-spacing:.5px; color:#4f604d; }
 .blend-product strong { display:block; font:36px Georgia,serif; margin:8px 0; color:#243a2b; }
@@ -25,12 +25,11 @@
 .blend-step-title > span:first-child { font:12px var(--mono); color:var(--blend-accent); width:30px; height:30px; border:1px solid #5b513d; border-radius:50%; display:grid; place-items:center; }
 .blend-step-note { margin-left:auto; color:var(--muted); font:10px var(--mono); letter-spacing:1px; }
 .blend-paths { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-#blend-builder .blend-paths button { position:relative; display:flex; flex-direction:column; text-align:left; gap:9px; padding:24px 60px 24px 24px; background:transparent; color:var(--text); border:1px solid var(--border); border-radius:3px; }
+#blend-builder .blend-paths button { position:relative; display:grid; grid-template-columns:36px minmax(0,1fr); align-content:center; text-align:left; gap:3px 16px; padding:20px 54px 20px 20px; background:transparent; color:var(--text); border:1px solid var(--border); border-radius:3px; }
 #blend-builder .blend-paths button:hover, #blend-builder .blend-paths button[aria-pressed=true] { border-color:var(--blend-accent); background:#243a2d; }
-.blend-path-kicker { color:var(--blend-accent); font:10px var(--mono); letter-spacing:1.7px; }
-.blend-paths strong { font:400 29px/1.2 var(--serif); letter-spacing:-.5px; }
-.blend-paths button > span:not(.blend-path-kicker):not(.blend-path-arrow):not(.blend-path-icon) { color:var(--muted); font-size:13px; max-width:45ch; }
-.blend-path-arrow { position:absolute; top:28px; right:24px; color:var(--blend-accent); }
+.blend-paths strong { font:400 26px/1.2 var(--serif); letter-spacing:-.5px; }
+.blend-path-description { grid-column:2; color:var(--muted); font-size:13px; }
+.blend-path-arrow { position:absolute; top:50%; transform:translateY(-50%); right:20px; color:var(--blend-accent); }
 .blend-work-grid { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(320px,1fr); gap:28px; align-items:start; }
 .blend-catalog h4 { margin-bottom:10px; }
 .blend-small { color:var(--muted); font-size:12px; line-height:1.6; }
@@ -54,8 +53,8 @@
 .blend-search-label,.blend-input-label { display:block; color:var(--muted); font-size:12px; margin:15px 0 7px; }
 #blend-catalog-count { margin:10px 0 15px; }
 .blend-oil-catalog { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.blend-oil-card { min-width:0; display:flex; flex-direction:column; gap:10px; background:var(--surface); padding:17px; border:1px solid var(--border); border-radius:3px; }
-.blend-oil-card.is-selected { border-color:#659a80; }
+.blend-oil-card { min-width:0; display:flex; flex-direction:column; gap:10px; background:transparent; padding:17px 0; border:0; border-top:1px solid var(--border); }
+.blend-oil-card.is-selected { border-top-color:#659a80; }
 .blend-oil-heading { display:flex; align-items:center; justify-content:space-between; gap:10px; }
 .blend-latin { color:var(--muted); font-size:12px; font-style:italic; margin-top:3px; }
 .blend-oil-swatch { height:25px; width:25px; border-radius:50% 50% 50% 0; transform:rotate(-45deg); background:var(--oil-color); opacity:.8; flex-shrink:0; }
@@ -79,7 +78,7 @@
 .blend-composition { display:flex; height:6px; border-radius:3px; overflow:hidden; margin:0 0 10px; gap:2px; background:#34483e; }
 .blend-composition span { min-width:0; flex-basis:0; }
 #blend-builder .blend-text-button { color:var(--blend-accent); border:0; background:none; text-decoration:underline; text-underline-offset:3px; font-size:12px; padding:5px 0; }
-.blend-proportion-note { padding:12px 0 17px; color:#c8c8bc; font-size:12px; line-height:1.6; border-bottom:1px solid var(--border); }
+.blend-proportion-note { padding:12px 0 17px 18px; color:#c8c8bc; font-size:12px; line-height:1.6; border-bottom:1px solid var(--border); }
 .blend-pets { display:flex; align-items:flex-start; gap:10px; margin:18px 0; font-size:13px; cursor:pointer; }
 .blend-pets input { margin-top:4px; accent-color:#88bca0; height:18px; width:18px; }
 .blend-pets small { display:block; color:var(--muted); font-size:11px; margin-top:3px; }
@@ -155,7 +154,7 @@
 .blend-bottle { width:72px; height:110px; flex:0 0 72px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
 .blend-product-copy { min-width:0; }
 .blend-product .blend-pill { color:#40543d; border-color:#a7b09a; border-radius:2px; padding:5px 7px; }
-.blend-path-icon { display:block; margin-bottom:7px; color:var(--amber); }
+.blend-path-icon { display:block; grid-row:1 / 3; align-self:center; color:var(--amber); }
 .blend-path-icon .ui-icon { width:29px; height:29px; }
 .blend-recipe-actions button { display:inline-flex; align-items:center; justify-content:center; gap:8px; }
 .blend-mixer { border-top:3px solid var(--blend-accent); }
@@ -166,7 +165,8 @@
   .blend-product strong { display:block; }
   .blend-product p { display:block; margin-bottom:10px; }
   .blend-product .blend-pill { width:auto; }
-  .blend-paths strong { font-size:24px; }
-  #blend-builder .blend-paths button { padding:18px 16px; }
+  .blend-paths { grid-template-columns:1fr; gap:8px; }
+  .blend-paths strong { font-size:23px; }
+  #blend-builder .blend-paths button { padding:14px 16px; }
   .blend-hero h2 { font-size:40px; }
 }

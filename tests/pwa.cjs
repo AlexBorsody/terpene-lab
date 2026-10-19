@@ -39,6 +39,7 @@ const { execFileSync } = require('node:child_process');
   assert.equal(await page.locator('#compound-name').textContent(),'Citral');
   const canonical=await page.evaluate(async()=>{const d=await(await fetch('master-data.json')).json();return {version:d.schemaVersion,oilCount:d.oils.length};});
   assert.equal(canonical.version,1);assert.equal(canonical.oilCount,28,'The canonical oil-first dataset is available offline');
+  await page.getByRole('button',{name:'Visualize',exact:true}).click();
   await page.getByRole('button',{name:'Network',exact:true}).click();
   assert.ok(await page.locator('#network-chart canvas').count());
   const reopened=await context.newPage();await reopened.goto(base+'?tab=oils&oil=lemon');
