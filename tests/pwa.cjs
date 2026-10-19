@@ -69,10 +69,13 @@ const { execFileSync } = require('node:child_process');
   assert.equal(await page.evaluate(async()=>!!(await navigator.serviceWorker.getRegistration()).waiting),false);
   assert.deepEqual(await page.evaluate(()=>caches.keys()),before);
   corrupt=false;
+  const expectedRelease=fs.readFileSync(path.join(root,'sw.js'),'utf8').match(/const RELEASE = "([^"]+)"/)[1];
+  const loaded=page.waitForEvent('load');
   await page.evaluate(async()=>{await (await navigator.serviceWorker.getRegistration()).update();});
-  await page.locator('#pwa-update').waitFor({state:'visible'});
-  assert.deepEqual((await page.evaluate(()=>caches.keys())).filter(x=>x.startsWith('sunnys-')).length,2);
-  await Promise.all([page.waitForEvent('load'),page.locator('#pwa-update').click()]);
+  await loaded;
+  await page.waitForFunction(release=>caches.has('sunnys-terpene-lab-'+release),expectedRelease);
+  assert.equal(await page.locator('#pwa-update').isVisible(),false,'No manual update button required');
+  assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('terpene-lab:blend:v1')).saved.length),1,'Automatic activation preserves saved recipes');
   await page.waitForFunction(()=>navigator.serviceWorker.controller && document.querySelector('#pwa-status')?.textContent === '');
   const after=await page.evaluate(()=>caches.keys());
   assert.equal(after.filter(x=>x.startsWith('sunnys-')).length,1);assert.ok(after.includes('unrelated-app-cache'));
@@ -83,7 +86,7 @@ const { execFileSync } = require('node:child_process');
   assert.equal(await ep.locator('.pwa-controls').isVisible(),false);
   assert.equal(await ep.evaluate(async()=>(await navigator.serviceWorker.getRegistrations()).length),0);
   await embedded.close();
-  console.log('PASS: manifest/icons/scope, offline reopening/charts/deep links, partial-release rejection, waiting/accepted updates, cache cleanup and embed isolation at '+prefix);
+  console.log('PASS: manifest/icons/scope, offline reopening/charts/deep links, partial-release rejection, automatic updates and recipe preservation, cache cleanup and embed isolation at '+prefix);
  }
  } finally {await browser.close();server.close();fs.rmSync(root,{recursive:true,force:true});}
 })().catch(e=>{console.error(e);process.exit(1)});

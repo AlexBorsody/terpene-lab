@@ -1,13 +1,13 @@
 // Generated release and SHA-256 map: run python3 scripts/build-pwa.py after edits.
-const RELEASE = "daaf6d9d655094d5";
+const RELEASE = "3545e4c4f0397d5c";
 const ASSETS = {
-  "index.html": "4451dfd58dc477b18e20f424c501ef6cb8c8e390c0aa429138c084cd6b131db4",
+  "index.html": "bfa27a7a733c84368b47587e0b2a2329c237aca8c7d7aa18fc80974297804188",
   "styles.css": "8d3bbf8620b8b36e02f264f11ebc6a90b961996fd594c9b42ce72c7aaa4fb317",
   "app.js": "f6662bd3fa461b90fee68b1abe5c70210e5930ae9c41ddfe02b37b1928acbe9b",
   "chemistry.js": "09f64d79607afee21306dd8a6fa4d1b28087d8bccd42dd924e958d7baaa4d132",
   "research.js": "acf3cd76eb76401d69f9b34dbcb82941c74bf7beb69976055866fa82765c4758",
   "data.js": "926f71d76156bcb9b9c91360f3f1c7ac1c63bde8d68c8e279101b1a56d9a2aea",
-  "pwa.js": "cef19be5b7af26f997b1d6eb025044d66d37ec662c348802ec210513f14c7ff5",
+  "pwa.js": "2be526f528a5a802f634be1d14b13a1e48b63617abb324e4cfec2ed71c159430",
   "blend-engine.js": "2e8efadb5582843de2b7b0a8cb4bf86f9f63404ae671cc00c86715260c215203",
   "blend-builder.js": "9dff4756827626b79334ca1056970bb552d3eaa65de678fcee134474018d970c",
   "blend-builder.css": "dc573556e73ee9b8845640c045a08b5c8179c5584634c256eda69562488f5f4f",
@@ -39,8 +39,9 @@ self.addEventListener('install', event => {
     }));
     const cache = await caches.open(CACHE);
     await Promise.all(entries.map(([url, response]) => cache.put(url, response)));
+    await self.skipWaiting();
   })());
-  // Updates wait for consent or for all old tabs to close.
+  // Activate only after the entire release has passed integrity checks.
 });
 
 self.addEventListener('message', event => {
