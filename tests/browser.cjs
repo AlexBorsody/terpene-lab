@@ -1,5 +1,6 @@
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const assert = require('node:assert/strict');
+const master = require('../master-data.json');
 (async()=>{
  const browser=await chromium.launch({headless:true,...(process.env.CHROME_PATH ? {executablePath:process.env.CHROME_PATH} : {}),args:['--no-sandbox']});
  const context=await browser.newContext({serviceWorkers:'block'});
@@ -81,11 +82,12 @@ const assert = require('node:assert/strict');
  await page.locator('[data-matrix-view="compound-topics"]').click();
  assert.equal(await page.locator('#matrix-table tbody tr').count(),42);
  await page.locator('[data-matrix-view="study-topics"]').click();
- assert.equal(await page.locator('#matrix-table tbody tr').count(),176);
+ assert.equal(await page.locator('#matrix-table tbody tr').count(),master.registries.studies.length);
  await page.locator('#matrix-inventory [data-matrix-inspect="sources"]').click();
  assert.equal(await page.locator('#matrix-inspector .chem-evidence').count(),50);
  // Complete an oil -> compound -> paper/topic path without leaving the Matrix.
  await page.goto(`${base}/?tab=matrix&inspect=compound/limonene&embed=1`);
+ await page.locator('#matrix-inspector .study-details > summary').first().click();
  await page.locator('#matrix-inspector [data-matrix-topic-link]').first().click();
  assert.equal(await page.locator('#tab-matrix').isVisible(),true);
  assert.equal(new URL(page.url()).searchParams.get('embed'),'1');
@@ -114,17 +116,17 @@ const assert = require('node:assert/strict');
   const suffix=embed?'&embed=1':'';
   await page.goto(`${base}/?tab=studies${suffix}`);
   await page.locator('#study-domain-filter').selectOption('health');
-  await page.locator('#study-domain-filter-navigation .topic-child-select').selectOption('health-respiratory');
-  await page.locator('#study-oil-filter').selectOption('eucalyptus');
-  await page.locator('#study-compound-filter').selectOption('eucalyptol');
+  await page.locator('#study-domain-filter-navigation .topic-child-select').selectOption('health-mental-health');
+  await page.locator('#study-oil-filter').selectOption('cannabis');
+  await page.locator('#study-compound-filter').selectOption('beta-caryophyllene');
   const studyIds=await page.locator('#study-list .study').evaluateAll(cards=>cards.map(card=>card.dataset.studyId).sort());
   assert.ok(studyIds.length>0,'Filter-state test must retain a nonempty real result');
   const assertStudyState=async()=>{
    const params=new URL(page.url()).searchParams;
-   for(const [key,value] of [['tab','studies'],['oil','eucalyptus'],['compound','eucalyptol'],['domain','health-respiratory']]) assert.equal(params.get(key),value,`Retained study ${key}`);
-   assert.equal(await page.locator('#study-oil-filter').inputValue(),'eucalyptus');
-   assert.equal(await page.locator('#study-compound-filter').inputValue(),'eucalyptol');
-   assert.equal(await page.locator('#study-domain-filter').inputValue(),'health-respiratory');
+   for(const [key,value] of [['tab','studies'],['oil','cannabis'],['compound','beta-caryophyllene'],['domain','health-mental-health']]) assert.equal(params.get(key),value,`Retained study ${key}`);
+   assert.equal(await page.locator('#study-oil-filter').inputValue(),'cannabis');
+   assert.equal(await page.locator('#study-compound-filter').inputValue(),'beta-caryophyllene');
+   assert.equal(await page.locator('#study-domain-filter').inputValue(),'health-mental-health');
    assert.deepEqual(await page.locator('#study-list .study').evaluateAll(cards=>cards.map(card=>card.dataset.studyId).sort()),studyIds);
    assert.equal(params.get('embed'),embed?'1':null);
   };
@@ -137,15 +139,15 @@ const assert = require('node:assert/strict');
   for(const [tab,label,filter] of [['oils','Oils','oil-domain-filter'],['matrix','Matrix','matrix-domain-filter']]) {
    await page.goto(`${base}/?tab=${tab}${suffix}`);
    await page.locator(`#${filter}`).selectOption('health');
-   await page.locator(`#${filter}-navigation .topic-child-select`).selectOption('health-respiratory');
+   await page.locator(`#${filter}-navigation .topic-child-select`).selectOption('health-mental-health');
    const snapshot=async()=>tab==='oils'
     ? page.locator('#oil-grid .card').evaluateAll(cards=>cards.map(card=>card.dataset.oil).sort())
     : page.locator('#matrix-table .cell').evaluateAll(cells=>cells.map(cell=>[cell.dataset.oil,cell.dataset.domain,cell.textContent.trim()]));
    const expected=await snapshot(); assert.ok(expected.length>0);
    const assertTopicState=async()=>{
     const params=new URL(page.url()).searchParams;
-    assert.equal(params.get('tab'),tab); assert.equal(params.get('domain'),'health-respiratory');
-    assert.equal(await page.locator(`#${filter}`).inputValue(),'health-respiratory');
+    assert.equal(params.get('tab'),tab); assert.equal(params.get('domain'),'health-mental-health');
+    assert.equal(await page.locator(`#${filter}`).inputValue(),'health-mental-health');
     assert.deepEqual(await snapshot(),expected,`${label} result set survives navigation`);
     assert.equal(params.get('embed'),embed?'1':null);
    };
@@ -209,7 +211,7 @@ const assert = require('node:assert/strict');
  assert.ok((await page.locator('#compound-chemistry').innerText()).includes('Esters'));
  await page.getByRole('button',{name:'Studies',exact:true}).click();
  await page.locator('#study-group-filter').selectOption('thiol');
- assert.ok((await page.locator('#study-list').innerText()).includes('Oswald'));
+ assert.ok((await page.locator('#study-list').innerText()).includes('Identification of a New Family of Prenylated Volatile Sulfur Compounds'));
  for(const tab of ['Oils','Matrix','Uses','Network','Compounds','Studies']) {
   await openView(tab);
   assert.equal(await page.locator('.tab-panel.active').count(),1);

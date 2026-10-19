@@ -159,3 +159,7 @@ Research corrections may change the browser projection only with a reversible le
 The test module exports `digest`, `loadGenerated`, `legacyProjection`, `reverseLedger`, and `counts` for audit tooling. Tests reverse the ledger, verify each after-digest, and require the exact original fingerprint. Undocumented drift cannot pass by changing only the stored baseline metadata. The complete original snapshot can additionally be supplied with `--baseline`.
 
 Configuration expansions use a separate entry with `kind: "configuration"`, `provenance: "user-request"`, and a clear reason; they do not need an unrelated scientific citation. Assertions/taxonomy metadata that do not alter the legacy projection need no baseline correction entry. Scientific corrections retain original stable record IDs even when an old slug no longer accurately describes corrected metadata.
+
+### Reviewed oil/publication boundaries
+
+A study may carry `oilLinkReview` with `status: "source-checked"`, `checkedAt`, public `sourceUrls`, `reason`, and `approvedOilIds`. When present, the generator requires the actual reverse oil links to equal this reviewed list. An empty list preserves a compound-only publication while preventing constituent presence from creating an oil-study join. Mixed papers may list the explicitly tested oils; endpoint assertions must still distinguish whole-oil results from isolated-compound or extract arms. This metadata records the scope of a particular review, not completeness of the library.

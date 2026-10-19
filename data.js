@@ -901,24 +901,6 @@ const TERPENE_DATA = {
               ]
             },
             {
-              "useNodeId": "health-pain-inflammation",
-              "evidenceIds": [
-                "use-7bcac00f98d25339fd83ea2c",
-                "use-e21475dfd1e531f26d60cce0",
-                "use-854cc2927f1e95288bb91cf9",
-                "use-98bcfdc9c47d83c5c4997715"
-              ],
-              "children": [
-                {
-                  "useNodeId": "health-pain-inflammation-menstrual-cramps",
-                  "evidenceIds": [
-                    "use-a11cc5be9269778c454d497a"
-                  ],
-                  "children": []
-                }
-              ]
-            },
-            {
               "useNodeId": "health-cognitive",
               "evidenceIds": [],
               "children": [
@@ -971,6 +953,23 @@ const TERPENE_DATA = {
                 "use-b34fc6cc6240ca9fc389df40"
               ],
               "children": []
+            },
+            {
+              "useNodeId": "health-pain-inflammation",
+              "evidenceIds": [
+                "use-e21475dfd1e531f26d60cce0",
+                "use-854cc2927f1e95288bb91cf9",
+                "use-98bcfdc9c47d83c5c4997715"
+              ],
+              "children": [
+                {
+                  "useNodeId": "health-pain-inflammation-menstrual-cramps",
+                  "evidenceIds": [
+                    "use-a11cc5be9269778c454d497a"
+                  ],
+                  "children": []
+                }
+              ]
             },
             {
               "useNodeId": "health-quality-of-life",
@@ -1139,7 +1138,6 @@ const TERPENE_DATA = {
         "chemical-lavender-2",
         "chemical-lavender-3",
         "use-05e67102300fbdaf2e564834",
-        "use-7bcac00f98d25339fd83ea2c",
         "use-c3cf11a0912f426a90160819",
         "use-051403856b1f93d50ed06db8",
         "use-6e982cee5ca4dcfc7c6af3f1",
@@ -1366,9 +1364,7 @@ const TERPENE_DATA = {
             },
             {
               "useNodeId": "health-pain-inflammation",
-              "evidenceIds": [
-                "use-a49bbbca85404516b9039060"
-              ],
+              "evidenceIds": [],
               "children": [
                 {
                   "useNodeId": "health-pain-inflammation-headache",
@@ -1527,7 +1523,6 @@ const TERPENE_DATA = {
         "use-cae4e5554fec98ae9dc9e298",
         "use-9f6bee492505359b5665035b",
         "use-fe8928b4772e3d2d9c140995",
-        "use-a49bbbca85404516b9039060",
         "use-9c9d15424beff4fcd16b54bc",
         "use-2cf2a4090a077b79d8d0216f",
         "use-20a1862c1f68db5f9cd13159",
@@ -1652,17 +1647,6 @@ const TERPENE_DATA = {
           "useNodeId": "health",
           "evidenceIds": [],
           "children": [
-            {
-              "useNodeId": "health-respiratory",
-              "evidenceIds": [
-                "use-8856d6ae2586ff856414b360",
-                "use-6767a143a0d3c61d18ded782",
-                "use-f47110e4ebb6e3d31b1952cf",
-                "use-f82961d39d5e2f482b43efd6",
-                "use-cc039d2230b104f2061de603"
-              ],
-              "children": []
-            },
             {
               "useNodeId": "health-pain-inflammation",
               "evidenceIds": [],
@@ -1796,7 +1780,6 @@ const TERPENE_DATA = {
       "evidenceIds": [
         "chemical-eucalyptus-1",
         "chemical-eucalyptus-2",
-        "use-8856d6ae2586ff856414b360",
         "use-d4bfe4a5f92431f058ec035d",
         "use-5de69ba083bc274408d37ffd",
         "use-92156ae29749b59d11b0802b",
@@ -1808,10 +1791,6 @@ const TERPENE_DATA = {
         "use-0a707e005e4a31de36ad48b7",
         "use-fb1d6e833f6dd34e84a3a32f",
         "use-36bb898d0f9c3049a9dd16f8",
-        "use-6767a143a0d3c61d18ded782",
-        "use-f47110e4ebb6e3d31b1952cf",
-        "use-f82961d39d5e2f482b43efd6",
-        "use-cc039d2230b104f2061de603",
         "use-2100b68754af0da1c52c5835",
         "use-c0c8c0f2d827903286a73fd6",
         "use-ce29c03c3fddf98a2723a6f0",
@@ -2159,13 +2138,32 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
+          "useNodeId": "microbial",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "microbial-bacteria",
+              "evidenceIds": [
+                "use-820d0a870fc68cbb659d6467"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-fungi",
+              "evidenceIds": [
+                "use-5843ab9fbdae4925fbefda9d"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
           "useNodeId": "health",
           "evidenceIds": [],
           "children": [
             {
               "useNodeId": "health-pain-inflammation",
               "evidenceIds": [
-                "use-6a4af63350202bc5a06c5045",
                 "use-4dda5422cc22303e55f08b52",
                 "use-aa7dc1d13c3c2319630d16c8",
                 "use-d76d6644e1c846434dca3aa1",
@@ -2217,26 +2215,6 @@ const TERPENE_DATA = {
           ]
         },
         {
-          "useNodeId": "microbial",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "microbial-bacteria",
-              "evidenceIds": [
-                "use-820d0a870fc68cbb659d6467"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "microbial-fungi",
-              "evidenceIds": [
-                "use-5843ab9fbdae4925fbefda9d"
-              ],
-              "children": []
-            }
-          ]
-        },
-        {
           "useNodeId": "botanical-bioactivity",
           "evidenceIds": [],
           "children": [
@@ -2251,7 +2229,6 @@ const TERPENE_DATA = {
         }
       ],
       "evidenceIds": [
-        "use-6a4af63350202bc5a06c5045",
         "use-820d0a870fc68cbb659d6467",
         "use-5843ab9fbdae4925fbefda9d",
         "use-4dda5422cc22303e55f08b52",
@@ -2338,14 +2315,6 @@ const TERPENE_DATA = {
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "health-pain-inflammation",
-              "evidenceIds": [
-                "use-15298882bee716382fd44b9b",
-                "use-clove-2012-pain"
-              ],
-              "children": []
-            },
-            {
               "useNodeId": "health-oral-dental",
               "evidenceIds": [],
               "children": [
@@ -2366,12 +2335,18 @@ const TERPENE_DATA = {
                   "useNodeId": "health-cognitive-memory",
                   "evidenceIds": [
                     "use-5f43b0ee78374412acea88a7",
-                    "use-8ec6dc07ebdd680e7870c0ab",
-                    "use-86155011801fb7dcab051f5a"
+                    "use-8ec6dc07ebdd680e7870c0ab"
                   ],
                   "children": []
                 }
               ]
+            },
+            {
+              "useNodeId": "health-pain-inflammation",
+              "evidenceIds": [
+                "use-clove-2012-pain"
+              ],
+              "children": []
             }
           ]
         },
@@ -2379,22 +2354,6 @@ const TERPENE_DATA = {
           "useNodeId": "microbial",
           "evidenceIds": [],
           "children": [
-            {
-              "useNodeId": "microbial-bacteria",
-              "evidenceIds": [
-                "use-50057e89d4567eeae922c469",
-                "use-f0c5940a4c92e345dd560785"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "microbial-biofilms",
-              "evidenceIds": [
-                "use-2ff199c5e385a120872ca2f2",
-                "use-9f05feb398cacb09041dd7fc"
-              ],
-              "children": []
-            },
             {
               "useNodeId": "microbial-fungi",
               "evidenceIds": [
@@ -2424,6 +2383,20 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
+            },
+            {
+              "useNodeId": "microbial-bacteria",
+              "evidenceIds": [
+                "use-f0c5940a4c92e345dd560785"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-biofilms",
+              "evidenceIds": [
+                "use-9f05feb398cacb09041dd7fc"
+              ],
+              "children": []
             }
           ]
         },
@@ -2458,16 +2431,12 @@ const TERPENE_DATA = {
         }
       ],
       "evidenceIds": [
-        "use-15298882bee716382fd44b9b",
         "use-93bd33c23d54269dec9683bd",
-        "use-50057e89d4567eeae922c469",
-        "use-2ff199c5e385a120872ca2f2",
         "use-7613eb83016c868c5e782268",
         "use-cf3370ff2006e86f5459d0ee",
         "use-0c16c51d2c83f4a0e5e73d28",
         "use-5f43b0ee78374412acea88a7",
         "use-8ec6dc07ebdd680e7870c0ab",
-        "use-86155011801fb7dcab051f5a",
         "use-f0c5940a4c92e345dd560785",
         "use-9f05feb398cacb09041dd7fc",
         "use-a8c81ad9895d636ee613f455",
@@ -3379,8 +3348,7 @@ const TERPENE_DATA = {
             {
               "useNodeId": "pest-ticks",
               "evidenceIds": [
-                "use-fd6157dba9d181fd88f60006",
-                "use-8730a381245911a1d8562c79"
+                "use-fd6157dba9d181fd88f60006"
               ],
               "children": []
             },
@@ -3388,35 +3356,6 @@ const TERPENE_DATA = {
               "useNodeId": "pest-ants",
               "evidenceIds": [
                 "use-60473c9264f4306ab28ed030"
-              ],
-              "children": []
-            }
-          ]
-        },
-        {
-          "useNodeId": "health",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "health-respiratory",
-              "evidenceIds": [
-                "use-a6195a3ae8fcf2a8666c828b",
-                "use-62abe9f47950fea71e2037b0"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "health-immune",
-              "evidenceIds": [
-                "use-475a8db7c766f8b669ecf195",
-                "use-d2704ff5d02fa722347026aa"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "botanical-bioactivity-oral-tolerability",
-              "evidenceIds": [
-                "use-241f76bf1d038dbb4f3a039b"
               ],
               "children": []
             }
@@ -3479,18 +3418,12 @@ const TERPENE_DATA = {
         "use-bc97ea6b032baf5fc6b6d3ab",
         "use-7673d6d30f35ab511926c4ef",
         "use-fd6157dba9d181fd88f60006",
-        "use-a6195a3ae8fcf2a8666c828b",
-        "use-475a8db7c766f8b669ecf195",
-        "use-62abe9f47950fea71e2037b0",
-        "use-d2704ff5d02fa722347026aa",
-        "use-241f76bf1d038dbb4f3a039b",
         "use-d8afe9a3f239a35d5392377a",
         "use-113d4fd1396bb9c9dabae3ad",
         "use-223f8970755ec7f98fbdf303",
         "use-c1327811e0144d8b2e878ca1",
         "use-29e4484c0286183707efdd59",
         "use-60473c9264f4306ab28ed030",
-        "use-8730a381245911a1d8562c79",
         "use-59b21ffccf48d0241cb69bff",
         "use-98765689922acbe25e89e5f9",
         "use-oregano-2024-food-contact-surfaces-cleaning-surface-disinfection",
@@ -5069,13 +5002,6 @@ const TERPENE_DATA = {
                 "use-709e5b4d4bd339bdc7ba918e"
               ],
               "children": []
-            },
-            {
-              "useNodeId": "pest-ticks",
-              "evidenceIds": [
-                "use-0f87b3ee13a000eea51a2ec1"
-              ],
-              "children": []
             }
           ]
         },
@@ -5143,7 +5069,6 @@ const TERPENE_DATA = {
         "chemical-grapefruit-3",
         "chemical-grapefruit-4",
         "use-709e5b4d4bd339bdc7ba918e",
-        "use-0f87b3ee13a000eea51a2ec1",
         "use-c91f07fe6f03f23e2c49f4a1",
         "use-e738321e4a62e20a79ccbe71",
         "use-97739563300f2b2e17048243"
@@ -6441,19 +6366,6 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
-          "useNodeId": "health",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "health-pain-inflammation",
-              "evidenceIds": [
-                "use-d90372a30c9a428fdd45b2a8"
-              ],
-              "children": []
-            }
-          ]
-        },
-        {
           "useNodeId": "botanical",
           "evidenceIds": [],
           "children": [
@@ -6472,6 +6384,18 @@ const TERPENE_DATA = {
                     "use-a28d42748ed9b58e47d3db2e",
                     "use-da358240c13538cfcc908638",
                     "use-8cbca5d7bc05b5fbff4c4e57"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "botanical-composition-essential-oil-composition",
+                  "evidenceIds": [
+                    "use-cannabis-gertsch-2008-caryophyllene-botanical-composition-essential-oil-composition",
+                    "use-cannabis-iseppi-2019-hemp-essential-oils-botanical-composition-essential-oil-composition",
+                    "use-cannabis-zengin-2018-cannabis-essential-oil-botanical-composition-essential-oil-composition",
+                    "use-cannabis-gulluni-2018-cannabis-inhalation-pilot-botanical-composition-essential-oil-composition",
+                    "use-cannabis-zheljazkov-2020-hemp-oil-antimicrobial-botanical-composition-essential-oil-composition",
+                    "use-cannabis-luca-2024-hemp-distillation-antimicrobial-botanical-composition-essential-oil-composition"
                   ],
                   "children": []
                 }
@@ -6528,13 +6452,118 @@ const TERPENE_DATA = {
               ]
             }
           ]
+        },
+        {
+          "useNodeId": "botanical-bioactivity",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "botanical-bioactivity-cannabinoid-receptor-activity",
+              "evidenceIds": [
+                "use-cannabis-gertsch-2008-caryophyllene-botanical-bioactivity-cannabinoid-receptor-activity"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "useNodeId": "microbial",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "microbial-bacteria",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "microbial-bacteria-gram-positive",
+                  "evidenceIds": [
+                    "use-cannabis-iseppi-2019-hemp-essential-oils-microbial-bacteria-gram-positive",
+                    "use-cannabis-zengin-2018-cannabis-essential-oil-microbial-bacteria-gram-positive",
+                    "use-cannabis-zheljazkov-2020-hemp-oil-antimicrobial-microbial-bacteria-gram-positive",
+                    "use-cannabis-luca-2024-hemp-distillation-antimicrobial-microbial-bacteria-gram-positive"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "microbial-bacteria-gram-negative",
+                  "evidenceIds": [
+                    "use-cannabis-iseppi-2019-hemp-essential-oils-microbial-bacteria-gram-negative",
+                    "use-cannabis-zengin-2018-cannabis-essential-oil-microbial-bacteria-gram-negative",
+                    "use-cannabis-zheljazkov-2020-hemp-oil-antimicrobial-microbial-bacteria-gram-negative",
+                    "use-cannabis-luca-2024-hemp-distillation-antimicrobial-microbial-bacteria-gram-negative"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "microbial-biofilms",
+              "evidenceIds": [
+                "use-cannabis-zengin-2018-cannabis-essential-oil-microbial-biofilms"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-fungi",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "microbial-fungi-yeast",
+                  "evidenceIds": [
+                    "use-cannabis-zengin-2018-cannabis-essential-oil-microbial-fungi-yeast",
+                    "use-cannabis-zheljazkov-2020-hemp-oil-antimicrobial-microbial-fungi-yeast",
+                    "use-cannabis-luca-2024-hemp-distillation-antimicrobial-microbial-fungi-yeast"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "microbial-fungi-dermatophytes",
+                  "evidenceIds": [
+                    "use-cannabis-luca-2024-hemp-distillation-antimicrobial-microbial-fungi-dermatophytes"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "health",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "health-mental-health",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-mental-health-mood",
+                  "evidenceIds": [
+                    "use-cannabis-gulluni-2018-cannabis-inhalation-pilot-health-mental-health-mood"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "health-cardiovascular",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-cardiovascular-acute-physiology",
+                  "evidenceIds": [
+                    "use-cannabis-gulluni-2018-cannabis-inhalation-pilot-health-cardiovascular-acute-physiology"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
         }
       ],
       "evidenceIds": [
         "chemical-cannabis-1",
         "chemical-cannabis-2",
         "chemical-cannabis-3",
-        "use-d90372a30c9a428fdd45b2a8",
         "use-a28d42748ed9b58e47d3db2e",
         "use-da358240c13538cfcc908638",
         "use-e3aa348462b737c0de7df533",
@@ -6548,7 +6577,29 @@ const TERPENE_DATA = {
         "use-709a3dece9276a89f9cc42c6",
         "use-cdeaa03b929c549409f5e507",
         "use-750f2d0ea9e4df587ceff998",
-        "use-1343901a2afe118ad6f240d1"
+        "use-1343901a2afe118ad6f240d1",
+        "use-cannabis-gertsch-2008-caryophyllene-botanical-composition-essential-oil-composition",
+        "use-cannabis-gertsch-2008-caryophyllene-botanical-bioactivity-cannabinoid-receptor-activity",
+        "use-cannabis-iseppi-2019-hemp-essential-oils-botanical-composition-essential-oil-composition",
+        "use-cannabis-iseppi-2019-hemp-essential-oils-microbial-bacteria-gram-positive",
+        "use-cannabis-iseppi-2019-hemp-essential-oils-microbial-bacteria-gram-negative",
+        "use-cannabis-zengin-2018-cannabis-essential-oil-botanical-composition-essential-oil-composition",
+        "use-cannabis-zengin-2018-cannabis-essential-oil-microbial-bacteria-gram-positive",
+        "use-cannabis-zengin-2018-cannabis-essential-oil-microbial-bacteria-gram-negative",
+        "use-cannabis-zengin-2018-cannabis-essential-oil-microbial-biofilms",
+        "use-cannabis-zengin-2018-cannabis-essential-oil-microbial-fungi-yeast",
+        "use-cannabis-gulluni-2018-cannabis-inhalation-pilot-botanical-composition-essential-oil-composition",
+        "use-cannabis-gulluni-2018-cannabis-inhalation-pilot-health-mental-health-mood",
+        "use-cannabis-zheljazkov-2020-hemp-oil-antimicrobial-botanical-composition-essential-oil-composition",
+        "use-cannabis-zheljazkov-2020-hemp-oil-antimicrobial-microbial-bacteria-gram-positive",
+        "use-cannabis-zheljazkov-2020-hemp-oil-antimicrobial-microbial-bacteria-gram-negative",
+        "use-cannabis-zheljazkov-2020-hemp-oil-antimicrobial-microbial-fungi-yeast",
+        "use-cannabis-luca-2024-hemp-distillation-antimicrobial-botanical-composition-essential-oil-composition",
+        "use-cannabis-luca-2024-hemp-distillation-antimicrobial-microbial-bacteria-gram-positive",
+        "use-cannabis-luca-2024-hemp-distillation-antimicrobial-microbial-bacteria-gram-negative",
+        "use-cannabis-luca-2024-hemp-distillation-antimicrobial-microbial-fungi-yeast",
+        "use-cannabis-luca-2024-hemp-distillation-antimicrobial-microbial-fungi-dermatophytes",
+        "use-cannabis-gulluni-2018-cannabis-inhalation-pilot-health-cardiovascular-acute-physiology"
       ],
       "precautions": {
         "legacySafety": "Volatile-oil composition varies substantially by cultivar and preparation. Ingredient research should not be generalized to cannabinoid-rich cannabis extracts.",
@@ -8432,9 +8483,16 @@ const TERPENE_DATA = {
         "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/12645832/",
         "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
       },
-      "oilIds": [
-        "eucalyptus"
-      ],
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [],
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/12645832/"
+        ],
+        "reason": "Only explicitly tested whole-oil arms may link to oils. Isolated-compound experiments remain in the compound bibliography."
+      },
+      "oilIds": [],
       "compoundIds": [
         "eucalyptol"
       ],
@@ -8460,7 +8518,7 @@ const TERPENE_DATA = {
       "context": "animal",
       "evidenceLevel": "preclinical",
       "finding": "Beta-caryophyllene was identified as a selective CB2 receptor agonist with anti-inflammatory effects in animal models.",
-      "limitations": "Animal and cell models; not human efficacy data.",
+      "limitations": "Cannabis oil was tested in receptor assays. The mouse inflammation experiment used isolated beta-caryophyllene, not cannabis oil.",
       "doi": "10.1073/pnas.0803601105",
       "citationReview": {
         "status": "identity-checked",
@@ -8473,15 +8531,25 @@ const TERPENE_DATA = {
         "scope": "Publication identity only; this does not verify each oil, preparation, endpoint or composition measurement."
       },
       "summaryReview": {
-        "status": "abstract-screened",
-        "checkedAt": "2026-10-18",
-        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/18574142/",
-        "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
+        "status": "full-text-screened",
+        "checkedAt": "2026-10-19",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2449371/",
+        "scope": "Cannabis whole-oil receptor assays separated from isolated beta-caryophyllene mouse inflammation experiments."
       },
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [
+          "cannabis"
+        ],
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/18574142/"
+        ],
+        "reason": "Only explicitly tested whole-oil arms may link to oils. Isolated-compound experiments remain in the compound bibliography."
+      },
+      "fullTextUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2449371/",
       "oilIds": [
-        "clove",
-        "lavender",
-        "frankincense"
+        "cannabis"
       ],
       "compoundIds": [
         "beta-caryophyllene"
@@ -8490,10 +8558,17 @@ const TERPENE_DATA = {
         {
           "type": "health",
           "subcategory": "pain-inflammation"
+        },
+        {
+          "type": "botanical",
+          "subcategory": "composition",
+          "topic": "essential-oil composition"
         }
       ],
       "useNodeIds": [
-        "health-pain-inflammation"
+        "health-pain-inflammation",
+        "botanical-composition-essential-oil-composition",
+        "botanical-bioactivity-cannabinoid-receptor-activity"
       ]
     },
     {
@@ -9213,9 +9288,16 @@ const TERPENE_DATA = {
         "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/39293727/",
         "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
       },
-      "oilIds": [
-        "clove"
-      ],
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [],
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/39293727/"
+        ],
+        "reason": "Only explicitly tested whole-oil arms may link to oils. Isolated-compound experiments remain in the compound bibliography."
+      },
+      "oilIds": [],
       "compoundIds": [
         "eugenol"
       ],
@@ -10368,9 +10450,16 @@ const TERPENE_DATA = {
         "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/34434006/",
         "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
       },
-      "oilIds": [
-        "clove"
-      ],
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [],
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/34434006/"
+        ],
+        "reason": "Only explicitly tested whole-oil arms may link to oils. Isolated-compound experiments remain in the compound bibliography."
+      },
+      "oilIds": [],
       "compoundIds": [
         "eugenol"
       ],
@@ -11017,9 +11106,16 @@ const TERPENE_DATA = {
         "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/20456191/",
         "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
       },
-      "oilIds": [
-        "peppermint"
-      ],
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [],
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/20456191/"
+        ],
+        "reason": "Only explicitly tested whole-oil arms may link to oils. Isolated-compound experiments remain in the compound bibliography."
+      },
+      "oilIds": [],
       "compoundIds": [
         "menthol"
       ],
@@ -11064,9 +11160,16 @@ const TERPENE_DATA = {
         "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/19624838/",
         "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
       },
-      "oilIds": [
-        "eucalyptus"
-      ],
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [],
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/19624838/"
+        ],
+        "reason": "Only explicitly tested whole-oil arms may link to oils. Isolated-compound experiments remain in the compound bibliography."
+      },
+      "oilIds": [],
       "compoundIds": [
         "eucalyptol"
       ],
@@ -11111,9 +11214,16 @@ const TERPENE_DATA = {
         "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/15064633/",
         "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
       },
-      "oilIds": [
-        "eucalyptus"
-      ],
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [],
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/15064633/"
+        ],
+        "reason": "Only explicitly tested whole-oil arms may link to oils. Isolated-compound experiments remain in the compound bibliography."
+      },
+      "oilIds": [],
       "compoundIds": [
         "eucalyptol"
       ],
@@ -11158,9 +11268,16 @@ const TERPENE_DATA = {
         "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/24261680/",
         "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
       },
-      "oilIds": [
-        "eucalyptus"
-      ],
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [],
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/24261680/"
+        ],
+        "reason": "Only explicitly tested whole-oil arms may link to oils. Isolated-compound experiments remain in the compound bibliography."
+      },
+      "oilIds": [],
       "compoundIds": [
         "eucalyptol"
       ],
@@ -11205,9 +11322,16 @@ const TERPENE_DATA = {
         "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/22978309/",
         "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
       },
-      "oilIds": [
-        "eucalyptus"
-      ],
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [],
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/22978309/"
+        ],
+        "reason": "Only explicitly tested whole-oil arms may link to oils. Isolated-compound experiments remain in the compound bibliography."
+      },
+      "oilIds": [],
       "compoundIds": [
         "eucalyptol"
       ],
@@ -11252,9 +11376,16 @@ const TERPENE_DATA = {
         "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/33773189/",
         "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
       },
-      "oilIds": [
-        "oregano"
-      ],
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [],
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/33773189/"
+        ],
+        "reason": "Only explicitly tested whole-oil arms may link to oils. Isolated-compound experiments remain in the compound bibliography."
+      },
+      "oilIds": [],
       "compoundIds": [
         "carvacrol"
       ],
@@ -11304,9 +11435,16 @@ const TERPENE_DATA = {
         "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/29193478/",
         "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
       },
-      "oilIds": [
-        "oregano"
-      ],
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [],
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/29193478/"
+        ],
+        "reason": "Only explicitly tested whole-oil arms may link to oils. Isolated-compound experiments remain in the compound bibliography."
+      },
+      "oilIds": [],
       "compoundIds": [
         "carvacrol"
       ],
@@ -11356,9 +11494,16 @@ const TERPENE_DATA = {
         "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/30486682/",
         "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
       },
-      "oilIds": [
-        "oregano"
-      ],
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [],
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/30486682/"
+        ],
+        "reason": "Only explicitly tested whole-oil arms may link to oils. Isolated-compound experiments remain in the compound bibliography."
+      },
+      "oilIds": [],
       "compoundIds": [
         "carvacrol"
       ],
@@ -12983,10 +13128,16 @@ const TERPENE_DATA = {
         "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/22299371/",
         "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
       },
-      "oilIds": [
-        "grapefruit",
-        "oregano"
-      ],
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [],
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/22299371/"
+        ],
+        "reason": "Only explicitly tested whole-oil arms may link to oils. Isolated-compound experiments remain in the compound bibliography."
+      },
+      "oilIds": [],
       "compoundIds": [
         "nootkatone",
         "carvacrol"
@@ -14105,9 +14256,16 @@ const TERPENE_DATA = {
         "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/33859287/",
         "scope": "Publication summary screened against indexed abstract. Detailed methods, sample composition and every oil-specific association are not thereby verified."
       },
-      "oilIds": [
-        "cannabis"
-      ],
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [],
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/33859287/"
+        ],
+        "reason": "Only explicitly tested whole-oil arms may link to oils. Isolated-compound experiments remain in the compound bibliography."
+      },
+      "oilIds": [],
       "compoundIds": [
         "alpha-humulene",
         "geraniol",
@@ -17477,6 +17635,396 @@ const TERPENE_DATA = {
       "useNodeIds": [
         "cleaning-hand-hygiene"
       ]
+    },
+    {
+      "id": "iseppi-2019-hemp-essential-oils",
+      "title": "Chemical Characterization and Evaluation of the Antibacterial Activity of Essential Oils from Fibre-Type Cannabis sativa L. (Hemp)",
+      "authors": "",
+      "journal": "Molecules",
+      "year": 2019,
+      "doi": "10.3390/molecules24122302",
+      "pubmedId": "31234360",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6631254/",
+      "fullTextUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6631254/",
+      "studyType": "laboratory-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "finding": "Hemp oils inhibited tested Gram-positive bacteria; none inhibited the tested Gram-negative bacteria.",
+      "limitations": "Seventeen oils varied by cultivar and composition. Culture assays do not establish surface disinfection or treatment of infection.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-19",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6631254/",
+        "sourceTitle": "Chemical Characterization and Evaluation of the Antibacterial Activity of Essential Oils from Fibre-Type Cannabis sativa L. (Hemp)",
+        "doi": "10.3390/molecules24122302",
+        "pubmedId": "31234360",
+        "scope": "Primary full-text publication metadata checked."
+      },
+      "summaryReview": {
+        "status": "full-text-screened",
+        "checkedAt": "2026-10-19",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6631254/",
+        "scope": "Whole-oil arms checked separately from extracts and isolated compounds."
+      },
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [
+          "cannabis"
+        ],
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6631254/"
+        ],
+        "reason": "Cannabis essential oil explicitly tested."
+      },
+      "oilIds": [
+        "cannabis"
+      ],
+      "compoundIds": [
+        "alpha-pinene",
+        "beta-pinene",
+        "myrcene",
+        "beta-caryophyllene"
+      ],
+      "categories": [
+        {
+          "type": "botanical",
+          "subcategory": "composition",
+          "topic": "essential-oil composition"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        }
+      ],
+      "useNodeIds": [
+        "botanical-composition-essential-oil-composition",
+        "microbial-bacteria-gram-positive",
+        "microbial-bacteria-gram-negative"
+      ]
+    },
+    {
+      "id": "zengin-2018-cannabis-essential-oil",
+      "title": "Chromatographic Analyses, In Vitro Biological Activities, and Cytotoxicity of Cannabis sativa L. Essential Oil: A Multidisciplinary Study",
+      "authors": "Gokhan Zengin, Luigi Menghini, Antonella Di Sotto, Romina Mancinelli, Francesca Sisto, Simone Carradori, Stefania Cesa, Caterina Fraschetti, Antonello Filippi, Letizia Angiolella, Marcello Locatelli, Luisa Mannina, Cinzia Ingallina, Valentina Puca, Marianna D’Antonio, Rossella Grande",
+      "journal": "Molecules",
+      "year": 2018,
+      "doi": "10.3390/molecules23123266",
+      "pubmedId": "30544765",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320915/",
+      "fullTextUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320915/",
+      "studyType": "laboratory-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "finding": "Futura 75 hemp oil inhibited bacteria and reduced viable cells in mature biofilms, but did not inhibit the tested yeasts.",
+      "limitations": "Laboratory assays of one cultivar. Oil, aromatic water and isolated naringenin were tested separately; their results are not interchangeable.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-19",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320915/",
+        "sourceTitle": "Chromatographic Analyses, In Vitro Biological Activities, and Cytotoxicity of Cannabis sativa L. Essential Oil: A Multidisciplinary Study",
+        "doi": "10.3390/molecules23123266",
+        "pubmedId": "30544765",
+        "scope": "Primary full-text publication metadata checked."
+      },
+      "summaryReview": {
+        "status": "full-text-screened",
+        "checkedAt": "2026-10-19",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320915/",
+        "scope": "Whole-oil arms checked separately from extracts and isolated compounds."
+      },
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [
+          "cannabis"
+        ],
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320915/"
+        ],
+        "reason": "Cannabis essential oil explicitly tested."
+      },
+      "oilIds": [
+        "cannabis"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "botanical",
+          "subcategory": "composition",
+          "topic": "essential-oil composition"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "yeast"
+        }
+      ],
+      "useNodeIds": [
+        "botanical-composition-essential-oil-composition",
+        "microbial-bacteria-gram-positive",
+        "microbial-bacteria-gram-negative",
+        "microbial-biofilms",
+        "microbial-fungi-yeast"
+      ]
+    },
+    {
+      "id": "gulluni-2018-cannabis-inhalation-pilot",
+      "title": "Cannabis Essential Oil: A Preliminary Study for the Evaluation of the Brain Effects",
+      "authors": "Nadia Gulluni, Tania Re, Idalba Loiacono, Giovanni Lanzo, Luigi Gori, Claudio Macchi, Francesco Epifani, Nicola Bragazzi, Fabio Firenzuoli",
+      "journal": "Evidence-based Complementary and Alternative Medicine : eCAM",
+      "year": 2018,
+      "doi": "10.1155/2018/1709182",
+      "pubmedId": "29576792",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5822802/",
+      "fullTextUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5822802/",
+      "studyType": "pilot-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 5,
+      "finding": "Five volunteers reported feeling calmer after smelling hemp oil; physiological and brain-wave measures also changed.",
+      "limitations": "Only five healthy volunteers, with a fixed exposure order. No clinical anxiety, depression, sleep or memory treatment was tested.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-19",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5822802/",
+        "sourceTitle": "Cannabis Essential Oil: A Preliminary Study for the Evaluation of the Brain Effects",
+        "doi": "10.1155/2018/1709182",
+        "pubmedId": "29576792",
+        "scope": "Primary full-text publication metadata checked."
+      },
+      "summaryReview": {
+        "status": "full-text-screened",
+        "checkedAt": "2026-10-19",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5822802/",
+        "scope": "Whole-oil arms checked separately from extracts and isolated compounds."
+      },
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [
+          "cannabis"
+        ],
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5822802/"
+        ],
+        "reason": "Cannabis essential oil explicitly tested."
+      },
+      "oilIds": [
+        "cannabis"
+      ],
+      "compoundIds": [
+        "myrcene",
+        "beta-caryophyllene"
+      ],
+      "categories": [
+        {
+          "type": "botanical",
+          "subcategory": "composition",
+          "topic": "essential-oil composition"
+        },
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "mood"
+        },
+        {
+          "type": "health",
+          "subcategory": "cardiovascular",
+          "topic": "acute-physiology"
+        }
+      ],
+      "useNodeIds": [
+        "botanical-composition-essential-oil-composition",
+        "health-mental-health-mood",
+        "health-cardiovascular-acute-physiology"
+      ]
+    },
+    {
+      "id": "zheljazkov-2020-hemp-oil-antimicrobial",
+      "title": "Industrial, CBD, and Wild Hemp: How Different Are Their Essential Oil Profile and Antimicrobial Activity?",
+      "authors": "Valtcho D. Zheljazkov, Vladimir Sikora, Ivayla Dincheva, Miroslava Kačániová, Tess Astatkie, Ivanka B. Semerdjieva, Dragana Latkovic",
+      "journal": "Molecules",
+      "year": 2020,
+      "doi": "10.3390/molecules25204631",
+      "pubmedId": "33053634",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7587197/",
+      "fullTextUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7587197/",
+      "studyType": "laboratory-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "finding": "Hemp oils varied in composition and laboratory antimicrobial activity across cultivars and wild accessions.",
+      "limitations": "Disc-diffusion results depend on the oil and organism. Some hydrodistilled samples contained cannabinoids; they do not represent every retail hemp oil.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-19",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7587197/",
+        "sourceTitle": "Industrial, CBD, and Wild Hemp: How Different Are Their Essential Oil Profile and Antimicrobial Activity?",
+        "doi": "10.3390/molecules25204631",
+        "pubmedId": "33053634",
+        "scope": "Primary full-text publication metadata checked."
+      },
+      "summaryReview": {
+        "status": "full-text-screened",
+        "checkedAt": "2026-10-19",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7587197/",
+        "scope": "Whole-oil arms checked separately from extracts and isolated compounds."
+      },
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [
+          "cannabis"
+        ],
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7587197/"
+        ],
+        "reason": "Cannabis essential oil explicitly tested."
+      },
+      "oilIds": [
+        "cannabis"
+      ],
+      "compoundIds": [
+        "beta-caryophyllene",
+        "alpha-humulene"
+      ],
+      "categories": [
+        {
+          "type": "botanical",
+          "subcategory": "composition",
+          "topic": "essential-oil composition"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "yeast"
+        }
+      ],
+      "useNodeIds": [
+        "botanical-composition-essential-oil-composition",
+        "microbial-bacteria-gram-positive",
+        "microbial-bacteria-gram-negative",
+        "microbial-fungi-yeast"
+      ]
+    },
+    {
+      "id": "luca-2024-hemp-distillation-antimicrobial",
+      "title": "Spent Material Extractives from Hemp Hydrodistillation as an Underexplored Source of Antimicrobial Cannabinoids",
+      "authors": "Simon Vlad Luca, Krzysztof Wojtanowski, Izabela Korona-Głowniak, Krystyna Skalicka-Woźniak, Mirjana Minceva, Adriana Trifan",
+      "journal": "Antibiotics",
+      "year": 2024,
+      "doi": "10.3390/antibiotics13060485",
+      "pubmedId": "38927152",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11201062/",
+      "fullTextUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11201062/",
+      "studyType": "laboratory-study",
+      "context": "in-vitro",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "finding": "Hemp essential oil inhibited selected microbes in culture; stronger results from cannabinoid-rich extracts were separate experiments.",
+      "limitations": "Only the HEO column in Table 6 is mapped here. Spent-material extracts and isolated cannabinoids are separate preparations; no clinical or disinfectant efficacy was tested.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-19",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11201062/",
+        "sourceTitle": "Spent Material Extractives from Hemp Hydrodistillation as an Underexplored Source of Antimicrobial Cannabinoids",
+        "doi": "10.3390/antibiotics13060485",
+        "pubmedId": "38927152",
+        "scope": "Primary full-text publication metadata checked."
+      },
+      "summaryReview": {
+        "status": "full-text-screened",
+        "checkedAt": "2026-10-19",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11201062/",
+        "scope": "Whole-oil arms checked separately from extracts and isolated compounds."
+      },
+      "oilLinkReview": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "approvedOilIds": [
+          "cannabis"
+        ],
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11201062/"
+        ],
+        "reason": "Cannabis essential oil explicitly tested."
+      },
+      "oilIds": [
+        "cannabis"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "botanical",
+          "subcategory": "composition",
+          "topic": "essential-oil composition"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-negative"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "yeast"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi",
+          "topic": "dermatophytes"
+        }
+      ],
+      "useNodeIds": [
+        "botanical-composition-essential-oil-composition",
+        "microbial-bacteria-gram-positive",
+        "microbial-bacteria-gram-negative",
+        "microbial-fungi-yeast",
+        "microbial-fungi-dermatophytes"
+      ]
     }
   ],
   "sources": [
@@ -19749,6 +20297,16 @@ const TERPENE_DATA = {
         ],
         "legacyBindings": [],
         "declared": true
+      },
+      {
+        "id": "botanical-bioactivity-cannabinoid-receptor-activity",
+        "label": "Cannabinoid receptor activity",
+        "parentId": "botanical-bioactivity",
+        "aliases": [
+          "botanical-bioactivity-cannabinoid-receptor-activity"
+        ],
+        "legacyBindings": [],
+        "declared": true
       }
     ],
     "aliases": {
@@ -20026,7 +20584,8 @@ const TERPENE_DATA = {
       "pest-plant-bugs-pyrrhocoris-apterus": "pest-plant-bugs-pyrrhocoris-apterus",
       "cleaning-hand-hygiene": "cleaning-hand-hygiene",
       "health-pain-inflammation-menstrual-cramps": "health-pain-inflammation-menstrual-cramps",
-      "health-quality-of-life": "health-quality-of-life"
+      "health-quality-of-life": "health-quality-of-life",
+      "botanical-bioactivity-cannabinoid-receptor-activity": "botanical-bioactivity-cannabinoid-receptor-activity"
     },
     "matrixGroups": [
       {
@@ -21959,188 +22518,6 @@ const TERPENE_DATA = {
       }
     },
     {
-      "id": "use-8856d6ae2586ff856414b360",
-      "kind": "study-use",
-      "oilId": "eucalyptus",
-      "studyId": "juergens-2003-cineole",
-      "useNodeId": "health-respiratory",
-      "finding": "Participants receiving cineole tolerated a greater reduction in prescribed prednisolone than placebo under study supervision.",
-      "limitations": "32 steroid-dependent asthma patients; isolated cineole, not eucalyptus essential oil. Medication changes were supervised study procedures.",
-      "material": {
-        "kind": "isolated-compound",
-        "label": "Isolated 1,8-cineole in small-gut-soluble capsules",
-        "relevance": "different-preparation",
-        "speciesMatch": "not-independently-verified"
-      },
-      "model": {
-        "kind": "human",
-        "label": "Human study",
-        "verification": "source-checked",
-        "scope": "endpoint"
-      },
-      "outcome": {
-        "direction": "positive",
-        "label": "positive",
-        "verification": "source-checked"
-      },
-      "route": "oral",
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "source-checked",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/12645832/"
-        ],
-        "checkedAt": "2026-10-19",
-        "notes": "Indexed primary abstract screened. 32 steroid-dependent asthma patients; isolated cineole, not eucalyptus essential oil. Medication changes were supervised study procedures."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "source-checked",
-        "sourceUrls": [
-          "https://pubmed.ncbi.nlm.nih.gov/12645832/"
-        ],
-        "notes": "Experimental route only; not consumer dosing guidance."
-      }
-    },
-    {
-      "id": "use-15298882bee716382fd44b9b",
-      "kind": "study-use",
-      "oilId": "clove",
-      "studyId": "gertsch-2008-caryophyllene",
-      "useNodeId": "health-pain-inflammation",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "isolated-compound",
-        "label": "Preparation needs primary-source verification.",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "animal",
-        "label": "animal",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/18574142/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed; detailed-primary-verification-pending Animal and cell models; not human efficacy data. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
-      "id": "use-7bcac00f98d25339fd83ea2c",
-      "kind": "study-use",
-      "oilId": "lavender",
-      "studyId": "gertsch-2008-caryophyllene",
-      "useNodeId": "health-pain-inflammation",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "isolated-compound",
-        "label": "isolated-compound",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-independently-verified"
-      },
-      "model": {
-        "kind": "animal",
-        "label": "animal",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/18574142/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed-only Animal and cell models; not human efficacy data. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
-      "id": "use-6a4af63350202bc5a06c5045",
-      "kind": "study-use",
-      "oilId": "frankincense",
-      "studyId": "gertsch-2008-caryophyllene",
-      "useNodeId": "health-pain-inflammation",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "isolated-compound",
-        "label": "isolated-compound",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-independently-verified"
-      },
-      "model": {
-        "kind": "animal",
-        "label": "animal",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/18574142/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed-only Animal and cell models; not human efficacy data. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
       "id": "use-c3cf11a0912f426a90160819",
       "kind": "study-use",
       "oilId": "lavender",
@@ -22987,96 +23364,6 @@ const TERPENE_DATA = {
         ],
         "checkedAt": null,
         "notes": "library-record-reviewed-only The authors noted limitations in the quantity and quality of included studies; interventions and routes varied. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
-      "id": "use-50057e89d4567eeae922c469",
-      "kind": "study-use",
-      "oilId": "clove",
-      "studyId": "ribeiro-2024-eugenol-antibiofilm-review",
-      "useNodeId": "microbial-bacteria",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "review",
-        "label": "Preparation needs primary-source verification.",
-        "relevance": "review",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "in-vitro",
-        "label": "in-vitro",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/39293727/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed; detailed-primary-verification-pending Predominantly laboratory evidence; does not establish clinical or finished-product efficacy. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
-      "id": "use-2ff199c5e385a120872ca2f2",
-      "kind": "study-use",
-      "oilId": "clove",
-      "studyId": "ribeiro-2024-eugenol-antibiofilm-review",
-      "useNodeId": "microbial-biofilms",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "review",
-        "label": "Preparation needs primary-source verification.",
-        "relevance": "review",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "in-vitro",
-        "label": "in-vitro",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/39293727/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed; detailed-primary-verification-pending Predominantly laboratory evidence; does not establish clinical or finished-product efficacy. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
@@ -24776,51 +25063,6 @@ const TERPENE_DATA = {
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/22453493/"
-        ],
-        "checkedAt": "2026-10-19",
-        "notes": "Primary abstract checked for material, route, model and outcome. No product efficacy inferred."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "source-checked",
-        "notes": "Exposure route explicitly reported in the primary abstract."
-      }
-    },
-    {
-      "id": "use-86155011801fb7dcab051f5a",
-      "kind": "study-use",
-      "oilId": "clove",
-      "studyId": "eugenol-2021-memory-neurogenesis",
-      "useNodeId": "health-cognitive-memory",
-      "finding": "Oral isolated eugenol improved some memory tasks and neural measures in mice; water-maze escape latency did not significantly improve.",
-      "limitations": "Isolated eugenol, not clove oil; oral dosing in mice cannot establish aromatherapy efficacy.",
-      "material": {
-        "kind": "isolated-compound",
-        "label": "Preparation needs primary-source verification.",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "animal",
-        "label": "Mouse experiment",
-        "verification": "source-checked",
-        "scope": "endpoint"
-      },
-      "outcome": {
-        "direction": "mixed",
-        "label": "Mixed animal findings",
-        "verification": "source-checked",
-        "reportedDirection": "positive"
-      },
-      "route": "oral",
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "source-checked",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/34434006/"
         ],
         "checkedAt": "2026-10-19",
         "notes": "Primary abstract checked for material, route, model and outcome. No product efficacy inferred."
@@ -27216,456 +27458,6 @@ const TERPENE_DATA = {
         ],
         "checkedAt": null,
         "notes": "library-record-only Exact material/species/chemotype and oil-specific results need primary verification before positive suggestion. Not independently source-reverified in this pass. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
-      "id": "use-a49bbbca85404516b9039060",
-      "kind": "study-use",
-      "oilId": "peppermint",
-      "studyId": "menthol-migraine-2010",
-      "useNodeId": "health-pain-inflammation",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "isolated-compound",
-        "label": "10% isolated menthol solution",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "human",
-        "label": "Human migraine trial",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/20456191/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-only Isolated menthol is not peppermint oil; exclude from automatic oil suggestion. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
-      "id": "use-6767a143a0d3c61d18ded782",
-      "kind": "study-use",
-      "oilId": "eucalyptus",
-      "studyId": "cineole-copd-2009",
-      "useNodeId": "health-respiratory",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "isolated-compound",
-        "label": "Medicinal oral 1,8-cineole preparations",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "human",
-        "label": "Human respiratory trials",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/19624838/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-only Never present as eucalyptus-oil, inhalation, household spray or finished-product clinical evidence. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
-      "id": "use-f47110e4ebb6e3d31b1952cf",
-      "kind": "study-use",
-      "oilId": "eucalyptus",
-      "studyId": "cineole-rhinosinusitis-2004",
-      "useNodeId": "health-respiratory",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "isolated-compound",
-        "label": "Medicinal oral 1,8-cineole preparations",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "human",
-        "label": "Human respiratory trials",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/15064633/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-only Never present as eucalyptus-oil, inhalation, household spray or finished-product clinical evidence. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
-      "id": "use-f82961d39d5e2f482b43efd6",
-      "kind": "study-use",
-      "oilId": "eucalyptus",
-      "studyId": "cineole-bronchitis-2013",
-      "useNodeId": "health-respiratory",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "isolated-compound",
-        "label": "Medicinal oral 1,8-cineole preparations",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "human",
-        "label": "Human respiratory trials",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/24261680/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-only Never present as eucalyptus-oil, inhalation, household spray or finished-product clinical evidence. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
-      "id": "use-cc039d2230b104f2061de603",
-      "kind": "study-use",
-      "oilId": "eucalyptus",
-      "studyId": "cineole-asthma-2012",
-      "useNodeId": "health-respiratory",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "isolated-compound",
-        "label": "Medicinal oral 1,8-cineole preparations",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "human",
-        "label": "Human respiratory trials",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/22978309/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-only Never present as eucalyptus-oil, inhalation, household spray or finished-product clinical evidence. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
-      "id": "use-a6195a3ae8fcf2a8666c828b",
-      "kind": "study-use",
-      "oilId": "oregano",
-      "studyId": "carvacrol-asthma-2021",
-      "useNodeId": "health-respiratory",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "isolated-compound",
-        "label": "Preparation needs primary-source verification.",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "human",
-        "label": "human",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/33773189/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed; detailed-primary-verification-pending Small trial of purified oral carvacrol used alongside routine asthma medication; not oregano oil. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
-      "id": "use-475a8db7c766f8b669ecf195",
-      "kind": "study-use",
-      "oilId": "oregano",
-      "studyId": "carvacrol-asthma-2021",
-      "useNodeId": "health-immune",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "isolated-compound",
-        "label": "Preparation needs primary-source verification.",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "human",
-        "label": "human",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/33773189/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed; detailed-primary-verification-pending Small trial of purified oral carvacrol used alongside routine asthma medication; not oregano oil. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
-      "id": "use-62abe9f47950fea71e2037b0",
-      "kind": "study-use",
-      "oilId": "oregano",
-      "studyId": "carvacrol-asthma-phase2-2018",
-      "useNodeId": "health-respiratory",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "isolated-compound",
-        "label": "Preparation needs primary-source verification.",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "human",
-        "label": "human",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/29193478/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed; detailed-primary-verification-pending Small study of purified oral carvacrol; not oregano essential oil. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
-      "id": "use-d2704ff5d02fa722347026aa",
-      "kind": "study-use",
-      "oilId": "oregano",
-      "studyId": "carvacrol-asthma-phase2-2018",
-      "useNodeId": "health-immune",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "isolated-compound",
-        "label": "Preparation needs primary-source verification.",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "human",
-        "label": "human",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/29193478/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed; detailed-primary-verification-pending Small study of purified oral carvacrol; not oregano essential oil. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
-      "id": "use-241f76bf1d038dbb4f3a039b",
-      "kind": "study-use",
-      "oilId": "oregano",
-      "studyId": "carvacrol-safety-2021",
-      "useNodeId": "botanical-bioactivity-oral-tolerability",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "isolated-compound",
-        "label": "Preparation needs primary-source verification.",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "human",
-        "label": "human",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/30486682/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed; detailed-primary-verification-pending Safety/tolerability study of purified oral carvacrol, not evidence of oregano-oil efficacy. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion. Original category corrected to the measured endpoint; oil-study relationship retained."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
@@ -30546,96 +30338,6 @@ const TERPENE_DATA = {
       }
     },
     {
-      "id": "use-0f87b3ee13a000eea51a2ec1",
-      "kind": "study-use",
-      "oilId": "grapefruit",
-      "studyId": "schulze-2011-ticks",
-      "useNodeId": "pest-ticks",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "isolated-compound",
-        "label": "isolated-compound",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-independently-verified"
-      },
-      "model": {
-        "kind": "environmental",
-        "label": "environmental",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/22299371/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed-only Field-plot tick-drag evaluation. Isolated nootkatone and carvacrol are distinct from grapefruit and oregano essential oils; no arbitrary spray protection claim. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
-      "id": "use-8730a381245911a1d8562c79",
-      "kind": "study-use",
-      "oilId": "oregano",
-      "studyId": "schulze-2011-ticks",
-      "useNodeId": "pest-ticks",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "isolated-compound",
-        "label": "Preparation needs primary-source verification.",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "environmental",
-        "label": "environmental",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/22299371/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed; detailed-primary-verification-pending Field-plot tick-drag evaluation. Isolated nootkatone and carvacrol are distinct from grapefruit and oregano essential oils; no arbitrary spray protection claim. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
       "id": "use-966e3641f89f43cc45cbb21f",
       "kind": "study-use",
       "oilId": "lemongrass",
@@ -32608,50 +32310,6 @@ const TERPENE_DATA = {
       "routeVerification": {
         "status": "unverified",
         "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
-      "id": "use-d90372a30c9a428fdd45b2a8",
-      "kind": "study-use",
-      "oilId": "cannabis",
-      "studyId": "cannabis-terpenes-review-2020",
-      "useNodeId": "health-pain-inflammation",
-      "finding": null,
-      "limitations": null,
-      "material": {
-        "kind": "isolated-compound",
-        "label": "Isolated alpha-humulene, geraniol, linalool and beta-pinene, sometimes with synthetic cannabinoid agonist",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "mixed-preclinical",
-        "label": "Mouse behavioral experiments and cell receptor assays; separate experimental systems with no single assigned route.",
-        "verification": "source-checked",
-        "scope": "mixed"
-      },
-      "outcome": {
-        "direction": "positive-in-studied-model",
-        "label": "positive in studied model",
-        "verification": "source-checked"
-      },
-      "route": null,
-      "species": "not-independently-authenticated",
-      "relevance": "contextual",
-      "researchMatch": false,
-      "verification": {
-        "status": "source-checked",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/33859287/"
-        ],
-        "checkedAt": "2026-10-18",
-        "notes": "primary-source-checked Preclinical mouse and cellular work on selected isolated terpenes; does not establish effects of cannabis aroma, essential oil, or a finished product in humans. Not cannabis essential oil, clinical evidence or entourage assurance. Correct PMID to 33859287; preserve canonical ID. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "supportsFunctionalUse": false,
-      "routeVerification": {
-        "status": "unresolved-or-multiple",
-        "notes": "The scoped record spans methods or lacks a separately verified route; no route is inferred."
       }
     },
     {
@@ -39585,6 +39243,1040 @@ const TERPENE_DATA = {
           "https://pubmed.ncbi.nlm.nih.gov/15937558/"
         ],
         "notes": "Experimental route only; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-gertsch-2008-caryophyllene-botanical-composition-essential-oil-composition",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "gertsch-2008-caryophyllene",
+      "useNodeId": "botanical-composition-essential-oil-composition",
+      "finding": "Five commercial cannabis essential oils contained different amounts of beta-caryophyllene.",
+      "limitations": "Cannabis oil was tested in receptor assays. The mouse inflammation experiment used isolated beta-caryophyllene, not cannabis oil.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Five commercial cannabis essential oils lacking classical cannabinoids",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "analytical",
+        "label": "Chemical composition analysis",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "analytical-not-efficacy",
+        "label": "analytical-not-efficacy",
+        "verification": "source-checked"
+      },
+      "route": "not-applicable",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC2449371/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "not-applicable",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC2449371/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-gertsch-2008-caryophyllene-botanical-bioactivity-cannabinoid-receptor-activity",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "gertsch-2008-caryophyllene",
+      "useNodeId": "botanical-bioactivity-cannabinoid-receptor-activity",
+      "finding": "Cannabis oils activated CB2-related laboratory responses; activity tracked beta-caryophyllene content.",
+      "limitations": "Cannabis oil was tested in receptor assays. The mouse inflammation experiment used isolated beta-caryophyllene, not cannabis oil.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Five commercial cannabis essential oils lacking classical cannabinoids",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-assay",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC2449371/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC2449371/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-iseppi-2019-hemp-essential-oils-botanical-composition-essential-oil-composition",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "iseppi-2019-hemp-essential-oils",
+      "useNodeId": "botanical-composition-essential-oil-composition",
+      "finding": "Seventeen hemp oils were chemically profiled; their composition varied.",
+      "limitations": "Seventeen oils varied by cultivar and composition. Culture assays do not establish surface disinfection or treatment of infection.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "analytical",
+        "label": "Chemical composition analysis",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "analytical-not-efficacy",
+        "label": "analytical-not-efficacy",
+        "verification": "source-checked"
+      },
+      "route": "not-applicable",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6631254/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "not-applicable",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6631254/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-iseppi-2019-hemp-essential-oils-microbial-bacteria-gram-positive",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "iseppi-2019-hemp-essential-oils",
+      "useNodeId": "microbial-bacteria-gram-positive",
+      "finding": "Six selected hemp oils inhibited Gram-positive strains in follow-up tests; activity varied by oil and strain.",
+      "limitations": "Seventeen oils varied by cultivar and composition. Culture assays do not establish surface disinfection or treatment of infection.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-assay",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6631254/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6631254/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-iseppi-2019-hemp-essential-oils-microbial-bacteria-gram-negative",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "iseppi-2019-hemp-essential-oils",
+      "useNodeId": "microbial-bacteria-gram-negative",
+      "finding": "None of the seventeen hemp oils inhibited the tested Gram-negative bacteria.",
+      "limitations": "Seventeen oils varied by cultivar and composition. Culture assays do not establish surface disinfection or treatment of infection.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "null",
+        "label": "null",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-assay",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6631254/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6631254/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-zengin-2018-cannabis-essential-oil-botanical-composition-essential-oil-composition",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "zengin-2018-cannabis-essential-oil",
+      "useNodeId": "botanical-composition-essential-oil-composition",
+      "finding": "The distilled Futura 75 sample was chemically characterized.",
+      "limitations": "Laboratory assays of one cultivar. Oil, aromatic water and isolated naringenin were tested separately; their results are not interchangeable.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "analytical",
+        "label": "Chemical composition analysis",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "analytical-not-efficacy",
+        "label": "analytical-not-efficacy",
+        "verification": "source-checked"
+      },
+      "route": "not-applicable",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320915/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "not-applicable",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320915/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-zengin-2018-cannabis-essential-oil-microbial-bacteria-gram-positive",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "zengin-2018-cannabis-essential-oil",
+      "useNodeId": "microbial-bacteria-gram-positive",
+      "finding": "The hemp oil inhibited the tested Staphylococcus aureus strains.",
+      "limitations": "Laboratory assays of one cultivar. Oil, aromatic water and isolated naringenin were tested separately; their results are not interchangeable.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-assay",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320915/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320915/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-zengin-2018-cannabis-essential-oil-microbial-bacteria-gram-negative",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "zengin-2018-cannabis-essential-oil",
+      "useNodeId": "microbial-bacteria-gram-negative",
+      "finding": "The hemp oil inhibited tested Helicobacter pylori strains.",
+      "limitations": "Laboratory assays of one cultivar. Oil, aromatic water and isolated naringenin were tested separately; their results are not interchangeable.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-assay",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320915/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320915/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-zengin-2018-cannabis-essential-oil-microbial-biofilms",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "zengin-2018-cannabis-essential-oil",
+      "useNodeId": "microbial-biofilms",
+      "finding": "Oil reduced viable bacteria in mature S. aureus biofilms; total biofilm biomass did not decrease.",
+      "limitations": "Laboratory assays of one cultivar. Oil, aromatic water and isolated naringenin were tested separately; their results are not interchangeable.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-assay",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320915/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320915/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-zengin-2018-cannabis-essential-oil-microbial-fungi-yeast",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "zengin-2018-cannabis-essential-oil",
+      "useNodeId": "microbial-fungi-yeast",
+      "finding": "The oil did not inhibit tested Candida and Malassezia yeasts within the tested range.",
+      "limitations": "Laboratory assays of one cultivar. Oil, aromatic water and isolated naringenin were tested separately; their results are not interchangeable.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "null",
+        "label": "null",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-assay",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320915/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320915/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-gulluni-2018-cannabis-inhalation-pilot-botanical-composition-essential-oil-composition",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "gulluni-2018-cannabis-inhalation-pilot",
+      "useNodeId": "botanical-composition-essential-oil-composition",
+      "finding": "The inhaled hemp oil was characterized by gas chromatography.",
+      "limitations": "Only five healthy volunteers, with a fixed exposure order. No clinical anxiety, depression, sleep or memory treatment was tested.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "analytical",
+        "label": "Chemical composition analysis",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "analytical-not-efficacy",
+        "label": "analytical-not-efficacy",
+        "verification": "source-checked"
+      },
+      "route": "not-applicable",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5822802/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "not-applicable",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5822802/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-gulluni-2018-cannabis-inhalation-pilot-health-mental-health-mood",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "gulluni-2018-cannabis-inhalation-pilot",
+      "useNodeId": "health-mental-health-mood",
+      "finding": "Five volunteers reported feeling calmer, more relaxed and more energetic after exposure.",
+      "limitations": "Only five healthy volunteers, with a fixed exposure order. No clinical anxiety, depression, sleep or memory treatment was tested.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Five-person exploratory pilot",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "inhalation",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5822802/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5822802/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-zheljazkov-2020-hemp-oil-antimicrobial-botanical-composition-essential-oil-composition",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "zheljazkov-2020-hemp-oil-antimicrobial",
+      "useNodeId": "botanical-composition-essential-oil-composition",
+      "finding": "Wild, cultivated and CBD hemp samples produced oils with different chemical profiles.",
+      "limitations": "Disc-diffusion results depend on the oil and organism. Some hydrodistilled samples contained cannabinoids; they do not represent every retail hemp oil.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "analytical",
+        "label": "Chemical composition analysis",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "analytical-not-efficacy",
+        "label": "analytical-not-efficacy",
+        "verification": "source-checked"
+      },
+      "route": "not-applicable",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7587197/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "not-applicable",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7587197/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-zheljazkov-2020-hemp-oil-antimicrobial-microbial-bacteria-gram-positive",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "zheljazkov-2020-hemp-oil-antimicrobial",
+      "useNodeId": "microbial-bacteria-gram-positive",
+      "finding": "Growth inhibition of S. aureus, E. faecalis and S. pneumoniae varied among the tested oils.",
+      "limitations": "Disc-diffusion results depend on the oil and organism. Some hydrodistilled samples contained cannabinoids; they do not represent every retail hemp oil.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-assay",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7587197/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7587197/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-zheljazkov-2020-hemp-oil-antimicrobial-microbial-bacteria-gram-negative",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "zheljazkov-2020-hemp-oil-antimicrobial",
+      "useNodeId": "microbial-bacteria-gram-negative",
+      "finding": "Growth inhibition of P. aeruginosa, Y. enterocolitica and S. enterica varied among the tested oils.",
+      "limitations": "Disc-diffusion results depend on the oil and organism. Some hydrodistilled samples contained cannabinoids; they do not represent every retail hemp oil.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-assay",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7587197/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7587197/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-zheljazkov-2020-hemp-oil-antimicrobial-microbial-fungi-yeast",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "zheljazkov-2020-hemp-oil-antimicrobial",
+      "useNodeId": "microbial-fungi-yeast",
+      "finding": "Candida growth inhibition varied among oils; some wild-hemp oils were more active than cultivated samples.",
+      "limitations": "Disc-diffusion results depend on the oil and organism. Some hydrodistilled samples contained cannabinoids; they do not represent every retail hemp oil.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-assay",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7587197/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7587197/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-luca-2024-hemp-distillation-antimicrobial-botanical-composition-essential-oil-composition",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "luca-2024-hemp-distillation-antimicrobial",
+      "useNodeId": "botanical-composition-essential-oil-composition",
+      "finding": "The essential oil contained identified monoterpenes and sesquiterpenes.",
+      "limitations": "Only the HEO column in Table 6 is mapped here. Spent-material extracts and isolated cannabinoids are separate preparations; no clinical or disinfectant efficacy was tested.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "analytical",
+        "label": "Chemical composition analysis",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "analytical-not-efficacy",
+        "label": "analytical-not-efficacy",
+        "verification": "source-checked"
+      },
+      "route": "not-applicable",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11201062/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "not-applicable",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11201062/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-luca-2024-hemp-distillation-antimicrobial-microbial-bacteria-gram-positive",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "luca-2024-hemp-distillation-antimicrobial",
+      "useNodeId": "microbial-bacteria-gram-positive",
+      "finding": "The essential oil inhibited Gram-positive strains at widely differing concentrations.",
+      "limitations": "Only the HEO column in Table 6 is mapped here. Spent-material extracts and isolated cannabinoids are separate preparations; no clinical or disinfectant efficacy was tested.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-assay",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11201062/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11201062/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-luca-2024-hemp-distillation-antimicrobial-microbial-bacteria-gram-negative",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "luca-2024-hemp-distillation-antimicrobial",
+      "useNodeId": "microbial-bacteria-gram-negative",
+      "finding": "The oil inhibited H. pylori, but not the five other Gram-negative species at the highest tested concentration.",
+      "limitations": "Only the HEO column in Table 6 is mapped here. Spent-material extracts and isolated cannabinoids are separate preparations; no clinical or disinfectant efficacy was tested.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-assay",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11201062/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11201062/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-luca-2024-hemp-distillation-antimicrobial-microbial-fungi-yeast",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "luca-2024-hemp-distillation-antimicrobial",
+      "useNodeId": "microbial-fungi-yeast",
+      "finding": "Candida inhibition required comparatively high oil concentrations.",
+      "limitations": "Only the HEO column in Table 6 is mapped here. Spent-material extracts and isolated cannabinoids are separate preparations; no clinical or disinfectant efficacy was tested.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-assay",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11201062/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11201062/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-luca-2024-hemp-distillation-antimicrobial-microbial-fungi-dermatophytes",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "luca-2024-hemp-distillation-antimicrobial",
+      "useNodeId": "microbial-fungi-dermatophytes",
+      "finding": "The oil inhibited two Trichophyton species in culture; the total extract was more active.",
+      "limitations": "Only the HEO column in Table 6 is mapped here. Spent-material extracts and isolated cannabinoids are separate preparations; no clinical or disinfectant efficacy was tested.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-assay",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11201062/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11201062/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cannabis-gulluni-2018-cannabis-inhalation-pilot-health-cardiovascular-acute-physiology",
+      "kind": "study-use",
+      "oilId": "cannabis",
+      "studyId": "gulluni-2018-cannabis-inhalation-pilot",
+      "useNodeId": "health-cardiovascular-acute-physiology",
+      "finding": "Diastolic blood pressure fell while heart rate and skin temperature rose during the five-person pilot.",
+      "limitations": "Only five healthy volunteers, with a fixed exposure order. No clinical anxiety, depression, sleep or memory treatment was tested.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Hydrodistilled Cannabis sativa essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Five-person exploratory pilot",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "inhalation",
+      "species": "Cannabis sativa",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5822802/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary full text checked for this oil arm and endpoint. No finished-product efficacy inference."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5822802/"
+        ],
+        "notes": "Experimental route, not consumer dosing guidance."
       }
     }
   ],

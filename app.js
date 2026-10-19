@@ -302,39 +302,62 @@ function assertionContext(s, oilId, useId) {
     ${a.verification ? `<p class="hint"><b>Verification:</b> ${esc(qualifierText(a.verification))}</p>` : ""}
     </div>`).join("")}</details>`;
 }
-function visibleAssertionContext(s, oilId, useId) {
-  if (!oilId) return "";
-  const assertions = R.assertions(oilId, s.id, useId);
-  if (!assertions.length) return '<p class="research-scope">Catalog association only; oil-specific material and applicability have not been reviewed.</p>';
-  const uniqueText = values => [...new Set(values.filter(Boolean))];
-  const labels = uniqueText(assertions.map(assertionStatus));
-  const materials = uniqueText(assertions.map(a => a.material?.label || a.material?.kind || (typeof a.material === "string" ? a.material : "")));
-  const models = uniqueText(assertions.map(a => a.model?.label || a.model?.kind || (typeof a.model === "string" ? a.model : "")));
-  const findings = uniqueText(assertions.map(a => a.finding));
-  const outcomes = uniqueText(assertions.map(a => a.outcome?.label || a.outcome?.direction));
-  return `<div class="research-scope"><p><b>For ${esc(oilById[oilId]?.name || oilId)}:</b> ${esc(labels.join(" · "))}</p>
-    <p><b>Material:</b> ${esc(materials.join("; ") || "Not verified")}<br><b>Model:</b> ${esc(models.join("; ") || "Not verified")}${outcomes.length ? `<br><b>Reported outcome:</b> ${esc(outcomes.join("; "))}` : ""}</p>
-    ${findings.map(finding => `<p><b>Oil-specific finding:</b> ${esc(finding)}</p>`).join("")}</div>`;
+function conciseStudyContext(s, oilId, useId) {
+  const assertions = oilId ? R.assertions(oilId, s.id, useId) : [];
+  const labels = assertions.map(a => {
+    const kind = a.material?.kind || '';
+    let label = kind === 'combination' ? 'Oil blend' : kind === 'isolated-compound' ? 'Isolated compound'
+      : /extract|plant-material|related-preparation|botanical-preparation/.test(kind) ? 'Related plant preparation'
+      : a.relevance === 'contextual' ? 'Related preparation' : '';
+    if (a.route === 'oral') label = [label, 'Oral study'].filter(Boolean).join(' · ');
+    if (a.model?.kind === 'animal') label = [label, 'Animal study'].filter(Boolean).join(' · ');
+    if (a.model?.kind === 'in-vitro') label = [label, 'Lab study'].filter(Boolean).join(' · ');
+    if (!['source-checked', 'source-verified'].includes(a.verification?.status)) label = [label, 'Oil link unverified'].filter(Boolean).join(' · ');
+    return label;
+  }).filter(Boolean);
+  if (oilId && !assertions.length) labels.push('Oil link unverified');
+  if (!oilId) {
+    const context = s.context || '';
+    if (/animal/.test(context)) labels.push('Animal study');
+    else if (/in-vitro|laboratory/.test(context)) labels.push('Lab study');
+    else if (/human/.test(context)) labels.push(s.sampleSize ? `Human study · ${s.sampleSize} participants` : 'Human study');
+  }
+  if (oilId && assertions.some(a => a.model?.kind === 'human') && s.sampleSize) labels.push(`${s.sampleSize} participants`);
+  return [...new Set(labels)].join(' · ');
 }
 function studyCard(s, scope = {}, useIds = null) {
   const oilId = typeof scope === "string" ? scope : scope?.oilId || null;
   const useId = typeof scope === "string" || scope === null ? useIds : scope?.useId || null;
+  const assertions = oilId ? R.assertions(oilId, s.id, useId) : [];
+  const findings = [...new Set(assertions.map(a => a.finding || s.finding).filter(Boolean))];
+  if (!findings.length && s.finding) findings.push(s.finding);
+  const context = conciseStudyContext(s, oilId, useId);
   const oilTags = (s.oilIds || []).map(id => oilById[id]
     ? `<button class="taglink" data-goto-oil="${esc(id)}">${esc(oilById[id].name)}</button>` : "").join("");
   const compTags = (s.compoundIds || []).map(id => compoundById[id]
     ? `<button class="taglink" data-goto-compound="${esc(id)}">${esc(compoundById[id].name)}</button>` : "").join("");
+  // The concise result uses the selected oil/endpoint, never another study arm.
+  // Keep full provenance and limitations available without repeating them above it.
+  const assessment = assertionContext(s, oilId, useId)
+    .replace('<details class="research-assessments">', '<div class="study-source-assessment">')
+    .replace(/<summary>(.*?)<\/summary>/, '<h5>$1</h5>').replace('</details>', '</div>');
   return `<div class="study" data-study-id="${esc(s.id)}">
-    <div class="study-badge">${evidenceBadge(s)}</div>
-    <div class="study-qualifiers">${researchQualifiers(s)}</div>
     <h4>${esc(s.title)}</h4>
-    <p class="cite">${esc(s.authors)} &middot; ${esc(s.journal)} &middot; ${s.year}${s.pubmedId ? " &middot; PMID " + esc(s.pubmedId) : ""}</p>
-    ${visibleAssertionContext(s, oilId, useId)}
-    <p class="finding"><span class="finding-label">Paper finding</span>${esc(s.finding)}</p>
-    ${s.limitations ? `<p class="limitations"><span class="finding-label">Limitations</span>${esc(s.limitations)}</p>` : ""}
-    <div class="catchips" aria-label="Source-tagged research topics">${categoryChips(s, oilId, useId)}</div>
-    ${s.summaryReview ? `<p class="hint source-review">${s.summaryReview.status === "full-text-screened" ? "Full text screened" : s.summaryReview.status === "abstract-screened" ? "Abstract screened" : "Citation checked; abstract unavailable"} · ${esc(s.summaryReview.checkedAt)}. Oil-specific checks are shown separately.</p>` : ""}
-    ${assertionContext(s, oilId, useId)}
-    <div class="tags">${oilTags}${compTags}<a class="ext read-paper" href="${esc(s.url)}" target="_blank" rel="noopener">Read paper</a></div>
+    <p class="cite">${esc(s.journal)} &middot; ${s.year}</p>
+    <div class="research-scope">${context ? `<p class="study-context">${esc(context)}</p>` : ''}
+      <p class="finding"><span class="finding-label">Result</span>${findings.map(esc).join('<br>')}</p>
+    </div>
+    <div class="tags"><a class="ext read-paper" href="${esc(s.url)}" target="_blank" rel="noopener">Read study</a></div>
+    <details class="research-assessments study-details"><summary>Study details</summary>
+      <p class="cite">${esc(s.authors)}${s.pubmedId ? ' · PMID ' + esc(s.pubmedId) : ''}</p>
+      <div class="study-badge">${evidenceBadge(s)}</div>
+      <div class="study-qualifiers">${researchQualifiers(s)}</div>
+      ${oilId ? `<p><b>Overall result:</b> ${esc(s.finding)}</p>` : ''}
+      ${s.limitations ? `<p class="limitations"><b>Limitations:</b> ${esc(s.limitations)}</p>` : ''}
+      ${assessment}
+      <div class="catchips" aria-label="Source-tagged research topics">${categoryChips(s, oilId, useId)}</div>
+      <div class="tags">${oilTags}${compTags}</div>
+    </details>
   </div>`;
 }
 function bindStudyLinks(root) {

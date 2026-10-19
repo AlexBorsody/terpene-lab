@@ -178,30 +178,23 @@ function visibleContext(studyId, oilId, nodeId) {
   assert.equal((card.match(/class="finding"/g) || []).length, 1, 'The paper finding remains a single block');
   return visible;
 }
-const juergens = data.evidenceAssertions.find(a => a.oilId === 'eucalyptus' && a.studyId === 'juergens-2003-cineole');
-assert.equal(juergens.material.kind, 'isolated-compound');
-assert.equal(juergens.route, 'oral', 'Primary abstract verifies oral cineole capsules, not inhaled eucalyptus oil');
-const cineoleContext = visibleContext('juergens-2003-cineole', 'eucalyptus', 'health-respiratory');
-assert.ok(cineoleContext.includes('Isolated 1,8-cineole in small-gut-soluble capsules'));
-assert.equal(juergens.verification.status, 'source-checked');
-assert.equal(juergens.relevance, 'contextual');
-assert.ok(!cineoleContext.includes('Source-reviewed direct research'));
+assert.ok(!data.evidenceAssertions.some(a => a.oilId === 'eucalyptus' && a.studyId === 'juergens-2003-cineole'), 'Pure cineole is not eucalyptus oil evidence');
 const myrrhContext = visibleContext('nialeila-2020-myrrh-frankincense-wound', 'myrrh', 'health-wound');
 const frankincenseContext = visibleContext('nialeila-2020-myrrh-frankincense-wound', 'frankincense', 'health-wound');
 assert.ok(myrrhContext.includes('Myrrh-extract sitz baths improved REEDA healing scores'));
 assert.ok(!myrrhContext.includes('Frankincense-extract sitz baths did not'));
 assert.ok(frankincenseContext.includes('Frankincense-extract sitz baths did not significantly differ from betadine'));
-assert.ok(frankincenseContext.includes('Boswellia carteri extract sitz bath'));
+assert.ok(frankincenseContext.includes('Related plant preparation'));
 assert.ok(!frankincenseContext.includes('Myrrh-extract sitz baths improved'));
 const contraryContext = visibleContext('moss-2008-peppermint-cognition', 'ylang-ylang', 'health-cognitive-memory');
-assert.ok(contraryContext.includes('Source-reviewed direct research'), 'Verified contrary evidence is not mislabeled unverified/contextual');
+assert.ok(!contraryContext.includes('Oil link unverified'), 'Verified contrary evidence is not mislabeled unverified');
 assert.ok(/impaired|worsened|reduced|negative/i.test(contraryContext), 'The adverse cognitive result is visible without disclosure');
 assert.ok(!contraryContext.includes('applicability not independently verified'));
 console.log('PASS: visible isolated-compound/oral applicability and distinct Faraji per-oil findings outside collapsed details');
 // A distinct filled action must retain the real paper URL and native link behavior.
 const papers = run('D.studies.map(studyCard).join("")');
 assert.equal((papers.match(/class="ext read-paper"/g) || []).length, run('D.studies.length'));
-assert.equal((papers.match(/target="_blank" rel="noopener">Read paper<\/a>/g) || []).length, run('D.studies.length'));
+assert.equal((papers.match(/target="_blank" rel="noopener">Read study<\/a>/g) || []).length, run('D.studies.length'));
 const css = fs.readFileSync('styles.css', 'utf8');
 const actionStyle = css.match(/\.study \.tags \.read-paper \{([^}]+)\}/)[1];
 assert.ok(/min-height:\s*44px/.test(actionStyle));

@@ -1,17 +1,17 @@
 // Generated release and SHA-256 map: run python3 scripts/build-pwa.py after edits.
-const RELEASE = "535059b9d3e32926";
+const RELEASE = "9d18e7fdae0a921a";
 const ASSETS = {
-  "index.html": "95475307c0ba1db7bba3128b24bce517f8123afeb0cb36defda1bb5cae1846a5",
-  "styles.css": "8d3bbf8620b8b36e02f264f11ebc6a90b961996fd594c9b42ce72c7aaa4fb317",
-  "app.js": "f6662bd3fa461b90fee68b1abe5c70210e5930ae9c41ddfe02b37b1928acbe9b",
+  "index.html": "2bde87c527ce04dccc404db2baa5147751fc78861dd2b53de166bbd469ad7f0a",
+  "styles.css": "da5100061bebc1c6527c6cfea0170f72f5e74adc1282c2506778a44eecaac8f0",
+  "app.js": "86f8a68bf091d8f87de277eb5df1eb945b55c0a679326ea87d3b3863c2f74534",
   "chemistry.js": "09f64d79607afee21306dd8a6fa4d1b28087d8bccd42dd924e958d7baaa4d132",
   "research.js": "acf3cd76eb76401d69f9b34dbcb82941c74bf7beb69976055866fa82765c4758",
-  "data.js": "45fe9d9d4187864bd87d286652347104eab8aa91d6c6a9924d9a85b45328b414",
+  "data.js": "2c809b3179ad60e6132f653fc2b2a7704c7216584d67d8f536bfda19d7fd4916",
   "pwa.js": "2be526f528a5a802f634be1d14b13a1e48b63617abb324e4cfec2ed71c159430",
   "blend-engine.js": "2e8efadb5582843de2b7b0a8cb4bf86f9f63404ae671cc00c86715260c215203",
   "blend-builder.js": "9dff4756827626b79334ca1056970bb552d3eaa65de678fcee134474018d970c",
   "blend-builder.css": "dc573556e73ee9b8845640c045a08b5c8179c5584634c256eda69562488f5f4f",
-  "master-data.json": "45ca1deee63f6f00f508947ca640918ac5e1c0d7a7c8f7d0d100e287fac18396",
+  "master-data.json": "80dbf2f4e7aa44b2af79072f7de5f0f0ec27dd25602f708f029a78158f9f34e4",
   "manifest.webmanifest": "1c1ca408fa48a60c75e17542f03c420a73d22d70f98e8f189fb9f1ce76b5865b",
   "shield-icon.svg": "b6a4fa5ec8968f651ec6bb9441f4cb6a3c5c5b333c45628c2e43ca348d2a5562",
   "vendor/echarts-5.5.1.min.js": "e84270bd0cd5bdf60fefc26d00c2a391cb2e81f4d26a7a9ee16185a54773a3cf",
