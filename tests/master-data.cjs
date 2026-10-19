@@ -206,6 +206,13 @@ function main() {
     assert.equal(require('../research.js').create(aliasData).resolve('fixture-path-only'), 'fixture-binding-only');
     assert.equal(require('../blend-engine.js').resolveQualityId('fixture-path-only', aliasData), 'fixture-binding-only'); checks++;
 
+    assert.deepEqual(data.taxonomy.matrixGroups, master.registries.matrixTopicGroups); checks++;
+    fixture(m => m.registries.matrixTopicGroups.push(copy(m.registries.matrixTopicGroups[0])), false, /duplicate/);
+    fixture(m => m.registries.matrixTopicGroups[0].label = '', false, /label and description/);
+    fixture(m => m.registries.useNodes.find(n => n.parentId === null).matrixGroupId = 'missing', false, /unknown matrix group/);
+    fixture(m => m.registries.useNodes.find(n => n.parentId).matrixGroupId = 'uses', false, /grouping belongs on taxonomy roots/);
+    fixture(m => { delete m.registries.useNodes.find(n => n.parentId === null).matrixGroupId; }, true); // UI exposes unclassified roots.
+
     fixture(m => m.oils[0].constituents[0].compoundId = 'missing', false, /unknown reference/);
     fixture(m => m.oils[0].studyLinks[0].studyId = 'missing', false, /unknown reference/);
     fixture(m => m.oils[0].constituents[0].sourceIds = ['unknown-source'], false, /unknown reference/);

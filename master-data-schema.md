@@ -22,7 +22,7 @@ The one-time `scripts/migrate-master-data.cjs` imports an explicit original snap
 - `blendBuilder`: original recipe/product configuration. Recipe version 1 and catalogVersion `2026-10-18` remain unchanged.
 - `blendDefaults` (optional): exploratory builder defaults for every catalog oil. Default stock is unconfirmed; safety review, limits, phototoxicity and pet suitability remain unknown/unverified. Existing per-oil compatibility overlays are retained.
 - `oils`: primary catalog records, each owning profile fields, constituent references, study links, nested uses, precautions, and unaudited legacy material.
-- `registries`: shared `compounds`, `studies`, `sources`, `useNodes`, `evidenceAssertions`, `chemicalGroups`, and `chemicalTaxonomy` arrays, plus `editorialReferences` source lists.
+- `registries`: shared `compounds`, `studies`, `sources`, `useNodes`, `evidenceAssertions`, `chemicalGroups`, `chemicalTaxonomy`, and `matrixTopicGroups` arrays, plus `editorialReferences` source lists.
 - `migration`: immutable baseline fingerprint/counts and an explicit correction ledger.
 
 An oil has:
@@ -68,6 +68,14 @@ IDs match `^[a-z0-9][a-z0-9-]{0,63}$`. They are assigned once and persisted. Cha
 Material, model, route, species, verification, and outcome are independent evidence facets. They must not be encoded as extra levels under use categories.
 
 Version 2 moves plant terpene chemistry out of cognition, consolidates animal-cognition tags into the shared memory endpoint (retaining the old ID as an alias), and keeps tolerability outside a misleading preclinical-only label. The old plant-chemistry ID still begins with `health-`; use `parentId`, never ID prefixes, to infer ancestry. Native topic selectors offer navigation roots plus the selected descendant; legacy aliases are resolved before selection, not inserted as duplicate hidden options.
+
+## Matrix display families
+
+`registries.matrixTopicGroups` defines the Matrix's topic families with stable `id`, `label`, and `description` fields. Each taxonomy root can declare `matrixGroupId`; descendants inherit through `parentId`, never their ID prefixes. These families organize the visualization without changing the evidence hierarchy. A group reference on a child or to a missing group is invalid. Unassigned roots appear under **Unclassified topics** so JSON-only expansion never silently hides records.
+
+The current families separate uses/outcomes from composition/sensory research and other biological assays. Material, model, route and outcome remain independent assertion facets. Group membership does not promote a study into a benefit claim.
+
+The Matrix reads the generated registries and relationships directly: all oils, compounds, topic nodes, publications and source records remain discoverable, including unused topics, catalog-only constituents and observations in other plant materials. Chemical cells use the shared quantitative-provenance guard and preserve individual samples. Oil/topic cells use scoped assertions; compound/topic cells are explicitly bibliography associations. Parent counts deduplicate publications across descendants. Details reuse the source-qualified evidence renderers; they do not create a second evidence dataset.
 
 ## Publication and compound review provenance
 
@@ -125,7 +133,7 @@ The initial migration deduplicated 33 exact citation URLs while retaining all 45
 
 The generated `TERPENE_DATA` object retains the existing profile, studies, compounds, sources, chemical groups, product configuration, and recipe format. It adds:
 
-- `D.taxonomy = {version, nodes, aliases}`; aliases is a direct alias-to-node-ID object.
+- `D.taxonomy = {version, nodes, aliases, matrixGroups}`; aliases is a direct alias-to-node-ID object.
 - `D.evidenceAssertions`: shared typed assertions.
 - `D.studies[].useNodeIds`: ordered endpoint IDs.
 - `D.oils[].useTree`: the nested canonical uses projection.

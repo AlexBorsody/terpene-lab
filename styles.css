@@ -1,17 +1,18 @@
-/* Terpene Lab - laboratory instrument aesthetic.
-   Dark navy, amber/gold accents, cream text. No emojis. */
+/* Terpene Lab - botanical field guide and working blend studio.
+   Ink green, warm paper, restrained line icons. */
 
 :root {
-  --bg: #0b1220;
-  --bg2: #0e1626;
-  --surface: #131d31;
-  --surface2: #182642;
-  --border: #26334f;
+  --bg: #111d1b;
+  --bg2: #14211e;
+  --surface: #192924;
+  --surface2: #22372f;
+  --border: #34483e;
   --text: #f2ead8;
-  --muted: #9aa7bd;
-  --amber: #72b89a;
-  --amber-dim: #4f8f76;
-  --teal: #5fc6b5;
+  --muted: #adb9ae;
+  --amber: #a8c5a2;
+  --amber-dim: #769979;
+  --teal: #95c9b4;
+  --serif: Georgia, "Times New Roman", serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
@@ -67,9 +68,10 @@ html:not(.lab-embedded) main { max-width: none; }
 }
 
 .brand h1 {
-  font-size: 20px;
-  letter-spacing: 3px;
-  font-weight: 800;
+  font-family: var(--serif);
+  font-size: 22px;
+  letter-spacing: .6px;
+  font-weight: 400;
 }
 
 .tagline {
@@ -79,17 +81,19 @@ html:not(.lab-embedded) main { max-width: none; }
   text-transform: uppercase;
 }
 
-.tabs { display: flex; gap: 6px; }
+.tabs { display: flex; gap: 3px; max-width: 100%; }
 
 .tab {
   background: transparent;
-  border: 1px solid var(--border);
+  border: 1px solid transparent;
   color: var(--muted);
-  padding: 8px 16px;
-  border-radius: 6px;
+  padding: 11px 12px;
+  border-radius: 2px;
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px;
   cursor: pointer;
-  font-size: 14px;
-  letter-spacing: 0.5px;
+  font-size: 13px;
+  letter-spacing: 0;
 }
 
 .tab:hover { color: var(--text); border-color: var(--amber-dim); }
@@ -97,23 +101,23 @@ html:not(.lab-embedded) main { max-width: none; }
 .tab.active {
   background: var(--amber);
   border-color: var(--amber);
-  color: #0b1220;
+  color: #111d1b;
   font-weight: 700;
 }
 
 main {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 24px 20px 60px;
+  padding: 28px clamp(20px, 3vw, 48px) 60px;
 }
 
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
 
-.catalog-intro { margin-bottom: 18px; max-width: 720px; }
-.catalog-intro h2 { font-size: clamp(22px, 3vw, 30px); line-height: 1.2; margin-bottom: 8px; }
+.catalog-intro { margin-bottom: 24px; max-width: 760px; padding: 12px 0 20px; border-bottom: 1px solid var(--border); }
+.catalog-intro h2 { font: 400 clamp(30px, 3.5vw, 44px)/1.15 var(--serif); letter-spacing: -.8px; margin-bottom: 12px; }
 .catalog-intro p { color: var(--muted); line-height: 1.55; }
-.card .oil-card-aroma { color: var(--text); font-size: 13px; line-height: 1.5; margin: 10px 0; }
+.card .oil-card-aroma { display: flex; align-items: flex-start; gap: 8px; color: var(--text); font-size: 13px; line-height: 1.5; margin: 16px 0 10px; }
 
 .toolbar {
   display: flex;
@@ -140,20 +144,21 @@ main {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 22px;
 }
 
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 16px;
+  border-radius: 3px;
+  padding: 22px;
   cursor: pointer;
   transition: border-color 0.15s, transform 0.15s;
 }
 
-.card:hover { border-color: var(--amber); transform: translateY(-2px); }
+.card:hover { border-color: var(--amber); background: var(--surface2); }
+.card:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; }
 
 .card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
 
@@ -164,7 +169,7 @@ main {
   flex-shrink: 0;
 }
 
-.card h3 { font-size: 16px; }
+.card h3 { font: 400 24px/1.15 var(--serif); letter-spacing: -.3px; }
 .card .latin { font-style: italic; color: var(--muted); font-size: 13px; }
 .card .sub { font-size: 12px; color: var(--muted); font-family: var(--mono); margin-top: 6px; }
 #oil-grid .card .sub { font-family: inherit; line-height: 1.55; }
@@ -184,7 +189,7 @@ main {
 .detail {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 3px;
   padding: 28px;
   margin-top: 6px;
 }
@@ -213,7 +218,7 @@ main {
   flex-shrink: 0;
 }
 
-.detail h2 { font-size: 28px; letter-spacing: 0.5px; }
+.detail h2 { font: 400 36px/1.2 var(--serif); letter-spacing: -.5px; }
 .detail h3 {
   font-size: 13px;
   text-transform: uppercase;
@@ -285,12 +290,12 @@ main {
 .study {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 18px 20px;
+  border-radius: 3px;
+  padding: 22px 24px;
   margin-bottom: 12px;
 }
 
-.study h4 { font-size: 16px; margin-bottom: 4px; }
+.study h4 { font: 400 21px/1.4 var(--serif); margin-bottom: 8px; }
 .study .cite { font-size: 13px; color: var(--muted); font-family: var(--mono); margin-bottom: 8px; }
 .study .finding { font-size: 14px; }
 .study .finding-label {
@@ -339,10 +344,10 @@ main {
   display: inline-flex; align-items: center; justify-content: center;
   width: 24px; height: 24px; border-radius: 50%;
   font-family: var(--mono); font-size: 12px; font-weight: 700;
-  color: #0b1220; flex-shrink: 0;
+  color: #111d1b; flex-shrink: 0;
 }
 .lvl.sm { width: 20px; height: 20px; font-size: 10px; }
-.lvl-clinical { background: #5fc6b5; }
+.lvl-clinical { background: #95c9b4; }
 .lvl-preclinical { background: #e8a020; }
 .lvl-laboratory { background: #7aa2f7; }
 .lvl-review { background: #9b7ed9; }
@@ -386,12 +391,12 @@ main {
 /* ---- domain explorer ---- */
 .domain-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
 .domain-tile {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
-  padding: 22px 18px; cursor: pointer; text-align: left; color: var(--text);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 3px;
+  padding: 24px; cursor: pointer; text-align: left; color: var(--text);
   transition: border-color 0.15s, transform 0.15s;
 }
 .domain-tile:hover { border-color: var(--amber); transform: translateY(-2px); }
-.domain-tile h3 { font-size: 18px; margin-bottom: 4px; }
+.domain-tile h3 { font: 400 25px/1.2 var(--serif); margin-bottom: 10px; }
 .domain-n { font-family: var(--mono); color: var(--amber); font-size: 14px; margin-bottom: 8px; }
 .domain-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 8px; }
 .domain-cols .chips { margin-top: 4px; }
@@ -516,7 +521,7 @@ main {
   .pathway-list { max-height: 290px; overflow-y: auto; }
 }
 
-.brand-owner { color: var(--amber); }
+.brand-owner { display: block; color: var(--amber); font: 600 10px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 2px; margin-bottom: 2px; }
 .brand h1 { white-space: nowrap; }
 @media (max-width: 480px) {
   .brand h1 { white-space: normal; font-size: 17px; line-height: 1.15; }
@@ -1136,19 +1141,19 @@ main {
 
 
 /* Additional chemistry: compact disclosures, independently scrollable in embeds. */
-.beyond-terpenes, .chem-evidence { border:1px solid var(--line, #26334f); border-radius:8px; margin:12px 0; padding:12px; background:#101b2e; color:#f2ead8; }
+.beyond-terpenes, .chem-evidence { border:1px solid var(--line, #34483e); border-radius:8px; margin:12px 0; padding:12px; background:#16241f; color:#f2ead8; }
 .beyond-terpenes summary, .chem-evidence summary { cursor:pointer; line-height:1.5; }
 .beyond-terpenes > summary { color:#efbd69; font-weight:600; }
 .beyond-terpenes p, .oil-chemistry p, .chem-context { font-size:13px; line-height:1.65; max-width:90ch; }
 .chem-group-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin:16px 0; }
 .chem-group-grid h4 { color:#efbd69; margin:0 0 6px; }
 .chem-group-grid section { min-width:0; }
-.chem-evidence summary span { display:block; color:#b8c5d8; font-size:12px; }
-.chem-evidence article + article { border-top:1px solid #33425a; margin-top:16px; padding-top:12px; }
+.chem-evidence summary span { display:block; color:#b7c5b8; font-size:12px; }
+.chem-evidence article + article { border-top:1px solid #3b5044; margin-top:16px; padding-top:12px; }
 .chem-sources { padding-left:20px; font-size:12px; line-height:1.6; }
 .chem-sources li { margin:8px 0; overflow-wrap:anywhere; }
 .chem-sources a { color:#efbd69; text-decoration:underline; }
-.chem-sources span { display:block; color:#b8c5d8; }
+.chem-sources span { display:block; color:#b7c5b8; }
 .beyond-terpenes .chip, .oil-chemistry .chip, #compound-material-evidence .chip { white-space:normal; text-align:left; overflow-wrap:anywhere; min-height:36px; }
 summary:focus-visible, .chip:focus-visible, .compound-card:focus-visible { outline:2px solid #efbd69; outline-offset:3px; }
 #oil-chart:has(.empty), #compound-oils-chart:has(.empty) { height:auto; min-height:0; }
@@ -1157,12 +1162,12 @@ summary:focus-visible, .chip:focus-visible, .compound-card:focus-visible { outli
 .oil-chemistry, .beyond-terpenes { min-width:0; overflow-wrap:anywhere; }
 .oil-chemistry .hint { white-space:normal; width:auto; }
 
-.oil-chemistry { border-top:1px solid #33425a; margin:12px 0; padding:8px 0; }
+.oil-chemistry { border-top:1px solid #3b5044; margin:12px 0; padding:8px 0; }
 .oil-chemistry > summary { color:#efbd69; cursor:pointer; }
-.oil-chemistry > summary span { display:block; font-size:12px; color:#b8c5d8; font-weight:400; text-transform:none; letter-spacing:0; }
-.oil-chemistry .chem-evidence { border:0; border-top:1px solid #26334f; border-radius:0; margin:8px 0; padding:6px 0; background:transparent; }
+.oil-chemistry > summary span { display:block; font-size:12px; color:#b7c5b8; font-weight:400; text-transform:none; letter-spacing:0; }
+.oil-chemistry .chem-evidence { border:0; border-top:1px solid #34483e; border-radius:0; margin:8px 0; padding:6px 0; background:transparent; }
 .chem-source-details { margin:8px 0; }
-.chem-source-details summary { cursor:pointer; font-size:12px; color:#b8c5d8; }
+.chem-source-details summary { cursor:pointer; font-size:12px; color:#b7c5b8; }
 .chem-status { color:#efbd69; font-size:12px; }
 
 /* Compact standalone PWA controls; never shown in Shopify embeds. */
@@ -1195,3 +1200,92 @@ summary:focus-visible, .chip:focus-visible, .compound-card:focus-visible { outli
 .research-scope { border-left:2px solid var(--amber); padding:9px 12px; margin:12px 0; background:rgba(210,171,93,.06); overflow-wrap:anywhere; }
 .research-scope p { font-size:14px; line-height:1.65; margin:0 0 8px; }
 .research-scope p:last-child { margin-bottom:0; }
+
+/* Small, reusable interface marks; labels always remain visible. */
+.lab-symbols { position: absolute; pointer-events: none; }
+.ui-icon { width: 20px; height: 20px; flex: 0 0 20px; fill: none; stroke: currentColor; stroke-width: 1.45; stroke-linecap: round; stroke-linejoin: round; vertical-align: middle; }
+.tab .ui-icon { width: 17px; height: 17px; flex-basis: 17px; }
+.section-kicker { color: var(--amber) !important; font-size: 11px; letter-spacing: 1.7px; text-transform: uppercase; margin-bottom: 12px; }
+#oil-grid .card { display: flex; flex-direction: column; border: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); border-radius: 0; background: transparent; padding: 22px 14px; }
+#oil-grid .card:hover { background: var(--surface); border-color: var(--amber-dim); }
+#oil-grid .card-top { align-items: flex-start; gap: 14px; }
+.oil-emblem { display: grid; place-items: center; width: 46px; height: 50px; color: var(--oil-color); flex: 0 0 46px; border: 1px solid var(--border); border-radius: 50% 50% 3px 3px; }
+.oil-emblem .ui-icon { width: 28px; height: 28px; }
+.oil-card-aroma .ui-icon { color: var(--muted); width: 17px; height: 17px; flex-basis: 17px; margin-top: 2px; }
+.oil-card-footer { margin-top: auto; padding-top: 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 11px; }
+.oil-card-footer .ui-icon { color: var(--amber); }
+.domain-icon { display: block; margin-bottom: 20px; color: var(--amber); }
+.domain-icon .ui-icon { width: 25px; height: 25px; }
+@media (max-width: 640px) {
+  .card-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .catalog-intro { padding-top: 8px; }
+  .brand h1 { font-size: 20px; }
+  .tab { padding: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { .card, .domain-tile { transition: none; transform: none; } }
+
+/* The matrix is a relationship browser, with an evidence inspector in context. */
+.matrix-heading { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin:12px 0 20px; }
+.matrix-heading h2 { font:400 clamp(32px,3.5vw,44px)/1.15 var(--serif); margin-bottom:12px; }
+.matrix-heading p:not(.section-kicker) { max-width:75ch; color:var(--muted); font-size:14px; }
+.matrix-data-link { color:var(--amber); font-size:12px; text-underline-offset:4px; flex-shrink:0; padding:10px 0; }
+.matrix-inventory { font:12px/1.7 var(--mono); color:var(--muted); margin-bottom:24px; }
+.matrix-inventory button { color:var(--amber); border:0; border-bottom:1px solid var(--amber-dim); background:transparent; cursor:pointer; font:inherit; padding:6px 0; }
+.matrix-views { display:flex; flex-wrap:wrap; gap:0; border-bottom:1px solid var(--border); margin-bottom:20px; }
+.matrix-views button { background:transparent; color:var(--muted); border:0; border-bottom:2px solid transparent; padding:14px 18px; min-height:48px; font:inherit; font-size:14px; cursor:pointer; }
+.matrix-views button[aria-pressed=true] { color:var(--text); border-bottom-color:var(--amber); }
+.matrix-toolbar { align-items:flex-end; gap:12px; }
+.matrix-toolbar label { display:flex; flex-direction:column; gap:6px; color:var(--muted); font-size:11px; min-width:0; max-width:100%; }
+.matrix-toolbar label[hidden] { display:none; }
+.matrix-toolbar select { max-width:300px; min-height:44px; }
+.matrix-toolbar input[type=search] { min-width:0; width:230px; max-width:100%; min-height:44px; }
+.matrix-table-heading { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; margin:18px 0 8px; color:var(--muted); font-size:11px; }
+#tab-matrix .matrix-wrap { max-height:65vh; border-radius:2px; overflow:auto; }
+.matrix-caption { text-align:left; padding:12px 16px; font:400 20px var(--serif); color:var(--text); background:var(--surface); }
+#matrix-table thead th { position:sticky; top:0; z-index:3; background:var(--surface2); min-width:132px; border-bottom:1px solid var(--amber-dim); }
+#matrix-table thead .rowlabel { z-index:4; }
+#matrix-table .rowlabel { width:220px; min-width:180px; max-width:300px; white-space:normal; z-index:2; border-right:1px solid var(--border); }
+#matrix-table th button { color:var(--text); background:transparent; border:0; font:inherit; text-align:inherit; cursor:pointer; padding:7px 0; min-height:44px; max-width:100%; overflow-wrap:anywhere; }
+#matrix-table th button:hover { color:var(--amber); text-decoration:underline; text-underline-offset:4px; }
+#matrix-table thead th button { font-size:12px; line-height:1.5; text-transform:none; letter-spacing:0; }
+#matrix-table th small { display:block; font:11px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; text-transform:none; letter-spacing:0; color:var(--muted); margin-top:5px; }
+#matrix-table tbody .rowlabel button { font-size:13px; line-height:1.4; }
+#matrix-table .cell { min-height:44px; min-width:66px; max-width:180px; }
+#matrix-table .cell[disabled] { color:var(--muted); opacity:.55; }
+#matrix-table .cell:not([disabled]):hover { color:var(--amber); text-decoration:underline; text-underline-offset:5px; }
+#matrix-table .composition-cell .cell-n { font:12px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; }
+#matrix-table tbody tr:hover td, #matrix-table tbody tr:hover .rowlabel { background:var(--surface2); }
+#tab-matrix button:focus-visible, .matrix-data-link:focus-visible, .matrix-wrap:focus-visible { outline:2px solid var(--amber); outline-offset:2px; }
+.matrix-inspector[hidden] { display:none; }
+.matrix-inspector { margin-top:30px; border-top:3px solid var(--amber); background:var(--surface); scroll-margin-top:150px; }
+.matrix-inspector > header { display:flex; align-items:flex-start; justify-content:space-between; gap:24px; padding:26px; border-bottom:1px solid var(--border); }
+.matrix-inspector > header h3 { font:400 clamp(24px,3vw,34px)/1.2 var(--serif); margin-bottom:12px; overflow-wrap:anywhere; }
+.matrix-inspector > header p:not(.section-kicker) { color:var(--muted); font-size:13px; max-width:80ch; }
+.matrix-inspector .back { flex-shrink:0; min-height:44px; }
+.matrix-inspector-body { padding:26px; }
+.matrix-inspector-body > h4 { font:400 26px/1.3 var(--serif); margin:28px 0 12px; }
+.matrix-detail-actions { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0; }
+.matrix-detail-actions .chip { border-radius:3px; display:inline-flex; align-items:center; gap:8px; }
+.matrix-records { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:26px; margin:16px 0; }
+.matrix-records button { display:flex; align-items:center; justify-content:space-between; gap:18px; min-height:62px; background:transparent; border:0; border-bottom:1px solid var(--border); color:var(--text); text-align:left; cursor:pointer; font:14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; padding:12px 0; }
+.matrix-records button > span { min-width:0; overflow-wrap:anywhere; }
+.matrix-records button > span:last-child { color:var(--amber); font-size:12px; text-align:right; }
+.matrix-records small { display:block; color:var(--muted); font:11px var(--mono); margin-top:4px; }
+.matrix-records .ui-icon { width:16px; height:16px; margin-left:4px; }
+.matrix-evidence-disclosure { padding:14px 0; border-bottom:1px solid var(--border); }
+.matrix-evidence-disclosure > summary { cursor:pointer; color:var(--amber); min-height:44px; padding:10px 0; }
+.matrix-inspector-path { margin-bottom:20px; font-size:13px; color:var(--amber); }
+.matrix-inspector pre { white-space:pre-wrap; overflow-wrap:anywhere; font-size:12px; padding:12px; }
+@media (max-width:640px) {
+ .matrix-heading { flex-direction:column; align-items:flex-start; gap:4px; }
+ .matrix-views button { flex:1 1 45%; padding:12px 8px; font-size:13px; }
+ .matrix-toolbar label { flex:1 1 45%; }
+ .matrix-toolbar label:first-child { flex-basis:100%; }
+ .matrix-toolbar input[type=search], .matrix-toolbar select { width:100%; max-width:100%; }
+ #matrix-table .rowlabel { width:145px; min-width:135px; max-width:160px; }
+ #matrix-table thead th { min-width:120px; }
+ .matrix-inspector > header { flex-direction:column; gap:12px; padding:18px; }
+ .matrix-inspector > header .back { margin-bottom:0; }
+ .matrix-inspector-body { padding:18px; }
+ .matrix-records { grid-template-columns:1fr; }
+}

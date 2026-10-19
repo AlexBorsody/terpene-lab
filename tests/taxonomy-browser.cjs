@@ -13,6 +13,8 @@ const ids = ['fixture-topic', 'fixture-system', 'fixture-model', 'fixture-leaf',
 const labels = ['Fixture research', 'Fixture system', 'Fixture model', 'Fixture leaf', 'Fixture sibling'];
 const parents = [null, ids[0], ids[1], ids[2], ids[2]];
 ids.forEach((id, i) => fixture.registries.useNodes.push({ id, label: labels[i], parentId: parents[i], aliases: [], legacyBindings: [], declared: false }));
+fixture.registries.matrixTopicGroups.push({ id: 'fixture-family', label: 'Fixture-only family', description: 'Added entirely in JSON.' });
+fixture.registries.useNodes.push({ id: 'fixture-family-root', label: 'Fixture family root', parentId: null, aliases: [], legacyBindings: [], declared: false, matrixGroupId: 'fixture-family' });
 const seed = fixture.registries.studies[0];
 function addStudy(id, tags, oilIds, compoundIds) {
   const record = { ...JSON.parse(JSON.stringify(seed)), id, title: id, doi: `10.9999/${id}`, pubmedId: String(900000000 + fixture.registries.studies.length), url: `https://example.org/research/${id}`, finding: 'A fixture-only finding; not a real clinical claim.', useNodeIds: tags };
@@ -192,8 +194,17 @@ const server = http.createServer((req, res) => {
     assert.equal((await page.locator('#matrix-table [data-oil="lemon"][data-domain="fixture-leaf"]').innerText()).trim(), '2');
     assert.equal((await page.locator('#matrix-table [data-oil="lavender"][data-domain="fixture-leaf"]').innerText()).trim(), '0');
     await page.locator('#matrix-table [data-oil="lemon"][data-domain="fixture-leaf"]').click();
-    assert.equal(await page.locator('#study-list .study').count(), 2);
-    await page.goBack(); assert.equal(await page.locator('#tab-matrix').isVisible(), true);
+    assert.equal(await page.locator('#matrix-inspector .study').count(), 2);
+    assert.equal(await page.locator('#tab-matrix').isVisible(), true);
+    assert.equal(await page.locator('#matrix-group-filter').inputValue(), 'unclassified', 'Unassigned JSON roots remain discoverable');
+    await page.goBack(); assert.equal(await page.locator('#matrix-inspector').isVisible(), false);
+    await page.locator('#matrix-group-filter').selectOption('fixture-family');
+    assert.equal(await page.locator('#matrix-table [data-matrix-topic="fixture-family-root"]').count(), 1, 'New JSON-only family is rendered without application edits');
+    assert.equal(await page.locator('#matrix-table tbody tr').count(), fixture.oils.length, 'Unused topics remain visible for every oil');
+    await page.locator('[data-matrix-view="study-topics"]').click();
+    await page.locator('#matrix-search').fill('fixture-shared');
+    await page.locator('#matrix-table tbody th [data-matrix-inspect="study/fixture-shared"]').click();
+    assert.equal(await page.locator('#matrix-inspector .research-assessments').count(), 2, 'Paper inspector exposes every scoped oil assessment');
     // Retained Pathway works with the same hierarchy, even if not mounted in this shell.
     await page.evaluate(() => {
       for (const id of ['pathway-plants', 'pathway-compounds', 'pathway-uses', 'pathway-evidence']) {

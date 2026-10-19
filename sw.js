@@ -1,18 +1,18 @@
 // Generated release and SHA-256 map: run python3 scripts/build-pwa.py after edits.
-const RELEASE = "b8c8fa2935564c6f";
+const RELEASE = "2a86a5dd6b81eee2";
 const ASSETS = {
-  "index.html": "53a3749495f2f465fffe899c7d234576e9d0191ab17a6cbff25b42145b2e46b8",
-  "styles.css": "58bfdf1613dcfbd3c034602cbccd3f9f80deabd3d9cec4132a9d797b49d84473",
-  "app.js": "200ee718cb4d9d91191765145d0b7db5a47f0dbd93d27b8312287c7a800ef9de",
+  "index.html": "e74cf47c6c9817634a48db3b02f055472c3543f5541b06aa8b87cc610e95d712",
+  "styles.css": "50be64517f7e15c6d052014acab9ef0fd5cfbc395e40765c0c01d9734531ac3d",
+  "app.js": "16057acb70b1855da9438d91cabc93c880abff869a21a4c06258bbe1287e7496",
   "chemistry.js": "09f64d79607afee21306dd8a6fa4d1b28087d8bccd42dd924e958d7baaa4d132",
   "research.js": "9adac5cca9e32904e624fe828d932e955a0a7dd4a28d7352dd866f62c282fdec",
-  "data.js": "9f4b71b8bd1b4e166ef1a48e0e91a4244f011de0210cc2d6bd16cc40f98a784d",
+  "data.js": "1a9ec447b446cb0ecaff7239a4827395e2ffc4a80604acf02dac8f09a98e9392",
   "pwa.js": "a52f02fdcb6a47168e81c5c7f7eff4c332da8c6952b05e60b9bd8fff9901f21f",
   "blend-engine.js": "b0c95678d8b1ede6ef9a61031dd8f30cd5866b1f909c80b3a8d5fa52a09938e7",
-  "blend-builder.js": "813b23e4977c70670bd0b028a40c1cc96e9bc5d9f898095b67707473a4cc621a",
-  "blend-builder.css": "6201de5c247026bb3990555c820ba8a4cf53892851b59a4502eb528396b908eb",
-  "master-data.json": "04a4cd751afa8e6c3053b4b3d43094172c701ca01395b3ed92d4333bc19ca9ad",
-  "manifest.webmanifest": "e85307edce52944b5afd4da7ad5082893d4a4dff1fd25a8abed6469eeaee1271",
+  "blend-builder.js": "f1df9650f2db318486a928b4fe90006aa777915e1feac5bd9cf79332e371d68b",
+  "blend-builder.css": "23a0905ae6c3fab9f5a2661fdf8050740a0660e6bece88ea3a0b2c93d5a46858",
+  "master-data.json": "fc440b75253398388571c9acefa72f3d0d04858863cf8adbc2c2e2a283686078",
+  "manifest.webmanifest": "1c1ca408fa48a60c75e17542f03c420a73d22d70f98e8f189fb9f1ce76b5865b",
   "shield-icon.svg": "b6a4fa5ec8968f651ec6bb9441f4cb6a3c5c5b333c45628c2e43ca348d2a5562",
   "vendor/echarts-5.5.1.min.js": "e84270bd0cd5bdf60fefc26d00c2a391cb2e81f4d26a7a9ee16185a54773a3cf",
   "icons/apple-touch-icon.png": "dedbda7b727acdf3642136907ab70dce873538492e65cfe38f9989c9ccfbfbee",

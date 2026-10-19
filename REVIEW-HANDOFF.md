@@ -1,5 +1,11 @@
 # Terpene Lab: independent review handoff
 
+## Matrix and visual interface follow-up
+
+The Matrix now serves as the canonical relationship browser with four views: oils/topics, oils/compounds, compounds/topics and studies/topics. `registries.matrixTopicGroups` and root `matrixGroupId` metadata separate practical use/outcome topics from composition/sensory research and other biological assays. Unassigned new roots remain visible. Clicking an oil opens all compound relationships, chemical observations, precautions and linked papers in place; source records are available from the inventory. Topic columns descend through the existing arbitrary-depth hierarchy.
+
+Blend Builder is the first tab and default landing view. The visual treatment uses botanical serif headings, ink-green surfaces and local SVG line icons. Scientific records and eligibility rules are unchanged by this interface follow-up. Source scope, unknown safety limits and composition provenance retain the limitations below.
+
 ## Independent source review — October 18, 2026
 
 The next review corrected the canonical master rather than accepting passing migration tests as scientific verification. All **156 existing publication identities** were checked using Europe PMC/PubMed or Crossref; **154 available abstracts** were screened. Two indexed records supplied no abstract (`composition-lemongrass-infusion-2014`, `composition-cx01`). One additional controlled human study was checked against its full text. All **34 compound formulas** were cross-checked against PubChem, with NIST used to resolve a conflicting curzerene name-search result. The original 28 oil profiles were reviewed and unsupported rankings/outcome shortcuts removed.

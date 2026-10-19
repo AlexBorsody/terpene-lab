@@ -213,7 +213,8 @@ function luminance(hex) {
   return rgb.reduce((sum, value, index) => sum + value * [0.2126, 0.7152, 0.0722][index], 0);
 }
 for (const background of ['#efbd69', '#f7cd86', '#dfac55']) {
-  const contrast = (luminance(background) + 0.05) / (luminance('#0b1220') + 0.05);
+  const foreground = css.match(/--bg:\s*(#[0-9a-f]{6})/i)[1];
+  const contrast = (luminance(background) + 0.05) / (luminance(foreground) + 0.05);
   assert.ok(contrast >= 7, `Read paper contrast ${contrast.toFixed(2)}:1`);
 }
 console.log(`PASS: shared-taxonomy renderer/filter regression; legacy aliases, alphabetic selectors and immutable source data`);

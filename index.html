@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sunny’s Shield Terpene Lab - Plant Science Evidence Explorer</title>
-<meta name="theme-color" content="#0b1220">
+<meta name="theme-color" content="#111d1b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="Terpene Lab">
@@ -18,8 +18,8 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="shield-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" sizes="180x180">
-<link rel="stylesheet" href="blend-builder.css?v=6201de5c247026bb">
-<link rel="stylesheet" href="styles.css?v=58bfdf1613dcfbd3">
+<link rel="stylesheet" href="blend-builder.css?v=23a0905ae6c3fab9">
+<link rel="stylesheet" href="styles.css?v=50be64517f7e15c6">
 <script src="vendor/echarts-5.5.1.min.js"></script>
 
 <style>
@@ -30,6 +30,19 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
 </style>
 </head>
 <body>
+<svg class="lab-symbols" width="0" height="0" aria-hidden="true" focusable="false"><defs>
+  <symbol id="lab-icon-blend" viewBox="0 0 24 24"><path d="M3 11h18M5 11a7 7 0 0 0 14 0M8 20h8M14 9l5-6 2 2-5 5"/></symbol>
+  <symbol id="lab-icon-oils" viewBox="0 0 24 24"><path d="M5 20 18 7M7 17C1 8 10 3 21 3c0 11-5 20-14 14ZM11 14v-4M14 11h4"/></symbol>
+  <symbol id="lab-icon-studies" viewBox="0 0 24 24"><path d="M12 6C9 4 5 4 2 5v14c3-1 7-1 10 1 3-2 7-2 10-1V5c-3-1-7-1-10 1Zm0 0v14M5 8h4M5 11h4M15 8h4M15 11h4"/></symbol>
+  <symbol id="lab-icon-compounds" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Zm0 0v5m8-.5-4 2m4 7-4-2M12 21v-5m-8 .5 4-2m-4-7 4 2"/></symbol>
+  <symbol id="lab-icon-matrix" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></symbol>
+  <symbol id="lab-icon-domains" viewBox="0 0 24 24"><path d="M12 7v5M5 17v-5h14v5"/><rect x="9" y="2" width="6" height="5" rx="1"/><rect x="2" y="17" width="6" height="5" rx="1"/><rect x="16" y="17" width="6" height="5" rx="1"/></symbol>
+  <symbol id="lab-icon-network" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="4" r="2"/><circle cx="20" cy="5" r="2"/><circle cx="5" cy="20" r="2"/><circle cx="20" cy="20" r="2"/><path d="m6 6 4 4m4-1 4-3M7 18l3-4m4 0 4 4"/></symbol>
+  <symbol id="lab-icon-aroma" viewBox="0 0 24 24"><path d="M3 8h12c5 0 5-6 1-6M3 12h15c5 0 5 7 0 7M3 16h6c4 0 4 5 1 5"/></symbol>
+  <symbol id="lab-icon-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+  <symbol id="lab-icon-save" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4V3Z"/></symbol>
+  <symbol id="lab-icon-share" viewBox="0 0 24 24"><path d="M12 16V3m-5 5 5-5 5 5M5 13v8h14v-8"/></symbol>
+</defs></svg>
 <div class="lab-return">
   <a href="https://sunnysshield.com/" target="_top">&larr; Back to Sunny's Shield</a>
 </div>
@@ -65,24 +78,25 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
         <p class="tagline">Plant science, put to work.</p>
       </div>
     </div>
-    <nav class="tabs">
-      <button class="tab active" data-tab="oils">Oils</button>
-      <button class="tab blend-tab" data-tab="blend">Blend Builder</button>
-      <button class="tab" data-tab="studies">Studies</button>
-      <button class="tab" data-tab="compounds">Compounds</button>
-      <button class="tab" data-tab="matrix">Matrix</button>
-      <button class="tab" data-tab="domains">Uses</button>
-      <button class="tab" data-tab="network">Network</button>
+    <nav class="tabs" aria-label="Explore the Lab">
+      <button class="tab blend-tab active" data-tab="blend"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#lab-icon-blend"/></svg><span>Blend Builder</span></button>
+      <button class="tab" data-tab="oils"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#lab-icon-oils"/></svg><span>Oils</span></button>
+      <button class="tab" data-tab="studies"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#lab-icon-studies"/></svg><span>Studies</span></button>
+      <button class="tab" data-tab="compounds"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#lab-icon-compounds"/></svg><span>Compounds</span></button>
+      <button class="tab" data-tab="matrix"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#lab-icon-matrix"/></svg><span>Matrix</span></button>
+      <button class="tab" data-tab="domains"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#lab-icon-domains"/></svg><span>Uses</span></button>
+      <button class="tab" data-tab="network"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#lab-icon-network"/></svg><span>Network</span></button>
     </nav>
   </div>
 </header>
 
 <main id="app">
-  <section id="tab-blend" class="tab-panel"><div id="blend-builder"></div></section>
+  <section id="tab-blend" class="tab-panel active"><div id="blend-builder"></div></section>
   <!-- OIL EXPLORER -->
-  <section id="tab-oils" class="tab-panel active">
+  <section id="tab-oils" class="tab-panel">
     <div id="oil-list-view">
       <div class="catalog-intro">
+        <p class="section-kicker">The botanical catalog</p>
         <h2>Find the oils that fit your idea.</h2>
         <p>Explore by use, compare aromas, and inspect the studies behind each oil. Bring your choices together in the Blend Builder.</p>
       </div>
@@ -175,25 +189,29 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
     </div>
   </section>
 
-  <!-- EVIDENCE MATRIX -->
+  <!-- CANONICAL DATA MATRIX -->
   <section id="tab-matrix" class="tab-panel">
+    <div class="matrix-heading"><div><p class="section-kicker">The evidence map</p><h2 id="matrix-title" tabindex="-1">Follow every connection.</h2><p>Explore the oils, compounds and research in one place. Select a name or a cell to inspect the underlying records.</p></div><a href="master-data.json" download class="matrix-data-link">Download canonical JSON</a></div>
+    <p id="matrix-inventory" class="matrix-inventory"></p>
+    <div class="matrix-views" role="group" aria-label="Matrix relationship">
+      <button data-matrix-view="oil-topics" aria-pressed="true">Oils × topics</button>
+      <button data-matrix-view="oil-compounds" aria-pressed="false">Oils × compounds</button>
+      <button data-matrix-view="compound-topics" aria-pressed="false">Compounds × topics</button>
+      <button data-matrix-view="study-topics" aria-pressed="false">Studies × topics</button>
+    </div>
     <div class="toolbar matrix-toolbar">
-      <input id="matrix-search" type="search" placeholder="Search plants...">
-      <select id="matrix-sort" aria-label="Sort matrix plants">
-        <option value="az">A to Z</option>
-        <option value="studies">Most studied</option>
-      </select>
-      <select id="matrix-domain-filter" aria-label="Show research topic"><option value="">All research topics</option></select>
-      <span id="matrix-count" class="count"></span>
+      <label>Find a row<input id="matrix-search" type="search" placeholder="Search names..."></label>
+      <label id="matrix-group-control">Topic family<select id="matrix-group-filter"></select></label>
+      <label id="matrix-topic-control">Topic<select id="matrix-domain-filter" aria-label="Show research topic"><option value="">All research topics</option></select></label>
+      <label id="matrix-chemical-control" hidden>Chemical category<select id="matrix-chemical-filter"></select></label>
+      <label id="matrix-oil-control">Oil<select id="matrix-oil-filter"></select></label>
+      <label>Order<select id="matrix-sort" aria-label="Sort matrix rows"><option value="az">A to Z</option><option value="studies">Most linked papers</option></select></label>
     </div>
     <div id="matrix-domain-filter-navigation" class="topic-navigation hidden"></div>
-    <p class="hint research-context">Unique papers linked to each oil and topic, including context-only associations. Parent totals include descendants; overlapping columns must not be added together. Counts are not proof of efficacy.</p>
-    <div class="matrix-scroll-cue" aria-hidden="true">
-      <span>←</span><b>SWIPE TO SEE MORE RESEARCH</b><span>→</span>
-    </div>
-    <div class="matrix-wrap">
-      <table id="matrix-table" class="matrix"></table>
-    </div>
+    <p id="matrix-context" class="hint research-context"></p>
+    <div class="matrix-table-heading"><span id="matrix-count" class="count"></span><span>Scroll across to explore columns →</span></div>
+    <div class="matrix-wrap" tabindex="0" role="region" aria-label="Canonical relationship matrix"><table id="matrix-table" class="matrix"></table></div>
+    <section id="matrix-inspector" class="matrix-inspector" aria-label="Selected matrix evidence" hidden></section>
   </section>
 
   <!-- DOMAIN EXPLORER -->
@@ -292,12 +310,12 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
   <p>Sunny's Shield Terpene Lab &middot; plant to molecule to paper &middot; inspect the evidence yourself. Not medical advice.</p>
 </footer>
 
-<script src="data.js?v=9f4b71b8bd1b4e16"></script>
+<script src="data.js?v=1a9ec447b446cb0e"></script>
 <script src="chemistry.js?v=09f64d79607afee2"></script>
 <script src="research.js?v=9adac5cca9e32904"></script>
-<script src="app.js?v=200ee718cb4d9d91"></script>
+<script src="app.js?v=16057acb70b1855d"></script>
 <script src="blend-engine.js?v=b0c95678d8b1ede6"></script>
-<script src="blend-builder.js?v=813b23e4977c7067"></script>
+<script src="blend-builder.js?v=f1df9650f2db3184"></script>
 <script src="pwa.js?v=a52f02fdcb6a4716"></script>
 </body>
 </html>

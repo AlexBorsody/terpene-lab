@@ -13588,7 +13588,8 @@
             "type": "health"
           }
         ],
-        "declared": true
+        "declared": true,
+        "matrixGroupId": "uses"
       },
       {
         "id": "health-mental-health",
@@ -13927,7 +13928,8 @@
             "type": "cleaning"
           }
         ],
-        "declared": true
+        "declared": true,
+        "matrixGroupId": "uses"
       },
       {
         "id": "cleaning-surface",
@@ -14009,7 +14011,8 @@
             "type": "microbial"
           }
         ],
-        "declared": true
+        "declared": true,
+        "matrixGroupId": "uses"
       },
       {
         "id": "microbial-bacteria",
@@ -14181,7 +14184,8 @@
             "type": "pest"
           }
         ],
-        "declared": true
+        "declared": true,
+        "matrixGroupId": "uses"
       },
       {
         "id": "pest-mosquitoes",
@@ -14315,7 +14319,8 @@
           }
         ],
         "declared": true,
-        "displayLabel": "Aroma research"
+        "displayLabel": "Aroma research",
+        "matrixGroupId": "composition"
       },
       {
         "id": "sensory-aroma-chemistry",
@@ -14384,7 +14389,8 @@
         ],
         "declared": true,
         "displayLabel": "Composition and flavonoid research",
-        "navigationRoot": false
+        "navigationRoot": false,
+        "matrixGroupId": "composition"
       },
       {
         "id": "botanical-nonvolatile-chemistry",
@@ -14892,7 +14898,8 @@
         ],
         "declared": true,
         "displayLabel": "Biological activity",
-        "navigationRoot": true
+        "navigationRoot": true,
+        "matrixGroupId": "assays"
       },
       {
         "id": "health-skin-dandruff",
@@ -32780,7 +32787,24 @@
         "paryani-2024",
         "bautista-2021"
       ]
-    }
+    },
+    "matrixTopicGroups": [
+      {
+        "id": "uses",
+        "label": "Uses & outcomes",
+        "description": "Health, cleaning, microbial and pest endpoints. Counts describe linked research, including contextual and unfavorable findings."
+      },
+      {
+        "id": "composition",
+        "label": "Composition & sensory research",
+        "description": "Analytical composition, constituent variation and aroma research. These columns describe chemistry and sensory questions, not application benefits."
+      },
+      {
+        "id": "assays",
+        "label": "Other biological assays",
+        "description": "Biological assays that are not assigned to a practical use or outcome. Inspect the model and material before drawing conclusions."
+      }
+    ]
   },
   "migration": {
     "baselineDigest": "da7bfc1289f92e46576493c7c144c9684537258e7f447f5f31da3241f395837e",

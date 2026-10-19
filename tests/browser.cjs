@@ -5,6 +5,72 @@ const assert = require('node:assert/strict');
  const context=await browser.newContext({serviceWorkers:'block'});
  const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const base=process.env.TEST_URL || 'http://127.0.0.1:8000';
+ // New visits open the first tab; explicit oil links and browser Back still work.
+ for (const embed of [false,true]) {
+  await page.goto(`${base}/${embed?'?embed=1':''}`);
+  assert.equal(await page.locator('.tabs .tab').first().getAttribute('data-tab'),'blend');
+  assert.equal(await page.locator('#tab-blend').isVisible(),true);
+  assert.equal(await page.locator('.tab-panel.active').count(),1);
+  await page.getByRole('button',{name:'Oils',exact:true}).click();
+  assert.equal(await page.locator('#oil-grid').isVisible(),true);
+  await page.goBack();
+  assert.equal(await page.locator('#tab-blend').isVisible(),true);
+  await page.goto(`${base}/?oil=lemon${embed?'&embed=1':''}`);
+  assert.equal(await page.locator('#oil-name').textContent(),'Lemon');
+ }
+ // The Matrix is a complete relationship browser, with distinct canonical topic families.
+ await page.goto(`${base}/?tab=matrix`);
+ assert.deepEqual(await page.locator('#matrix-table [data-matrix-topic]').evaluateAll(nodes=>nodes.map(n=>n.dataset.matrixTopic)),['health','cleaning','microbial','pest']);
+ await page.locator('#matrix-group-filter').selectOption('composition');
+ assert.deepEqual(await page.locator('#matrix-table [data-matrix-topic]').evaluateAll(nodes=>nodes.map(n=>n.dataset.matrixTopic)),['sensory','botanical']);
+ await page.locator('#matrix-group-filter').selectOption('assays');
+ assert.equal(await page.locator('#matrix-table [data-matrix-topic]').getAttribute('data-matrix-topic'),'botanical-bioactivity');
+ await page.locator('#matrix-table [data-matrix-inspect="oil/lemon"]').click();
+ assert.equal(await page.locator('#matrix-inspector-title').textContent(),'Lemon');
+ await page.locator('#matrix-inspector [data-matrix-inspect="relationship/lemon/limonene"]').click();
+ assert.match(await page.locator('#matrix-inspector').innerText(),/Historical ranges are not plotted/);
+ assert.doesNotMatch(await page.locator('#matrix-inspector').innerText(),/60[–-]75%/);
+ await page.goBack();
+ await page.locator('#matrix-inspector [data-matrix-inspect="relationship/lemon/geranyl-acetate"]').click();
+ assert.match(await page.locator('#matrix-inspector').innerText(),/0\.56%/);
+ assert.ok(await page.locator('#matrix-inspector a[href^="https:"]').count()>0);
+ await page.locator('#matrix-inspector [data-matrix-inspect="oil/lemon"]').click();
+ await page.locator('[data-matrix-focus="lemon"]').click();
+ assert.equal(await page.locator('#matrix-table tbody tr').count(),1);
+ assert.equal(await page.locator('#matrix-table thead [data-matrix-inspect]').count(),34);
+ assert.equal(await page.locator('#matrix-table [data-matrix-inspect="relationship/lemon/prenylthiol"]').innerText(),'Other material');
+ await page.locator('#matrix-chemical-filter').selectOption('group:ester');
+ const matrixRoute=page.url();
+ await page.locator('#matrix-table [data-matrix-inspect="relationship/lemon/geranyl-acetate"]').click();
+ const detailRoute=page.url();
+ await page.reload();
+ assert.equal(await page.locator('#matrix-inspector-title').textContent(),'Lemon → Geranyl acetate');
+ assert.equal(await page.locator('#matrix-oil-filter').inputValue(),'lemon');
+ assert.equal(await page.locator('#matrix-chemical-filter').inputValue(),'group:ester');
+ await page.goBack(); await page.waitForURL(matrixRoute);
+ assert.equal(await page.locator('#matrix-inspector').isVisible(),false);
+ await page.goForward(); await page.waitForURL(detailRoute);
+ await page.locator('[data-matrix-view="compound-topics"]').click();
+ assert.equal(await page.locator('#matrix-table tbody tr').count(),34);
+ await page.locator('[data-matrix-view="study-topics"]').click();
+ assert.equal(await page.locator('#matrix-table tbody tr').count(),157);
+ await page.locator('#matrix-inventory [data-matrix-inspect="sources"]').click();
+ assert.equal(await page.locator('#matrix-inspector .chem-evidence').count(),45);
+ // Complete an oil -> compound -> paper/topic path without leaving the Matrix.
+ await page.goto(`${base}/?tab=matrix&inspect=compound/limonene&embed=1`);
+ await page.locator('#matrix-inspector [data-matrix-topic-link]').first().click();
+ assert.equal(await page.locator('#tab-matrix').isVisible(),true);
+ assert.equal(new URL(page.url()).searchParams.get('embed'),'1');
+ assert.ok(new URL(page.url()).searchParams.get('domain'));
+ // Scroll belongs to the large table, never to the whole page, including open details.
+ for(const width of [320,390,768,1440]) {
+  await page.setViewportSize({width,height:900});
+  for(const embed of [false,true]) {
+   await page.goto(`${base}/?tab=matrix&matrixMode=oil-compounds&matrixOil=lemon&inspect=relationship/lemon/geranyl-acetate${embed?'&embed=1':''}`);
+   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,`Matrix overflow ${width} embed ${embed}`);
+   assert.equal(await page.locator('#matrix-inspector-title').isVisible(),true);
+  }
+ }
  // Unknown route IDs must not resolve inherited Object prototype properties.
  for(const [tab,key,prefix] of [['oils','oil','oil'],['compounds','compound','compound']]) {
   for(const id of ['constructor','__proto__']) {
@@ -72,16 +138,15 @@ const assert = require('node:assert/strict');
   const startUrl=page.url();
   const link=page.locator(`#compound-material-evidence [${route.attribute}="${route.target}"]`).first();
   await link.locator('xpath=ancestor::details[contains(@class,"chem-evidence")]').locator(':scope > summary').click();
-  const initialLength=await page.evaluate(()=>{
+  await page.evaluate(()=>{
    window.testPushCount=0;
    const original=history.pushState.bind(history);
    history.pushState=(...args)=>{window.testPushCount++;return original(...args);};
-   return history.length;
   });
   await link.click();
   assert.equal(new URL(page.url()).searchParams.get(route.destination),route.target);
   assert.equal(await page.evaluate(()=>window.testPushCount),1,'One evidence click must navigate once');
-  assert.equal(await page.evaluate(()=>history.length),initialLength+1,'One evidence click must add one history entry');
+  // pushState count plus Back verifies a single entry without Chromium's 50-entry history cap.
   await page.goBack();
   await page.waitForURL(startUrl);
   assert.equal(await page.locator('#compound-name').textContent(),route.compound==='citral'?'Citral':'Nobiletin');
