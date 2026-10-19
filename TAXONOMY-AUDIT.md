@@ -37,3 +37,20 @@ Projection changes have reversible entries in the canonical correction ledger. S
 `tests/catalog-consistency.cjs` independently traverses the canonical parent IDs and assertions for every oil/topic combination, then checks every pair of topics in both All and Any modes. Browser regressions exercise every nonempty stocked topic, counts, visibility, parent replacement, search, reset, persistence and contextual evidence.
 
 This is a complete structural consistency audit and targeted primary-source correction pass, **not** an exhaustive systematic review or full-text authentication of every evidence assertion. Primary indexed records were refreshed for 165 existing PubMed publications; older source-review status remains explicit where an oil-specific endpoint was not independently reverified. Concentration, interaction and finished-product safety review remain separate unresolved work; this release does not certify those fields or turn animal, compound or antimicrobial laboratory findings into product claims.
+
+## Follow-up: treatment-arm integrity — 19 October 2026
+
+Nine existing publications received a further scoped mapping review. Eight were checked against their primary indexed abstracts through Europe PMC; the Atlas cedar paper was checked in full text. This pass adds measured endpoints to existing papers rather than padding the bibliography.
+
+- **Göbel 1994:** eucalyptus's combination arm had little effect on pain sensitivity; it must not inherit peppermint–ethanol's analgesic result. Added the measured cognitive-performance association for both blend components, without inventing attention or memory subtypes. [Primary record](https://pubmed.ncbi.nlm.nih.gov/7954745/)
+- **Han 2006:** moved the blend's pain mapping to **Menstrual cramps**, verified the 67-person sample, and preserved the three-oil intervention and species distinction. [Primary record](https://pubmed.ncbi.nlm.nih.gov/16884344/)
+- **Hur 2007:** all three oil links now explicitly describe the combined mouthwash and fixed day-one/day-two treatment order. [Primary record](https://pubmed.ncbi.nlm.nih.gov/17380550/)
+- **Nematolahi 2018:** separated questionnaire endpoints; sleep latency and duration did not improve significantly. Removed the redundant parent cognitive assertion; memory still rolls up to cognition. Oral herb results remain contextual to essential oil. [Primary record](https://pubmed.ncbi.nlm.nih.gov/29389474/)
+- **Kasper 2010 / Juergens 2003:** verified the oral formulation routes and kept them distinct from inhalation, retail lavender oil and whole eucalyptus oil. The latter tested isolated cineole. [Lavender](https://pubmed.ncbi.nlm.nih.gov/20512042/), [cineole](https://pubmed.ncbi.nlm.nih.gov/12645832/)
+- **Kuriyama 2005:** kept the three-oil massage intervention explicit; added the absent null between-treatment anxiety/depression findings. Immune biomarkers are not infection-prevention evidence. [Primary record](https://pubmed.ncbi.nlm.nih.gov/15937558/)
+- **Napavichayanun 2024:** replaced unsupported broad mental-health mappings with **Quality of life**. Distinguished the 56-person healthy-volunteer phase from the 34-person blood-pressure phase; both oils remain combination evidence. [Primary record](https://pubmed.ncbi.nlm.nih.gov/38087747/)
+- **Galovičová 2022:** biofilm protein-profile changes do not demonstrate biofilm eradication; live firebug mortality is an animal experiment, not an in-vitro culture assay. [Full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC8839266/)
+
+Both new endpoints are canonical JSON nodes. Builder, Matrix, oil profiles and study navigation inherit their hierarchy through the shared resolver. Regression checks preserve the different arm outcomes and prevent quality-of-life evidence from becoming a mental-health match.
+
+Remaining work: library-reviewed associations still need oil-specific source checks; compound associations, exact composition provenance, concentrations and safety fields are not certified by this pass. An abstract screen is not a full-text review. Existing unresolved associations were not promoted merely because a publication was retrieved.

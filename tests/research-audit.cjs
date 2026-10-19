@@ -67,7 +67,7 @@ test('Targeted source checking is distinct from complete library coverage', () =
   assert.equal(master.migration.audit.libraryReviewedOnlyExistingRelations, 169);
   assert.equal(master.migration.audit.newPrimaryPublications, 3);
   const primaryPairs = new Set(assertions.filter(a => a.verification.status === 'source-checked').map(a => a.oilId + '/' + a.studyId));
-  assert.equal(primaryPairs.size, 87); // Prior 51, nine corrected existing pairs, two new-paper oil relations.
+  assert.equal(primaryPairs.size, 100); // 87 prior pairs plus 13 newly source-checked oil/publication pairs.
 });
 test('Every publication has an independent citation check, separate from endpoint verification', () => {
   all(regs.studies, s => s.citationReview.status === 'identity-checked' && ['2026-10-18','2026-10-19'].includes(s.citationReview.checkedAt), 'citation review');
