@@ -79,13 +79,13 @@
       <div class="blend-product"><svg class="blend-bottle" viewBox="0 0 80 120" aria-hidden="true" focusable="false"><rect x="26" y="6" width="28" height="14" rx="2"/><path d="M30 20v13c0 7-15 8-15 20v51c0 6 4 10 10 10h30c6 0 10-4 10-10V53c0-12-15-13-15-20V20M32 10v6m8-6v6m8-6v6"/><rect x="23" y="53" width="34" height="39" rx="1"/><path d="M33 82 48 63c-15 0-20 9-13 16 8 3 14-4 13-16M28 99h24"/></svg><div class="blend-product-copy"><span class="blend-product-size">${esc(config.product.name)} / ${esc(config.product.size)}</span><strong>${esc(priceLabel)}<span> per custom blend</span></strong><span class="blend-pill">Manual review before mixing</span></div></div>
     </div>
     <p id="blend-link-error" class="blend-message is-error" role="alert" ${restoreError ? '' : 'hidden'}>${esc(restoreError)}</p>
-    <div class="blend-step-title"><span>01</span><h3>Start with</h3></div>
+    <div class="blend-step-title"><span>1</span><h3>Start with</h3></div>
     <div class="blend-paths" role="group" aria-label="Choose a starting point">
       <button type="button" data-blend-path="qualities"><span class="blend-path-icon">${uiIcon("domains")}</span><strong>Shop by use</strong><span class="blend-path-description">Explore the research.</span><span class="blend-path-arrow" aria-hidden="true">${uiIcon("arrow")}</span></button>
       <button type="button" data-blend-path="oils"><span class="blend-path-icon">${uiIcon("oils")}</span><strong>Browse oils</strong><span class="blend-path-description">Follow your favorite aromas.</span><span class="blend-path-arrow" aria-hidden="true">${uiIcon("arrow")}</span></button>
     </div>
     <div id="blend-workspace" hidden>
-      <div class="blend-step-title"><span>02</span><h3>Choose your oils</h3></div>
+      <div class="blend-step-title"><span>2</span><h3>Choose your oils</h3></div>
       <div class="blend-work-grid">
         <section class="blend-catalog" aria-labelledby="blend-catalog-title">
           <div class="blend-catalog-heading"><h4 id="blend-catalog-title">Explore the oils</h4><button type="button" id="blend-reset-choices" class="blend-text-button">Reset choices</button></div>
@@ -211,7 +211,7 @@
     const importantWarnings=warnings;
     const paperCount=new Set(recipe.oils.flatMap(o=>research.studiesForOil(o.id).map(s=>s.id))).size;
     section.hidden=false;
-    section.innerHTML=`<div class="blend-step-title"><span>03</span><h3 id="blend-results-title" tabindex="-1">Review your blend</h3></div>
+    section.innerHTML=`<div class="blend-step-title"><span>3</span><h3 id="blend-results-title" tabindex="-1">Review your blend</h3></div>
       <div class="blend-results-lead"><section class="blend-result-summary"><p class="blend-eyebrow">${esc(config.product.size)} CUSTOM BLEND</p><h4>${esc(recipe.name || 'Your custom blend')}</h4><ul class="blend-recipe-list">${recipe.oils.map(o=>`<li><span>${esc(byId[o.id].name)}</span><strong>${o.percent}%</strong></li>`).join('')}</ul><p class="blend-small">Oil proportions only. ${Number.isFinite(config.product.totalOilLoadPercent) ? 'Final spray oil concentration: '+esc(config.product.totalOilLoadPercent)+'%, subject to review.' : 'Final dilution is confirmed before mixing.'}</p></section>
       <section class="blend-result-cautions" aria-labelledby="blend-cautions-title"><p class="blend-eyebrow">BEFORE WE MIX</p><h4 id="blend-cautions-title">Made with care</h4><p>We review your ingredients, dilution and intended use before mixing.</p>${recipe.petContext ? '<p class="blend-inline-warning">Pet-safety review required. This blend is not approved for use around animals.</p>' : ''}<ul>${warningList([...priorityBlockers,...importantWarnings])}</ul><p class="blend-small">Ingredient studies do not prove this finished blend’s effects or safety.</p></section></div>
       <section class="blend-checkout" aria-labelledby="blend-checkout-title"><div><p class="blend-eyebrow">SUNNY’S SHIELD</p><h4 id="blend-checkout-title">${esc(config.product.name)} · ${esc(priceLabel)}</h4><p>${esc(config.product.size)}</p><p class="blend-small">Your recipe travels with your order. Review before mixing.</p></div><div>${cart ? `<a id="blend-checkout" class="blend-primary" href="${esc(cart.url)}" target="_top" rel="noreferrer" aria-describedby="blend-checkout-status">Checkout · ${esc(priceLabel)} ${uiIcon('arrow')}</a><p id="blend-checkout-status" class="blend-small">Secure Shopify checkout</p>` : `<button type="button" class="blend-primary" disabled>Checkout · ${esc(priceLabel)}</button><p id="blend-checkout-status" class="blend-small" role="status">${esc(orderMessage)}</p>`}</div></section>
