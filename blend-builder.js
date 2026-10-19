@@ -27,6 +27,9 @@
           Array.isArray(d.oils) && d.oils.length <= 5 && new Set(d.oils.map(o => o.id)).size === d.oils.length &&
           d.oils.every(o => o && Object.keys(o).length === 2 && typeof o.id === 'string' && Object.hasOwn(byId,o.id) && Number.isFinite(o.percent) && o.percent >= 0 && o.percent <= 100)) {
         recipe = {...initial(),...d,qualityIds:d.path==='oils' ? [] : [...new Set(d.qualityIds.map(id=>E.resolveQualityId(id,data)))]}; chosenPath = true;
+      } else if (Array.isArray(d.oils) && d.oils.some(o=>o && !byId[o.id])) {
+        localStorage.setItem(STORAGE+':unavailable-draft',JSON.stringify(d));
+        restoreError = 'Your previous blend contains oils we no longer offer. Choose from the current collection to start again.';
       }
     }
   } catch { storageError = true; }
@@ -43,7 +46,7 @@
     try { localStorage.setItem(STORAGE,JSON.stringify({draft:recipe,saved})); storageError = false; }
     catch { storageError = true; }
     const notice = document.getElementById('blend-storage-note');
-    if (notice) notice.textContent = storageError ? 'Browser storage is unavailable. Copy a share link to keep a finished recipe.' : 'Draft stays in this browser. Saved recipes need no account.';
+    if (notice) notice.textContent = storageError ? 'Couldn’t save your draft. Copy a recipe link to keep it.' : '';
   }
   function announce(message, error = false) {
     const el = document.getElementById('blend-status');
@@ -71,43 +74,44 @@
   root.innerHTML = `
     <div class="blend-hero">
       <div><p class="blend-eyebrow">Sunny’s Shield / Blend studio</p><h2>Build your blend.</h2>
-        <ul class="blend-intro scan-list"><li>Choose up to 5 essential oils.</li><li>Set their proportions.</li><li>Review research and precautions.</li></ul><p class="blend-library-note">${uiIcon("studies")}<span>${data.studies.length} research papers to explore</span></p></div>
+        <ul class="blend-intro"><li>Up to 5 oils</li><li>Your proportions</li><li>Made for you</li></ul></div>
       <div class="blend-product"><svg class="blend-bottle" viewBox="0 0 80 120" aria-hidden="true" focusable="false"><rect x="26" y="6" width="28" height="14" rx="2"/><path d="M30 20v13c0 7-15 8-15 20v51c0 6 4 10 10 10h30c6 0 10-4 10-10V53c0-12-15-13-15-20V20M32 10v6m8-6v6m8-6v6"/><rect x="23" y="53" width="34" height="39" rx="1"/><path d="M33 82 48 63c-15 0-20 9-13 16 8 3 14-4 13-16M28 99h24"/></svg><div class="blend-product-copy"><span class="blend-product-size">${esc(config.product.name)} / ${esc(config.product.size)}</span><strong>${esc(priceLabel)}<span> per custom blend</span></strong><p>Standard bottle, base and label.</p><span class="blend-pill">Manual review before mixing</span></div></div>
     </div>
     <p id="blend-link-error" class="blend-message is-error" role="alert" ${restoreError ? '' : 'hidden'}>${esc(restoreError)}</p>
     <div class="blend-step-title"><span>01</span><h3>Start with</h3></div>
     <div class="blend-paths" role="group" aria-label="Choose a starting point">
-      <button type="button" data-blend-path="qualities"><span class="blend-path-icon">${uiIcon("domains")}</span><strong>Uses & research</strong><span class="blend-path-description">Find oils by research topic.</span><span class="blend-path-arrow" aria-hidden="true">${uiIcon("arrow")}</span></button>
-      <button type="button" data-blend-path="oils"><span class="blend-path-icon">${uiIcon("oils")}</span><strong>Oils & aromas</strong><span class="blend-path-description">Start with an oil you like.</span><span class="blend-path-arrow" aria-hidden="true">${uiIcon("arrow")}</span></button>
+      <button type="button" data-blend-path="qualities"><span class="blend-path-icon">${uiIcon("domains")}</span><strong>Shop by use</strong><span class="blend-path-description">Explore the research.</span><span class="blend-path-arrow" aria-hidden="true">${uiIcon("arrow")}</span></button>
+      <button type="button" data-blend-path="oils"><span class="blend-path-icon">${uiIcon("oils")}</span><strong>Browse oils</strong><span class="blend-path-description">Follow your favorite aromas.</span><span class="blend-path-arrow" aria-hidden="true">${uiIcon("arrow")}</span></button>
     </div>
     <div id="blend-workspace" hidden>
       <div class="blend-step-title"><span>02</span><h3>Choose your oils</h3></div>
       <div class="blend-work-grid">
         <section class="blend-catalog" aria-labelledby="blend-catalog-title">
           <h4 id="blend-catalog-title">Explore the oils</h4>
-          <div id="blend-quality-picker"><p class="blend-small">Choose a topic. Counts include related materials—check what each paper tested.</p><div id="blend-qualities" class="blend-quality-buttons" role="group" aria-label="Research topics"></div></div>
+          <div id="blend-quality-picker"><div id="blend-qualities" class="blend-quality-buttons" role="group" aria-label="Research topics"></div></div>
           <label class="blend-search-label" for="blend-search">Find an oil</label>
           <input id="blend-search" type="search" placeholder="Oil name or aroma..." autocomplete="off">
           <p id="blend-catalog-count" class="blend-small"></p><div id="blend-oil-catalog" class="blend-oil-catalog"></div>
-          <p class="blend-small blend-catalog-footnote">Availability and suitability for the finished spray need review.</p>
         </section>
-        <section class="blend-mixer" aria-labelledby="blend-mixer-title">
+        <section id="blend-mixer" class="blend-mixer" aria-labelledby="blend-mixer-title">
           <div class="blend-mixer-top"><h4 id="blend-mixer-title">Your blend</h4><span id="blend-selected-count" class="blend-small"></span></div>
           <label for="blend-name" class="blend-input-label">Recipe name</label><input id="blend-name" maxlength="120" aria-describedby="blend-name-help" value="${esc(recipe.name)}" autocomplete="off">
-          <p id="blend-name-help" class="blend-small">60 characters max · Visible in shared links</p><div id="blend-selected"></div>
+          <p id="blend-name-help" class="sr-only">Up to 60 characters. Included in shared recipe links.</p><div id="blend-selected"></div>
           <div class="blend-total-row"><span>Oil-blend total</span><strong id="blend-total"></strong></div>
           <div id="blend-composition" class="blend-composition" aria-hidden="true"></div>
           <p id="blend-total-help" class="blend-small" aria-live="polite"></p>
           <button type="button" id="blend-normalize" class="blend-text-button">Balance to 100%</button>
-          <ul class="blend-proportion-note scan-list"><li><strong>100% = the oil blend only.</strong></li><li>Not the finished spray concentration or mixing instructions.</li></ul>
-          <label class="blend-pets"><input type="checkbox" id="blend-pets" ${recipe.petContext ? 'checked' : ''}><span>Will be used around pets<small>Flags missing or unsuitable pet-safety data.</small></span></label>
+          <p class="blend-proportion-note">Oil proportions only. We review the final dilution.</p>
+          <label class="blend-pets"><input type="checkbox" id="blend-pets" ${recipe.petContext ? 'checked' : ''}><span>Will be used around pets</span></label>
           <p id="blend-pet-warning" class="blend-inline-warning" hidden>Pet-safety review is required. This builder does not establish that a blend is safe for animals.</p>
-          <button type="button" id="blend-generate" class="blend-primary">Explore this blend <span aria-hidden="true">→</span></button>
+          <div class="blend-order-price"><span>${esc(config.product.size)} custom blend</span><strong>${esc(priceLabel)}</strong></div>
+          <button type="button" id="blend-generate" class="blend-primary">Review & checkout <span aria-hidden="true">→</span></button>
           <p id="blend-status" class="blend-message" role="status" aria-live="polite"></p>
           <p id="blend-storage-note" class="blend-small"></p>
         </section>
       </div>
     </div>
+    <div id="blend-shop-bar" class="blend-shop-bar" hidden><div><strong>${priceLabel}</strong><span id="blend-shop-count"></span></div><button type="button" data-review-blend class="blend-primary">Review & checkout <span aria-hidden="true">→</span></button></div>
     <section id="blend-results" class="blend-results" aria-labelledby="blend-results-title" hidden></section>
     <section class="blend-saved" aria-labelledby="blend-saved-title"><h3 id="blend-saved-title">Your saved recipes</h3><div id="blend-saved-list"></div><button type="button" id="blend-reset" class="blend-text-button">Start a new blend</button></section>`;
   function renderPaths() {
@@ -117,7 +121,7 @@
     const previouslyOpen=new Set([...root.querySelectorAll('[data-topic-branch][open]')].map(el=>el.dataset.topicBranch));
     function topicNode(topic) {
       const children=research.children(topic.id), label=research.label(topic.id);
-      const count=research.countOils(topic.id,{eligibleOnly:false});
+      const count=oils.filter(o=>research.studiesForOil(o.id,[topic.id]).length).length;
       const button=`<button type="button" class="blend-quality" data-quality="${esc(topic.id)}" aria-pressed="${recipe.qualityIds.includes(topic.id)}" title="${esc(research.breadcrumb(topic.id))}">${children.length?'All '+esc(label):esc(label)} <small>${count}</small></button>`;
       if(!children.length)return button;
       const selected=recipe.qualityIds.filter(id=>research.descendants(topic.id).includes(id)).length;
@@ -131,7 +135,7 @@
     const direct=topics.length ? found.filter(o=>research.studiesForOil(o.id,topics,{eligibleOnly:true}).length) : found;
     const directIds=new Set(direct.map(o=>o.id));
     const related=topics.length ? found.filter(o=>!directIds.has(o.id)&&research.studiesForOil(o.id,topics).length) : [];
-    document.getElementById('blend-catalog-count').textContent=topics.length ? `${direct.length} oils with reviewed research matches; ${related.length} with other linked research. These are research links, not effectiveness rankings.` : `${found.length} oils in the Lab catalog. Research links are not effectiveness rankings.`;
+    document.getElementById('blend-catalog-count').textContent=topics.length ? `${direct.length} research matches · ${related.length} related oils` : `${found.length} oils`;
     function oilCard(o, contextual=false) {
       const selected=recipe.oils.some(s=>s.id===o.id), topicLabels=labels(o);
       return `<article class="blend-oil-card ${selected?'is-selected':''}"><div class="blend-oil-heading"><div><h5>${esc(o.name)}</h5><p class="blend-latin">${esc(o.latinName)}</p></div><span class="blend-oil-swatch" style="--oil-color:${/^#[0-9a-f]{3,8}$/i.test(o.color)?o.color:'#72b89a'}" aria-hidden="true"></span></div><p class="blend-aroma">${esc(o.aroma.join(' · '))}</p><p class="blend-small">${contextual?'Related research; check material and outcome.':topicLabels.length?'Research: '+esc(topicLabels.join(', ')):'No reviewed whole-oil topic match.'}</p><button type="button" data-add-oil="${esc(o.id)}" ${selected||recipe.oils.length>=5?'disabled':''}>${selected?'Added to your blend':recipe.oils.length>=5?'5-oil limit reached':'+ Add oil'}</button></article>`;
@@ -147,9 +151,11 @@
   }
   function renderSummary() {
     const value=total();
+    document.getElementById('blend-shop-bar').hidden=!recipe.oils.length;
+    document.getElementById('blend-shop-count').textContent=config.product.size+' · '+recipe.oils.length+(recipe.oils.length===1?' oil':' oils');
     document.getElementById('blend-total').textContent=value+'%';
     document.getElementById('blend-total').classList.toggle('is-error',value!==100 && recipe.oils.length>0);
-    document.getElementById('blend-total-help').textContent=!recipe.oils.length ? 'Choose 1 to 5 oils to begin.' : value===100 && recipe.oils.every(o=>o.percent>0) ? '100% of the oil blend. Ready to explore.' : recipe.oils.some(o=>o.percent<=0) ? 'Give every oil a positive portion, or remove oils set to 0%.' : 'Use positive portions adding to 100%, or choose Balance to 100%.';
+    document.getElementById('blend-total-help').textContent=!recipe.oils.length ? '' : value===100 && recipe.oils.every(o=>o.percent>0) ? 'Ready to review' : recipe.oils.some(o=>o.percent<=0) ? 'Set a portion above 0%, or remove the oil.' : 'Balance your blend to 100%.';
     document.getElementById('blend-normalize').disabled=!recipe.oils.length || !recipe.oils.every(o=>o.percent>0);
     document.getElementById('blend-composition').innerHTML=recipe.oils.map((o,i)=>`<span style="flex-grow:${o.percent};background:var(--blend-segment-${i})" title="${esc(byId[o.id].name)} ${o.percent}%"></span>`).join('');
     document.getElementById('blend-pet-warning').hidden=!recipe.petContext;
@@ -161,7 +167,8 @@
     for (const warning of warnings) {
       const oil=warning.code==='sensitization_note' && warning.oilIds?.length===1 ? byId[warning.oilIds[0]] : null;
       if (!oil?.blend.sensitizationNotes) { result.push(warning); continue; }
-      const note=oil.blend.sensitizationNotes.trim();
+      const originalNote=oil.blend.sensitizationNotes.trim();
+      const note=originalNote==='No verified sensitization assessment yet for this oil in the proposed leave-on spray. Legacy profile notes are unaudited and do not establish formulation safety.' ? 'Skin-sensitivity assessment pending for the finished blend.' : originalNote;
       if (!groups.has(note)) { const group={...warning,oilIds:[],message:''}; groups.set(note,group); result.push(group); }
       const group=groups.get(note);group.oilIds.push(oil.id);
       group.message=group.oilIds.map(id=>byId[id].name).join(' + ')+': '+note;
@@ -177,7 +184,7 @@
     linked.sort((a,b)=>Number(audited.has(b.id))-Number(audited.has(a.id)));
     const paper=study=>studyCard(study,oil.id,topics);
     const papers=linked.length ? linked.slice(0,2).map(paper).join('')+(linked.length>2?`<details class="blend-more-research"><summary>Read ${linked.length-2} more linked papers</summary>${linked.slice(2).map(paper).join('')}</details>`:'') : '<p>No study is linked to this oil for the selected research topics. This is a gap, not evidence of no effect.</p>';
-    return `<article class="blend-profile"><header><div><p class="blend-eyebrow">ESSENTIAL OIL / ${entry.percent}% OF BLEND</p><h4>${esc(oil.name)}</h4><p class="blend-latin">${esc(oil.latinName)}</p></div><span class="blend-pill">${esc(oil.aroma.join(' · '))}</span></header><div class="blend-profile-columns"><div><h5>Research from the Lab library</h5><p class="blend-small">${linked.length} linked papers · ${audited.size} with reviewed oil-specific topic matches. Related preparations and uncertain associations are identified below.</p>${papers}<a class="blend-library-link" href="${esc(studyHref(oil.id))}">Explore ${esc(oil.name)} in the study library</a></div><div class="blend-profile-cautions"><h5>Precautions & evidence gaps</h5><p>${b.dermalMaxPercent===null?'No verified leave-on dermal maximum yet. Suitability for the finished spray needs manual review.':`Documented maximum in the finished product: ${esc(b.dermalMaxPercent)}%.`}</p>${b.dermalMaxSource?`<p>Limit source: ${sourceLink(b.dermalMaxSource)}</p>`:''}<p>${b.petSafer===true&&b.petSource?'Pet context still requires species and exposure review.':'Pet suitability: no verified pet-safer approval.'}</p><p>${esc(b.sensitizationNotes||'Sensitization data: no verified data yet.')}</p><p>${b.phototoxic===null?'Phototoxicity: no verified data yet for the supplied preparation.':b.phototoxic?'Phototoxicity flagged. Preparation and exposure limits require review.':'No phototoxicity flag recorded; this is not a safety guarantee.'}</p><p>Interaction review applies to the whole blend. Missing information never means no risk.</p></div></div><div class="blend-constituents"><h5>Cataloged major constituents</h5><ul>${constituents||'<li>No verified data yet.</li>'}</ul><p class="blend-small">Whole essential oils contain more than terpenes. These are literature records, not a batch analysis or a complete chemical composition.</p></div></article>`;
+    return `<article class="blend-profile"><header><div><p class="blend-eyebrow">ESSENTIAL OIL / ${entry.percent}% OF BLEND</p><h4>${esc(oil.name)}</h4><p class="blend-latin">${esc(oil.latinName)}</p></div><span class="blend-pill">${esc(oil.aroma.join(' · '))}</span></header><div class="blend-profile-columns"><div><h5>Research from the Lab library</h5><p class="blend-small">${linked.length} linked papers · ${audited.size} with reviewed oil-specific topic matches. Related preparations and uncertain associations are identified below.</p>${papers}<a class="blend-library-link" href="${esc(studyHref(oil.id))}">Explore ${esc(oil.name)} in the study library</a></div><div class="blend-profile-cautions"><h5>Precautions & evidence gaps</h5><p>${b.dermalMaxPercent===null?'No verified leave-on dermal maximum yet. Suitability for the finished spray needs manual review.':`Documented maximum in the finished product: ${esc(b.dermalMaxPercent)}%.`}</p>${b.dermalMaxSource?`<p>Limit source: ${sourceLink(b.dermalMaxSource)}</p>`:''}<p>${b.petSafer===true&&b.petSource?'Pet context still requires species and exposure review.':'Pet suitability: no verified pet-safer approval.'}</p><p>${esc(b.sensitizationNotes||'Sensitization data: no verified data yet.')}</p><p>${b.phototoxic===null?'Phototoxicity: no verified data yet for the supplied preparation.':b.phototoxic?'Phototoxicity flagged. Preparation and exposure limits require review.':'No phototoxicity flag recorded; this is not a safety guarantee.'}</p><p>Interaction review applies to the whole blend. Missing information never means no risk.</p></div></div><div class="blend-constituents"><h5>Reported constituents</h5><ul>${constituents||'<li>No verified data yet.</li>'}</ul><p class="blend-small">Whole essential oils contain more than terpenes. These are literature records, not a batch analysis or a complete chemical composition.</p></div></article>`;
   }
   function renderResults() {
     const section=document.getElementById('blend-results');
@@ -185,29 +192,33 @@
     const valid=E.validateRecipe(recipe,data);
     if (!valid.valid || root.querySelector('input:invalid')) { section.hidden=true; generated=false; return; }
     const safety=E.evaluateSafety(recipe,data);
-    let cart=null, orderMessage='Shopify ordering is being set up. Save your recipe for now.';
+    let cart=null, orderMessage='Ordering is not available yet. You can save this blend.';
     try { cart=E.cartPermalink(recipe,data); } catch(error) {
-      if (error.errors?.some(item=>['total_limit_exceeded','dermal_limit_exceeded','oil_interaction'].includes(item.code))) orderMessage='Resolve the sourced limit or interaction warnings before ordering.';
+      if (error.errors?.some(item=>['total_limit_exceeded','dermal_limit_exceeded','oil_interaction'].includes(item.code))) orderMessage='Resolve the concentration or interaction warnings before checkout.';
     }
     const priorityBlockers=safety.blockers.filter(item=>['total_limit_exceeded','dermal_limit_exceeded','pet_context_blocked','oil_interaction'].includes(item.code));
-    const mapped=[...new Set(recipe.oils.flatMap(o=>labels(byId[o.id])))];
+    const warnings=combinedWarnings(safety.warnings);
+    // Generic missing-review details stay available below; actual oil-specific cautions stay beside the order.
+    const importantWarnings=warnings;
+    const paperCount=new Set(recipe.oils.flatMap(o=>research.studiesForOil(o.id).map(s=>s.id))).size;
     section.hidden=false;
-    section.innerHTML=`<div class="blend-step-title"><span>03</span><h3 id="blend-results-title" tabindex="-1">${esc(recipe.name || 'Your custom blend')}</h3><span class="blend-step-note">RECIPE V1</span></div>
-      <div class="blend-results-lead"><section class="blend-result-summary"><p class="blend-eyebrow">YOUR BLEND AT A GLANCE</p><h4>${recipe.oils.map(o=>esc(byId[o.id].name)).join(' + ')}</h4><ul class="blend-recipe-list">${recipe.oils.map(o=>`<li><span>${esc(byId[o.id].name)}</span><strong>${o.percent}%</strong></li>`).join('')}</ul><p>Reviewed research topics: ${mapped.length ? esc(mapped.join(', ')) : 'no oil-specific mappings verified yet'}.</p><p class="blend-small">These proportions describe only the oil mixture. ${Number.isFinite(config.product.totalOilLoadPercent) ? 'Configured final spray oil concentration: '+esc(config.product.totalOilLoadPercent)+'% (subject to manual formulation review).' : 'Final spray concentration has not been set.'}</p></section>
-      <section class="blend-result-cautions" aria-labelledby="blend-cautions-title"><p class="blend-eyebrow">CAUTIONS COME WITH THE RESEARCH</p><h4 id="blend-cautions-title">Review before mixing</h4><p>Ingredient research does not validate this blend or the finished spray. No medical or therapeutic benefit is claimed.</p>${recipe.petContext ? '<p class="blend-inline-warning">Pet context is on. Do not assume this blend is safe around pets.</p>' : ''}<ul>${warningList([...priorityBlockers,...combinedWarnings(safety.warnings)])}</ul><p>Every custom recipe is reviewed before mixing. Final concentration, ingredient suitability and stock are confirmed during that review.</p></section></div>
-      <div class="blend-recipe-actions"><button type="button" id="blend-save" class="blend-primary">${uiIcon("save")}Save recipe</button><button type="button" id="blend-share" class="blend-secondary">${uiIcon("share")}Copy share link</button><span id="blend-action-status" role="status" aria-live="polite"></span></div>
+    section.innerHTML=`<div class="blend-step-title"><span>03</span><h3 id="blend-results-title" tabindex="-1">Review your blend</h3></div>
+      <div class="blend-results-lead"><section class="blend-result-summary"><p class="blend-eyebrow">${esc(config.product.size)} CUSTOM BLEND</p><h4>${esc(recipe.name || 'Your custom blend')}</h4><ul class="blend-recipe-list">${recipe.oils.map(o=>`<li><span>${esc(byId[o.id].name)}</span><strong>${o.percent}%</strong></li>`).join('')}</ul><p class="blend-small">Oil proportions only. ${Number.isFinite(config.product.totalOilLoadPercent) ? 'Final spray oil concentration: '+esc(config.product.totalOilLoadPercent)+'%, subject to review.' : 'Final dilution is confirmed before mixing.'}</p></section>
+      <section class="blend-result-cautions" aria-labelledby="blend-cautions-title"><p class="blend-eyebrow">BEFORE WE MIX</p><h4 id="blend-cautions-title">Made with care</h4><p>We review your ingredients, dilution and intended use before mixing.</p>${recipe.petContext ? '<p class="blend-inline-warning">Pet-safety review required. This blend is not approved for use around animals.</p>' : ''}<ul>${warningList([...priorityBlockers,...importantWarnings])}</ul><p class="blend-small">Ingredient studies do not prove this finished blend’s effects or safety.</p></section></div>
+      <section class="blend-checkout" aria-labelledby="blend-checkout-title"><div><p class="blend-eyebrow">SUNNY’S SHIELD</p><h4 id="blend-checkout-title">${esc(config.product.name)} · ${esc(priceLabel)}</h4><p>${esc(config.product.size)} · Bottle, base and label included</p><p class="blend-small">Your recipe travels with your order. Review before mixing.</p></div><div>${cart ? `<a id="blend-checkout" class="blend-primary" href="${esc(cart.url)}" target="_top" rel="noreferrer" aria-describedby="blend-checkout-status">Checkout · ${esc(priceLabel)} ${uiIcon('arrow')}</a><p id="blend-checkout-status" class="blend-small">Secure Shopify checkout</p>` : `<button type="button" class="blend-primary" disabled>Checkout · ${esc(priceLabel)}</button><p id="blend-checkout-status" class="blend-small" role="status">${esc(orderMessage)}</p>`}</div></section>
+      <div class="blend-recipe-actions"><button type="button" id="blend-save" class="blend-secondary">${uiIcon('save')}Save for later</button><button type="button" id="blend-share" class="blend-secondary">${uiIcon('share')}Share blend</button><span id="blend-action-status" role="status" aria-live="polite"></span></div>
       <div id="blend-share-fallback" hidden><label for="blend-share-url">Copy this recipe link</label><input id="blend-share-url" readonly></div>
-      <p class="blend-small">Saved on this device. Anyone with your link can see the recipe and its name.</p>
-      <div class="blend-profile-list">${recipe.oils.map(oilProfile).join('')}</div>
-      <section class="blend-checkout" aria-labelledby="blend-checkout-title"><div><p class="blend-eyebrow">${esc(config.product.name)} / SUNNY'S SHIELD</p><h4 id="blend-checkout-title">Your recipe. Our ${esc(config.product.size)} bottle.</h4><p>${esc(priceLabel)} per bottle · Standard base, bottle and label.</p><p class="blend-small">Your recipe name, oil proportions and pet context travel with the order for manual review before mixing. Shopify handles payment and shipping.</p><p class="blend-small">Explore every research category. Final use and concentration need review for the finished product.</p></div><div>${cart ? `<a id="blend-checkout" class="blend-primary" href="${esc(cart.url)}" target="_top" rel="noreferrer" aria-describedby="blend-checkout-status">Continue to Shopify · ${esc(priceLabel)}</a><p id="blend-checkout-status" class="blend-small">Opens Shopify checkout for this recipe. Check the cart contents before paying.</p>` : `<p id="blend-checkout-status" class="blend-order-pending" role="status">${esc(orderMessage)}</p>`}</div></section>
-      ${safety.blockers.length ? `<section class="blend-review-requirements"><h4>What still needs review</h4><ul>${warningList(safety.blockers)}</ul></section>` : ''}`;
+      <details class="blend-research-disclosure"><summary>Research & ingredients <span>${paperCount} linked papers</span></summary><div class="blend-profile-list">${recipe.oils.map(oilProfile).join('')}</div></details>
+      ${safety.blockers.length ? `<details class="blend-review-requirements"><summary>Formulation review details</summary><ul>${warningList(safety.blockers)}</ul></details>` : ''}`;
     bindStudyLinks(section);
   }
   function renderSaved() {
+    root.querySelector('.blend-saved').hidden=!chosenPath && !saved.length;
+    document.getElementById('blend-saved-title').hidden=!saved.length;
     document.getElementById('blend-saved-list').innerHTML=saved.length ? saved.map((encoded,index)=>{
       try { const item=E.decodeRecipe(encoded,data); return `<div class="blend-saved-item"><div><strong>${esc(item.name)}</strong><p class="blend-small">${item.oils.map(o=>`${esc(byId[o.id].name)} ${o.percent}%`).join(' · ')}</p></div><div><button type="button" data-load-recipe="${index}">Load</button><button type="button" data-delete-recipe="${index}" aria-label="Delete saved recipe ${esc(item.name)}">Delete</button></div></div>`; }
       catch { return `<div class="blend-saved-item"><p>Recipe from an older or unavailable catalog. Rebuild it with current data.</p><button type="button" data-delete-recipe="${index}" aria-label="Delete unavailable saved recipe">Delete</button></div>`; }
-    }).join('') : '<p class="blend-small">Finish a blend, then save it here or keep a share link.</p>';
+    }).join('') : '';
   }
   function refresh() {
     document.getElementById('blend-name').value=recipe.name;
@@ -217,6 +228,11 @@
   }
   function updated(message) { renderCatalog();renderSelected();renderResults();if(message)announce(message); }
   root.addEventListener('click',async event=>{
+    if (event.target.closest('[data-review-blend]')) {
+      document.getElementById('blend-generate').click();
+      if (!generated) { document.getElementById('blend-mixer').scrollIntoView({behavior:'smooth',block:'start'}); document.getElementById('blend-name').focus({preventScroll:true}); }
+      return;
+    }
     const checkout=event.target.closest('#blend-checkout');
     if (checkout) {
       // Revalidate the current recipe on handoff; the configured Shopify variant owns the price.
@@ -251,9 +267,9 @@
       if (!result.valid) {announce(result.errors.map(e=>e.message).join(' '),true);return;}
       recipe=result.recipe;generated=true;renderResults();document.getElementById('blend-results-title').focus();
       document.getElementById('blend-results').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
-      announce('Research and cautions are ready. This recipe still needs formulation review.');persist();
+      announce('Your blend is ready to review.');persist();
     }
-    if (button.id==='blend-save') { try {const encoded=E.encodeRecipe(recipe,data);saved=[encoded,...new Set(saved.map(code=>{try{return E.encodeRecipe(E.decodeRecipe(code,data),data);}catch{return code;}}).filter(code=>code!==encoded))].slice(0,12);persist();renderSaved();document.getElementById('blend-action-status').textContent=storageError?'Could not save to this browser. Copy a share link instead.':'Recipe saved on this device.';}catch(error){document.getElementById('blend-action-status').textContent=error.message;} }
+    if (button.id==='blend-save') { try {const encoded=E.encodeRecipe(recipe,data);saved=[encoded,...new Set(saved.map(code=>{try{return E.encodeRecipe(E.decodeRecipe(code,data),data);}catch{return code;}}).filter(code=>code!==encoded))].slice(0,12);persist();renderSaved();document.getElementById('blend-action-status').textContent=storageError?'Could not save to this browser. Copy a share link instead.':'Blend saved.';}catch(error){document.getElementById('blend-action-status').textContent=error.message;} }
     if (button.id==='blend-share') {
       try {const url=new URL(location.pathname,location.origin);url.searchParams.set('tab','blend');url.searchParams.set('recipe',E.encodeRecipe(recipe,data));
         try {await navigator.clipboard.writeText(url.href);document.getElementById('blend-action-status').textContent='Recipe link copied.';}

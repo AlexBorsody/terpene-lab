@@ -18,8 +18,8 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="shield-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" sizes="180x180">
-<link rel="stylesheet" href="blend-builder.css?v=b42e18b42dd4d361">
-<link rel="stylesheet" href="styles.css?v=0b47efec936f0a7b">
+<link rel="stylesheet" href="blend-builder.css?v=0fd361214944f771">
+<link rel="stylesheet" href="styles.css?v=5fb42d6a9b2aa158">
 <script src="vendor/echarts-5.5.1.min.js"></script>
 
 <style>
@@ -197,7 +197,8 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
 
   <!-- CANONICAL DATA MATRIX -->
   <section id="tab-matrix" class="tab-panel">
-    <div class="matrix-heading"><div><p class="section-kicker">The evidence map</p><h2 id="matrix-title" tabindex="-1">Research matrix</h2><ul class="scan-list"><li><strong>Names</strong> open oils, compounds or papers.</li><li><strong>Cells</strong> show the linked evidence.</li><li><strong>Topic headings</strong> open narrower topics.</li></ul></div><a href="master-data.json" download class="matrix-data-link">Download data (JSON)</a></div>
+    <div class="matrix-heading"><div><p class="section-kicker">The evidence map</p><h2 id="matrix-title" tabindex="-1">Research matrix</h2></div><a href="master-data.json" download class="matrix-data-link">Download JSON</a></div>
+    <details class="matrix-guide"><summary><svg class="ui-icon" aria-hidden="true"><use href="#lab-icon-studies"/></svg>Reading the matrix</summary><ul class="scan-list"><li>Names open profiles; cells open evidence.</li><li>Topic arrows open subtopics.</li><li>Counts include subtopics and overlap. They measure research coverage, not effectiveness.</li><li>Percentages describe cited samples. A blank cell means no recorded link.</li></ul></details>
     <p id="matrix-inventory" class="matrix-inventory"></p>
     <div class="matrix-views" role="group" aria-label="Matrix relationship">
       <button data-matrix-view="oil-topics" aria-pressed="true">Oils × topics</button>
@@ -206,7 +207,7 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
       <button data-matrix-view="study-topics" aria-pressed="false">Studies × topics</button>
     </div>
     <div class="toolbar matrix-toolbar">
-      <label>Find a row<input id="matrix-search" type="search" placeholder="Search names..."></label>
+      <label>Search<input id="matrix-search" type="search" placeholder="Search names..."></label>
       <label id="matrix-group-control">Topic family<select id="matrix-group-filter"></select></label>
       <label id="matrix-topic-control">Topic<select id="matrix-domain-filter" aria-label="Show research topic"><option value="">All research topics</option></select></label>
       <label id="matrix-chemical-control" hidden>Chemical category<select id="matrix-chemical-filter"></select></label>
@@ -215,7 +216,7 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
     </div>
     <div id="matrix-domain-filter-navigation" class="topic-navigation hidden"></div>
     <ul id="matrix-context" class="hint research-context scan-list matrix-key"></ul>
-    <div class="matrix-table-heading"><span id="matrix-count" class="count"></span><span>Scroll across to explore columns →</span></div>
+    <div class="matrix-table-heading"><span id="matrix-count" class="count"></span><span>More columns →</span></div>
     <div class="matrix-wrap" tabindex="0" role="region" aria-label="Canonical relationship matrix"><table id="matrix-table" class="matrix"></table></div>
     <section id="matrix-inspector" class="matrix-inspector" aria-label="Selected matrix evidence" hidden></section>
   </section>
@@ -316,13 +317,13 @@ if (new URLSearchParams(window.location.search).get("embed") === "1" || window.s
   <p>Sunny's Shield Terpene Lab &middot; plant to molecule to paper &middot; inspect the evidence yourself. Not medical advice.</p>
 </footer>
 
-<script src="data.js?v=1a9ec447b446cb0e"></script>
+<script src="data.js?v=91f86e961ef16639"></script>
 <script src="chemistry.js?v=09f64d79607afee2"></script>
 <script src="research.js?v=9adac5cca9e32904"></script>
-<script src="app.js?v=ea6827b3de5f92b0"></script>
-<script src="blend-engine.js?v=b0c95678d8b1ede6"></script>
-<script src="blend-builder.js?v=257f92fbcefbcf11"></script>
-<script src="pwa.js?v=a52f02fdcb6a4716"></script>
+<script src="app.js?v=f6662bd3fa461b90"></script>
+<script src="blend-engine.js?v=2e8efadb5582843d"></script>
+<script src="blend-builder.js?v=4f8b3aceb9e0c8ea"></script>
+<script src="pwa.js?v=cef19be5b7af26f9"></script>
 </body>
 </html>
 

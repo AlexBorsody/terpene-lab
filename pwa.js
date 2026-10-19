@@ -6,15 +6,12 @@
   const status = document.getElementById('pwa-status');
   const install = document.getElementById('pwa-install');
   const update = document.getElementById('pwa-update');
-  let ready = false;
   let prompt;
   let registration;
   let reloading = false;
   let hadController = !!navigator.serviceWorker.controller;
   const render = () => {
-    status.textContent = navigator.onLine
-      ? (ready ? 'Lab saved for offline use. Paper links and photos need internet.' : '')
-      : (ready ? 'Offline: saved research summaries and charts. Paper links and photos need internet.' : 'Offline. Open the Lab online once to save it.');
+    status.textContent = navigator.onLine ? '' : 'You’re offline.';
   };
   window.addEventListener('beforeinstallprompt', event => {
     event.preventDefault();
@@ -64,11 +61,10 @@
       // register() or another tab may have already fired updatefound.
       observeInstalling();
       await navigator.serviceWorker.ready;
-      ready = true;
       render();
       setInterval(check, 60 * 60 * 1000);
     } catch (error) {
-      status.textContent = 'Offline saving is unavailable. You can still browse online.';
+      render();
       console.warn('Lab offline setup:', error);
     }
   });

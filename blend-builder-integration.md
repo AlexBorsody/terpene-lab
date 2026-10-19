@@ -12,7 +12,7 @@ or Shopify Plus feature is required.
 
 - `name: "Custom Blend"`, `price: 40`, `currency: "USD"`, `size: "8 oz"`.
 - `shopifyStoreUrl: "https://sunnysshield.com"`, the verified existing storefront.
-- `shopifyVariantId: null` until the actual Custom Blend variant is verified.
+- `shopifyVariantId: "67698909052973"`, verified against the published Shopify product.
 - `baseVersion: null` unless the merchant supplies a real base version.
 - Existing final-loading/limit fields stay unknown unless supported by reviewed
   formulation data. No dilution, base composition or stock is inferred.
@@ -23,10 +23,7 @@ maintaining another hard-coded product definition. The current offer remains
 $40 USD / 8 oz. A recipe cannot override these values, the destination or variant;
 Shopify remains authoritative for the actual price and availability.
 
-As of 2026-10-18, the public store does not list a Custom Blend product. The Lab
-therefore shows a concise setup message rather than an active purchase link.
-The handoff is implemented and tested with fixtures; no real custom order,
-merchant order-property display or payment has been verified.
+On 2026-10-18 the merchant authorized creation of [Custom Blend · 8 oz](https://sunnysshield.com/products/custom-blend-8-oz). Shopify product `15422217617453` is active on Online Store, priced at $40 USD, with inventory tracking off for made-to-order requests. A real checkout preview confirmed quantity one, $40, and the recipe attached. No payment or order was submitted. Shipping rates and completed-order fulfillment have not been exercised.
 
 ## Cart link and recipe field
 
@@ -37,7 +34,7 @@ The link is constructed only from the trusted store configuration:
 `https://sunnysshield.com/cart/{verified-variant-id}:1?properties={encoded-properties}`
 
 `encoded-properties` is UTF-8 Base64URL encoding of a JSON object containing
-exactly one string property, **Recipe**. The readable value includes:
+short customer-facing **Blend** and **Oil proportions** fields, plus **Around pets** when selected. The **_Recipe** property retains the complete fulfillment record. Shopify hides underscore-prefixed properties at checkout; they are not secrets or authorization. The internal value includes:
 
 - Recipe name, recipe schema version and catalog version.
 - Oil names, stable oil IDs and relative percentages totaling 100% of the oil
@@ -54,9 +51,9 @@ The displayed $40 is not a client-side override of the Shopify variant price.
 The property belongs to this order line, not the product description or the
 order-wide note. Only one custom product/quantity is sent per handoff. Shopify's
 permalink documentation permits up to 25 properties on the first product; this
-implementation deliberately uses only one. It does not promise merging an
+implementation uses three fields, or four with pet context. It does not promise merging an
 existing cart or preserving multiple custom blends across separate visits.
-Customers are prompted to check cart contents before paying.
+Customers can review the exact oils and proportions in the checkout summary.
 
 The anchor is rebuilt whenever the recipe changes, revalidated on click and
 targets the top window so embedded Lab users reach Shopify checkout outside the
@@ -73,7 +70,7 @@ Store URLs must be HTTPS root origins without credentials, query, fragment or
 custom port. Variant IDs must be valid positive numeric IDs; recipes cannot
 change the destination or product configuration.
 
-Research and cautions remain equally prominent. Missing formulation, stock or
+Oil-specific cautions remain visible beside the recipe; detailed research is expandable. Missing formulation, stock or
 ingredient-review data is information for manual review, not an automatic
 approval or a requirement for a separate checkout service. If actually sourced
 final loading and a sourced hard limit establish an excess, or a sourced
@@ -81,7 +78,7 @@ blocking interaction exists, the Lab does not offer the handoff until corrected.
 
 The browser is not an enforcement boundary. Anyone can alter a URL or buy the
 variant directly. Every order must be treated as an unreviewed recipe request,
-including orders without a Recipe property. Before mixing, the merchant checks
+including orders without an _Recipe property. Before mixing, the merchant checks
 the oils and stock, proportions, final formulation/loading, base, application,
 combined risks and pet context. Missing, changed or unsuitable requests require
 merchant resolution before fulfillment; no automatic mixing workflow is implied.
@@ -90,19 +87,9 @@ The Lab does not invent a refund policy or guarantee fulfillment of every
 requested combination. The merchant's product page should explain the actual
 review and resolution policy.
 
-## Enable the real handoff
+## Fulfillment checks
 
-1. Create or identify the actual standard 8 oz Custom Blend variant in Shopify,
-   confirm $40 USD, availability and the merchant's manual review process.
-2. Verify the numeric variant ID and storefront, then set `shopifyVariantId` in
-   a reviewed change. Do not paste credentials or a Shopify Admin API token.
-3. Verify a test handoff on the actual store: correct product/price/quantity,
-   Unicode recipe, readable Recipe property, changed recipe, existing cart,
-   mobile/embedded navigation and unavailable product behavior. Inspect the
-   merchant order line with an authorized test order before claiming end-to-end
-   order verification. No paid order is part of the current implementation.
-4. Keep fulfillment manual and review orders missing or carrying altered recipe
-   data. A client-rendered link is not safety certification.
+The merchant must verify a real order line before enabling any automated fulfillment. Verify stock, the intended application, final dilution, base, combined risks and pet context before mixing. No safe concentration is inferred from a study concentration. Weight/package defaults have not been measured for this product; confirm them before shipping.
 
 ## Local cache and sharing
 
@@ -146,3 +133,5 @@ all external navigation. It never reaches Shopify, creates an order or collects
 payment. Synthetic safety values are fixtures, not production recommendations.
 
 Official reference: [Shopify cart permalinks and line-item properties](https://shopify.dev/docs/apps/build/checkout/create-cart-permalinks).
+
+Shopify private properties: https://shopify.dev/docs/api/liquid/objects/line_item#properties

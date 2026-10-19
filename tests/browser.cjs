@@ -65,7 +65,7 @@ const assert = require('node:assert/strict');
  await page.locator('#matrix-inspector [data-matrix-inspect="oil/lemon"]').click();
  await page.locator('[data-matrix-focus="lemon"]').click();
  assert.equal(await page.locator('#matrix-table tbody tr').count(),1);
- assert.equal(await page.locator('#matrix-table thead [data-matrix-inspect]').count(),34);
+ assert.equal(await page.locator('#matrix-table thead [data-matrix-inspect]').count(),42);
  assert.equal(await page.locator('#matrix-table [data-matrix-inspect="relationship/lemon/prenylthiol"]').innerText(),'Other material');
  await page.locator('#matrix-chemical-filter').selectOption('group:ester');
  const matrixRoute=page.url();
@@ -79,11 +79,11 @@ const assert = require('node:assert/strict');
  assert.equal(await page.locator('#matrix-inspector').isVisible(),false);
  await page.goForward(); await page.waitForURL(detailRoute);
  await page.locator('[data-matrix-view="compound-topics"]').click();
- assert.equal(await page.locator('#matrix-table tbody tr').count(),34);
+ assert.equal(await page.locator('#matrix-table tbody tr').count(),42);
  await page.locator('[data-matrix-view="study-topics"]').click();
- assert.equal(await page.locator('#matrix-table tbody tr').count(),157);
+ assert.equal(await page.locator('#matrix-table tbody tr').count(),174);
  await page.locator('#matrix-inventory [data-matrix-inspect="sources"]').click();
- assert.equal(await page.locator('#matrix-inspector .chem-evidence').count(),45);
+ assert.equal(await page.locator('#matrix-inspector .chem-evidence').count(),50);
  // Complete an oil -> compound -> paper/topic path without leaving the Matrix.
  await page.goto(`${base}/?tab=matrix&inspect=compound/limonene&embed=1`);
  await page.locator('#matrix-inspector [data-matrix-topic-link]').first().click();
@@ -226,7 +226,8 @@ const assert = require('node:assert/strict');
   await page.evaluate(id=>showCompound(id),compound);
   assert.ok((await page.locator(`#compound-oil-links [data-goto-oil="${oil}"]`).innerText()).includes(`${value}% in cited sample`));
  }
- assert.equal(await page.locator('#oil-sort option[value="compound"]').evaluate(el=>el.disabled && el.hidden),true);
+ // New oil records include quantified, source-backed constituent samples.
+ assert.equal(await page.locator('#oil-sort option[value="compound"]').evaluate(el=>!el.disabled && !el.hidden),true);
  await openView('Network');
  const graph=await page.evaluate(()=>echarts.getInstanceByDom(document.getElementById('network-chart')).getOption().series[0]);
  for(const node of graph.data.filter(n=>n.id.startsWith('compound:'))) assert.ok(graph.links.some(e=>e.target===node.id),`orphan ${node.id}`);

@@ -20,7 +20,7 @@
  * encodeRecipe / decodeRecipe / normalizePercentages / cartPermalink throw
  * BlendValidationError (with .errors) on invalid input.
  * evaluateSafety -> {requiresReview: true, blockers, warnings}.
- * cartPermalink -> {url, recipe, properties: {Recipe: string}, encodedRecipe}.
+ * cartPermalink -> {url, recipe, properties: object, encodedRecipe}.
  * Product/store/variant come only from the trusted catalog configuration, never
  * the recipe. Shopify sets the real variant price and checks its availability.
  * The encoded recipe is editable customer input, not signed manufacturing
@@ -427,7 +427,17 @@
     if (canonical.petContext) lines.push('Customer context: pets may be present. Species and exposure require review.');
     lines.push('Manual formulation review required before fulfillment. Oil shares are relative portions of the oil mixture, not finished-product concentrations.');
     lines.push('Recipe code: ' + encoded);
-    var properties = {Recipe: lines.join('\n')};
+    // Shopify hides underscore-prefixed properties at checkout, while retaining
+    // the full recipe for fulfillment. Public fields stay readable and short.
+    var properties = {
+      Blend: canonical.name || 'Custom Blend',
+      'Oil proportions': canonical.oils.map(function (entry) {
+        var oil = catalog.oils.get(entry.id);
+        return (text(oil.name) ? oil.name.trim() : entry.id) + ' ' + formattedPercent(entry.percent);
+      }).join(' · '),
+      _Recipe: lines.join('\n')
+    };
+    if (canonical.petContext) properties['Around pets'] = 'Yes — review required';
     var encodedProperties;
     try { encodedProperties = base64Encode(utf8Bytes(JSON.stringify(properties))); }
     catch (_) { fail('product_configuration', 'The product recipe metadata must contain valid Unicode text.'); }

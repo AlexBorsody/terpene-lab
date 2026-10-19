@@ -130,7 +130,7 @@ assert.deepEqual(engine.decodeRecipe(encoded(staleOilsFirst), fixture()).quality
 assert.deepEqual(JSON.parse(Buffer.from(engine.encodeRecipe(staleOilsFirst, fixture()), 'base64url').toString('utf8')).qualityIds, []);
 const cleanCheckout = engine.cartPermalink(staleOilsFirst, fixture());
 assert.deepEqual(cleanCheckout.recipe.qualityIds, []);
-assert.doesNotMatch(cleanCheckout.properties.Recipe, /Purported qualities|None selected/);
+assert.doesNotMatch(cleanCheckout.properties._Recipe, /Purported qualities|None selected/);
 assert.deepEqual(staleOilsFirst.qualityIds, ['focus', 'calm'], 'Canonicalization must not mutate input');
 // Shared v1 recipes survive the canonical topic migration without hidden aliases.
 {
@@ -313,15 +313,15 @@ assert.deepEqual([...url.searchParams.keys()], ['properties']);
 assert.match(url.searchParams.get('properties'), /^[A-Za-z0-9_-]+$/);
 const properties = JSON.parse(Buffer.from(url.searchParams.get('properties'), 'base64url').toString('utf8'));
 assert.deepEqual(properties, payload.properties);
-assert.deepEqual(Object.keys(properties), ['Recipe']);
-assert.match(properties.Recipe, /Name: Test-only recipe/);
-assert.match(properties.Recipe, /Recipe schema: v1; catalog: 2026-10-18/);
-assert.match(properties.Recipe, /Oil mixture \(relative portions, total 100%\): TEST-ONLY alpha \[alpha\] 50%; TEST-ONLY beta \[beta\] 50%/);
-assert.match(properties.Recipe, /Product: Custom Blend, 8 oz/);
-assert.match(properties.Recipe, /Manual formulation review required before fulfillment/);
-assert.match(properties.Recipe, /not finished-product concentrations/);
-assert.match(properties.Recipe, new RegExp('Recipe code: ' + payload.encodedRecipe + '$'));
-assert.doesNotMatch(properties.Recipe, /Base version|Purported qualities|approved|safe|Finished spray concentrations|Finished spray oil load/);
+assert.deepEqual(Object.keys(properties), ['Blend', 'Oil proportions', '_Recipe']);
+assert.match(properties._Recipe, /Name: Test-only recipe/);
+assert.match(properties._Recipe, /Recipe schema: v1; catalog: 2026-10-18/);
+assert.match(properties._Recipe, /Oil mixture \(relative portions, total 100%\): TEST-ONLY alpha \[alpha\] 50%; TEST-ONLY beta \[beta\] 50%/);
+assert.match(properties._Recipe, /Product: Custom Blend, 8 oz/);
+assert.match(properties._Recipe, /Manual formulation review required before fulfillment/);
+assert.match(properties._Recipe, /not finished-product concentrations/);
+assert.match(properties._Recipe, new RegExp('Recipe code: ' + payload.encodedRecipe + '$'));
+assert.doesNotMatch(properties._Recipe, /Base version|Purported qualities|approved|safe|Finished spray concentrations|Finished spray oil load/);
 assert.deepEqual(engine.decodeRecipe(payload.encodedRecipe, fixture()), payload.recipe);
 assert.equal(engine.checkoutPayload, undefined, 'No obsolete backend payload API');
 assert.equal(Object.hasOwn(payload, 'expectedPrice'), false);
@@ -339,18 +339,18 @@ assert.equal(context.BLEND_ENGINE.cartPermalink(recipe(), fixture()).url, payloa
   assert.equal(href.searchParams.size, 1);
   const recovered = JSON.parse(Buffer.from(href.searchParams.get('properties'), 'base64url').toString('utf8'));
   assert.deepEqual(recovered, result.properties);
-  assert.ok(recovered.Recipe.includes(d.oils[0].name + ' [alpha] 50%'));
-  assert.ok(recovered.Recipe.includes(value.name));
-  assert.match(recovered.Recipe, /Customer context: pets may be present/);
-  assert.doesNotMatch(recovered.Recipe, /pet-safe|pet-safer|Purported qualities/);
+  assert.ok(recovered._Recipe.includes(d.oils[0].name + ' [alpha] 50%'));
+  assert.ok(recovered._Recipe.includes(value.name));
+  assert.match(recovered._Recipe, /Customer context: pets may be present/);
+  assert.doesNotMatch(recovered._Recipe, /pet-safe|pet-safer|Purported qualities/);
   assert.deepEqual(engine.decodeRecipe(result.encodedRecipe, d), engine.validateRecipe(value, d).recipe);
   assert.equal(context.BLEND_ENGINE.cartPermalink(value, d).url, result.url);
 }
 const decimals = {...recipe(), oils: [{id: 'alpha', percent: 33.34}, {id: 'beta', percent: 33.33}, {id: 'gamma', percent: 33.33}]};
-assert.match(engine.cartPermalink(decimals, fixture()).properties.Recipe, /\[alpha\] 33.34%/);
+assert.match(engine.cartPermalink(decimals, fixture()).properties._Recipe, /\[alpha\] 33.34%/);
 const five = {...recipe(), oils: fixture().oils.slice(0, 5).map(oil => ({id: oil.id, percent: 20}))};
 assert.equal(engine.cartPermalink(five, fixture()).recipe.oils.length, 5);
-assert.match(engine.cartPermalink({...recipe(), name: '   '}, fixture()).properties.Recipe, /^Name: Custom Blend\n/);
+assert.match(engine.cartPermalink({...recipe(), name: '   '}, fixture()).properties._Recipe, /^Name: Custom Blend\n/);
 
 // Product and destination configuration are trusted separately from recipe input.
 function permalinkInvalid(data, code, value = recipe()) {
@@ -402,7 +402,7 @@ for (const [key, value] of [['price', 0], ['price', -1], ['price', Infinity], ['
 {
   const d = fixture(); Object.assign(d.blendBuilder.product, {name:'Catalog-defined blend', price:45.5, currency:'CAD', size:'4 oz'});
   const result = engine.cartPermalink(recipe(), d);
-  assert.match(result.properties.Recipe, /Product: Catalog-defined blend, 4 oz/);
+  assert.match(result.properties._Recipe, /Product: Catalog-defined blend, 4 oz/);
 }
 { const d = fixture(); delete d.blendBuilder.product; permalinkInvalid(d, 'product_configuration'); }
 { const d = fixture(); d.blendBuilder.product = null; permalinkInvalid(d, 'product_configuration'); }
@@ -412,11 +412,11 @@ for (const field of ['shopifyStoreUrl', 'shopifyVariantId', 'baseVersion', 'pric
 }
 for (const base of [undefined, null]) {
   const d = fixture(); d.blendBuilder.product.baseVersion = base;
-  assert.doesNotMatch(engine.cartPermalink(recipe(), d).properties.Recipe, /Base version/);
+  assert.doesNotMatch(engine.cartPermalink(recipe(), d).properties._Recipe, /Base version/);
 }
 {
   const d = fixture(); d.blendBuilder.product.baseVersion = ' Test-only base α / v2 ';
-  assert.match(engine.cartPermalink(recipe(), d).properties.Recipe, /Base version: Test-only base α \/ v2/);
+  assert.match(engine.cartPermalink(recipe(), d).properties._Recipe, /Base version: Test-only base α \/ v2/);
 }
 for (const base of [false, 1, {}, '', ' ', 'x'.repeat(121), 'base\nversion']) {
   const d = fixture(); d.blendBuilder.product.baseVersion = base;
@@ -470,10 +470,10 @@ const realRecipe = {...recipe(), catalogVersion: data.blendBuilder.catalogVersio
 assert.equal(engine.validateRecipe(realRecipe, data).valid, true);
 assert.equal(data.blendBuilder.product.price, 40);
 assert.equal(data.blendBuilder.product.shopifyStoreUrl, 'https://sunnysshield.com');
-assert.equal(data.blendBuilder.product.shopifyVariantId, null);
+assert.equal(data.blendBuilder.product.shopifyVariantId, '67698909052973');
 assert.equal(data.blendBuilder.product.baseVersion, null);
 assert.equal(data.blendBuilder.product.totalOilLoadPercent, null);
 for (const obsolete of ['checkoutEndpoint', 'checkoutAllowedHosts', 'serverValidationVerified']) assert.equal(Object.hasOwn(data.blendBuilder.product, obsolete), false);
 blocked(data, 'total_load_unknown', realRecipe);
-permalinkInvalid(data, 'checkout_variant_missing', realRecipe);
-console.log('PASS: strict recipes, deterministic normalization, Unicode sharing, safe single-property Shopify cart permalinks, manual review and separate sourced scientific limits');
+assert.equal(new URL(engine.cartPermalink(realRecipe,data).url).pathname, '/cart/67698909052973:1');
+console.log('PASS: strict recipes, deterministic normalization, Unicode sharing, safe readable Shopify cart permalinks, manual review and separate sourced scientific limits');
