@@ -226,7 +226,8 @@ const assert = require('node:assert/strict');
   await page.evaluate(id=>showCompound(id),compound);
   assert.ok((await page.locator(`#compound-oil-links [data-goto-oil="${oil}"]`).innerText()).includes(`${value}% in cited sample`));
  }
- assert.equal(await page.locator('#oil-sort option[value="compound"]').evaluate(el=>el.disabled && el.hidden),true);
+ // New oil records include quantified, source-backed constituent samples.
+ assert.equal(await page.locator('#oil-sort option[value="compound"]').evaluate(el=>!el.disabled && !el.hidden),true);
  await openView('Network');
  const graph=await page.evaluate(()=>echarts.getInstanceByDom(document.getElementById('network-chart')).getOption().series[0]);
  for(const node of graph.data.filter(n=>n.id.startsWith('compound:'))) assert.ok(graph.links.some(e=>e.target===node.id),`orphan ${node.id}`);
