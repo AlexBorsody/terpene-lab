@@ -1297,7 +1297,7 @@ summary:focus-visible, .chip:focus-visible, .compound-card:focus-visible { outli
  .matrix-heading h2 { margin-bottom:12px; }
 }
 @media (max-width:640px) {
- .tabs .tab { flex:1; justify-content:center; padding:10px 6px; gap:6px; font-size:12px; }
+ .tabs .tab { flex:1 0 auto; justify-content:center; padding:10px 6px; gap:6px; font-size:12px; white-space:nowrap; }
  .tabs .ui-icon { width:16px; height:16px; }
  .section-tabs { gap:0 18px; margin-bottom:22px; }
  .section-tabs .tab { font-size:12px; }
