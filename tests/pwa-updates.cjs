@@ -63,10 +63,27 @@ async function scenario({ alreadyInstalling, controlled, alreadyWaiting = false 
   assert.equal(button.hidden, true, 'Activation leaves no manual update action');
   assert.equal(reloads, controlled ? 1 : 0, 'First installation must not reload; automatic update reloads once');
 }
+async function embeddedScenario(existingWorker) {
+  let registrations=0, checks=0, reloads=0;
+  const serviceWorker=target({controller:existingWorker?{}:null,
+    getRegistration:async()=>existingWorker?{update:async()=>{checks++;}}:undefined,
+    register:()=>{registrations++;}});
+  vm.runInNewContext(fs.readFileSync('pwa.js','utf8'),{
+    navigator:{serviceWorker},window:target(),
+    document:target({documentElement:{classList:{contains:()=>true}},getElementById:()=>null}),
+    location:{reload:()=>{reloads++;}},setInterval(){},console
+  });
+  await Promise.resolve();await Promise.resolve();
+  assert.equal(registrations,0,'Storefront frames never install a worker');
+  assert.equal(checks,existingWorker?1:0,'Only an inherited worker is checked');
+  await serviceWorker.emit('controllerchange');
+  assert.equal(reloads,existingWorker?1:0,'Inherited updates refresh embedded apps too');
+}
 (async () => {
   for (const alreadyInstalling of [true, false]) {
     for (const controlled of [true, false]) await scenario({ alreadyInstalling, controlled });
   }
   await scenario({ alreadyInstalling: false, controlled: true, alreadyWaiting: true });
+  await embeddedScenario(true);await embeddedScenario(false);
   console.log('PASS: deterministic already-installing, future updatefound and already-waiting updates; automatic activation, single reload and first-install behavior');
 })().catch(error => { console.error(error); process.exit(1); });
