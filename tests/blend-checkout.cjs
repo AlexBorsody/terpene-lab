@@ -192,8 +192,8 @@ async function captureBeforeNavigation(page, scope = page) {
     assert.match(result.properties._Recipe,/Manual formulation review required/);
     assert.match(result.properties._Recipe,/relative portions.*not finished-product concentrations/);
     assert.doesNotMatch(result.properties._Recipe,/Base version:|certified|certification|Final spray concentration:|Finished spray oil load:/i);
-    assert.match(await page.locator('.blend-result-summary').innerText(),/Final spray concentration has not been set/);
-    assert.match(await page.locator('.blend-result-cautions').innerText(),/reviewed before mixing/);
+    assert.match(await page.locator('.blend-result-summary').innerText(),/Final dilution is confirmed before mixing/);
+    assert.match(await page.locator('.blend-result-cautions').innerText(),/review your ingredients, dilution and intended use before mixing/);
     const safety=await page.evaluate(key=>BLEND_ENGINE.evaluateSafety(JSON.parse(localStorage.getItem(key)).draft,TERPENE_DATA),STORAGE);
     assert.equal(safety.requiresReview,true);
     assert.ok(Array.isArray(safety.blockers));assert.ok(Array.isArray(safety.warnings));
@@ -229,7 +229,7 @@ async function captureBeforeNavigation(page, scope = page) {
     await page.locator('#blend-pets').check();
     result=await cart(page);assert.equal(result.recipe.petContext,true);
     assert.match(result.properties._Recipe,/pets may be present/);
-    assert.match(await page.locator('.blend-result-cautions').innerText(),/Pet context is on/);
+    assert.match(await page.locator('.blend-result-cautions').innerText(),/Pet-safety review required/);
     await page.locator('#blend-pets').uncheck();
     result=await cart(page);assert.equal(result.recipe.petContext,false);
     assert.doesNotMatch(result.properties._Recipe,/Customer context: pets/);
@@ -415,7 +415,7 @@ async function captureBeforeNavigation(page, scope = page) {
     let warning=await page.locator('.blend-result-cautions').innerText();
     assert.match(warning,/Lavender/);assert.match(warning,/2% of the finished spray/);assert.match(warning,/1% dermal maximum/);
     assert.equal(await page.locator('.blend-result-cautions a[href="https://example.test/dermal-ceiling"]').isVisible(),true);
-    assert.match(await page.locator('#blend-checkout-status').innerText(),/sourced limit or interaction/);
+    assert.match(await page.locator('#blend-checkout-status').innerText(),/concentration or interaction warnings/);
     await page.evaluate(()=>{
       TERPENE_DATA.oils.find(oil=>oil.id==='lavender').blend.dermalMaxPercent=3;
       Object.assign(TERPENE_DATA.blendBuilder.product,{
@@ -461,7 +461,7 @@ async function captureBeforeNavigation(page, scope = page) {
     await page.evaluate(()=>TERPENE_DATA.oils.find(oil=>oil.id==='lavender').blend.interactions[0].severity='blocker');
     await refresh(page);await noVisibleCart(page);
     warning=await cautions.innerText();assert.match(warning,/Lavender \+ Lemon/);
-    assert.match(await page.locator('#blend-checkout-status').innerText(),/sourced limit or interaction/);
+    assert.match(await page.locator('#blend-checkout-status').innerText(),/concentration or interaction warnings/);
   });
 
   await test('actual standalone click persists the current recipe before an intercepted GET handoff',async(page,t)=>{

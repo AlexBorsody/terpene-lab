@@ -177,7 +177,7 @@ async function assertNoOverflow(page, label) {
     assert.deepEqual((await assertCatalog(page,['fixture-blend-root'],fixture)).direct,['lavender','lemon','rosemary'],'Parent includes every descendant branch');
     await topic(page,'fixture-blend-leaf');
     assert.deepEqual((await assertCatalog(page,['fixture-blend-root','fixture-blend-leaf'],fixture)).direct,['lavender','lemon','rosemary'],'Parent plus child does not double count oils');
-    await add(page,'lavender');await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').count()) await page.locator('.blend-research-disclosure > summary').click();
+    await add(page,'lavender');await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').isVisible()) await page.locator('.blend-research-disclosure > summary').click();
     assert.deepEqual(await page.locator('.blend-profile .study').evaluateAll(nodes=>nodes.map(node=>node.dataset.studyId)),['fixture-blend-direct'],'Parent plus child does not repeat the same paper');
     for(const id of ['fixture-blend-system','fixture-blend-model','fixture-blend-sibling']) await topic(page,id);
     const allFive=fixture.taxonomy.nodes.filter(node=>node.id.startsWith('fixture-blend-')).map(node=>node.id).sort();
@@ -199,7 +199,7 @@ async function assertNoOverflow(page, label) {
     assert.equal(await related.evaluate(node=>node.open),true,'Contextual bibliography expands through a native keyboard disclosure');
     assert.match(await related.innerText(),/missing match is not evidence of no effect/);
     assert.match(await related.innerText(),/Other linked research/);
-    await add(page,'lemon');await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').count()) await page.locator('.blend-research-disclosure > summary').click();
+    await add(page,'lemon');await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').isVisible()) await page.locator('.blend-research-disclosure > summary').click();
     const profile=page.locator('.blend-profile');
     assert.match(await profile.innerText(),/1 linked papers · 0 with reviewed oil-specific topic matches/);
     assert.deepEqual(await profile.locator('.study').evaluateAll(nodes=>nodes.map(node=>node.dataset.studyId)),['fixture-blend-context']);
@@ -242,7 +242,7 @@ async function assertNoOverflow(page, label) {
   },()=>{Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async()=>{throw new Error('Test denied clipboard');}}});});
   await test('selected-topic profiles and library links share one canonical study collection',async page=>{
     await open(page);await choose(page,'qualities');await topic(page,'fixture-blend-leaf');await add(page,'lavender');
-    await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').count()) await page.locator('.blend-research-disclosure > summary').click();
+    await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').isVisible()) await page.locator('.blend-research-disclosure > summary').click();
     const card=page.locator('.blend-profile [data-study-id="fixture-blend-direct"]');
     const title=await card.locator('h4').innerText(), finding=await card.locator('.finding').innerText();
     assert.deepEqual(await card.locator('[data-goto-use]').evaluateAll(nodes=>nodes.map(node=>node.dataset.gotoUse)),['fixture-blend-leaf']);
@@ -270,7 +270,7 @@ async function assertNoOverflow(page, label) {
     await topic(page,TOPICS.calm);
     await topic(page,TOPICS.focus);
     await add(page,'lavender');await page.locator('#blend-name').fill('Path switch recipe');
-    await page.locator('#blend-pets').check();await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').count()) await page.locator('.blend-research-disclosure > summary').click();
+    await page.locator('#blend-pets').check();await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').isVisible()) await page.locator('.blend-research-disclosure > summary').click();
     const before=await selected(page);
     await choose(page,'oils');
     assert.equal(await page.locator('#blend-quality-picker').isVisible(),false);
@@ -351,7 +351,7 @@ async function assertNoOverflow(page, label) {
     await page.locator('[data-portion="lemon"]').fill('30');
     assert.equal(await page.locator('[data-portion-range="lavender"]').inputValue(),'20');
     assert.equal(await page.locator('#blend-total').innerText(),'50%');
-    await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').count()) await page.locator('.blend-research-disclosure > summary').click();
+    await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').isVisible()) await page.locator('.blend-research-disclosure > summary').click();
     assert.equal(await page.locator('#blend-results').isVisible(),false);
     assert.match(await page.locator('#blend-status').innerText(),/100/);
     await page.locator('#blend-normalize').click();
@@ -359,24 +359,24 @@ async function assertNoOverflow(page, label) {
     await page.locator('[data-portion-range="lavender"]').evaluate(el=>{el.value='55.25';el.dispatchEvent(new Event('input',{bubbles:true}));});
     assert.equal(await page.locator('[data-portion="lavender"]').inputValue(),'55.25');
     await page.locator('[data-portion="lemon"]').fill('44.75');
-    await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').count()) await page.locator('.blend-research-disclosure > summary').click();
+    await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').isVisible()) await page.locator('.blend-research-disclosure > summary').click();
     assert.equal(await page.locator('#blend-results').isVisible(),true);
     for(const invalid of ['0','-1','101','']) {
       await page.locator('[data-portion="lavender"]').fill(invalid);
-      await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').count()) await page.locator('.blend-research-disclosure > summary').click();
+      await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').isVisible()) await page.locator('.blend-research-disclosure > summary').click();
       assert.equal(await page.locator('#blend-results').isVisible(),false,`Reject ${JSON.stringify(invalid)}`);
       assert.ok((await page.locator('#blend-status').innerText()).length>0);
       await page.locator('[data-portion="lavender"]').fill('55.25');
-      await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').count()) await page.locator('.blend-research-disclosure > summary').click();
+      await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').isVisible()) await page.locator('.blend-research-disclosure > summary').click();
       assert.equal(await page.locator('#blend-results').isVisible(),true,`Recover from ${JSON.stringify(invalid)}`);
     }
     // Correcting a rejected number through its slider must clear both validity states.
     await page.locator('[data-portion="lavender"]').fill('101');
     await page.locator('[data-portion-range="lavender"]').evaluate(el=>{el.value='55.25';el.dispatchEvent(new Event('input',{bubbles:true}));});
-    await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').count()) await page.locator('.blend-research-disclosure > summary').click();
+    await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').isVisible()) await page.locator('.blend-research-disclosure > summary').click();
     assert.equal(await page.locator('#blend-results').isVisible(),true,'Slider correction clears invalid number state');
     await page.locator('[data-portion="lavender"]').fill('10.001');
-    await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').count()) await page.locator('.blend-research-disclosure > summary').click();
+    await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').isVisible()) await page.locator('.blend-research-disclosure > summary').click();
     assert.equal(await page.locator('#blend-results').isVisible(),false,'Reject excessive precision through native validity');
     await page.locator('[data-portion="lavender"]').fill('0');
     await page.locator('[data-portion="lemon"]').fill('0');
@@ -444,8 +444,8 @@ async function assertNoOverflow(page, label) {
   await test('saved recipe persistence, load, delete, and literal XSS-safe names',async page=>{
     const evil='<img src=x onerror=window.blendXSS=1>';
     await page.goto(recipeUrl(seed())); await page.locator('#blend-name').fill(evil);
-    assert.equal(await page.locator('#blend-results-title').innerText(),evil);
-    assert.equal(await page.locator('#blend-results-title img').count(),0);
+    assert.equal(await page.locator('.blend-result-summary h4').innerText(),evil);
+    assert.equal(await page.locator('.blend-result-summary h4 img').count(),0);
     await page.locator('#blend-save').click();
     assert.match(await page.locator('#blend-action-status').innerText(),/Blend saved/);
     await page.locator('#blend-save').click();
@@ -473,10 +473,10 @@ async function assertNoOverflow(page, label) {
     const decoded=E.decodeRecipe(new URL(url).searchParams.get('recipe'),data);
     assert.equal(decoded.name,'Night garden 🌿 café');
     const clean=await browser.newContext({serviceWorkers:'block',reducedMotion:'reduce'});
-    await intercept(clean,'share reload');
+    await intercept(clean,'share reload',data);
     const other=await clean.newPage();other.on('pageerror',e=>pageErrors.push('share reload: '+e.message));
     await other.goto(url);
-    assert.equal(await other.locator('#blend-results-title').innerText(),decoded.name);
+    assert.equal(await other.locator('.blend-result-summary h4').innerText(),decoded.name);
     assert.deepEqual((await selected(other)).sort((a,b)=>a.id.localeCompare(b.id)),decoded.oils);
     assert.equal(await other.locator('#blend-results').isVisible(),true);
     await assertNoPurchase(other); await clean.close();
@@ -507,7 +507,7 @@ async function assertNoOverflow(page, label) {
     assert.equal(new URL(page.url()).searchParams.has('recipe'),false);
     await page.goBack(); await page.waitForURL(url);
     assert.equal(await page.locator('#tab-blend.active').count(),1);
-    assert.equal(await page.locator('#blend-results-title').innerText(),'Evening garden','Back restores recipe A named by URL, not edited draft B');
+    assert.equal(await page.locator('.blend-result-summary h4').innerText(),'Evening garden','Back restores recipe A named by URL, not edited draft B');
     await page.goForward();assert.equal(await page.locator('#tab-oils.active').count(),1);
     const oilsUrl=page.url();
     assert.equal(await page.evaluate(()=>window.testPushCount),1,'Back and Forward do not create new history entries');
@@ -595,12 +595,12 @@ async function assertNoOverflow(page, label) {
     await page.setViewportSize({width:320,height:1000});
     for(const name of ['X'.repeat(60),'🌿'.repeat(60)]) {
       await page.goto(recipeUrl(seed({name})));
-      assert.equal(await page.locator('#blend-results-title').innerText(),name);
+      assert.equal(await page.locator('.blend-result-summary h4').innerText(),name);
       await page.locator('#blend-save').click();
       await assertNoOverflow(page,`${Array.from(name).length}-character shared recipe name`);
       await page.locator('#blend-reset').click();
       await page.locator('[data-load-recipe="0"]').click();
-      assert.equal(await page.locator('#blend-results-title').innerText(),name);
+      assert.equal(await page.locator('.blend-result-summary h4').innerText(),name);
       await assertNoOverflow(page,'saved long recipe name');
       await page.reload();
       assert.equal(await page.locator('#blend-name').inputValue(),name,'Valid Unicode draft survives reload');
@@ -647,15 +647,15 @@ async function assertNoOverflow(page, label) {
   });
   await test('denied storage preserves working builder and provides honest save feedback',async page=>{
     await open(page);await choose(page);await add(page,'lavender');
-    assert.match(await page.locator('#blend-storage-note').innerText(),/storage is unavailable/i);
-    await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').count()) await page.locator('.blend-research-disclosure > summary').click();assert.equal(await page.locator('#blend-results').isVisible(),true);
+    assert.match(await page.locator('#blend-storage-note').innerText(),/Couldn’t save your draft/i);
+    await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').isVisible()) await page.locator('.blend-research-disclosure > summary').click();assert.equal(await page.locator('#blend-results').isVisible(),true);
     await page.locator('#blend-save').click();
     assert.match(await page.locator('#blend-action-status').innerText(),/Could not save to this browser/);
     await assertNoPurchase(page);
   },()=>{Object.defineProperty(window,'localStorage',{configurable:true,get(){throw new DOMException('Test denied storage','SecurityError');}});});
   await test('malformed local data is ignored without XSS or a crash',async page=>{
     await open(page);assert.equal(await page.locator('#blend-workspace').isVisible(),false);
-    await choose(page);await add(page,'lavender');await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').count()) await page.locator('.blend-research-disclosure > summary').click();
+    await choose(page);await add(page,'lavender');await page.locator('#blend-generate').click(); if (await page.locator('.blend-research-disclosure').isVisible()) await page.locator('.blend-research-disclosure > summary').click();
     assert.equal(await page.locator('#blend-results').isVisible(),true);await assertNoPurchase(page);
   },()=>{localStorage.setItem('terpene-lab:blend:v1','{invalid');});
   await browser.close();
