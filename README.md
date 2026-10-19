@@ -6,6 +6,8 @@ For an independent engineering/scientific review of the canonical migration, sta
 
 ## Views
 
+The main navigation is **Blend Builder · Oils · Visualize**. Oils contains Browse oils, Studies, Compounds and Uses; Visualize contains Matrix and Network. Existing view URLs remain valid, including filtered and detail links.
+
 - **Blend Builder** (first tab and default landing view): research-topics-first or oils-first custom oil recipes across the full catalog, written evidence and precautions, saved drafts and versioned share links. $40 / 8 oz custom product, manually reviewed before mixing; a Shopify cart permalink carries the recipe once the real product variant is configured. See [integration and launch requirements](blend-builder-integration.md).
 
 - **Oils**: oil explorer with composition fingerprint (range bars), research coverage, evidence summary, studies.

@@ -105,6 +105,18 @@ html:not(.lab-embedded) main { max-width: none; }
   font-weight: 700;
 }
 
+/* Section navigation sits below the three main destinations. */
+.section-tabs { display:flex; flex-wrap:wrap; gap:4px 18px; border-bottom:1px solid var(--border); margin:-6px 0 28px; }
+.section-tabs[hidden] { display:none; }
+.section-tabs .tab { padding:12px 2px; border:0; border-bottom:2px solid transparent; border-radius:0; }
+.section-tabs .tab.active { color:var(--text); background:transparent; border-bottom-color:var(--amber); font-weight:600; }
+.section-tabs .tab:hover { color:var(--text); border-bottom-color:var(--amber-dim); }
+.tab:focus-visible { outline:2px solid var(--amber); outline-offset:3px; }
+.scan-list { padding-left:20px; color:var(--muted); font-size:14px; line-height:1.6; }
+.scan-list li + li { margin-top:4px; }
+.scan-list li::marker { color:var(--amber-dim); }
+.scan-list strong { color:var(--text); font-weight:600; }
+
 main {
   max-width: 1100px;
   margin: 0 auto;
@@ -1230,6 +1242,7 @@ summary:focus-visible, .chip:focus-visible, .compound-card:focus-visible { outli
 .matrix-heading p:not(.section-kicker) { max-width:75ch; color:var(--muted); font-size:14px; }
 .matrix-data-link { color:var(--amber); font-size:12px; text-underline-offset:4px; flex-shrink:0; padding:10px 0; }
 .matrix-inventory { font:12px/1.7 var(--mono); color:var(--muted); margin-bottom:24px; }
+.matrix-key { font-size:12px; border-left:2px solid var(--border); padding-left:22px; }
 .matrix-inventory button { color:var(--amber); border:0; border-bottom:1px solid var(--amber-dim); background:transparent; cursor:pointer; font:inherit; padding:6px 0; }
 .matrix-views { display:flex; flex-wrap:wrap; gap:0; border-bottom:1px solid var(--border); margin-bottom:20px; }
 .matrix-views button { background:transparent; color:var(--muted); border:0; border-bottom:2px solid transparent; padding:14px 18px; min-height:48px; font:inherit; font-size:14px; cursor:pointer; }
@@ -1277,6 +1290,11 @@ summary:focus-visible, .chip:focus-visible, .compound-card:focus-visible { outli
 .matrix-inspector-path { margin-bottom:20px; font-size:13px; color:var(--amber); }
 .matrix-inspector pre { white-space:pre-wrap; overflow-wrap:anywhere; font-size:12px; padding:12px; }
 @media (max-width:640px) {
+ .tabs .tab { flex:1; justify-content:center; padding:10px 6px; gap:6px; font-size:12px; }
+ .tabs .ui-icon { width:16px; height:16px; }
+ .section-tabs { gap:0 18px; margin-bottom:22px; }
+ .section-tabs .tab { font-size:12px; }
+ .section-tabs .ui-icon { display:none; }
  .matrix-heading { flex-direction:column; align-items:flex-start; gap:4px; }
  .matrix-views button { flex:1 1 45%; padding:12px 8px; font-size:13px; }
  .matrix-toolbar label { flex:1 1 45%; }

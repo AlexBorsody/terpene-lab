@@ -70,36 +70,36 @@
   }
   root.innerHTML = `
     <div class="blend-hero">
-      <div><p class="blend-eyebrow">Sunny’s Shield / Blend studio</p><h2>Create a custom blend.</h2>
-        <p class="blend-intro">Start with a research topic or an essential oil. Explore the chemistry, shape the aroma, and see the evidence and precautions together.</p><p class="blend-library-note">${uiIcon("studies")}<span>${data.studies.length} papers in the library. Follow the evidence as you build.</span></p></div>
+      <div><p class="blend-eyebrow">Sunny’s Shield / Blend studio</p><h2>Build your blend.</h2>
+        <ul class="blend-intro scan-list"><li>Choose up to 5 essential oils.</li><li>Set their proportions.</li><li>Review research and precautions.</li></ul><p class="blend-library-note">${uiIcon("studies")}<span>${data.studies.length} research papers to explore</span></p></div>
       <div class="blend-product"><svg class="blend-bottle" viewBox="0 0 80 120" aria-hidden="true" focusable="false"><rect x="26" y="6" width="28" height="14" rx="2"/><path d="M30 20v13c0 7-15 8-15 20v51c0 6 4 10 10 10h30c6 0 10-4 10-10V53c0-12-15-13-15-20V20M32 10v6m8-6v6m8-6v6"/><rect x="23" y="53" width="34" height="39" rx="1"/><path d="M33 82 48 63c-15 0-20 9-13 16 8 3 14-4 13-16M28 99h24"/></svg><div class="blend-product-copy"><span class="blend-product-size">${esc(config.product.name)} / ${esc(config.product.size)}</span><strong>${esc(priceLabel)}<span> per custom blend</span></strong><p>Standard bottle, base and label.</p><span class="blend-pill">Manual review before mixing</span></div></div>
     </div>
     <p id="blend-link-error" class="blend-message is-error" role="alert" ${restoreError ? '' : 'hidden'}>${esc(restoreError)}</p>
-    <div class="blend-step-title"><span>01</span><h3>Choose your starting point</h3></div>
+    <div class="blend-step-title"><span>01</span><h3>Start with</h3></div>
     <div class="blend-paths" role="group" aria-label="Choose a starting point">
-      <button type="button" data-blend-path="qualities"><span class="blend-path-icon">${uiIcon("domains")}</span><span class="blend-path-kicker">TOPICS FIRST</span><strong>Find your direction</strong><span>Explore the same research topics used across the Lab, from aroma and skin to microbes and cleaning.</span><span class="blend-path-arrow" aria-hidden="true">${uiIcon("arrow")}</span></button>
-      <button type="button" data-blend-path="oils"><span class="blend-path-icon">${uiIcon("oils")}</span><span class="blend-path-kicker">OILS FIRST</span><strong>Follow your curiosity</strong><span>Pick familiar oils, then discover their aromas, chemistry and research.</span><span class="blend-path-arrow" aria-hidden="true">${uiIcon("arrow")}</span></button>
+      <button type="button" data-blend-path="qualities"><span class="blend-path-icon">${uiIcon("domains")}</span><strong>Uses & research</strong><span class="blend-path-description">Find oils by research topic.</span><span class="blend-path-arrow" aria-hidden="true">${uiIcon("arrow")}</span></button>
+      <button type="button" data-blend-path="oils"><span class="blend-path-icon">${uiIcon("oils")}</span><strong>Oils & aromas</strong><span class="blend-path-description">Start with an oil you like.</span><span class="blend-path-arrow" aria-hidden="true">${uiIcon("arrow")}</span></button>
     </div>
     <div id="blend-workspace" hidden>
-      <div class="blend-step-title"><span>02</span><h3>Make it your own</h3><span class="blend-step-note">UP TO 5 ESSENTIAL OILS</span></div>
+      <div class="blend-step-title"><span>02</span><h3>Choose your oils</h3></div>
       <div class="blend-work-grid">
         <section class="blend-catalog" aria-labelledby="blend-catalog-title">
           <h4 id="blend-catalog-title">Explore the oils</h4>
-          <div id="blend-quality-picker"><p class="blend-small">Choose research topics. Counts include related materials; each paper explains what was actually tested.</p><div id="blend-qualities" class="blend-quality-buttons" role="group" aria-label="Research topics"></div></div>
-          <label class="blend-search-label" for="blend-search">Search all oils in the Lab</label>
+          <div id="blend-quality-picker"><p class="blend-small">Choose a topic. Counts include related materials—check what each paper tested.</p><div id="blend-qualities" class="blend-quality-buttons" role="group" aria-label="Research topics"></div></div>
+          <label class="blend-search-label" for="blend-search">Find an oil</label>
           <input id="blend-search" type="search" placeholder="Oil name or aroma..." autocomplete="off">
           <p id="blend-catalog-count" class="blend-small"></p><div id="blend-oil-catalog" class="blend-oil-catalog"></div>
-          <p class="blend-small blend-catalog-footnote">The full Lab catalog is available for exploration. Stock and suitability for the finished spray still need review.</p>
+          <p class="blend-small blend-catalog-footnote">Availability and suitability for the finished spray need review.</p>
         </section>
         <section class="blend-mixer" aria-labelledby="blend-mixer-title">
-          <div class="blend-mixer-top"><h4 id="blend-mixer-title">Your formula sketch</h4><span id="blend-selected-count" class="blend-small"></span></div>
+          <div class="blend-mixer-top"><h4 id="blend-mixer-title">Your blend</h4><span id="blend-selected-count" class="blend-small"></span></div>
           <label for="blend-name" class="blend-input-label">Recipe name</label><input id="blend-name" maxlength="120" aria-describedby="blend-name-help" value="${esc(recipe.name)}" autocomplete="off">
-          <p id="blend-name-help" class="blend-small">Up to 60 characters. Recipe names are visible in shared links.</p><div id="blend-selected"></div>
+          <p id="blend-name-help" class="blend-small">60 characters max · Visible in shared links</p><div id="blend-selected"></div>
           <div class="blend-total-row"><span>Oil-blend total</span><strong id="blend-total"></strong></div>
           <div id="blend-composition" class="blend-composition" aria-hidden="true"></div>
           <p id="blend-total-help" class="blend-small" aria-live="polite"></p>
           <button type="button" id="blend-normalize" class="blend-text-button">Balance to 100%</button>
-          <p class="blend-proportion-note">Percentages describe the relative portions of the essential-oil blend. They are not the concentration in the finished spray or instructions for mixing a product.</p>
+          <ul class="blend-proportion-note scan-list"><li><strong>100% = the oil blend only.</strong></li><li>Not the finished spray concentration or mixing instructions.</li></ul>
           <label class="blend-pets"><input type="checkbox" id="blend-pets" ${recipe.petContext ? 'checked' : ''}><span>Will be used around pets<small>Flags missing or unsuitable pet-safety data.</small></span></label>
           <p id="blend-pet-warning" class="blend-inline-warning" hidden>Pet-safety review is required. This builder does not establish that a blend is safe for animals.</p>
           <button type="button" id="blend-generate" class="blend-primary">Explore this blend <span aria-hidden="true">→</span></button>
@@ -134,7 +134,7 @@
     document.getElementById('blend-catalog-count').textContent=topics.length ? `${direct.length} oils with reviewed research matches; ${related.length} with other linked research. These are research links, not effectiveness rankings.` : `${found.length} oils in the Lab catalog. Research links are not effectiveness rankings.`;
     function oilCard(o, contextual=false) {
       const selected=recipe.oils.some(s=>s.id===o.id), topicLabels=labels(o);
-      return `<article class="blend-oil-card ${selected?'is-selected':''}"><div class="blend-oil-heading"><div><h5>${esc(o.name)}</h5><p class="blend-latin">${esc(o.latinName)}</p></div><span class="blend-oil-swatch" style="--oil-color:${/^#[0-9a-f]{3,8}$/i.test(o.color)?o.color:'#72b89a'}" aria-hidden="true"></span></div><p class="blend-aroma">${esc(o.aroma.join(' · '))}</p><p class="blend-small">${contextual?'Other linked research. Open the evidence to check its preparation, outcome and relevance.':topicLabels.length?'Research: '+esc(topicLabels.join(', ')):'No reviewed whole-oil topic match yet. Related literature remains available.'}</p><button type="button" data-add-oil="${esc(o.id)}" ${selected||recipe.oils.length>=5?'disabled':''}>${selected?'Added to your blend':recipe.oils.length>=5?'5-oil limit reached':'+ Add oil'}</button></article>`;
+      return `<article class="blend-oil-card ${selected?'is-selected':''}"><div class="blend-oil-heading"><div><h5>${esc(o.name)}</h5><p class="blend-latin">${esc(o.latinName)}</p></div><span class="blend-oil-swatch" style="--oil-color:${/^#[0-9a-f]{3,8}$/i.test(o.color)?o.color:'#72b89a'}" aria-hidden="true"></span></div><p class="blend-aroma">${esc(o.aroma.join(' · '))}</p><p class="blend-small">${contextual?'Related research; check material and outcome.':topicLabels.length?'Research: '+esc(topicLabels.join(', ')):'No reviewed whole-oil topic match.'}</p><button type="button" data-add-oil="${esc(o.id)}" ${selected||recipe.oils.length>=5?'disabled':''}>${selected?'Added to your blend':recipe.oils.length>=5?'5-oil limit reached':'+ Add oil'}</button></article>`;
     }
     document.getElementById('blend-oil-catalog').innerHTML=direct.map(o=>oilCard(o)).join('')+(related.length?`<details class="blend-related-catalog"><summary>Other linked research · ${related.length} oils</summary><p class="blend-small">These papers include contextual preparations, uncertain associations, or findings not counted as reviewed topic matches. Read each material, model and outcome; a missing match is not evidence of no effect.</p><div class="blend-oil-catalog">${related.map(o=>oilCard(o,true)).join('')}</div></details>`:'')||'<p class="blend-empty">No oils match this search. Try another aroma or research topic.</p>';
   }
@@ -142,7 +142,7 @@
     document.getElementById('blend-selected-count').textContent = recipe.oils.length + ' / 5 oils';
     document.getElementById('blend-selected').innerHTML = recipe.oils.map(entry => {
       const o=byId[entry.id]; return `<div class="blend-portion"><div class="blend-portion-heading"><label for="blend-percent-${o.id}">${esc(o.name)}</label><button type="button" data-remove-oil="${o.id}" aria-label="Remove ${esc(o.name)}">Remove</button></div><div class="blend-portion-controls"><input type="range" min="0" max="100" step="0.01" value="${entry.percent}" data-portion-range="${o.id}" aria-label="${esc(o.name)} relative portion" aria-describedby="blend-total-help"><span><input id="blend-percent-${o.id}" type="number" min="0" max="100" step="0.01" value="${entry.percent}" data-portion="${o.id}" inputmode="decimal" aria-label="${esc(o.name)} relative percentage" aria-describedby="blend-total-help">%</span></div></div>`;
-    }).join('') || '<div class="blend-empty"><span aria-hidden="true">＋</span><p>Add your first oil.<br>A little curiosity goes a long way.</p></div>';
+    }).join('') || '<div class="blend-empty"><span aria-hidden="true">＋</span><p>Choose an oil to start.</p></div>';
     renderSummary();
   }
   function renderSummary() {

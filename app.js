@@ -165,6 +165,7 @@ document.querySelectorAll(".tab").forEach(btn => {
       const filter = document.getElementById(tab === "oils" ? "oil-domain-filter" : "matrix-domain-filter");
       routeUrl(tab, { domain: R.resolve(filter?.value) });
     } else routeUrl(tab);
+    window.scrollTo({ top: 0, behavior: 'instant' });
   });
 });
 
@@ -219,8 +220,14 @@ function applyRoute() {
 window.addEventListener("popstate", applyRoute);
 
 function switchTab(tab) {
-  document.querySelectorAll(".tab").forEach(b =>
-    b.classList.toggle("active", b.dataset.tab === tab));
+  const section = ['oils', 'studies', 'compounds', 'domains'].includes(tab) ? 'oils' : ['matrix', 'network'].includes(tab) ? 'visualize' : 'blend';
+  document.querySelectorAll(".tab").forEach(button => {
+    const active = button.dataset.section ? button.dataset.section === section : button.dataset.tab === tab;
+    button.classList.toggle("active", active);
+    if (active) button.setAttribute('aria-current', 'page');
+    else button.removeAttribute('aria-current');
+  });
+  document.querySelectorAll('[data-section-nav]').forEach(nav => { nav.hidden = nav.dataset.sectionNav !== section; });
   document.querySelectorAll(".tab-panel").forEach(p =>
     p.classList.toggle("active", p.id === "tab-" + tab));
   disposeCharts();
@@ -981,7 +988,17 @@ function renderMatrix() {
   const inventory = document.getElementById('matrix-inventory');
   inventory.innerHTML = `${D.oils.length} oils · ${D.compounds.length} compounds · ${R.nodes.length} topic terms · ${D.studies.length} papers · <button data-matrix-inspect="sources">${D.sources.length} source records</button>`;
   matrixBindInspector(inventory);
-  document.getElementById('matrix-context').textContent = topics ? `${group?.description || ''} Click a column to descend the hierarchy. Parent counts include descendants; do not add overlapping columns. ${oilRows ? 'Numbers are unique oil-linked papers, not effectiveness scores.' : matrixState.mode === 'compound-topics' ? 'Numbers are compound-bibliography links, not proof of the compound’s effects.' : 'A mark means the paper carries that topic or a descendant.'}` : 'Cells show recorded oil–compound relationships. Percentages belong to cited samples; “Catalog only” means no source-qualified measurement. “Other material” includes plant/extract evidence. A dash means no recorded link, not chemical absence.';
+  const matrixKey = topics ? [
+    group?.description,
+    oilRows ? 'Counts = linked papers, not effectiveness scores.' : matrixState.mode === 'compound-topics' ? 'Counts = bibliography links, not proof of a compound’s effects.' : '● = paper tagged with this topic or a subtopic.',
+    'Parent counts include subtopics. Overlapping columns cannot be added.'
+  ] : [
+    'Percentages = cited samples only.',
+    'Catalog only = no source-qualified measurement.',
+    'Other material = plant or extract evidence.',
+    '— = no recorded link, not chemical absence.'
+  ];
+  document.getElementById('matrix-context').innerHTML = matrixKey.filter(Boolean).map(text => `<li>${esc(text)}</li>`).join('');
   const columns = topics ? selected ? [selected, ...R.children(selected.id)] : roots : D.compounds.filter(compound => CHEMISTRY.matchesCategory(compound, matrixState.chemical));
   const kind = oilRows ? 'oil' : matrixState.mode === 'compound-topics' ? 'compound' : 'study';
   let rows = (oilRows ? D.oils : kind === 'compound' ? D.compounds : D.studies).filter(row => (!oilRows || !matrixState.oil || row.id === matrixState.oil) && (!q || [row.name, row.latinName, row.title, row.formula, row.authors, row.pubmedId, row.doi].filter(Boolean).join(' ').toLowerCase().includes(q)));
