@@ -859,9 +859,7 @@ const TERPENE_DATA = {
           "children": [
             {
               "useNodeId": "health-mental-health",
-              "evidenceIds": [
-                "use-7857d7ad2f4f61528cdc9af1"
-              ],
+              "evidenceIds": [],
               "children": [
                 {
                   "useNodeId": "health-mental-health-anxiety",
@@ -870,7 +868,8 @@ const TERPENE_DATA = {
                     "use-051403856b1f93d50ed06db8",
                     "use-7256b71c872ea1f9f6075f4a",
                     "use-b3e114de6c1a11826cd66a9a",
-                    "use-edbddf65fc33e8b62241ef50"
+                    "use-edbddf65fc33e8b62241ef50",
+                    "use-16411e3e0141564604d91d91-anxiety"
                   ],
                   "children": []
                 },
@@ -894,7 +893,8 @@ const TERPENE_DATA = {
                 {
                   "useNodeId": "health-mental-health-mood",
                   "evidenceIds": [
-                    "use-67a63def7ed8f3141bbbcc2a"
+                    "use-67a63def7ed8f3141bbbcc2a",
+                    "use-16411e3e0141564604d91d91-mood"
                   ],
                   "children": []
                 }
@@ -904,12 +904,19 @@ const TERPENE_DATA = {
               "useNodeId": "health-pain-inflammation",
               "evidenceIds": [
                 "use-7bcac00f98d25339fd83ea2c",
-                "use-a11cc5be9269778c454d497a",
                 "use-e21475dfd1e531f26d60cce0",
                 "use-854cc2927f1e95288bb91cf9",
                 "use-98bcfdc9c47d83c5c4997715"
               ],
-              "children": []
+              "children": [
+                {
+                  "useNodeId": "health-pain-inflammation-menstrual-cramps",
+                  "evidenceIds": [
+                    "use-a11cc5be9269778c454d497a"
+                  ],
+                  "children": []
+                }
+              ]
             },
             {
               "useNodeId": "health-cognitive",
@@ -962,6 +969,13 @@ const TERPENE_DATA = {
               "useNodeId": "health-wound",
               "evidenceIds": [
                 "use-b34fc6cc6240ca9fc389df40"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "health-quality-of-life",
+              "evidenceIds": [
+                "use-7857d7ad2f4f61528cdc9af1"
               ],
               "children": []
             },
@@ -1169,7 +1183,9 @@ const TERPENE_DATA = {
         "use-lavender-40154579-429",
         "use-lavender-2003-attention",
         "use-audit-kasper-2010-silexan-health-mental-health-sleep",
-        "use-audit-ghaderi-solhjou-2020-health-oral-dental-needle-insertion-pain"
+        "use-audit-ghaderi-solhjou-2020-health-oral-dental-needle-insertion-pain",
+        "use-16411e3e0141564604d91d91-anxiety",
+        "use-16411e3e0141564604d91d91-mood"
       ],
       "precautions": {
         "legacySafety": "Generally well tolerated; patch test for sensitive skin.",
@@ -1379,7 +1395,8 @@ const TERPENE_DATA = {
             {
               "useNodeId": "health-cognitive",
               "evidenceIds": [
-                "use-acd1a7e8d32e5b33e24c2b8a"
+                "use-acd1a7e8d32e5b33e24c2b8a",
+                "use-6ce984a771dd1c22fcef7886-cognition"
               ],
               "children": [
                 {
@@ -1523,7 +1540,8 @@ const TERPENE_DATA = {
         "use-a89a2e5b4235532d5d3b9f2b",
         "use-ad28b49fe54c841b88526a4e",
         "use-c4334f9e78bcea6f8b96db1b",
-        "use-peppermint-40154579-428"
+        "use-peppermint-40154579-428",
+        "use-6ce984a771dd1c22fcef7886-cognition"
       ],
       "precautions": {
         "legacySafety": "Keep away from young children; can irritate eyes and mucous membranes.",
@@ -1657,6 +1675,13 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
+            },
+            {
+              "useNodeId": "health-cognitive",
+              "evidenceIds": [
+                "use-d4bfe4a5f92431f058ec035d-cognition"
+              ],
+              "children": []
             }
           ]
         },
@@ -1793,7 +1818,8 @@ const TERPENE_DATA = {
         "use-300810e01819882f5222d211",
         "use-f6be6b5f78431276ce1628cc",
         "use-a7819a1d26c9d909feaccee1",
-        "use-74056e862c1e2524fedf5418"
+        "use-74056e862c1e2524fedf5418",
+        "use-d4bfe4a5f92431f058ec035d-cognition"
       ],
       "precautions": {
         "legacySafety": "Do not use near infants; keep diluted and away from eyes.",
@@ -4333,7 +4359,6 @@ const TERPENE_DATA = {
               "useNodeId": "health-cognitive",
               "evidenceIds": [
                 "use-cb0c0554f97ab6b02ea9ccf1",
-                "use-63559e3ecdce183aaa8fe5d7",
                 "use-093fa0bbb1a3be779eadeebf",
                 "use-c845a83dcd6faea1c533fbf2"
               ],
@@ -4486,7 +4511,6 @@ const TERPENE_DATA = {
         "use-196a064983bf3438d09a6e62",
         "use-109655d2e84a41034473a3cd",
         "use-cb0c0554f97ab6b02ea9ccf1",
-        "use-63559e3ecdce183aaa8fe5d7",
         "use-093fa0bbb1a3be779eadeebf",
         "use-c845a83dcd6faea1c533fbf2",
         "use-21ab51776e35041e03c10735",
@@ -5321,10 +5345,16 @@ const TERPENE_DATA = {
           "children": [
             {
               "useNodeId": "health-pain-inflammation",
-              "evidenceIds": [
-                "use-3cd3455bdbc98c697794a95a"
-              ],
-              "children": []
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-pain-inflammation-menstrual-cramps",
+                  "evidenceIds": [
+                    "use-3cd3455bdbc98c697794a95a"
+                  ],
+                  "children": []
+                }
+              ]
             }
           ]
         }
@@ -6000,9 +6030,7 @@ const TERPENE_DATA = {
           "children": [
             {
               "useNodeId": "health-mental-health",
-              "evidenceIds": [
-                "use-1f0ea0ffaea7246bd5900bee"
-              ],
+              "evidenceIds": [],
               "children": [
                 {
                   "useNodeId": "health-mental-health-calm",
@@ -6035,6 +6063,13 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
+            },
+            {
+              "useNodeId": "health-quality-of-life",
+              "evidenceIds": [
+                "use-1f0ea0ffaea7246bd5900bee"
+              ],
+              "children": []
             },
             {
               "useNodeId": "health-cognitive",
@@ -8704,10 +8739,15 @@ const TERPENE_DATA = {
           "type": "health",
           "subcategory": "pain-inflammation",
           "topic": "headache"
+        },
+        {
+          "type": "health",
+          "subcategory": "cognitive"
         }
       ],
       "useNodeIds": [
-        "health-pain-inflammation-headache"
+        "health-pain-inflammation-headache",
+        "health-cognitive"
       ]
     },
     {
@@ -10029,10 +10069,22 @@ const TERPENE_DATA = {
         {
           "type": "health",
           "subcategory": "immune"
+        },
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "anxiety"
+        },
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "mood"
         }
       ],
       "useNodeIds": [
-        "health-immune"
+        "health-immune",
+        "health-mental-health-anxiety",
+        "health-mental-health-mood"
       ]
     },
     {
@@ -10484,18 +10536,13 @@ const TERPENE_DATA = {
           "type": "health",
           "subcategory": "mental-health",
           "topic": "sleep"
-        },
-        {
-          "type": "health",
-          "subcategory": "cognitive"
         }
       ],
       "useNodeIds": [
         "health-cognitive-memory",
         "health-mental-health-anxiety",
         "health-mental-health-mood",
-        "health-mental-health-sleep",
-        "health-cognitive"
+        "health-mental-health-sleep"
       ]
     },
     {
@@ -11546,7 +11593,7 @@ const TERPENE_DATA = {
       "studyType": "randomized-controlled-trial",
       "context": "human",
       "evidenceLevel": "clinical",
-      "sampleSize": null,
+      "sampleSize": 67,
       "finding": "Topical aromatherapy with a lavender, clary sage, and rose blend significantly reduced menstrual cramp severity versus placebo.",
       "limitations": "Topical lavender, clary sage and rose blend; individual oil contributions were not isolated. No arbitrary spray or single-oil efficacy inference.",
       "citationReview": {
@@ -11572,14 +11619,9 @@ const TERPENE_DATA = {
       "compoundIds": [
         "linalool"
       ],
-      "categories": [
-        {
-          "type": "health",
-          "subcategory": "pain-inflammation"
-        }
-      ],
+      "categories": [],
       "useNodeIds": [
-        "health-pain-inflammation"
+        "health-pain-inflammation-menstrual-cramps"
       ]
     },
     {
@@ -13207,15 +13249,11 @@ const TERPENE_DATA = {
         {
           "type": "health",
           "subcategory": "cardiovascular"
-        },
-        {
-          "type": "health",
-          "subcategory": "mental-health"
         }
       ],
       "useNodeIds": [
         "health-cardiovascular",
-        "health-mental-health"
+        "health-quality-of-life"
       ]
     },
     {
@@ -19691,6 +19729,26 @@ const TERPENE_DATA = {
         ],
         "legacyBindings": [],
         "declared": true
+      },
+      {
+        "id": "health-pain-inflammation-menstrual-cramps",
+        "label": "Menstrual cramps",
+        "parentId": "health-pain-inflammation",
+        "aliases": [
+          "health-pain-inflammation-menstrual-cramps"
+        ],
+        "legacyBindings": [],
+        "declared": true
+      },
+      {
+        "id": "health-quality-of-life",
+        "label": "Quality of life",
+        "parentId": "health",
+        "aliases": [
+          "health-quality-of-life"
+        ],
+        "legacyBindings": [],
+        "declared": true
       }
     ],
     "aliases": {
@@ -19966,7 +20024,9 @@ const TERPENE_DATA = {
       "health-skin-psoriasis": "health-skin-psoriasis",
       "pest-beetles-callosobruchus-maculatus": "pest-beetles-callosobruchus-maculatus",
       "pest-plant-bugs-pyrrhocoris-apterus": "pest-plant-bugs-pyrrhocoris-apterus",
-      "cleaning-hand-hygiene": "cleaning-hand-hygiene"
+      "cleaning-hand-hygiene": "cleaning-hand-hygiene",
+      "health-pain-inflammation-menstrual-cramps": "health-pain-inflammation-menstrual-cramps",
+      "health-quality-of-life": "health-quality-of-life"
     },
     "matrixGroups": [
       {
@@ -21767,43 +21827,45 @@ const TERPENE_DATA = {
       "oilId": "lavender",
       "studyId": "kasper-2010-silexan",
       "useNodeId": "health-mental-health-anxiety",
-      "finding": null,
-      "limitations": null,
+      "finding": "Anxiety scores improved versus placebo in adults with subsyndromal anxiety.",
+      "limitations": "221 adults; formulation-specific oral trial, not inhalation or a custom spray. The indexed abstract identifies Lavandula species without authenticating a retail oil batch.",
       "material": {
-        "kind": "oral-preparation",
-        "label": "oral-standardized-oil",
-        "relevance": "related-preparation",
+        "kind": "oral-oil-formulation",
+        "label": "Defined oral lavender-oil capsule preparation (Silexan), 80 mg/day for ten weeks",
+        "relevance": "different-preparation",
         "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "human",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
       },
-      "route": null,
+      "route": "oral",
       "species": "not-independently-authenticated",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/20512042/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed-only Used a standardized oral preparation, not diffused oil. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 221 adults; formulation-specific oral trial, not inhalation or a custom spray. The indexed abstract identifies Lavandula species without authenticating a retail oil batch."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/20512042/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -21902,43 +21964,45 @@ const TERPENE_DATA = {
       "oilId": "eucalyptus",
       "studyId": "juergens-2003-cineole",
       "useNodeId": "health-respiratory",
-      "finding": null,
-      "limitations": null,
+      "finding": "Participants receiving cineole tolerated a greater reduction in prescribed prednisolone than placebo under study supervision.",
+      "limitations": "32 steroid-dependent asthma patients; isolated cineole, not eucalyptus essential oil. Medication changes were supervised study procedures.",
       "material": {
         "kind": "isolated-compound",
-        "label": "Medicinal oral 1,8-cineole preparations",
-        "relevance": "isolated-compound",
-        "speciesMatch": "not-explicitly-verified"
+        "label": "Isolated 1,8-cineole in small-gut-soluble capsules",
+        "relevance": "different-preparation",
+        "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "Human respiratory trials",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
       },
-      "route": null,
+      "route": "oral",
       "species": "not-independently-authenticated",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/12645832/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Never present as eucalyptus-oil, inhalation, household spray or finished-product clinical evidence. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 32 steroid-dependent asthma patients; isolated cineole, not eucalyptus essential oil. Medication changes were supervised study procedures."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/12645832/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -22307,43 +22371,45 @@ const TERPENE_DATA = {
       "oilId": "peppermint",
       "studyId": "gobel-schmidt-soyka-1994",
       "useNodeId": "health-pain-inflammation-headache",
-      "finding": null,
-      "limitations": null,
+      "finding": "The peppermint–ethanol preparation reduced experimental pain sensitivity in healthy volunteers.",
+      "limitations": "32 healthy volunteers; laboratory measures, not treatment of headache attacks. Botanical species and concentrations are not specified in the checked abstract.",
       "material": {
-        "kind": "related-preparation",
-        "label": "Preparation needs primary-source verification.",
-        "relevance": "related-species/preparation",
-        "speciesMatch": "not-explicitly-verified"
+        "kind": "single-oil-topical-formulation",
+        "label": "Peppermint oil in ethanol, applied to forehead and temples",
+        "relevance": "different-preparation",
+        "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "human",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "mixed"
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
       },
-      "route": null,
+      "route": "topical",
       "species": "not-independently-authenticated",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/7954745/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Exact material/species/chemotype and oil-specific results need primary verification before positive suggestion. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 32 healthy volunteers; laboratory measures, not treatment of headache attacks. Botanical species and concentrations are not specified in the checked abstract."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/7954745/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -22352,43 +22418,45 @@ const TERPENE_DATA = {
       "oilId": "eucalyptus",
       "studyId": "gobel-schmidt-soyka-1994",
       "useNodeId": "health-pain-inflammation-headache",
-      "finding": null,
-      "limitations": null,
+      "finding": "The peppermint–eucalyptus combination had little effect on experimental pain sensitivity.",
+      "limitations": "32 healthy volunteers; laboratory measures, not treatment of headache attacks. Botanical species and concentrations are not specified in the checked abstract.",
       "material": {
-        "kind": "related-preparation",
-        "label": "Preparation needs primary-source verification.",
-        "relevance": "related-species/preparation",
-        "speciesMatch": "not-explicitly-verified"
+        "kind": "combination",
+        "label": "Peppermint and eucalyptus oils in ethanol, applied to forehead and temples",
+        "relevance": "combination-not-isolated",
+        "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "human",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "mixed"
+        "direction": "null",
+        "label": "null",
+        "verification": "source-checked"
       },
-      "route": null,
+      "route": "topical",
       "species": "not-independently-authenticated",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/7954745/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Exact material/species/chemotype and oil-specific results need primary verification before positive suggestion. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 32 healthy volunteers; laboratory measures, not treatment of headache attacks. Botanical species and concentrations are not specified in the checked abstract."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/7954745/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -24266,43 +24334,45 @@ const TERPENE_DATA = {
       "oilId": "tea-tree",
       "studyId": "hur-park-2007",
       "useNodeId": "health-oral-dental-oral-malodor",
-      "finding": null,
-      "limitations": null,
+      "finding": "The three-oil mouthwash reduced oral malodor and volatile sulfur compounds in ICU patients.",
+      "limitations": "32 patients received oils on day one and benzydamine on day two. Fixed treatment order and a combination intervention prevent isolated-oil efficacy inference.",
       "material": {
-        "kind": "related-preparation",
-        "label": "Preparation needs primary-source verification.",
-        "relevance": "related-species/preparation",
-        "speciesMatch": "not-explicitly-verified"
+        "kind": "combination",
+        "label": "Diluted tea tree, peppermint and lemon oil mouthwash",
+        "relevance": "combination-not-isolated",
+        "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "human",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "not-assessed"
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
       },
-      "route": null,
+      "route": "oral-rinse",
       "species": "not-independently-authenticated",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/17380550/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Exact material/species/chemotype and oil-specific results need primary verification before positive suggestion. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion. Original cleaning tag is not verified soil-removal evidence; use precise microbial/textile/oral endpoint correction. Original category corrected to the measured endpoint; oil-study relationship retained."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 32 patients received oils on day one and benzydamine on day two. Fixed treatment order and a combination intervention prevent isolated-oil efficacy inference."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/17380550/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -24311,43 +24381,45 @@ const TERPENE_DATA = {
       "oilId": "peppermint",
       "studyId": "hur-park-2007",
       "useNodeId": "health-oral-dental-oral-malodor",
-      "finding": null,
-      "limitations": null,
+      "finding": "The three-oil mouthwash reduced oral malodor and volatile sulfur compounds in ICU patients.",
+      "limitations": "32 patients received oils on day one and benzydamine on day two. Fixed treatment order and a combination intervention prevent isolated-oil efficacy inference.",
       "material": {
         "kind": "combination",
-        "label": "Tea-tree, peppermint and lemon mouthwash blend",
-        "relevance": "related-species/preparation",
-        "speciesMatch": "not-explicitly-verified"
+        "label": "Diluted tea tree, peppermint and lemon oil mouthwash",
+        "relevance": "combination-not-isolated",
+        "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "32 intensive-care patients; one-hour follow-up",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
       },
-      "route": null,
+      "route": "oral-rinse",
       "species": "not-independently-authenticated",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/17380550/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Cannot attribute effect to peppermint; oral malodor is not room deodorization or surface cleaning. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 32 patients received oils on day one and benzydamine on day two. Fixed treatment order and a combination intervention prevent isolated-oil efficacy inference."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/17380550/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -24356,43 +24428,45 @@ const TERPENE_DATA = {
       "oilId": "lemon",
       "studyId": "hur-park-2007",
       "useNodeId": "health-oral-dental-oral-malodor",
-      "finding": null,
-      "limitations": null,
+      "finding": "The three-oil mouthwash reduced oral malodor and volatile sulfur compounds in ICU patients.",
+      "limitations": "32 patients received oils on day one and benzydamine on day two. Fixed treatment order and a combination intervention prevent isolated-oil efficacy inference.",
       "material": {
         "kind": "combination",
-        "label": "essential-oil-blend",
-        "relevance": "related-preparation",
+        "label": "Diluted tea tree, peppermint and lemon oil mouthwash",
+        "relevance": "combination-not-isolated",
         "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "human",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
       },
-      "route": null,
+      "route": "oral-rinse",
       "species": "not-independently-authenticated",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/17380550/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed-only n=32; single ICU; follow-up only one hour. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion. Original cleaning tag is not verified soil-removal evidence; use precise microbial/textile/oral endpoint correction. Original category corrected to the measured endpoint; oil-study relationship retained."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 32 patients received oils on day one and benzydamine on day two. Fixed treatment order and a combination intervention prevent isolated-oil efficacy inference."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/17380550/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -24446,43 +24520,45 @@ const TERPENE_DATA = {
       "oilId": "lavender",
       "studyId": "kuriyama-watanabe-2005",
       "useNodeId": "health-immune",
-      "finding": null,
-      "limitations": null,
+      "finding": "Some lymphocyte measures changed after the combined-oil massage intervention.",
+      "limitations": "11 participants. Biomarker changes do not establish infection prevention or clinical immune benefit. The abstract contains an inconsistent significance notation for total lymphocytes.",
       "material": {
         "kind": "combination",
-        "label": "essential-oil-blend",
-        "relevance": "related-preparation",
+        "label": "Lavender, cypress and sweet marjoram oils in almond oil, with massage",
+        "relevance": "combination-not-isolated",
         "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "human",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
       },
-      "route": null,
+      "route": "topical",
       "species": "not-independently-authenticated",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/15937558/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed-only n=11; preliminary; blend also contained cypress and sweet marjoram oils. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 11 participants. Biomarker changes do not establish infection prevention or clinical immune benefit. The abstract contains an inconsistent significance notation for total lymphocytes."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/15937558/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -24850,43 +24926,45 @@ const TERPENE_DATA = {
       "oilId": "rosemary",
       "studyId": "rosemary-students-2018",
       "useNodeId": "health-cognitive-memory",
-      "finding": null,
-      "limitations": null,
+      "finding": "Self-reported prospective and retrospective memory scores improved relative to placebo.",
+      "limitations": "68 students; questionnaire outcomes. Neither rosemary essential oil nor inhalation was tested.",
       "material": {
-        "kind": "related-preparation",
-        "label": "Oral rosemary powder/herb preparations",
-        "relevance": "related-species/preparation",
-        "speciesMatch": "not-explicitly-verified"
+        "kind": "plant-material",
+        "label": "Oral rosemary herb preparation, 500 mg twice daily for one month",
+        "relevance": "different-preparation",
+        "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "Human cognitive studies",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
       },
-      "route": null,
-      "species": "not-independently-authenticated",
+      "route": "oral",
+      "species": "Rosmarinus officinalis",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/29389474/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Do not use as rosemary-essential-oil or inhalation evidence. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 68 students; questionnaire outcomes. Neither rosemary essential oil nor inhalation was tested."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/29389474/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -24895,43 +24973,45 @@ const TERPENE_DATA = {
       "oilId": "rosemary",
       "studyId": "rosemary-students-2018",
       "useNodeId": "health-mental-health-anxiety",
-      "finding": null,
-      "limitations": null,
+      "finding": "Anxiety questionnaire scores improved relative to placebo.",
+      "limitations": "68 students; questionnaire outcomes. Neither rosemary essential oil nor inhalation was tested.",
       "material": {
-        "kind": "related-preparation",
-        "label": "Oral rosemary powder/herb preparations",
-        "relevance": "related-species/preparation",
-        "speciesMatch": "not-explicitly-verified"
+        "kind": "plant-material",
+        "label": "Oral rosemary herb preparation, 500 mg twice daily for one month",
+        "relevance": "different-preparation",
+        "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "Human cognitive studies",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
       },
-      "route": null,
-      "species": "not-independently-authenticated",
+      "route": "oral",
+      "species": "Rosmarinus officinalis",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/29389474/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Do not use as rosemary-essential-oil or inhalation evidence. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 68 students; questionnaire outcomes. Neither rosemary essential oil nor inhalation was tested."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/29389474/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -24940,43 +25020,45 @@ const TERPENE_DATA = {
       "oilId": "rosemary",
       "studyId": "rosemary-students-2018",
       "useNodeId": "health-mental-health-mood",
-      "finding": null,
-      "limitations": null,
+      "finding": "Depression questionnaire scores improved relative to placebo.",
+      "limitations": "68 students; questionnaire outcomes. Neither rosemary essential oil nor inhalation was tested.",
       "material": {
-        "kind": "related-preparation",
-        "label": "Oral rosemary powder/herb preparations",
-        "relevance": "related-species/preparation",
-        "speciesMatch": "not-explicitly-verified"
+        "kind": "plant-material",
+        "label": "Oral rosemary herb preparation, 500 mg twice daily for one month",
+        "relevance": "different-preparation",
+        "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "Human cognitive studies",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
       },
-      "route": null,
-      "species": "not-independently-authenticated",
+      "route": "oral",
+      "species": "Rosmarinus officinalis",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/29389474/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Do not use as rosemary-essential-oil or inhalation evidence. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 68 students; questionnaire outcomes. Neither rosemary essential oil nor inhalation was tested."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/29389474/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -24985,43 +25067,45 @@ const TERPENE_DATA = {
       "oilId": "rosemary",
       "studyId": "rosemary-students-2018",
       "useNodeId": "health-mental-health-sleep",
-      "finding": null,
-      "limitations": null,
+      "finding": "Sleep-quality scores improved, but sleep latency and duration components did not significantly improve.",
+      "limitations": "68 students; questionnaire outcomes. Neither rosemary essential oil nor inhalation was tested.",
       "material": {
-        "kind": "related-preparation",
-        "label": "Oral rosemary powder/herb preparations",
-        "relevance": "related-species/preparation",
-        "speciesMatch": "not-explicitly-verified"
+        "kind": "plant-material",
+        "label": "Oral rosemary herb preparation, 500 mg twice daily for one month",
+        "relevance": "different-preparation",
+        "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "Human cognitive studies",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
       },
-      "route": null,
-      "species": "not-independently-authenticated",
+      "route": "oral",
+      "species": "Rosmarinus officinalis",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/29389474/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Do not use as rosemary-essential-oil or inhalation evidence. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 68 students; questionnaire outcomes. Neither rosemary essential oil nor inhalation was tested."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/29389474/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -27819,44 +27903,46 @@ const TERPENE_DATA = {
       "kind": "study-use",
       "oilId": "lavender",
       "studyId": "han-2006-dysmenorrhea",
-      "useNodeId": "health-pain-inflammation",
-      "finding": null,
-      "limitations": null,
+      "useNodeId": "health-pain-inflammation-menstrual-cramps",
+      "finding": "The three-oil massage intervention reduced menstrual cramp severity versus the comparison groups.",
+      "limitations": "67 students. No individual-oil arm; the rose species is Rosa centifolia, not a generic interchangeable rose oil.",
       "material": {
         "kind": "combination",
-        "label": "essential-oil-blend",
-        "relevance": "related-preparation",
+        "label": "Lavender, clary sage and Rosa centifolia oils in almond oil, with abdominal massage",
+        "relevance": "combination-not-isolated",
         "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "human",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
       },
-      "route": null,
+      "route": "topical",
       "species": "not-independently-authenticated",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/16884344/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed-only Topical lavender, clary sage and rose blend; individual oil contributions were not isolated. No arbitrary spray or single-oil efficacy inference. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 67 students. No individual-oil arm; the rose species is Rosa centifolia, not a generic interchangeable rose oil."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/16884344/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -30822,43 +30908,45 @@ const TERPENE_DATA = {
       "oilId": "lavender",
       "studyId": "napavichayanun-2024-lavender-ylang-ylang-blood-pressure",
       "useNodeId": "health-cardiovascular",
-      "finding": null,
-      "limitations": null,
+      "finding": "The combined-oil pad improved systolic blood-pressure and pulse-rate differences relative to placebo.",
+      "limitations": "34 high-blood-pressure volunteers, 14 days. Two-oil intervention; individual-oil effects were not isolated.",
       "material": {
         "kind": "combination",
-        "label": "essential-oil-blend",
-        "relevance": "related-preparation",
+        "label": "Shirt-mounted pads containing lavender and ylang-ylang oils",
+        "relevance": "combination-not-isolated",
         "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "human",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
       },
-      "route": null,
+      "route": "inhalation",
       "species": "not-independently-authenticated",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/38087747/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed-only 34 high-BP volunteers in efficacy phase; longer-term effects unknown. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 34 high-blood-pressure volunteers, 14 days. Two-oil intervention; individual-oil effects were not isolated."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/38087747/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -30866,44 +30954,46 @@ const TERPENE_DATA = {
       "kind": "study-use",
       "oilId": "lavender",
       "studyId": "napavichayanun-2024-lavender-ylang-ylang-blood-pressure",
-      "useNodeId": "health-mental-health",
-      "finding": null,
-      "limitations": null,
+      "useNodeId": "health-quality-of-life",
+      "finding": "Quality-of-life scores improved in the separate 56-person healthy-volunteer phase.",
+      "limitations": "Two-hour exposure in the healthy-volunteer safety phase. Not the 34-person hypertension efficacy trial, and not a demonstrated anxiety or depression outcome.",
       "material": {
         "kind": "combination",
-        "label": "essential-oil-blend",
-        "relevance": "related-preparation",
+        "label": "Shirt-mounted pads containing lavender and ylang-ylang oils",
+        "relevance": "combination-not-isolated",
         "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "human",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
       },
-      "route": null,
+      "route": "inhalation",
       "species": "not-independently-authenticated",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/38087747/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed-only 34 high-BP volunteers in efficacy phase; longer-term effects unknown. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. Two-hour exposure in the healthy-volunteer safety phase. Not the 34-person hypertension efficacy trial, and not a demonstrated anxiety or depression outcome."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/38087747/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -30912,43 +31002,45 @@ const TERPENE_DATA = {
       "oilId": "ylang-ylang",
       "studyId": "napavichayanun-2024-lavender-ylang-ylang-blood-pressure",
       "useNodeId": "health-cardiovascular",
-      "finding": null,
-      "limitations": null,
+      "finding": "The combined-oil pad improved systolic blood-pressure and pulse-rate differences relative to placebo.",
+      "limitations": "34 high-blood-pressure volunteers, 14 days. Two-oil intervention; individual-oil effects were not isolated.",
       "material": {
-        "kind": "related-preparation",
-        "label": "Lavender and ylang-ylang oil-containing sticker pads",
-        "relevance": "related-species/preparation",
-        "speciesMatch": "not-explicitly-verified"
+        "kind": "combination",
+        "label": "Shirt-mounted pads containing lavender and ylang-ylang oils",
+        "relevance": "combination-not-isolated",
+        "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "34 high-blood-pressure volunteers in efficacy phase",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
       },
-      "route": null,
+      "route": "inhalation",
       "species": "not-independently-authenticated",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/38087747/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Combination cannot identify ylang-ylang contribution; do not suggest oils for treating hypertension. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 34 high-blood-pressure volunteers, 14 days. Two-oil intervention; individual-oil effects were not isolated."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/38087747/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -30956,44 +31048,46 @@ const TERPENE_DATA = {
       "kind": "study-use",
       "oilId": "ylang-ylang",
       "studyId": "napavichayanun-2024-lavender-ylang-ylang-blood-pressure",
-      "useNodeId": "health-mental-health",
-      "finding": null,
-      "limitations": null,
+      "useNodeId": "health-quality-of-life",
+      "finding": "Quality-of-life scores improved in the separate 56-person healthy-volunteer phase.",
+      "limitations": "Two-hour exposure in the healthy-volunteer safety phase. Not the 34-person hypertension efficacy trial, and not a demonstrated anxiety or depression outcome.",
       "material": {
-        "kind": "related-preparation",
-        "label": "Lavender and ylang-ylang oil-containing sticker pads",
-        "relevance": "related-species/preparation",
-        "speciesMatch": "not-explicitly-verified"
+        "kind": "combination",
+        "label": "Shirt-mounted pads containing lavender and ylang-ylang oils",
+        "relevance": "combination-not-isolated",
+        "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "34 high-blood-pressure volunteers in efficacy phase",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
       },
-      "route": null,
+      "route": "inhalation",
       "species": "not-independently-authenticated",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/38087747/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Combination cannot identify ylang-ylang contribution; do not suggest oils for treating hypertension. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. Two-hour exposure in the healthy-volunteer safety phase. Not the 34-person hypertension efficacy trial, and not a demonstrated anxiety or depression outcome."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/38087747/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -35285,51 +35379,6 @@ const TERPENE_DATA = {
       }
     },
     {
-      "id": "use-63559e3ecdce183aaa8fe5d7",
-      "kind": "study-use",
-      "oilId": "rosemary",
-      "studyId": "rosemary-students-2018",
-      "useNodeId": "health-cognitive",
-      "finding": null,
-      "limitations": null,
-      "route": null,
-      "species": "not-independently-authenticated",
-      "material": {
-        "kind": "related-preparation",
-        "label": "Oral rosemary powder/herb preparations",
-        "relevance": "related-species/preparation",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "human",
-        "label": "Human cognitive studies",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
-      },
-      "relevance": "contextual",
-      "researchMatch": false,
-      "supportsFunctionalUse": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/29389474/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-only Do not use as rosemary-essential-oil or inhalation evidence. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
-      },
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
       "id": "use-093fa0bbb1a3be779eadeebf",
       "kind": "study-use",
       "oilId": "rosemary",
@@ -36596,44 +36645,46 @@ const TERPENE_DATA = {
       "kind": "study-use",
       "oilId": "clary-sage",
       "studyId": "han-2006-dysmenorrhea",
-      "useNodeId": "health-pain-inflammation",
-      "finding": null,
-      "limitations": "Blend results cannot be attributed to this individual oil.",
-      "route": null,
+      "useNodeId": "health-pain-inflammation-menstrual-cramps",
+      "finding": "The three-oil massage intervention reduced menstrual cramp severity versus the comparison groups.",
+      "limitations": "67 students. No individual-oil arm; the rose species is Rosa centifolia, not a generic interchangeable rose oil.",
+      "route": "topical",
       "species": "not-independently-authenticated",
       "material": {
         "kind": "combination",
-        "label": "Lavender, clary sage and rose topical blend.",
-        "relevance": "related-preparation",
-        "speciesMatch": "not-independently-authenticated"
+        "label": "Lavender, clary sage and Rosa centifolia oils in almond oil, with abdominal massage",
+        "relevance": "combination-not-isolated",
+        "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "Human randomized trial of a multi-oil blend.",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "reportedDirection": "positive",
-        "label": "Reported blend-level result; individual oil contribution not isolated.",
-        "verification": "library-reported-unverified"
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
       },
       "relevance": "contextual",
       "researchMatch": false,
       "supportsFunctionalUse": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/16884344/"
         ],
-        "checkedAt": null,
-        "notes": "Recovered contextual blend component from the canonical paper; no independent source recheck of this arm in this pass."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 67 students. No individual-oil arm; the rose species is Rosa centifolia, not a generic interchangeable rose oil."
       },
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/16884344/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -38750,7 +38801,7 @@ const TERPENE_DATA = {
         "urls": [
           "https://pmc.ncbi.nlm.nih.gov/articles/PMC8839266/"
         ],
-        "checkedAt": "2026-10-18",
+        "checkedAt": "2026-10-19",
         "notes": "full-text-screened. Commercial sample with a supplier-reported identity and a profile different from the other Atlas cedar sample. Food-model, culture and firebug assays are not clinical treatment, cleaning performance or mosquito/tick repellency. Mortality is not a repellency endpoint."
       },
       "routeVerification": {
@@ -38797,7 +38848,7 @@ const TERPENE_DATA = {
         "urls": [
           "https://pmc.ncbi.nlm.nih.gov/articles/PMC8839266/"
         ],
-        "checkedAt": "2026-10-18",
+        "checkedAt": "2026-10-19",
         "notes": "full-text-screened. Commercial sample with a supplier-reported identity and a profile different from the other Atlas cedar sample. Food-model, culture and firebug assays are not clinical treatment, cleaning performance or mosquito/tick repellency. Mortality is not a repellency endpoint."
       },
       "routeVerification": {
@@ -38814,8 +38865,8 @@ const TERPENE_DATA = {
       "oilId": "cedarwood-atlas",
       "studyId": "galovicova-2022-atlas-cedar-bioactivity",
       "useNodeId": "microbial-biofilms",
-      "finding": "Laboratory microbial growth or biofilm endpoints; not disinfection or clinical efficacy.",
-      "limitations": null,
+      "finding": "MALDI-TOF protein profiles of P. fluorescens and S. enterica biofilms changed from day seven after oil exposure.",
+      "limitations": "Protein-profile changes do not establish viable biofilm eradication or surface disinfection.",
       "material": {
         "kind": "essential-oil",
         "label": "Cedrus atlantica distilled essential oil",
@@ -38829,22 +38880,22 @@ const TERPENE_DATA = {
         "scope": "endpoint"
       },
       "outcome": {
-        "direction": "positive",
-        "label": "positive",
+        "direction": "analytical-not-efficacy",
+        "label": "Biofilm protein-profile change",
         "verification": "source-checked"
       },
       "route": "laboratory-contact-and-vapor",
       "species": "Cedrus atlantica",
       "relevance": "direct",
       "researchMatch": true,
-      "supportsFunctionalUse": true,
+      "supportsFunctionalUse": false,
       "verification": {
         "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pmc.ncbi.nlm.nih.gov/articles/PMC8839266/"
         ],
-        "checkedAt": "2026-10-18",
+        "checkedAt": "2026-10-19",
         "notes": "full-text-screened. Commercial sample with a supplier-reported identity and a profile different from the other Atlas cedar sample. Food-model, culture and firebug assays are not clinical treatment, cleaning performance or mosquito/tick repellency. Mortality is not a repellency endpoint."
       },
       "routeVerification": {
@@ -38870,8 +38921,8 @@ const TERPENE_DATA = {
         "speciesMatch": "same-species"
       },
       "model": {
-        "kind": "in-vitro",
-        "label": "Laboratory culture or enzyme assay",
+        "kind": "animal",
+        "label": "Live firebugs in a sealed-dish vapor experiment",
         "verification": "source-checked",
         "scope": "endpoint"
       },
@@ -38891,7 +38942,7 @@ const TERPENE_DATA = {
         "urls": [
           "https://pmc.ncbi.nlm.nih.gov/articles/PMC8839266/"
         ],
-        "checkedAt": "2026-10-18",
+        "checkedAt": "2026-10-19",
         "notes": "full-text-screened. Commercial sample with a supplier-reported identity and a profile different from the other Atlas cedar sample. Food-model, culture and firebug assays are not clinical treatment, cleaning performance or mosquito/tick repellency. Mortality is not a repellency endpoint."
       },
       "routeVerification": {
@@ -39217,43 +39268,45 @@ const TERPENE_DATA = {
       "oilId": "lavender",
       "studyId": "kasper-2010-silexan",
       "useNodeId": "health-mental-health-sleep",
-      "finding": null,
-      "limitations": null,
+      "finding": "Anxiety-related sleep scores improved versus placebo.",
+      "limitations": "221 adults; formulation-specific oral trial, not inhalation or a custom spray. The indexed abstract identifies Lavandula species without authenticating a retail oil batch.",
       "material": {
-        "kind": "oral-preparation",
-        "label": "oral-standardized-oil",
-        "relevance": "related-preparation",
+        "kind": "oral-oil-formulation",
+        "label": "Defined oral lavender-oil capsule preparation (Silexan), 80 mg/day for ten weeks",
+        "relevance": "different-preparation",
         "speciesMatch": "not-independently-verified"
       },
       "model": {
         "kind": "human",
-        "label": "human",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive"
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
       },
-      "route": null,
+      "route": "oral",
       "species": "not-independently-authenticated",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/20512042/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed-only Used a standardized oral preparation, not diffused oil. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 221 adults; formulation-specific oral trial, not inhalation or a custom spray. The indexed abstract identifies Lavandula species without authenticating a retail oil batch."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/20512042/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     },
     {
@@ -39344,6 +39397,194 @@ const TERPENE_DATA = {
       "routeVerification": {
         "status": "unverified",
         "notes": "No independently checked endpoint-specific exposure route is assigned."
+      }
+    },
+    {
+      "id": "use-6ce984a771dd1c22fcef7886-cognition",
+      "kind": "study-use",
+      "oilId": "peppermint",
+      "studyId": "gobel-schmidt-soyka-1994",
+      "useNodeId": "health-cognitive",
+      "finding": "The peppermint–eucalyptus–ethanol combination improved measured cognitive performance; individual oil contributions were not isolated.",
+      "limitations": "32 healthy volunteers. The abstract does not identify attention or memory as the specific improved endpoint; no narrower cognitive tag is assigned.",
+      "material": {
+        "kind": "combination",
+        "label": "Peppermint and eucalyptus oils in ethanol, applied to forehead and temples",
+        "relevance": "combination-not-isolated",
+        "speciesMatch": "not-independently-verified"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "topical",
+      "species": "not-independently-authenticated",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/7954745/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 32 healthy volunteers. The abstract does not identify attention or memory as the specific improved endpoint; no narrower cognitive tag is assigned."
+      },
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/7954745/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-d4bfe4a5f92431f058ec035d-cognition",
+      "kind": "study-use",
+      "oilId": "eucalyptus",
+      "studyId": "gobel-schmidt-soyka-1994",
+      "useNodeId": "health-cognitive",
+      "finding": "The peppermint–eucalyptus–ethanol combination improved measured cognitive performance; individual oil contributions were not isolated.",
+      "limitations": "32 healthy volunteers. The abstract does not identify attention or memory as the specific improved endpoint; no narrower cognitive tag is assigned.",
+      "material": {
+        "kind": "combination",
+        "label": "Peppermint and eucalyptus oils in ethanol, applied to forehead and temples",
+        "relevance": "combination-not-isolated",
+        "speciesMatch": "not-independently-verified"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "topical",
+      "species": "not-independently-authenticated",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/7954745/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 32 healthy volunteers. The abstract does not identify attention or memory as the specific improved endpoint; no narrower cognitive tag is assigned."
+      },
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/7954745/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-16411e3e0141564604d91d91-anxiety",
+      "kind": "study-use",
+      "oilId": "lavender",
+      "studyId": "kuriyama-watanabe-2005",
+      "useNodeId": "health-mental-health-anxiety",
+      "finding": "Anxiety and depression scores improved after both massages, with no difference between aromatherapy and carrier-oil massage.",
+      "limitations": "11 participants. Biomarker changes do not establish infection prevention or clinical immune benefit. The abstract contains an inconsistent significance notation for total lymphocytes.",
+      "material": {
+        "kind": "combination",
+        "label": "Lavender, cypress and sweet marjoram oils in almond oil, with massage",
+        "relevance": "combination-not-isolated",
+        "speciesMatch": "not-independently-verified"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "null",
+        "label": "No between-treatment difference",
+        "verification": "source-checked"
+      },
+      "route": "topical",
+      "species": "not-independently-authenticated",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/15937558/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 11 participants. Biomarker changes do not establish infection prevention or clinical immune benefit. The abstract contains an inconsistent significance notation for total lymphocytes."
+      },
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/15937558/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-16411e3e0141564604d91d91-mood",
+      "kind": "study-use",
+      "oilId": "lavender",
+      "studyId": "kuriyama-watanabe-2005",
+      "useNodeId": "health-mental-health-mood",
+      "finding": "Anxiety and depression scores improved after both massages, with no difference between aromatherapy and carrier-oil massage.",
+      "limitations": "11 participants. Biomarker changes do not establish infection prevention or clinical immune benefit. The abstract contains an inconsistent significance notation for total lymphocytes.",
+      "material": {
+        "kind": "combination",
+        "label": "Lavender, cypress and sweet marjoram oils in almond oil, with massage",
+        "relevance": "combination-not-isolated",
+        "speciesMatch": "not-independently-verified"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "null",
+        "label": "No between-treatment difference",
+        "verification": "source-checked"
+      },
+      "route": "topical",
+      "species": "not-independently-authenticated",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/15937558/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Indexed primary abstract screened. 11 participants. Biomarker changes do not establish infection prevention or clinical immune benefit. The abstract contains an inconsistent significance notation for total lymphocytes."
+      },
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/15937558/"
+        ],
+        "notes": "Experimental route only; not consumer dosing guidance."
       }
     }
   ],

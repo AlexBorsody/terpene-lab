@@ -180,10 +180,11 @@ function visibleContext(studyId, oilId, nodeId) {
 }
 const juergens = data.evidenceAssertions.find(a => a.oilId === 'eucalyptus' && a.studyId === 'juergens-2003-cineole');
 assert.equal(juergens.material.kind, 'isolated-compound');
-assert.equal(juergens.route, null, 'Library-only routes stay unverified; the reported oral preparation remains visible in material');
+assert.equal(juergens.route, 'oral', 'Primary abstract verifies oral cineole capsules, not inhaled eucalyptus oil');
 const cineoleContext = visibleContext('juergens-2003-cineole', 'eucalyptus', 'health-respiratory');
-assert.ok(cineoleContext.includes('Medicinal oral 1,8-cineole preparations'));
-assert.ok(cineoleContext.includes('Library-linked evidence; applicability not independently verified'));
+assert.ok(cineoleContext.includes('Isolated 1,8-cineole in small-gut-soluble capsules'));
+assert.equal(juergens.verification.status, 'source-checked');
+assert.equal(juergens.relevance, 'contextual');
 assert.ok(!cineoleContext.includes('Source-reviewed direct research'));
 const myrrhContext = visibleContext('nialeila-2020-myrrh-frankincense-wound', 'myrrh', 'health-wound');
 const frankincenseContext = visibleContext('nialeila-2020-myrrh-frankincense-wound', 'frankincense', 'health-wound');

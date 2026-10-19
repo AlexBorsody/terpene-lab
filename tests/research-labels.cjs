@@ -170,8 +170,8 @@ const assert = require('node:assert/strict');
   assert.equal(await cineole.locator('.research-scope').evaluate(node => !!node.closest('details')), false);
   assert.equal(await cineole.locator('.research-assessments').getAttribute('open'), null);
   const cineoleText = await cineole.locator('.research-scope').innerText();
-  assert.ok(cineoleText.includes('Medicinal oral 1,8-cineole preparations'));
-  assert.ok(cineoleText.includes('Library-linked evidence; applicability not independently verified'));
+  assert.ok(cineoleText.includes('Isolated 1,8-cineole in small-gut-soluble capsules'));
+  assert.ok(cineoleText.includes('Source-reviewed contextual evidence'));
   assert.ok(!cineoleText.includes('Source-reviewed direct research'));
   for (const [oil, finding, wrongFinding, material] of [
     ['myrrh', 'Myrrh-extract sitz baths improved REEDA healing scores', 'Frankincense-extract sitz baths did not', 'Commiphora myrrha extract sitz bath'],

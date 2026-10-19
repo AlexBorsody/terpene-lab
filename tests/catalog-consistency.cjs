@@ -31,3 +31,30 @@ assert.ok(!assertions.some(a=>a.studyId==='kumar-mishra-2011' && a.useNodeId==='
 assert.match(d.studies.find(s=>s.id==='francisconi-2020').finding,/Tea tree oil/);
 assert.ok(assertions.filter(a=>a.studyId==='holloway-2024-argentineant' && a.oilId==='rosemary').every(a=>a.material.kind==='plant-material' && !a.researchMatch));
 console.log(`catalog-consistency: ${nodes.length} topics × ${m.oils.length} oils; ${pairs} topic pairs checked in both all/any modes`);
+
+// Source-audited arm boundaries: shared publications must not share outcomes blindly.
+const scoped=(oil,study,topic)=>r.assertions(oil,study,topic);
+const headache='gobel-schmidt-soyka-1994';
+assert.equal(scoped('eucalyptus',headache,'health-pain-inflammation-headache')[0].outcome.direction,'null');
+assert.equal(scoped('peppermint',headache,'health-pain-inflammation-headache')[0].outcome.direction,'positive');
+for(const oil of ['peppermint','eucalyptus']){
+ const cognition=scoped(oil,headache,'health-cognitive');
+ assert.equal(cognition.length,1);
+ assert.equal(cognition[0].material.kind,'combination');
+ assert.equal(cognition[0].researchMatch,false);
+ assert.equal(scoped(oil,headache,'health-cognitive-attention').length,0);
+}
+const pads='napavichayanun-2024-lavender-ylang-ylang-blood-pressure';
+for(const oil of ['lavender','ylang-ylang']){
+ assert.equal(scoped(oil,pads,'health-mental-health').length,0);
+ assert.equal(scoped(oil,pads,'health-quality-of-life').length,1);
+ assert.equal(scoped(oil,pads,'health-cardiovascular').length,1);
+}
+for(const topic of ['health-mental-health-anxiety','health-mental-health-mood'])
+ assert.equal(scoped('lavender','kuriyama-watanabe-2005',topic)[0].outcome.direction,'null');
+assert.equal(scoped('eucalyptus','juergens-2003-cineole','health-respiratory')[0].material.kind,'isolated-compound');
+assert.equal(scoped('rosemary','rosemary-students-2018','health-mental-health-sleep')[0].outcome.direction,'mixed');
+assert.equal(scoped('cedarwood-atlas','galovicova-2022-atlas-cedar-bioactivity','microbial-biofilms')[0].supportsFunctionalUse,false);
+for(const oil of ['lavender','clary-sage'])
+ assert.equal(scoped(oil,'han-2006-dysmenorrhea','health-pain-inflammation-menstrual-cramps').length,1);
+console.log('catalog-consistency: treatment arms, null results, populations and preparations remain distinct');
