@@ -83,7 +83,7 @@ const assert = require('node:assert/strict');
  await page.locator('[data-matrix-view="study-topics"]').click();
  assert.equal(await page.locator('#matrix-table tbody tr').count(),174);
  await page.locator('#matrix-inventory [data-matrix-inspect="sources"]').click();
- assert.equal(await page.locator('#matrix-inspector .chem-evidence').count(),45);
+ assert.equal(await page.locator('#matrix-inspector .chem-evidence').count(),50);
  // Complete an oil -> compound -> paper/topic path without leaving the Matrix.
  await page.goto(`${base}/?tab=matrix&inspect=compound/limonene&embed=1`);
  await page.locator('#matrix-inspector [data-matrix-topic-link]').first().click();

@@ -18,14 +18,12 @@ jobs:
       - name: Browser checks
         run: |
           export CHROME_PATH="$(node -e "console.log(require('playwright').chromium.executablePath())")"
-          node tests/pwa.cjs
           python3 -m http.server 8000 >/tmp/lab-server.log 2>&1 &
-          node tests/browser.cjs
-          node tests/molecule-viewer-browser.cjs
-          node tests/research-labels.cjs
-          node tests/taxonomy-browser.cjs
-          node tests/blend-browser.cjs
-          node tests/blend-checkout.cjs
+          browser_status=0
+          for suite in pwa browser molecule-viewer-browser research-labels taxonomy-browser blend-browser blend-checkout; do
+            node "tests/$suite.cjs" || browser_status=1
+          done
+          exit "$browser_status"
       - name: Preserve blend review screenshots
         if: always()
         uses: actions/upload-artifact@v4
