@@ -1,4 +1,4 @@
-/* Installation, offline status and consent-based release updates. */
+/* Installation, offline status and automatic release updates. */
 (() => {
   const embedded = document.documentElement.classList.contains('lab-embedded');
   // Embedded storefronts must not register a worker or show install/update UI.
@@ -51,7 +51,11 @@
       if (!registration || navigator.onLine) {
         registration = await navigator.serviceWorker.register('./sw.js', { scope: './', updateViaCache: 'none' });
       }
-      const offer = () => { update.hidden = !registration.waiting; };
+      const offer = () => {
+        update.hidden = true;
+        // Also activate workers left waiting by an older app version.
+        registration.waiting?.postMessage({ type: 'ACTIVATE_UPDATE' });
+      };
       offer();
       const observeInstalling = () => {
         const worker = registration.installing;
@@ -62,7 +66,7 @@
       observeInstalling();
       await navigator.serviceWorker.ready;
       render();
-      setInterval(check, 60 * 60 * 1000);
+      setInterval(check, 60 * 1000);
     } catch (error) {
       render();
       console.warn('Lab offline setup:', error);
