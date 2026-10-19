@@ -619,8 +619,8 @@ function renderCompounds() {
   grid.innerHTML = list.map(c => {
     const n = oilsWithCompound(c.id).length;
     const s = studiesForCompound(c.id).length;
-    return `<div class="card compound-card" data-c="${c.id}" tabindex="0" role="button" aria-label="Explore ${esc(c.name)}"${c.showModel === false ? "" : ` aria-describedby="molecule-note-${c.id}"`}>
-      ${c.showModel === false ? "" : `<div class="molecule3d" id="molecule3d-${c.id}" data-molecule-id="${c.id}" role="img" aria-label="Illustrative 3D sketch for ${esc(c.name)}. Not a validated molecular structure. Loading illustration."><span class="molecule-status">Loading illustration</span><span class="molecule-disclaimer" id="molecule-note-${c.id}">Illustrative sketch.<br>Not a validated molecular structure.</span></div>`}
+    return `<div class="card compound-card" data-c="${c.id}" tabindex="0" role="button" aria-label="Explore ${esc(c.name)}">
+      ${c.showModel === false ? "" : `<div class="molecule3d" id="molecule3d-${c.id}" data-molecule-id="${c.id}" role="img" aria-label="3D illustration of ${esc(c.name)}. Loading illustration."><span class="molecule-status">Loading illustration</span></div>`}
       <h3>${esc(c.name)}</h3>
       <div class="compound-chemline"><span class="formula-chip">${formatFormula(c.formula)}</span></div>
       <p class="sub">${esc(c.chemicalClass)}${CHEMISTRY.tags(c).length ? " · " + CHEMISTRY.tags(c).map(esc).join(", ") : ""}</p>
@@ -677,7 +677,7 @@ function disposeMoleculeViewers() {
 }
 function setMoleculeStatus(host, compound, status) {
   host.querySelector(".molecule-status").textContent = status;
-  host.setAttribute("aria-label", `Illustrative 3D sketch for ${compound.name}. Not a validated molecular structure. ${status}`);
+  host.setAttribute("aria-label", `3D illustration of ${compound.name}. ${status}`);
 }
 async function initMolecule3D(host) {
   if (!host || !host.isConnected || host.dataset.ready) return;
@@ -1129,7 +1129,7 @@ function renderNetwork() {
     kind: r.kind,
     description: `${r.oil.name} / ${r.compound.name}: ${r.kind === "nonvolatile-oil" ? "reported in a nonvolatile oil fraction" : r.kind === "catalog" ? "catalog relationship; quantity not verified" : "reported in a cited oil sample"}`,
     sample: r.record.sample || "",
-    lineStyle: r.kind === "nonvolatile-oil" ? { type: "dashed", color: "#efbd69", width: 2 } : undefined
+    lineStyle: r.kind === "nonvolatile-oil" ? { type: "dashed", color: "#9fcfc7", width: 2 } : undefined
   }));
   chart.setOption({
     backgroundColor: "transparent",

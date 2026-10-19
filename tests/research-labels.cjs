@@ -90,7 +90,7 @@ const assert = require('node:assert/strict');
       target: link.target
     }));
     assert.ok(appearance.height >= 44);
-    assert.equal(appearance.background, 'rgb(239, 189, 105)');
+    assert.equal(appearance.background, 'rgb(159, 207, 199)');
     const luminance = color => color.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
     const light=luminance(appearance.background), dark=luminance(appearance.color);
     assert.ok((Math.max(light,dark)+.05)/(Math.min(light,dark)+.05)>=7,'Read-paper text retains AAA contrast');

@@ -52,7 +52,7 @@ function harness(mode = 'success', { noThree = false, noObservers = false } = {}
 function assertUnavailable(h, env) {
   assert.equal(h.dataset.ready, 'unavailable');
   assert.equal(h.status.textContent, '3D illustration unavailable');
-  assert.match(h.attributes['aria-label'], /Illustrative 3D sketch.*Not a validated molecular structure/);
+  assert.match(h.attributes['aria-label'], /3D illustration of/);
   assert.doesNotMatch(h.attributes['aria-label'], /drag/i);
   assert.equal(h.children.length, 0);
   assert.equal(env.frames.size, 0);
@@ -70,7 +70,7 @@ function assertDisposed(env) {
   assert.equal(env.stats.renders, 1);
   assert.equal(host.dataset.ready, '1');
   assert.equal(host.status.textContent, 'Drag to rotate');
-  assert.match(host.attributes['aria-label'], /Not a validated molecular structure/);
+  assert.match(host.attributes['aria-label'], /3D illustration of/);
   assert.equal(host.children[0].attributes['aria-hidden'], 'true');
   host.isConnected = false; env.tick();
   assert.equal(env.frames.size, 0);
@@ -115,10 +115,10 @@ function assertDisposed(env) {
   env.run('renderCompounds()'); assert.equal(env.observers[0].disconnected, true);
   const html = env.elements.get('compound-grid').innerHTML;
   assert.equal((html.match(/class="molecule3d"/g) || []).length, 1, 'showModel=false stays respected');
-  assert.match(html, /aria-describedby="molecule-note-limonene"/);
-  assert.match(html, /id="molecule-note-limonene"/);
+  assert.doesNotMatch(html, /aria-describedby="molecule-note-/);
+
   assert.doesNotMatch(html, /molecule-note-hidden/);
-  assert.match(html, /Illustrative sketch\.<br>Not a validated molecular structure\./);
+  assert.doesNotMatch(html, /molecule-disclaimer|Not a validated molecular structure/);
   assert.doesNotMatch(html, /drag to rotate|Interactive 3D model/i, 'Loading markup does not promise a working or validated model');
 
   env = harness('success', { noObservers: true }); host = env.host(); env.run('initVisibleMolecules()');
