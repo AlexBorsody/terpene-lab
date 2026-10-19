@@ -474,41 +474,21 @@ const TERPENE_DATA = {
               "evidenceIds": [],
               "children": [
                 {
-                  "useNodeId": "health-mental-health-anxiety",
-                  "evidenceIds": [
-                    "use-e0d9439b4df9cb9a11621ff9"
-                  ],
-                  "children": []
-                },
-                {
                   "useNodeId": "health-mental-health-mood",
                   "evidenceIds": [
                     "use-4c83ae7120a0492e05653061",
                     "use-cff1034d6f3aeade79ac3be0"
                   ],
                   "children": []
-                }
-              ]
-            },
-            {
-              "useNodeId": "health-skin",
-              "evidenceIds": [],
-              "children": [
+                },
                 {
-                  "useNodeId": "health-skin-barrier-repair",
+                  "useNodeId": "health-mental-health-anxiety",
                   "evidenceIds": [
-                    "use-0c5b2c7de5f6afbe3b6472ab"
+                    "use-e0d9439b4df9cb9a11621ff9"
                   ],
                   "children": []
                 }
               ]
-            },
-            {
-              "useNodeId": "health-pain-inflammation",
-              "evidenceIds": [
-                "use-d33a0f87937988ce1969c552"
-              ],
-              "children": []
             },
             {
               "useNodeId": "health-oral-dental",
@@ -542,25 +522,26 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
-            }
-          ]
-        },
-        {
-          "useNodeId": "cleaning",
-          "evidenceIds": [],
-          "children": [
+            },
             {
-              "useNodeId": "cleaning-surface",
+              "useNodeId": "health-skin",
               "evidenceIds": [],
               "children": [
                 {
-                  "useNodeId": "cleaning-surface-soil-removal",
+                  "useNodeId": "health-skin-barrier-repair",
                   "evidenceIds": [
-                    "use-4a10299d162eb945202bf4e5"
+                    "use-0c5b2c7de5f6afbe3b6472ab"
                   ],
                   "children": []
                 }
               ]
+            },
+            {
+              "useNodeId": "health-pain-inflammation",
+              "evidenceIds": [
+                "use-d33a0f87937988ce1969c552"
+              ],
+              "children": []
             }
           ]
         },
@@ -576,16 +557,16 @@ const TERPENE_DATA = {
               ],
               "children": [
                 {
-                  "useNodeId": "microbial-bacteria-gram-negative",
+                  "useNodeId": "microbial-bacteria-formulation-preservation",
                   "evidenceIds": [
-                    "use-85e9a1ddaf3f06b1db4a8012"
+                    "use-a206d1b8918ac54505369303"
                   ],
                   "children": []
                 },
                 {
-                  "useNodeId": "microbial-bacteria-formulation-preservation",
+                  "useNodeId": "microbial-bacteria-gram-negative",
                   "evidenceIds": [
-                    "use-a206d1b8918ac54505369303"
+                    "use-85e9a1ddaf3f06b1db4a8012"
                   ],
                   "children": []
                 },
@@ -607,17 +588,17 @@ const TERPENE_DATA = {
               "children": []
             },
             {
-              "useNodeId": "microbial-viruses",
-              "evidenceIds": [
-                "use-22816df0543e7d1bdff83b69"
-              ],
-              "children": []
-            },
-            {
               "useNodeId": "microbial-biofilms",
               "evidenceIds": [
                 "use-b11d3965cf490b62d2114190",
                 "use-a32ad8743767e3ea07ceb625"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-viruses",
+              "evidenceIds": [
+                "use-22816df0543e7d1bdff83b69"
               ],
               "children": []
             }
@@ -628,11 +609,17 @@ const TERPENE_DATA = {
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "pest-flies",
-              "evidenceIds": [
-                "use-1e3ec68ab8b4a0068ea4b65d"
-              ],
-              "children": []
+              "useNodeId": "pest-beetles",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "pest-beetles-harmonia-axyridis",
+                  "evidenceIds": [
+                    "use-1e3ec68ab8b4a0068ea4b65d"
+                  ],
+                  "children": []
+                }
+              ]
             }
           ]
         },
@@ -656,6 +643,25 @@ const TERPENE_DATA = {
                   "useNodeId": "botanical-composition-flavonoid-analysis",
                   "evidenceIds": [
                     "use-6b208df69c4c24e46cb17f01"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "cleaning",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "cleaning-surface",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "cleaning-surface-soil-removal",
+                  "evidenceIds": [
+                    "use-4a10299d162eb945202bf4e5"
                   ],
                   "children": []
                 }
@@ -854,8 +860,7 @@ const TERPENE_DATA = {
             {
               "useNodeId": "health-mental-health",
               "evidenceIds": [
-                "use-7857d7ad2f4f61528cdc9af1",
-                "use-b3e114de6c1a11826cd66a9a"
+                "use-7857d7ad2f4f61528cdc9af1"
               ],
               "children": [
                 {
@@ -864,6 +869,7 @@ const TERPENE_DATA = {
                     "use-05e67102300fbdaf2e564834",
                     "use-051403856b1f93d50ed06db8",
                     "use-7256b71c872ea1f9f6075f4a",
+                    "use-b3e114de6c1a11826cd66a9a",
                     "use-edbddf65fc33e8b62241ef50"
                   ],
                   "children": []
@@ -872,7 +878,8 @@ const TERPENE_DATA = {
                   "useNodeId": "health-mental-health-sleep",
                   "evidenceIds": [
                     "use-c3cf11a0912f426a90160819",
-                    "use-632a4ca42703e3ad296e6026"
+                    "use-632a4ca42703e3ad296e6026",
+                    "use-audit-kasper-2010-silexan-health-mental-health-sleep"
                   ],
                   "children": []
                 },
@@ -913,6 +920,13 @@ const TERPENE_DATA = {
                   "evidenceIds": [
                     "use-e8e9b411809079b4fc13dad9",
                     "use-2cb6fe1dabf9a0156c4eb775"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "health-cognitive-attention",
+                  "evidenceIds": [
+                    "use-lavender-2003-attention"
                   ],
                   "children": []
                 }
@@ -980,6 +994,19 @@ const TERPENE_DATA = {
                       "children": []
                     }
                   ]
+                }
+              ]
+            },
+            {
+              "useNodeId": "health-oral-dental",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-oral-dental-needle-insertion-pain",
+                  "evidenceIds": [
+                    "use-audit-ghaderi-solhjou-2020-health-oral-dental-needle-insertion-pain"
+                  ],
+                  "children": []
                 }
               ]
             }
@@ -1139,7 +1166,10 @@ const TERPENE_DATA = {
         "use-1639b396b8fc1ca6280889c5",
         "use-161716dec2fa9b809445a1fd",
         "use-98bcfdc9c47d83c5c4997715",
-        "use-lavender-40154579-429"
+        "use-lavender-40154579-429",
+        "use-lavender-2003-attention",
+        "use-audit-kasper-2010-silexan-health-mental-health-sleep",
+        "use-audit-ghaderi-solhjou-2020-health-oral-dental-needle-insertion-pain"
       ],
       "precautions": {
         "legacySafety": "Generally well tolerated; patch test for sensitive skin.",
@@ -1292,7 +1322,6 @@ const TERPENE_DATA = {
             {
               "useNodeId": "health-digestive",
               "evidenceIds": [
-                "use-9c9d15424beff4fcd16b54bc",
                 "use-94e0eab005746c5e3e510453"
               ],
               "children": [
@@ -1310,6 +1339,7 @@ const TERPENE_DATA = {
                     {
                       "useNodeId": "health-digestive-nausea-postoperative",
                       "evidenceIds": [
+                        "use-9c9d15424beff4fcd16b54bc",
                         "use-peppermint-40154579-428"
                       ],
                       "children": []
@@ -1385,8 +1415,7 @@ const TERPENE_DATA = {
               "useNodeId": "pest-ticks",
               "evidenceIds": [
                 "use-cae4e5554fec98ae9dc9e298",
-                "use-9f6bee492505359b5665035b",
-                "use-41312716610a785250eee149"
+                "use-9f6bee492505359b5665035b"
               ],
               "children": []
             },
@@ -1490,7 +1519,6 @@ const TERPENE_DATA = {
         "use-e84cde0b3e2e90f258da30ec",
         "use-13085b704bbf791206741876",
         "use-94e0eab005746c5e3e510453",
-        "use-41312716610a785250eee149",
         "use-acd1a7e8d32e5b33e24c2b8a",
         "use-a89a2e5b4235532d5d3b9f2b",
         "use-ad28b49fe54c841b88526a4e",
@@ -1637,26 +1665,19 @@ const TERPENE_DATA = {
           "evidenceIds": [],
           "children": [
             {
+              "useNodeId": "microbial-viruses",
+              "evidenceIds": [
+                "use-5de69ba083bc274408d37ffd",
+                "use-2100b68754af0da1c52c5835"
+              ],
+              "children": []
+            },
+            {
               "useNodeId": "microbial-bacteria",
               "evidenceIds": [
                 "use-6e747bced155edf20e7fe0d4",
                 "use-31c9ff43c82be0f2c83dc915",
                 "use-eead6999bcad0fe95e9a92a6"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "microbial-fungi",
-              "evidenceIds": [
-                "use-f6be6b5f78431276ce1628cc"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "microbial-viruses",
-              "evidenceIds": [
-                "use-5de69ba083bc274408d37ffd",
-                "use-2100b68754af0da1c52c5835"
               ],
               "children": []
             },
@@ -1669,6 +1690,13 @@ const TERPENE_DATA = {
                 "use-a7819a1d26c9d909feaccee1"
               ],
               "children": []
+            },
+            {
+              "useNodeId": "microbial-fungi",
+              "evidenceIds": [
+                "use-f6be6b5f78431276ce1628cc"
+              ],
+              "children": []
             }
           ]
         },
@@ -1677,9 +1705,9 @@ const TERPENE_DATA = {
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "pest-mosquitoes",
+              "useNodeId": "pest-flies",
               "evidenceIds": [
-                "use-36bb898d0f9c3049a9dd16f8"
+                "use-92156ae29749b59d11b0802b"
               ],
               "children": []
             },
@@ -1691,9 +1719,9 @@ const TERPENE_DATA = {
               "children": []
             },
             {
-              "useNodeId": "pest-flies",
+              "useNodeId": "pest-mosquitoes",
               "evidenceIds": [
-                "use-92156ae29749b59d11b0802b"
+                "use-36bb898d0f9c3049a9dd16f8"
               ],
               "children": []
             },
@@ -1710,13 +1738,6 @@ const TERPENE_DATA = {
           "useNodeId": "botanical",
           "evidenceIds": [],
           "children": [
-            {
-              "useNodeId": "botanical-nonvolatile-chemistry",
-              "evidenceIds": [
-                "use-74056e862c1e2524fedf5418"
-              ],
-              "children": []
-            },
             {
               "useNodeId": "botanical-composition",
               "evidenceIds": [],
@@ -1736,6 +1757,13 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
+            },
+            {
+              "useNodeId": "botanical-nonvolatile-chemistry",
+              "evidenceIds": [
+                "use-74056e862c1e2524fedf5418"
+              ],
+              "children": []
             }
           ]
         }
@@ -1852,6 +1880,73 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
+          "useNodeId": "microbial",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "microbial-bacteria",
+              "evidenceIds": [
+                "use-a6368d767cd1c279ddf2ac2e",
+                "use-78e0e1c401063aa2ff8ba97b",
+                "use-cc9d828bd221604e75bb2d02",
+                "use-72f10dfd7f30e7f6a7e95dfd"
+              ],
+              "children": [
+                {
+                  "useNodeId": "microbial-bacteria-formulation-preservation",
+                  "evidenceIds": [
+                    "use-c1a403b56fcc16bab68bf203"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "microbial-fungi",
+              "evidenceIds": [
+                "use-e309f8807fe540e6d5a6539e",
+                "use-20a2c4999a081e81a2d9fb7d"
+              ],
+              "children": [
+                {
+                  "useNodeId": "microbial-fungi-dermatophytes",
+                  "evidenceIds": [
+                    "use-80761b8497b7552e0581ff11",
+                    "use-0d9d9da75899758b7f7fa53d"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "microbial-fungi-yeast",
+                  "evidenceIds": [
+                    "use-67359e89f3beed1301a00ef5",
+                    "use-7545fb9f52346da660992ba5"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "microbial-viruses",
+              "evidenceIds": [
+                "use-66ef0b16145d6165861d97a5",
+                "use-3a8c67f6e53e988f76dcc0b2"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-biofilms",
+              "evidenceIds": [
+                "use-cda937ef79879d0b98325174",
+                "use-cbd24a0b38c5e5ec0bd6e453",
+                "use-5e911da482d65d604143b62b",
+                "use-c627192aaee6b02e838646cc"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
           "useNodeId": "health",
           "evidenceIds": [],
           "children": [
@@ -1903,73 +1998,6 @@ const TERPENE_DATA = {
           ]
         },
         {
-          "useNodeId": "microbial",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "microbial-bacteria",
-              "evidenceIds": [
-                "use-a6368d767cd1c279ddf2ac2e",
-                "use-78e0e1c401063aa2ff8ba97b",
-                "use-cc9d828bd221604e75bb2d02",
-                "use-72f10dfd7f30e7f6a7e95dfd"
-              ],
-              "children": [
-                {
-                  "useNodeId": "microbial-bacteria-formulation-preservation",
-                  "evidenceIds": [
-                    "use-c1a403b56fcc16bab68bf203"
-                  ],
-                  "children": []
-                }
-              ]
-            },
-            {
-              "useNodeId": "microbial-fungi",
-              "evidenceIds": [
-                "use-e309f8807fe540e6d5a6539e",
-                "use-20a2c4999a081e81a2d9fb7d"
-              ],
-              "children": [
-                {
-                  "useNodeId": "microbial-fungi-yeast",
-                  "evidenceIds": [
-                    "use-67359e89f3beed1301a00ef5",
-                    "use-7545fb9f52346da660992ba5"
-                  ],
-                  "children": []
-                },
-                {
-                  "useNodeId": "microbial-fungi-dermatophytes",
-                  "evidenceIds": [
-                    "use-80761b8497b7552e0581ff11",
-                    "use-0d9d9da75899758b7f7fa53d"
-                  ],
-                  "children": []
-                }
-              ]
-            },
-            {
-              "useNodeId": "microbial-viruses",
-              "evidenceIds": [
-                "use-66ef0b16145d6165861d97a5",
-                "use-3a8c67f6e53e988f76dcc0b2"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "microbial-biofilms",
-              "evidenceIds": [
-                "use-cda937ef79879d0b98325174",
-                "use-cbd24a0b38c5e5ec0bd6e453",
-                "use-5e911da482d65d604143b62b",
-                "use-c627192aaee6b02e838646cc"
-              ],
-              "children": []
-            }
-          ]
-        },
-        {
           "useNodeId": "pest",
           "evidenceIds": [],
           "children": [
@@ -1978,6 +2006,19 @@ const TERPENE_DATA = {
               "evidenceIds": [
                 "use-57102e05968da766c5480431",
                 "use-e7a5e0125c7a4c4c502ae340"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "useNodeId": "cleaning",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "cleaning-hand-hygiene",
+              "evidenceIds": [
+                "use-tea-tree-2021-hand-hygiene-cleaning-hand-hygiene"
               ],
               "children": []
             }
@@ -2012,7 +2053,8 @@ const TERPENE_DATA = {
         "use-57102e05968da766c5480431",
         "use-e7a5e0125c7a4c4c502ae340",
         "use-720ac203725127123a09e333",
-        "use-595383b99480de3b1ed1add1"
+        "use-595383b99480de3b1ed1add1",
+        "use-tea-tree-2021-hand-hygiene-cleaning-hand-hygiene"
       ],
       "precautions": {
         "legacySafety": "For external use; can irritate sensitive skin undiluted.",
@@ -2095,24 +2137,43 @@ const TERPENE_DATA = {
           "evidenceIds": [],
           "children": [
             {
+              "useNodeId": "health-pain-inflammation",
+              "evidenceIds": [
+                "use-6a4af63350202bc5a06c5045",
+                "use-4dda5422cc22303e55f08b52",
+                "use-aa7dc1d13c3c2319630d16c8",
+                "use-d76d6644e1c846434dca3aa1",
+                "use-ec7e872601b766330af85b20",
+                "use-60cb5a39dd5f82a9b83c2f1a"
+              ],
+              "children": []
+            },
+            {
               "useNodeId": "health-mental-health",
               "evidenceIds": [],
               "children": [
-                {
-                  "useNodeId": "health-mental-health-anxiety",
-                  "evidenceIds": [
-                    "use-c34e824b01a699c2613ab6b1"
-                  ],
-                  "children": []
-                },
                 {
                   "useNodeId": "health-mental-health-fatigue",
                   "evidenceIds": [
                     "use-60b5ed96b4aec91a860b8612"
                   ],
                   "children": []
+                },
+                {
+                  "useNodeId": "health-mental-health-anxiety",
+                  "evidenceIds": [
+                    "use-c34e824b01a699c2613ab6b1"
+                  ],
+                  "children": []
                 }
               ]
+            },
+            {
+              "useNodeId": "health-wound",
+              "evidenceIds": [
+                "use-4f8f592c0af0c861bcc5b1b1"
+              ],
+              "children": []
             },
             {
               "useNodeId": "health-skin",
@@ -2126,25 +2187,6 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
-            },
-            {
-              "useNodeId": "health-pain-inflammation",
-              "evidenceIds": [
-                "use-6a4af63350202bc5a06c5045",
-                "use-4dda5422cc22303e55f08b52",
-                "use-aa7dc1d13c3c2319630d16c8",
-                "use-d76d6644e1c846434dca3aa1",
-                "use-ec7e872601b766330af85b20",
-                "use-60cb5a39dd5f82a9b83c2f1a"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "health-wound",
-              "evidenceIds": [
-                "use-4f8f592c0af0c861bcc5b1b1"
-              ],
-              "children": []
             }
           ]
         },
@@ -2270,24 +2312,10 @@ const TERPENE_DATA = {
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "health-cognitive",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "health-cognitive-memory",
-                  "evidenceIds": [
-                    "use-5f43b0ee78374412acea88a7",
-                    "use-8ec6dc07ebdd680e7870c0ab",
-                    "use-86155011801fb7dcab051f5a"
-                  ],
-                  "children": []
-                }
-              ]
-            },
-            {
               "useNodeId": "health-pain-inflammation",
               "evidenceIds": [
-                "use-15298882bee716382fd44b9b"
+                "use-15298882bee716382fd44b9b",
+                "use-clove-2012-pain"
               ],
               "children": []
             },
@@ -2299,6 +2327,21 @@ const TERPENE_DATA = {
                   "useNodeId": "health-oral-dental-needle-insertion-pain",
                   "evidenceIds": [
                     "use-93bd33c23d54269dec9683bd"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "health-cognitive",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-cognitive-memory",
+                  "evidenceIds": [
+                    "use-5f43b0ee78374412acea88a7",
+                    "use-8ec6dc07ebdd680e7870c0ab",
+                    "use-86155011801fb7dcab051f5a"
                   ],
                   "children": []
                 }
@@ -2315,6 +2358,14 @@ const TERPENE_DATA = {
               "evidenceIds": [
                 "use-50057e89d4567eeae922c469",
                 "use-f0c5940a4c92e345dd560785"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-biofilms",
+              "evidenceIds": [
+                "use-2ff199c5e385a120872ca2f2",
+                "use-9f05feb398cacb09041dd7fc"
               ],
               "children": []
             },
@@ -2347,14 +2398,6 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
-            },
-            {
-              "useNodeId": "microbial-biofilms",
-              "evidenceIds": [
-                "use-2ff199c5e385a120872ca2f2",
-                "use-9f05feb398cacb09041dd7fc"
-              ],
-              "children": []
             }
           ]
         },
@@ -2363,18 +2406,18 @@ const TERPENE_DATA = {
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "pest-mosquitoes",
-              "evidenceIds": [
-                "use-92724007256c15e4d24c807b",
-                "use-2e121967f4419f4a0fd90a92"
-              ],
-              "children": []
-            },
-            {
               "useNodeId": "pest-ticks",
               "evidenceIds": [
                 "use-a8c81ad9895d636ee613f455",
                 "use-8c630c19c498c8d47d0b4bc2"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-mosquitoes",
+              "evidenceIds": [
+                "use-92724007256c15e4d24c807b",
+                "use-2e121967f4419f4a0fd90a92"
               ],
               "children": []
             },
@@ -2407,7 +2450,8 @@ const TERPENE_DATA = {
         "use-0a2a24a22f1de099cfbf28c6",
         "use-1683760382f1860315fd647a",
         "use-2e121967f4419f4a0fd90a92",
-        "use-8baecfad1aed9a879a0b4e6f"
+        "use-8baecfad1aed9a879a0b4e6f",
+        "use-clove-2012-pain"
       ],
       "precautions": {
         "legacySafety": "Potent; always dilute heavily. Can irritate skin and mucous membranes.",
@@ -2549,10 +2593,16 @@ const TERPENE_DATA = {
           "children": [
             {
               "useNodeId": "health-mental-health",
-              "evidenceIds": [
-                "use-01e934e5ff1084464b3c5fd1"
-              ],
-              "children": []
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-mental-health-anxiety",
+                  "evidenceIds": [
+                    "use-01e934e5ff1084464b3c5fd1"
+                  ],
+                  "children": []
+                }
+              ]
             },
             {
               "useNodeId": "health-pain-inflammation",
@@ -2560,6 +2610,32 @@ const TERPENE_DATA = {
                 "use-9f1d2c97e840747376aee96c"
               ],
               "children": []
+            }
+          ]
+        },
+        {
+          "useNodeId": "botanical",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "botanical-composition",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "botanical-composition-flavonoid-analysis",
+                  "evidenceIds": [
+                    "use-40943ef4084a78dd1e53d938"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "botanical-composition-essential-oil-composition",
+                  "evidenceIds": [
+                    "use-f4b63ddb2b9f69555ec6dccf"
+                  ],
+                  "children": []
+                }
+              ]
             }
           ]
         },
@@ -2575,32 +2651,6 @@ const TERPENE_DATA = {
                   "useNodeId": "cleaning-surface-soil-removal",
                   "evidenceIds": [
                     "use-dc3d06113dbceb577eef419c"
-                  ],
-                  "children": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "useNodeId": "botanical",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "botanical-composition",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "botanical-composition-essential-oil-composition",
-                  "evidenceIds": [
-                    "use-f4b63ddb2b9f69555ec6dccf"
-                  ],
-                  "children": []
-                },
-                {
-                  "useNodeId": "botanical-composition-flavonoid-analysis",
-                  "evidenceIds": [
-                    "use-40943ef4084a78dd1e53d938"
                   ],
                   "children": []
                 }
@@ -2746,26 +2796,6 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
-          "useNodeId": "microbial",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "microbial-fungi",
-              "evidenceIds": [
-                "use-5bdc9074e854c6c2ce3c824c"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "microbial-biofilms",
-              "evidenceIds": [
-                "use-04a64cbcebbc344e02a3b5ac"
-              ],
-              "children": []
-            }
-          ]
-        },
-        {
           "useNodeId": "pest",
           "evidenceIds": [],
           "children": [
@@ -2809,6 +2839,26 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "microbial",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "microbial-fungi",
+              "evidenceIds": [
+                "use-5bdc9074e854c6c2ce3c824c"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-biofilms",
+              "evidenceIds": [
+                "use-04a64cbcebbc344e02a3b5ac"
+              ],
+              "children": []
             }
           ]
         }
@@ -2977,7 +3027,8 @@ const TERPENE_DATA = {
                 {
                   "useNodeId": "microbial-bacteria-gram-positive",
                   "evidenceIds": [
-                    "use-e75120e0de6a6002e71c372c"
+                    "use-e75120e0de6a6002e71c372c",
+                    "use-audit-semeniuc-2017-microbial-bacteria-gram-positive"
                   ],
                   "children": []
                 },
@@ -2994,15 +3045,20 @@ const TERPENE_DATA = {
               ]
             },
             {
-              "useNodeId": "microbial-fungi",
-              "evidenceIds": [
-                "use-385617371befbd78fc17610f"
-              ],
+              "useNodeId": "microbial-environmental-counts",
+              "evidenceIds": [],
               "children": [
                 {
-                  "useNodeId": "microbial-fungi-mold",
+                  "useNodeId": "microbial-environmental-counts-surfaces",
                   "evidenceIds": [
-                    "use-bae8d9622eefd4d0664806da"
+                    "use-ea7c8f7e3c3bfcd90001875f"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "microbial-environmental-counts-air",
+                  "evidenceIds": [
+                    "use-16eb2f7f6be801daa8e4ee71"
                   ],
                   "children": []
                 }
@@ -3018,20 +3074,15 @@ const TERPENE_DATA = {
               "children": []
             },
             {
-              "useNodeId": "microbial-environmental-counts",
-              "evidenceIds": [],
+              "useNodeId": "microbial-fungi",
+              "evidenceIds": [
+                "use-385617371befbd78fc17610f"
+              ],
               "children": [
                 {
-                  "useNodeId": "microbial-environmental-counts-surfaces",
+                  "useNodeId": "microbial-fungi-mold",
                   "evidenceIds": [
-                    "use-ea7c8f7e3c3bfcd90001875f"
-                  ],
-                  "children": []
-                },
-                {
-                  "useNodeId": "microbial-environmental-counts-air",
-                  "evidenceIds": [
-                    "use-16eb2f7f6be801daa8e4ee71"
+                    "use-bae8d9622eefd4d0664806da"
                   ],
                   "children": []
                 }
@@ -3064,6 +3115,32 @@ const TERPENE_DATA = {
               ]
             }
           ]
+        },
+        {
+          "useNodeId": "cleaning",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "cleaning-surface",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "cleaning-surface-disinfection",
+                  "evidenceIds": [
+                    "use-thyme-2024-cleaning-surface-disinfection"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "cleaning-air",
+              "evidenceIds": [
+                "use-thyme-2024-cleaning-air"
+              ],
+              "children": []
+            }
+          ]
         }
       ],
       "evidenceIds": [
@@ -3085,7 +3162,10 @@ const TERPENE_DATA = {
         "use-0895748bfde73c3a149158f5",
         "use-50935ffc5a456191bed5dbf0",
         "use-fc617135d82c6963619e2498",
-        "use-385617371befbd78fc17610f"
+        "use-385617371befbd78fc17610f",
+        "use-thyme-2024-cleaning-surface-disinfection",
+        "use-thyme-2024-cleaning-air",
+        "use-audit-semeniuc-2017-microbial-bacteria-gram-positive"
       ],
       "precautions": {
         "legacySafety": "Potent; always dilute heavily. Avoid in pregnancy.",
@@ -3205,6 +3285,89 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
+          "useNodeId": "microbial",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "microbial-bacteria",
+              "evidenceIds": [
+                "use-e8cdbfa8503c57dba0bc300f",
+                "use-bc97ea6b032baf5fc6b6d3ab"
+              ],
+              "children": [
+                {
+                  "useNodeId": "microbial-bacteria-gram-positive",
+                  "evidenceIds": [
+                    "use-a07b52528696635e75925b0b",
+                    "use-223f8970755ec7f98fbdf303"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "microbial-bacteria-gram-negative",
+                  "evidenceIds": [
+                    "use-da1e9c676d3345aa5360beeb",
+                    "use-d8afe9a3f239a35d5392377a"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "microbial-biofilms",
+              "evidenceIds": [
+                "use-fa7c1ee84176e6a61ffdcb9e",
+                "use-4ed6c3885d87505606a71fca",
+                "use-7673d6d30f35ab511926c4ef",
+                "use-113d4fd1396bb9c9dabae3ad",
+                "use-c1327811e0144d8b2e878ca1"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-viruses",
+              "evidenceIds": [
+                "use-29e4484c0286183707efdd59"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-environmental-counts",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "microbial-environmental-counts-surfaces",
+                  "evidenceIds": [
+                    "use-oregano-2024-food-contact-surfaces-microbial-environmental-counts-surfaces"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "pest",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "pest-ticks",
+              "evidenceIds": [
+                "use-fd6157dba9d181fd88f60006",
+                "use-8730a381245911a1d8562c79"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-ants",
+              "evidenceIds": [
+                "use-60473c9264f4306ab28ed030"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
           "useNodeId": "health",
           "evidenceIds": [],
           "children": [
@@ -3234,76 +3397,6 @@ const TERPENE_DATA = {
           ]
         },
         {
-          "useNodeId": "microbial",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "microbial-bacteria",
-              "evidenceIds": [
-                "use-e8cdbfa8503c57dba0bc300f",
-                "use-bc97ea6b032baf5fc6b6d3ab"
-              ],
-              "children": [
-                {
-                  "useNodeId": "microbial-bacteria-gram-positive",
-                  "evidenceIds": [
-                    "use-a07b52528696635e75925b0b"
-                  ],
-                  "children": []
-                },
-                {
-                  "useNodeId": "microbial-bacteria-gram-negative",
-                  "evidenceIds": [
-                    "use-da1e9c676d3345aa5360beeb",
-                    "use-d8afe9a3f239a35d5392377a",
-                    "use-223f8970755ec7f98fbdf303"
-                  ],
-                  "children": []
-                }
-              ]
-            },
-            {
-              "useNodeId": "microbial-viruses",
-              "evidenceIds": [
-                "use-29e4484c0286183707efdd59"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "microbial-biofilms",
-              "evidenceIds": [
-                "use-fa7c1ee84176e6a61ffdcb9e",
-                "use-4ed6c3885d87505606a71fca",
-                "use-7673d6d30f35ab511926c4ef",
-                "use-113d4fd1396bb9c9dabae3ad",
-                "use-c1327811e0144d8b2e878ca1"
-              ],
-              "children": []
-            }
-          ]
-        },
-        {
-          "useNodeId": "pest",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "pest-ticks",
-              "evidenceIds": [
-                "use-fd6157dba9d181fd88f60006",
-                "use-8730a381245911a1d8562c79"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "pest-ants",
-              "evidenceIds": [
-                "use-60473c9264f4306ab28ed030"
-              ],
-              "children": []
-            }
-          ]
-        },
-        {
           "useNodeId": "botanical",
           "evidenceIds": [],
           "children": [
@@ -3322,6 +3415,25 @@ const TERPENE_DATA = {
                   "useNodeId": "botanical-composition-flavonoid-analysis",
                   "evidenceIds": [
                     "use-98765689922acbe25e89e5f9"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "cleaning",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "cleaning-surface",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "cleaning-surface-disinfection",
+                  "evidenceIds": [
+                    "use-oregano-2024-food-contact-surfaces-cleaning-surface-disinfection"
                   ],
                   "children": []
                 }
@@ -3354,7 +3466,9 @@ const TERPENE_DATA = {
         "use-60473c9264f4306ab28ed030",
         "use-8730a381245911a1d8562c79",
         "use-59b21ffccf48d0241cb69bff",
-        "use-98765689922acbe25e89e5f9"
+        "use-98765689922acbe25e89e5f9",
+        "use-oregano-2024-food-contact-surfaces-cleaning-surface-disinfection",
+        "use-oregano-2024-food-contact-surfaces-microbial-environmental-counts-surfaces"
       ],
       "precautions": {
         "legacySafety": "Potent and potentially irritating; chemotype and dilution matter.",
@@ -3475,9 +3589,66 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
+          "useNodeId": "pest",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "pest-mosquitoes",
+              "evidenceIds": [
+                "use-7656e33f4a6572a2bb79e605"
+              ],
+              "children": [
+                {
+                  "useNodeId": "pest-mosquitoes-repellency",
+                  "evidenceIds": [
+                    "use-160e2e095063e78514a4adf2"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "pest-flies",
+              "evidenceIds": [
+                "use-34edeab92e2daf2f70c3ef21"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-fleas",
+              "evidenceIds": [
+                "use-f85ec91d3314138aa67f7b7c"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-ticks",
+              "evidenceIds": [
+                "use-966e3641f89f43cc45cbb21f"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
           "useNodeId": "health",
           "evidenceIds": [],
           "children": [
+            {
+              "useNodeId": "health-oral-dental",
+              "evidenceIds": [
+                "use-d944803f3f888bf13b4f3e77"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "health-pain-inflammation",
+              "evidenceIds": [
+                "use-bbb1149e389c26dca7e14790",
+                "use-36e24aa00fbe2ec7c57967c8"
+              ],
+              "children": []
+            },
             {
               "useNodeId": "health-skin",
               "evidenceIds": [],
@@ -3490,21 +3661,6 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
-            },
-            {
-              "useNodeId": "health-pain-inflammation",
-              "evidenceIds": [
-                "use-bbb1149e389c26dca7e14790",
-                "use-36e24aa00fbe2ec7c57967c8"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "health-oral-dental",
-              "evidenceIds": [
-                "use-d944803f3f888bf13b4f3e77"
-              ],
-              "children": []
             }
           ]
         },
@@ -3526,48 +3682,6 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
-            }
-          ]
-        },
-        {
-          "useNodeId": "pest",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "pest-mosquitoes",
-              "evidenceIds": [
-                "use-7656e33f4a6572a2bb79e605"
-              ],
-              "children": [
-                {
-                  "useNodeId": "pest-mosquitoes-repellency",
-                  "evidenceIds": [
-                    "use-160e2e095063e78514a4adf2"
-                  ],
-                  "children": []
-                }
-              ]
-            },
-            {
-              "useNodeId": "pest-ticks",
-              "evidenceIds": [
-                "use-966e3641f89f43cc45cbb21f"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "pest-fleas",
-              "evidenceIds": [
-                "use-f85ec91d3314138aa67f7b7c"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "pest-flies",
-              "evidenceIds": [
-                "use-34edeab92e2daf2f70c3ef21"
-              ],
-              "children": []
             }
           ]
         },
@@ -3878,19 +3992,6 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
-          "useNodeId": "health",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "health-metabolic",
-              "evidenceIds": [
-                "use-cbc3ddd1c4d0ca03cc97d12d"
-              ],
-              "children": []
-            }
-          ]
-        },
-        {
           "useNodeId": "microbial",
           "evidenceIds": [],
           "children": [
@@ -3903,33 +4004,46 @@ const TERPENE_DATA = {
               "children": []
             },
             {
+              "useNodeId": "microbial-biofilms",
+              "evidenceIds": [
+                "use-9cbc7a44358a4ddd804d997c",
+                "use-9dc6141c760d4148272abd7d",
+                "use-fc8d7306d3c9b26c0e174b00"
+              ],
+              "children": []
+            },
+            {
               "useNodeId": "microbial-fungi",
               "evidenceIds": [
                 "use-11fac7bdf825c0e258cda1e7"
               ],
               "children": [
                 {
-                  "useNodeId": "microbial-fungi-yeast",
-                  "evidenceIds": [
-                    "use-3fcaa67dbf4a6847b1ad781f"
-                  ],
-                  "children": []
-                },
-                {
                   "useNodeId": "microbial-fungi-mold",
                   "evidenceIds": [
                     "use-b7f8007ecbd326f9ed431ff7"
                   ],
                   "children": []
+                },
+                {
+                  "useNodeId": "microbial-fungi-yeast",
+                  "evidenceIds": [
+                    "use-3fcaa67dbf4a6847b1ad781f"
+                  ],
+                  "children": []
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "useNodeId": "health",
+          "evidenceIds": [],
+          "children": [
             {
-              "useNodeId": "microbial-biofilms",
+              "useNodeId": "health-metabolic",
               "evidenceIds": [
-                "use-9cbc7a44358a4ddd804d997c",
-                "use-9dc6141c760d4148272abd7d",
-                "use-fc8d7306d3c9b26c0e174b00"
+                "use-cbc3ddd1c4d0ca03cc97d12d"
               ],
               "children": []
             }
@@ -4032,37 +4146,22 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
-          "useNodeId": "health",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "health-pain-inflammation",
-              "evidenceIds": [
-                "use-6fe4e3fe08d51b77c3495ba7",
-                "use-f956159286ae5110ae69a219"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "health-oral-dental",
-              "evidenceIds": [
-                "use-7c3768bd42147e0661804499"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "health-wound",
-              "evidenceIds": [
-                "use-2b53f2314c71867a9a27b227"
-              ],
-              "children": []
-            }
-          ]
-        },
-        {
           "useNodeId": "microbial",
           "evidenceIds": [],
           "children": [
+            {
+              "useNodeId": "microbial-fungi",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "microbial-fungi-dermatophytes",
+                  "evidenceIds": [
+                    "use-409567737cd6bcd2d73933a8"
+                  ],
+                  "children": []
+                }
+              ]
+            },
             {
               "useNodeId": "microbial-bacteria",
               "evidenceIds": [],
@@ -4082,19 +4181,34 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "health",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "health-oral-dental",
+              "evidenceIds": [
+                "use-7c3768bd42147e0661804499"
+              ],
+              "children": []
             },
             {
-              "useNodeId": "microbial-fungi",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "microbial-fungi-dermatophytes",
-                  "evidenceIds": [
-                    "use-409567737cd6bcd2d73933a8"
-                  ],
-                  "children": []
-                }
-              ]
+              "useNodeId": "health-pain-inflammation",
+              "evidenceIds": [
+                "use-6fe4e3fe08d51b77c3495ba7",
+                "use-f956159286ae5110ae69a219"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "health-wound",
+              "evidenceIds": [
+                "use-2b53f2314c71867a9a27b227"
+              ],
+              "children": []
             }
           ]
         }
@@ -4216,6 +4330,40 @@ const TERPENE_DATA = {
           "evidenceIds": [],
           "children": [
             {
+              "useNodeId": "health-cognitive",
+              "evidenceIds": [
+                "use-cb0c0554f97ab6b02ea9ccf1",
+                "use-63559e3ecdce183aaa8fe5d7",
+                "use-093fa0bbb1a3be779eadeebf",
+                "use-c845a83dcd6faea1c533fbf2"
+              ],
+              "children": [
+                {
+                  "useNodeId": "health-cognitive-memory",
+                  "evidenceIds": [
+                    "use-164a611934d4943efa1c14fe",
+                    "use-bac7351c7ddca36ba71193cf",
+                    "use-e7ed61805d083035c8a30b8e"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "health-cognitive-attention",
+                  "evidenceIds": [
+                    "use-b1841f45a8c9a4547e51d781"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "health-cognitive-alertness",
+                  "evidenceIds": [
+                    "use-85134766b5c86bd66f4ddad5"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
               "useNodeId": "health-mental-health",
               "evidenceIds": [],
               "children": [
@@ -4237,40 +4385,6 @@ const TERPENE_DATA = {
                   "useNodeId": "health-mental-health-sleep",
                   "evidenceIds": [
                     "use-dbf2b8b16241b81f46882322"
-                  ],
-                  "children": []
-                }
-              ]
-            },
-            {
-              "useNodeId": "health-cognitive",
-              "evidenceIds": [
-                "use-cb0c0554f97ab6b02ea9ccf1",
-                "use-63559e3ecdce183aaa8fe5d7",
-                "use-093fa0bbb1a3be779eadeebf",
-                "use-c845a83dcd6faea1c533fbf2"
-              ],
-              "children": [
-                {
-                  "useNodeId": "health-cognitive-attention",
-                  "evidenceIds": [
-                    "use-b1841f45a8c9a4547e51d781"
-                  ],
-                  "children": []
-                },
-                {
-                  "useNodeId": "health-cognitive-memory",
-                  "evidenceIds": [
-                    "use-164a611934d4943efa1c14fe",
-                    "use-bac7351c7ddca36ba71193cf",
-                    "use-e7ed61805d083035c8a30b8e"
-                  ],
-                  "children": []
-                },
-                {
-                  "useNodeId": "health-cognitive-alertness",
-                  "evidenceIds": [
-                    "use-85134766b5c86bd66f4ddad5"
                   ],
                   "children": []
                 }
@@ -4314,18 +4428,18 @@ const TERPENE_DATA = {
               ]
             },
             {
-              "useNodeId": "microbial-viruses",
-              "evidenceIds": [
-                "use-90ed855da5a21ba9eef60842"
-              ],
-              "children": []
-            },
-            {
               "useNodeId": "microbial-biofilms",
               "evidenceIds": [
                 "use-529ee2682445396d5861ab73",
                 "use-de30645587b7f0bf86751c87",
                 "use-2c3c7f46f03fbbaebfdbf8dc"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-viruses",
+              "evidenceIds": [
+                "use-90ed855da5a21ba9eef60842"
               ],
               "children": []
             }
@@ -4336,16 +4450,16 @@ const TERPENE_DATA = {
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "pest-mosquitoes",
+              "useNodeId": "pest-ants",
               "evidenceIds": [
-                "use-109655d2e84a41034473a3cd"
+                "use-196a064983bf3438d09a6e62"
               ],
               "children": []
             },
             {
-              "useNodeId": "pest-ants",
+              "useNodeId": "pest-mosquitoes",
               "evidenceIds": [
-                "use-196a064983bf3438d09a6e62"
+                "use-109655d2e84a41034473a3cd"
               ],
               "children": []
             }
@@ -4593,28 +4707,22 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
-          "useNodeId": "health",
+          "useNodeId": "pest",
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "health-pain-inflammation",
+              "useNodeId": "pest-fleas",
               "evidenceIds": [
-                "use-80bcb1f03fe05fd5e14ca15c"
+                "use-0cfc0abfa826d856df55e5fe"
               ],
               "children": []
             },
             {
-              "useNodeId": "health-metabolic",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "health-metabolic-alpha-amylase-inhibition",
-                  "evidenceIds": [
-                    "use-3e9823ab4f9db346590dd4c6"
-                  ],
-                  "children": []
-                }
-              ]
+              "useNodeId": "pest-mites",
+              "evidenceIds": [
+                "use-b47aa9bbcdb07504aeebdbe7"
+              ],
+              "children": []
             }
           ]
         },
@@ -4660,20 +4768,26 @@ const TERPENE_DATA = {
           ]
         },
         {
-          "useNodeId": "pest",
+          "useNodeId": "health",
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "pest-fleas",
-              "evidenceIds": [
-                "use-0cfc0abfa826d856df55e5fe"
-              ],
-              "children": []
+              "useNodeId": "health-metabolic",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-metabolic-alpha-amylase-inhibition",
+                  "evidenceIds": [
+                    "use-3e9823ab4f9db346590dd4c6"
+                  ],
+                  "children": []
+                }
+              ]
             },
             {
-              "useNodeId": "pest-mites",
+              "useNodeId": "health-pain-inflammation",
               "evidenceIds": [
-                "use-b47aa9bbcdb07504aeebdbe7"
+                "use-80bcb1f03fe05fd5e14ca15c"
               ],
               "children": []
             }
@@ -4922,39 +5036,20 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
-          "useNodeId": "cleaning",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "cleaning-surface",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "cleaning-surface-soil-removal",
-                  "evidenceIds": [
-                    "use-97739563300f2b2e17048243"
-                  ],
-                  "children": []
-                }
-              ]
-            }
-          ]
-        },
-        {
           "useNodeId": "pest",
           "evidenceIds": [],
           "children": [
             {
-              "useNodeId": "pest-ticks",
+              "useNodeId": "pest-fleas",
               "evidenceIds": [
-                "use-0f87b3ee13a000eea51a2ec1"
+                "use-709e5b4d4bd339bdc7ba918e"
               ],
               "children": []
             },
             {
-              "useNodeId": "pest-fleas",
+              "useNodeId": "pest-ticks",
               "evidenceIds": [
-                "use-709e5b4d4bd339bdc7ba918e"
+                "use-0f87b3ee13a000eea51a2ec1"
               ],
               "children": []
             }
@@ -4991,6 +5086,25 @@ const TERPENE_DATA = {
                   "useNodeId": "botanical-composition-flavonoid-analysis",
                   "evidenceIds": [
                     "use-e738321e4a62e20a79ccbe71"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "cleaning",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "cleaning-surface",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "cleaning-surface-soil-removal",
+                  "evidenceIds": [
+                    "use-97739563300f2b2e17048243"
                   ],
                   "children": []
                 }
@@ -5130,46 +5244,6 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
-          "useNodeId": "health",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "health-pain-inflammation",
-              "evidenceIds": [
-                "use-3cd3455bdbc98c697794a95a"
-              ],
-              "children": []
-            }
-          ]
-        },
-        {
-          "useNodeId": "microbial",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "microbial-bacteria",
-              "evidenceIds": [
-                "use-c2a42ea34131184f059c5fa9"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "microbial-fungi",
-              "evidenceIds": [
-                "use-de6997ad32894443d3af7e5a"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "microbial-biofilms",
-              "evidenceIds": [
-                "use-406775d3dd7f6408da9fb2ec"
-              ],
-              "children": []
-            }
-          ]
-        },
-        {
           "useNodeId": "pest",
           "evidenceIds": [],
           "children": [
@@ -5211,6 +5285,46 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "microbial",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "microbial-bacteria",
+              "evidenceIds": [
+                "use-c2a42ea34131184f059c5fa9"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-biofilms",
+              "evidenceIds": [
+                "use-406775d3dd7f6408da9fb2ec"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-fungi",
+              "evidenceIds": [
+                "use-de6997ad32894443d3af7e5a"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "useNodeId": "health",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "health-pain-inflammation",
+              "evidenceIds": [
+                "use-3cd3455bdbc98c697794a95a"
+              ],
+              "children": []
             }
           ]
         }
@@ -5346,6 +5460,32 @@ const TERPENE_DATA = {
       },
       "useTree": [
         {
+          "useNodeId": "pest",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "pest-mites",
+              "evidenceIds": [
+                "use-40489d86e961e1ccd7697f7a"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-beetles",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "pest-beetles-harmonia-axyridis",
+                  "evidenceIds": [
+                    "use-7a700a62fa141c9488b27a24"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
           "useNodeId": "microbial",
           "evidenceIds": [],
           "children": [
@@ -5356,17 +5496,17 @@ const TERPENE_DATA = {
               ],
               "children": [
                 {
-                  "useNodeId": "microbial-bacteria-gram-positive",
-                  "evidenceIds": [
-                    "use-44e0df194000b74cfa142947"
-                  ],
-                  "children": []
-                },
-                {
                   "useNodeId": "microbial-bacteria-gram-negative",
                   "evidenceIds": [
                     "use-26ec34695ab1632cad696482",
                     "use-c9905f00ca01194e1c62a3bf"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "microbial-bacteria-gram-positive",
+                  "evidenceIds": [
+                    "use-44e0df194000b74cfa142947"
                   ],
                   "children": []
                 }
@@ -5398,32 +5538,6 @@ const TERPENE_DATA = {
                 "use-2ce35b4e5760777272ed1f14"
               ],
               "children": []
-            }
-          ]
-        },
-        {
-          "useNodeId": "pest",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "pest-mites",
-              "evidenceIds": [
-                "use-40489d86e961e1ccd7697f7a"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "pest-beetles",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "pest-beetles-harmonia-axyridis",
-                  "evidenceIds": [
-                    "use-7a700a62fa141c9488b27a24"
-                  ],
-                  "children": []
-                }
-              ]
             }
           ]
         },
@@ -5720,13 +5834,12 @@ const TERPENE_DATA = {
           "children": [
             {
               "useNodeId": "health-mental-health",
-              "evidenceIds": [
-                "use-1f0b37bd3fec565dff1c2093"
-              ],
+              "evidenceIds": [],
               "children": [
                 {
                   "useNodeId": "health-mental-health-anxiety",
                   "evidenceIds": [
+                    "use-1f0b37bd3fec565dff1c2093",
                     "use-917fae96e7423fb17e13f5b9"
                   ],
                   "children": []
@@ -5744,17 +5857,17 @@ const TERPENE_DATA = {
               "evidenceIds": [],
               "children": [
                 {
-                  "useNodeId": "botanical-composition-essential-oil-composition",
+                  "useNodeId": "botanical-composition-flavonoid-analysis",
                   "evidenceIds": [
-                    "use-ccf269cde5a9b71136e96750",
-                    "use-8120c51c5fa8ca0ebb32c118"
+                    "use-6faae00dde3905db22822c81"
                   ],
                   "children": []
                 },
                 {
-                  "useNodeId": "botanical-composition-flavonoid-analysis",
+                  "useNodeId": "botanical-composition-essential-oil-composition",
                   "evidenceIds": [
-                    "use-6faae00dde3905db22822c81"
+                    "use-ccf269cde5a9b71136e96750",
+                    "use-8120c51c5fa8ca0ebb32c118"
                   ],
                   "children": []
                 }
@@ -5892,17 +6005,32 @@ const TERPENE_DATA = {
               ],
               "children": [
                 {
+                  "useNodeId": "health-mental-health-calm",
+                  "evidenceIds": [
+                    "use-5f07f90e17eb53cc3b39298f",
+                    "use-41461537d60c8103152b664e"
+                  ],
+                  "children": []
+                },
+                {
                   "useNodeId": "health-mental-health-mood",
                   "evidenceIds": [
                     "use-dba3a9a6e81663299af41218"
                   ],
                   "children": []
-                },
+                }
+              ]
+            },
+            {
+              "useNodeId": "health-cardiovascular",
+              "evidenceIds": [
+                "use-f1dc214d495de36d6f8d4776"
+              ],
+              "children": [
                 {
-                  "useNodeId": "health-mental-health-calm",
+                  "useNodeId": "health-cardiovascular-acute-physiology",
                   "evidenceIds": [
-                    "use-5f07f90e17eb53cc3b39298f",
-                    "use-41461537d60c8103152b664e"
+                    "use-735a60b7ea7b7986cf9fabce"
                   ],
                   "children": []
                 }
@@ -5923,21 +6051,6 @@ const TERPENE_DATA = {
                   "useNodeId": "health-cognitive-alertness",
                   "evidenceIds": [
                     "use-0e8c2bebf147db2dc1e04e1b"
-                  ],
-                  "children": []
-                }
-              ]
-            },
-            {
-              "useNodeId": "health-cardiovascular",
-              "evidenceIds": [
-                "use-f1dc214d495de36d6f8d4776"
-              ],
-              "children": [
-                {
-                  "useNodeId": "health-cardiovascular-acute-physiology",
-                  "evidenceIds": [
-                    "use-735a60b7ea7b7986cf9fabce"
                   ],
                   "children": []
                 }
@@ -6306,6 +6419,45 @@ const TERPENE_DATA = {
           ]
         },
         {
+          "useNodeId": "botanical",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "botanical-composition",
+              "evidenceIds": [
+                "use-e83b6541346f2d1acba35891",
+                "use-9c414465016a86fe1aa80c50",
+                "use-709a3dece9276a89f9cc42c6",
+                "use-1343901a2afe118ad6f240d1"
+              ],
+              "children": [
+                {
+                  "useNodeId": "health-cognitive-plant-chemistry",
+                  "evidenceIds": [
+                    "use-a28d42748ed9b58e47d3db2e",
+                    "use-da358240c13538cfcc908638",
+                    "use-8cbca5d7bc05b5fbff4c4e57"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "botanical-nonvolatile-chemistry",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "botanical-nonvolatile-chemistry-flavonoid-chemistry",
+                  "evidenceIds": [
+                    "use-041a7892eb1b9e396f561a41"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
           "useNodeId": "sensory",
           "evidenceIds": [],
           "children": [
@@ -6335,45 +6487,6 @@ const TERPENE_DATA = {
                   "useNodeId": "sensory-aroma-chemistry-minor-nonterpenoid-volatiles",
                   "evidenceIds": [
                     "use-c92609fc85deb407fc4e1c24"
-                  ],
-                  "children": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "useNodeId": "botanical",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "botanical-nonvolatile-chemistry",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "botanical-nonvolatile-chemistry-flavonoid-chemistry",
-                  "evidenceIds": [
-                    "use-041a7892eb1b9e396f561a41"
-                  ],
-                  "children": []
-                }
-              ]
-            },
-            {
-              "useNodeId": "botanical-composition",
-              "evidenceIds": [
-                "use-e83b6541346f2d1acba35891",
-                "use-9c414465016a86fe1aa80c50",
-                "use-709a3dece9276a89f9cc42c6",
-                "use-1343901a2afe118ad6f240d1"
-              ],
-              "children": [
-                {
-                  "useNodeId": "health-cognitive-plant-chemistry",
-                  "evidenceIds": [
-                    "use-a28d42748ed9b58e47d3db2e",
-                    "use-da358240c13538cfcc908638",
-                    "use-8cbca5d7bc05b5fbff4c4e57"
                   ],
                   "children": []
                 }
@@ -8191,10 +8304,16 @@ const TERPENE_DATA = {
           "type": "health",
           "subcategory": "mental-health",
           "topic": "anxiety"
+        },
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "sleep"
         }
       ],
       "useNodeIds": [
-        "health-mental-health-anxiety"
+        "health-mental-health-anxiety",
+        "health-mental-health-sleep"
       ]
     },
     {
@@ -8958,13 +9077,24 @@ const TERPENE_DATA = {
         {
           "type": "microbial",
           "subcategory": "fungi"
+        },
+        {
+          "type": "cleaning",
+          "subcategory": "surface",
+          "topic": "disinfection"
+        },
+        {
+          "type": "cleaning",
+          "subcategory": "air"
         }
       ],
       "useNodeIds": [
         "microbial-environmental-counts-surfaces",
         "microbial-environmental-counts-air",
         "microbial-bacteria",
-        "microbial-fungi"
+        "microbial-fungi",
+        "cleaning-surface-disinfection",
+        "cleaning-air"
       ]
     },
     {
@@ -9232,14 +9362,15 @@ const TERPENE_DATA = {
         },
         {
           "type": "pest",
-          "subcategory": "flies"
+          "subcategory": "beetles",
+          "topic": "harmonia-axyridis"
         }
       ],
       "useNodeIds": [
         "microbial-bacteria",
         "microbial-fungi",
         "microbial-biofilms",
-        "pest-flies"
+        "pest-beetles-harmonia-axyridis"
       ]
     },
     {
@@ -9448,11 +9579,17 @@ const TERPENE_DATA = {
         {
           "type": "health",
           "subcategory": "cognitive"
+        },
+        {
+          "type": "health",
+          "subcategory": "cognitive",
+          "topic": "attention"
         }
       ],
       "useNodeIds": [
         "health-cognitive-memory",
-        "health-cognitive"
+        "health-cognitive",
+        "health-cognitive-attention"
       ]
     },
     {
@@ -9745,15 +9882,10 @@ const TERPENE_DATA = {
         {
           "type": "pest",
           "subcategory": "flies"
-        },
-        {
-          "type": "pest",
-          "subcategory": "ticks"
         }
       ],
       "useNodeIds": [
-        "pest-flies",
-        "pest-ticks"
+        "pest-flies"
       ]
     },
     {
@@ -9992,10 +10124,16 @@ const TERPENE_DATA = {
           "type": "health",
           "subcategory": "mental-health",
           "topic": "anxiety"
+        },
+        {
+          "type": "health",
+          "subcategory": "oral-dental",
+          "topic": "needle-insertion-pain"
         }
       ],
       "useNodeIds": [
-        "health-mental-health-anxiety"
+        "health-mental-health-anxiety",
+        "health-oral-dental-needle-insertion-pain"
       ]
     },
     {
@@ -10136,10 +10274,15 @@ const TERPENE_DATA = {
           "type": "health",
           "subcategory": "cognitive",
           "topic": "memory"
+        },
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
         }
       ],
       "useNodeIds": [
-        "health-cognitive-memory"
+        "health-cognitive-memory",
+        "health-pain-inflammation"
       ]
     },
     {
@@ -11572,14 +11715,9 @@ const TERPENE_DATA = {
       "compoundIds": [
         "menthol"
       ],
-      "categories": [
-        {
-          "type": "health",
-          "subcategory": "digestive"
-        }
-      ],
+      "categories": [],
       "useNodeIds": [
-        "health-digestive"
+        "health-digestive-nausea-postoperative"
       ]
     },
     {
@@ -11805,12 +11943,18 @@ const TERPENE_DATA = {
         {
           "type": "microbial",
           "subcategory": "bacteria"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
         }
       ],
       "useNodeIds": [
         "microbial-bacteria-gram-negative",
         "microbial-biofilms",
-        "microbial-bacteria"
+        "microbial-bacteria",
+        "microbial-bacteria-gram-positive"
       ]
     },
     {
@@ -11879,8 +12023,8 @@ const TERPENE_DATA = {
       "context": "in-vitro",
       "evidenceLevel": "laboratory",
       "sampleSize": null,
-      "finding": "Lemon and thyme oils inhibited Candida in laboratory assays, including brief exposures intended to simulate rinsing.",
-      "limitations": "Cultured organisms and a rinse simulation, not a clinical oral-candidiasis treatment trial. Experimental concentrations are not mouthwash recommendations.",
+      "finding": "Tea tree oil and isolated terpinen-4-ol inhibited tested Candida albicans strains and reduced experimental biofilms after a 60-second exposure.",
+      "limitations": "Laboratory mouthwash simulation, not a trial in people. Whole oil and isolated terpinen-4-ol were tested separately; this does not establish clinical mouthwash efficacy.",
       "citationReview": {
         "status": "identity-checked",
         "checkedAt": "2026-10-18",
@@ -12262,10 +12406,16 @@ const TERPENE_DATA = {
           "type": "microbial",
           "subcategory": "bacteria",
           "topic": "gram-negative"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria",
+          "topic": "gram-positive"
         }
       ],
       "useNodeIds": [
-        "microbial-bacteria-gram-negative"
+        "microbial-bacteria-gram-negative",
+        "microbial-bacteria-gram-positive"
       ]
     },
     {
@@ -12897,7 +13047,8 @@ const TERPENE_DATA = {
       "categories": [
         {
           "type": "health",
-          "subcategory": "mental-health"
+          "subcategory": "mental-health",
+          "topic": "anxiety"
         },
         {
           "type": "health",
@@ -12905,7 +13056,7 @@ const TERPENE_DATA = {
         }
       ],
       "useNodeIds": [
-        "health-mental-health",
+        "health-mental-health-anxiety",
         "health-pain-inflammation"
       ]
     },
@@ -12951,11 +13102,12 @@ const TERPENE_DATA = {
       "categories": [
         {
           "type": "health",
-          "subcategory": "mental-health"
+          "subcategory": "mental-health",
+          "topic": "anxiety"
         }
       ],
       "useNodeIds": [
-        "health-mental-health"
+        "health-mental-health-anxiety"
       ]
     },
     {
@@ -13565,11 +13717,12 @@ const TERPENE_DATA = {
       "categories": [
         {
           "type": "health",
-          "subcategory": "mental-health"
+          "subcategory": "mental-health",
+          "topic": "anxiety"
         }
       ],
       "useNodeIds": [
-        "health-mental-health"
+        "health-mental-health-anxiety"
       ]
     },
     {
@@ -17193,6 +17346,99 @@ const TERPENE_DATA = {
         "microbial-biofilms",
         "pest-plant-bugs-pyrrhocoris-apterus"
       ]
+    },
+    {
+      "id": "oregano-2024-food-contact-surfaces",
+      "title": "Antibacterial Activity of Oregano (Origanum vulgare L.) Essential Oil Vapors against Microbial Contaminants of Food-Contact Surfaces",
+      "authors": "Pinto L, Cervellieri S, Netti T, Lippolis V, Baruzzi F.",
+      "journal": "Antibiotics (Basel, Switzerland)",
+      "year": 2024,
+      "doi": "10.3390/antibiotics13040371",
+      "pubmedId": "38667047",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38667047/",
+      "studyType": "in-vitro",
+      "context": "laboratory",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "finding": "Oregano oil vapor reduced culturable bacteria on steel, polypropylene and glass coupons. Most tested combinations had no detectable viable cells; one Staphylococcus/glass combination retained survivors.",
+      "limitations": "Controlled vapor exposure, not a household spray. Results depend on organism, surface, soil load and exposure conditions; no infection-prevention or certified-disinfectant claim.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-19",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://europepmc.org/article/MED/38667047",
+        "sourceTitle": "Antibacterial Activity of Oregano (<i>Origanum vulgare</i> L.) Essential Oil Vapors against Microbial Contaminants of Food-Contact Surfaces.",
+        "doi": "10.3390/antibiotics13040371",
+        "pubmedId": "38667047",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-19",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/38667047/",
+        "scope": "Primary abstract checked; no full-text or product efficacy claim."
+      },
+      "fullTextUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11047463/",
+      "oilIds": [
+        "oregano"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "cleaning",
+          "subcategory": "surface",
+          "topic": "disinfection"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "environmental-counts",
+          "topic": "surfaces"
+        }
+      ],
+      "useNodeIds": [
+        "cleaning-surface-disinfection",
+        "microbial-environmental-counts-surfaces"
+      ]
+    },
+    {
+      "id": "tea-tree-2021-hand-hygiene",
+      "title": "Antimicrobial and hand hygiene effects of Tea Tree Essential Oil disinfectant: A randomised control trial",
+      "authors": "Youn BH, Kim YS, Yoo S, Hur MH.",
+      "journal": "International journal of clinical practice",
+      "year": 2021,
+      "doi": "10.1111/ijcp.14206",
+      "pubmedId": "33950544",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33950544/",
+      "studyType": "RCT",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 112,
+      "finding": "A randomized trial in 112 adults compared a 10% tea-tree formulation, alcohol, benzalkonium chloride and no treatment. Post-treatment bacterial counts differed among groups; the abstract does not establish equivalence or superiority to alcohol.",
+      "limitations": "Specific 10% formulation with solubilizer and glycerin. Short-term hand measurements, not infection rates, arbitrary dilution advice or surface-disinfection evidence.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-19",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://europepmc.org/article/MED/33950544",
+        "sourceTitle": "Antimicrobial and hand hygiene effects of Tea Tree Essential Oil disinfectant: A randomised control trial.",
+        "doi": "10.1111/ijcp.14206",
+        "pubmedId": "33950544",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-19",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/33950544/",
+        "scope": "Primary abstract checked; no full-text or product efficacy claim."
+      },
+      "oilIds": [
+        "tea-tree"
+      ],
+      "compoundIds": [],
+      "categories": [],
+      "useNodeIds": [
+        "cleaning-hand-hygiene"
+      ]
     }
   ],
   "sources": [
@@ -18188,7 +18434,8 @@ const TERPENE_DATA = {
             "subcategory": "air"
           }
         ],
-        "declared": true
+        "declared": true,
+        "displayLabel": "Air sanitation"
       },
       {
         "id": "cleaning-laundry",
@@ -18527,7 +18774,7 @@ const TERPENE_DATA = {
           }
         ],
         "declared": true,
-        "displayLabel": "Aroma research",
+        "displayLabel": "Scent chemistry",
         "matrixGroupId": "composition"
       },
       {
@@ -18545,7 +18792,8 @@ const TERPENE_DATA = {
             "subcategory": "aroma-chemistry"
           }
         ],
-        "declared": true
+        "declared": true,
+        "displayLabel": "Aroma composition"
       },
       {
         "id": "sensory-aroma-chemistry-volatile-compounds",
@@ -18816,7 +19064,8 @@ const TERPENE_DATA = {
             "topic": "disinfection"
           }
         ],
-        "declared": false
+        "declared": false,
+        "displayLabel": "Surface disinfection"
       },
       {
         "id": "cleaning-air-bioaerosols",
@@ -19432,6 +19681,16 @@ const TERPENE_DATA = {
         ],
         "legacyBindings": [],
         "declared": true
+      },
+      {
+        "id": "cleaning-hand-hygiene",
+        "label": "Hand hygiene",
+        "parentId": "cleaning",
+        "aliases": [
+          "cleaning-hand-hygiene"
+        ],
+        "legacyBindings": [],
+        "declared": true
       }
     ],
     "aliases": {
@@ -19706,7 +19965,8 @@ const TERPENE_DATA = {
       "health-digestive-smooth-muscle": "health-digestive-smooth-muscle",
       "health-skin-psoriasis": "health-skin-psoriasis",
       "pest-beetles-callosobruchus-maculatus": "pest-beetles-callosobruchus-maculatus",
-      "pest-plant-bugs-pyrrhocoris-apterus": "pest-plant-bugs-pyrrhocoris-apterus"
+      "pest-plant-bugs-pyrrhocoris-apterus": "pest-plant-bugs-pyrrhocoris-apterus",
+      "cleaning-hand-hygiene": "cleaning-hand-hygiene"
     },
     "matrixGroups": [
       {
@@ -23116,9 +23376,9 @@ const TERPENE_DATA = {
       "kind": "study-use",
       "oilId": "lemon",
       "studyId": "kacaniova-2024-lemon",
-      "useNodeId": "pest-flies",
-      "finding": null,
-      "limitations": null,
+      "useNodeId": "pest-beetles-harmonia-axyridis",
+      "finding": "Lemon oil caused concentration-dependent mortality of Harmonia axyridis beetles in sealed dishes after 24 hours.",
+      "limitations": "Beetle mortality, not fly control or repellency. Concentrated experimental exposure does not establish a consumer spray dose.",
       "material": {
         "kind": "essential-oil",
         "label": "essential-oil",
@@ -24366,8 +24626,8 @@ const TERPENE_DATA = {
       "oilId": "clove",
       "studyId": "halder-2011-clove-memory",
       "useNodeId": "health-cognitive-memory",
-      "finding": null,
-      "limitations": null,
+      "finding": "Injected clove oil partly reversed scopolamine-related memory deficits in mice; effects varied by dose and task. Oxidative-stress findings were also mixed.",
+      "limitations": "Intraperitoneal injection in mice, not inhaled or topical use in people.",
       "material": {
         "kind": "essential-oil",
         "label": "Named whole-oil sample; preparation details were not independently recorded.",
@@ -24376,33 +24636,33 @@ const TERPENE_DATA = {
       },
       "model": {
         "kind": "animal",
-        "label": "animal",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Mouse experiment",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
+        "direction": "mixed",
+        "label": "Mixed animal findings",
+        "verification": "source-checked",
         "reportedDirection": "positive"
       },
-      "route": null,
+      "route": "injection",
       "species": "not-independently-authenticated",
-      "relevance": "unreviewed",
+      "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/21157682/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed; detailed-primary-verification-pending Mouse model using injected clove oil and pharmacologically induced memory impairment; does not establish cognitive benefit in humans or from normal aromatic use. Not independently source-reverified in this pass. Audit did not clear this relation for suggestion. Original category corrected to the measured endpoint; oil-study relationship retained."
+        "checkedAt": "2026-10-19",
+        "notes": "Primary abstract checked for material, route, model and outcome. No product efficacy inferred."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "notes": "Exposure route explicitly reported in the primary abstract."
       }
     },
     {
@@ -24411,8 +24671,8 @@ const TERPENE_DATA = {
       "oilId": "clove",
       "studyId": "halder-2012-clove-acute-cognition",
       "useNodeId": "health-cognitive-memory",
-      "finding": null,
-      "limitations": null,
+      "finding": "Injected clove oil reversed retention-memory deficits in mice; acquisition effects depended on dose. Pain responses varied by test and dose.",
+      "limitations": "Intraperitoneal injection and induced deficits in mice; no human attention or finished-product benefit is established.",
       "material": {
         "kind": "essential-oil",
         "label": "Named whole-oil sample; preparation details were not independently recorded.",
@@ -24421,33 +24681,33 @@ const TERPENE_DATA = {
       },
       "model": {
         "kind": "animal",
-        "label": "animal",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Mouse experiment",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
+        "direction": "mixed",
+        "label": "Mixed animal findings",
+        "verification": "source-checked",
         "reportedDirection": "positive"
       },
-      "route": null,
+      "route": "injection",
       "species": "not-independently-authenticated",
-      "relevance": "unreviewed",
+      "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/22453493/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed; detailed-primary-verification-pending Mouse model with intraperitoneal administration and scopolamine-induced impairment; not evidence of human cognitive enhancement. Not independently source-reverified in this pass. Audit did not clear this relation for suggestion. Original category corrected to the measured endpoint; oil-study relationship retained."
+        "checkedAt": "2026-10-19",
+        "notes": "Primary abstract checked for material, route, model and outcome. No product efficacy inferred."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "notes": "Exposure route explicitly reported in the primary abstract."
       }
     },
     {
@@ -24456,8 +24716,8 @@ const TERPENE_DATA = {
       "oilId": "clove",
       "studyId": "eugenol-2021-memory-neurogenesis",
       "useNodeId": "health-cognitive-memory",
-      "finding": null,
-      "limitations": null,
+      "finding": "Oral isolated eugenol improved some memory tasks and neural measures in mice; water-maze escape latency did not significantly improve.",
+      "limitations": "Isolated eugenol, not clove oil; oral dosing in mice cannot establish aromatherapy efficacy.",
       "material": {
         "kind": "isolated-compound",
         "label": "Preparation needs primary-source verification.",
@@ -24466,33 +24726,33 @@ const TERPENE_DATA = {
       },
       "model": {
         "kind": "animal",
-        "label": "animal",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "Mouse experiment",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
+        "direction": "mixed",
+        "label": "Mixed animal findings",
+        "verification": "source-checked",
         "reportedDirection": "positive"
       },
-      "route": null,
+      "route": "oral",
       "species": "not-independently-authenticated",
       "relevance": "contextual",
       "researchMatch": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/34434006/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-reviewed; detailed-primary-verification-pending Small mouse study of isolated eugenol; findings do not establish cognitive benefit in humans or from clove-oil aroma. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+        "checkedAt": "2026-10-19",
+        "notes": "Primary abstract checked for material, route, model and outcome. No product efficacy inferred."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "notes": "Exposure route explicitly reported in the primary abstract."
       }
     },
     {
@@ -27425,8 +27685,8 @@ const TERPENE_DATA = {
       "oilId": "rosemary",
       "studyId": "moss-oliver-2012-cineole",
       "useNodeId": "health-cognitive-attention",
-      "finding": null,
-      "limitations": null,
+      "finding": "In 20 volunteers exposed to rosemary aroma, blood cineole concentration correlated with cognitive task speed and accuracy. Mood associations were less consistent.",
+      "limitations": "Correlational study without an unexposed comparison group; it cannot establish that rosemary improves attention.",
       "material": {
         "kind": "essential-oil",
         "label": "Rosmarinus officinalis essential-oil aroma",
@@ -27435,33 +27695,33 @@ const TERPENE_DATA = {
       },
       "model": {
         "kind": "human",
-        "label": "Healthy-adult brief-exposure experiment and n=20 exposure/cineole correlation study",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "20 adults; correlation after rosemary aroma",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
+        "direction": "mixed",
+        "label": "Mixed / correlational",
+        "verification": "source-checked",
         "reportedDirection": "positive-in-studied-model"
       },
-      "route": null,
+      "route": "inhalation",
       "species": "not-independently-authenticated",
-      "relevance": "unreviewed",
-      "researchMatch": false,
+      "relevance": "direct",
+      "researchMatch": true,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/23983963/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Acute experiments; blood-cineole association is correlational and not proof of mechanism or treatment. Not independently source-reverified in this pass."
+        "checkedAt": "2026-10-19",
+        "notes": "Primary abstract checked for material, route, model and outcome. No product efficacy inferred."
       },
       "supportsFunctionalUse": false,
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "notes": "Exposure route explicitly reported in the primary abstract."
       }
     },
     {
@@ -27783,7 +28043,7 @@ const TERPENE_DATA = {
       "kind": "study-use",
       "oilId": "peppermint",
       "studyId": "anderson-2004-ponv",
-      "useNodeId": "health-digestive",
+      "useNodeId": "health-digestive-nausea-postoperative",
       "finding": null,
       "limitations": null,
       "material": {
@@ -28368,7 +28628,7 @@ const TERPENE_DATA = {
       "kind": "study-use",
       "oilId": "oregano",
       "studyId": "jurado-2023",
-      "useNodeId": "microbial-bacteria-gram-negative",
+      "useNodeId": "microbial-bacteria-gram-positive",
       "finding": null,
       "limitations": null,
       "material": {
@@ -28460,11 +28720,11 @@ const TERPENE_DATA = {
       "studyId": "tuan-2025",
       "useNodeId": "microbial-fungi-yeast",
       "finding": null,
-      "limitations": null,
+      "limitations": "Laboratory Candida study: biofilm formation was inhibited, but tested concentrations did not eradicate more than half of mature biofilm. No clinical efficacy inferred.",
       "material": {
-        "kind": "related-preparation",
-        "label": "Preparation needs primary-source verification.",
-        "relevance": "related-species/preparation",
+        "kind": "essential-oil",
+        "label": "Melaleuca alternifolia essential oil from plants cultivated in Vietnam",
+        "relevance": "whole-oil",
         "speciesMatch": "not-explicitly-verified"
       },
       "model": {
@@ -28505,11 +28765,11 @@ const TERPENE_DATA = {
       "studyId": "tuan-2025",
       "useNodeId": "microbial-biofilms",
       "finding": null,
-      "limitations": null,
+      "limitations": "Laboratory Candida study: biofilm formation was inhibited, but tested concentrations did not eradicate more than half of mature biofilm. No clinical efficacy inferred.",
       "material": {
-        "kind": "related-preparation",
-        "label": "Preparation needs primary-source verification.",
-        "relevance": "related-species/preparation",
+        "kind": "essential-oil",
+        "label": "Melaleuca alternifolia essential oil from plants cultivated in Vietnam",
+        "relevance": "whole-oil",
         "speciesMatch": "not-explicitly-verified"
       },
       "model": {
@@ -29982,11 +30242,11 @@ const TERPENE_DATA = {
       "studyId": "holloway-2024-argentineant",
       "useNodeId": "pest-ants",
       "finding": null,
-      "limitations": null,
+      "limitations": "Ant harborage experiment with fresh leaves; not evidence for distilled rosemary oil.",
       "material": {
-        "kind": "essential-oil",
-        "label": "Named whole-oil sample; preparation details were not independently recorded.",
-        "relevance": "whole-oil-direct",
+        "kind": "plant-material",
+        "label": "Fresh rosemary leaves, not distilled essential oil",
+        "relevance": "different-preparation",
         "speciesMatch": "not-explicitly-verified"
       },
       "model": {
@@ -30003,7 +30263,7 @@ const TERPENE_DATA = {
       },
       "route": null,
       "species": "not-independently-authenticated",
-      "relevance": "unreviewed",
+      "relevance": "contextual",
       "researchMatch": false,
       "verification": {
         "status": "library-reviewed",
@@ -30338,7 +30598,7 @@ const TERPENE_DATA = {
       "kind": "study-use",
       "oilId": "sweet-orange",
       "studyId": "nascimento-2025-sweet-orange-labor",
-      "useNodeId": "health-mental-health",
+      "useNodeId": "health-mental-health-anxiety",
       "finding": null,
       "limitations": null,
       "material": {
@@ -30428,7 +30688,7 @@ const TERPENE_DATA = {
       "kind": "study-use",
       "oilId": "bergamot",
       "studyId": "wakui-2026-bergamot-exam-anxiety",
-      "useNodeId": "health-mental-health",
+      "useNodeId": "health-mental-health-anxiety",
       "finding": null,
       "limitations": null,
       "material": {
@@ -31591,7 +31851,7 @@ const TERPENE_DATA = {
       "kind": "study-use",
       "oilId": "lavender",
       "studyId": "seifi-2014-lavender-anxiety-null",
-      "useNodeId": "health-mental-health",
+      "useNodeId": "health-mental-health-anxiety",
       "finding": null,
       "limitations": null,
       "material": {
@@ -34565,51 +34825,6 @@ const TERPENE_DATA = {
       }
     },
     {
-      "id": "use-41312716610a785250eee149",
-      "kind": "study-use",
-      "oilId": "peppermint",
-      "studyId": "kumar-mishra-2011",
-      "useNodeId": "pest-ticks",
-      "finding": null,
-      "limitations": null,
-      "route": null,
-      "species": "not-independently-authenticated",
-      "material": {
-        "kind": "essential-oil",
-        "label": "Study essential oils and formulations",
-        "relevance": "whole-oil-direct",
-        "speciesMatch": "not-explicitly-verified"
-      },
-      "model": {
-        "kind": "environmental",
-        "label": "Housefly and tick models",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
-      },
-      "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
-        "reportedDirection": "positive-in-studied-model"
-      },
-      "relevance": "unreviewed",
-      "researchMatch": false,
-      "supportsFunctionalUse": false,
-      "verification": {
-        "status": "library-reviewed",
-        "sourceIds": [],
-        "urls": [
-          "https://pubmed.ncbi.nlm.nih.gov/21338379/"
-        ],
-        "checkedAt": null,
-        "notes": "library-record-only Species, formulation, concentration and endpoints differ; no human-use repellent efficacy assurance. Not independently source-reverified in this pass. Audit did not clear this relation for suggestion."
-      },
-      "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
-      }
-    },
-    {
       "id": "use-acd1a7e8d32e5b33e24c2b8a",
       "kind": "study-use",
       "oilId": "peppermint",
@@ -35120,9 +35335,9 @@ const TERPENE_DATA = {
       "oilId": "rosemary",
       "studyId": "moss-oliver-2012-cineole",
       "useNodeId": "health-cognitive",
-      "finding": null,
-      "limitations": null,
-      "route": null,
+      "finding": "In 20 volunteers exposed to rosemary aroma, blood cineole concentration correlated with cognitive task speed and accuracy. Mood associations were less consistent.",
+      "limitations": "Correlational study without an unexposed comparison group; it cannot establish that rosemary improves attention.",
+      "route": "inhalation",
       "species": "not-independently-authenticated",
       "material": {
         "kind": "essential-oil",
@@ -35132,31 +35347,31 @@ const TERPENE_DATA = {
       },
       "model": {
         "kind": "human",
-        "label": "Healthy-adult brief-exposure experiment and n=20 exposure/cineole correlation study",
-        "verification": "library-reported-unverified",
-        "scope": "reported-study-context"
+        "label": "20 adults; correlation after rosemary aroma",
+        "verification": "source-checked",
+        "scope": "endpoint"
       },
       "outcome": {
-        "direction": "unverified",
-        "label": "unverified",
-        "verification": "library-reported-unverified",
+        "direction": "mixed",
+        "label": "Mixed / correlational",
+        "verification": "source-checked",
         "reportedDirection": "positive-in-studied-model"
       },
-      "relevance": "unreviewed",
-      "researchMatch": false,
+      "relevance": "direct",
+      "researchMatch": true,
       "supportsFunctionalUse": false,
       "verification": {
-        "status": "library-reviewed",
+        "status": "source-checked",
         "sourceIds": [],
         "urls": [
           "https://pubmed.ncbi.nlm.nih.gov/23983963/"
         ],
-        "checkedAt": null,
-        "notes": "library-record-only Acute experiments; blood-cineole association is correlational and not proof of mechanism or treatment. Not independently source-reverified in this pass."
+        "checkedAt": "2026-10-19",
+        "notes": "Primary abstract checked for material, route, model and outcome. No product efficacy inferred."
       },
       "routeVerification": {
-        "status": "unverified",
-        "notes": "No independently checked endpoint-specific exposure route is assigned."
+        "status": "source-checked",
+        "notes": "Exposure route explicitly reported in the primary abstract."
       }
     },
     {
@@ -38685,6 +38900,450 @@ const TERPENE_DATA = {
           "https://pmc.ncbi.nlm.nih.gov/articles/PMC8839266/"
         ],
         "notes": "Endpoint-specific experimental route; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-thyme-2024-cleaning-surface-disinfection",
+      "kind": "study-use",
+      "oilId": "thyme",
+      "studyId": "sateriale-forgione-2024",
+      "useNodeId": "cleaning-surface-disinfection",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Commercial thyme white oil, Sigma W306509; 2.5% or 5% dispersed in water and shaken before use. Sample-specific species/chemotype/extraction not independently authenticated in methods.",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "not-explicitly-verified"
+      },
+      "model": {
+        "kind": "environmental",
+        "label": "Indoor surface-swab culturable microbial counts after direct experimental treatment.",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-surface-contact",
+      "species": "not-independently-authenticated",
+      "relevance": "direct",
+      "researchMatch": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11130963/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Application and measured endpoint are complementary tags: microbial counts after surface contact or experimental air nebulization. This is not soil removal or certification of a commercial disinfectant."
+      },
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "notes": "Endpoint-specific method from the checked publication."
+      }
+    },
+    {
+      "id": "use-thyme-2024-cleaning-air",
+      "kind": "study-use",
+      "oilId": "thyme",
+      "studyId": "sateriale-forgione-2024",
+      "useNodeId": "cleaning-air",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Commercial thyme white oil, Sigma W306509; 2.5% or 5% dispersed in water and shaken before use. Sample-specific species/chemotype/extraction not independently authenticated in methods.",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "not-explicitly-verified"
+      },
+      "model": {
+        "kind": "environmental",
+        "label": "Culturable airborne microbial counts in an unoccupied laboratory after experimental nebulization.",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "experimental-nebulization",
+      "species": "not-independently-authenticated",
+      "relevance": "direct",
+      "researchMatch": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11130963/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Application and measured endpoint are complementary tags: microbial counts after surface contact or experimental air nebulization. This is not soil removal or certification of a commercial disinfectant."
+      },
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "notes": "Endpoint-specific method from the checked publication."
+      }
+    },
+    {
+      "id": "use-oregano-2024-food-contact-surfaces-cleaning-surface-disinfection",
+      "kind": "study-use",
+      "oilId": "oregano",
+      "studyId": "oregano-2024-food-contact-surfaces",
+      "useNodeId": "cleaning-surface-disinfection",
+      "finding": "Oregano oil vapor reduced culturable bacteria on steel, polypropylene and glass coupons. Most tested combinations had no detectable viable cells; one Staphylococcus/glass combination retained survivors.",
+      "limitations": "Controlled vapor exposure, not a household spray. Results depend on organism, surface, soil load and exposure conditions; no infection-prevention or certified-disinfectant claim.",
+      "route": "experimental-vapor-surface-contact",
+      "species": "not-independently-authenticated",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Origanum vulgare essential-oil vapor",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "not-explicitly-verified"
+      },
+      "model": {
+        "kind": "laboratory",
+        "label": "laboratory study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "Mixed within studied conditions",
+        "verification": "source-checked"
+      },
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/38667047/"
+        ],
+        "sourceIds": [],
+        "notes": "Primary abstract checked. Findings apply to the tested preparation and endpoint only."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "notes": "Exposure route described in primary abstract."
+      }
+    },
+    {
+      "id": "use-oregano-2024-food-contact-surfaces-microbial-environmental-counts-surfaces",
+      "kind": "study-use",
+      "oilId": "oregano",
+      "studyId": "oregano-2024-food-contact-surfaces",
+      "useNodeId": "microbial-environmental-counts-surfaces",
+      "finding": "Oregano oil vapor reduced culturable bacteria on steel, polypropylene and glass coupons. Most tested combinations had no detectable viable cells; one Staphylococcus/glass combination retained survivors.",
+      "limitations": "Controlled vapor exposure, not a household spray. Results depend on organism, surface, soil load and exposure conditions; no infection-prevention or certified-disinfectant claim.",
+      "route": "experimental-vapor-surface-contact",
+      "species": "not-independently-authenticated",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Origanum vulgare essential-oil vapor",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "not-explicitly-verified"
+      },
+      "model": {
+        "kind": "laboratory",
+        "label": "laboratory study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "Mixed within studied conditions",
+        "verification": "source-checked"
+      },
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/38667047/"
+        ],
+        "sourceIds": [],
+        "notes": "Primary abstract checked. Findings apply to the tested preparation and endpoint only."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "notes": "Exposure route described in primary abstract."
+      }
+    },
+    {
+      "id": "use-tea-tree-2021-hand-hygiene-cleaning-hand-hygiene",
+      "kind": "study-use",
+      "oilId": "tea-tree",
+      "studyId": "tea-tree-2021-hand-hygiene",
+      "useNodeId": "cleaning-hand-hygiene",
+      "finding": "A randomized trial in 112 adults compared a 10% tea-tree formulation, alcohol, benzalkonium chloride and no treatment. Post-treatment bacterial counts differed among groups; the abstract does not establish equivalence or superiority to alcohol.",
+      "limitations": "Specific 10% formulation with solubilizer and glycerin. Short-term hand measurements, not infection rates, arbitrary dilution advice or surface-disinfection evidence.",
+      "route": "topical-hands",
+      "species": "not-independently-authenticated",
+      "material": {
+        "kind": "single-oil-topical-formulation",
+        "label": "10% tea-tree oil formulation with solubilizer, glycerin and water",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "not-explicitly-verified"
+      },
+      "model": {
+        "kind": "human",
+        "label": "human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "Mixed within studied conditions",
+        "verification": "source-checked"
+      },
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "checkedAt": "2026-10-19",
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/33950544/"
+        ],
+        "sourceIds": [],
+        "notes": "Primary abstract checked. Findings apply to the tested preparation and endpoint only."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "notes": "Exposure route described in primary abstract."
+      }
+    },
+    {
+      "id": "use-lavender-2003-attention",
+      "kind": "study-use",
+      "oilId": "lavender",
+      "studyId": "moss-cook-2003",
+      "useNodeId": "health-cognitive-attention",
+      "finding": "Working memory and reaction times worsened.",
+      "limitations": "Acute laboratory exposure with multiple outcomes, not lasting cognitive improvement. This is separate from the later 20-person blood-cineole correlation study.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Lavandula angustifolia aroma",
+        "relevance": "whole-oil",
+        "speciesMatch": "matches"
+      },
+      "model": {
+        "kind": "human",
+        "label": "human",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "negative",
+        "label": "Working memory and reaction times worsened.",
+        "verification": "source-checked"
+      },
+      "route": "inhalation",
+      "species": "Lavandula angustifolia",
+      "relevance": "direct",
+      "researchMatch": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/12690999/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "Independent check of indexed abstract; source scope is limited to the named material, endpoint and model. No finished-product inference."
+      },
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "notes": "Exposure checked in indexed abstract."
+      }
+    },
+    {
+      "id": "use-clove-2012-pain",
+      "kind": "study-use",
+      "oilId": "clove",
+      "studyId": "halder-2012-clove-acute-cognition",
+      "useNodeId": "health-pain-inflammation",
+      "finding": "Injected clove oil reversed retention-memory deficits in mice; acquisition effects depended on dose. Pain responses varied by test and dose.",
+      "limitations": "Intraperitoneal injection and induced deficits in mice; no human attention or finished-product benefit is established.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Named whole-oil sample; preparation details were not independently recorded.",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "not-explicitly-verified"
+      },
+      "model": {
+        "kind": "animal",
+        "label": "Mouse experiment",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "Mixed animal findings",
+        "verification": "source-checked",
+        "reportedDirection": "positive"
+      },
+      "route": "injection",
+      "species": "not-independently-authenticated",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/22453493/"
+        ],
+        "checkedAt": "2026-10-19",
+        "notes": "Primary abstract checked for material, route, model and outcome. No product efficacy inferred."
+      },
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "source-checked",
+        "notes": "Exposure route explicitly reported in the primary abstract."
+      }
+    },
+    {
+      "id": "use-audit-kasper-2010-silexan-health-mental-health-sleep",
+      "kind": "study-use",
+      "oilId": "lavender",
+      "studyId": "kasper-2010-silexan",
+      "useNodeId": "health-mental-health-sleep",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "oral-preparation",
+        "label": "oral-standardized-oil",
+        "relevance": "related-preparation",
+        "speciesMatch": "not-independently-verified"
+      },
+      "model": {
+        "kind": "human",
+        "label": "human",
+        "verification": "library-reported-unverified",
+        "scope": "reported-study-context"
+      },
+      "outcome": {
+        "direction": "unverified",
+        "label": "unverified",
+        "verification": "library-reported-unverified",
+        "reportedDirection": "positive"
+      },
+      "route": null,
+      "species": "not-independently-authenticated",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "verification": {
+        "status": "library-reviewed",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/20512042/"
+        ],
+        "checkedAt": null,
+        "notes": "library-record-reviewed-only Used a standardized oral preparation, not diffused oil. Not independently source-reverified in this pass. Material is contextual or unverified rather than a direct whole-oil match. Audit did not clear this relation for suggestion."
+      },
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "unverified",
+        "notes": "No independently checked endpoint-specific exposure route is assigned."
+      }
+    },
+    {
+      "id": "use-audit-ghaderi-solhjou-2020-health-oral-dental-needle-insertion-pain",
+      "kind": "study-use",
+      "oilId": "lavender",
+      "studyId": "ghaderi-solhjou-2020",
+      "useNodeId": "health-oral-dental-needle-insertion-pain",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "essential-oil",
+        "relevance": "whole-oil",
+        "speciesMatch": "not-independently-verified"
+      },
+      "model": {
+        "kind": "human",
+        "label": "human",
+        "verification": "library-reported-unverified",
+        "scope": "reported-study-context"
+      },
+      "outcome": {
+        "direction": "unverified",
+        "label": "unverified",
+        "verification": "library-reported-unverified",
+        "reportedDirection": "positive"
+      },
+      "route": null,
+      "species": "not-independently-authenticated",
+      "relevance": "unreviewed",
+      "researchMatch": false,
+      "verification": {
+        "status": "library-reviewed",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/32891272/"
+        ],
+        "checkedAt": null,
+        "notes": "library-record-reviewed-only n=24 crossover; pediatric dental setting only. Not independently source-reverified in this pass. Audit did not clear this relation for suggestion."
+      },
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "unverified",
+        "notes": "No independently checked endpoint-specific exposure route is assigned."
+      }
+    },
+    {
+      "id": "use-audit-semeniuc-2017-microbial-bacteria-gram-positive",
+      "kind": "study-use",
+      "oilId": "thyme",
+      "studyId": "semeniuc-2017",
+      "useNodeId": "microbial-bacteria-gram-positive",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Named whole-oil sample; preparation details were not independently recorded.",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "not-explicitly-verified"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "in-vitro",
+        "verification": "library-reported-unverified",
+        "scope": "reported-study-context"
+      },
+      "outcome": {
+        "direction": "unverified",
+        "label": "unverified",
+        "verification": "library-reported-unverified",
+        "reportedDirection": "mixed"
+      },
+      "route": null,
+      "species": "not-independently-authenticated",
+      "relevance": "unreviewed",
+      "researchMatch": false,
+      "verification": {
+        "status": "library-reviewed",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/28911683/"
+        ],
+        "checkedAt": null,
+        "notes": "library-record-reviewed; detailed-primary-verification-pending Food-bacteria panel only; disc-diffusion screening. Not independently source-reverified in this pass. Audit did not clear this relation for suggestion."
+      },
+      "supportsFunctionalUse": false,
+      "routeVerification": {
+        "status": "unverified",
+        "notes": "No independently checked endpoint-specific exposure route is assigned."
       }
     }
   ],

@@ -84,7 +84,7 @@ assert.ok(element('oil-grid').innerHTML.includes('Composition analysis'));
 assert.ok(run('R.nodes.length > 0'), 'Generated taxonomy is loaded before app.js');
 assert.ok(!element('oil-grid').innerHTML.includes('Botanical chemistry'));
 assert.ok(run('domainsForOil("cannabis").map(R.label).includes("Flavonoid research")'));
-assert.ok(run('domainsForOil("cannabis").map(R.label).includes("Aroma research")'));
+assert.ok(run('domainsForOil("cannabis").map(R.label).includes("Scent chemistry")'));
 const options = [...element('study-oil-filter').innerHTML.matchAll(/<option value="([^"]*)">([^<]*)<\/option>/g)].map(match => ({ id: match[1], label: match[2] }));
 assert.deepEqual(options[0], { id: '', label: 'All oils' });
 assert.equal(options.length, run('D.oils.length') + 1);
@@ -99,7 +99,7 @@ assert.deepEqual(pathwayIds, options.slice(1).map(option => option.id));
 for (const [id, label, count] of [
   ['botanical:composition', 'Composition analysis', counts.composition],
   ['botanical:nonvolatile-chemistry', 'Flavonoid research', counts.flavonoids],
-  ['sensory', 'Aroma research', counts.aroma],
+  ['sensory', 'Scent chemistry', counts.aroma],
   ['botanical', run('R.label("botanical")'), counts.botanical]
 ]) {
   for (const filter of ['study-domain-filter', 'oil-domain-filter', 'matrix-domain-filter']) {

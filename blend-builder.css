@@ -218,3 +218,19 @@ body:has(.blend-shop-bar:not([hidden])) footer { padding-bottom:120px; }
 @media(max-width:680px) { .blend-shop-bar { bottom:0; width:100%; border-radius:0; padding:12px 18px calc(12px + env(safe-area-inset-bottom)); gap:12px; }.blend-shop-bar strong { font-size:23px; }#blend-builder .blend-shop-bar button { padding:12px 17px; } }
 
 .blend-result-summary h4 { overflow-wrap:anywhere; }
+
+/* Selected filters stay visible; adding a use narrows results by default. */
+.blend-filter-chips { display:flex; flex-wrap:wrap; gap:6px; margin:10px 0; }
+.blend-filter-chips button, .blend-match-mode button { padding:8px 11px; border:1px solid #c5cfba; border-radius:4px; background:#fffdf7; color:#294633; font:inherit; cursor:pointer; }
+.blend-filter-chips button { font-size:12px; }
+.blend-match-mode { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin:10px 0 16px; font-size:12px; }
+.blend-match-mode span { margin-right:4px; }
+.blend-match-mode button[aria-pressed="true"] { background:#294633; color:#fffdf7; border-color:#294633; }
+.blend-card-research { font-size:12px; color:#355b42; margin:0 0 12px; }
+.blend-match-label { font-weight:600; }
+.blend-evidence-label { font-size:11px; }
+.blend-filter-chips button:focus-visible, .blend-match-mode button:focus-visible { outline:2px solid #294633; outline-offset:3px; }
+
+.blend-catalog-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
+.blend-catalog-heading h4 { margin:0; }
+#blend-reset-choices { min-height:44px; flex-shrink:0; }
