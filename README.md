@@ -85,10 +85,9 @@ pages or return app HTML for failed assets. ECharts' license is in `vendor/`.
 
 The service worker precaches an entire release with SHA-256 verification and
 bypasses HTTP caches during installation. It refuses partial/mixed deployments.
-The active release stays consistent until an update is accepted or all its tabs
-close. The Lab checks for updates on return to the tab, reconnect, and hourly;
-“Update available: refresh Lab” activates the ready release and reloads open
-standalone tabs. Navigation URLs survive refresh; transient unsaved filter input
+A verified release calls `skipWaiting()` and activates automatically. The Lab
+checks on page load, return to the tab, reconnect, and every minute. Controller
+changes reload open standalone tabs once; no update-button click is required. Navigation URLs survive refresh; transient unsaved filter input
 may reset. Only caches belonging to the Lab are cleaned up. In an iframe or
 `?embed=1`, install/status/update controls and new worker registration are disabled.
 
@@ -118,7 +117,7 @@ Commit regenerated `data.js`, `index.html` and `sw.js` with the changed master/a
 The script stamps content-specific script/style URLs to avoid stale HTTP caches. CI checks the generated
 release and regression tests before merging. The PWA suite serves its own isolated
 copies at root and `/terpene-lab/`, simulates offline reopening, a corrupt partial
-rollout, waiting/accepted upgrades, and unrelated-cache preservation.
+rollout, automatic upgrades and saved-recipe preservation, and unrelated-cache preservation.
 
 See `shopify-embed.md` for storefront embedding.
 
