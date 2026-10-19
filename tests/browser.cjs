@@ -139,15 +139,15 @@ const master = require('../master-data.json');
   for(const [tab,label,filter] of [['oils','Oils','oil-domain-filter'],['matrix','Matrix','matrix-domain-filter']]) {
    await page.goto(`${base}/?tab=${tab}${suffix}`);
    await page.locator(`#${filter}`).selectOption('health');
-   await page.locator(`#${filter}-navigation .topic-child-select`).selectOption('health-respiratory');
+   await page.locator(`#${filter}-navigation .topic-child-select`).selectOption('health-mental-health');
    const snapshot=async()=>tab==='oils'
     ? page.locator('#oil-grid .card').evaluateAll(cards=>cards.map(card=>card.dataset.oil).sort())
     : page.locator('#matrix-table .cell').evaluateAll(cells=>cells.map(cell=>[cell.dataset.oil,cell.dataset.domain,cell.textContent.trim()]));
    const expected=await snapshot(); assert.ok(expected.length>0);
    const assertTopicState=async()=>{
     const params=new URL(page.url()).searchParams;
-    assert.equal(params.get('tab'),tab); assert.equal(params.get('domain'),'health-respiratory');
-    assert.equal(await page.locator(`#${filter}`).inputValue(),'health-respiratory');
+    assert.equal(params.get('tab'),tab); assert.equal(params.get('domain'),'health-mental-health');
+    assert.equal(await page.locator(`#${filter}`).inputValue(),'health-mental-health');
     assert.deepEqual(await snapshot(),expected,`${label} result set survives navigation`);
     assert.equal(params.get('embed'),embed?'1':null);
    };
