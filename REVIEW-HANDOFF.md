@@ -1,5 +1,10 @@
 # Terpene Lab: independent review handoff
 
+## Current handoff — 19 October 2026
+
+See [TAXONOMY-AUDIT.md](TAXONOMY-AUDIT.md) for the current consistency audit. The inventory is 33 research oils (26 stocked), 42 compounds, 176 publications and 98 topic terms. Builder and Matrix use the same scoped bibliography; Builder alone applies stock availability. Real $40 checkout is configured. Earlier inventory and checkout notes below describe the previous review baseline, not the current release.
+
+
 ## Matrix and visual interface follow-up
 
 The Matrix now serves as the canonical relationship browser with four views: oils/topics, oils/compounds, compounds/topics and studies/topics. `registries.matrixTopicGroups` and root `matrixGroupId` metadata separate practical use/outcome topics from composition/sensory research and other biological assays. Unassigned new roots remain visible. Clicking an oil opens all compound relationships, chemical observations, precautions and linked papers in place; source records are available from the inventory. Topic columns descend through the existing arbitrary-depth hierarchy.
