@@ -87,6 +87,7 @@ const master = require('../master-data.json');
  assert.equal(await page.locator('#matrix-inspector .chem-evidence').count(),50);
  // Complete an oil -> compound -> paper/topic path without leaving the Matrix.
  await page.goto(`${base}/?tab=matrix&inspect=compound/limonene&embed=1`);
+ await page.locator('#matrix-inspector .study-details > summary').first().click();
  await page.locator('#matrix-inspector [data-matrix-topic-link]').first().click();
  assert.equal(await page.locator('#tab-matrix').isVisible(),true);
  assert.equal(new URL(page.url()).searchParams.get('embed'),'1');
