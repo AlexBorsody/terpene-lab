@@ -22,9 +22,9 @@ function all(list, predicate, message) {
 }
 
 test('Canonical inventories and unique publications', () => {
-  assert.equal(master.oils.length, 28); assert.equal(regs.compounds.length, 34);
-  assert.equal(regs.studies.length, 157); assert.equal(regs.sources.length, 45);
-  assert.equal(new Set(regs.studies.map(s => s.id)).size, 157);
+  assert.equal(master.oils.length, 33); assert.equal(regs.compounds.length, 42);
+  assert.equal(regs.studies.length, 174); assert.equal(regs.sources.length, 50);
+  assert.equal(new Set(regs.studies.map(s => s.id)).size, 174);
   for (const field of ['doi', 'pubmedId']) {
     const values = regs.studies.map(s => s[field]?.toLowerCase()).filter(Boolean);
     assert.equal(new Set(values).size, values.length, 'Duplicate publication ' + field);
@@ -67,11 +67,11 @@ test('Targeted source checking is distinct from complete library coverage', () =
   assert.equal(master.migration.audit.libraryReviewedOnlyExistingRelations, 169);
   assert.equal(master.migration.audit.newPrimaryPublications, 3);
   const primaryPairs = new Set(assertions.filter(a => a.verification.status === 'source-checked').map(a => a.oilId + '/' + a.studyId));
-  assert.equal(primaryPairs.size, 62); // Prior 51, nine corrected existing pairs, two new-paper oil relations.
+  assert.equal(primaryPairs.size, 81); // Prior 51, nine corrected existing pairs, two new-paper oil relations.
 });
 test('Every publication has an independent citation check, separate from endpoint verification', () => {
   all(regs.studies, s => s.citationReview.status === 'identity-checked' && s.citationReview.checkedAt === '2026-10-18', 'citation review');
-  assert.equal(regs.studies.filter(s => s.summaryReview.status === 'abstract-screened').length, 154);
+  assert.equal(regs.studies.filter(s => s.summaryReview.status === 'abstract-screened').length, 163);
   assert.deepEqual(regs.studies.filter(s => s.summaryReview.status === 'abstract-unavailable').map(s => s.id), ['composition-lemongrass-infusion-2014', 'composition-cx01']);
   assert.ok(assertions.some(a => a.verification.status === 'library-reviewed'), 'Abstract screening must not silently promote every oil-specific edge');
   all(regs.studies.filter(s => s.citationReview.provider === 'Crossref'), s => s.citationReview.sourceUrl.startsWith('https://api.crossref.org/works/'), 'Fallback provenance must identify the provider actually used');
@@ -289,9 +289,32 @@ test('Source-backed correction ledger reverses to the exact lossless baseline', 
       assert.ok(studies.has(s.id), 'Lost canonical study ' + s.id);
       for (const oid of s.oilIds) assert.ok(oils.get(oid).studyLinks.some(l => l.studyId === s.id), 'Lost oil-study relation ' + oid + '/' + s.id);
     }
-    assert.deepEqual(data.blendBuilder.product, restored.blendBuilder.product);
-    assert.equal(data.oils.filter(o => o.blend).length, 28);
+    assert.deepEqual({...data.blendBuilder.product,shopifyVariantId:null}, restored.blendBuilder.product);
+    assert.equal(data.oils.filter(o => o.blend).length, 33);
     assert.equal(master.migration.correctionLedger.find(e => e.id === 'source-audit-2026-10-18').instructions.length, 36);
   } finally { fs.rmSync(tmp, {recursive:true,force:true}); }
+});
+test('Merchant assortment is independent of the complete research library', () => {
+  const data=loadGenerated(path.join(root,'data.js'));
+  for (const id of ['ravintsara','vitex','bergamot','copaiba','grapefruit','lemon-eucalyptus','niaouli']) {
+    const oil=data.oils.find(o=>o.id===id);
+    assert.equal(oil.blend.enabled,false); assert.ok(oil.evidenceIds.length);
+    assert.ok(data.studies.some(s=>s.oilIds.includes(id)));
+  }
+  for(const id of ['cedarwood-atlas','chamomile-german','chamomile-roman','sandalwood','ginger']) {
+    assert.equal(data.oils.find(o=>o.id===id).blend.enabled,true);
+    assert.ok(data.oils.find(o=>o.id===id).constituents.length);
+    assert.ok(assertions.filter(a=>a.oilId===id).length>=3);
+  }
+  assert.equal(data.oils.filter(o=>o.blend.enabled).length,26);
+});
+test('New oil research preserves material, species, negative results and specific pests', () => {
+  all(rows('can-2012-german-chamomile-behavior'), a=>a.outcome.direction==='negative' && !a.researchMatch, 'mouse anxiety result');
+  all(rows('wang-2020-ginger-composition').filter(a=>a.useNodeId==='microbial-bacteria'), a=>!a.researchMatch && a.material.kind==='botanical-extract', 'CO2 extraction');
+  all(rows('zargaran-2018-chamomile-migraine'), a=>!a.researchMatch && a.material.kind==='botanical-preparation', 'oleogel not distilled oil');
+  all(rows('2025-ginger-peppermint-lavender-nausea'), a=>!a.researchMatch && a.material.kind==='combination' && a.outcome.direction==='mixed', 'blend cannot establish single-oil effects');
+  all(rows('moy-2012-sandalwood-acne-regimen'), a=>!a.researchMatch && a.material.speciesMatch==='unverified', 'salicylic acid and unverified sandalwood species');
+  all(rows('galovicova-2022-atlas-cedar-bioactivity').filter(a=>a.useNodeId.startsWith('pest')), a=>a.useNodeId==='pest-plant-bugs-pyrrhocoris-apterus', 'firebugs do not become mosquitoes');
+  assert.match(studies.get('el-assri-2025-roman-chamomile-bioactivity').limitations,/disagree/);
 });
 console.log(`research-audit: ${checks} checks passed; ${assertions.length} scoped study assertions, ${assertions.filter(a => a.researchMatch).length} research-topic matches.`);

@@ -93,7 +93,7 @@ async function configure(page, overrides = {}) {
 async function open(page, configured = true) {
   await page.goto(base+'/?tab=blend');
   await ready(page);
-  if (configured) await configure(page);
+  await configure(page, configured ? {} : {shopifyVariantId:null});
 }
 async function create(page, name = FIXTURE_NAME) {
   await page.locator('[data-blend-path="oils"]').click();
@@ -119,11 +119,11 @@ function decodeHref(href) {
   const encoded = url.searchParams.get('properties');
   assert.match(encoded,/^[A-Za-z0-9_-]+$/,'Properties use unpadded Base64URL');
   const properties = JSON.parse(Buffer.from(encoded,'base64url').toString('utf8'));
-  assert.deepEqual(Object.keys(properties),['Recipe'],'Exactly one readable Recipe property');
-  assert.equal(typeof properties.Recipe,'string');
-  assert.ok(properties.Recipe.length>0);
+  assert.deepEqual(Object.keys(properties).filter(k=>k !== 'Around pets'),['Blend','Oil proportions','_Recipe'],'Readable customer fields and private fulfillment recipe');
+  assert.equal(typeof properties._Recipe,'string');
+  assert.ok(properties._Recipe.length>0);
   assert.equal(Buffer.from(JSON.stringify(properties),'utf8').toString('base64url'),encoded,'UTF-8 property payload round-trips exactly');
-  const match = properties.Recipe.match(/^Recipe code: ([A-Za-z0-9_-]+)$/m);
+  const match = properties._Recipe.match(/^Recipe code: ([A-Za-z0-9_-]+)$/m);
   assert.ok(match,'Readable Recipe retains a versioned recipe code');
   const recipe = JSON.parse(Buffer.from(match[1],'base64url').toString('utf8'));
   return {url,properties,recipe,encodedRecipe:match[1]};
@@ -132,7 +132,7 @@ async function cart(page) {
   const anchor = page.locator('#blend-checkout');
   assert.equal(await anchor.isVisible(),true);
   assert.equal(await anchor.evaluate(node=>node.tagName),'A','Checkout is a browser-native link');
-  assert.equal(await anchor.innerText(),'Continue to Shopify · $40.00');
+  assert.equal(await anchor.innerText(),'Checkout · $40.00');
   assert.equal(await anchor.getAttribute('target'),'_top');
   assert.ok((await anchor.getAttribute('rel')).split(/\s+/).includes('noreferrer'));
   const result = decodeHref(await anchor.getAttribute('href'));
@@ -170,10 +170,10 @@ async function captureBeforeNavigation(page, scope = page) {
 (async()=>{
   browser = await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',args:['--no-sandbox']});
 
-  await test('production ordering stays unavailable until a verified Custom variant is configured',async page=>{
+  await test('unconfigured fixture stays unavailable until a verified Custom variant is configured',async page=>{
     await open(page,false);await create(page);
     await noVisibleCart(page);
-    assert.match(await page.locator('#blend-checkout-status').innerText(),/Shopify ordering is being set up/);
+    assert.match(await page.locator('#blend-checkout-status').innerText(),/Ordering is not available yet/);
     const config=await page.evaluate(()=>TERPENE_DATA.blendBuilder.product);
     assert.equal(config.shopifyVariantId,null,'Never substitute an existing merchant product');
     assert.equal(config.price,40);assert.equal(config.currency,'USD');assert.equal(config.size,'8 oz');
@@ -188,10 +188,10 @@ async function captureBeforeNavigation(page, scope = page) {
     const result=await cart(page);
     assert.equal(result.recipe.name,FIXTURE_NAME);
     assert.deepEqual(result.recipe.oils,[{id:'lavender',percent:100}]);
-    assert.match(result.properties.Recipe,/Lavender \[lavender\] 100%/);
-    assert.match(result.properties.Recipe,/Manual formulation review required/);
-    assert.match(result.properties.Recipe,/relative portions.*not finished-product concentrations/);
-    assert.doesNotMatch(result.properties.Recipe,/Base version:|certified|certification|Final spray concentration:|Finished spray oil load:/i);
+    assert.match(result.properties._Recipe,/Lavender \[lavender\] 100%/);
+    assert.match(result.properties._Recipe,/Manual formulation review required/);
+    assert.match(result.properties._Recipe,/relative portions.*not finished-product concentrations/);
+    assert.doesNotMatch(result.properties._Recipe,/Base version:|certified|certification|Final spray concentration:|Finished spray oil load:/i);
     assert.match(await page.locator('.blend-result-summary').innerText(),/Final spray concentration has not been set/);
     assert.match(await page.locator('.blend-result-cautions').innerText(),/reviewed before mixing/);
     const safety=await page.evaluate(key=>BLEND_ENGINE.evaluateSafety(JSON.parse(localStorage.getItem(key)).draft,TERPENE_DATA),STORAGE);
@@ -228,11 +228,11 @@ async function captureBeforeNavigation(page, scope = page) {
     assert.equal(result.recipe.path,'oils');assert.deepEqual(result.recipe.qualityIds,[],'No hidden quality selections enter the order');
     await page.locator('#blend-pets').check();
     result=await cart(page);assert.equal(result.recipe.petContext,true);
-    assert.match(result.properties.Recipe,/pets may be present/);
+    assert.match(result.properties._Recipe,/pets may be present/);
     assert.match(await page.locator('.blend-result-cautions').innerText(),/Pet context is on/);
     await page.locator('#blend-pets').uncheck();
     result=await cart(page);assert.equal(result.recipe.petContext,false);
-    assert.doesNotMatch(result.properties.Recipe,/Customer context: pets/);
+    assert.doesNotMatch(result.properties._Recipe,/Customer context: pets/);
   });
 
   await test('five oils and maximum Unicode names round-trip; invalid drafts cannot expose a link',async page=>{
@@ -245,7 +245,7 @@ async function captureBeforeNavigation(page, scope = page) {
     assert.equal(result.recipe.oils.length,5);
     assert.equal(result.recipe.oils.reduce((sum,oil)=>sum+Math.round(oil.percent*100),0),10000);
     assert.equal(await page.locator('[data-add-oil]:not(:disabled)').count(),0);
-    await page.locator('[data-add-oil="bergamot"]').evaluate(button=>button.click());
+    await page.locator('[data-add-oil="ginger"]').evaluate(button=>button.click());
     assert.deepEqual((await cart(page)).recipe.oils,result.recipe.oils,'Sixth oil cannot be added');
     await page.locator('#blend-name').fill('x'.repeat(61));await noVisibleCart(page);
     assert.equal(await page.locator('#blend-name').evaluate(input=>input.checkValidity()),false);

@@ -989,22 +989,16 @@ function renderMatrix() {
   inventory.innerHTML = `${D.oils.length} oils · ${D.compounds.length} compounds · ${R.nodes.length} topic terms · ${D.studies.length} papers · <button data-matrix-inspect="sources">${D.sources.length} source records</button>`;
   matrixBindInspector(inventory);
   const matrixKey = topics ? [
-    group?.description,
-    oilRows ? 'Counts = linked papers, not effectiveness scores.' : matrixState.mode === 'compound-topics' ? 'Counts = bibliography links, not proof of a compound’s effects.' : '● = paper tagged with this topic or a subtopic.',
-    'Parent counts include subtopics. Overlapping columns cannot be added.'
-  ] : [
-    'Percentages = cited samples only.',
-    'Catalog only = no source-qualified measurement.',
-    'Other material = plant or extract evidence.',
-    '— = no recorded link, not chemical absence.'
-  ];
+    matrixState.mode === 'study-topics' ? '● Linked topic' : 'Linked papers · not effectiveness',
+    'Includes subtopics'
+  ] : ['% Cited sample', 'Catalog only · unquantified', 'Other material · plant or extract'];
   document.getElementById('matrix-context').innerHTML = matrixKey.filter(Boolean).map(text => `<li>${esc(text)}</li>`).join('');
   const columns = topics ? selected ? [selected, ...R.children(selected.id)] : roots : D.compounds.filter(compound => CHEMISTRY.matchesCategory(compound, matrixState.chemical));
   const kind = oilRows ? 'oil' : matrixState.mode === 'compound-topics' ? 'compound' : 'study';
   let rows = (oilRows ? D.oils : kind === 'compound' ? D.compounds : D.studies).filter(row => (!oilRows || !matrixState.oil || row.id === matrixState.oil) && (!q || [row.name, row.latinName, row.title, row.formula, row.authors, row.pubmedId, row.doi].filter(Boolean).join(' ').toLowerCase().includes(q)));
   rows.sort((a,b) => (sort === 'studies' ? matrixPapers(kind,b.id).length - matrixPapers(kind,a.id).length : 0) || (a.name || a.title).localeCompare(b.name || b.title));
   document.getElementById('matrix-count').textContent = `${rows.length} ${kind === 'oil' ? 'oil' : kind === 'compound' ? 'compound' : 'paper'}${rows.length === 1 ? '' : 's'} × ${columns.length} columns`;
-  let html = `<caption class="matrix-caption">${topics ? group?.label || 'Research topics' : 'Oil–compound records'}</caption><thead><tr><th scope="col" class="rowlabel">${kind === 'oil' ? 'Essential oil' : kind === 'compound' ? 'Compound' : 'Publication'}<small>Select a name to explore</small></th>${columns.map(column => `<th scope="col"><button ${topics ? 'data-matrix-topic' : 'data-matrix-inspect'}="${topics ? esc(column.id) : 'compound/' + esc(column.id)}">${esc(topics ? R.label(column.id) : column.name)}${topics && R.children(column.id).length ? '<small>Explore subtopics ↓</small>' : !topics ? `<small>${formatFormula(column.formula)}</small>` : ''}</button></th>`).join('')}</tr></thead><tbody>`;
+  let html = `<caption class="matrix-caption">${topics ? group?.label || 'Research topics' : 'Oil–compound records'}</caption><thead><tr><th scope="col" class="rowlabel">${kind === 'oil' ? 'Essential oil' : kind === 'compound' ? 'Compound' : 'Publication'}</th>${columns.map(column => `<th scope="col"><button ${topics ? 'data-matrix-topic' : 'data-matrix-inspect'}="${topics ? esc(column.id) : 'compound/' + esc(column.id)}">${esc(topics ? R.label(column.id) : column.name)}${topics && R.children(column.id).length ? '<small aria-label="Explore subtopics">↓</small>' : !topics ? `<small>${formatFormula(column.formula)}</small>` : ''}</button></th>`).join('')}</tr></thead><tbody>`;
   rows.forEach(row => {
     html += `<tr><th scope="row" class="rowlabel"><button data-matrix-inspect="${kind}/${esc(row.id)}">${oilRows ? `<span class="swatch sm" style="background:${esc(row.color)}"></span>` : ''}${esc(row.name || row.title)}<small>${esc(oilRows ? row.latinName : kind === 'compound' ? row.formula : `${row.year} · ${row.journal}`)}</small></button></th>`;
     columns.forEach(column => {

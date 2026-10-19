@@ -1,17 +1,17 @@
 // Generated release and SHA-256 map: run python3 scripts/build-pwa.py after edits.
-const RELEASE = "e6bc724701a42604";
+const RELEASE = "07a38a59f1a6ebb5";
 const ASSETS = {
-  "index.html": "a155d6b0308fbb226501e6e9a4e0709df03b59d83377d6dfa2b620ac8c810498",
-  "styles.css": "0b47efec936f0a7b92378b9506afba4f02f04ce6e8108c3b9769f07f395449d0",
-  "app.js": "ea6827b3de5f92b066233602bf9c7a327494bf6270d41ce0a06dc569b0a051f9",
+  "index.html": "97125e13831bc3fa4af53ffd3e44161ec8b97b4c07fb40993652ff98cf6ae58f",
+  "styles.css": "5fb42d6a9b2aa1580baeaa76cc9fe3b5c9dd18e4482b702ca758a475b7e3d25c",
+  "app.js": "f6662bd3fa461b90fee68b1abe5c70210e5930ae9c41ddfe02b37b1928acbe9b",
   "chemistry.js": "09f64d79607afee21306dd8a6fa4d1b28087d8bccd42dd924e958d7baaa4d132",
   "research.js": "9adac5cca9e32904e624fe828d932e955a0a7dd4a28d7352dd866f62c282fdec",
-  "data.js": "1a9ec447b446cb0ecaff7239a4827395e2ffc4a80604acf02dac8f09a98e9392",
-  "pwa.js": "a52f02fdcb6a47168e81c5c7f7eff4c332da8c6952b05e60b9bd8fff9901f21f",
-  "blend-engine.js": "b0c95678d8b1ede6ef9a61031dd8f30cd5866b1f909c80b3a8d5fa52a09938e7",
-  "blend-builder.js": "257f92fbcefbcf119bd1e261a854b5e0f3645c73ddfe35a1564a5e16eb1e9907",
-  "blend-builder.css": "b42e18b42dd4d361f33326d51895fd453d385ce6bb93bc7c59005930b56d8d4a",
-  "master-data.json": "fc440b75253398388571c9acefa72f3d0d04858863cf8adbc2c2e2a283686078",
+  "data.js": "91f86e961ef1663966544319a4cabe8b6790998048a46d7ef4d17082e285aff9",
+  "pwa.js": "cef19be5b7af26f997b1d6eb025044d66d37ec662c348802ec210513f14c7ff5",
+  "blend-engine.js": "2e8efadb5582843de2b7b0a8cb4bf86f9f63404ae671cc00c86715260c215203",
+  "blend-builder.js": "4f8b3aceb9e0c8ea034860f1a888dc5782d91152a9cee8cc6acf7596f3170a0b",
+  "blend-builder.css": "a3a3f6d718629a44a8c299ce0fc2b50cbd4b80993c21103f8203b6d5897a9823",
+  "master-data.json": "f3d1b6196fe3e535c3b7d3321a4f87ec4ec5348ea9ffac549a7cb2f719ba7491",
   "manifest.webmanifest": "1c1ca408fa48a60c75e17542f03c420a73d22d70f98e8f189fb9f1ce76b5865b",
   "shield-icon.svg": "b6a4fa5ec8968f651ec6bb9441f4cb6a3c5c5b333c45628c2e43ca348d2a5562",
   "vendor/echarts-5.5.1.min.js": "e84270bd0cd5bdf60fefc26d00c2a391cb2e81f4d26a7a9ee16185a54773a3cf",

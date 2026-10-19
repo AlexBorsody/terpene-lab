@@ -18,7 +18,7 @@ const assert = require('node:assert/strict');
   assert.deepEqual(oilNames, [...oilNames].sort((a, b) => a.localeCompare(b)));
   const cannabisIndex = oilOptions.findIndex(option => option.value === 'cannabis');
   assert.equal(oilOptions[cannabisIndex - 1].label, 'Bergamot');
-  assert.equal(oilOptions[cannabisIndex + 1].label, 'Cinnamon Bark');
+  assert.equal(oilOptions[cannabisIndex + 1].label, 'Cedarwood (Atlas)');
   const counts = await page.evaluate(() => {
     const descendants = id => {
       const nodes = new Set([id]); let size;

@@ -163,7 +163,8 @@ function main() {
     }
     assert.equal(data.blendBuilder.catalogVersion, '2026-10-18');
     assert.equal(data.blendBuilder.version, '1');
-    assert.deepEqual(data.blendBuilder.product, restored.blendBuilder.product, 'Product configuration changed'); checks++;
+    assert.deepEqual({...data.blendBuilder.product, shopifyVariantId:null}, restored.blendBuilder.product, 'Only the verified Shopify variant changed');
+    assert.equal(data.blendBuilder.product.shopifyVariantId,'67698909052973'); checks++;
     assert.equal(data.taxonomy.aliases['botanical:composition'], 'botanical-composition');
     assert.equal(data.taxonomy.aliases['sensory/aroma-chemistry/sulfur volatiles'], 'sensory-aroma-chemistry-sulfur-volatiles'); checks++;
     assert.ok(data.taxonomy.nodes.some(node => node.id === 'sensory-aroma-chemistry-sensory-perception' && node.declared));
@@ -336,7 +337,7 @@ function main() {
     const defaultsOutput = path.join(tmp, 'defaults.js');
     const defaultsResult = generate('--master', fixturePath, '--output', defaultsOutput); assert.equal(defaultsResult.status, 0, defaultsResult.stderr);
     const defaultsData = loadGenerated(defaultsOutput);
-    assert.ok(defaultsData.oils.every(oil => oil.blend.enabled && oil.blend.availability === 'unconfirmed' && oil.blend.safetyReviewStatus === 'unverified'));
+    assert.ok(defaultsData.oils.every(oil => oil.blend.enabled === (master.oils.find(o=>o.id===oil.id).legacy.blend?.enabled !== false) && oil.blend.availability === 'unconfirmed' && oil.blend.safetyReviewStatus === 'unverified'));
     assert.ok(defaultsData.oils.every(oil => oil.blend.legacySafetyNotes === oil.safety)); checks++;
     fixture(m => { m.blendDefaults = {availability: 'available'}; }, false, /inventory must remain unconfirmed/);
     fixture(m => m.registries.chemicalTaxonomy.push(copy(m.registries.chemicalTaxonomy[0])), false, /duplicate/);

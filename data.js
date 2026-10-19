@@ -38,7 +38,7 @@ const TERPENE_DATA = {
       "totalOilMaxPercent": null,
       "totalOilMaxSource": null,
       "shopifyStoreUrl": "https://sunnysshield.com",
-      "shopifyVariantId": null,
+      "shopifyVariantId": "67698909052973",
       "baseVersion": null
     },
     "starterOilIds": [
@@ -47,9 +47,13 @@ const TERPENE_DATA = {
       "peppermint",
       "lemon",
       "sweet-orange",
-      "bergamot",
       "ylang-ylang",
-      "frankincense"
+      "frankincense",
+      "cedarwood-atlas",
+      "chamomile-german",
+      "chamomile-roman",
+      "sandalwood",
+      "ginger"
     ]
   },
   "categories": [
@@ -865,6 +869,14 @@ const TERPENE_DATA = {
                   "children": []
                 },
                 {
+                  "useNodeId": "health-mental-health-sleep",
+                  "evidenceIds": [
+                    "use-c3cf11a0912f426a90160819",
+                    "use-632a4ca42703e3ad296e6026"
+                  ],
+                  "children": []
+                },
+                {
                   "useNodeId": "health-mental-health-stress",
                   "evidenceIds": [
                     "use-7085b1ba254905c0500335b5",
@@ -876,41 +888,6 @@ const TERPENE_DATA = {
                   "useNodeId": "health-mental-health-mood",
                   "evidenceIds": [
                     "use-67a63def7ed8f3141bbbcc2a"
-                  ],
-                  "children": []
-                },
-                {
-                  "useNodeId": "health-mental-health-sleep",
-                  "evidenceIds": [
-                    "use-c3cf11a0912f426a90160819",
-                    "use-632a4ca42703e3ad296e6026"
-                  ],
-                  "children": []
-                }
-              ]
-            },
-            {
-              "useNodeId": "health-cognitive",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "health-cognitive-memory",
-                  "evidenceIds": [
-                    "use-e8e9b411809079b4fc13dad9",
-                    "use-2cb6fe1dabf9a0156c4eb775"
-                  ],
-                  "children": []
-                }
-              ]
-            },
-            {
-              "useNodeId": "health-skin",
-              "evidenceIds": [],
-              "children": [
-                {
-                  "useNodeId": "health-skin-barrier-repair",
-                  "evidenceIds": [
-                    "use-161716dec2fa9b809445a1fd"
                   ],
                   "children": []
                 }
@@ -926,6 +903,20 @@ const TERPENE_DATA = {
                 "use-98bcfdc9c47d83c5c4997715"
               ],
               "children": []
+            },
+            {
+              "useNodeId": "health-cognitive",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-cognitive-memory",
+                  "evidenceIds": [
+                    "use-e8e9b411809079b4fc13dad9",
+                    "use-2cb6fe1dabf9a0156c4eb775"
+                  ],
+                  "children": []
+                }
+              ]
             },
             {
               "useNodeId": "health-immune",
@@ -957,6 +948,80 @@ const TERPENE_DATA = {
               "useNodeId": "health-wound",
               "evidenceIds": [
                 "use-b34fc6cc6240ca9fc389df40"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "health-skin",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-skin-barrier-repair",
+                  "evidenceIds": [
+                    "use-161716dec2fa9b809445a1fd"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "health-digestive",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-digestive-nausea",
+                  "evidenceIds": [],
+                  "children": [
+                    {
+                      "useNodeId": "health-digestive-nausea-postoperative",
+                      "evidenceIds": [
+                        "use-lavender-40154579-429"
+                      ],
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "pest",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "pest-ticks",
+              "evidenceIds": [
+                "use-1d0aadb9dc2404b7f24879bf"
+              ],
+              "children": [
+                {
+                  "useNodeId": "pest-ticks-repellency",
+                  "evidenceIds": [
+                    "use-6e982cee5ca4dcfc7c6af3f1"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "pest-mosquitoes",
+              "evidenceIds": [
+                "use-a0d5ff7e790b56f4a2aaea3d"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-fleas",
+              "evidenceIds": [
+                "use-7ecf43d5681330dc2fb69990"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-mites",
+              "evidenceIds": [
+                "use-2c18b140ae5622a285241c86"
               ],
               "children": []
             }
@@ -1002,48 +1067,6 @@ const TERPENE_DATA = {
               "evidenceIds": [
                 "use-e72fcbf86957163bc0109c6b",
                 "use-0439ed164a28e632031e1289"
-              ],
-              "children": []
-            }
-          ]
-        },
-        {
-          "useNodeId": "pest",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "pest-mosquitoes",
-              "evidenceIds": [
-                "use-a0d5ff7e790b56f4a2aaea3d"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "pest-ticks",
-              "evidenceIds": [
-                "use-1d0aadb9dc2404b7f24879bf"
-              ],
-              "children": [
-                {
-                  "useNodeId": "pest-ticks-repellency",
-                  "evidenceIds": [
-                    "use-6e982cee5ca4dcfc7c6af3f1"
-                  ],
-                  "children": []
-                }
-              ]
-            },
-            {
-              "useNodeId": "pest-fleas",
-              "evidenceIds": [
-                "use-7ecf43d5681330dc2fb69990"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "pest-mites",
-              "evidenceIds": [
-                "use-2c18b140ae5622a285241c86"
               ],
               "children": []
             }
@@ -1115,7 +1138,8 @@ const TERPENE_DATA = {
         "use-5cc7fc9dcebc227151daebd3",
         "use-1639b396b8fc1ca6280889c5",
         "use-161716dec2fa9b809445a1fd",
-        "use-98bcfdc9c47d83c5c4997715"
+        "use-98bcfdc9c47d83c5c4997715",
+        "use-lavender-40154579-429"
       ],
       "precautions": {
         "legacySafety": "Generally well tolerated; patch test for sensitive skin.",
@@ -1250,40 +1274,47 @@ const TERPENE_DATA = {
               "evidenceIds": [],
               "children": [
                 {
-                  "useNodeId": "health-mental-health-mood",
+                  "useNodeId": "health-mental-health-sleep",
                   "evidenceIds": [
-                    "use-f53f57245534265d5932fcd5"
+                    "use-ddc87d44354ad367bb711d4b"
                   ],
                   "children": []
                 },
                 {
-                  "useNodeId": "health-mental-health-sleep",
+                  "useNodeId": "health-mental-health-mood",
                   "evidenceIds": [
-                    "use-ddc87d44354ad367bb711d4b"
+                    "use-f53f57245534265d5932fcd5"
                   ],
                   "children": []
                 }
               ]
             },
             {
-              "useNodeId": "health-cognitive",
+              "useNodeId": "health-digestive",
               "evidenceIds": [
-                "use-acd1a7e8d32e5b33e24c2b8a"
+                "use-9c9d15424beff4fcd16b54bc",
+                "use-94e0eab005746c5e3e510453"
               ],
               "children": [
                 {
-                  "useNodeId": "health-cognitive-memory",
+                  "useNodeId": "health-digestive-ibs",
                   "evidenceIds": [
-                    "use-20a1862c1f68db5f9cd13159"
+                    "use-83d918365c960ee1a1eea925"
                   ],
                   "children": []
                 },
                 {
-                  "useNodeId": "health-cognitive-alertness",
-                  "evidenceIds": [
-                    "use-31d21d62ce7cca4091ab8e8e"
-                  ],
-                  "children": []
+                  "useNodeId": "health-digestive-nausea",
+                  "evidenceIds": [],
+                  "children": [
+                    {
+                      "useNodeId": "health-digestive-nausea-postoperative",
+                      "evidenceIds": [
+                        "use-peppermint-40154579-428"
+                      ],
+                      "children": []
+                    }
+                  ]
                 }
               ]
             },
@@ -1316,20 +1347,62 @@ const TERPENE_DATA = {
               ]
             },
             {
-              "useNodeId": "health-digestive",
+              "useNodeId": "health-cognitive",
               "evidenceIds": [
-                "use-9c9d15424beff4fcd16b54bc",
-                "use-94e0eab005746c5e3e510453"
+                "use-acd1a7e8d32e5b33e24c2b8a"
               ],
               "children": [
                 {
-                  "useNodeId": "health-digestive-ibs",
+                  "useNodeId": "health-cognitive-memory",
                   "evidenceIds": [
-                    "use-83d918365c960ee1a1eea925"
+                    "use-20a1862c1f68db5f9cd13159"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "health-cognitive-alertness",
+                  "evidenceIds": [
+                    "use-31d21d62ce7cca4091ab8e8e"
                   ],
                   "children": []
                 }
               ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "pest",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "pest-flies",
+              "evidenceIds": [
+                "use-67b442327a53efcb957d118d"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-ticks",
+              "evidenceIds": [
+                "use-cae4e5554fec98ae9dc9e298",
+                "use-9f6bee492505359b5665035b",
+                "use-41312716610a785250eee149"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-mosquitoes",
+              "evidenceIds": [
+                "use-fe8928b4772e3d2d9c140995"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "pest-ants",
+              "evidenceIds": [
+                "use-2cf2a4090a077b79d8d0216f"
+              ],
+              "children": []
             }
           ]
         },
@@ -1345,53 +1418,17 @@ const TERPENE_DATA = {
               "children": []
             },
             {
-              "useNodeId": "microbial-fungi",
-              "evidenceIds": [
-                "use-a89a2e5b4235532d5d3b9f2b"
-              ],
-              "children": []
-            },
-            {
               "useNodeId": "microbial-biofilms",
               "evidenceIds": [
                 "use-64c6d6e7044c1c2cf9cc7ab6",
                 "use-ad28b49fe54c841b88526a4e"
               ],
               "children": []
-            }
-          ]
-        },
-        {
-          "useNodeId": "pest",
-          "evidenceIds": [],
-          "children": [
-            {
-              "useNodeId": "pest-mosquitoes",
-              "evidenceIds": [
-                "use-fe8928b4772e3d2d9c140995"
-              ],
-              "children": []
             },
             {
-              "useNodeId": "pest-ticks",
+              "useNodeId": "microbial-fungi",
               "evidenceIds": [
-                "use-cae4e5554fec98ae9dc9e298",
-                "use-9f6bee492505359b5665035b",
-                "use-41312716610a785250eee149"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "pest-flies",
-              "evidenceIds": [
-                "use-67b442327a53efcb957d118d"
-              ],
-              "children": []
-            },
-            {
-              "useNodeId": "pest-ants",
-              "evidenceIds": [
-                "use-2cf2a4090a077b79d8d0216f"
+                "use-a89a2e5b4235532d5d3b9f2b"
               ],
               "children": []
             }
@@ -1401,13 +1438,6 @@ const TERPENE_DATA = {
           "useNodeId": "botanical",
           "evidenceIds": [],
           "children": [
-            {
-              "useNodeId": "botanical-nonvolatile-chemistry",
-              "evidenceIds": [
-                "use-c4334f9e78bcea6f8b96db1b"
-              ],
-              "children": []
-            },
             {
               "useNodeId": "botanical-composition",
               "evidenceIds": [],
@@ -1427,6 +1457,13 @@ const TERPENE_DATA = {
                   "children": []
                 }
               ]
+            },
+            {
+              "useNodeId": "botanical-nonvolatile-chemistry",
+              "evidenceIds": [
+                "use-c4334f9e78bcea6f8b96db1b"
+              ],
+              "children": []
             }
           ]
         }
@@ -1457,7 +1494,8 @@ const TERPENE_DATA = {
         "use-acd1a7e8d32e5b33e24c2b8a",
         "use-a89a2e5b4235532d5d3b9f2b",
         "use-ad28b49fe54c841b88526a4e",
-        "use-c4334f9e78bcea6f8b96db1b"
+        "use-c4334f9e78bcea6f8b96db1b",
+        "use-peppermint-40154579-428"
       ],
       "precautions": {
         "legacySafety": "Keep away from young children; can irritate eyes and mucous membranes.",
@@ -3671,7 +3709,7 @@ const TERPENE_DATA = {
         }
       ],
       "blend": {
-        "enabled": true,
+        "enabled": false,
         "availability": "unconfirmed",
         "qualityMappings": [],
         "dermalMaxPercent": null,
@@ -3686,7 +3724,8 @@ const TERPENE_DATA = {
         "legacySafetyNotesVerified": false,
         "researchGaps": [],
         "relatedStudyIds": [],
-        "legacySafetyNotes": "For external use; keep away from eyes. PMD products: follow label age guidance."
+        "legacySafetyNotes": "For external use; keep away from eyes. PMD products: follow label age guidance.",
+        "activeEvidenceSource": false
       },
       "useTree": [
         {
@@ -4718,7 +4757,7 @@ const TERPENE_DATA = {
       ],
       "chemicalEvidence": [],
       "blend": {
-        "enabled": true,
+        "enabled": false,
         "availability": "unconfirmed",
         "qualityMappings": [],
         "dermalMaxPercent": null,
@@ -4733,7 +4772,8 @@ const TERPENE_DATA = {
         "legacySafetyNotesVerified": false,
         "researchGaps": [],
         "relatedStudyIds": [],
-        "legacySafetyNotes": "Generally well tolerated; patch test for sensitive skin."
+        "legacySafetyNotes": "Generally well tolerated; patch test for sensitive skin.",
+        "activeEvidenceSource": false
       },
       "useTree": [
         {
@@ -4862,7 +4902,7 @@ const TERPENE_DATA = {
         }
       ],
       "blend": {
-        "enabled": true,
+        "enabled": false,
         "availability": "unconfirmed",
         "qualityMappings": [],
         "dermalMaxPercent": null,
@@ -4877,7 +4917,8 @@ const TERPENE_DATA = {
         "legacySafetyNotesVerified": false,
         "researchGaps": [],
         "relatedStudyIds": [],
-        "legacySafetyNotes": "Phototoxic risk; avoid sun exposure after topical use."
+        "legacySafetyNotes": "Phototoxic risk; avoid sun exposure after topical use.",
+        "activeEvidenceSource": false
       },
       "useTree": [
         {
@@ -5477,7 +5518,7 @@ const TERPENE_DATA = {
       ],
       "chemicalEvidence": [],
       "blend": {
-        "enabled": true,
+        "enabled": false,
         "availability": "unconfirmed",
         "qualityMappings": [],
         "dermalMaxPercent": null,
@@ -5492,7 +5533,8 @@ const TERPENE_DATA = {
         "legacySafetyNotesVerified": false,
         "researchGaps": [],
         "relatedStudyIds": [],
-        "legacySafetyNotes": "For external use; limited safety data — dilute well."
+        "legacySafetyNotes": "For external use; limited safety data — dilute well.",
+        "activeEvidenceSource": false
       },
       "useTree": [
         {
@@ -5627,7 +5669,7 @@ const TERPENE_DATA = {
         }
       ],
       "blend": {
-        "enabled": true,
+        "enabled": false,
         "availability": "unconfirmed",
         "qualityMappings": [
           {
@@ -5980,7 +6022,7 @@ const TERPENE_DATA = {
       ],
       "chemicalEvidence": [],
       "blend": {
-        "enabled": true,
+        "enabled": false,
         "availability": "unconfirmed",
         "qualityMappings": [],
         "dermalMaxPercent": null,
@@ -5995,7 +6037,8 @@ const TERPENE_DATA = {
         "legacySafetyNotesVerified": false,
         "researchGaps": [],
         "relatedStudyIds": [],
-        "legacySafetyNotes": "For external use; dilute well."
+        "legacySafetyNotes": "For external use; dilute well.",
+        "activeEvidenceSource": false
       },
       "useTree": [
         {
@@ -6057,7 +6100,7 @@ const TERPENE_DATA = {
       ],
       "chemicalEvidence": [],
       "blend": {
-        "enabled": true,
+        "enabled": false,
         "availability": "unconfirmed",
         "qualityMappings": [],
         "dermalMaxPercent": null,
@@ -6072,7 +6115,8 @@ const TERPENE_DATA = {
         "legacySafetyNotesVerified": false,
         "researchGaps": [],
         "relatedStudyIds": [],
-        "legacySafetyNotes": "For external use; use the cineole chemotype, not camphor chemotype."
+        "legacySafetyNotes": "For external use; use the cineole chemotype, not camphor chemotype.",
+        "activeEvidenceSource": false
       },
       "useTree": [
         {
@@ -6360,6 +6404,798 @@ const TERPENE_DATA = {
       ],
       "precautions": {
         "legacySafety": "Volatile-oil composition varies substantially by cultivar and preparation. Ingredient research should not be generalized to cannabinoid-rich cannabis extracts.",
+        "reviewStatus": "unreviewed"
+      }
+    },
+    {
+      "id": "cedarwood-atlas",
+      "name": "Cedarwood (Atlas)",
+      "latinName": "Cedrus atlantica",
+      "family": "Pinaceae",
+      "plantPart": "Wood",
+      "extraction": "Distillation",
+      "aroma": [
+        "woody",
+        "dry",
+        "warm"
+      ],
+      "color": "#a17751",
+      "description": "Distilled Atlas cedar wood with a warm, woody aroma. Distinct from Virginia cedarwood (Juniperus virginiana).",
+      "uses": [],
+      "safety": "Supplier identity, concentration and suitability for the finished product require review.",
+      "constituents": [
+        {
+          "compoundId": "beta-himachalene",
+          "range": {
+            "min": 28.99,
+            "max": 28.99
+          },
+          "status": "quantified",
+          "sourceIds": [
+            "atlas-cedar-2023-composition"
+          ],
+          "material": "Essential oil",
+          "sample": "Azrou wood, March 2022",
+          "extraction": "hydrodistillation",
+          "method": "GC-MS peak area",
+          "basis": "Reported chromatographic area percentage in this source sample only; not a supplier specification."
+        },
+        {
+          "compoundId": "alpha-himachalene",
+          "range": {
+            "min": 14.43,
+            "max": 14.43
+          },
+          "status": "quantified",
+          "sourceIds": [
+            "atlas-cedar-2023-composition"
+          ],
+          "material": "Essential oil",
+          "sample": "Azrou wood, March 2022",
+          "extraction": "hydrodistillation",
+          "method": "GC-MS peak area",
+          "basis": "Reported chromatographic area percentage in this source sample only; not a supplier specification."
+        }
+      ],
+      "chemicalEvidence": [],
+      "blend": {
+        "enabled": true,
+        "availability": "unconfirmed",
+        "qualityMappings": [],
+        "dermalMaxPercent": null,
+        "dermalMaxSource": null,
+        "cautionThresholds": [],
+        "phototoxic": null,
+        "sensitizationNotes": "No verified sensitization assessment yet for this oil in the proposed leave-on spray. Legacy profile notes are unaudited and do not establish formulation safety.",
+        "petSafer": null,
+        "petSource": null,
+        "interactions": [],
+        "safetyReviewStatus": "unverified",
+        "legacySafetyNotesVerified": false,
+        "researchGaps": [
+          "No safe finished-product concentration is inferred from these studies."
+        ],
+        "relatedStudyIds": [],
+        "legacySafetyNotes": "Supplier identity, concentration and suitability for the finished product require review.",
+        "activeEvidenceSource": false
+      },
+      "useTree": [
+        {
+          "useNodeId": "botanical",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "botanical-composition",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "botanical-composition-essential-oil-composition",
+                  "evidenceIds": [
+                    "use-cedarwood-atlas-37570883-401"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "microbial",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "microbial-bacteria",
+              "evidenceIds": [
+                "use-cedarwood-atlas-37570883-402",
+                "use-cedarwood-atlas-35161339-430"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-fungi",
+              "evidenceIds": [
+                "use-cedarwood-atlas-37570883-403",
+                "use-cedarwood-atlas-35161339-431"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-biofilms",
+              "evidenceIds": [
+                "use-cedarwood-atlas-35161339-432"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "useNodeId": "health",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "health-pain-inflammation",
+              "evidenceIds": [
+                "use-cedarwood-atlas-37570883-404",
+                "use-cedarwood-atlas-26344850-405"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "useNodeId": "pest",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "pest-plant-bugs",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "pest-plant-bugs-pyrrhocoris-apterus",
+                  "evidenceIds": [
+                    "use-cedarwood-atlas-35161339-433"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidenceIds": [
+        "use-cedarwood-atlas-37570883-401",
+        "use-cedarwood-atlas-37570883-402",
+        "use-cedarwood-atlas-37570883-403",
+        "use-cedarwood-atlas-37570883-404",
+        "use-cedarwood-atlas-26344850-405",
+        "use-cedarwood-atlas-35161339-430",
+        "use-cedarwood-atlas-35161339-431",
+        "use-cedarwood-atlas-35161339-432",
+        "use-cedarwood-atlas-35161339-433"
+      ],
+      "precautions": {
+        "legacySafety": "Supplier identity, concentration and suitability for the finished product require review.",
+        "reviewStatus": "unreviewed"
+      }
+    },
+    {
+      "id": "chamomile-german",
+      "name": "Chamomile (German)",
+      "latinName": "Matricaria recutita",
+      "family": "Asteraceae",
+      "plantPart": "Flower heads",
+      "extraction": "Distillation",
+      "aroma": [
+        "herbal",
+        "sweet",
+        "hay"
+      ],
+      "color": "#738db8",
+      "description": "Distilled German chamomile flowers. Bisabolol-related constituents and blue chamazulene vary with cultivar and growing conditions.",
+      "uses": [],
+      "safety": "Supplier identity, concentration and suitability for the finished product require review.",
+      "constituents": [
+        {
+          "compoundId": "alpha-bisabolol",
+          "range": null,
+          "status": "reported-unquantified",
+          "sourceIds": [
+            "german-chamomile-2016-composition"
+          ],
+          "material": "Essential oil",
+          "sample": "Three cultivars and multiple growing treatments",
+          "extraction": "hydrodistillation",
+          "method": "GC-MS",
+          "basis": "Presence reported; no catalog-wide percentage inferred."
+        },
+        {
+          "compoundId": "chamazulene",
+          "range": null,
+          "status": "reported-unquantified",
+          "sourceIds": [
+            "german-chamomile-2016-composition"
+          ],
+          "material": "Essential oil",
+          "sample": "Three cultivars and multiple growing treatments",
+          "extraction": "hydrodistillation",
+          "method": "GC-MS",
+          "basis": "Presence reported; no catalog-wide percentage inferred."
+        }
+      ],
+      "chemicalEvidence": [],
+      "blend": {
+        "enabled": true,
+        "availability": "unconfirmed",
+        "qualityMappings": [],
+        "dermalMaxPercent": null,
+        "dermalMaxSource": null,
+        "cautionThresholds": [],
+        "phototoxic": null,
+        "sensitizationNotes": "Avoid with chamomile or Asteraceae allergy. Severe reactions have been reported; a finished-product concentration still needs review.",
+        "petSafer": null,
+        "petSource": null,
+        "interactions": [],
+        "safetyReviewStatus": "unverified",
+        "legacySafetyNotesVerified": false,
+        "researchGaps": [
+          "No safe finished-product concentration is inferred from these studies."
+        ],
+        "relatedStudyIds": [],
+        "legacySafetyNotes": "Supplier identity, concentration and suitability for the finished product require review.",
+        "activeEvidenceSource": false
+      },
+      "useTree": [
+        {
+          "useNodeId": "botanical",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "botanical-composition",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "botanical-composition-essential-oil-composition",
+                  "evidenceIds": [
+                    "use-chamomile-german-28231151-406"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "health",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "health-mental-health",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-mental-health-anxiety",
+                  "evidenceIds": [
+                    "use-chamomile-german-22070986-407",
+                    "use-chamomile-german-38172912-419"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "health-cardiovascular",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-cardiovascular-acute-physiology",
+                  "evidenceIds": [
+                    "use-chamomile-german-38172912-420"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "health-pain-inflammation",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-pain-inflammation-headache",
+                  "evidenceIds": [
+                    "use-chamomile-german-29808331-421"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidenceIds": [
+        "use-chamomile-german-28231151-406",
+        "use-chamomile-german-22070986-407",
+        "use-chamomile-german-38172912-419",
+        "use-chamomile-german-38172912-420",
+        "use-chamomile-german-29808331-421"
+      ],
+      "precautions": {
+        "legacySafety": "Supplier identity, concentration and suitability for the finished product require review.",
+        "reviewStatus": "unreviewed",
+        "sourceUrls": [
+          "https://www.ema.europa.eu/en/medicines/herbal/matricariae-aetheroleum"
+        ],
+        "scope": "EMA essential-oil allergy caution checked; finished-spray safety remains unreviewed."
+      }
+    },
+    {
+      "id": "chamomile-roman",
+      "name": "Chamomile (Roman)",
+      "latinName": "Chamaemelum nobile",
+      "family": "Asteraceae",
+      "plantPart": "Flower heads",
+      "extraction": "Distillation",
+      "aroma": [
+        "apple",
+        "floral",
+        "soft"
+      ],
+      "color": "#b4af68",
+      "description": "Roman chamomile flower oil with a soft, apple-like aroma and an ester-rich profile. A different species from German chamomile.",
+      "uses": [],
+      "safety": "Supplier identity, concentration and suitability for the finished product require review.",
+      "constituents": [
+        {
+          "compoundId": "isobutyl-angelate",
+          "range": {
+            "min": 4.9,
+            "max": 4.9
+          },
+          "status": "quantified",
+          "sourceIds": [
+            "roman-chamomile-2018-composition"
+          ],
+          "material": "Essential oil",
+          "sample": "Aromax commercial oil",
+          "extraction": "commercial oil; batch distillation details unreported",
+          "method": "GC/GC-MS",
+          "basis": "Reported chromatographic area percentage in this source sample only; not a supplier specification."
+        },
+        {
+          "compoundId": "alpha-pinene",
+          "range": {
+            "min": 2.4,
+            "max": 2.4
+          },
+          "status": "quantified",
+          "sourceIds": [
+            "roman-chamomile-2018-composition"
+          ],
+          "material": "Essential oil",
+          "sample": "Aromax commercial oil",
+          "extraction": "commercial oil; batch distillation details unreported",
+          "method": "GC/GC-MS",
+          "basis": "Reported chromatographic area percentage in this source sample only; not a supplier specification."
+        }
+      ],
+      "chemicalEvidence": [],
+      "blend": {
+        "enabled": true,
+        "availability": "unconfirmed",
+        "qualityMappings": [],
+        "dermalMaxPercent": null,
+        "dermalMaxSource": null,
+        "cautionThresholds": [],
+        "phototoxic": null,
+        "sensitizationNotes": "Finished-product sensitization, concentration and pet suitability have not been assessed for this oil.",
+        "petSafer": null,
+        "petSource": null,
+        "interactions": [],
+        "safetyReviewStatus": "unverified",
+        "legacySafetyNotesVerified": false,
+        "researchGaps": [
+          "No safe finished-product concentration is inferred from these studies."
+        ],
+        "relatedStudyIds": [],
+        "legacySafetyNotes": "Supplier identity, concentration and suitability for the finished product require review.",
+        "activeEvidenceSource": false
+      },
+      "useTree": [
+        {
+          "useNodeId": "botanical",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "botanical-composition",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "botanical-composition-essential-oil-composition",
+                  "evidenceIds": [
+                    "use-chamomile-roman-29681854-408"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "health",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "health-digestive",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-digestive-smooth-muscle",
+                  "evidenceIds": [
+                    "use-chamomile-roman-29681854-409"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "microbial",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "microbial-bacteria",
+              "evidenceIds": [
+                "use-chamomile-roman-39968372-422"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "microbial-fungi",
+              "evidenceIds": [
+                "use-chamomile-roman-39968372-423"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "useNodeId": "pest",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "pest-beetles",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "pest-beetles-callosobruchus-maculatus",
+                  "evidenceIds": [
+                    "use-chamomile-roman-39968372-424"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidenceIds": [
+        "use-chamomile-roman-29681854-408",
+        "use-chamomile-roman-29681854-409",
+        "use-chamomile-roman-39968372-422",
+        "use-chamomile-roman-39968372-423",
+        "use-chamomile-roman-39968372-424"
+      ],
+      "precautions": {
+        "legacySafety": "Supplier identity, concentration and suitability for the finished product require review.",
+        "reviewStatus": "unreviewed"
+      }
+    },
+    {
+      "id": "sandalwood",
+      "name": "Sandalwood",
+      "latinName": "Santalum album",
+      "family": "Santalaceae",
+      "plantPart": "Heartwood",
+      "extraction": "Distillation",
+      "aroma": [
+        "woody",
+        "creamy",
+        "soft"
+      ],
+      "color": "#b59a71",
+      "description": "Distilled East Indian sandalwood heartwood. Its santalol-rich profile is distinct from Australian sandalwood (Santalum spicatum).",
+      "uses": [],
+      "safety": "Supplier identity, concentration and suitability for the finished product require review.",
+      "constituents": [
+        {
+          "compoundId": "alpha-santalol",
+          "range": {
+            "min": 49,
+            "max": 49
+          },
+          "status": "quantified",
+          "sourceIds": [
+            "sandalwood-2017-composition"
+          ],
+          "material": "Essential oil",
+          "sample": "Lot PISO-110904SD/SA",
+          "extraction": "distillation",
+          "method": "Supplier certificate of analysis",
+          "basis": "Supplier certificate reported percentage for the studied lot only; not independent analysis of store stock."
+        },
+        {
+          "compoundId": "beta-santalol",
+          "range": {
+            "min": 20.8,
+            "max": 20.8
+          },
+          "status": "quantified",
+          "sourceIds": [
+            "sandalwood-2017-composition"
+          ],
+          "material": "Essential oil",
+          "sample": "Lot PISO-110904SD/SA",
+          "extraction": "distillation",
+          "method": "Supplier certificate of analysis",
+          "basis": "Supplier certificate reported percentage for the studied lot only; not independent analysis of store stock."
+        }
+      ],
+      "chemicalEvidence": [],
+      "blend": {
+        "enabled": true,
+        "availability": "unconfirmed",
+        "qualityMappings": [],
+        "dermalMaxPercent": null,
+        "dermalMaxSource": null,
+        "cautionThresholds": [],
+        "phototoxic": null,
+        "sensitizationNotes": "One participant withdrew after a mild skin reaction in the linked 10% serum study. That study does not set a safe concentration for this blend.",
+        "petSafer": null,
+        "petSource": null,
+        "interactions": [],
+        "safetyReviewStatus": "unverified",
+        "legacySafetyNotesVerified": false,
+        "researchGaps": [
+          "No safe finished-product concentration is inferred from these studies."
+        ],
+        "relatedStudyIds": [],
+        "legacySafetyNotes": "Supplier identity, concentration and suitability for the finished product require review.",
+        "activeEvidenceSource": false
+      },
+      "useTree": [
+        {
+          "useNodeId": "health",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "health-cardiovascular",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-cardiovascular-acute-physiology",
+                  "evidenceIds": [
+                    "use-sandalwood-14765284-410"
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "useNodeId": "health-mental-health",
+              "evidenceIds": [
+                "use-sandalwood-14765284-411"
+              ],
+              "children": []
+            },
+            {
+              "useNodeId": "health-skin",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-skin-psoriasis",
+                  "evidenceIds": [
+                    "use-sandalwood-28360856-413",
+                    "use-sandalwood-28360856-414-lab"
+                  ],
+                  "children": []
+                },
+                {
+                  "useNodeId": "health-skin-acne",
+                  "evidenceIds": [
+                    "use-sandalwood-23377508-425"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "botanical",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "botanical-composition",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "botanical-composition-essential-oil-composition",
+                  "evidenceIds": [
+                    "use-sandalwood-28360856-412"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidenceIds": [
+        "use-sandalwood-14765284-410",
+        "use-sandalwood-14765284-411",
+        "use-sandalwood-28360856-412",
+        "use-sandalwood-28360856-413",
+        "use-sandalwood-28360856-414-lab",
+        "use-sandalwood-23377508-425"
+      ],
+      "precautions": {
+        "legacySafety": "Supplier identity, concentration and suitability for the finished product require review.",
+        "reviewStatus": "unreviewed",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5352686/"
+        ]
+      }
+    },
+    {
+      "id": "ginger",
+      "name": "Ginger",
+      "latinName": "Zingiber officinale",
+      "family": "Zingiberaceae",
+      "plantPart": "Rhizome",
+      "extraction": "Distillation",
+      "aroma": [
+        "spicy",
+        "warm",
+        "woody"
+      ],
+      "color": "#bd9148",
+      "description": "Distilled ginger rhizome with a warm, spicy aroma. Essential oil is a different preparation from ginger powder, tea and CO₂ extracts.",
+      "uses": [],
+      "safety": "Supplier identity, concentration and suitability for the finished product require review.",
+      "constituents": [
+        {
+          "compoundId": "zingiberene",
+          "range": {
+            "min": 35.651,
+            "max": 35.651
+          },
+          "status": "quantified",
+          "sourceIds": [
+            "ginger-2020-distilled-composition"
+          ],
+          "material": "Essential oil",
+          "sample": "Tongling white ginger, distilled arm",
+          "extraction": "steam distillation",
+          "method": "GC-MS peak area",
+          "basis": "Reported chromatographic area percentage in this source sample only; not a supplier specification."
+        },
+        {
+          "compoundId": "geraniol",
+          "range": {
+            "min": 1.382,
+            "max": 1.382
+          },
+          "status": "quantified",
+          "sourceIds": [
+            "ginger-2020-distilled-composition"
+          ],
+          "material": "Essential oil",
+          "sample": "Tongling white ginger, distilled arm",
+          "extraction": "steam distillation",
+          "method": "GC-MS peak area",
+          "basis": "Reported chromatographic area percentage in this source sample only; not a supplier specification."
+        }
+      ],
+      "chemicalEvidence": [],
+      "blend": {
+        "enabled": true,
+        "availability": "unconfirmed",
+        "qualityMappings": [],
+        "dermalMaxPercent": null,
+        "dermalMaxSource": null,
+        "cautionThresholds": [],
+        "phototoxic": null,
+        "sensitizationNotes": "No verified sensitization assessment yet for this oil in the proposed leave-on spray. Legacy profile notes are unaudited and do not establish formulation safety.",
+        "petSafer": null,
+        "petSource": null,
+        "interactions": [],
+        "safetyReviewStatus": "unverified",
+        "legacySafetyNotesVerified": false,
+        "researchGaps": [
+          "No safe finished-product concentration is inferred from these studies."
+        ],
+        "relatedStudyIds": [],
+        "legacySafetyNotes": "Supplier identity, concentration and suitability for the finished product require review.",
+        "activeEvidenceSource": false
+      },
+      "useTree": [
+        {
+          "useNodeId": "health",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "health-digestive",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "health-digestive-nausea",
+                  "evidenceIds": [],
+                  "children": [
+                    {
+                      "useNodeId": "health-digestive-nausea-chemotherapy",
+                      "evidenceIds": [
+                        "use-ginger-26051575-415"
+                      ],
+                      "children": []
+                    },
+                    {
+                      "useNodeId": "health-digestive-nausea-postoperative",
+                      "evidenceIds": [
+                        "use-ginger-27841938-416",
+                        "use-ginger-37774171-426",
+                        "use-ginger-40154579-427"
+                      ],
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "botanical",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "botanical-composition",
+              "evidenceIds": [],
+              "children": [
+                {
+                  "useNodeId": "botanical-composition-essential-oil-composition",
+                  "evidenceIds": [
+                    "use-ginger-32872604-417"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "useNodeId": "microbial",
+          "evidenceIds": [],
+          "children": [
+            {
+              "useNodeId": "microbial-bacteria",
+              "evidenceIds": [
+                "use-ginger-32872604-418"
+              ],
+              "children": []
+            }
+          ]
+        }
+      ],
+      "evidenceIds": [
+        "use-ginger-26051575-415",
+        "use-ginger-27841938-416",
+        "use-ginger-32872604-417",
+        "use-ginger-32872604-418",
+        "use-ginger-37774171-426",
+        "use-ginger-40154579-427"
+      ],
+      "precautions": {
+        "legacySafety": "Supplier identity, concentration and suitability for the finished product require review.",
         "reviewStatus": "unreviewed"
       }
     }
@@ -7123,6 +7959,145 @@ const TERPENE_DATA = {
         "formula": "C21H22O8",
         "pubchemCid": 72344,
         "scope": "Name/formula cross-check only; no concentration, batch composition or stereochemistry is inferred."
+      }
+    },
+    {
+      "id": "beta-himachalene",
+      "name": "β-Himachalene",
+      "chemicalClass": "Sesquiterpene",
+      "formula": "C15H24",
+      "aroma": [],
+      "description": "A sesquiterpene hydrocarbon identified in Atlas cedarwood oil.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/11586487",
+        "provider": "PubChem",
+        "formula": "C15H24",
+        "pubchemCid": 11586487,
+        "scope": "Name and formula checked. Reference identity does not establish stereochemistry or concentration in any oil batch."
+      }
+    },
+    {
+      "id": "alpha-himachalene",
+      "name": "α-Himachalene",
+      "chemicalClass": "Sesquiterpene",
+      "formula": "C15H24",
+      "aroma": [],
+      "description": "A himachalene isomer identified in Atlas cedarwood volatile profiles.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/520909",
+        "provider": "PubChem",
+        "formula": "C15H24",
+        "pubchemCid": 520909,
+        "scope": "Name and formula checked. Reference identity does not establish stereochemistry or concentration in any oil batch."
+      }
+    },
+    {
+      "id": "alpha-bisabolol",
+      "name": "α-Bisabolol",
+      "chemicalClass": "Sesquiterpenoid",
+      "formula": "C15H26O",
+      "aroma": [],
+      "description": "A sesquiterpene alcohol reported in German chamomile. Isomers and amounts vary between samples.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/10586",
+        "provider": "PubChem",
+        "formula": "C15H26O",
+        "pubchemCid": 10586,
+        "scope": "Name and formula checked. Reference identity does not establish stereochemistry or concentration in any oil batch."
+      }
+    },
+    {
+      "id": "chamazulene",
+      "name": "Chamazulene",
+      "chemicalClass": "Norsesquiterpene",
+      "formula": "C14H16",
+      "aroma": [],
+      "description": "A blue azulene derivative formed from plant precursors during distillation of German chamomile; it has fourteen carbon atoms.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/10719",
+        "provider": "PubChem",
+        "formula": "C14H16",
+        "pubchemCid": 10719,
+        "scope": "Name and formula checked. Reference identity does not establish stereochemistry or concentration in any oil batch."
+      }
+    },
+    {
+      "id": "isobutyl-angelate",
+      "name": "Isobutyl angelate",
+      "chemicalClass": "Aliphatic ester",
+      "formula": "C9H16O2",
+      "aroma": [],
+      "description": "An angelic-acid ester identified in Roman chamomile oil. It is not a terpene.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/5367807",
+        "provider": "PubChem",
+        "formula": "C9H16O2",
+        "pubchemCid": 5367807,
+        "scope": "Name and formula checked. Reference identity does not establish stereochemistry or concentration in any oil batch."
+      },
+      "functionalGroups": [
+        "ester"
+      ]
+    },
+    {
+      "id": "alpha-santalol",
+      "name": "α-Santalol",
+      "chemicalClass": "Sesquiterpenoid",
+      "formula": "C15H24O",
+      "aroma": [],
+      "description": "A sesquiterpene alcohol prominent in East Indian sandalwood oil. Isolated-compound experiments are distinct from whole-oil studies.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/11085337",
+        "provider": "PubChem",
+        "formula": "C15H24O",
+        "pubchemCid": 11085337,
+        "scope": "Name and formula checked. Reference identity does not establish stereochemistry or concentration in any oil batch."
+      }
+    },
+    {
+      "id": "beta-santalol",
+      "name": "β-Santalol",
+      "chemicalClass": "Sesquiterpenoid",
+      "formula": "C15H24O",
+      "aroma": [],
+      "description": "A sesquiterpene alcohol measured alongside α-santalol in Santalum album oil.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/6857681",
+        "provider": "PubChem",
+        "formula": "C15H24O",
+        "pubchemCid": 6857681,
+        "scope": "Name and formula checked. Reference identity does not establish stereochemistry or concentration in any oil batch."
+      }
+    },
+    {
+      "id": "zingiberene",
+      "name": "Zingiberene",
+      "chemicalClass": "Sesquiterpene",
+      "formula": "C15H24",
+      "aroma": [],
+      "description": "A sesquiterpene hydrocarbon identified in distilled ginger rhizome oil.",
+      "identityReview": {
+        "status": "formula-checked",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/compound/92776",
+        "provider": "PubChem",
+        "formula": "C15H24",
+        "pubchemCid": 92776,
+        "scope": "Name and formula checked. Reference identity does not establish stereochemistry or concentration in any oil batch."
       }
     }
   ],
@@ -15388,6 +16363,836 @@ const TERPENE_DATA = {
         "health-skin-barrier-repair",
         "health-pain-inflammation"
       ]
+    },
+    {
+      "id": "el-hachlafi-2023-atlas-cedar",
+      "title": "Antioxidant, Volatile Compounds; Antimicrobial, Anti-Inflammatory, and Dermatoprotective Properties of Cedrus atlantica (Endl.) Manetti Ex Carriere Essential Oil: In Vitro and In Silico Investigations",
+      "authors": "El Hachlafi N, Mrabti HN, Al-Mijalli SH, Jeddi M, Abdallah EM, Benkhaira N, Hadni H, Assaggaf H, Qasem A, Goh KW, Al-Farga A, Bouyahya A, Fikri-Benbrahim K",
+      "journal": "Molecules (Basel, Switzerland)",
+      "year": 2023,
+      "doi": "10.3390/molecules28155913",
+      "pubmedId": "37570883",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37570883/",
+      "studyType": "in-vitro",
+      "context": "laboratory",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "finding": "Hydrodistilled Atlas cedar wood oil inhibited tested bacterial and fungal cultures and 5-lipoxygenase in laboratory assays. GC-MS identified β- and α-himachalene among its main constituents.",
+      "limitations": "One Moroccan wood sample; laboratory culture and enzyme assays, not infection treatment, pain relief in humans or a validated spray.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A37570883%20AND%20SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Antioxidant, Volatile Compounds; Antimicrobial, Anti-Inflammatory, and Dermatoprotective Properties of Cedrus atlantica (Endl.) Manetti Ex Carriere Essential Oil: In Vitro and In Silico Investigations",
+        "doi": "10.3390/molecules28155913",
+        "pubmedId": "37570883",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "full-text-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10421490/",
+        "scope": "Material, methods, outcomes and limitations checked; no finished-product claim."
+      },
+      "fullTextUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10421490/",
+      "oilIds": [
+        "cedarwood-atlas"
+      ],
+      "compoundIds": [
+        "beta-himachalene",
+        "alpha-himachalene"
+      ],
+      "categories": [
+        {
+          "type": "botanical",
+          "subcategory": "composition",
+          "topic": "essential-oil composition"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi"
+        },
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "useNodeIds": [
+        "botanical-composition-essential-oil-composition",
+        "microbial-bacteria",
+        "microbial-fungi",
+        "health-pain-inflammation"
+      ]
+    },
+    {
+      "id": "martins-2015-atlas-cedar-pain",
+      "title": "Inhalation of Cedrus atlantica essential oil alleviates pain behavior through activation of descending pain modulation pathways in a mouse model of postoperative pain",
+      "authors": "Martins DF, Martins DF, Emer AA, Batisti AP, Donatello N, Carlesso MG, Mazzardo-Martins L, Venzke D, Micke GA, Pizzolatti MG, Piovezan AP, dos Santos AR",
+      "journal": "Journal of ethnopharmacology",
+      "year": 2015,
+      "doi": "10.1016/j.jep.2015.08.048",
+      "pubmedId": "26344850",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/26344850/",
+      "studyType": "animal-study",
+      "context": "animal",
+      "evidenceLevel": "animal",
+      "sampleSize": null,
+      "finding": "Inhaled Cedrus atlantica oil reduced mechanical hypersensitivity after paw-incision surgery in male mice.",
+      "limitations": "Animal experiment. The abstract does not establish human analgesia, a safe exposure or the commercial oil batch specification.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A26344850%20AND%20SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Inhalation of Cedrus atlantica essential oil alleviates pain behavior through activation of descending pain modulation pathways in a mouse model of postoperative pain",
+        "doi": "10.1016/j.jep.2015.08.048",
+        "pubmedId": "26344850",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/26344850/",
+        "scope": "Material, methods, outcomes and limitations checked; no finished-product claim."
+      },
+      "oilIds": [
+        "cedarwood-atlas"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation"
+        }
+      ],
+      "useNodeIds": [
+        "health-pain-inflammation"
+      ]
+    },
+    {
+      "id": "ghassemi-2016-german-chamomile-composition",
+      "title": "Increase of Chamazulene and α-Bisabolol Contents of the Essential Oil of German Chamomile (Matricaria chamomilla L.) Using Salicylic Acid Treatments under Normal and Heat Stress Conditions",
+      "authors": "Ghasemi M, Babaeian Jelodar N, Modarresi M, Bagheri N, Jamali A",
+      "journal": "Foods (Basel, Switzerland)",
+      "year": 2016,
+      "doi": "10.3390/foods5030056",
+      "pubmedId": "28231151",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28231151/",
+      "studyType": "composition-analysis",
+      "context": "laboratory",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "finding": "GC-MS detected bisabolol-related constituents and chamazulene in distilled German chamomile flowers; profiles varied with cultivar, planting conditions and salicylic-acid treatment.",
+      "limitations": "Agronomic composition study. These sample profiles establish neither calming effects nor a universal commercial-oil composition.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A28231151%20AND%20SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Increase of Chamazulene and α-Bisabolol Contents of the Essential Oil of German Chamomile (Matricaria chamomilla L.) Using Salicylic Acid Treatments under Normal and Heat Stress Conditions",
+        "doi": "10.3390/foods5030056",
+        "pubmedId": "28231151",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "full-text-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5302395/",
+        "scope": "Material, methods, outcomes and limitations checked; no finished-product claim."
+      },
+      "fullTextUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5302395/",
+      "oilIds": [
+        "chamomile-german"
+      ],
+      "compoundIds": [
+        "alpha-bisabolol",
+        "chamazulene"
+      ],
+      "categories": [
+        {
+          "type": "botanical",
+          "subcategory": "composition",
+          "topic": "essential-oil composition"
+        }
+      ],
+      "useNodeIds": [
+        "botanical-composition-essential-oil-composition"
+      ]
+    },
+    {
+      "id": "can-2012-german-chamomile-behavior",
+      "title": "Psychopharmacological profile of Chamomile (Matricaria recutita L.) essential oil in mice",
+      "authors": "Can OD, Demir Özkay U, Kıyan HT, Demirci B",
+      "journal": "Phytomedicine : international journal of phytotherapy and phytopharmacology",
+      "year": 2012,
+      "doi": "10.1016/j.phymed.2011.10.001",
+      "pubmedId": "22070986",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22070986/",
+      "studyType": "animal-study",
+      "context": "animal",
+      "evidenceLevel": "animal",
+      "sampleSize": null,
+      "finding": "German chamomile essential oil increased locomotion and anxiety-like behavior at the higher tested doses in mice, rather than showing a calming effect.",
+      "limitations": "Mouse behavioral tests. Exposure route was not established from the checked abstract; tea and extract studies cannot be substituted for this oil.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A22070986%20AND%20SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Psychopharmacological profile of Chamomile (Matricaria recutita L.) essential oil in mice",
+        "doi": "10.1016/j.phymed.2011.10.001",
+        "pubmedId": "22070986",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/22070986/",
+        "scope": "Material, methods, outcomes and limitations checked; no finished-product claim."
+      },
+      "oilIds": [
+        "chamomile-german"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "anxiety"
+        }
+      ],
+      "useNodeIds": [
+        "health-mental-health-anxiety"
+      ]
+    },
+    {
+      "id": "sandor-2018-roman-chamomile",
+      "title": "Evidence Supports Tradition: The in Vitro Effects of Roman Chamomile on Smooth Muscles",
+      "authors": "Sándor Z, Mottaghipisheh J, Veres K, Hohmann J, Bencsik T, Horváth A, Kelemen D, Papp R, Barthó L, Csupor D",
+      "journal": "Frontiers in pharmacology",
+      "year": 2018,
+      "doi": "10.3389/fphar.2018.00323",
+      "pubmedId": "29681854",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29681854/",
+      "studyType": "ex-vivo",
+      "context": "laboratory",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "finding": "Roman chamomile essential oil relaxed isolated intestinal tissue. The paper tested oil and hydroethanolic extracts separately; its oil contained angelate esters.",
+      "limitations": "Isolated guinea-pig, rat and human tissue experiments, not a clinical trial. Direct tissue exposure does not establish digestive benefits from inhalation or a skin spray.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A29681854%20AND%20SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Evidence Supports Tradition: The in Vitro Effects of Roman Chamomile on Smooth Muscles",
+        "doi": "10.3389/fphar.2018.00323",
+        "pubmedId": "29681854",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "full-text-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5897738/",
+        "scope": "Material, methods, outcomes and limitations checked; no finished-product claim."
+      },
+      "fullTextUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5897738/",
+      "oilIds": [
+        "chamomile-roman"
+      ],
+      "compoundIds": [
+        "isobutyl-angelate",
+        "alpha-pinene"
+      ],
+      "categories": [
+        {
+          "type": "botanical",
+          "subcategory": "composition",
+          "topic": "essential-oil composition"
+        }
+      ],
+      "useNodeIds": [
+        "botanical-composition-essential-oil-composition",
+        "health-digestive-smooth-muscle"
+      ]
+    },
+    {
+      "id": "hongratanaworakit-2004-sandalwood",
+      "title": "Evaluation of the effects of East Indian sandalwood oil and alpha-santalol on humans after transdermal absorption",
+      "authors": "Hongratanaworakit T, Heuberger E, Buchbauer G",
+      "journal": "Planta medica",
+      "year": 2004,
+      "doi": "10.1055/s-2004-815446",
+      "pubmedId": "14765284",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/14765284/",
+      "studyType": "human-experimental",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": null,
+      "finding": "After transdermal exposure, whole sandalwood oil reduced physiological arousal but increased behavioral activation. Isolated α-santalol had a different, more sedative profile.",
+      "limitations": "Acute study in healthy people with fragrance inhalation blocked by masks. Whole-oil findings are mixed and do not establish sleep, anxiety treatment or spray effectiveness.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A14765284%20AND%20SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Evaluation of the effects of East Indian sandalwood oil and alpha-santalol on humans after transdermal absorption",
+        "doi": "10.1055/s-2004-815446",
+        "pubmedId": "14765284",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/14765284/",
+        "scope": "Material, methods, outcomes and limitations checked; no finished-product claim."
+      },
+      "oilIds": [
+        "sandalwood"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "cardiovascular",
+          "topic": "acute-physiology"
+        },
+        {
+          "type": "health",
+          "subcategory": "mental-health"
+        }
+      ],
+      "useNodeIds": [
+        "health-cardiovascular-acute-physiology",
+        "health-mental-health"
+      ]
+    },
+    {
+      "id": "sharma-2017-sandalwood-psoriasis",
+      "title": "East Indian Sandalwood Oil (EISO) Alleviates Inflammatory and Proliferative Pathologies of Psoriasis",
+      "authors": "Sharma M, Levenson C, Clements I, Castella P, Gebauer K, Cox ME",
+      "journal": "Frontiers in pharmacology",
+      "year": 2017,
+      "doi": "10.3389/fphar.2017.00125",
+      "pubmedId": "28360856",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28360856/",
+      "studyType": "pilot-study",
+      "context": "human and laboratory",
+      "evidenceLevel": "clinical",
+      "sampleSize": 12,
+      "finding": "A small uncontrolled pilot reported improved plaque scores with a 10% sandalwood-oil serum; one participant withdrew after a mild application-site reaction. Separate skin-model experiments reduced inflammatory markers.",
+      "limitations": "Twelve enrolled, eleven evaluable; open-label, no placebo, proprietary formulation and manufacturer-affiliated authors. Study concentration is not a general dermal safety limit.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A28360856%20AND%20SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "East Indian Sandalwood Oil (EISO) Alleviates Inflammatory and Proliferative Pathologies of Psoriasis",
+        "doi": "10.3389/fphar.2017.00125",
+        "pubmedId": "28360856",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "full-text-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5352686/",
+        "scope": "Material, methods, outcomes and limitations checked; no finished-product claim."
+      },
+      "fullTextUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5352686/",
+      "oilIds": [
+        "sandalwood"
+      ],
+      "compoundIds": [
+        "alpha-santalol",
+        "beta-santalol"
+      ],
+      "categories": [
+        {
+          "type": "botanical",
+          "subcategory": "composition",
+          "topic": "essential-oil composition"
+        }
+      ],
+      "useNodeIds": [
+        "botanical-composition-essential-oil-composition",
+        "health-skin-psoriasis"
+      ]
+    },
+    {
+      "id": "lua-2015-ginger-chemotherapy",
+      "title": "Effects of inhaled ginger aromatherapy on chemotherapy-induced nausea and vomiting and health-related quality of life in women with breast cancer",
+      "authors": "Lua PL, Salihah N, Mazlan N",
+      "journal": "Complementary therapies in medicine",
+      "year": 2015,
+      "doi": "10.1016/j.ctim.2015.03.009",
+      "pubmedId": "26051575",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/26051575/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 60,
+      "finding": "In 60 women, inhaled ginger oil briefly reduced nausea but showed no significant overall nausea or vomiting benefit over fragrance-matched placebo.",
+      "limitations": "Single-blind crossover during chemotherapy. The authors found the evidence insufficient for efficacy; selected quality-of-life improvements do not establish nausea control.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A26051575%20AND%20SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Effects of inhaled ginger aromatherapy on chemotherapy-induced nausea and vomiting and health-related quality of life in women with breast cancer",
+        "doi": "10.1016/j.ctim.2015.03.009",
+        "pubmedId": "26051575",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/26051575/",
+        "scope": "Material, methods, outcomes and limitations checked; no finished-product claim."
+      },
+      "oilIds": [
+        "ginger"
+      ],
+      "compoundIds": [],
+      "categories": [],
+      "useNodeIds": [
+        "health-digestive-nausea-chemotherapy"
+      ]
+    },
+    {
+      "id": "lee-2017-ginger-postoperative",
+      "title": "Effectiveness of Ginger Essential Oil on Postoperative Nausea and Vomiting in Abdominal Surgery Patients",
+      "authors": "Lee YR, Shin HS",
+      "journal": "Journal of alternative and complementary medicine (New York, N.Y.)",
+      "year": 2017,
+      "doi": "10.1089/acm.2015.0328",
+      "pubmedId": "27841938",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27841938/",
+      "studyType": "quasi-experimental",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 60,
+      "finding": "Postoperative nausea and vomiting scores were lower with ginger-oil inhalation than saline in 60 abdominal-surgery patients.",
+      "limitations": "Quasi-experimental, non-equivalent groups and an unscented comparator. Not a randomized blinded efficacy trial or evidence for oral ginger or a custom spray.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A27841938%20AND%20SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Effectiveness of Ginger Essential Oil on Postoperative Nausea and Vomiting in Abdominal Surgery Patients",
+        "doi": "10.1089/acm.2015.0328",
+        "pubmedId": "27841938",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/27841938/",
+        "scope": "Material, methods, outcomes and limitations checked; no finished-product claim."
+      },
+      "oilIds": [
+        "ginger"
+      ],
+      "compoundIds": [],
+      "categories": [],
+      "useNodeIds": [
+        "health-digestive-nausea-postoperative"
+      ]
+    },
+    {
+      "id": "wang-2020-ginger-composition",
+      "title": "Antibacterial Activity and Mechanism of Ginger Essential Oil against Escherichia coli and Staphylococcus aureus",
+      "authors": "Wang X, Shen Y, Thakur K, Han J, Zhang JG, Hu F, Wei ZJ",
+      "journal": "Molecules (Basel, Switzerland)",
+      "year": 2020,
+      "doi": "10.3390/molecules25173955",
+      "pubmedId": "32872604",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32872604/",
+      "studyType": "in-vitro",
+      "context": "laboratory",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "finding": "Steam-distilled and CO₂-extracted ginger preparations were analyzed separately. Subsequent antibacterial tests used the CO₂ preparation, which inhibited E. coli and S. aureus in culture.",
+      "limitations": "The antibacterial arm did not test the catalog distilled oil. Reported chromatographic percentages are sample-specific and do not establish a product specification.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A32872604%20AND%20SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Antibacterial Activity and Mechanism of Ginger Essential Oil against Escherichia coli and Staphylococcus aureus",
+        "doi": "10.3390/molecules25173955",
+        "pubmedId": "32872604",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "full-text-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7504760/",
+        "scope": "Material, methods, outcomes and limitations checked; no finished-product claim."
+      },
+      "fullTextUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7504760/",
+      "oilIds": [
+        "ginger"
+      ],
+      "compoundIds": [
+        "zingiberene",
+        "geraniol"
+      ],
+      "categories": [
+        {
+          "type": "botanical",
+          "subcategory": "composition",
+          "topic": "essential-oil composition"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "bacteria"
+        }
+      ],
+      "useNodeIds": [
+        "botanical-composition-essential-oil-composition",
+        "microbial-bacteria"
+      ]
+    },
+    {
+      "id": "pourshaikhian-2024-german-chamomile-acs",
+      "title": "Effects of aromatherapy with Matricaria chamomile essential oil on anxiety and hemodynamic indices in patients with acute coronary syndrome, 2021: a randomized controlled trial",
+      "authors": "Pourshaikhian M, Moghadamnia MT, Kazemnezhad Leyli E, Shafiei Kisomi Z",
+      "journal": "BMC complementary medicine and therapies",
+      "year": 2024,
+      "doi": "10.1186/s12906-023-04326-9",
+      "pubmedId": "38172912",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38172912/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 154,
+      "finding": "In 154 acute-coronary-syndrome patients, inhaled German chamomile diluted in sesame oil was associated with lower anxiety scores, blood pressure and heart rate over two nights versus sesame oil.",
+      "limitations": "Single hospital, short follow-up, subjective anxiety, scent-distinguishable comparator and baseline demographic imbalances despite randomization. Adjunct to usual hospital care; no evidence of treating coronary disease or validating a custom spray.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A38172912%20AND%20SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Effects of aromatherapy with Matricaria chamomile essential oil on anxiety and hemodynamic indices in patients with acute coronary syndrome, 2021: a randomized controlled trial",
+        "doi": "10.1186/s12906-023-04326-9",
+        "pubmedId": "38172912",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "full-text-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10763144/",
+        "scope": "Material, methods, outcomes and limitations checked; no finished-product claim."
+      },
+      "fullTextUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10763144/",
+      "oilIds": [
+        "chamomile-german"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "mental-health",
+          "topic": "anxiety"
+        },
+        {
+          "type": "health",
+          "subcategory": "cardiovascular",
+          "topic": "acute-physiology"
+        }
+      ],
+      "useNodeIds": [
+        "health-mental-health-anxiety",
+        "health-cardiovascular-acute-physiology"
+      ]
+    },
+    {
+      "id": "zargaran-2018-chamomile-migraine",
+      "title": "Evaluation of the effect of topical chamomile (Matricaria chamomilla L.) oleogel as pain relief in migraine without aura: a randomized, double-blind, placebo-controlled, crossover study",
+      "authors": "Zargaran A, Borhani-Haghighi A, Salehi-Marzijarani M, Faridi P, Daneshamouz S, Azadi A, Sadeghpour H, Sakhteman A, Mohagheghzadeh A",
+      "journal": "Neurological sciences : official journal of the Italian Neurological Society and of the Italian Society of Clinical Neurophysiology",
+      "year": 2018,
+      "doi": "10.1007/s10072-018-3415-1",
+      "pubmedId": "29808331",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29808331/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 100,
+      "finding": "A crossover trial reported reduced migraine symptoms with a traditional chamomile-in-sesame-oil oleogel; 72 of 100 enrolled patients completed the protocol.",
+      "limitations": "A botanical extraction in sesame oil containing apigenin and chamazulene, not the catalog distilled essential oil. Attrition and formulation specificity limit transfer; no whole-oil efficacy inference.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A29808331%20AND%20SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Evaluation of the effect of topical chamomile (Matricaria chamomilla L.) oleogel as pain relief in migraine without aura: a randomized, double-blind, placebo-controlled, crossover study",
+        "doi": "10.1007/s10072-018-3415-1",
+        "pubmedId": "29808331",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/29808331/",
+        "scope": "Material, methods, outcomes and limitations checked; no finished-product claim."
+      },
+      "oilIds": [
+        "chamomile-german"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "pain-inflammation",
+          "topic": "headache"
+        }
+      ],
+      "useNodeIds": [
+        "health-pain-inflammation-headache"
+      ]
+    },
+    {
+      "id": "el-assri-2025-roman-chamomile-bioactivity",
+      "title": "Molecular characterization, chemical profile and biological properties of essential oils from Chamaemelum nobile (L.) flowers of Morocco: in vitro and in silico studies",
+      "authors": "El-Assri EM, El-Assri Y, El Brahimi R, El Fadili M, Baghouz A, Abuelizz HA, Er-Rahmani S, Lahkimi A, Bouia A",
+      "journal": "Frontiers in chemistry",
+      "year": 2025,
+      "doi": "10.3389/fchem.2025.1539872",
+      "pubmedId": "39968372",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39968372/",
+      "studyType": "in-vitro",
+      "context": "laboratory",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "finding": "Hydrodistilled Moroccan Roman chamomile flower oil inhibited tested bacteria and fungi. Separate cowpea-weevil experiments reported fumigant mortality and avoidance of treated filter paper.",
+      "limitations": "Laboratory assays only. The unusual sesquiterpene-rich profile is not generalized to commercial ester-rich Roman chamomile. The abstract and methods/results disagree on insect exposure quantities; no dose, household protection or human infection claim is adopted.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A39968372%20AND%20SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Molecular characterization, chemical profile and biological properties of essential oils from Chamaemelum nobile (L.) flowers of Morocco: in vitro and in silico studies",
+        "doi": "10.3389/fchem.2025.1539872",
+        "pubmedId": "39968372",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "full-text-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11832495/",
+        "scope": "Material, methods, outcomes and limitations checked; no finished-product claim."
+      },
+      "fullTextUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11832495/",
+      "oilIds": [
+        "chamomile-roman"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi"
+        }
+      ],
+      "useNodeIds": [
+        "microbial-bacteria",
+        "microbial-fungi",
+        "pest-beetles-callosobruchus-maculatus"
+      ]
+    },
+    {
+      "id": "moy-2012-sandalwood-acne-regimen",
+      "title": "Single-center, open-label study of a proprietary topical 0.5% salicylic acid-based treatment regimen containing sandalwood oil in adolescents and adults with mild to moderate acne",
+      "authors": "Moy RL, Levenson C, So JJ, Rock JA",
+      "journal": "Journal of drugs in dermatology : JDD",
+      "year": 2012,
+      "doi": null,
+      "pubmedId": "23377508",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/23377508/",
+      "studyType": "open-label-study",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 47,
+      "finding": "An uncontrolled eight-week study reported improvement in 42 of 47 patients using a multi-product acne regimen containing salicylic acid and sandalwood oil.",
+      "limitations": "Combination regimen with 0.5% salicylic acid, no placebo or oil-only arm. The checked abstract describes Australian-sourced sandalwood without a botanical species; neither Santalum album identity nor an independent oil benefit is established.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A23377508%20AND%20SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Single-center, open-label study of a proprietary topical 0.5% salicylic acid-based treatment regimen containing sandalwood oil in adolescents and adults with mild to moderate acne",
+        "doi": null,
+        "pubmedId": "23377508",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/23377508/",
+        "scope": "Material, methods, outcomes and limitations checked; no finished-product claim."
+      },
+      "oilIds": [
+        "sandalwood"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "health",
+          "subcategory": "skin",
+          "topic": "acne"
+        }
+      ],
+      "useNodeIds": [
+        "health-skin-acne"
+      ]
+    },
+    {
+      "id": "sforza-2023-ginger-postoperative",
+      "title": "Using Ginger Oil to Treat Nausea and Vomiting Following Breast Augmentation Surgery",
+      "authors": "Sforza M, Sidhu M, Okhiria R, Okhiria T, Saghir R, Saghir N, Husein R, Poojary M, Seifalian A",
+      "journal": "Plastic and aesthetic nursing",
+      "year": 2023,
+      "doi": "10.1097/psn.0000000000000534",
+      "pubmedId": "37774171",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37774171/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 30,
+      "finding": "A small randomized trial reported lower postoperative nausea/vomiting scores after ginger oil was placed on the laryngeal mask before breast-augmentation surgery.",
+      "limitations": "Thirty women at one center. Intraoperative airway-device exposure differs from everyday aromatherapy; extraction and batch identity are not specified in the checked abstract. No consumer exposure recommendation is inferred.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A37774171%20AND%20SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Using Ginger Oil to Treat Nausea and Vomiting Following Breast Augmentation Surgery",
+        "doi": "10.1097/psn.0000000000000534",
+        "pubmedId": "37774171",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/37774171/",
+        "scope": "Material, methods, outcomes and limitations checked; no finished-product claim."
+      },
+      "oilIds": [
+        "ginger"
+      ],
+      "compoundIds": [],
+      "categories": [],
+      "useNodeIds": [
+        "health-digestive-nausea-postoperative"
+      ]
+    },
+    {
+      "id": "2025-ginger-peppermint-lavender-nausea",
+      "title": "Effect of aromatherapy with peppermint, ginger, and lavender on postoperative nausea severity after oral surgery under general anaesthesia: A single-blind randomized controlled trial",
+      "authors": "Ishikawa E, Fujisawa T, Kimura Y, Hojo T, Kamekura N, Kido K",
+      "journal": "Complementary therapies in medicine",
+      "year": 2025,
+      "doi": "10.1016/j.ctim.2025.103169",
+      "pubmedId": "40154579",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40154579/",
+      "studyType": "randomized-controlled-trial",
+      "context": "human",
+      "evidenceLevel": "clinical",
+      "sampleSize": 182,
+      "finding": "A peppermint, ginger and lavender blend reduced nausea severity after oral surgery. Rescue antiemetic use did not differ significantly; 57 of 182 randomized patients developed nausea and received the intervention.",
+      "limitations": "Three-oil combination versus water, single center and scent-distinguishable control. The symptomatic subgroup was much smaller than enrollment; individual-oil effects and a custom spray cannot be inferred.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A40154579%20AND%20SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Effect of aromatherapy with peppermint, ginger, and lavender on postoperative nausea severity after oral surgery under general anaesthesia: A single-blind randomized controlled trial",
+        "doi": "10.1016/j.ctim.2025.103169",
+        "pubmedId": "40154579",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "abstract-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/40154579/",
+        "scope": "Material, methods, outcomes and limitations checked; no finished-product claim."
+      },
+      "oilIds": [
+        "lavender",
+        "peppermint",
+        "ginger"
+      ],
+      "compoundIds": [],
+      "categories": [],
+      "useNodeIds": [
+        "health-digestive-nausea-postoperative"
+      ]
+    },
+    {
+      "id": "galovicova-2022-atlas-cedar-bioactivity",
+      "title": "Chemical Composition, Antioxidant, In Vitro and In Situ Antimicrobial, Antibiofilm, and Anti-Insect Activity of Cedar atlantica Essential Oil",
+      "authors": "Kačániová M, Galovičová L, Valková V, Ďuranová H, Štefániková J, Čmiková N, Vukic M, Vukovic NL, Kowalczewski PŁ",
+      "journal": "Plants (Basel, Switzerland)",
+      "year": 2022,
+      "doi": "10.3390/plants11030358",
+      "pubmedId": "35161339",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35161339/",
+      "studyType": "in-vitro",
+      "context": "laboratory",
+      "evidenceLevel": "laboratory",
+      "sampleSize": null,
+      "finding": "A commercial Moroccan cedar-wood oil showed microbial inhibition and changes in experimental biofilms. A separate sealed-dish vapor assay caused firebug mortality.",
+      "limitations": "Commercial sample with a supplier-reported identity and a profile different from the other Atlas cedar sample. Food-model, culture and firebug assays are not clinical treatment, cleaning performance or mosquito/tick repellency. Mortality is not a repellency endpoint.",
+      "citationReview": {
+        "status": "identity-checked",
+        "checkedAt": "2026-10-18",
+        "provider": "Europe PMC",
+        "sourceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A35161339%20AND%20SRC%3AMED&format=json&resultType=core",
+        "sourceTitle": "Chemical Composition, Antioxidant, In Vitro and In Situ Antimicrobial, Antibiofilm, and Anti-Insect Activity of Cedar atlantica Essential Oil",
+        "doi": "10.3390/plants11030358",
+        "pubmedId": "35161339",
+        "scope": "Publication identity checked independently from endpoint applicability."
+      },
+      "summaryReview": {
+        "status": "full-text-screened",
+        "checkedAt": "2026-10-18",
+        "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8839266/",
+        "scope": "Material, methods, outcomes and limitations checked; no finished-product claim."
+      },
+      "fullTextUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8839266/",
+      "oilIds": [
+        "cedarwood-atlas"
+      ],
+      "compoundIds": [],
+      "categories": [
+        {
+          "type": "microbial",
+          "subcategory": "bacteria"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "fungi"
+        },
+        {
+          "type": "microbial",
+          "subcategory": "biofilms"
+        }
+      ],
+      "useNodeIds": [
+        "microbial-bacteria",
+        "microbial-fungi",
+        "microbial-biofilms",
+        "pest-plant-bugs-pyrrhocoris-apterus"
+      ]
     }
   ],
   "sources": [
@@ -15856,6 +17661,61 @@ const TERPENE_DATA = {
       "method": "Capillary GC and GC-MS; chromatographic composition",
       "limitations": "Ripeness and season affect composition; this value is not universal.",
       "url": "https://doi.org/10.1080/10412905.2001.9699710"
+    },
+    {
+      "id": "atlas-cedar-2023-composition",
+      "label": "Antioxidant, Volatile Compounds; Antimicrobial, Anti-Inflammatory, and Dermatoprotective Properties of Cedrus atlantica (Endl.) Manetti Ex Carriere Essential Oil: In Vitro and In Silico Investigations (2023)",
+      "type": "composition-study",
+      "evidenceLevel": "laboratory",
+      "sample": "Azrou, Morocco wood, March 2022; voucher RAB 113587",
+      "extraction": "hydrodistillation, 3 hours",
+      "method": "GC-MS, relative peak area",
+      "limitations": "One wood sample; not universal ranges.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37570883/"
+    },
+    {
+      "id": "german-chamomile-2016-composition",
+      "label": "Increase of Chamazulene and α-Bisabolol Contents of the Essential Oil of German Chamomile (Matricaria chamomilla L.) Using Salicylic Acid Treatments under Normal and Heat Stress Conditions (2016)",
+      "type": "composition-study",
+      "evidenceLevel": "laboratory",
+      "sample": "Bushehr, Bona and Bodegold cultivars under normal/heat stress and salicylic-acid treatments",
+      "extraction": "flower hydrodistillation, 5 hours",
+      "method": "GC-MS",
+      "limitations": "Treatment-specific measurements are not pooled into a catalog percentage.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28231151/"
+    },
+    {
+      "id": "roman-chamomile-2018-composition",
+      "label": "Evidence Supports Tradition: The in Vitro Effects of Roman Chamomile on Smooth Muscles (2018)",
+      "type": "composition-study",
+      "evidenceLevel": "laboratory",
+      "sample": "Commercial Roman chamomile oil, Aromax, Hungary",
+      "extraction": "commercial distilled oil; batch extraction details not supplied",
+      "method": "GC/GC-MS",
+      "limitations": "Sample-specific profile, not all Roman chamomile oils.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29681854/"
+    },
+    {
+      "id": "sandalwood-2017-composition",
+      "label": "East Indian Sandalwood Oil (EISO) Alleviates Inflammatory and Proliferative Pathologies of Psoriasis (2017)",
+      "type": "composition-study",
+      "evidenceLevel": "laboratory",
+      "sample": "Santalum album heartwood oil, lot PISO-110904SD/SA",
+      "extraction": "distillation",
+      "method": "Supplier certificate of analysis reproduced in Table 1",
+      "limitations": "Supplier certificate, not an independent analysis of Sunny’s Shield stock.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28360856/"
+    },
+    {
+      "id": "ginger-2020-distilled-composition",
+      "label": "Antibacterial Activity and Mechanism of Ginger Essential Oil against Escherichia coli and Staphylococcus aureus (2020)",
+      "type": "composition-study",
+      "evidenceLevel": "laboratory",
+      "sample": "Tongling white ginger, steam-distilled arm",
+      "extraction": "steam distillation",
+      "method": "GC-MS peak area",
+      "limitations": "Keep distinct from the CO₂ extract used in the antibacterial arm.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32872604/"
     }
   ],
   "chemicalGroups": [
@@ -17502,6 +19362,76 @@ const TERPENE_DATA = {
         ],
         "legacyBindings": [],
         "declared": true
+      },
+      {
+        "id": "health-digestive-nausea",
+        "label": "Nausea",
+        "parentId": "health-digestive",
+        "aliases": [
+          "health-digestive-nausea"
+        ],
+        "legacyBindings": [],
+        "declared": true
+      },
+      {
+        "id": "health-digestive-nausea-postoperative",
+        "label": "Postoperative nausea",
+        "parentId": "health-digestive-nausea",
+        "aliases": [
+          "health-digestive-nausea-postoperative"
+        ],
+        "legacyBindings": [],
+        "declared": true
+      },
+      {
+        "id": "health-digestive-nausea-chemotherapy",
+        "label": "Chemotherapy-related nausea",
+        "parentId": "health-digestive-nausea",
+        "aliases": [
+          "health-digestive-nausea-chemotherapy"
+        ],
+        "legacyBindings": [],
+        "declared": true
+      },
+      {
+        "id": "health-digestive-smooth-muscle",
+        "label": "Intestinal smooth muscle",
+        "parentId": "health-digestive",
+        "aliases": [
+          "health-digestive-smooth-muscle"
+        ],
+        "legacyBindings": [],
+        "declared": true
+      },
+      {
+        "id": "health-skin-psoriasis",
+        "label": "Psoriasis",
+        "parentId": "health-skin",
+        "aliases": [
+          "health-skin-psoriasis"
+        ],
+        "legacyBindings": [],
+        "declared": true
+      },
+      {
+        "id": "pest-beetles-callosobruchus-maculatus",
+        "label": "Cowpea weevil (C. maculatus)",
+        "parentId": "pest-beetles",
+        "aliases": [
+          "pest-beetles-callosobruchus-maculatus"
+        ],
+        "legacyBindings": [],
+        "declared": true
+      },
+      {
+        "id": "pest-plant-bugs-pyrrhocoris-apterus",
+        "label": "Firebug (P. apterus)",
+        "parentId": "pest-plant-bugs",
+        "aliases": [
+          "pest-plant-bugs-pyrrhocoris-apterus"
+        ],
+        "legacyBindings": [],
+        "declared": true
       }
     ],
     "aliases": {
@@ -17769,7 +19699,14 @@ const TERPENE_DATA = {
       "pest:beetles:harmonia-axyridis": "pest-beetles-harmonia-axyridis",
       "pest/beetles/harmonia-axyridis": "pest-beetles-harmonia-axyridis",
       "health-metabolic-alpha-amylase-inhibition": "health-metabolic-alpha-amylase-inhibition",
-      "health-skin-barrier-repair": "health-skin-barrier-repair"
+      "health-skin-barrier-repair": "health-skin-barrier-repair",
+      "health-digestive-nausea": "health-digestive-nausea",
+      "health-digestive-nausea-postoperative": "health-digestive-nausea-postoperative",
+      "health-digestive-nausea-chemotherapy": "health-digestive-nausea-chemotherapy",
+      "health-digestive-smooth-muscle": "health-digestive-smooth-muscle",
+      "health-skin-psoriasis": "health-skin-psoriasis",
+      "pest-beetles-callosobruchus-maculatus": "pest-beetles-callosobruchus-maculatus",
+      "pest-plant-bugs-pyrrhocoris-apterus": "pest-plant-bugs-pyrrhocoris-apterus"
     },
     "matrixGroups": [
       {
@@ -35198,6 +37135,1557 @@ const TERPENE_DATA = {
         "checkedAt": "2026-10-18",
         "notes": "Independent check of full text, methods §2.4 and results; source scope is limited to the named material, endpoint and model. No finished-product inference."
       }
+    },
+    {
+      "id": "use-cedarwood-atlas-37570883-401",
+      "kind": "study-use",
+      "oilId": "cedarwood-atlas",
+      "studyId": "el-hachlafi-2023-atlas-cedar",
+      "useNodeId": "botanical-composition-essential-oil-composition",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Cedrus atlantica distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "analytical",
+        "label": "GC-MS composition analysis",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "analytical-not-efficacy",
+        "label": "analytical-not-efficacy",
+        "verification": "source-checked"
+      },
+      "route": "not-applicable",
+      "species": "Cedrus atlantica",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC10421490/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. One Moroccan wood sample; laboratory culture and enzyme assays, not infection treatment, pain relief in humans or a validated spray."
+      },
+      "routeVerification": {
+        "status": "not-applicable",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC10421490/"
+        ],
+        "notes": "Composition measurement, not exposure."
+      }
+    },
+    {
+      "id": "use-cedarwood-atlas-37570883-402",
+      "kind": "study-use",
+      "oilId": "cedarwood-atlas",
+      "studyId": "el-hachlafi-2023-atlas-cedar",
+      "useNodeId": "microbial-bacteria",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Cedrus atlantica distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory culture or enzyme assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "in-vitro-exposure",
+      "species": "Cedrus atlantica",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC10421490/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. One Moroccan wood sample; laboratory culture and enzyme assays, not infection treatment, pain relief in humans or a validated spray."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC10421490/"
+        ],
+        "notes": "Endpoint-specific route; not a recommended consumer use."
+      }
+    },
+    {
+      "id": "use-cedarwood-atlas-37570883-403",
+      "kind": "study-use",
+      "oilId": "cedarwood-atlas",
+      "studyId": "el-hachlafi-2023-atlas-cedar",
+      "useNodeId": "microbial-fungi",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Cedrus atlantica distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory culture or enzyme assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "in-vitro-exposure",
+      "species": "Cedrus atlantica",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC10421490/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. One Moroccan wood sample; laboratory culture and enzyme assays, not infection treatment, pain relief in humans or a validated spray."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC10421490/"
+        ],
+        "notes": "Endpoint-specific route; not a recommended consumer use."
+      }
+    },
+    {
+      "id": "use-cedarwood-atlas-37570883-404",
+      "kind": "study-use",
+      "oilId": "cedarwood-atlas",
+      "studyId": "el-hachlafi-2023-atlas-cedar",
+      "useNodeId": "health-pain-inflammation",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Cedrus atlantica distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory culture or enzyme assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "in-vitro-exposure",
+      "species": "Cedrus atlantica",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC10421490/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. One Moroccan wood sample; laboratory culture and enzyme assays, not infection treatment, pain relief in humans or a validated spray."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC10421490/"
+        ],
+        "notes": "Endpoint-specific route; not a recommended consumer use."
+      }
+    },
+    {
+      "id": "use-cedarwood-atlas-26344850-405",
+      "kind": "study-use",
+      "oilId": "cedarwood-atlas",
+      "studyId": "martins-2015-atlas-cedar-pain",
+      "useNodeId": "health-pain-inflammation",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Cedrus atlantica distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "animal",
+        "label": "Mouse experiment",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "inhalation",
+      "species": "Cedrus atlantica",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/26344850/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "abstract-screened. Animal experiment. The abstract does not establish human analgesia, a safe exposure or the commercial oil batch specification."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/26344850/"
+        ],
+        "notes": "Endpoint-specific route; not a recommended consumer use."
+      }
+    },
+    {
+      "id": "use-chamomile-german-28231151-406",
+      "kind": "study-use",
+      "oilId": "chamomile-german",
+      "studyId": "ghassemi-2016-german-chamomile-composition",
+      "useNodeId": "botanical-composition-essential-oil-composition",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Matricaria recutita distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "analytical",
+        "label": "GC-MS composition analysis",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "analytical-not-efficacy",
+        "label": "analytical-not-efficacy",
+        "verification": "source-checked"
+      },
+      "route": "not-applicable",
+      "species": "Matricaria recutita",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5302395/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. Agronomic composition study. These sample profiles establish neither calming effects nor a universal commercial-oil composition."
+      },
+      "routeVerification": {
+        "status": "not-applicable",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5302395/"
+        ],
+        "notes": "Composition measurement, not exposure."
+      }
+    },
+    {
+      "id": "use-chamomile-german-22070986-407",
+      "kind": "study-use",
+      "oilId": "chamomile-german",
+      "studyId": "can-2012-german-chamomile-behavior",
+      "useNodeId": "health-mental-health-anxiety",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Matricaria recutita distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "animal",
+        "label": "Mouse experiment",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "negative",
+        "label": "negative",
+        "verification": "source-checked"
+      },
+      "route": null,
+      "species": "Matricaria recutita",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/22070986/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "abstract-screened. Mouse behavioral tests. Exposure route was not established from the checked abstract; tea and extract studies cannot be substituted for this oil."
+      },
+      "routeVerification": {
+        "status": "unverified",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/22070986/"
+        ],
+        "notes": "Route not established from the checked abstract."
+      }
+    },
+    {
+      "id": "use-chamomile-roman-29681854-408",
+      "kind": "study-use",
+      "oilId": "chamomile-roman",
+      "studyId": "sandor-2018-roman-chamomile",
+      "useNodeId": "botanical-composition-essential-oil-composition",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Chamaemelum nobile distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "analytical",
+        "label": "GC-MS composition analysis",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "analytical-not-efficacy",
+        "label": "analytical-not-efficacy",
+        "verification": "source-checked"
+      },
+      "route": "not-applicable",
+      "species": "Chamaemelum nobile",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5897738/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. Isolated guinea-pig, rat and human tissue experiments, not a clinical trial. Direct tissue exposure does not establish digestive benefits from inhalation or a skin spray."
+      },
+      "routeVerification": {
+        "status": "not-applicable",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5897738/"
+        ],
+        "notes": "Composition measurement, not exposure."
+      }
+    },
+    {
+      "id": "use-chamomile-roman-29681854-409",
+      "kind": "study-use",
+      "oilId": "chamomile-roman",
+      "studyId": "sandor-2018-roman-chamomile",
+      "useNodeId": "health-digestive-smooth-muscle",
+      "finding": "Roman chamomile oil relaxed isolated animal intestinal tissue and human jejunal strips. These are tissue-bath experiments, not treated patients.",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Chamaemelum nobile distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "ex-vivo",
+        "label": "Isolated intestinal tissue",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "ex-vivo-exposure",
+      "species": "Chamaemelum nobile",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5897738/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. Isolated guinea-pig, rat and human tissue experiments, not a clinical trial. Direct tissue exposure does not establish digestive benefits from inhalation or a skin spray."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5897738/"
+        ],
+        "notes": "Endpoint-specific route; not a recommended consumer use."
+      }
+    },
+    {
+      "id": "use-sandalwood-14765284-410",
+      "kind": "study-use",
+      "oilId": "sandalwood",
+      "studyId": "hongratanaworakit-2004-sandalwood",
+      "useNodeId": "health-cardiovascular-acute-physiology",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Santalum album distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "topical",
+      "species": "Santalum album",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/14765284/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "abstract-screened. Acute study in healthy people with fragrance inhalation blocked by masks. Whole-oil findings are mixed and do not establish sleep, anxiety treatment or spray effectiveness."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/14765284/"
+        ],
+        "notes": "Endpoint-specific route; not a recommended consumer use."
+      }
+    },
+    {
+      "id": "use-sandalwood-14765284-411",
+      "kind": "study-use",
+      "oilId": "sandalwood",
+      "studyId": "hongratanaworakit-2004-sandalwood",
+      "useNodeId": "health-mental-health",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Santalum album distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "topical",
+      "species": "Santalum album",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/14765284/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "abstract-screened. Acute study in healthy people with fragrance inhalation blocked by masks. Whole-oil findings are mixed and do not establish sleep, anxiety treatment or spray effectiveness."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/14765284/"
+        ],
+        "notes": "Endpoint-specific route; not a recommended consumer use."
+      }
+    },
+    {
+      "id": "use-sandalwood-28360856-412",
+      "kind": "study-use",
+      "oilId": "sandalwood",
+      "studyId": "sharma-2017-sandalwood-psoriasis",
+      "useNodeId": "botanical-composition-essential-oil-composition",
+      "finding": "The supplier certificate reported α-santalol 49.0% and β-santalol 20.8% for the studied Santalum album heartwood oil lot.",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Santalum album distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "analytical",
+        "label": "GC-MS composition analysis",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "analytical-not-efficacy",
+        "label": "analytical-not-efficacy",
+        "verification": "source-checked"
+      },
+      "route": "not-applicable",
+      "species": "Santalum album",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5352686/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. Twelve enrolled, eleven evaluable; open-label, no placebo, proprietary formulation and manufacturer-affiliated authors. Study concentration is not a general dermal safety limit."
+      },
+      "routeVerification": {
+        "status": "not-applicable",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5352686/"
+        ],
+        "notes": "Composition measurement, not exposure."
+      }
+    },
+    {
+      "id": "use-sandalwood-28360856-413",
+      "kind": "study-use",
+      "oilId": "sandalwood",
+      "studyId": "sharma-2017-sandalwood-psoriasis",
+      "useNodeId": "health-skin-psoriasis",
+      "finding": "Plaque scores improved in an uncontrolled pilot; one of twelve participants withdrew with an application-site reaction. No placebo comparison established efficacy.",
+      "limitations": null,
+      "material": {
+        "kind": "single-oil-topical-formulation",
+        "label": "10% w/w Santalum album oil in a proprietary serum, twice daily for up to 28 days",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "topical",
+      "species": "Santalum album",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5352686/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. Twelve enrolled, eleven evaluable; open-label, no placebo, proprietary formulation and manufacturer-affiliated authors. Study concentration is not a general dermal safety limit."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5352686/"
+        ],
+        "notes": "Endpoint-specific route; not a recommended consumer use."
+      }
+    },
+    {
+      "id": "use-sandalwood-28360856-414-lab",
+      "kind": "study-use",
+      "oilId": "sandalwood",
+      "studyId": "sharma-2017-sandalwood-psoriasis",
+      "useNodeId": "health-skin-psoriasis",
+      "finding": "Separate reconstructed psoriatic skin models exposed to sandalwood oil showed reduced inflammatory markers.",
+      "limitations": "Laboratory tissue models, not clinical improvement. Does not establish treatment or a safe formulation.",
+      "material": {
+        "kind": "essential-oil",
+        "label": "Santalum album distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory culture or enzyme assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "in-vitro-exposure",
+      "species": "Santalum album",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5352686/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. Laboratory tissue models, not clinical improvement. Does not establish treatment or a safe formulation."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC5352686/"
+        ],
+        "notes": "Endpoint-specific route; not a recommended consumer use."
+      }
+    },
+    {
+      "id": "use-ginger-26051575-415",
+      "kind": "study-use",
+      "oilId": "ginger",
+      "studyId": "lua-2015-ginger-chemotherapy",
+      "useNodeId": "health-digestive-nausea-chemotherapy",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Zingiber officinale distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "inhalation",
+      "species": "Zingiber officinale",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/26051575/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "abstract-screened. Single-blind crossover during chemotherapy. The authors found the evidence insufficient for efficacy; selected quality-of-life improvements do not establish nausea control."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/26051575/"
+        ],
+        "notes": "Endpoint-specific route; not a recommended consumer use."
+      }
+    },
+    {
+      "id": "use-ginger-27841938-416",
+      "kind": "study-use",
+      "oilId": "ginger",
+      "studyId": "lee-2017-ginger-postoperative",
+      "useNodeId": "health-digestive-nausea-postoperative",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Zingiber officinale distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "inhalation",
+      "species": "Zingiber officinale",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/27841938/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "abstract-screened. Quasi-experimental, non-equivalent groups and an unscented comparator. Not a randomized blinded efficacy trial or evidence for oral ginger or a custom spray."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/27841938/"
+        ],
+        "notes": "Endpoint-specific route; not a recommended consumer use."
+      }
+    },
+    {
+      "id": "use-ginger-32872604-417",
+      "kind": "study-use",
+      "oilId": "ginger",
+      "studyId": "wang-2020-ginger-composition",
+      "useNodeId": "botanical-composition-essential-oil-composition",
+      "finding": "The steam-distilled sample contained zingiberene at 35.651% and geraniol at 1.382% of chromatographic peak area, distinct from the CO₂ sample.",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Zingiber officinale distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "analytical",
+        "label": "GC-MS composition analysis",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "analytical-not-efficacy",
+        "label": "analytical-not-efficacy",
+        "verification": "source-checked"
+      },
+      "route": "not-applicable",
+      "species": "Zingiber officinale",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7504760/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. The antibacterial arm did not test the catalog distilled oil. Reported chromatographic percentages are sample-specific and do not establish a product specification."
+      },
+      "routeVerification": {
+        "status": "not-applicable",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7504760/"
+        ],
+        "notes": "Composition measurement, not exposure."
+      }
+    },
+    {
+      "id": "use-ginger-32872604-418",
+      "kind": "study-use",
+      "oilId": "ginger",
+      "studyId": "wang-2020-ginger-composition",
+      "useNodeId": "microbial-bacteria",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "botanical-extract",
+        "label": "Supercritical CO₂ ginger extract selected for antibacterial tests",
+        "relevance": "different-preparation",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory culture or enzyme assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "in-vitro-exposure",
+      "species": "Zingiber officinale",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7504760/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. The antibacterial arm did not test the catalog distilled oil. Reported chromatographic percentages are sample-specific and do not establish a product specification."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7504760/"
+        ],
+        "notes": "Endpoint-specific route; not a recommended consumer use."
+      }
+    },
+    {
+      "id": "use-chamomile-german-38172912-419",
+      "kind": "study-use",
+      "oilId": "chamomile-german",
+      "studyId": "pourshaikhian-2024-german-chamomile-acs",
+      "useNodeId": "health-mental-health-anxiety",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Matricaria recutita distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "inhalation",
+      "species": "Matricaria recutita",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC10763144/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. Single hospital, short follow-up, subjective anxiety, scent-distinguishable comparator and baseline demographic imbalances despite randomization. Adjunct to usual hospital care; no evidence of treating coronary disease or validating a custom spray."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC10763144/"
+        ],
+        "notes": "Endpoint-specific experimental route; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-chamomile-german-38172912-420",
+      "kind": "study-use",
+      "oilId": "chamomile-german",
+      "studyId": "pourshaikhian-2024-german-chamomile-acs",
+      "useNodeId": "health-cardiovascular-acute-physiology",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Matricaria recutita distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "inhalation",
+      "species": "Matricaria recutita",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC10763144/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. Single hospital, short follow-up, subjective anxiety, scent-distinguishable comparator and baseline demographic imbalances despite randomization. Adjunct to usual hospital care; no evidence of treating coronary disease or validating a custom spray."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC10763144/"
+        ],
+        "notes": "Endpoint-specific experimental route; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-chamomile-german-29808331-421",
+      "kind": "study-use",
+      "oilId": "chamomile-german",
+      "studyId": "zargaran-2018-chamomile-migraine",
+      "useNodeId": "health-pain-inflammation-headache",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "botanical-preparation",
+        "label": "Traditional chamomile extraction in sesame oil, reformulated as oleogel",
+        "relevance": "different-preparation",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "topical",
+      "species": "Matricaria recutita",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/29808331/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "abstract-screened. A botanical extraction in sesame oil containing apigenin and chamazulene, not the catalog distilled essential oil. Attrition and formulation specificity limit transfer; no whole-oil efficacy inference."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/29808331/"
+        ],
+        "notes": "Endpoint-specific experimental route; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-chamomile-roman-39968372-422",
+      "kind": "study-use",
+      "oilId": "chamomile-roman",
+      "studyId": "el-assri-2025-roman-chamomile-bioactivity",
+      "useNodeId": "microbial-bacteria",
+      "finding": "Growth inhibition of the tested microbial cultures; no human treatment endpoint.",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Chamaemelum nobile distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory culture or enzyme assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "in-vitro-exposure",
+      "species": "Chamaemelum nobile",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11832495/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. Laboratory assays only. The unusual sesquiterpene-rich profile is not generalized to commercial ester-rich Roman chamomile. The abstract and methods/results disagree on insect exposure quantities; no dose, household protection or human infection claim is adopted."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11832495/"
+        ],
+        "notes": "Endpoint-specific experimental route; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-chamomile-roman-39968372-423",
+      "kind": "study-use",
+      "oilId": "chamomile-roman",
+      "studyId": "el-assri-2025-roman-chamomile-bioactivity",
+      "useNodeId": "microbial-fungi",
+      "finding": "Growth inhibition of the tested microbial cultures; no human treatment endpoint.",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Chamaemelum nobile distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory culture or enzyme assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "in-vitro-exposure",
+      "species": "Chamaemelum nobile",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11832495/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. Laboratory assays only. The unusual sesquiterpene-rich profile is not generalized to commercial ester-rich Roman chamomile. The abstract and methods/results disagree on insect exposure quantities; no dose, household protection or human infection claim is adopted."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11832495/"
+        ],
+        "notes": "Endpoint-specific experimental route; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-chamomile-roman-39968372-424",
+      "kind": "study-use",
+      "oilId": "chamomile-roman",
+      "studyId": "el-assri-2025-roman-chamomile-bioactivity",
+      "useNodeId": "pest-beetles-callosobruchus-maculatus",
+      "finding": "Cowpea weevil laboratory fumigation and filter-paper avoidance assays; not mosquito, tick or household protection.",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Chamaemelum nobile distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory culture or enzyme assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-contact-and-vapor",
+      "species": "Chamaemelum nobile",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11832495/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. Laboratory assays only. The unusual sesquiterpene-rich profile is not generalized to commercial ester-rich Roman chamomile. The abstract and methods/results disagree on insect exposure quantities; no dose, household protection or human infection claim is adopted."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC11832495/"
+        ],
+        "notes": "Endpoint-specific experimental route; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-sandalwood-23377508-425",
+      "kind": "study-use",
+      "oilId": "sandalwood",
+      "studyId": "moy-2012-sandalwood-acne-regimen",
+      "useNodeId": "health-skin-acne",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "combination",
+        "label": "Salicylic acid plus sandalwood oil cleanser, serum, spot treatment and mask",
+        "relevance": "combination-not-isolated",
+        "speciesMatch": "unverified"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "topical",
+      "species": "Santalum album",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/23377508/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "abstract-screened. Combination regimen with 0.5% salicylic acid, no placebo or oil-only arm. The checked abstract describes Australian-sourced sandalwood without a botanical species; neither Santalum album identity nor an independent oil benefit is established."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/23377508/"
+        ],
+        "notes": "Endpoint-specific experimental route; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-ginger-37774171-426",
+      "kind": "study-use",
+      "oilId": "ginger",
+      "studyId": "sforza-2023-ginger-postoperative",
+      "useNodeId": "health-digestive-nausea-postoperative",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "botanical-preparation",
+        "label": "Ginger oil on an anesthesia laryngeal mask; extraction not specified in abstract",
+        "relevance": "preparation-unverified",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "laryngeal-mask-exposure",
+      "species": "Zingiber officinale",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/37774171/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "abstract-screened. Thirty women at one center. Intraoperative airway-device exposure differs from everyday aromatherapy; extraction and batch identity are not specified in the checked abstract. No consumer exposure recommendation is inferred."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/37774171/"
+        ],
+        "notes": "Endpoint-specific experimental route; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-ginger-40154579-427",
+      "kind": "study-use",
+      "oilId": "ginger",
+      "studyId": "2025-ginger-peppermint-lavender-nausea",
+      "useNodeId": "health-digestive-nausea-postoperative",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "combination",
+        "label": "Peppermint, ginger and lavender oils, each diluted to 1% in the studied intervention",
+        "relevance": "combination-not-isolated",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "inhalation",
+      "species": "Zingiber officinale",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/40154579/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "abstract-screened. Three-oil combination versus water, single center and scent-distinguishable control. The symptomatic subgroup was much smaller than enrollment; individual-oil effects and a custom spray cannot be inferred."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/40154579/"
+        ],
+        "notes": "Endpoint-specific experimental route; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-peppermint-40154579-428",
+      "kind": "study-use",
+      "oilId": "peppermint",
+      "studyId": "2025-ginger-peppermint-lavender-nausea",
+      "useNodeId": "health-digestive-nausea-postoperative",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "combination",
+        "label": "Peppermint, ginger and lavender oils, each diluted to 1% in the studied intervention",
+        "relevance": "combination-not-isolated",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "inhalation",
+      "species": "Mentha piperita",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/40154579/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "abstract-screened. Three-oil combination versus water, single center and scent-distinguishable control. The symptomatic subgroup was much smaller than enrollment; individual-oil effects and a custom spray cannot be inferred."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/40154579/"
+        ],
+        "notes": "Endpoint-specific experimental route; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-lavender-40154579-429",
+      "kind": "study-use",
+      "oilId": "lavender",
+      "studyId": "2025-ginger-peppermint-lavender-nausea",
+      "useNodeId": "health-digestive-nausea-postoperative",
+      "finding": null,
+      "limitations": null,
+      "material": {
+        "kind": "combination",
+        "label": "Peppermint, ginger and lavender oils, each diluted to 1% in the studied intervention",
+        "relevance": "combination-not-isolated",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "human",
+        "label": "Human study",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "mixed",
+        "label": "mixed",
+        "verification": "source-checked"
+      },
+      "route": "inhalation",
+      "species": "Lavandula angustifolia",
+      "relevance": "contextual",
+      "researchMatch": false,
+      "supportsFunctionalUse": false,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/40154579/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "abstract-screened. Three-oil combination versus water, single center and scent-distinguishable control. The symptomatic subgroup was much smaller than enrollment; individual-oil effects and a custom spray cannot be inferred."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pubmed.ncbi.nlm.nih.gov/40154579/"
+        ],
+        "notes": "Endpoint-specific experimental route; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cedarwood-atlas-35161339-430",
+      "kind": "study-use",
+      "oilId": "cedarwood-atlas",
+      "studyId": "galovicova-2022-atlas-cedar-bioactivity",
+      "useNodeId": "microbial-bacteria",
+      "finding": "Laboratory microbial growth or biofilm endpoints; not disinfection or clinical efficacy.",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Cedrus atlantica distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory culture or enzyme assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-contact-and-vapor",
+      "species": "Cedrus atlantica",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC8839266/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. Commercial sample with a supplier-reported identity and a profile different from the other Atlas cedar sample. Food-model, culture and firebug assays are not clinical treatment, cleaning performance or mosquito/tick repellency. Mortality is not a repellency endpoint."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC8839266/"
+        ],
+        "notes": "Endpoint-specific experimental route; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cedarwood-atlas-35161339-431",
+      "kind": "study-use",
+      "oilId": "cedarwood-atlas",
+      "studyId": "galovicova-2022-atlas-cedar-bioactivity",
+      "useNodeId": "microbial-fungi",
+      "finding": "Laboratory microbial growth or biofilm endpoints; not disinfection or clinical efficacy.",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Cedrus atlantica distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory culture or enzyme assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-contact-and-vapor",
+      "species": "Cedrus atlantica",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC8839266/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. Commercial sample with a supplier-reported identity and a profile different from the other Atlas cedar sample. Food-model, culture and firebug assays are not clinical treatment, cleaning performance or mosquito/tick repellency. Mortality is not a repellency endpoint."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC8839266/"
+        ],
+        "notes": "Endpoint-specific experimental route; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cedarwood-atlas-35161339-432",
+      "kind": "study-use",
+      "oilId": "cedarwood-atlas",
+      "studyId": "galovicova-2022-atlas-cedar-bioactivity",
+      "useNodeId": "microbial-biofilms",
+      "finding": "Laboratory microbial growth or biofilm endpoints; not disinfection or clinical efficacy.",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Cedrus atlantica distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory culture or enzyme assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-contact-and-vapor",
+      "species": "Cedrus atlantica",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC8839266/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. Commercial sample with a supplier-reported identity and a profile different from the other Atlas cedar sample. Food-model, culture and firebug assays are not clinical treatment, cleaning performance or mosquito/tick repellency. Mortality is not a repellency endpoint."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC8839266/"
+        ],
+        "notes": "Endpoint-specific experimental route; not consumer dosing guidance."
+      }
+    },
+    {
+      "id": "use-cedarwood-atlas-35161339-433",
+      "kind": "study-use",
+      "oilId": "cedarwood-atlas",
+      "studyId": "galovicova-2022-atlas-cedar-bioactivity",
+      "useNodeId": "pest-plant-bugs-pyrrhocoris-apterus",
+      "finding": "Firebug (Pyrrhocoris apterus) mortality after 24-hour vapor exposure in sealed dishes; not repellency.",
+      "limitations": null,
+      "material": {
+        "kind": "essential-oil",
+        "label": "Cedrus atlantica distilled essential oil",
+        "relevance": "whole-oil-direct",
+        "speciesMatch": "same-species"
+      },
+      "model": {
+        "kind": "in-vitro",
+        "label": "Laboratory culture or enzyme assay",
+        "verification": "source-checked",
+        "scope": "endpoint"
+      },
+      "outcome": {
+        "direction": "positive",
+        "label": "positive",
+        "verification": "source-checked"
+      },
+      "route": "laboratory-vapor",
+      "species": "Cedrus atlantica",
+      "relevance": "direct",
+      "researchMatch": true,
+      "supportsFunctionalUse": true,
+      "verification": {
+        "status": "source-checked",
+        "sourceIds": [],
+        "urls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC8839266/"
+        ],
+        "checkedAt": "2026-10-18",
+        "notes": "full-text-screened. Commercial sample with a supplier-reported identity and a profile different from the other Atlas cedar sample. Food-model, culture and firebug assays are not clinical treatment, cleaning performance or mosquito/tick repellency. Mortality is not a repellency endpoint."
+      },
+      "routeVerification": {
+        "status": "source-checked",
+        "sourceUrls": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC8839266/"
+        ],
+        "notes": "Endpoint-specific experimental route; not consumer dosing guidance."
+      }
     }
   ],
   "schemaVersion": 1,
@@ -35349,6 +38837,28 @@ const TERPENE_DATA = {
           ],
           "chemicalClasses": [
             "Flavonoid"
+          ]
+        }
+      },
+      {
+        "id": "class:Norsesquiterpene",
+        "label": "Norsesquiterpenes",
+        "parentId": "terpenes",
+        "selectable": true,
+        "match": {
+          "chemicalClasses": [
+            "Norsesquiterpene"
+          ]
+        }
+      },
+      {
+        "id": "class:Aliphatic ester",
+        "label": "Aliphatic esters",
+        "parentId": null,
+        "selectable": true,
+        "match": {
+          "chemicalClasses": [
+            "Aliphatic ester"
           ]
         }
       }

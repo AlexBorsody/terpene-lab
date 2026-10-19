@@ -92,7 +92,7 @@ const names = options.slice(1).map(option => option.label);
 assert.deepEqual(names, [...names].sort((a, b) => a.localeCompare(b)));
 const cannabis = options.findIndex(option => option.id === 'cannabis');
 assert.equal(options[cannabis - 1].label, 'Bergamot');
-assert.equal(options[cannabis + 1].label, 'Cinnamon Bark');
+assert.equal(options[cannabis + 1].label, 'Cedarwood (Atlas)');
 run('renderPathway("cannabis")');
 const pathwayIds = [...element('pathway-plants').innerHTML.matchAll(/data-path-oil="([^"]+)"/g)].map(match => match[1]);
 assert.deepEqual(pathwayIds, options.slice(1).map(option => option.id));
