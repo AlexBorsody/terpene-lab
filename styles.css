@@ -326,12 +326,12 @@ main {
 .study .tags .read-paper {
   display: inline-flex; align-items: center; justify-content: center;
   min-height: 44px; min-width: 44px; max-width: 100%;
-  padding: 10px 16px; border: 2px solid #efbd69;
-  background: #efbd69; color: var(--bg);
+  padding: 10px 16px; border: 2px solid #9fcfc7;
+  background: #9fcfc7; color: var(--bg);
   font-size: 14px; font-weight: 700; line-height: 1.25; text-align: center;
 }
-.study .tags .read-paper:hover { background: #f7cd86; border-color: #f7cd86; color: var(--bg); }
-.study .tags .read-paper:active { background: #dfac55; border-color: #dfac55; }
+.study .tags .read-paper:hover { background: #b7dfd8; border-color: #b7dfd8; color: var(--bg); }
+.study .tags .read-paper:active { background: #8dbfb7; border-color: #8dbfb7; }
 .study .tags .read-paper:focus-visible { outline: 3px solid var(--text); outline-offset: 3px; }
 .study .taglink { color: var(--muted); }
 
@@ -360,7 +360,7 @@ main {
 }
 .lvl.sm { width: 20px; height: 20px; font-size: 10px; }
 .lvl-clinical { background: #95c9b4; }
-.lvl-preclinical { background: #e8a020; }
+.lvl-preclinical { background: #76aaa7; }
 .lvl-laboratory { background: #7aa2f7; }
 .lvl-review { background: #9b7ed9; }
 .lvl-text { font-size: 12px; color: var(--muted); text-transform: capitalize; }
@@ -639,8 +639,7 @@ main {
 .molecule3d[data-ready="1"] { touch-action: none; cursor: grab; }
 .molecule3d[data-ready="1"]:active { cursor: grabbing; }
 .molecule3d canvas { width: 100% !important; height: 100% !important; display: block; }
-.molecule3d .molecule-status,
-.molecule3d .molecule-disclaimer {
+.molecule3d .molecule-status {
   position: absolute;
   left: 6px;
   right: 6px;
@@ -652,7 +651,6 @@ main {
   pointer-events: none;
 }
 .molecule3d .molecule-status { top: 6px; }
-.molecule3d .molecule-disclaimer { bottom: 6px; }
 .compound-card:has(.molecule3d) > h3,
 .compound-card:has(.molecule3d) > p,
 .compound-card:has(.molecule3d) > .compound-chemline { max-width: 50%; }
@@ -675,7 +673,7 @@ main {
   white-space: nowrap;
 }
 .evidence-clinical { background: rgba(31,201,184,.16); color: #43d7c8; border: 1px solid rgba(31,201,184,.38); }
-.evidence-preclinical { background: rgba(240,166,35,.15); color: #efb44b; border: 1px solid rgba(240,166,35,.35); }
+.evidence-preclinical { background: rgba(118,170,167,.15); color: #9fcfc7; border: 1px solid rgba(118,170,167,.35); }
 .evidence-laboratory { background: rgba(100,155,245,.15); color: #82b2ff; border: 1px solid rgba(100,155,245,.35); }
 .evidence-review { background: rgba(163,120,215,.15); color: #bd91ee; border: 1px solid rgba(163,120,215,.35); }
 
@@ -1155,19 +1153,19 @@ main {
 /* Additional chemistry: compact disclosures, independently scrollable in embeds. */
 .beyond-terpenes, .chem-evidence { border:1px solid var(--line, #34483e); border-radius:8px; margin:12px 0; padding:12px; background:#16241f; color:#f2ead8; }
 .beyond-terpenes summary, .chem-evidence summary { cursor:pointer; line-height:1.5; }
-.beyond-terpenes > summary { color:#efbd69; font-weight:600; }
+.beyond-terpenes > summary { color:#9fcfc7; font-weight:600; }
 .beyond-terpenes p, .oil-chemistry p, .chem-context { font-size:13px; line-height:1.65; max-width:90ch; }
 .chem-group-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin:16px 0; }
-.chem-group-grid h4 { color:#efbd69; margin:0 0 6px; }
+.chem-group-grid h4 { color:#9fcfc7; margin:0 0 6px; }
 .chem-group-grid section { min-width:0; }
 .chem-evidence summary span { display:block; color:#b7c5b8; font-size:12px; }
 .chem-evidence article + article { border-top:1px solid #3b5044; margin-top:16px; padding-top:12px; }
 .chem-sources { padding-left:20px; font-size:12px; line-height:1.6; }
 .chem-sources li { margin:8px 0; overflow-wrap:anywhere; }
-.chem-sources a { color:#efbd69; text-decoration:underline; }
+.chem-sources a { color:#9fcfc7; text-decoration:underline; }
 .chem-sources span { display:block; color:#b7c5b8; }
 .beyond-terpenes .chip, .oil-chemistry .chip, #compound-material-evidence .chip { white-space:normal; text-align:left; overflow-wrap:anywhere; min-height:36px; }
-summary:focus-visible, .chip:focus-visible, .compound-card:focus-visible { outline:2px solid #efbd69; outline-offset:3px; }
+summary:focus-visible, .chip:focus-visible, .compound-card:focus-visible { outline:2px solid #9fcfc7; outline-offset:3px; }
 #oil-chart:has(.empty), #compound-oils-chart:has(.empty) { height:auto; min-height:0; }
 @media (max-width:600px) { .chem-group-grid { grid-template-columns:1fr; } .beyond-terpenes, .chem-evidence { padding:10px; } }
 
@@ -1175,12 +1173,12 @@ summary:focus-visible, .chip:focus-visible, .compound-card:focus-visible { outli
 .oil-chemistry .hint { white-space:normal; width:auto; }
 
 .oil-chemistry { border-top:1px solid #3b5044; margin:12px 0; padding:8px 0; }
-.oil-chemistry > summary { color:#efbd69; cursor:pointer; }
+.oil-chemistry > summary { color:#9fcfc7; cursor:pointer; }
 .oil-chemistry > summary span { display:block; font-size:12px; color:#b7c5b8; font-weight:400; text-transform:none; letter-spacing:0; }
 .oil-chemistry .chem-evidence { border:0; border-top:1px solid #34483e; border-radius:0; margin:8px 0; padding:6px 0; background:transparent; }
 .chem-source-details { margin:8px 0; }
 .chem-source-details summary { cursor:pointer; font-size:12px; color:#b7c5b8; }
-.chem-status { color:#efbd69; font-size:12px; }
+.chem-status { color:#9fcfc7; font-size:12px; }
 
 /* Compact standalone PWA controls; never shown in Shopify embeds. */
 .pwa-controls { padding: 12px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; color: var(--muted); font-size: 12px; }
@@ -1210,7 +1208,7 @@ summary:focus-visible, .chip:focus-visible, .compound-card:focus-visible { outli
 @media (max-width: 600px) { .topic-child-label { display: block; } .topic-child-select { display: block; width: 100%; margin-top: 6px; } }
 
 /* Oil-specific applicability stays visible beside the publication summary. */
-.research-scope { border-left:2px solid var(--amber); padding:9px 12px; margin:12px 0; background:rgba(210,171,93,.06); overflow-wrap:anywhere; }
+.research-scope { border-left:2px solid var(--amber); padding:9px 12px; margin:12px 0; background:rgba(118,170,167,.06); overflow-wrap:anywhere; }
 .research-scope p { font-size:14px; line-height:1.65; margin:0 0 8px; }
 .research-scope p:last-child { margin-bottom:0; }
 

@@ -1,5 +1,5 @@
 /* Warm paper, botanical ink and a clear order card for the blend shop. */
-#blend-builder { --blend-accent:#476344; --blend-segment-0:#78b99d; --blend-segment-1:#b2a6d4; --blend-segment-2:#476344; --blend-segment-3:#77b6c9; --blend-segment-4:#d19189; max-width:1360px; margin:0 auto; overflow-wrap:anywhere; }
+#blend-builder { --blend-accent:#366861; --blend-segment-0:#78b99d; --blend-segment-1:#b2a6d4; --blend-segment-2:#476344; --blend-segment-3:#77b6c9; --blend-segment-4:#d19189; max-width:1360px; margin:0 auto; overflow-wrap:anywhere; }
 #blend-builder [hidden] { display:none !important; }
 #blend-builder button, #blend-builder input { font:inherit; }
 #blend-builder button { min-height:44px; cursor:pointer; }
@@ -57,7 +57,7 @@
 .blend-oil-card.is-selected { border-color:#406649; background:#edf1e5; }
 .blend-oil-heading { display:flex; align-items:center; justify-content:space-between; gap:10px; }
 .blend-latin { color:var(--muted); font-size:12px; font-style:italic; margin-top:3px; }
-.blend-oil-swatch { height:25px; width:25px; border-radius:50% 50% 50% 0; transform:rotate(-45deg); background:var(--oil-color); opacity:.8; flex-shrink:0; }
+.blend-oil-swatch { height:32px; width:32px; color:var(--blend-accent); flex-shrink:0; }
 .blend-aroma { font-size:13px; color:#586049; }
 #blend-builder .blend-oil-card button { background:transparent; border:1px solid #aebca7; border-radius:6px; color:#294d37; padding:7px; font-size:12px; margin-top:auto; }
 #blend-builder .blend-oil-card button:not(:disabled):hover { background:#e1e8da; }

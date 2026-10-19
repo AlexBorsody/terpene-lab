@@ -198,7 +198,7 @@ assert.equal((papers.match(/target="_blank" rel="noopener">Read study<\/a>/g) ||
 const css = fs.readFileSync('styles.css', 'utf8');
 const actionStyle = css.match(/\.study \.tags \.read-paper \{([^}]+)\}/)[1];
 assert.ok(/min-height:\s*44px/.test(actionStyle));
-assert.ok(/background:\s*#efbd69/.test(actionStyle));
+assert.ok(/background:\s*#9fcfc7/.test(actionStyle));
 assert.ok(/color:\s*var\(--bg\)/.test(actionStyle));
 assert.ok(/max-width:\s*100%/.test(actionStyle));
 assert.ok(/\.read-paper:focus-visible\s*\{[^}]*outline:\s*3px solid/.test(css));
@@ -206,7 +206,7 @@ function luminance(hex) {
   const rgb = hex.match(/[0-9a-f]{2}/gi).map(value => parseInt(value, 16) / 255).map(value => value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4);
   return rgb.reduce((sum, value, index) => sum + value * [0.2126, 0.7152, 0.0722][index], 0);
 }
-for (const background of ['#efbd69', '#f7cd86', '#dfac55']) {
+for (const background of ['#9fcfc7', '#b7dfd8', '#8dbfb7']) {
   const foreground = css.match(/--bg:\s*(#[0-9a-f]{6})/i)[1];
   const contrast = (luminance(background) + 0.05) / (luminance(foreground) + 0.05);
   assert.ok(contrast >= 7, `Read paper contrast ${contrast.toFixed(2)}:1`);

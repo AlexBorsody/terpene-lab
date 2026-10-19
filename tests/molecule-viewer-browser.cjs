@@ -26,20 +26,19 @@ const dependency = 'https://cdn.jsdelivr.net/npm/three@0.170.0/+esm';
       await page.waitForFunction(() => ['1', 'unavailable'].includes(document.querySelector('.molecule3d')?.dataset.ready));
       const successful = mode === 'success';
       assert.equal(await host.getAttribute('data-ready'), successful ? '1' : 'unavailable');
-      assert.match(await host.getAttribute('aria-label'), /Illustrative 3D sketch.*Not a validated molecular structure/);
-      assert.equal(await host.locator('..').getAttribute('aria-describedby'), await host.locator('.molecule-disclaimer').getAttribute('id'));
-      assert.match(await host.locator('.molecule-disclaimer').innerText(), /Illustrative sketch\.\s*Not a validated molecular structure\./);
+      assert.match(await host.getAttribute('aria-label'), /3D illustration of/);
+      assert.equal(await host.locator('.molecule-disclaimer').count(), 0);
       assert.equal(await host.locator('.molecule-status').innerText(), successful ? 'Drag to rotate' : '3D illustration unavailable');
       assert.equal(await host.locator('canvas').count(), successful ? 1 : 0);
       assert.equal(await host.evaluate(el => getComputedStyle(el).cursor), successful ? 'grab' : 'pointer');
       assert.equal(await host.evaluate(el => getComputedStyle(el).touchAction), successful ? 'none' : 'auto');
       if (!successful) assert.doesNotMatch(await host.innerText(), /drag/i);
       const bounds = await host.evaluate(el => {
-        const host = el.getBoundingClientRect(), status = el.querySelector('.molecule-status').getBoundingClientRect(), note = el.querySelector('.molecule-disclaimer').getBoundingClientRect();
-        return { labelsFit: status.top >= host.top && status.left >= host.left && status.right <= host.right && note.bottom <= host.bottom && note.left >= host.left && note.right <= host.right,
-          noOverlap: status.bottom < note.top, fontSize: parseFloat(getComputedStyle(el.querySelector('.molecule-disclaimer')).fontSize) };
+        const host = el.getBoundingClientRect(), status = el.querySelector('.molecule-status').getBoundingClientRect();
+        return { labelsFit: status.top >= host.top && status.left >= host.left && status.right <= host.right && status.bottom <= host.bottom,
+          fontSize: parseFloat(getComputedStyle(el.querySelector('.molecule-status')).fontSize) };
       });
-      assert.ok(bounds.labelsFit && bounds.noOverlap, `${mode} labels fit at ${width}px`);
+      assert.ok(bounds.labelsFit, `${mode} labels fit at ${width}px`);
       assert.ok(bounds.fontSize >= 11);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true);
       if (['success', 'constructor-failure'].includes(mode)) await page.locator('.compound-card').first().screenshot({ path: `/tmp/terpene-molecule-${mode}-${width}.png` });
