@@ -23,8 +23,8 @@ function all(list, predicate, message) {
 
 test('Canonical inventories and unique publications', () => {
   assert.equal(master.oils.length, 33); assert.equal(regs.compounds.length, 42);
-  assert.equal(regs.studies.length, 176); assert.equal(regs.sources.length, 50);
-  assert.equal(new Set(regs.studies.map(s => s.id)).size, 176);
+  assert.equal(regs.studies.length, 181); assert.equal(regs.sources.length, 50);
+  assert.equal(new Set(regs.studies.map(s => s.id)).size, 181);
   for (const field of ['doi', 'pubmedId']) {
     const values = regs.studies.map(s => s[field]?.toLowerCase()).filter(Boolean);
     assert.equal(new Set(values).size, values.length, 'Duplicate publication ' + field);
@@ -67,11 +67,11 @@ test('Targeted source checking is distinct from complete library coverage', () =
   assert.equal(master.migration.audit.libraryReviewedOnlyExistingRelations, 169);
   assert.equal(master.migration.audit.newPrimaryPublications, 3);
   const primaryPairs = new Set(assertions.filter(a => a.verification.status === 'source-checked').map(a => a.oilId + '/' + a.studyId));
-  assert.equal(primaryPairs.size, 100); // 87 prior pairs plus 13 newly source-checked oil/publication pairs.
+  assert.equal(primaryPairs.size, 103); // Remove three old scoped compound-only pairs; add six cannabis whole-oil pairs.
 });
 test('Every publication has an independent citation check, separate from endpoint verification', () => {
   all(regs.studies, s => s.citationReview.status === 'identity-checked' && ['2026-10-18','2026-10-19'].includes(s.citationReview.checkedAt), 'citation review');
-  assert.equal(regs.studies.filter(s => s.summaryReview.status === 'abstract-screened').length, 165);
+  assert.equal(regs.studies.filter(s => s.summaryReview.status === 'abstract-screened').length, 164);
   assert.deepEqual(regs.studies.filter(s => s.summaryReview.status === 'abstract-unavailable').map(s => s.id), ['composition-lemongrass-infusion-2014', 'composition-cx01']);
   assert.ok(assertions.some(a => a.verification.status === 'library-reviewed'), 'Abstract screening must not silently promote every oil-specific edge');
   all(regs.studies.filter(s => s.citationReview.provider === 'Crossref'), s => s.citationReview.sourceUrl.startsWith('https://api.crossref.org/works/'), 'Fallback provenance must identify the provider actually used');
@@ -192,8 +192,14 @@ test('Rosemary scalp lotion keeps its comparative limitations', () => {
   assert.match(s.finding, /Itching increased/);
 });
 test('Isolated compounds and oral products never match whole-oil functional uses', () => {
-  const ids = ['gertsch-2008-caryophyllene','eugenol-2021-memory-neurogenesis','menthol-migraine-2010','carvacrol-asthma-2021','carvacrol-asthma-phase2-2018','carvacrol-safety-2021','schulze-2011-ticks','cannabis-terpenes-review-2020'];
-  for (const id of ids) all(rows(id), a => !a.researchMatch && a.material.kind === 'isolated-compound', id);
+  for (const study of regs.studies.filter(s => s.oilLinkReview)) {
+    assert.deepEqual([...new Set(rows(study.id).map(a => a.oilId))].sort(), [...study.oilLinkReview.approvedOilIds].sort());
+    if (!study.oilLinkReview.approvedOilIds.length) {
+      assert.ok(regs.compounds.some(c => c.studyLinks.some(l => l.studyId === study.id)), study.id + ': preserve compound bibliography');
+      assert.ok(!master.oils.some(o => o.studyLinks.some(l => l.studyId === study.id)), study.id + ': no unsupported oil links');
+    }
+  }
+  all(rows('gertsch-2008-caryophyllene'), a => a.oilId === 'cannabis' && a.useNodeId.startsWith('botanical-'), 'Cannabis receptor/composition arms, not mouse inflammation');
   for (const id of ['kasper-2010-silexan','moridpour-2024-cinnamon','khanna-macdonald-levesque-2014'])
     all(rows(id), a => !a.researchMatch, id);
 });
@@ -263,7 +269,7 @@ test('Direct topic matching is independent of favorable outcome', () => {
   all(rows('fikry-2025-niaouli-lung-cancer'), a => a.researchMatch && a.outcome.direction === 'mechanistic' && a.supportsFunctionalUse === false, 'niaouli cell research remains visible without immune or clinical claim');
 });
 test('Mixed cannabis systems never inherit a cell-only exposure route', () => {
-  all(rows('cannabis-terpenes-review-2020'), a => a.route === null && a.model.kind === 'mixed-preclinical' && a.model.scope === 'mixed', 'separate mouse and cell methods');
+  assert.equal(rows('cannabis-terpenes-review-2020').length, 0, 'Pure-terpene experiments must not create cannabis oil evidence');
 });
 test('Same-paper composition, fungal and animal exposures stay separate', () => {
   const id = 'composition-lemongrass-2014';
@@ -287,7 +293,11 @@ test('Source-backed correction ledger reverses to the exact lossless baseline', 
     assert.equal(digest(restored), master.migration.baselineDigest);
     for (const s of restored.studies) {
       assert.ok(studies.has(s.id), 'Lost canonical study ' + s.id);
-      for (const oid of s.oilIds) assert.ok(oils.get(oid).studyLinks.some(l => l.studyId === s.id), 'Lost oil-study relation ' + oid + '/' + s.id);
+      for (const oid of s.oilIds) {
+        const review = studies.get(s.id).oilLinkReview;
+        if (review && !review.approvedOilIds.includes(oid)) continue; // Explicit, source-backed correction is preserved in the reversible ledger.
+        assert.ok(oils.get(oid).studyLinks.some(l => l.studyId === s.id), 'Lost oil-study relation ' + oid + '/' + s.id);
+      }
     }
     assert.deepEqual({...data.blendBuilder.product,shopifyVariantId:null}, restored.blendBuilder.product);
     assert.equal(data.oils.filter(o => o.blend).length, 33);
@@ -316,5 +326,23 @@ test('New oil research preserves material, species, negative results and specifi
   all(rows('moy-2012-sandalwood-acne-regimen'), a=>!a.researchMatch && a.material.speciesMatch==='unverified', 'salicylic acid and unverified sandalwood species');
   all(rows('galovicova-2022-atlas-cedar-bioactivity').filter(a=>a.useNodeId.startsWith('pest')), a=>a.useNodeId==='pest-plant-bugs-pyrrhocoris-apterus', 'firebugs do not become mosquitoes');
   assert.match(studies.get('el-assri-2025-roman-chamomile-bioactivity').limitations,/disagree/);
+});
+test('Cannabis oil research preserves negative results and excludes unrelated clinical claims', () => {
+  assert.equal(rows('iseppi-2019-hemp-essential-oils').find(a => a.useNodeId === 'microbial-bacteria-gram-negative').outcome.direction, 'null');
+  assert.equal(rows('zengin-2018-cannabis-essential-oil').find(a => a.useNodeId === 'microbial-fungi-yeast').outcome.direction, 'null');
+  assert.equal(studies.get('gulluni-2018-cannabis-inhalation-pilot').sampleSize, 5);
+  assert.ok(!rows('gulluni-2018-cannabis-inhalation-pilot').some(a => /sleep|anxiety|cognitive/.test(a.useNodeId)));
+  all(rows('luca-2024-hemp-distillation-antimicrobial'), a => a.material.kind === 'essential-oil' && /HEO column/.test(a.limitations), 'HEO arm only');
+});
+test('Generator rejects reattaching pure compound research to an oil', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'terpene-material-'));
+  try {
+    const changed = structuredClone(master);
+    changed.oils.find(o => o.id === 'eucalyptus').studyLinks.push({studyId:'juergens-2003-cineole',order:0});
+    const input = path.join(tmp,'master.json');fs.writeFileSync(input,JSON.stringify(changed));
+    const result = spawnSync('python3',[path.join(root,'scripts/build-data.py'),'--master',input,'--output',path.join(tmp,'bad.js')],{encoding:'utf8'});
+    assert.notEqual(result.status,0);
+    assert.match(result.stderr + result.stdout,/oil links differ from source-checked experimental materials/);
+  } finally { fs.rmSync(tmp,{recursive:true,force:true}); }
 });
 console.log(`research-audit: ${checks} checks passed; ${assertions.length} scoped study assertions, ${assertions.filter(a => a.researchMatch).length} research-topic matches.`);

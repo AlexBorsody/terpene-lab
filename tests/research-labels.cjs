@@ -165,14 +165,7 @@ const assert = require('node:assert/strict');
   assert.equal(await page.locator('#compound-oils-chart').isVisible(), false);
   // Applicability caveats are visible before opening assessment details.
   await page.goto(`${base}/?tab=studies&oil=eucalyptus&domain=health-respiratory`);
-  const cineole = page.locator('#study-list [data-study-id="juergens-2003-cineole"]');
-  assert.equal(await cineole.locator('.research-scope').isVisible(), true);
-  assert.equal(await cineole.locator('.research-scope').evaluate(node => !!node.closest('details')), false);
-  assert.equal(await cineole.locator('.research-assessments').getAttribute('open'), null);
-  const cineoleText = await cineole.locator('.research-scope').innerText();
-  assert.ok(cineoleText.includes('Isolated 1,8-cineole in small-gut-soluble capsules'));
-  assert.ok(cineoleText.includes('Source-reviewed contextual evidence'));
-  assert.ok(!cineoleText.includes('Source-reviewed direct research'));
+  assert.equal(await page.locator('#study-list [data-study-id="juergens-2003-cineole"]').count(), 0);
   for (const [oil, finding, wrongFinding, material] of [
     ['myrrh', 'Myrrh-extract sitz baths improved REEDA healing scores', 'Frankincense-extract sitz baths did not', 'Commiphora myrrha extract sitz bath'],
     ['frankincense', 'Frankincense-extract sitz baths did not significantly differ from betadine', 'Myrrh-extract sitz baths improved', 'Boswellia carteri extract sitz bath']
@@ -184,7 +177,9 @@ const assert = require('node:assert/strict');
     assert.equal(await scope.evaluate(node => !!node.closest('details')), false);
     assert.equal(await paper.locator('.research-assessments').getAttribute('open'), null);
     const text = await scope.innerText();
-    assert.ok(text.includes(finding)); assert.ok(text.includes(material)); assert.ok(!text.includes(wrongFinding));
+    assert.ok(text.includes(finding)); assert.ok(text.includes('Related plant preparation'));
+    await paper.locator('.study-details > summary').click();
+    assert.ok((await paper.locator('.study-details').innerText()).includes(material)); assert.ok(!text.includes(wrongFinding));
     assert.equal(await paper.locator('.finding').count(), 1);
   }
   assert.deepEqual(errors, []);

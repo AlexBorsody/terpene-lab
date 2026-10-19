@@ -54,3 +54,21 @@ Nine existing publications received a further scoped mapping review. Eight were 
 Both new endpoints are canonical JSON nodes. Builder, Matrix, oil profiles and study navigation inherit their hierarchy through the shared resolver. Regression checks preserve the different arm outcomes and prevent quality-of-life evidence from becoming a mental-health match.
 
 Remaining work: library-reviewed associations still need oil-specific source checks; compound associations, exact composition provenance, concentrations and safety fields are not certified by this pass. An abstract screen is not a full-text review. Existing unresolved associations were not promoted merely because a publication was retrieved.
+
+## 2026-10-19 — Compound/oil boundary and cannabis expansion
+
+Removed 17 unsupported oil/publication joins across 14 publications. Isolated cineole, menthol, eugenol, carvacrol, nootkatone and terpene experiments remain discoverable through their compounds, without attaching them to every oil containing those compounds. The reviewed `oilLinkReview.approvedOilIds` list is enforced by the generator; a mutation test rejects reintroducing an untested oil. This is a reviewed-material constraint, not a universal assumption that compound papers never include whole-oil arms.
+
+Gertsch 2008 explicitly tested five commercial cannabis essential oils in receptor experiments. Cannabis is now the sole oil link; the clove, lavender and frankincense links are removed. Cannabis assertions cover chemical composition and receptor activity. The isolated beta-caryophyllene mouse inflammation result remains in the publication/compound record, not a cannabis-oil health assertion. Primary source: https://pmc.ncbi.nlm.nih.gov/articles/PMC2449371/.
+
+Five additional full texts were reviewed and added:
+
+- Iseppi 2019, https://pmc.ncbi.nlm.nih.gov/articles/PMC6631254/: 17 oils; composition, variable Gram-positive inhibition, and null Gram-negative results.
+- Zengin 2018, https://pmc.ncbi.nlm.nih.gov/articles/PMC6320915/: Futura 75 oil; bacterial and biofilm assays, with null yeast results. Reduced viable biofilm cells does not mean reduced total biomass. Aromatic water and isolated naringenin results are not assigned to the oil.
+- Gulluni 2018, https://pmc.ncbi.nlm.nih.gov/articles/PMC5822802/: five-person inhalation pilot; subjective mood and acute physiology. Fixed exposure order; no clinical anxiety, depression, sleep or cognitive-performance efficacy claim.
+- Zheljazkov 2020, https://pmc.ncbi.nlm.nih.gov/articles/PMC7587197/: composition and cultivar-dependent bacterial/yeast inhibition. Cannabinoids in some hydrodistilled samples preclude treating all retail oils as equivalent.
+- Luca 2024, https://pmc.ncbi.nlm.nih.gov/articles/PMC11201062/: only the HEO oil arm from Table 6 supplies microbial assertions. Stronger spent-material/total-extract or isolated-cannabinoid findings are not borrowed.
+
+Inventory: 181 papers; 13 linked to cannabis; 101 use nodes; 395 study-use assertions and 53 chemical observations. Of the study-use assertions, 210 are source-checked and 185 remain library-reviewed only. There are 103 independently scoped source-checked oil/publication pairs. This pass does not certify the remaining 185 assertions or claim a comprehensive literature search.
+
+All oil/topic joins and all 5,050 topic pairs are checked against canonical assertions. Null findings stay discoverable. Research coverage remains independent of the merchant assortment. Study cards now show the scoped result and short material/model labels, with authors, PMID and detailed provenance under Study details; source-check timestamps are removed from the main card.

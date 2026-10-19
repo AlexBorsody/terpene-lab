@@ -52,7 +52,7 @@ for(const oil of ['lavender','ylang-ylang']){
 }
 for(const topic of ['health-mental-health-anxiety','health-mental-health-mood'])
  assert.equal(scoped('lavender','kuriyama-watanabe-2005',topic)[0].outcome.direction,'null');
-assert.equal(scoped('eucalyptus','juergens-2003-cineole','health-respiratory')[0].material.kind,'isolated-compound');
+assert.equal(scoped('eucalyptus','juergens-2003-cineole','health-respiratory').length,0);
 assert.equal(scoped('rosemary','rosemary-students-2018','health-mental-health-sleep')[0].outcome.direction,'mixed');
 assert.equal(scoped('cedarwood-atlas','galovicova-2022-atlas-cedar-bioactivity','microbial-biofilms')[0].supportsFunctionalUse,false);
 for(const oil of ['lavender','clary-sage'])

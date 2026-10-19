@@ -1336,3 +1336,13 @@ body:has(#tab-blend.active) .lab-footer { background:var(--bg2); }
 
 /* An installed release must not hide its update action below the catalog. */
 .pwa-controls:has(#pwa-update:not([hidden])) { position:fixed; top:12px; right:12px; z-index:1000; max-width:calc(100vw - 24px); background:var(--surface); border:1px solid var(--border); border-radius:6px; box-shadow:0 4px 20px #0003; }
+
+/* Study cards: one result, one action; source detail stays available on demand. */
+.study .research-scope { border:0; padding:0; margin:12px 0; background:none; }
+.study .study-context { color:var(--muted); font-size:12px; margin-bottom:8px; }
+.study .study-details { margin-top:14px; border-top:1px solid var(--border); padding-top:10px; }
+.study .study-details > summary { cursor:pointer; color:var(--muted); font-size:13px; min-height:44px; display:flex; align-items:center; gap:8px; }
+.study .study-details > summary::before { content:'+'; font-size:18px; }
+.study .study-details[open] > summary::before { content:'−'; }
+.study .study-details > summary:focus-visible { outline:2px solid var(--amber); outline-offset:3px; }
+.study .study-details .research-assessment { margin-top:12px; }

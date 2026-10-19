@@ -251,6 +251,18 @@ def validate(master):
                     require(identity.get('status') == 'formula-checked' and identity.get('formula') == record.get('formula'),
                             f'{record["id"]}: formula differs from reviewed identity')
                     https_url(identity.get('sourceUrl'), f'{record["id"]}.identityReview.sourceUrl')
+    for study in studies.values():
+        review = study.get('oilLinkReview')
+        if review is None:
+            continue
+        require(review.get('status') == 'source-checked', f'{study["id"]}: invalid oil-link review')
+        approved = review.get('approvedOilIds', [])
+        refs(approved, oils, f'{study["id"]}.oilLinkReview.approvedOilIds')
+        require(bool(review.get('sourceUrls')), f'{study["id"]}: oil-link review needs primary sources')
+        for url in review['sourceUrls']:
+            https_url(url, f'{study["id"]}.oilLinkReview.sourceUrls')
+        actual = [oil['id'] for oil in oils.values() if any(link['studyId'] == study['id'] for link in oil['studyLinks'])]
+        require(sorted(actual) == sorted(approved), f'{study["id"]}: oil links differ from source-checked experimental materials')
     for kind, links in link_orders.items():
         for study_id, positions in links.items():
             require(sorted(positions) == list(range(len(positions))), f'{study_id}: {kind} study link order must be unique and contiguous')
